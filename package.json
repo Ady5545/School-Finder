@@ -1,0 +1,13 @@
+{
+  "name": "school-website",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "school-website-backend"
+  ],
+  "scripts": {
+    "dev": "node school-website-backend/server.js",
+    "build": "npm run build --workspace=school-website-backend",
+    "start": "node school-website-backend/server.js"
+  }
+}

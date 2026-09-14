@@ -1,0 +1,8 @@
+{
+  "name": "Schools of Greater Noida",
+  "description": "School finder platform with reviews, ratings, wishlist, and student portal for Greater Noida institutions",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

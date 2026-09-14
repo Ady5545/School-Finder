@@ -31,17 +31,9 @@ export default function WishlistPage() {
           icon={<Heart className="w-6 h-6 text-rose-500" />}
           title="No shortlisted schools yet"
           description="Click the heart icon on any school card to save it to your personal shortlist."
-          actionLabel="Browse Schools Directory"
-          onAction={() => {}}
+          actionLabel="Explore Schools"
+          actionHref="/schools"
         />
-
-        <div className="text-center mt-4">
-          <Link href="/schools">
-            <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              Explore Schools
-            </Button>
-          </Link>
-        </div>
       </div>
     </div>
   );

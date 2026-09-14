@@ -117,7 +117,7 @@ export interface School {
   auditNotes: string[];
 }
 
-export const schools: School[] = schoolsJson as School[];
+export const schools: School[] = schoolsJson as unknown as School[];
 export const legacyUrlMap: Record<string, string> = legacyUrlMapJson as Record<string, string>;
 
 export function getSchoolBySlug(slug: string): School | undefined {

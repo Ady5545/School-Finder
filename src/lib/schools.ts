@@ -14,6 +14,20 @@ export function getSchoolBySlug(slug: string): School | undefined {
   return getBySlug(slug);
 }
 
+export function getSchoolByLegacyFile(filePath: string): School | undefined {
+  if (!filePath) return undefined;
+  const clean = filePath.replace(/^\/+/, '');
+  return schools.find(
+    s =>
+      s.legacyIdentifiers.pageFile === clean ||
+      s.legacyIdentifiers.pageFile === filePath ||
+      s.legacyIdentifiers.cardLink.includes(clean) ||
+      s.legacyIdentifiers.legacyUrls.includes(clean) ||
+      s.legacyIdentifiers.legacyUrls.includes('/' + clean) ||
+      s.legacyIdentifiers.legacyUrls.includes(filePath)
+  );
+}
+
 export function getPopularSchools(limit: number = 4): School[] {
   // Sort by rating score descending, then reviewsCount
   return [...schools]

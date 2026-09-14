@@ -1,8 +1,6 @@
 {
   "name": "Schools of Greater Noida",
-  "description": "Admission Pitara: School discovery, decision-making, and admission intelligence platform for Greater Noida West and Noida Extension",
+  "description": "School discovery, decision-making, and admission intelligence platform for Greater Noida West and Noida Extension",
   "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

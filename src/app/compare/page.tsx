@@ -32,16 +32,8 @@ export default function ComparePage() {
           title="No schools selected for comparison"
           description="Browse schools in Greater Noida West and click 'Compare' on any school card to begin a side-by-side analysis."
           actionLabel="Browse Schools Directory"
-          onAction={() => {}}
+          actionHref="/schools"
         />
-
-        <div className="text-center mt-4">
-          <Link href="/schools">
-            <Button variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-              Find Schools to Compare
-            </Button>
-          </Link>
-        </div>
       </div>
     </div>
   );

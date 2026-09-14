@@ -1,5 +1,7 @@
 import { resolveLegacyUrl } from '../../data/schoolsData';
 
+export { resolveLegacyUrl };
+
 export interface LegacyResolutionResult {
   isLegacy: boolean;
   canonicalSlug: string | null;

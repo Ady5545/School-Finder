@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { cn } from '../../lib/utils';
 import { Inbox } from 'lucide-react';
 import { Button } from './Button';
@@ -8,6 +9,7 @@ export interface EmptyStateProps {
   title: string;
   description: string;
   actionLabel?: string;
+  actionHref?: string;
   onAction?: () => void;
   className?: string;
 }
@@ -17,6 +19,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   title,
   description,
   actionLabel,
+  actionHref,
   onAction,
   className,
 }) => {
@@ -36,7 +39,14 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
       <p className="text-xs text-[var(--color-content-muted)] max-w-sm mb-4 leading-relaxed">
         {description}
       </p>
-      {actionLabel && onAction && (
+      {actionLabel && actionHref && (
+        <Link href={actionHref}>
+          <Button variant="primary" size="sm">
+            {actionLabel}
+          </Button>
+        </Link>
+      )}
+      {actionLabel && !actionHref && onAction && (
         <Button variant="primary" size="sm" onClick={onAction}>
           {actionLabel}
         </Button>

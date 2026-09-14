@@ -104,7 +104,7 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
           title="No schools found"
           description={`We could not find any schools matching your search "${q}". Try clearing filters or searching by a broader sector name.`}
           actionLabel="View All Schools"
-          onAction={() => {}}
+          actionHref="/schools"
         />
       )}
     </div>

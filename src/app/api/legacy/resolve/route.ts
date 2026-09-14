@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { resolveLegacyUrl } from '../../../lib/legacyRedirect';
-import { getSchoolByLegacyFile } from '../../../lib/schools';
+import { resolveLegacyUrl } from '../../../../lib/legacyRedirect';
+import { getSchoolByLegacyFile } from '../../../../lib/schools';
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,13 +11,13 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Query parameter "path" is required' }, { status: 400 });
     }
 
-    const resolvedUrl = resolveLegacyUrl(path);
-    const school = getSchoolByLegacyFile(path);
+    const school = resolveLegacyUrl(path);
+    const resolvedUrl = school ? `/schools/${school.slug}` : path;
 
     return NextResponse.json({
       originalPath: path,
       resolvedUrl,
-      isRedirected: resolvedUrl !== path,
+      isRedirected: school !== undefined,
       school: school || null,
     });
   } catch (error) {

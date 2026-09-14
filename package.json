@@ -6,9 +6,9 @@
     "school-website-backend"
   ],
   "scripts": {
-    "dev": "node school-website-backend/server.js",
-    "build": "npm run build --workspace=school-website-backend",
-    "start": "node school-website-backend/server.js",
+    "dev": "next dev -p 3000 -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start -p 3000 -H 0.0.0.0",
     "lint": "node scripts/validate-phase1.js && node scripts/validate-phase2.js",
     "test": "node scripts/validate-phase1.js && node scripts/validate-phase2.js",
     "test:phase1": "node scripts/validate-phase1.js",

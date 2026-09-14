@@ -8,6 +8,28 @@
   "scripts": {
     "dev": "node school-website-backend/server.js",
     "build": "npm run build --workspace=school-website-backend",
-    "start": "node school-website-backend/server.js"
+    "start": "node school-website-backend/server.js",
+    "lint": "node scripts/validate-phase1.js && node scripts/validate-phase2.js",
+    "test": "node scripts/validate-phase1.js && node scripts/validate-phase2.js",
+    "test:phase1": "node scripts/validate-phase1.js",
+    "test:phase2": "node scripts/validate-phase2.js"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.46.0",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.6.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
   }
 }

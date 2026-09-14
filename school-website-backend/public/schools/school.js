@@ -1,6 +1,6 @@
 // ====== AOS Init ======
 document.addEventListener('DOMContentLoaded', () => {
-  if (AOS) AOS.init({ duration: 1000, once: true });
+  if (typeof AOS !== 'undefined') AOS.init({ duration: 1000, once: true });
 
   // ====== Wishlist Heart Toggle ======
   document.querySelectorAll('.wishlist .heart').forEach(heart => {

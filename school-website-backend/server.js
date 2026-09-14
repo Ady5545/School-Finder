@@ -88,6 +88,7 @@ function isValidEmail(email) {
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/school-website-backend/public", express.static(path.join(__dirname, "public")));
 
 // ---------------- HEALTH CHECK ----------------
 app.get("/health", (req, res) => res.json({ status: "ok" }));
@@ -366,8 +367,11 @@ app.post("/api/auth/update", async (req, res) => {
   }
 });
 
-// Fallback to index.html
+// Fallback to index.html for page routes (avoid sending HTML for missing assets)
 app.get("*", (req, res) => {
+  if (req.path.includes(".")) {
+    return res.status(404).send("Not found");
+  }
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 

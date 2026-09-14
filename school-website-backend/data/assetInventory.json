@@ -1,0 +1,1290 @@
+[
+  {
+    "sourcePath": "school-website-backend/public/images/DPWS.jpeg",
+    "publicRelPath": "/images/DPWS.jpeg",
+    "filename": "DPWS.jpeg",
+    "format": "JPEG",
+    "width": 1360,
+    "height": 907,
+    "sizeBytes": 296558,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/SRU.jpeg",
+    "publicRelPath": "/images/SRU.jpeg",
+    "filename": "SRU.jpeg",
+    "format": "JPEG",
+    "width": 225,
+    "height": 225,
+    "sizeBytes": 10373,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/bls-world-school.jpg",
+    "publicRelPath": "/images/bls-world-school.jpg",
+    "filename": "bls-world-school.jpg",
+    "format": "JPEG",
+    "width": 1920,
+    "height": 958,
+    "sizeBytes": 711457,
+    "assignedSchoolSlug": "bls-world-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/bls.jpg",
+    "publicRelPath": "/images/bls.jpg",
+    "filename": "bls.jpg",
+    "format": "JPEG",
+    "width": 1002,
+    "height": 339,
+    "sizeBytes": 83593,
+    "assignedSchoolSlug": "bls-world-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/dps.png",
+    "publicRelPath": "/images/dps.png",
+    "filename": "dps.png",
+    "format": "PNG",
+    "width": 243,
+    "height": 243,
+    "sizeBytes": 66488,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/gaurs.png",
+    "publicRelPath": "/images/gaurs.png",
+    "filename": "gaurs.png",
+    "format": "PNG",
+    "width": 1346,
+    "height": 516,
+    "sizeBytes": 444721,
+    "assignedSchoolSlug": "Platform (Homepage Hero)",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/gd goenka.png",
+    "publicRelPath": "/images/gd goenka.png",
+    "filename": "gd goenka.png",
+    "format": "PNG",
+    "width": 1024,
+    "height": 576,
+    "sizeBytes": 616593,
+    "assignedSchoolSlug": "gd-goenka-international-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/gd.jpg",
+    "publicRelPath": "/images/gd.jpg",
+    "filename": "gd.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 500,
+    "sizeBytes": 76732,
+    "assignedSchoolSlug": "gd-goenka-international-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/infinity.jpg",
+    "publicRelPath": "/images/infinity.jpg",
+    "filename": "infinity.jpg",
+    "format": "JPEG",
+    "width": 1268,
+    "height": 720,
+    "sizeBytes": 318673,
+    "assignedSchoolSlug": "the-infinity-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/infinity.png",
+    "publicRelPath": "/images/infinity.png",
+    "filename": "infinity.png",
+    "format": "PNG",
+    "width": 994,
+    "height": 802,
+    "sizeBytes": 1011565,
+    "assignedSchoolSlug": "the-infinity-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/jm.jpg",
+    "publicRelPath": "/images/jm.jpg",
+    "filename": "jm.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 300,
+    "sizeBytes": 21236,
+    "assignedSchoolSlug": "jm-international-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/lotus.jpeg",
+    "publicRelPath": "/images/lotus.jpeg",
+    "filename": "lotus.jpeg",
+    "format": "JPEG",
+    "width": 220,
+    "height": 229,
+    "sizeBytes": 8751,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/lotusjpg.jpg",
+    "publicRelPath": "/images/lotusjpg.jpg",
+    "filename": "lotusjpg.jpg",
+    "format": "JPEG",
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 174592,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/pacific.jpeg",
+    "publicRelPath": "/images/pacific.jpeg",
+    "filename": "pacific.jpeg",
+    "format": "JPEG",
+    "width": 287,
+    "height": 176,
+    "sizeBytes": 8820,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/ramagya.jpg",
+    "publicRelPath": "/images/ramagya.jpg",
+    "filename": "ramagya.jpg",
+    "format": "JPEG",
+    "width": 1000,
+    "height": 1000,
+    "sizeBytes": 198235,
+    "assignedSchoolSlug": "ramagya-school-noida-extension",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/salvation.webp",
+    "publicRelPath": "/images/salvation.webp",
+    "filename": "salvation.webp",
+    "format": "WEBP",
+    "width": 1280,
+    "height": 720,
+    "sizeBytes": 104060,
+    "assignedSchoolSlug": "salvation-tree-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/shiv nadar.jpg",
+    "publicRelPath": "/images/shiv nadar.jpg",
+    "filename": "shiv nadar.jpg",
+    "format": "JPEG",
+    "width": 951,
+    "height": 612,
+    "sizeBytes": 468284,
+    "assignedSchoolSlug": "shiv-nadar-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/shiv.webp",
+    "publicRelPath": "/images/shiv.webp",
+    "filename": "shiv.webp",
+    "format": "WEBP",
+    "width": 687,
+    "height": 457,
+    "sizeBytes": 52456,
+    "assignedSchoolSlug": "shiv-nadar-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/shri ram global.avif",
+    "publicRelPath": "/images/shri ram global.avif",
+    "filename": "shri ram global.avif",
+    "format": "HEIC",
+    "width": 1728,
+    "height": 972,
+    "sizeBytes": 89107,
+    "assignedSchoolSlug": "shri-ram-global-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/sks.jpg",
+    "publicRelPath": "/images/sks.jpg",
+    "filename": "sks.jpg",
+    "format": "JPEG",
+    "width": 1400,
+    "height": 551,
+    "sizeBytes": 156945,
+    "assignedSchoolSlug": "sks-world-school-greater-noida-west",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/sx.jpg",
+    "publicRelPath": "/images/sx.jpg",
+    "filename": "sx.jpg",
+    "format": "JPEG",
+    "width": 1360,
+    "height": 785,
+    "sizeBytes": 288704,
+    "assignedSchoolSlug": "st-xaviers-high-school",
+    "suitability": [
+      "hero",
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/images/wisdom tree.jpg",
+    "publicRelPath": "/images/wisdom tree.jpg",
+    "filename": "wisdom tree.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 300,
+    "sizeBytes": 18937,
+    "assignedSchoolSlug": "the-wisdom-tree-school",
+    "suitability": [
+      "featured"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/abroad.jpg",
+    "publicRelPath": "/schools/DPSWS/abroad.jpg",
+    "filename": "abroad.jpg",
+    "format": "JPEG",
+    "width": 1920,
+    "height": 1280,
+    "sizeBytes": 338022,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/assembky.jpg",
+    "publicRelPath": "/schools/DPSWS/assembky.jpg",
+    "filename": "assembky.jpg",
+    "format": "JPEG",
+    "width": 1024,
+    "height": 678,
+    "sizeBytes": 46308,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/award.jpg",
+    "publicRelPath": "/schools/DPSWS/award.jpg",
+    "filename": "award.jpg",
+    "format": "JPEG",
+    "width": 1024,
+    "height": 678,
+    "sizeBytes": 86913,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/banner.jpg",
+    "publicRelPath": "/schools/DPSWS/banner.jpg",
+    "filename": "banner.jpg",
+    "format": "JPEG",
+    "width": 1536,
+    "height": 864,
+    "sizeBytes": 321573,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/foriegner.jpg",
+    "publicRelPath": "/schools/DPSWS/foriegner.jpg",
+    "filename": "foriegner.jpg",
+    "format": "JPEG",
+    "width": 570,
+    "height": 360,
+    "sizeBytes": 40405,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/ground.jpg",
+    "publicRelPath": "/schools/DPSWS/ground.jpg",
+    "filename": "ground.jpg",
+    "format": "JPEG",
+    "width": 1024,
+    "height": 678,
+    "sizeBytes": 66506,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/photo.jpeg",
+    "publicRelPath": "/schools/DPSWS/photo.jpeg",
+    "filename": "photo.jpeg",
+    "format": "JPEG",
+    "width": 1600,
+    "height": 1066,
+    "sizeBytes": 671556,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/ramayan.webp",
+    "publicRelPath": "/schools/DPSWS/ramayan.webp",
+    "filename": "ramayan.webp",
+    "format": "WEBP",
+    "width": 1600,
+    "height": 1066,
+    "sizeBytes": 199864,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/speech.jpg",
+    "publicRelPath": "/schools/DPSWS/speech.jpg",
+    "filename": "speech.jpg",
+    "format": "JPEG",
+    "width": 2560,
+    "height": 1707,
+    "sizeBytes": 417260,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/swimmming ppook.jpg",
+    "publicRelPath": "/schools/DPSWS/swimmming ppook.jpg",
+    "filename": "swimmming ppook.jpg",
+    "format": "JPEG",
+    "width": 570,
+    "height": 360,
+    "sizeBytes": 54048,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/unform girls.png",
+    "publicRelPath": "/schools/DPSWS/unform girls.png",
+    "filename": "unform girls.png",
+    "format": "PNG",
+    "width": 472,
+    "height": 964,
+    "sizeBytes": 379135,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/DPSWS/uniform boys.png",
+    "publicRelPath": "/schools/DPSWS/uniform boys.png",
+    "filename": "uniform boys.png",
+    "format": "PNG",
+    "width": 502,
+    "height": 1032,
+    "sizeBytes": 578280,
+    "assignedSchoolSlug": "delhi-world-public-school-kp-5",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/2_(1)_(1).jpg",
+    "publicRelPath": "/schools/TSRU/2_(1)_(1).jpg",
+    "filename": "2_(1)_(1).jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 225,
+    "sizeBytes": 24596,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/6.jpg",
+    "publicRelPath": "/schools/TSRU/6.jpg",
+    "filename": "6.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 313,
+    "sizeBytes": 28809,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/6_(1).jpg",
+    "publicRelPath": "/schools/TSRU/6_(1).jpg",
+    "filename": "6_(1).jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 225,
+    "sizeBytes": 25360,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/PARENT_WORKSHOP-min_-_Dr_Jay_Kumar_Singh.webp",
+    "publicRelPath": "/schools/TSRU/PARENT_WORKSHOP-min_-_Dr_Jay_Kumar_Singh.webp",
+    "filename": "PARENT_WORKSHOP-min_-_Dr_Jay_Kumar_Singh.webp",
+    "format": "WEBP",
+    "width": 4080,
+    "height": 1824,
+    "sizeBytes": 184928,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/Sri-Ram2.jpg",
+    "publicRelPath": "/schools/TSRU/Sri-Ram2.jpg",
+    "filename": "Sri-Ram2.jpg",
+    "format": "JPEG",
+    "width": 4160,
+    "height": 2340,
+    "sizeBytes": 1080188,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/boys uniform.webp",
+    "publicRelPath": "/schools/TSRU/boys uniform.webp",
+    "filename": "boys uniform.webp",
+    "format": "WEBP",
+    "width": 533,
+    "height": 533,
+    "sizeBytes": 12010,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/girl uniform.webp",
+    "publicRelPath": "/schools/TSRU/girl uniform.webp",
+    "filename": "girl uniform.webp",
+    "format": "WEBP",
+    "width": 533,
+    "height": 533,
+    "sizeBytes": 13026,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/image-12.jpg",
+    "publicRelPath": "/schools/TSRU/image-12.jpg",
+    "filename": "image-12.jpg",
+    "format": "JPEG",
+    "width": 1200,
+    "height": 801,
+    "sizeBytes": 106379,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/images (4).jpeg",
+    "publicRelPath": "/schools/TSRU/images (4).jpeg",
+    "filename": "images (4).jpeg",
+    "format": "JPEG",
+    "width": 225,
+    "height": 225,
+    "sizeBytes": 11797,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/TSRU/the-shri-ram-universal-school-noida-extension-noida-schools-zp35nh9ylq.avif",
+    "publicRelPath": "/schools/TSRU/the-shri-ram-universal-school-noida-extension-noida-schools-zp35nh9ylq.avif",
+    "filename": "the-shri-ram-universal-school-noida-extension-noida-schools-zp35nh9ylq.avif",
+    "format": "HEIC",
+    "width": 1728,
+    "height": 1152,
+    "sizeBytes": 259542,
+    "assignedSchoolSlug": "the-shri-ram-universal-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/DPS_Noidaoutdoor.jpg",
+    "publicRelPath": "/schools/dps/DPS_Noidaoutdoor.jpg",
+    "filename": "DPS_Noidaoutdoor.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 333,
+    "sizeBytes": 39450,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/Delhi_Public_School_528_Building_3.jpg",
+    "publicRelPath": "/schools/dps/Delhi_Public_School_528_Building_3.jpg",
+    "filename": "Delhi_Public_School_528_Building_3.jpg",
+    "format": "JPEG",
+    "width": 800,
+    "height": 600,
+    "sizeBytes": 109774,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/Screenshot 2026-03-08 at 2.17.59\u202fPM.png",
+    "publicRelPath": "/schools/dps/Screenshot 2026-03-08 at 2.17.59\u202fPM.png",
+    "filename": "Screenshot 2026-03-08 at 2.17.59\u202fPM.png",
+    "format": "PNG",
+    "width": 828,
+    "height": 1100,
+    "sizeBytes": 1475602,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/Screenshot 2026-03-08 at 2.18.21\u202fPM.png",
+    "publicRelPath": "/schools/dps/Screenshot 2026-03-08 at 2.18.21\u202fPM.png",
+    "filename": "Screenshot 2026-03-08 at 2.18.21\u202fPM.png",
+    "format": "PNG",
+    "width": 822,
+    "height": 1100,
+    "sizeBytes": 1229278,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/Screenshot 2026-03-08 at 2.18.29\u202fPM.png",
+    "publicRelPath": "/schools/dps/Screenshot 2026-03-08 at 2.18.29\u202fPM.png",
+    "filename": "Screenshot 2026-03-08 at 2.18.29\u202fPM.png",
+    "format": "PNG",
+    "width": 826,
+    "height": 1102,
+    "sizeBytes": 1302371,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/Screenshot 2026-03-08 at 2.18.37\u202fPM.png",
+    "publicRelPath": "/schools/dps/Screenshot 2026-03-08 at 2.18.37\u202fPM.png",
+    "filename": "Screenshot 2026-03-08 at 2.18.37\u202fPM.png",
+    "format": "PNG",
+    "width": 830,
+    "height": 1110,
+    "sizeBytes": 1157676,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps-boys-uniform.jpg.jpg",
+    "publicRelPath": "/schools/dps/dps-boys-uniform.jpg.jpg",
+    "filename": "dps-boys-uniform.jpg.jpg",
+    "format": "WEBP",
+    "width": 1000,
+    "height": 1000,
+    "sizeBytes": 27640,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "uniform",
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps-girls-uniform.jpg.jpeg",
+    "publicRelPath": "/schools/dps/dps-girls-uniform.jpg.jpeg",
+    "filename": "dps-girls-uniform.jpg.jpeg",
+    "format": "WEBP",
+    "width": 1000,
+    "height": 1000,
+    "sizeBytes": 30692,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "uniform",
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps1.jpg",
+    "publicRelPath": "/schools/dps/dps1.jpg",
+    "filename": "dps1.jpg",
+    "format": "JPEG",
+    "width": 800,
+    "height": 600,
+    "sizeBytes": 178512,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps2.jpeg",
+    "publicRelPath": "/schools/dps/dps2.jpeg",
+    "filename": "dps2.jpeg",
+    "format": "JPEG",
+    "width": 800,
+    "height": 533,
+    "sizeBytes": 78009,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps3.jpg",
+    "publicRelPath": "/schools/dps/dps3.jpg",
+    "filename": "dps3.jpg",
+    "format": "JPEG",
+    "width": 800,
+    "height": 533,
+    "sizeBytes": 57955,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps4.jpg",
+    "publicRelPath": "/schools/dps/dps4.jpg",
+    "filename": "dps4.jpg",
+    "format": "JPEG",
+    "width": 800,
+    "height": 533,
+    "sizeBytes": 88835,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps5.jpg",
+    "publicRelPath": "/schools/dps/dps5.jpg",
+    "filename": "dps5.jpg",
+    "format": "JPEG",
+    "width": 800,
+    "height": 533,
+    "sizeBytes": 42874,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/dps6.jpg",
+    "publicRelPath": "/schools/dps/dps6.jpg",
+    "filename": "dps6.jpg",
+    "format": "JPEG",
+    "width": 667,
+    "height": 600,
+    "sizeBytes": 77147,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/dps/outdoor2.jpeg",
+    "publicRelPath": "/schools/dps/outdoor2.jpeg",
+    "filename": "outdoor2.jpeg",
+    "format": "JPEG",
+    "width": 1575,
+    "height": 670,
+    "sizeBytes": 424749,
+    "assignedSchoolSlug": "delhi-public-school-knowledge-park-5",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/633147593_1471082731695678_6732246442191460788_n.jpg",
+    "publicRelPath": "/schools/lotus/633147593_1471082731695678_6732246442191460788_n.jpg",
+    "filename": "633147593_1471082731695678_6732246442191460788_n.jpg",
+    "format": "JPEG",
+    "width": 1440,
+    "height": 1080,
+    "sizeBytes": 406812,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/8.jpg",
+    "publicRelPath": "/schools/lotus/8.jpg",
+    "filename": "8.jpg",
+    "format": "JPEG",
+    "width": 4032,
+    "height": 3024,
+    "sizeBytes": 1253545,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/achievement.jpg",
+    "publicRelPath": "/schools/lotus/achievement.jpg",
+    "filename": "achievement.jpg",
+    "format": "JPEG",
+    "width": 605,
+    "height": 202,
+    "sizeBytes": 30331,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/boys uniform.webp",
+    "publicRelPath": "/schools/lotus/boys uniform.webp",
+    "filename": "boys uniform.webp",
+    "format": "WEBP",
+    "width": 533,
+    "height": 533,
+    "sizeBytes": 12694,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/commuity.jpg",
+    "publicRelPath": "/schools/lotus/commuity.jpg",
+    "filename": "commuity.jpg",
+    "format": "JPEG",
+    "width": 605,
+    "height": 202,
+    "sizeBytes": 133379,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/dance.jpg",
+    "publicRelPath": "/schools/lotus/dance.jpg",
+    "filename": "dance.jpg",
+    "format": "JPEG",
+    "width": 700,
+    "height": 467,
+    "sizeBytes": 398370,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/girls uniform.webp",
+    "publicRelPath": "/schools/lotus/girls uniform.webp",
+    "filename": "girls uniform.webp",
+    "format": "WEBP",
+    "width": 533,
+    "height": 533,
+    "sizeBytes": 14622,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/images (1).jpeg",
+    "publicRelPath": "/schools/lotus/images (1).jpeg",
+    "filename": "images (1).jpeg",
+    "format": "JPEG",
+    "width": 259,
+    "height": 194,
+    "sizeBytes": 9445,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/images (2).jpeg",
+    "publicRelPath": "/schools/lotus/images (2).jpeg",
+    "filename": "images (2).jpeg",
+    "format": "JPEG",
+    "width": 259,
+    "height": 194,
+    "sizeBytes": 11952,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/images (3).jpeg",
+    "publicRelPath": "/schools/lotus/images (3).jpeg",
+    "filename": "images (3).jpeg",
+    "format": "JPEG",
+    "width": 259,
+    "height": 194,
+    "sizeBytes": 11457,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/images.jpeg",
+    "publicRelPath": "/schools/lotus/images.jpeg",
+    "filename": "images.jpeg",
+    "format": "JPEG",
+    "width": 259,
+    "height": 195,
+    "sizeBytes": 10148,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/images3.jpeg",
+    "publicRelPath": "/schools/lotus/images3.jpeg",
+    "filename": "images3.jpeg",
+    "format": "JPEG",
+    "width": 263,
+    "height": 192,
+    "sizeBytes": 16135,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/slider1.jpg",
+    "publicRelPath": "/schools/lotus/slider1.jpg",
+    "filename": "slider1.jpg",
+    "format": "JPEG",
+    "width": 1920,
+    "height": 850,
+    "sizeBytes": 293771,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/small kids.jpeg",
+    "publicRelPath": "/schools/lotus/small kids.jpeg",
+    "filename": "small kids.jpeg",
+    "format": "JPEG",
+    "width": 1280,
+    "height": 963,
+    "sizeBytes": 152565,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/lotus/timing.jpg",
+    "publicRelPath": "/schools/lotus/timing.jpg",
+    "filename": "timing.jpg",
+    "format": "JPEG",
+    "width": 700,
+    "height": 467,
+    "sizeBytes": 352910,
+    "assignedSchoolSlug": "lotus-valley-international-school",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/1744089371_slider-2.png",
+    "publicRelPath": "/schools/pacific/1744089371_slider-2.png",
+    "filename": "1744089371_slider-2.png",
+    "format": "PNG",
+    "width": 410,
+    "height": 323,
+    "sizeBytes": 258683,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/7-4-550x330.jpg",
+    "publicRelPath": "/schools/pacific/7-4-550x330.jpg",
+    "filename": "7-4-550x330.jpg",
+    "format": "JPEG",
+    "width": 550,
+    "height": 330,
+    "sizeBytes": 46685,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/Delhi_Entrance-1600x1000.jpg",
+    "publicRelPath": "/schools/pacific/Delhi_Entrance-1600x1000.jpg",
+    "filename": "Delhi_Entrance-1600x1000.jpg",
+    "format": "JPEG",
+    "width": 1600,
+    "height": 1000,
+    "sizeBytes": 446603,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/audi.jpg",
+    "publicRelPath": "/schools/pacific/audi.jpg",
+    "filename": "audi.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 333,
+    "sizeBytes": 228182,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/baloon.jpg",
+    "publicRelPath": "/schools/pacific/baloon.jpg",
+    "filename": "baloon.jpg",
+    "format": "JPEG",
+    "width": 1280,
+    "height": 713,
+    "sizeBytes": 128810,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/bb.jpg",
+    "publicRelPath": "/schools/pacific/bb.jpg",
+    "filename": "bb.jpg",
+    "format": "JPEG",
+    "width": 316,
+    "height": 370,
+    "sizeBytes": 25312,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/boys uniform.jpg",
+    "publicRelPath": "/schools/pacific/boys uniform.jpg",
+    "filename": "boys uniform.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 1000,
+    "sizeBytes": 45930,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/comp.jpg",
+    "publicRelPath": "/schools/pacific/comp.jpg",
+    "filename": "comp.jpg",
+    "format": "JPEG",
+    "width": 500,
+    "height": 333,
+    "sizeBytes": 129697,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/event.jpg",
+    "publicRelPath": "/schools/pacific/event.jpg",
+    "filename": "event.jpg",
+    "format": "JPEG",
+    "width": 1056,
+    "height": 526,
+    "sizeBytes": 69714,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/girls uniform.jpg",
+    "publicRelPath": "/schools/pacific/girls uniform.jpg",
+    "filename": "girls uniform.jpg",
+    "format": "JPEG",
+    "width": 525,
+    "height": 1000,
+    "sizeBytes": 60268,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/images.jpeg",
+    "publicRelPath": "/schools/pacific/images.jpeg",
+    "filename": "images.jpeg",
+    "format": "JPEG",
+    "width": 249,
+    "height": 202,
+    "sizeBytes": 14133,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/iskool.webp",
+    "publicRelPath": "/schools/pacific/iskool.webp",
+    "filename": "iskool.webp",
+    "format": "WEBP",
+    "width": 953,
+    "height": 611,
+    "sizeBytes": 469518,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/kheloo.webp",
+    "publicRelPath": "/schools/pacific/kheloo.webp",
+    "filename": "kheloo.webp",
+    "format": "WEBP",
+    "width": 1200,
+    "height": 600,
+    "sizeBytes": 203132,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/pacif.jpg",
+    "publicRelPath": "/schools/pacific/pacif.jpg",
+    "filename": "pacif.jpg",
+    "format": "JPEG",
+    "width": 1920,
+    "height": 900,
+    "sizeBytes": 265649,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/pacific_world_school_cover.jpeg",
+    "publicRelPath": "/schools/pacific/pacific_world_school_cover.jpeg",
+    "filename": "pacific_world_school_cover.jpeg",
+    "format": "JPEG",
+    "width": 900,
+    "height": 600,
+    "sizeBytes": 140107,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/pray.jpg",
+    "publicRelPath": "/schools/pacific/pray.jpg",
+    "filename": "pray.jpg",
+    "format": "JPEG",
+    "width": 800,
+    "height": 480,
+    "sizeBytes": 551099,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/sports.jpg",
+    "publicRelPath": "/schools/pacific/sports.jpg",
+    "filename": "sports.jpg",
+    "format": "JPEG",
+    "width": 1920,
+    "height": 900,
+    "sizeBytes": 418011,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/pacific/uniform boys.jpg",
+    "publicRelPath": "/schools/pacific/uniform boys.jpg",
+    "filename": "uniform boys.jpg",
+    "format": "WEBP",
+    "width": 800,
+    "height": 800,
+    "sizeBytes": 34892,
+    "assignedSchoolSlug": "pacific-world-school-techzone-4",
+    "suitability": [
+      "uniform",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/ryan/main.webp",
+    "publicRelPath": "/schools/ryan/main.webp",
+    "filename": "main.webp",
+    "format": "WEBP",
+    "width": 1300,
+    "height": 617,
+    "sizeBytes": 164572,
+    "assignedSchoolSlug": "ryan-international-school-greater-noida",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/wisdom tre/banner.avif",
+    "publicRelPath": "/schools/wisdom tre/banner.avif",
+    "filename": "banner.avif",
+    "format": "HEIC",
+    "width": 646,
+    "height": 223,
+    "sizeBytes": 6935,
+    "assignedSchoolSlug": "the-wisdom-tree-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  },
+  {
+    "sourcePath": "school-website-backend/public/schools/xavier/banner.avif",
+    "publicRelPath": "/schools/xavier/banner.avif",
+    "filename": "banner.avif",
+    "format": "HEIC",
+    "width": 1578,
+    "height": 591,
+    "sizeBytes": 109547,
+    "assignedSchoolSlug": "st-xaviers-high-school",
+    "suitability": [
+      "hero",
+      "gallery"
+    ]
+  }
+]

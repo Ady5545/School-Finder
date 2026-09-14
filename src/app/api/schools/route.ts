@@ -1,0 +1,31 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { getAllSchools, filterSchools } from '../../../lib/schools';
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const q = searchParams.get('q') || undefined;
+    const boardParam = searchParams.get('board');
+    const areaParam = searchParams.get('area');
+
+    const board = boardParam ? boardParam.split(',') : undefined;
+    const area = areaParam ? areaParam.split(',') : undefined;
+
+    if (!q && !board && !area) {
+      const schools = getAllSchools();
+      return NextResponse.json({
+        total: schools.length,
+        schools,
+      });
+    }
+
+    const filtered = filterSchools({ searchQuery: q, board, area });
+    return NextResponse.json({
+      total: filtered.length,
+      schools: filtered,
+    });
+  } catch (error) {
+    console.error('API /api/schools error:', error);
+    return NextResponse.json({ error: 'Failed to fetch schools' }, { status: 500 });
+  }
+}

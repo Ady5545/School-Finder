@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKS World School - Greater Noida West</title>
+
+<link rel="stylesheet" href="/school-website-backend/public/schools/dps.css">
+<script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+</head>
+
+<body>
+
+<nav>
+<h2>Schools Of Greater Noida</h2>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="../index.html#schools">Schools</a></li>
+<li><a href="../index.html#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section id="wishlist">
+<h3>My Wishlist</h3>
+<div id="wishlistArea"><p>No schools added yet.</p></div>
+</section>
+
+<section class="hero" data-aos="fade-in">
+<h1>SKS World School - Greater Noida West</h1>
+<p>CBSE Board | Nursery – 12 | ⭐ 4.3 Rating</p>
+<button><i class="fas fa-school"></i> Explore School</button>
+</section>
+
+<div class="wishlist">
+<svg class="heart" data-school="SKS World School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2">
+<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l7.78-7.78"></path>
+</svg>
+</div>
+
+<div class="school-gallery-container">
+<h2>School Gallery</h2>
+<div class="gallery-wrapper">
+
+<button class="gallery-btn left" id="galleryPrev">❮</button>
+
+<div class="school-gallery" id="schoolGallery">
+<img src="/schools/sks/sks1.jpg">
+<img src="/schools/sks/sks2.jpg">
+<img src="/schools/sks/sks3.jpg">
+<img src="/schools/sks/sks4.jpg">
+<img src="/schools/sks/sks5.jpg">
+</div>
+
+<button class="gallery-btn right" id="galleryNext">❯</button>
+</div>
+
+<div id="galleryViewer">
+<span id="closeViewer">&times;</span>
+<img id="viewerImg">
+</div>
+</div>
+
+<section class="basic-info" data-aos="fade-up">
+<h2>Basic Information</h2>
+<ul>
+<li>Board: CBSE</li>
+<li>Classes: Nursery – 12</li>
+<li>Student-Teacher Ratio: 25:1</li>
+<li>Admission Age: 3+</li>
+</ul>
+</section>
+
+<section class="facilities" data-aos="fade-up">
+<h2>Facilities</h2>
+<div class="facility-carousel">
+<div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>Basketball Court</p></div>
+<div class="facility-slide"><i class="fas fa-football-ball"></i><p>Football Ground</p></div>
+<div class="facility-slide"><i class="fas fa-laptop"></i><p>Computer Lab</p></div>
+<div class="facility-slide"><i class="fas fa-flask"></i><p>Science Lab</p></div>
+<div class="facility-slide"><i class="fas fa-book"></i><p>Library</p></div>
+<div class="facility-slide"><i class="fas fa-bus"></i><p>Transport</p></div>
+</div>
+</section>
+
+<section class="fees" data-aos="fade-up">
+<h2>Fees & Book Cost</h2>
+<table class="school-fee-table">
+<thead>
+<tr><th>Type</th><th>Approx Cost (₹)</th></tr>
+</thead>
+<tbody>
+<tr><td>Registration Fee</td><td>1,000</td></tr>
+<tr><td>Admission Fee</td><td>40,000</td></tr>
+<tr><td>Monthly Tuition</td><td>8,500 – 9,500</td></tr>
+<tr><td>Transport</td><td>3,000 – 4,000</td></tr>
+<tr class="total-row"><td><strong>Estimated First Year</strong></td><td><strong>~1,00,000</strong></td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="uniform" data-aos="fade-up">
+<h2>Uniform</h2>
+<div class="uniform-slider">
+<div class="uniform-card">
+<h3>Boys</h3>
+<img src="/schools/sks/boys.jpg">
+</div>
+<div class="uniform-card">
+<h3>Girls</h3>
+<img src="/schools/sks/girls.jpg">
+</div>
+</div>
+</section>
+
+<section class="location" data-aos="fade-up">
+<h2>Location</h2>
+<iframe src="https://www.google.com/maps?q=SKS+World+School+Greater+Noida+West&output=embed"
+width="100%" height="400" style="border:0;"></iframe>
+</section>
+
+<section class="cta-buttons" data-aos="fade-up">
+<a href="https://sksworldschool.com" target="_blank">
+<button><i class="fas fa-external-link-alt"></i> Visit Website</button>
+</a>
+<a href="#"><button><i class="fas fa-phone"></i> Call School</button></a>
+<a href="#"><button><i class="fas fa-file-alt"></i> Apply for Admission</button></a>
+</section>
+
+<script>
+AOS.init({ duration:1000, once:true });
+</script>
+
+<script>
+const gallery=document.getElementById("schoolGallery");
+const prev=document.getElementById("galleryPrev");
+const next=document.getElementById("galleryNext");
+
+next.addEventListener("click",()=>{gallery.scrollBy({left:300,behavior:"smooth"});});
+prev.addEventListener("click",()=>{gallery.scrollBy({left:-300,behavior:"smooth"});});
+</script>
+
+<script>
+const galleryImages=document.querySelectorAll(".school-gallery img");
+const viewer=document.getElementById("galleryViewer");
+const viewerImg=document.getElementById("viewerImg");
+const closeViewer=document.getElementById("closeViewer");
+
+galleryImages.forEach(img=>{
+img.addEventListener("click",()=>{
+viewer.style.display="flex";
+viewerImg.src=img.src;
+});
+});
+
+closeViewer.addEventListener("click",()=>{
+viewer.style.display="none";
+});
+</script>
+
+
+<script src="/school-website-backend/public/schools/school.js"></script>
+
+</body>
+</html>

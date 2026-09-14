@@ -1,0 +1,297 @@
+/* Reset & Fonts */
+body { font-family: 'Arial', sans-serif; margin:0; background:#f4f4f4; color:#333; }
+ul { list-style:none; padding:0; margin:0; }
+
+/* Navbar */
+nav { display:flex; justify-content:space-between; align-items:center; padding:15px 40px; background:#111; color:white; }
+nav ul { display:flex; gap:25px; }
+nav ul li a { text-decoration:none; color:white; transition:0.3s; }
+nav ul li a:hover { color:#ff6b00; }
+
+/* Hero */
+.hero { height:400px; display:flex; flex-direction:column; justify-content:center; align-items:center; background:url('../images/dps1.jpg') no-repeat center center/cover; background-attachment:fixed; color:white; text-align:center; position:relative; }
+.hero::after { content:""; position:absolute; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.4); }
+.hero h1, .hero p { position:relative; z-index:1; }
+.hero button { background:linear-gradient(135deg,#ff6b00,#ff3c00); color:white; border-radius:30px; padding:15px 40px; font-size:1.2rem; box-shadow:0 5px 20px rgba(255,107,0,0.5); border:none; cursor:pointer; transition:0.4s; }
+.hero button:hover { transform:scale(1.1); box-shadow:0 10px 30px rgba(255,107,0,0.8); }
+
+/* Gallery */
+.gallery { padding:40px 20px; text-align:center; }
+.gallery h2 { margin-bottom:20px; }
+.gallery-container { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+.gallery-container img { width:300px; border-radius:10px; transition:transform 0.3s; }
+.gallery-container img:hover { transform:scale(1.05); }
+
+/* Basic Info */
+.basic-info { padding:40px 20px; background:#fff; border-radius:10px; margin:20px; }
+.basic-info ul li { padding:8px 0; font-size:1.1rem; }
+
+/* Facilities Carousel */
+.facility-carousel { display:flex; overflow-x:auto; gap:20px; padding:20px; scroll-behavior:smooth; }
+.facility-slide { flex:0 0 200px; background:#fff; border-radius:15px; padding:20px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.1); transition:transform 0.3s; }
+.facility-slide:hover { transform:translateY(-10px) scale(1.05); }
+.facility-slide i { font-size:2rem; color:#ff6b00; margin-bottom:10px; }
+
+/* Fees Table */
+.fees { padding:40px 20px; background:#fff; border-radius:10px; margin:20px; overflow-x:auto; }
+.fees table { width:100%; border-collapse:collapse; }
+.fees th, .fees td { padding:12px 15px; text-align:left; }
+.fees th { background:#ff6b00; color:#fff; }
+.fees tr:nth-child(even) { background:#f9f9f9; }
+.fees tr { opacity:0; transform:translateY(20px); animation:fadeInUp 0.5s forwards; }
+.fees tr:nth-child(1){ animation-delay:0.1s; }
+.fees tr:nth-child(2){ animation-delay:0.2s; }
+.fees tr:nth-child(3){ animation-delay:0.3s; }
+.fees tr:nth-child(4){ animation-delay:0.4s; }
+.fees tr:nth-child(5){ animation-delay:0.5s; }
+
+/* Uniform Slider */
+.uniform { padding:40px 20px; text-align:center; }
+.uniform h2 { margin-bottom:25px; }
+.uniform-slider { display:flex; overflow-x:auto; gap:40px; padding:20px; scroll-behavior:smooth; }
+.uniform-card { flex:0 0 300px; background:#fff; border-radius:20px; padding:20px; text-align:center; box-shadow:0 15px 35px rgba(0,0,0,0.15); transition:transform 0.3s; }
+.uniform-card img { width:100%; border-radius:15px; }
+.uniform-card:hover { transform:scale(1.05) translateY(-5px); }
+
+/* Location */
+.location { padding:40px 20px; }
+
+/* CTA Buttons */
+.cta-buttons { display:flex; justify-content:center; gap:25px; padding:40px 20px; flex-wrap:wrap; }
+.cta-buttons button { padding:15px 30px; border:none; border-radius:8px; background:linear-gradient(135deg,#ff6b00,#ff3c00); color:white; font-size:1rem; cursor:pointer; transition: transform 0.3s, box-shadow 0.3s; }
+.cta-buttons button:hover { transform:scale(1.05); box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+
+/* Animations */
+@keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
+
+/* Responsive */
+@media screen and (max-width:768px){
+    .gallery-container, .facility-carousel, .uniform-slider { flex-direction:column; align-items:center; }
+}
+
+.school-hero{
+  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.school-hero {
+    position: relative;
+    height: 400px; /* or whatever you use */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.school-hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4); /* 40% black overlay */
+    z-index: 1;
+}
+
+.school-hero h1 {
+    position: relative;
+    z-index: 2; /* so it sits above overlay */
+    font-size: 2.8rem;
+    margin: 0;
+}
+
+.school-hero h1 {
+    position: relative;
+    z-index:2;
+    color: white;
+    font-size: 3rem;
+    opacity:0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards 0.3s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+.school-hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.school-hero img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter: brightness(0.8) blur(1px); /* modern dim & blur */
+    transform: scale(1.05);
+    transition: transform 0.6s ease;
+}
+
+.school-hero:hover img {
+    transform: scale(1.1); /* subtle zoom effect on hover */
+}
+
+.school-hero::after {
+    content: "";
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+    z-index:1;
+}
+
+
+.school-fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+  margin: 20px 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.school-fee-table thead {
+  background: linear-gradient(135deg, #ff6b00, #ff3c00);
+  color: #fff;
+  font-weight: bold;
+}
+.school-fee-table th, .school-fee-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+.school-fee-table tbody tr {
+  background: #fffaf0;
+  transition: background 0.3s;
+}
+.school-fee-table tbody tr:nth-child(even) {
+  background: #fff4e6;
+}
+.school-fee-table tbody tr:hover {
+  background: #ffe0c0;
+}
+.school-fee-table .total-row {
+  background: #ffdab0;
+  font-weight: bold;
+  font-size: 1.05em;
+}
+
+/* Gallery Grid */
+.school-gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.school-gallery img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+  cursor:pointer;
+  transition:transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.school-gallery img:hover{
+  transform:scale(1.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Fullscreen Viewer */
+#galleryViewer{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+#galleryViewer img{
+  max-width:90%;
+  max-height:85%;
+  border-radius:10px;
+}
+
+#closeViewer{
+  position:absolute;
+  top:25px;
+  right:40px;
+  font-size:40px;
+  color:white;
+  cursor:pointer;
+}
+
+
+.school-gallery-container{
+margin-top:40px;
+text-align:center;
+}
+
+.gallery-wrapper{
+position:relative;
+display:flex;
+align-items:center;
+overflow:hidden;
+}
+
+.school-gallery{
+display:flex;
+gap:15px;
+overflow-x:auto;
+scroll-behavior:smooth;
+padding:10px;
+}
+
+.school-gallery img{
+width:260px;
+height:170px;
+object-fit:cover;
+border-radius:12px;
+cursor:pointer;
+transition:transform 0.3s;
+}
+
+.school-gallery img:hover{
+transform:scale(1.05);
+}
+
+.gallery-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:#000;
+color:white;
+border:none;
+font-size:24px;
+padding:10px 14px;
+cursor:pointer;
+border-radius:50%;
+opacity:0.7;
+}
+
+.gallery-btn:hover{
+opacity:1;
+}
+
+.gallery-btn.left{
+left:0;
+}
+
+.gallery-btn.right{
+right:0;
+}

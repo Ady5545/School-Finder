@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delhi World Public School - Greater Noida</title>
+
+<!-- Fancy CSS -->
+<link rel="stylesheet" href="/school-website-backend/public/schools/dps.css">
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+
+<!-- AOS Library for scroll animations -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+</head>
+
+<body>
+<!-- Navbar -->
+<nav>
+    <h2>Schools Of Greater Noida</h2>
+    <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#schools">Schools</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+
+</nav>
+
+
+
+
+
+
+
+
+<!-- Hero -->
+<div class="school-hero" style="background: url('/schools/DPSWS/banner.jpg') center/cover no-repeat;">
+  <div class="hero-overlay">
+    <h1>Delhi Public School KP5</h1>
+    <p>Excellence in Education & Holistic Development</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+    <svg class="heart" data-school="Delhi Public World School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+    </svg>
+
+
+<!-- Gallery -->
+
+
+<div class="school-gallery-container">
+
+<h2>School Gallery</h2>
+
+<div class="gallery-wrapper">
+
+<button class="gallery-btn left" id="galleryPrev">❮</button>
+
+<div class="school-gallery" id="schoolGallery">
+
+<img src="/school-website-backend/public/schools/DPSWS/abroad.jpg" alt="DPS Classroom">
+    <img src="/school-website-backend/public/schools/DPSWS/assembky.jpg" alt="DPS Playground">
+    <img src="/school-website-backend/public/schools/DPSWS/award.jpg" alt="DPS Science Lab">
+    <img src="/school-website-backend/public/schools/DPSWS/foriegner.jpg" alt="DPS Science Lab">
+    <img src="/school-website-backend/public/schools/DPSWS/ground.jpg" alt="DPS Science Lab">
+    <img src="/school-website-backend/public/schools/DPSWS/photo.jpeg" alt="DPS Science Lab">
+    <img src="/school-website-backend/public/schools/DPSWS/photo.jpeg" alt="DPS Science Lab">
+    <img src="/school-website-backend/public/schools/DPSWS/speech.jpg" alt="DPS Science Lab">
+    <img src="/school-website-backend/public/schools/DPSWS/swimmming ppook.jpg" alt="DPS Science Lab">
+    <img src="/school-website-backend/public/schools/DPSWS/ramayan.webp" alt="DPS Science Lab">
+
+</div>
+
+<button class="gallery-btn right" id="galleryNext">❯</button>
+
+</div>
+
+</div>
+
+
+
+
+<!-- Fullscreen Image Viewer -->
+<div id="galleryViewer">
+  <span id="closeViewer">&times;</span>
+  <img id="viewerImg">
+</div>
+
+
+</section>
+
+<!-- Basic Info -->
+<section class="basic-info" data-aos="fade-up">
+    <h2>Basic Information</h2>
+    <ul>
+        <li>Board: CBSE</li>
+        <li>Classes: Nursery – 12</li>
+        <li>Student-Teacher Ratio: 18:1</li>
+        <li>Admission Age: 3+</li>
+    </ul>
+</section>
+
+<!-- Facilities Carousel -->
+<section class="facilities" data-aos="fade-up">
+     <h2>Facilities</h2>
+    <div class="facility-carousel">
+        <div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>Basketball Court</p></div>
+        <div class="facility-slide"><i class="fas fa-football-ball"></i><p>Football Ground</p></div>
+        <div class="facility-slide"><i class="fas fa-laptop"></i><p>Computer Lab</p></div>
+        <div class="facility-slide"><i class="fas fa-laptop"></i><p>CO-ed School</p></div>
+        <div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>AC Rooms</p></div>
+        <div class="facility-slide"><i class="fas fa-flask"></i><p>Science Lab</p></div>
+        <div class="facility-slide"><i class="fas fa-book"></i><p>Library</p></div>
+        <div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>5 Acre Campus</p></div>
+        <div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>Air-Conditioned Bus</p></div>
+        <div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>AI Lab</div>
+        <div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>Smart Boards</p></div>
+        <div class="facility-slide"><i class="fas fa-basketball-ball"></i><p>CCTVs All Over School</p></div>
+        <div class="facility-slide"><i class="fas fa-bus"></i><p>Transport</p></div>
+        <div class="facility-slide"><i class="fas fa-paint-brush"></i><p>Art & Music Room</p></div>
+        <div class="facility-slide"><i class="fas fa-swimmer"></i><p>Swimming Pool</p></div>
+        <div class="facility-slide"><i class="fas fa-hospital"></i><p>Medical Room</p></div>
+    </div>
+</section>
+
+<!-- Fees Table -->
+<section class="fees" data-aos="fade-up">
+    <h2>Fees & Book Cost</h2>
+    <!-- Modern Fee Table for DWPS KP5 -->
+<table class="school-fee-table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Cost (Approx)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- One-Time Fees -->
+    <tr>
+      <td>Registration Fee (One-Time)</td>
+      <td>₹2,000</td>
+    </tr>
+    <tr>
+      <td>Admission Fee (One-Time)</td>
+      <td>₹40,000</td>
+    </tr>
+
+    <!-- Annual Fees -->
+    <tr>
+      <td>Annual Charges (Yearly)</td>
+      <td>₹7,000</td>
+    </tr>
+
+    <!-- Tuition Fees (Quarterly / per Class) -->
+    <tr>
+      <td>Tuition Fee (Pre-Nursery/Nursery/Prep)</td>
+      <td>₹21,000</td>
+    </tr>
+    <tr>
+      <td>Tuition Fee (Classes I–V)</td>
+      <td>₹22,500</td>
+    </tr>
+    <tr>
+      <td>Tuition Fee (Classes VI–VIII)</td>
+      <td>₹24,900</td>
+    </tr>
+    <tr>
+      <td>Tuition Fee (Classes IX–X)</td>
+      <td>₹25,500</td>
+    </tr>
+    <tr>
+      <td>Tuition Fee (Classes XI–XII)</td>
+      <td>₹28,500</td>
+    </tr>
+
+    <!-- Optional Transport -->
+    <tr>
+      <td>Transport (0–8 km / month)</td>
+      <td>₹2,500</td>
+    </tr>
+    <tr>
+      <td>Transport (8–15 km / month)</td>
+      <td>₹2,800</td>
+    </tr>
+    <tr>
+      <td>Transport (15–25 km / month)</td>
+      <td>₹3,000</td>
+    </tr>
+    <tr>
+      <td>Transport (Above 25 km / month)</td>
+      <td>₹3,500</td>
+    </tr>
+
+    <!-- Total First Year -->
+    <tr class="total-row">
+      <td><strong>Approx. Total First Year (excl. transport)</strong></td>
+      <td><strong>₹70,500 – ₹75,500</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<style>
+/* ===== Modern School Fee Table ===== */
+.school-fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Arial', sans-serif;
+  margin: 20px 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.school-fee-table thead {
+  background: linear-gradient(135deg, #ff6b00, #ff3c00);
+  color: #fff;
+  font-weight: bold;
+}
+
+.school-fee-table th,
+.school-fee-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.school-fee-table tbody tr {
+  background: #fffaf0;
+  transition: background 0.3s;
+}
+
+.school-fee-table tbody tr:nth-child(even) {
+  background: #fff4e6;
+}
+
+.school-fee-table tbody tr:hover {
+  background: #ffe0c0;
+}
+
+.school-fee-table .total-row {
+  background: #ffdab0;
+  font-weight: bold;
+  font-size: 1.05em;
+}
+</style>
+</section>
+
+<!-- Uniform Slider -->
+<section class="uniform" data-aos="fade-up">
+    <h2>Uniform</h2>
+    <div class="uniform-slider">
+        <div class="uniform-card">
+            <h3>Boys</h3>
+            <img src="/school-website-backend/public/schools/DPSWS/uniform boys.png" alt="Boys Uniform">
+        </div>
+        <div class="uniform-card">
+            <h3>Girls</h3>
+            <img src="/school-website-backend/public/schools/DPSWS/unform girls.png" alt="Girls Uniform">
+        </div>
+    </div>
+</section>
+
+<!-- Location -->
+<section class="location" data-aos="fade-up">
+    <h2>Location</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.000000!3d28.000000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0000000000000000!2sDelhi%20Public%20School%20Greater%20Noida%20West!5e0!3m2!1sen!2sin!4v0000000000" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</section>
+
+<!-- CTA Buttons -->
+<section class="cta-buttons" data-aos="fade-up">
+    <a href="https://www.dpsgnw.com" target="_blank"><button><i class="fas fa-external-link-alt"></i> Visit Website</button></a>
+    <a href="tel:+911234567890"><button><i class="fas fa-phone"></i> Call School</button></a>
+    <a href="#"><button><i class="fas fa-file-alt"></i> Apply for Admission</button></a>
+</section>
+
+<script>
+AOS.init({ duration: 1000, once: true });
+
+
+</script>
+
+<!-- School Gallery Script -->
+<script>
+const galleryImages = document.querySelectorAll(".school-gallery img");
+const viewer = document.getElementById("galleryViewer");
+const viewerImg = document.getElementById("viewerImg");
+const closeViewer = document.getElementById("closeViewer");
+
+galleryImages.forEach(img=>{
+  img.addEventListener("click",()=>{
+    viewer.style.display="flex";
+    viewerImg.src=img.src;
+  });
+});
+
+closeViewer.addEventListener("click",()=>{
+  viewer.style.display="none";
+});
+</script>
+
+
+<script>
+
+const gallery = document.getElementById("schoolGallery");
+const prev = document.getElementById("galleryPrev");
+const next = document.getElementById("galleryNext");
+
+next.addEventListener("click", () => {
+gallery.scrollBy({
+left:300,
+behavior:"smooth"
+});
+});
+
+prev.addEventListener("click", () => {
+gallery.scrollBy({
+left:-300,
+behavior:"smooth"
+});
+});
+
+</script>
+
+
+<script src="/school-website-backend/public/schools/school.js"></script>
+</body>
+</html>

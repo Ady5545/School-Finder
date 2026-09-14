@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schools Of Greater Noida</title>
+
+    <!-- Your full <style> block remains unchanged – paste it here if it's not in style.css -->
+    <style>
+        /* ... your existing styles ... */
+        body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f9f9f9; }
+        /* ... rest of your CSS ... */
+    </style>
+</head>
+<body>
+
+<!-- Floating top-right login/register button -->
+<button id="loginBtnFloating" class="login-btn-floating">Login / Register</button>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <a href="#" class="logo">Schools Of Greater Noida</a>
+    <ul class="nav-links">
+      <li><a href="#schools">Schools</a></li>
+      <li>
+        <button id="calendarBtn" class="calendar-btn" 
+                style="padding:10px 20px; border:none; border-radius:30px; background:linear-gradient(135deg,#ff6b00,#ff3c00); color:white; cursor:pointer;">
+          Calendar
+        </button>
+      </li>
+      <li><a href="#wishlist">Wishlist</a></li>
+      <li><a href="#pedagogy">Pedagogy</a></li>
+    </ul>
+    <div class="hamburger"><span></span><span></span><span></span></div>
+  </div>
+<div id="userMenu" style="display:none; position:relative;">
+  <button id="userBtn">Logged in</button>
+  <div id="userDropdown" style="display:none; position:absolute; top:100%; left:0; background:white; border:1px solid #ccc; padding:5px; min-width:120px;">
+    <div id="myWishlistBtn" style="cursor:pointer; padding:5px;">My Wishlist</div>
+    <div id="logoutBtn" style="cursor:pointer; padding:5px;">Logout</div>
+  </div>
+</div>
+
+
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Find the Best Schools in Greater Noida West</h1>
+    <p>Compare, wishlist, and choose the perfect school for your child.</p>
+    <div class="hero-buttons">
+        <button id="exploreSchoolsBtn">Explore Schools</button>
+        <button id="heroLoginBtn">Register / Login</button>
+    </div>
+</section>
+
+<div class="admission-alert">
+  <h2>Upcoming Admission Alert</h2>
+  <p>Next Admission Opens In: <span id="admissionCountdown">Loading...</span></p>
+</div>
+
+<!-- SCHOOLS -->
+<section class="schools-section" id="schools">
+    <h2>Find the Best Schools</h2>
+    <div class="search-box">
+        <input type="text" id="schoolSearch" placeholder="Search for a school...">
+    </div>
+
+    <div class="school-cards-container">
+
+        <!-- SCHOOL 1 -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-01" 
+             data-rating="5" 
+             data-fee="60000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Delhi Public School Knowledge Park 5" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/schools/dps/Delhi_Public_School_528_Building_3.jpg" alt="DPS School">
+            <h3>Delhi Public School Knowledge Park 5</h3>
+            <a href="schools/dps.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Delhi Public School Knowledge Park 5">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>National Inter‑DPS Sports & Athletics participation</li>
+                    <li>Strong CBSE board results</li>
+                    <li>Active student performance in Olympiads & MUN events</li>
+                </ul>
+                <a href="schools/dps.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 2 -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-05" 
+             data-rating="4" 
+             data-fee="55000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Lotus Valley International School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/lotusjpg.jpg" alt="Lotus Valley International School">
+            <h3>Lotus Valley International School</h3>
+            <a href="schools/lotus.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Lotus Valley International">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Top rankings in national school surveys</li>
+                    <li>Award for excellence in community engagement & leadership</li>
+                    <li>Innovative learning model recognition</li>
+                </ul>
+                <a href="schools/lotus.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 3 -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-10" 
+             data-rating="4" 
+             data-fee="50000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Pacific World School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/pacific.jpeg" alt="Pacific World School">
+            <h3>Pacific World School Techzone 4</h3>
+            <a href="schools/pacific.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="PWS">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>World‑class campus & labs</li>
+                    <li>Emphasis on global readiness & critical thinking</li>
+                    <li>Strong experiential and creative learning culture</li>
+                </ul>
+                <a href="schools/pacific.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 4 -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-05-01" 
+             data-rating="5" 
+             data-fee="65000">
+            <div class="wishlist">
+                <svg class="heart" data-school="The Shri Ram Universal School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/SRU.jpeg" alt="TSRU">
+            <h3>The Shri Ram Universal School</h3>
+            <a href="/schools/SRU.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="TSRU">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Top emerging CBSE school in UP</li>
+                    <li>Holistic learning with strong co‑curricular output</li>
+                    <li>Leadership & personalized education ethos</li>
+                </ul>
+                <a href="schools/SRU.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 5 -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-10" 
+             data-rating="4" 
+             data-fee="50000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Delhi World Public School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/DPWS.jpeg" alt="DPWS">
+            <h3>Delhi World Public School KP 5</h3>
+            <a href="schools/DPSWS.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="PWS">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Winners in National & International Olympiads</li>
+                    <li>Finalists at UNESCO International Youth Festival “Planet of ART”</li>
+                    <li>Awards in National “Japan on Canvas” painting competition</li>
+                </ul>
+                <a href="schools/DPSWS.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 6 – Ryan International School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-01" 
+             data-rating="4.5" 
+             data-fee="50000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Ryan International School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/schools/ryan/main.webp" alt="Ryan International School">
+            <h3>Ryan International School Greater Noida</h3>
+            <a href="schools/ryan.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Ryan">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Excellent academics & extracurriculars</li>
+                    <li>Strong sports & arts culture</li>
+                    <li>Modern infrastructure with labs & libraries</li>
+                </ul>
+                <a href="schools/ryan.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 7 – SKS World School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-05" 
+             data-rating="4.2" 
+             data-fee="45000">
+            <div class="wishlist">
+                <svg class="heart" data-school="SKS World School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/sks.jpg" alt="SKS World School">
+            <h3>SKS World School Greater Noida West</h3>
+            <a href="schools/sks.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="SKS">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Holistic learning & modern campus</li>
+                    <li>Strong academic results</li>
+                    <li>Emphasis on creativity & critical thinking</li>
+                </ul>
+                <a href="schools/sks.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 8 – JM International School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-10" 
+             data-rating="4" 
+             data-fee="50000">
+            <div class="wishlist">
+                <svg class="heart" data-school="JM International School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/jm.jpg" alt="JM International School">
+            <h3>JM International School</h3>
+            <a href="schools/jm.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="JM">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Strong academic culture</li>
+                    <li>Focus on extracurriculars</li>
+                    <li>Modern classrooms and labs</li>
+                </ul>
+                <a href="schools/jm.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 9 – St. Xavier's High School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-07" 
+             data-rating="4.3" 
+             data-fee="48000">
+            <div class="wishlist">
+                <svg class="heart" data-school="St. Xavier's High School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/sx.jpg" alt="St. Xavier's High School">
+            <h3>St. Xavier's High School</h3>
+            <a href="schools/xaviers.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Xaviers">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Focus on academic excellence & values</li>
+                    <li>Co‑curricular programs & sports</li>
+                    <li>Strong alumni network</li>
+                </ul>
+                <a href="schools/st.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 10 – The Wisdom Tree School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-08" 
+             data-rating="4.1" 
+             data-fee="47000">
+            <div class="wishlist">
+                <svg class="heart" data-school="The Wisdom Tree School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/wisdom tree.jpg" alt="The Wisdom Tree School">
+            <h3>The Wisdom Tree School</h3>
+            <a href="schools/wisdom.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Wisdom">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Focus on holistic learning</li>
+                    <li>Emphasis on creative thinking</li>
+                    <li>Modern labs & activity spaces</li>
+                </ul>
+                <a href="schools/wisdom.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 11 – The Infinity School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-09" 
+             data-rating="4" 
+             data-fee="52000">
+            <div class="wishlist">
+                <svg class="heart" data-school="The Infinity School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/infinity.png" alt="The Infinity School">
+            <h3>The Infinity School</h3>
+            <a href="schools/infinity.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Infinity">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Progressive teaching methods</li>
+                    <li>Innovative campus & activity zones</li>
+                    <li>Focus on STEM & arts integration</li>
+                </ul>
+                <a href="schools/infinity.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 12 – Ramagya School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-06" 
+             data-rating="4" 
+             data-fee="49000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Ramagya School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/ramagya.jpg" alt="Ramagya School">
+            <h3>Ramagya School Noida Extension</h3>
+            <a href="schools/ramagya.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Ramagya">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>High academic performance & co-curriculars</li>
+                    <li>Modern classrooms & labs</li>
+                    <li>Strong focus on innovation & creativity</li>
+                </ul>
+                <a href="schools/ramagya.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 13 – GD Goenka International School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-05" 
+             data-rating="4.2" 
+             data-fee="53000">
+            <div class="wishlist">
+                <svg class="heart" data-school="GD Goenka International School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/gd goenka.png" alt="GD Goenka International School">
+            <h3>GD Goenka International School Greater Noida West</h3>
+            <a href="schools/gdgoenka.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="GDGoenka">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Excellent infrastructure & academic record</li>
+                    <li>Focus on global readiness & creativity</li>
+                    <li>Wide range of co-curricular activities</li>
+                </ul>
+                <a href="schools/gd-goenka.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 14 – Salvation Tree -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-06" 
+             data-rating="3.9" 
+             data-fee="42000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Salvation Tree" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/salvation.webp" alt="Salvation Tree">
+            <h3>Salvation Tree Greater Noida</h3>
+            <a href="schools/salvation-tree.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="Salvation">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Innovative curriculum & modern campus</li>
+                    <li>Focus on student wellbeing & academics</li>
+                    <li>Creative & co-curricular programs</li>
+                </ul>
+                <a href="schools/salvation-tree.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 15 – BLS World School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-08" 
+             data-rating="4" 
+             data-fee="51000">
+            <div class="wishlist">
+                <svg class="heart" data-school="BLS World School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/bls-world-school.jpg" alt="BLS World School">
+            <h3>BLS World School</h3>
+            <a href="schools/bls.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="BLS">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>High academic standards & modern infrastructure</li>
+                    <li>Focus on holistic development</li>
+                    <li>Wide extracurricular opportunities</li>
+                </ul>
+                <a href="schools/bls-world.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 16 – Shiv Nadar School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-09" 
+             data-rating="4.5" 
+             data-fee="60000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Shiv Nadar School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/shiv nadar.jpg" alt="Shiv Nadar School">
+            <h3>Shiv Nadar School Greater Noida/Noida</h3>
+            <a href="schools/shiv-nadar.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="ShivNadar">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Exceptional academics & co-curriculars</li>
+                    <li>World-class campus & facilities</li>
+                    <li>Emphasis on innovation & leadership</li>
+                </ul>
+                <a href="schools/shiv-nadar.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+        <!-- SCHOOL 17 – Shri Ram Global School -->
+        <div class="school-card" 
+             data-board="cbse" 
+             data-type="private" 
+             data-admission="2026-04-10" 
+             data-rating="4.3" 
+             data-fee="55000">
+            <div class="wishlist">
+                <svg class="heart" data-school="Shri Ram Global School" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <img src="/school-website-backend/public/images/shri ram global.avif" alt="Shri Ram Global School">
+            <h3>Shri Ram Global School</h3>
+            <a href="schools/shriram.html" class="view-btn">View Details</a>
+            <div class="school-info">
+                <div class="rating" data-school="ShriRam">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <h4>Achievements</h4>
+                <ul>
+                    <li>Excellent academics & extracurricular activities</li>
+                    <li>Modern infrastructure & labs</li>
+                    <li>Focus on leadership & innovation</li>
+                </ul>
+                <a href="schools/shri-ram-global.html" class="view-btn">More Info</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- WISHLIST AREA -->
+<div id="wishlist">
+    <h3>My Wishlist</h3>
+    <div id="wishlistArea"></div>
+</div>
+
+<!-- ---------------- AUTH MODAL ---------------- -->
+<div id="authModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+
+    <!-- ---------------- LOGIN FORM ---------------- -->
+    <form id="loginForm">
+      <h2>Login</h2>
+      <input type="email" id="loginEmail" placeholder="Email" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="button" id="loginBtn">Login</button>
+      <p>Don't have an account? <span id="showRegister" style="cursor:pointer; color:blue;">Sign up now</span></p>
+    </form>
+
+    <!-- ---------------- REGISTER FORM ---------------- -->
+<form id="registerForm" style="display:none;">
+  <h2>Register</h2>
+
+  <input type="email" id="registerEmail" placeholder="Email" required />
+  <input type="text" id="registerUsername" placeholder="Username" required />
+  <input type="password" id="registerPassword" placeholder="Password" required />
+  <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" required />
+  <div id="passwordStrength" style="font-size:12px; color:gray; margin-top:4px;"></div>
+
+  <button type="button" id="registerBtn">Send OTP</button>
+
+  <p>
+    Already have an account?
+    <span id="showLogin" style="cursor:pointer; color:blue;">Login here</span>
+  </p>
+</form>
+
+<!-- ================= OTP POPUP ================= -->
+<div id="otpPopup" class="otp-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); justify-content:center; align-items:center; z-index:1100;">
+  <div class="otp-popup-content" style="background:white; padding:20px; border-radius:10px; width:300px; position:relative;">
+    <span class="close" onclick="document.getElementById('otpPopup').style.display='none'" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:18px;">&times;</span>
+    <h3>Enter OTP</h3>
+    <input type="text" id="otpInput" placeholder="Enter OTP" maxlength="6" style="width:100%; padding:8px; margin:10px 0;" />
+    <button id="verifyOtpBtn" style="width:100%; padding:10px; background:#ff3c00; color:white; border:none; border-radius:5px; cursor:pointer;">Verify OTP</button>
+  </div>
+</div>
+
+
+      <!-- ---------------- OTP VERIFICATION ---------------- -->
+      <div id="otpSection" style="display:none; margin-top:10px;">
+      
+        <button type="button" id="verifyOTP">Verify OTP</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- User Menu (shown when logged in) -->
+<div id="userMenu" style="display:none; position: relative; margin-left: 10px;">
+  <button id="userBtn">User▾</button>
+  <div id="userDropdown" style="display:none; position:absolute; top:100%; left:0; background:#fff; border:1px solid #ccc; padding:10px; width:150px; box-shadow:0 2px 8px rgba(0,0,0,0.2); z-index:100;">
+    <button id="myWishlistBtn" style="display:block; width:100%; margin-bottom:5px;">My Wishlist</button>
+    <button id="logoutBtn" style="display:block; width:100%;">Logout</button>
+  </div>
+</div>
+
+
+
+<!-- Calendar Popup -->
+<div id="calendarPopup" 
+     style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+            padding:20px; max-width:700px; width:90%; background:#fff; border-radius:12px; 
+            box-shadow:0 8px 25px rgba(0,0,0,0.2); z-index:10000;">
+
+  <button id="closeCalendar" 
+          style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:18px; cursor:pointer;">✖</button>
+
+  <div class="calendar-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+    <button id="prevMonth" style="padding:5px 10px;">◀</button>
+    <h3 id="monthYear" style="margin:0; text-align:center; flex-grow:1;"></h3>
+    <button id="nextMonth" style="padding:5px 10px;">▶</button>
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(7, 1fr); text-align:center; font-weight:bold; margin-bottom:5px;">
+    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+  </div>
+
+  <div class="calendar-grid" id="calendar" style="display:grid; grid-template-columns: repeat(7, 1fr); gap:5px;"></div>
+
+  <div id="calendarLegend" style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap; font-size:0.9rem;">
+    <div style="display:flex; align-items:center; gap:5px;">
+      <span style="width:15px; height:15px; background:#FF6B6B; display:inline-block; border-radius:50%;"></span> Delhi Public School
+    </div>
+    <div style="display:flex; align-items:center; gap:5px;">
+      <span style="width:15px; height:15px; background:#FFD93D; display:inline-block; border-radius:50%;"></span> Lotus Valley International
+    </div>
+    <div style="display:flex; align-items:center; gap:5px;">
+      <span style="width:15px; height:15px; background:#6BCB77; display:inline-block; border-radius:50%;"></span> Pacific World School
+    </div>
+    <div style="display:flex; align-items:center; gap:5px;">
+      <span style="width:15px; height:15px; background:#4D96FF; display:inline-block; border-radius:50%;"></span> The Shri Ram Universal
+    </div>
+  </div>
+</div>
+
+<!-- Calendar Popup (your existing HTML) -->
+<div id="calendarPopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); padding:20px; max-width:700px; width:90%; background:#fff; border-radius:12px; box-shadow:0 8px 25px rgba(0,0,0,0.2); z-index:10000;">
+  <!-- Paste your calendar popup content here – unchanged -->
+</div>
+
+
+
+
+
+
+<!-- SINGLE WORKING JAVASCRIPT -->
+
+<script src="/school-website-backend/public/script.js"></script>
+
+</body>
+</html>

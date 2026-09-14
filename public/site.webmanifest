@@ -1,0 +1,17 @@
+{
+  "name": "Admission Pitara",
+  "short_name": "AdmissionPitara",
+  "description": "School discovery, decision-making, and admission intelligence platform for Greater Noida West",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfaf8",
+  "theme_color": "#0f3256",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

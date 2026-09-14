@@ -11,22 +11,26 @@
   --color-brand-900: #0f2942;
   --color-brand-950: #0a1c2e;
 
-  --color-primary: #0f3b66;
-  --color-primary-hover: #0b2b4c;
-  --color-primary-light: #ebf3fa;
+  --color-primary: #0f3256;
+  --color-primary-hover: #0a223c;
+  --color-primary-light: #eef4f9;
+
+  --color-accent: #c85a28;
+  --color-accent-hover: #ad491c;
+  --color-accent-light: #fef5f0;
 
   --color-surface: #ffffff;
   --color-surface-elevated: #ffffff;
-  --color-surface-muted: #f8fafc;
-  --color-surface-subtle: #f1f5f9;
+  --color-surface-muted: #fbfaf8;
+  --color-surface-subtle: #f4f1ea;
 
-  --color-content: #0f172a;
+  --color-content: #0f1c2e;
   --color-content-muted: #475569;
-  --color-content-subtle: #94a3b8;
+  --color-content-subtle: #8a99ad;
 
-  --color-border: #e2e8f0;
-  --color-border-subtle: #f1f5f9;
-  --color-border-strong: #cbd5e1;
+  --color-border: #e6e3dc;
+  --color-border-subtle: #f0ece3;
+  --color-border-strong: #ccc6ba;
 
   --color-success: #059669;
   --color-success-bg: #ecfdf5;
@@ -79,3 +83,11 @@ body {
 html {
   scrollbar-gutter: stable;
 }
+
+/* Smooth microinteractions */
+@media (prefers-reduced-motion: no-preference) {
+  .smooth-transition {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+

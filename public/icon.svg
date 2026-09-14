@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- Background with subtle warm gradient -->
+  <rect width="512" height="512" rx="128" fill="#0f3256"/>
+  
+  <!-- Subtle inner ambient glow -->
+  <circle cx="256" cy="220" r="160" fill="url(#sunburst)" opacity="0.15"/>
+  
+  <!-- Radiating Knowledge / Discovery Rays -->
+  <g stroke="#f59e0b" stroke-width="6" stroke-linecap="round" opacity="0.8">
+    <line x1="256" y1="90" x2="256" y2="120" />
+    <line x1="190" y1="105" x2="205" y2="130" />
+    <line x1="322" y1="105" x2="307" y2="130" />
+    <line x1="135" y1="145" x2="158" y2="165" />
+    <line x1="377" y1="145" x2="354" y2="165" />
+  </g>
+
+  <!-- Emerging Sun / Wisdom Crest -->
+  <path d="M196 210C196 176.863 222.863 150 256 150C289.137 150 316 176.863 316 210H196Z" fill="url(#goldGrad)"/>
+
+  <!-- The "Pitara" (Treasure Chest of Knowledge) Lid Arch -->
+  <path d="M112 248C112 212.653 140.653 184 176 184H336C371.347 184 400 212.653 400 248V264H112V248Z" fill="#d95d39"/>
+  <path d="M112 248C112 212.653 140.653 184 176 184H336C371.347 184 400 212.653 400 248" stroke="#fbd5b5" stroke-width="8"/>
+  
+  <!-- Lid Band & Ornaments -->
+  <rect x="236" y="184" width="40" height="80" fill="#c2410c" />
+  <rect x="236" y="184" width="40" height="80" stroke="#fef3c7" stroke-width="4" fill="none"/>
+
+  <!-- The "Pitara" Trunk Base -->
+  <path d="M120 264H392L376 392C374 408 360 420 344 420H168C152 420 138 408 136 392L120 264Z" fill="#c2410c"/>
+  
+  <!-- Front Shield Plaque & Keyhole -->
+  <path d="M226 264H286V320C286 336.569 272.569 350 256 350C239.431 350 226 336.569 226 320V264Z" fill="#fbbf24" stroke="#fef3c7" stroke-width="5"/>
+  <circle cx="256" cy="296" r="8" fill="#0f3256"/>
+  <polygon points="253,296 259,296 261,316 251,316" fill="#0f3256"/>
+
+  <!-- Corner Brackets (Traditional Brass Detailing) -->
+  <path d="M128 350L136 392C138 408 152 420 168 420H196" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <path d="M384 350L376 392C374 408 360 420 344 420H316" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+  <!-- Horizontal Trim Accent -->
+  <line x1="124" y1="264" x2="388" y2="264" stroke="#fef3c7" stroke-width="8"/>
+
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="sunburst" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#0f3256" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldGrad" x1="196" y1="150" x2="316" y2="210" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fef08a"/>
+      <stop offset="0.5" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -14,6 +14,7 @@ export interface ToastItem {
 
 interface ToastContextType {
   toast: (message: string, type?: ToastType) => void;
+  showToast: (message: string, type?: ToastType) => void;
   removeToast: (id: string) => void;
 }
 
@@ -37,6 +38,8 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     [removeToast]
   );
 
+  const showToast = toast;
+
   const icons = {
     success: <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />,
     error: <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />,
@@ -52,7 +55,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <ToastContext.Provider value={{ toast, removeToast }}>
+    <ToastContext.Provider value={{ toast, showToast, removeToast }}>
       {children}
       <div
         aria-live="polite"

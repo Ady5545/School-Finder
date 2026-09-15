@@ -3,16 +3,19 @@ import { cn } from '../../lib/utils';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   hoverEffect?: boolean;
+  reveal?: boolean;
 }
 
 export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, hoverEffect = false, children, ...props }, ref) => {
+  ({ className, hoverEffect = false, reveal = true, children, ...props }, ref) => {
     return (
       <div
         ref={ref}
+        data-reveal={reveal ? 'card' : undefined}
         className={cn(
-          'rounded-xl border border-[var(--color-border)] bg-white shadow-xs transition-all duration-150',
-          hoverEffect && 'hover:border-[var(--color-border-strong)] hover:shadow-sm hover:-translate-y-0.5',
+          'rounded-xl border border-[var(--color-border)] bg-white shadow-xs',
+          reveal && 'reveal-on-scroll',
+          hoverEffect && 'tactile-card hover:border-[var(--color-border-strong)] hover:shadow-sm hover:-translate-y-0.5',
           className
         )}
         {...props}

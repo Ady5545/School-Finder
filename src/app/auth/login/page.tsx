@@ -1,44 +1,51 @@
 import React from 'react';
 import Link from 'next/link';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../../../components/ui/Card';
-import { Input } from '../../../components/ui/Input';
-import { Button } from '../../../components/ui/Button';
-import { GraduationCap } from 'lucide-react';
+import { LoginForm } from '../../../components/auth/LoginForm';
+import { BrandLogo } from '../../../components/ui/BrandLogo';
 import { buildPageMetadata } from '../../../lib/seo';
+import { ShieldCheck, BookmarkCheck, Scale } from 'lucide-react';
 
-export const metadata = buildPageMetadata('Parent Sign In', 'Sign in to Admission Pitara to manage your school shortlists and comparisons.', '/auth/login');
+export const metadata = buildPageMetadata(
+  'Parent Sign In',
+  'Sign in to your Admission Pitara parent account to access saved school shortlists, fee comparisons, and admission trackers in Greater Noida.',
+  '/auth/login'
+);
 
 export default function LoginPage() {
   return (
-    <div className="max-w-md mx-auto px-4 py-16 w-full flex flex-col items-center justify-center flex-1">
-      <div className="flex items-center gap-2.5 mb-6 select-none">
-        <div className="w-10 h-10 rounded-xl bg-[var(--color-primary)] text-white flex items-center justify-center shadow-xs">
-          <GraduationCap className="w-5 h-5" />
+    <div className="min-h-[80vh] w-full flex flex-col items-center justify-center px-4 py-12 bg-radial-hero">
+      <div className="w-full max-w-md mb-6 text-center flex flex-col items-center">
+        <Link href="/" className="inline-block mb-3">
+          <BrandLogo size="md" />
+        </Link>
+        <h1 className="text-xl sm:text-2xl font-black text-[var(--color-content)] tracking-tight">
+          Parent Account Sign In
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--color-content-muted)] max-w-sm mt-1">
+          Pick up your Greater Noida school search, saved compare trays, and admission milestones.
+        </p>
+
+        {/* Feature badges */}
+        <div className="flex items-center justify-center gap-3 mt-4 text-[11px] font-semibold text-slate-600">
+          <span className="inline-flex items-center gap-1">
+            <BookmarkCheck className="w-3.5 h-3.5 text-amber-600" />
+            Saved Shortlist
+          </span>
+          <span className="text-slate-300">•</span>
+          <span className="inline-flex items-center gap-1">
+            <Scale className="w-3.5 h-3.5 text-sky-600" />
+            Comparison Trays
+          </span>
+          <span className="text-slate-300">•</span>
+          <span className="inline-flex items-center gap-1">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+            Verified Profile
+          </span>
         </div>
-        <span className="text-xl font-extrabold tracking-tight text-[var(--color-content)]">
-          Admission Pitara
-        </span>
       </div>
 
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle>Welcome back</CardTitle>
-          <CardDescription>Enter your email to sign in to your parent dashboard</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Input label="Email address" type="email" placeholder="name@example.com" />
-          <Input label="Password" type="password" placeholder="••••••••" />
-          <Button variant="primary" size="md" className="w-full">
-            Sign In
-          </Button>
-        </CardContent>
-        <CardFooter className="justify-center text-xs text-[var(--color-content-muted)]">
-          Don&apos;t have an account?{' '}
-          <Link href="/auth/register" className="font-semibold text-[var(--color-primary)] ml-1 hover:underline">
-            Register here
-          </Link>
-        </CardFooter>
-      </Card>
+      <LoginForm />
     </div>
   );
 }
+

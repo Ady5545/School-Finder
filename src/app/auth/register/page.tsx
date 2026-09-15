@@ -1,45 +1,49 @@
 import React from 'react';
 import Link from 'next/link';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../../../components/ui/Card';
-import { Input } from '../../../components/ui/Input';
-import { Button } from '../../../components/ui/Button';
-import { GraduationCap } from 'lucide-react';
+import { RegisterForm } from '../../../components/auth/RegisterForm';
+import { BrandLogo } from '../../../components/ui/BrandLogo';
 import { buildPageMetadata } from '../../../lib/seo';
+import { Shield, Sparkles, CheckCircle2 } from 'lucide-react';
 
-export const metadata = buildPageMetadata('Parent Registration', 'Create an Admission Pitara parent account to track admissions and fees.', '/auth/register');
+export const metadata = buildPageMetadata(
+  'Parent Registration',
+  'Create a verified parent account on Admission Pitara to track admission deadlines, fee structures, and school shortlists across Greater Noida.',
+  '/auth/register'
+);
 
 export default function RegisterPage() {
   return (
-    <div className="max-w-md mx-auto px-4 py-16 w-full flex flex-col items-center justify-center flex-1">
-      <div className="flex items-center gap-2.5 mb-6 select-none">
-        <div className="w-10 h-10 rounded-xl bg-[var(--color-primary)] text-white flex items-center justify-center shadow-xs">
-          <GraduationCap className="w-5 h-5" />
+    <div className="min-h-[80vh] w-full flex flex-col items-center justify-center px-4 py-12 bg-radial-hero">
+      <div className="w-full max-w-lg mb-6 text-center flex flex-col items-center">
+        <Link href="/" className="inline-block mb-3">
+          <BrandLogo size="md" />
+        </Link>
+        <h1 className="text-xl sm:text-2xl font-black text-[var(--color-content)] tracking-tight">
+          Join Greater Noida Parents
+        </h1>
+        <p className="text-xs sm:text-sm text-[var(--color-content-muted)] max-w-md mt-1">
+          Access verified fee breakdowns, compare schools side-by-side, and save your admission shortlist.
+        </p>
+
+        {/* Value pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-4 text-[11px] font-semibold text-slate-700">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-[var(--color-border)] shadow-2xs">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            100% Free for Parents
+          </span>
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-[var(--color-border)] shadow-2xs">
+            <Shield className="w-3.5 h-3.5 text-sky-600" />
+            Zero Spam / Mobile Safe
+          </span>
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white border border-[var(--color-border)] shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            17 Verified Greater Noida Schools
+          </span>
         </div>
-        <span className="text-xl font-extrabold tracking-tight text-[var(--color-content)]">
-          Admission Pitara
-        </span>
       </div>
 
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle>Create Parent Account</CardTitle>
-          <CardDescription>Join parents researching schools in Greater Noida West</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <Input label="Full Name" type="text" placeholder="Parent Name" />
-          <Input label="Email address" type="email" placeholder="name@example.com" />
-          <Input label="Create Password" type="password" placeholder="••••••••" />
-          <Button variant="primary" size="md" className="w-full">
-            Register Account
-          </Button>
-        </CardContent>
-        <CardFooter className="justify-center text-xs text-[var(--color-content-muted)]">
-          Already registered?{' '}
-          <Link href="/auth/login" className="font-semibold text-[var(--color-primary)] ml-1 hover:underline">
-            Sign in here
-          </Link>
-        </CardFooter>
-      </Card>
+      <RegisterForm />
     </div>
   );
 }
+

@@ -25,11 +25,11 @@ export const WishlistContentView: React.FC = () => {
 
   if (savedSchools.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto w-full">
+      <div className="max-w-2xl mx-auto w-full py-8">
         <EmptyState
           icon={<Heart className="w-8 h-8 text-rose-500" />}
           title="Your shortlist is empty"
-          description="Click the heart icon on any school card across the directory or search results to keep track of prospective schools."
+          description="Click the heart icon on any school card across the directory or search results to keep track of prospective schools for your family."
           actionLabel="Browse Schools Directory"
           actionHref="/schools"
         />
@@ -37,7 +37,7 @@ export const WishlistContentView: React.FC = () => {
     );
   }
 
-  // Calculate average annual tuition
+  // Calculate annual tuition stats
   const validTuitions = savedSchools
     .map(s => s.fees.cardFee || 0)
     .filter(t => t > 0);
@@ -45,24 +45,42 @@ export const WishlistContentView: React.FC = () => {
     validTuitions.length > 0
       ? Math.round(validTuitions.reduce((a, b) => a + b, 0) / validTuitions.length)
       : 0;
+  const minTuition = validTuitions.length > 0 ? Math.min(...validTuitions) : 0;
+  const maxTuition = validTuitions.length > 0 ? Math.max(...validTuitions) : 0;
 
   return (
-    <div className="w-full flex flex-col">
-      {/* Shortlist Summary Metrics Bar */}
-      <div className="bg-white rounded-2xl border border-[var(--color-border)] p-4 sm:p-6 shadow-xs mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+    <div className="w-full flex flex-col space-y-6">
+      {/* Shortlist Summary Workspace Card */}
+      <div className="bg-white rounded-2xl border border-[var(--color-border)] p-5 sm:p-6 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div className="flex items-start sm:items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 border border-rose-100 shadow-2xs">
             <Heart className="w-6 h-6 fill-rose-500" />
           </div>
           <div>
-            <h2 className="text-base font-extrabold text-[var(--color-content)]">
-              {savedSchools.length} {savedSchools.length === 1 ? 'School' : 'Schools'} in Family Shortlist
-            </h2>
-            <div className="flex items-center gap-3 text-xs text-[var(--color-content-muted)] mt-0.5">
-              <span>Avg Annual Tuition: <strong className="text-slate-800">{formatCurrency(avgTuition)}</strong></span>
-              <span>•</span>
-              <span>Locality: Greater Noida West</span>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-black text-[var(--color-content)]">
+                {savedSchools.length} {savedSchools.length === 1 ? 'School' : 'Schools'} in Family Shortlist
+              </h2>
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-100">
+                Personalized
+              </span>
             </div>
+            <p className="text-xs text-[var(--color-content-muted)] mt-1">
+              Locality: Greater Noida West & Noida Extension • Data preserved across browser sessions
+            </p>
+          </div>
+        </div>
+
+        {/* Budget Snapshot Strip */}
+        <div className="flex flex-wrap items-center gap-4 bg-[var(--color-surface-muted)] px-4 py-2.5 rounded-xl border border-[var(--color-border-subtle)] text-xs">
+          <div>
+            <span className="text-[10px] uppercase font-bold text-slate-400 block">Avg Budget</span>
+            <strong className="text-slate-800 font-extrabold">{formatCurrency(avgTuition)}/yr</strong>
+          </div>
+          <div className="h-6 w-px bg-slate-200" />
+          <div>
+            <span className="text-[10px] uppercase font-bold text-slate-400 block">Budget Span</span>
+            <strong className="text-slate-800 font-bold">{formatCurrency(minTuition)} – {formatCurrency(maxTuition)}</strong>
           </div>
         </div>
 
@@ -74,7 +92,7 @@ export const WishlistContentView: React.FC = () => {
                 size="sm"
                 onClick={compareAllSaved}
                 leftIcon={<Scale className="w-3.5 h-3.5" />}
-                className="text-xs font-bold"
+                className="text-xs font-bold bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)]"
               >
                 Compare Shortlist
               </Button>
@@ -87,7 +105,7 @@ export const WishlistContentView: React.FC = () => {
             className="text-xs font-semibold text-rose-600 hover:text-rose-700 px-3 py-2 rounded-lg hover:bg-rose-50 flex items-center gap-1.5 transition-colors cursor-pointer"
           >
             <Trash2 className="w-3.5 h-3.5" />
-            <span>Clear Shortlist</span>
+            <span>Clear</span>
           </button>
         </div>
       </div>

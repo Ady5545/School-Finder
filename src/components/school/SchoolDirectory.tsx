@@ -316,44 +316,6 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           onAction={resetAllFilters}
         />
       )}
-
-      {/* Floating Compare Tray / Indicator */}
-      {compareList.length > 0 && (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-xl bg-slate-900 text-white rounded-2xl p-3.5 shadow-2xl border border-slate-700 flex items-center justify-between gap-4 animate-in slide-in-from-bottom-5">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-bold">
-              <Scale className="w-4 h-4" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xs font-bold leading-tight">
-                {compareList.length} {compareList.length === 1 ? 'school' : 'schools'} in comparison
-              </span>
-              <span className="text-[10px] text-slate-400">
-                {compareList.length < 2 ? 'Add at least 2 schools to compare' : 'Ready for side-by-side analysis'}
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={clearCompare}
-              className="text-xs text-slate-400 hover:text-white px-2 py-1 cursor-pointer"
-            >
-              Clear
-            </button>
-            <Link href="/compare">
-              <Button
-                variant="primary"
-                size="sm"
-                className="bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold"
-              >
-                Compare Now ({compareList.length})
-              </Button>
-            </Link>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -4,23 +4,27 @@ import '../styles/globals.css';
 import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
 import { ToastProvider } from '../components/ui/Toast';
+import { AuthProvider } from '../lib/authContext';
 import { SchoolStoreProvider } from '../lib/schoolStore';
+import { ComparisonDock } from '../components/school/ComparisonDock';
+import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Admission Pitara | Schools of Greater Noida West',
+    default: 'Admission Pitara — Greater Noida | Find the right school in Greater Noida',
     template: '%s | Admission Pitara',
   },
   description:
-    'Admission Pitara: The parent-first school discovery, fee verification, and admission intelligence platform for Greater Noida West and Noida Extension.',
-  applicationName: 'Admission Pitara',
+    'Admission Pitara: Find the right school in Greater Noida. The parent-first school discovery, verified fee breakdown, and admission intelligence platform for Greater Noida West & Noida Extension.',
+  applicationName: 'Admission Pitara — Greater Noida',
   authors: [{ name: 'Admission Pitara Editorial' }],
   keywords: [
     'Admission Pitara',
+    'Schools in Greater Noida',
     'Schools in Greater Noida West',
     'Schools in Noida Extension',
     'School Admissions Greater Noida',
-    'School Fees Comparison',
+    'School Fees Comparison Greater Noida',
     'CBSE Schools Noida Extension',
     'IB Schools Greater Noida',
   ],
@@ -34,18 +38,18 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   openGraph: {
-    title: 'Admission Pitara | Schools of Greater Noida West',
+    title: 'Admission Pitara — Greater Noida | Find the right school in Greater Noida',
     description:
-      'The parent-first school discovery, verified fee breakdown, and admission intelligence platform for Greater Noida West & Noida Extension.',
+      'Find the right school in Greater Noida. Parent-first school discovery, verified fee breakdown, and admission intelligence platform.',
     siteName: 'Admission Pitara',
     type: 'website',
     locale: 'en_IN',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Admission Pitara | Schools of Greater Noida West',
+    title: 'Admission Pitara — Greater Noida | Find the right school in Greater Noida',
     description:
-      'Verified school fee structures, board affiliations, ratios, and admission tracker for Greater Noida West.',
+      'Verified school fee structures, board affiliations, ratios, and admission tracker for Greater Noida.',
   },
 };
 
@@ -69,13 +73,17 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col bg-[var(--color-surface-muted)] text-[var(--color-content)] antialiased">
         <ToastProvider>
-          <SchoolStoreProvider>
-            <Header />
-            <main className="flex-1 w-full flex flex-col" id="main-content">
-              {children}
-            </main>
-            <Footer />
-          </SchoolStoreProvider>
+          <AuthProvider>
+            <SchoolStoreProvider>
+              <Header />
+              <main className="flex-1 w-full flex flex-col" id="main-content">
+                {children}
+              </main>
+              <Footer />
+              <ComparisonDock />
+              <ScrollRevealManager />
+            </SchoolStoreProvider>
+          </AuthProvider>
         </ToastProvider>
       </body>
     </html>

@@ -11,11 +11,14 @@ import {
   ShieldCheck,
   Mail,
   Lock,
+  Eye,
+  EyeOff,
   Info,
   Sparkles,
   ArrowRight,
   RefreshCw,
   Edit3,
+  AlertCircle,
 } from 'lucide-react';
 
 export const LoginForm: React.FC = () => {
@@ -23,11 +26,11 @@ export const LoginForm: React.FC = () => {
   const { login, sendOtp, isAuthenticated } = useAuth();
 
   const [activeTab, setActiveTab] = useState<'password' | 'otp'>('password');
-  const [identifier, setIdentifier] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   // Email OTP flow state
-  const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
@@ -35,6 +38,8 @@ export const LoginForm: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const [noAccountFound, setNoAccountFound] = useState<{ email: string; message?: string } | null>(null);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -53,26 +58,33 @@ export const LoginForm: React.FC = () => {
   const handlePasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
+    setNoAccountFound(null);
 
-    if (!identifier || !password) {
-      setErrorMessage('Please enter both your email/mobile and password.');
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !password) {
+      setErrorMessage('Please enter both your email address and password.');
       return;
     }
 
     setIsSubmitting(true);
-    const res = await login({ identifier, password, loginType: 'password' });
+    const res = await login({ email: cleanEmail, password, loginType: 'password' });
     setIsSubmitting(false);
 
     if (res.success) {
       router.push('/dashboard');
     } else {
-      setErrorMessage(res.message || 'Login failed. Please check your credentials.');
+      if (res.notFound) {
+        setNoAccountFound({ email: cleanEmail, message: res.message });
+      } else {
+        setErrorMessage(res.message || 'Login failed. Please check your credentials.');
+      }
     }
   };
 
   const handleRequestLoginOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
+    setNoAccountFound(null);
 
     const cleanEmail = email.trim().toLowerCase();
     if (!cleanEmail || !cleanEmail.includes('@')) {
@@ -86,12 +98,16 @@ export const LoginForm: React.FC = () => {
 
     if (res.success) {
       setOtpSent(true);
-      setResendCooldown(45);
+      setResendCooldown(60);
       if (res.devOtp) {
         setDevOtpHint(res.devOtp);
       }
     } else {
-      setErrorMessage(res.message || 'Failed to dispatch login verification code.');
+      if (res.notFound) {
+        setNoAccountFound({ email: cleanEmail, message: res.message });
+      } else {
+        setErrorMessage(res.message || 'Failed to dispatch login verification code.');
+      }
     }
   };
 
@@ -100,7 +116,7 @@ export const LoginForm: React.FC = () => {
     setErrorMessage(null);
 
     if (!otp || otp.trim().length !== 6) {
-      setErrorMessage('Please enter the 6-digit verification code.');
+      setErrorMessage('Please enter the 6-digit verification code sent to your email.');
       return;
     }
 
@@ -115,49 +131,65 @@ export const LoginForm: React.FC = () => {
     }
   };
 
-  const fillDemoAccount = () => {
-    setIdentifier('parent@example.com');
+  const fillDemoParent = () => {
+    setEmail('parent@example.com');
     setPassword('Parent@12345');
     setActiveTab('password');
     setErrorMessage(null);
   };
 
+  const fillDemoAdmin = () => {
+    setEmail('admin@admissionpitara.com');
+    setPassword('Admin@Pitara2025');
+    setActiveTab('password');
+    setErrorMessage(null);
+  };
+
   return (
-    <Card className="w-full max-w-md shadow-sm border border-[var(--color-border)] bg-white">
-      <CardHeader className="space-y-1.5 pb-4 border-b border-[var(--color-border-subtle)]">
-        <div className="flex items-center justify-between">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-[11px] font-bold">
-            <ShieldCheck className="w-3.5 h-3.5 text-slate-500" />
-            <span>Family Portal</span>
-          </div>
-          <button
-            type="button"
-            onClick={fillDemoAccount}
-            className="text-[11px] font-bold text-sky-700 hover:text-sky-800 hover:underline inline-flex items-center gap-1 cursor-pointer"
-          >
-            <Sparkles className="w-3 h-3 text-amber-500" />
-            <span>Fill Demo Account</span>
-          </button>
+    <Card className="w-full max-w-md mx-auto shadow-xl border-stone-200 bg-white">
+      <CardHeader className="space-y-2 pb-4 pt-6 px-6 border-b border-stone-100 text-center">
+        <div className="mx-auto w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center text-amber-700 mb-1">
+          <ShieldCheck className="w-5 h-5 stroke-[2.2]" />
         </div>
-        <CardTitle className="text-xl sm:text-2xl font-black text-[var(--color-content)] tracking-tight">
-          Welcome back
+        <CardTitle className="text-2xl font-serif text-stone-900 tracking-tight">
+          Parent Sign In
         </CardTitle>
-        <CardDescription className="text-xs text-[var(--color-content-muted)]">
-          Sign in to access your shortlisted Greater Noida schools and saved comparisons.
+        <CardDescription className="text-xs text-stone-600">
+          Sign in to access your shortlisted Greater Noida schools, saved comparisons, and verified reviews.
         </CardDescription>
 
+        {/* Quick Demo Fills */}
+        <div className="flex items-center justify-center gap-3 pt-2">
+          <button
+            type="button"
+            onClick={fillDemoParent}
+            className="text-[11px] font-semibold text-amber-800 hover:text-amber-950 hover:underline inline-flex items-center gap-1 cursor-pointer"
+          >
+            <Sparkles className="w-3 h-3 text-amber-600" />
+            <span>Fill Demo Parent</span>
+          </button>
+          <span className="text-stone-300">•</span>
+          <button
+            type="button"
+            onClick={fillDemoAdmin}
+            className="text-[11px] font-semibold text-stone-600 hover:text-stone-900 hover:underline inline-flex items-center gap-1 cursor-pointer"
+          >
+            <span>Admin Auditor</span>
+          </button>
+        </div>
+
         {/* Tab switch */}
-        <div className="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-xl mt-3">
+        <div className="grid grid-cols-2 gap-1 p-1 bg-stone-100 rounded-lg mt-3">
           <button
             type="button"
             onClick={() => {
               setActiveTab('password');
               setErrorMessage(null);
             }}
-            className={`py-1.5 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`py-1.5 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
               activeTab === 'password'
-                ? 'bg-white text-[var(--color-content)] shadow-2xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white text-stone-900 shadow-sm'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             Password Sign In
@@ -168,10 +200,10 @@ export const LoginForm: React.FC = () => {
               setActiveTab('otp');
               setErrorMessage(null);
             }}
-            className={`py-1.5 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`py-1.5 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
               activeTab === 'otp'
-                ? 'bg-white text-[var(--color-content)] shadow-2xs'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-white text-stone-900 shadow-sm'
+                : 'text-stone-600 hover:text-stone-900'
             }`}
           >
             Email Code Sign In
@@ -179,89 +211,186 @@ export const LoginForm: React.FC = () => {
         </div>
       </CardHeader>
 
-      <CardContent className="pt-6">
-        {errorMessage && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium flex items-start gap-2 animate-fadeIn">
-            <Info className="w-4 h-4 shrink-0 text-rose-500 mt-0.5" />
+      <CardContent className="p-6">
+        {noAccountFound && (
+          <div className="mb-5 p-4 rounded-xl bg-amber-50/90 border border-amber-300 text-stone-900 shadow-sm animate-fade-in space-y-3">
+            <div className="flex items-start gap-2.5">
+              <AlertCircle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-bold text-stone-900 uppercase tracking-wide">
+                  No Account Found
+                </h4>
+                <p className="text-xs text-stone-700 mt-0.5 leading-relaxed">
+                  We couldn&apos;t find an existing parent account for <strong className="font-semibold text-stone-900">{noAccountFound.email}</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-1 flex flex-col sm:flex-row gap-2">
+              <Link
+                href={`/register?email=${encodeURIComponent(noAccountFound.email)}`}
+                className="flex-1"
+              >
+                <Button
+                  type="button"
+                  variant="primary"
+                  size="sm"
+                  className="w-full bg-amber-800 hover:bg-amber-900 text-white font-semibold text-xs justify-center"
+                  rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+                >
+                  Create Parent Account
+                </Button>
+              </Link>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setNoAccountFound(null);
+                  setEmail('');
+                  setPassword('');
+                }}
+                className="text-xs text-stone-700 bg-white border-stone-300 hover:bg-stone-50 justify-center"
+              >
+                Try another email
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {errorMessage && !noAccountFound && (
+          <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-xs text-red-800 flex items-start gap-2">
+            <Info className="w-4 h-4 shrink-0 text-red-600 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
         )}
 
         {activeTab === 'password' ? (
           <form onSubmit={handlePasswordLogin} className="space-y-4">
-            <Input
-              label="Email Address or Mobile Number"
-              placeholder="parent@example.com or 9876543210"
-              value={identifier}
-              onChange={e => setIdentifier(e.target.value)}
-              leftIcon={<Mail className="w-4 h-4 text-slate-400" />}
-              required
-            />
-            <Input
-              label="Password"
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              leftIcon={<Lock className="w-4 h-4 text-slate-400" />}
-              required
-            />
-
-            <div className="pt-2">
-              <Button
-                type="submit"
-                variant="primary"
-                size="md"
-                isLoading={isSubmitting}
-                className="w-full font-bold"
-                rightIcon={<ArrowRight className="w-4 h-4" />}
-              >
-                Sign In to Dashboard
-              </Button>
+            <div>
+              <label htmlFor="login-email" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Email Address
+              </label>
+              <div className="relative">
+                <Input
+                  id="login-email"
+                  type="email"
+                  placeholder="parent@example.com"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  disabled={isSubmitting}
+                  required
+                  className="pl-10"
+                />
+                <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
             </div>
+
+            <div>
+              <label htmlFor="login-password" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Password
+              </label>
+              <div className="relative">
+                <Input
+                  id="login-password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter your password..."
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  disabled={isSubmitting}
+                  required
+                  className="pl-10 pr-10"
+                />
+                <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            <Button
+              id="login-submit-btn"
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full justify-center bg-amber-800 hover:bg-amber-900 text-white font-medium mt-2"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                  Signing In...
+                </>
+              ) : (
+                <>
+                  <span>Sign In</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </>
+              )}
+            </Button>
           </form>
         ) : (
           <div>
             {!otpSent ? (
               <form onSubmit={handleRequestLoginOtp} className="space-y-4">
-                <Input
-                  label="Registered Email Address"
-                  placeholder="parent@example.com"
-                  type="email"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  leftIcon={<Mail className="w-4 h-4 text-slate-400" />}
-                  helperText="We will send a 6-digit verification code to your email."
-                  required
-                />
+                <div>
+                  <label htmlFor="login-otp-email" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                    Registered Email Address
+                  </label>
+                  <div className="relative">
+                    <Input
+                      id="login-otp-email"
+                      type="email"
+                      placeholder="parent@example.com"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      disabled={isSubmitting}
+                      required
+                      className="pl-10"
+                    />
+                    <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
+                </div>
+
                 <Button
+                  id="send-login-otp-btn"
                   type="submit"
                   variant="primary"
-                  size="md"
-                  isLoading={isSubmitting}
-                  className="w-full font-bold"
+                  size="lg"
+                  className="w-full justify-center bg-amber-800 hover:bg-amber-900 text-white font-medium"
+                  disabled={isSubmitting || !email.includes('@')}
                 >
-                  Send Verification Code
+                  {isSubmitting ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                      Sending Verification Code...
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Verification Code</span>
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </>
+                  )}
                 </Button>
               </form>
             ) : (
               <form onSubmit={handleOtpLogin} className="space-y-4">
-                <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-sky-600" />
-                    <div>
-                      <span className="text-slate-500 block text-[11px]">Code sent to:</span>
-                      <strong className="text-slate-900 font-bold">{email.trim().toLowerCase()}</strong>
-                    </div>
+                <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-3 flex items-center justify-between text-xs">
+                  <div>
+                    <span className="text-stone-500">Code sent to: </span>
+                    <strong className="text-stone-800">{email}</strong>
                   </div>
                   <button
                     type="button"
                     onClick={() => {
                       setOtpSent(false);
                       setOtp('');
-                      setDevOtpHint(null);
                     }}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-sky-700 hover:underline cursor-pointer"
+                    className="text-amber-800 hover:underline font-semibold flex items-center gap-1"
                   >
                     <Edit3 className="w-3 h-3" />
                     <span>Change</span>
@@ -269,61 +398,64 @@ export const LoginForm: React.FC = () => {
                 </div>
 
                 {devOtpHint && (
-                  <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center justify-between animate-fadeIn">
-                    <div>
-                      <span className="font-semibold block">[Sandbox Mode] Verification Code:</span>
-                      <strong className="font-mono text-sm tracking-widest text-emerald-950 font-black">
-                        {devOtpHint}
-                      </strong>
-                    </div>
+                  <div className="p-2.5 bg-stone-100 border border-stone-300 rounded-lg text-xs text-stone-700 flex items-center justify-between">
+                    <span>
+                      <strong>Dev OTP:</strong> {devOtpHint}
+                    </span>
                     <button
                       type="button"
                       onClick={() => setOtp(devOtpHint)}
-                      className="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[11px] hover:bg-emerald-700 cursor-pointer"
+                      className="px-2 py-0.5 bg-white border border-stone-300 rounded text-stone-800 hover:bg-stone-50 text-[11px] font-medium"
                     >
-                      Auto Fill
+                      Fill
                     </button>
                   </div>
                 )}
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-[var(--color-content)]">
-                    Enter 6-Digit Email Verification Code
+                <div>
+                  <label htmlFor="login-otp-input" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                    Enter 6-Digit Email Code
                   </label>
-                  <input
+                  <Input
+                    id="login-otp-input"
                     type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
                     maxLength={6}
-                    autoFocus
-                    placeholder="••••••"
+                    placeholder="• • • • • •"
                     value={otp}
-                    onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
-                    className="w-full text-center tracking-[0.4em] text-2xl font-mono py-2.5 px-4 rounded-xl border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none font-bold text-slate-900 bg-white"
+                    onChange={e => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    disabled={isSubmitting}
+                    className="text-center font-mono text-xl tracking-widest"
+                    autoFocus
                   />
-                </div>
-
-                <div className="flex items-center justify-between text-xs text-slate-500">
-                  <span>Didn&apos;t receive code?</span>
-                  <button
-                    type="button"
-                    disabled={resendCooldown > 0 || isSubmitting}
-                    onClick={handleRequestLoginOtp}
-                    className="font-semibold text-sky-700 disabled:text-slate-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <RefreshCw className={`w-3 h-3 ${resendCooldown > 0 ? 'animate-spin' : ''}`} />
-                    <span>{resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend Code'}</span>
-                  </button>
+                  <div className="flex items-center justify-between text-xs text-stone-500 mt-2">
+                    <span>Didn&apos;t receive code?</span>
+                    <button
+                      type="button"
+                      onClick={handleRequestLoginOtp}
+                      disabled={resendCooldown > 0 || isSubmitting}
+                      className="text-amber-800 font-semibold hover:underline disabled:text-stone-400 disabled:no-underline"
+                    >
+                      {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend Code'}
+                    </button>
+                  </div>
                 </div>
 
                 <Button
+                  id="verify-login-otp-btn"
                   type="submit"
                   variant="primary"
-                  size="md"
-                  isLoading={isSubmitting}
-                  className="w-full font-bold"
+                  size="lg"
+                  className="w-full justify-center bg-amber-800 hover:bg-amber-900 text-white font-medium"
+                  disabled={isSubmitting || otp.length !== 6}
                 >
-                  Verify Code & Sign In
+                  {isSubmitting ? (
+                    <>
+                      <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                      Verifying...
+                    </>
+                  ) : (
+                    <span>Verify & Sign In</span>
+                  )}
                 </Button>
               </form>
             )}
@@ -331,10 +463,14 @@ export const LoginForm: React.FC = () => {
         )}
       </CardContent>
 
-      <CardFooter className="justify-center border-t border-[var(--color-border-subtle)] py-4 text-xs text-[var(--color-content-muted)]">
-        Don&apos;t have a parent account?{' '}
-        <Link href="/auth/register" className="font-bold text-[var(--color-primary)] ml-1 hover:underline">
-          Register with Email OTP
+      <CardFooter className="bg-stone-50/80 px-6 py-4 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-600">
+        <span>Need a parent account?</span>
+        <Link
+          id="register-link-from-login"
+          href="/register"
+          className="font-semibold text-amber-800 hover:text-amber-950 transition-colors"
+        >
+          Create Verified Account &rarr;
         </Link>
       </CardFooter>
     </Card>

@@ -10,6 +10,7 @@ export type {
   SchoolContact,
   SchoolRating,
   SchoolAssets,
+  SchoolVerification,
   LegacyIdentifiers,
 } from '../../data/schoolsData';
 

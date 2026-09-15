@@ -6,14 +6,13 @@ import { useToast } from '../components/ui/Toast';
 export interface ParentUserProfile {
   id: string;
   name: string;
-  mobile: string;
   email: string;
-  locality: string;
+  preferredSchoolLocality?: string;
   preferredBoards?: string[];
   childGrade?: string;
-  mobileVerified: boolean;
   emailVerified: boolean;
-  marketingConsent: boolean;
+  role?: 'parent' | 'admin';
+  analyticsConsent: boolean;
   createdAt: string;
   wishlist?: string[];
   compareList?: string[];
@@ -22,34 +21,39 @@ export interface ParentUserProfile {
 interface AuthContextType {
   user: ParentUserProfile | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   isLoading: boolean;
   token: string | null;
   sendOtp: (
     email: string,
     options?: { purpose?: 'register' | 'login'; name?: string } | 'register' | 'login'
-  ) => Promise<{ success: boolean; message?: string; devOtp?: string }>;
+  ) => Promise<{ success: boolean; message?: string; devOtp?: string; category?: string; notFound?: boolean }>;
   verifyOtp: (email: string, otp: string) => Promise<{ success: boolean; verificationToken?: string; message?: string }>;
   register: (data: {
     name: string;
-    mobile: string;
     email: string;
-    locality: string;
-    password: string;
-    verificationToken: string;
+    preferredSchoolLocality?: string;
+    password?: string;
+    verificationToken?: string;
     preferredBoards?: string[];
     childGrade?: string;
     termsAccepted: boolean;
-    marketingConsent?: boolean;
+    analyticsConsent?: boolean;
   }) => Promise<{ success: boolean; message?: string }>;
   login: (credentials: {
-    identifier?: string;
-    email?: string;
+    email: string;
     password?: string;
-    mobile?: string;
     otp?: string;
     loginType?: 'password' | 'otp';
-  }) => Promise<{ success: boolean; message?: string }>;
+  }) => Promise<{ success: boolean; message?: string; notFound?: boolean }>;
   logout: () => Promise<void>;
+  updateProfile: (updates: {
+    name?: string;
+    preferredSchoolLocality?: string;
+    preferredBoards?: string[];
+    childGrade?: string;
+    analyticsConsent?: boolean;
+  }) => Promise<{ success: boolean; message?: string }>;
   refreshProfile: () => Promise<void>;
 }
 
@@ -103,7 +107,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const data = await res.json();
       if (!res.ok || !data.success) {
         showToast(data.message || 'Failed to dispatch verification code', 'error');
-        return { success: false, message: data.message };
+        return { success: false, notFound: data.notFound, message: data.message, category: data.category };
       }
       showToast(data.message || 'Verification code sent to your email', 'success');
       return { success: true, message: data.message, devOtp: data.devOtp };
@@ -137,15 +141,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const register = async (formData: {
     name: string;
-    mobile: string;
     email: string;
-    locality: string;
-    password: string;
-    verificationToken: string;
+    preferredSchoolLocality?: string;
+    password?: string;
+    verificationToken?: string;
     preferredBoards?: string[];
     childGrade?: string;
     termsAccepted: boolean;
-    marketingConsent?: boolean;
+    analyticsConsent?: boolean;
   }) => {
     try {
       const res = await fetch('/api/auth/register', {
@@ -163,7 +166,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (data.token) {
         setToken(data.token);
       }
-      showToast('Parent account registered successfully! Welcome to Admission Pitara.', 'success');
+      showToast('Parent account registered successfully! Email verified.', 'success');
       return { success: true, message: data.message };
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Network error';
@@ -173,9 +176,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const login = async (credentials: {
-    identifier?: string;
+    email: string;
     password?: string;
-    mobile?: string;
     otp?: string;
     loginType?: 'password' | 'otp';
   }) => {
@@ -188,7 +190,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const data = await res.json();
       if (!res.ok || !data.success) {
         showToast(data.message || 'Login failed', 'error');
-        return { success: false, message: data.message };
+        return { success: false, notFound: data.notFound, message: data.message };
       }
 
       setUser(data.user);
@@ -200,6 +202,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Network error';
       showToast('Login failed due to a network issue.', 'error');
+      return { success: false, message: msg };
+    }
+  };
+
+  const updateProfile = async (updates: {
+    name?: string;
+    preferredSchoolLocality?: string;
+    preferredBoards?: string[];
+    childGrade?: string;
+    analyticsConsent?: boolean;
+  }) => {
+    try {
+      const res = await fetch('/api/auth/me', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        showToast(data.message || 'Update failed', 'error');
+        return { success: false, message: data.message };
+      }
+      setUser(data.user);
+      showToast('Preferences updated successfully', 'success');
+      return { success: true, message: data.message };
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Network error';
+      showToast('Failed to update preferences', 'error');
       return { success: false, message: msg };
     }
   };
@@ -221,6 +251,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       value={{
         user,
         isAuthenticated: Boolean(user),
+        isAdmin: user?.role === 'admin',
         isLoading,
         token,
         sendOtp,
@@ -228,6 +259,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         register,
         login,
         logout,
+        updateProfile,
         refreshProfile,
       }}
     >

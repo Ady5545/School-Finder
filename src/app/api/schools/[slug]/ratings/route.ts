@@ -1,0 +1,189 @@
+import { NextRequest, NextResponse } from 'next/server';
+import {
+  getSchoolRatings,
+  getSchoolRatingSummary,
+  saveSchoolRating,
+  deleteSchoolRating,
+  verifySessionToken,
+  getUserById,
+  getUserRatingForSchool,
+} from '../../../../../lib/authStore';
+import { getSchoolBySlug } from '../../../../../lib/schools';
+
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const { slug } = await params;
+    if (!slug) {
+      return NextResponse.json({ success: false, message: 'School slug required' }, { status: 400 });
+    }
+
+    const school = getSchoolBySlug(slug);
+    if (!school) {
+      return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
+    }
+
+    const summary = getSchoolRatingSummary(slug);
+    const ratings = getSchoolRatings(slug);
+
+    // If user is authenticated, also return their specific rating
+    const cookieToken = req.cookies.get('ap_session')?.value;
+    const authHeader = req.headers.get('Authorization');
+    const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+    const token = cookieToken || headerToken;
+
+    let userRating = null;
+    if (token) {
+      const session = verifySessionToken(token);
+      if (session?.sub) {
+        userRating = getUserRatingForSchool(slug, session.sub);
+      }
+    }
+
+    return NextResponse.json({
+      success: true,
+      summary,
+      ratings,
+      userRating,
+    });
+  } catch (error) {
+    console.error('Error fetching school ratings:', error);
+    return NextResponse.json({ success: false, message: 'Failed to fetch school ratings' }, { status: 500 });
+  }
+}
+
+export async function POST(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const { slug } = await params;
+    if (!slug) {
+      return NextResponse.json({ success: false, message: 'School slug required' }, { status: 400 });
+    }
+
+    // Validate canonical school exists
+    const school = getSchoolBySlug(slug);
+    if (!school) {
+      return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
+    }
+
+    // Authenticate parent
+    const cookieToken = req.cookies.get('ap_session')?.value;
+    const authHeader = req.headers.get('Authorization');
+    const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+    const token = cookieToken || headerToken;
+
+    if (!token) {
+      return NextResponse.json(
+        { success: false, message: 'Please sign in to rate this school.' },
+        { status: 401 }
+      );
+    }
+
+    const session = verifySessionToken(token);
+    if (!session || !session.sub) {
+      return NextResponse.json(
+        { success: false, message: 'Session expired. Please sign in again.' },
+        { status: 401 }
+      );
+    }
+
+    const user = getUserById(session.sub);
+    if (!user) {
+      return NextResponse.json(
+        { success: false, message: 'Parent account not found.' },
+        { status: 404 }
+      );
+    }
+
+    if (!user.emailVerified) {
+      return NextResponse.json(
+        { success: false, message: 'Please verify your email address before submitting a review.' },
+        { status: 403 }
+      );
+    }
+
+    const body = await req.json();
+    const { score, title, comment, categories } = body;
+
+    const numScore = Number(score);
+    if (!numScore || numScore < 1 || numScore > 5) {
+      return NextResponse.json(
+        { success: false, message: 'Rating score must be between 1 and 5 stars.' },
+        { status: 400 }
+      );
+    }
+
+    if (!comment || typeof comment !== 'string' || comment.trim().length < 5) {
+      return NextResponse.json(
+        { success: false, message: 'Please provide feedback of at least 5 characters.' },
+        { status: 400 }
+      );
+    }
+
+    const rating = saveSchoolRating({
+      schoolSlug: slug,
+      userId: user.id,
+      userName: user.name,
+      userChildGrade: user.childGrade,
+      score: Math.round(numScore),
+      title: title ? String(title).trim().slice(0, 100) : undefined,
+      comment: String(comment).trim().slice(0, 1000),
+      categories: categories && typeof categories === 'object' ? {
+        academics: categories.academics ? Math.min(5, Math.max(1, Number(categories.academics))) : undefined,
+        infrastructure: categories.infrastructure ? Math.min(5, Math.max(1, Number(categories.infrastructure))) : undefined,
+        faculty: categories.faculty ? Math.min(5, Math.max(1, Number(categories.faculty))) : undefined,
+        safety: categories.safety ? Math.min(5, Math.max(1, Number(categories.safety))) : undefined,
+      } : undefined,
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: 'Thank you! Your verified parent rating has been published.',
+      rating,
+      summary: getSchoolRatingSummary(slug),
+    });
+  } catch (error) {
+    console.error('Error submitting school rating:', error);
+    return NextResponse.json({ success: false, message: 'Failed to submit rating' }, { status: 500 });
+  }
+}
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const { slug } = await params;
+    if (!slug) {
+      return NextResponse.json({ success: false, message: 'School slug required' }, { status: 400 });
+    }
+
+    const cookieToken = req.cookies.get('ap_session')?.value;
+    const authHeader = req.headers.get('Authorization');
+    const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+    const token = cookieToken || headerToken;
+
+    if (!token) {
+      return NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    }
+
+    const session = verifySessionToken(token);
+    if (!session || !session.sub) {
+      return NextResponse.json({ success: false, message: 'Invalid session' }, { status: 401 });
+    }
+
+    const deleted = deleteSchoolRating(slug, session.sub);
+    return NextResponse.json({
+      success: deleted,
+      message: deleted ? 'Your review has been removed.' : 'Review not found.',
+      summary: getSchoolRatingSummary(slug),
+    });
+  } catch (error) {
+    console.error('Error deleting school rating:', error);
+    return NextResponse.json({ success: false, message: 'Failed to delete rating' }, { status: 500 });
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info' | 'outline';
+  variant?: 'default' | 'primary' | 'accent' | 'success' | 'warning' | 'error' | 'info' | 'outline';
   size?: 'sm' | 'md';
   hasDot?: boolean;
 }
@@ -14,12 +14,13 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
 
     const variants = {
       default: 'bg-[var(--color-surface-subtle)] text-[var(--color-content)] border border-[var(--color-border)]',
-      primary: 'bg-[var(--color-primary-light)] text-[var(--color-primary)] border border-blue-200/50',
-      success: 'bg-[var(--color-success-bg)] text-[var(--color-success-text)] border border-emerald-200',
-      warning: 'bg-[var(--color-warning-bg)] text-[var(--color-warning-text)] border border-amber-200',
-      error: 'bg-[var(--color-error-bg)] text-[var(--color-error-text)] border border-rose-200',
-      info: 'bg-[var(--color-info-bg)] text-[var(--color-info-text)] border border-sky-200',
-      outline: 'bg-transparent text-[var(--color-content-muted)] border border-[var(--color-border)]',
+      primary: 'bg-[var(--color-primary-light)] text-[var(--color-primary)] border border-[var(--color-brand-200)]/70 font-semibold',
+      accent: 'bg-[var(--color-accent-light)] text-[var(--color-accent)] border border-[#f2cfbe] font-semibold',
+      success: 'bg-[var(--color-success-bg)] text-[var(--color-success-text)] border border-emerald-200/80',
+      warning: 'bg-[var(--color-warning-bg)] text-[var(--color-warning-text)] border border-amber-200/80',
+      error: 'bg-[var(--color-error-bg)] text-[var(--color-error-text)] border border-rose-200/80',
+      info: 'bg-[var(--color-info-bg)] text-[var(--color-info-text)] border border-sky-200/80',
+      outline: 'bg-transparent text-[var(--color-content-muted)] border border-[var(--color-border-strong)]',
     };
 
     const sizes = {
@@ -30,6 +31,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
     const dotColors = {
       default: 'bg-[var(--color-content-subtle)]',
       primary: 'bg-[var(--color-primary)]',
+      accent: 'bg-[var(--color-accent)]',
       success: 'bg-[var(--color-success)]',
       warning: 'bg-[var(--color-warning)]',
       error: 'bg-[var(--color-error)]',

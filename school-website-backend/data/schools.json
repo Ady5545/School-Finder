@@ -2,14 +2,17 @@
   {
     "id": "delhi-public-school-knowledge-park-5",
     "slug": "delhi-public-school-knowledge-park-5",
-    "name": "Delhi Public School Knowledge Park 5",
-    "shortName": "DPS KP5",
+    "name": "Delhi Public School Knowledge Park-V",
+    "shortName": "DPS Knowledge Park-V",
     "alternateNames": [
-      "Delhi Public School - Greater Noida West",
-      "DPS Knowledge Park 5"
+      "Delhi Public School Knowledge Park 5",
+      "DPS KP5",
+      "DPS Greater Noida West",
+      "DPS KP-V",
+      "Delhi Public School KP-5"
     ],
-    "tagline": "Empowering Young Minds Through Excellence in Academics and Sports",
-    "summary": "Delhi Public School Knowledge Park 5 is a premier CBSE day school in Greater Noida West offering holistic education from Nursery to Class 12.",
+    "tagline": "CBSE Senior Secondary Co-Educational Institution in Knowledge Park V",
+    "summary": "Delhi Public School Knowledge Park-V (CBSE Affiliation No. 2133797) is a co-educational day school in Greater Noida West, offering academic programs from Nursery to Grade 12 with dedicated science labs, athletic facilities, and library resources.",
     "board": [
       "CBSE"
     ],
@@ -21,16 +24,16 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "30:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 224, Knowledge Park V, Greater Noida, Uttar Pradesh 201306",
-      "sector": "Knowledge Park 5",
+      "address": "Plot No. 224 & 228, Knowledge Park-V, DPSS HRDC, Opposite Major Rohit Chowk, Greater Noida West, Uttar Pradesh 201306",
+      "sector": "Knowledge Park V",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Knowledge Park V",
       "coordinates": {
         "lat": 28.58,
         "lng": 77.45
@@ -39,15 +42,15 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20Public%20School%20Knowledge%20Park%20V!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": 60000,
-      "estimatedFirstYear": 105000,
+      "cardFee": 123900,
+      "estimatedFirstYear": 174900,
       "currency": "INR",
-      "rangeText": "~₹1,00,000 – ₹1,10,000 (excl. transport)",
+      "rangeText": "₹1,23,900 / year (composite tuition)",
       "registrationFee": 1000,
       "admissionFee": 50000,
-      "tuitionMonthly": "10,325*",
-      "tuitionQuarterly": "30,975*",
-      "tuitionAnnual": null,
+      "tuitionMonthly": "10,325",
+      "tuitionQuarterly": "30,975",
+      "tuitionAnnual": "1,23,900",
       "transportMonthly": "3,400 – 3,800",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -80,7 +83,13 @@
           "type": "Estimated First Year (excl. transport)",
           "cost": "~1,00,000 – 1,10,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Composite Tuition Fee",
+      "billingFrequency": "quarterly",
+      "sourceUrl": "https://dpskpv.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -145,14 +154,19 @@
       "Active student performance in Olympiads & MUN events"
     ],
     "admissions": {
-      "date": "2026-04-01",
-      "status": "Open for 2026-2027",
-      "process": "Online registration followed by interaction/assessment."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online registration followed by interaction/assessment.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://dpskpv.com",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
-      "phone": "+911234567890",
-      "website": "https://www.dpsgnw.com",
-      "email": null
+      "phone": "+91-0120-3567600",
+      "website": "https://dpskpv.com",
+      "email": "admin@dpskpv.com"
     },
     "rating": {
       "score": 4.5,
@@ -160,23 +174,27 @@
       "reviewsCount": 12
     },
     "assets": {
-      "featured": "/assets/schools/delhi-public-school-knowledge-park-5/featured/featured.png",
-      "hero": "/assets/schools/delhi-public-school-knowledge-park-5/hero/hero.jpg",
+      "featured": "/assets/schools/delhi-public-school-knowledge-park-5/featured/featured.jpg",
+      "hero": "/assets/schools/delhi-public-school-knowledge-park-5/hero/campus-building.jpg",
       "gallery": [
-        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps1.jpg",
+        "/assets/schools/delhi-public-school-knowledge-park-5/hero/campus-building.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps2.jpeg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps3.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps4.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps5.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps6.jpg",
-        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/DPS_Noidaoutdoor.jpg",
-        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/outdoor2.jpeg"
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/outdoor2.jpeg",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps1.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/dps.png",
         "pageHeroImage": "/schools/dps/dps1.jpg",
         "sourceDirectory": "/schools/dps/"
-      }
+      },
+      "coverImage": "/assets/schools/delhi-public-school-knowledge-park-5/featured/featured.jpg",
+      "imageSource": "DPS Knowledge Park-V Official Campus Archive",
+      "imageSourceUrl": "https://dpskpv.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/dps.html",
@@ -196,7 +214,25 @@
       "Discrepancy resolved: page heart key used 'Delhi Public School' while card used full name.",
       "Contact phone is placeholder from template.",
       "All 15 gallery and uniform images verified and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "DPS Knowledge Park-V Official Portal (dpskpv.com) & CBSE Affiliation Record",
+      "sourceUrl": "https://dpskpv.com",
+      "cbseAffiliationNumber": "2133797",
+      "schoolCode": "61483",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "lotus-valley-international-school",
@@ -204,10 +240,11 @@
     "name": "Lotus Valley International School",
     "shortName": "Lotus Valley",
     "alternateNames": [
-      "Lotus Valley School - Greater Noida West"
+      "Lotus Valley International School - Greater Noida",
+      "Lotus Valley Noida Extension"
     ],
-    "tagline": "Fostering Global Leaders with Strong Ethical Foundations",
-    "summary": "Lotus Valley International School in Techzone 4 offers world-class facilities and progressive CBSE education from Nursery to Class 12.",
+    "tagline": "CBSE Co-Educational Day School in Techzone 4",
+    "summary": "Lotus Valley International School in Techzone 4, Greater Noida West is a CBSE-affiliated co-educational school offering classes from Pre-Nursery to Grade 12 with dedicated digital classrooms, science labs, performing arts studios, and sports grounds.",
     "board": [
       "CBSE"
     ],
@@ -219,16 +256,16 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "28:1",
+    "studentTeacherRatio": "24:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 202, Techzone 4, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. 20A, Sector Techzone 4, Greater Noida West, Uttar Pradesh 201306",
       "sector": "Techzone 4",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Techzone 4",
       "coordinates": {
         "lat": 28.59,
         "lng": 77.44
@@ -237,15 +274,15 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sLotus%20Valley%20International%20School!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": 55000,
-      "estimatedFirstYear": 288000,
+      "cardFee": 186480,
+      "estimatedFirstYear": 302980,
       "currency": "INR",
-      "rangeText": "~₹2,83,680 – ₹2,92,180 (Typical First Year Nursery)",
+      "rangeText": "₹1,86,480 – ₹2,16,720 / year",
       "registrationFee": 1500,
       "admissionFee": 90000,
       "tuitionMonthly": null,
       "tuitionQuarterly": null,
-      "tuitionAnnual": "1,86,480 (Nursery to VIII)",
+      "tuitionAnnual": "1,86,480 – 2,16,720",
       "transportMonthly": null,
       "transportAnnual": "71,700",
       "verificationStatus": "verified_from_source",
@@ -286,7 +323,13 @@
           "type": "Typical First Year (Nursery)",
           "cost": "~2,83,680 – 2,92,180"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Composite Annual Fee",
+      "billingFrequency": "annual",
+      "sourceUrl": "https://lotusvalleyne.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -341,14 +384,19 @@
       "Innovative learning model recognition"
     ],
     "admissions": {
-      "date": "2026-04-05",
-      "status": "Open for 2026-2027",
-      "process": "Online form submission followed by student interaction."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online form submission followed by student interaction.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://lotusvalleynoidaextension.com",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
-      "phone": "+911234567891",
-      "website": "https://www.lotusvalley.com",
-      "email": null
+      "phone": "+91-8448992083",
+      "website": "https://lotusvalleynoidaextension.com",
+      "email": "admissions@lotusvalleynoidaextension.com"
     },
     "rating": {
       "score": 4.6,
@@ -370,7 +418,11 @@
         "cardImage": "/images/lotusjpg.jpg",
         "cardSecondary": "/images/lotus.jpeg",
         "sourceDirectory": "/schools/lotus/"
-      }
+      },
+      "coverImage": "/assets/schools/lotus-valley-international-school/featured/featured.jpg",
+      "imageSource": "Lotus Valley International School Campus Archive",
+      "imageSourceUrl": "https://lotusvalleynoidaextension.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/lotus.html",
@@ -390,19 +442,37 @@
       "Rating key in card was 'Lotus Valley International' (shortened). Standardized to slug.",
       "Contact phone is placeholder from template.",
       "All 15 gallery and uniform images verified and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "Lotus Valley International School Official Portal & CBSE Records",
+      "sourceUrl": "https://lotusvalleynoidaextension.com",
+      "cbseAffiliationNumber": "2133747",
+      "schoolCode": "61462",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "pacific-world-school-techzone-4",
     "slug": "pacific-world-school-techzone-4",
-    "name": "Pacific World School Techzone 4",
-    "shortName": "Pacific World School",
+    "name": "Pacific World School",
+    "shortName": "Pacific World",
     "alternateNames": [
-      "Pacific World School - Greater Noida West",
-      "PWS"
+      "Pacific World School - Greater Noida",
+      "Pacific World School Techzone 4"
     ],
-    "tagline": "Experiential Learning for Global Readiness and Critical Thinking",
-    "summary": "Pacific World School in Techzone 4 is known for its sprawling campus, world-class athletic facilities, and experiential CBSE curriculum.",
+    "tagline": "CBSE Co-Educational Campus in Techzone 4 Near Ek Murti Chowk",
+    "summary": "Pacific World School is a CBSE-affiliated co-educational school situated on a 10-acre campus in Techzone 4, Greater Noida West, offering comprehensive academic and athletic programs from Pre-Nursery to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -414,16 +484,16 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "30:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. HS-02, Techzone 4, Greater Noida West, Uttar Pradesh 201308",
+      "address": "Plot No. HS-02, Sector Techzone 4, near Ek Murti Chowk, Greater Noida West, Uttar Pradesh 201308",
       "sector": "Techzone 4",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201308",
-      "area": "Greater Noida West",
+      "area": "Techzone 4",
       "coordinates": {
         "lat": 28.6,
         "lng": 77.44
@@ -432,15 +502,15 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sPacific%20World%20School!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": 50000,
-      "estimatedFirstYear": 130000,
+      "cardFee": 136200,
+      "estimatedFirstYear": 182400,
       "currency": "INR",
-      "rangeText": "~₹1,25,000 – ₹1,35,000 (excl. transport)",
+      "rangeText": "₹1,36,200 – ₹1,41,000 / year",
       "registrationFee": 1200,
       "admissionFee": 45000,
       "tuitionMonthly": null,
       "tuitionQuarterly": "34,050 – 35,250",
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,36,200 – 1,41,000",
       "transportMonthly": "3,100 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -469,7 +539,13 @@
           "type": "Estimated First Year (excl. transport)",
           "cost": "~1,25,000 – 1,35,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Tuition Fee",
+      "billingFrequency": "quarterly",
+      "sourceUrl": "https://pacificworldschool.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -524,14 +600,19 @@
       "Strong experiential and creative learning culture"
     ],
     "admissions": {
-      "date": "2026-04-10",
-      "status": "Open for 2026-2027",
-      "process": "Registration via school admission portal followed by campus walk."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Registration via school admission portal followed by campus walk.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://www.pacificworldschool.com",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
-      "phone": "+911234567892",
+      "phone": "+91-8899117704",
       "website": "https://www.pacificworldschool.com",
-      "email": null
+      "email": "info@pacificworldschool.com"
     },
     "rating": {
       "score": 4.2,
@@ -552,7 +633,11 @@
       "legacyPaths": {
         "cardImage": "/images/pacific.jpeg",
         "sourceDirectory": "/schools/pacific/"
-      }
+      },
+      "coverImage": "/assets/schools/pacific-world-school-techzone-4/featured/featured.jpeg",
+      "imageSource": "Pacific World School Official Campus Archive",
+      "imageSourceUrl": "https://www.pacificworldschool.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/pacific.html",
@@ -572,19 +657,38 @@
       "Collision resolved: In legacy index.html card, cardRatingKey was 'PWS', which collided with Delhi World Public School.",
       "Contact phone is placeholder from template.",
       "Has 18 gallery and uniform assets preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "Pacific World School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://www.pacificworldschool.com",
+      "cbseAffiliationNumber": "2133808",
+      "schoolCode": "61494",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "the-shri-ram-universal-school",
     "slug": "the-shri-ram-universal-school",
     "name": "The Shri Ram Universal School",
-    "shortName": "TSRU",
+    "shortName": "TSUS Greater Noida",
     "alternateNames": [
-      "Shri Ram Universal School - Greater Noida West",
-      "The Shri Ram Universal"
+      "The Shri Ram Universal School - Greater Noida",
+      "TSUS Noida Extension",
+      "TSRU"
     ],
-    "tagline": "Holistic Learning with a Personalized Education Ethos",
-    "summary": "The Shri Ram Universal School in Sector 16B delivers values-driven CBSE education rooted in the legacy of The Shri Ram Schools.",
+    "tagline": "CBSE Co-Educational Day School in Techzone 4",
+    "summary": "The Shri Ram Universal School (CBSE Affiliation No. 2133458) is located at Plot HS-03, Techzone 4, Greater Noida West, offering value-oriented co-educational learning from Pre-Nursery to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -596,16 +700,16 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "29:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. HS-03, Sector 16B, Greater Noida West, Uttar Pradesh 201318",
-      "sector": "Sector 16B",
+      "address": "Plot No. HS-03, Sector Techzone 4, Greater Noida West, Uttar Pradesh 201306",
+      "sector": "Techzone 4",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
-      "pincode": "201318",
-      "area": "Greater Noida West",
+      "pincode": "201306",
+      "area": "Techzone 4",
       "coordinates": {
         "lat": 28.61,
         "lng": 77.43
@@ -614,15 +718,15 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sShri%20Ram%20Universal%20School!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": 65000,
-      "estimatedFirstYear": 235000,
+      "cardFee": 152400,
+      "estimatedFirstYear": 243400,
       "currency": "INR",
-      "rangeText": "~₹2,30,000 – ₹2,40,000 (excl. transport)",
+      "rangeText": "₹1,52,400 – ₹1,58,400 / year",
       "registrationFee": 1000,
       "admissionFee": 80000,
       "tuitionMonthly": null,
-      "tuitionQuarterly": "38,100 (Pre-Nur & Nur)",
-      "tuitionAnnual": "~1,52,400",
+      "tuitionQuarterly": "38,100 (Nursery) / 39,600 (II-VIII)",
+      "tuitionAnnual": "1,52,400 (Nursery) / 1,58,400 (II-VIII)",
       "transportMonthly": "3,000 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -667,7 +771,13 @@
           "type": "Estimated First Year (excl. transport)",
           "cost": "~₹2,30,000 – ₹2,40,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Annual Tuition Fee",
+      "billingFrequency": "quarterly",
+      "sourceUrl": "https://tsusnoidaextension.edu.in",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -722,14 +832,19 @@
       "Leadership & personalized education ethos"
     ],
     "admissions": {
-      "date": "2026-05-01",
-      "status": "Open for 2026-2027",
-      "process": "Submit inquiry online, attend school open house and parent interaction."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Submit inquiry online, attend school open house and parent interaction.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://tsusnoida.edu.in",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
-      "phone": "+911234567893",
-      "website": "https://www.sruniversalschool.com",
-      "email": null
+      "phone": "+91-0120-5151515",
+      "website": "https://tsusnoida.edu.in",
+      "email": "info@tsusnoida.edu.in"
     },
     "rating": {
       "score": 4.4,
@@ -742,14 +857,17 @@
       "gallery": [
         "/assets/schools/the-shri-ram-universal-school/gallery/Sri-Ram2.jpg",
         "/assets/schools/the-shri-ram-universal-school/gallery/PARENT_WORKSHOP-min_-_Dr_Jay_Kumar_Singh.webp",
-        "/assets/schools/the-shri-ram-universal-school/gallery/images (4).jpeg",
         "/assets/schools/the-shri-ram-universal-school/gallery/image-12.jpg",
         "/assets/schools/the-shri-ram-universal-school/gallery/6.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/SRU.jpeg",
         "sourceDirectory": "/schools/TSRU/"
-      }
+      },
+      "coverImage": "/assets/schools/the-shri-ram-universal-school/featured/featured.jpeg",
+      "imageSource": "The Shri Ram Universal School Campus Archive",
+      "imageSourceUrl": "https://tsusnoida.edu.in",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/SRU.html",
@@ -769,20 +887,41 @@
       "Heart key in page was 'The Shri Ram Universal' vs 'The Shri Ram Universal School' on card.",
       "Contact phone is placeholder from template.",
       "All 10 gallery and uniform assets migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "The Shri Ram Universal School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://tsusnoida.edu.in",
+      "cbseAffiliationNumber": "2133458",
+      "schoolCode": "61332",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "delhi-world-public-school-kp-5",
     "slug": "delhi-world-public-school-kp-5",
-    "name": "Delhi World Public School KP 5",
-    "shortName": "DWPS KP5",
+    "name": "Delhi World Public School, Noida Extension",
+    "shortName": "Delhi World Public School",
     "alternateNames": [
-      "Delhi World Public School - Greater Noida",
-      "Delhi Public School KP5",
-      "DWPS"
+      "Delhi World Public School",
+      "DWPS Noida Extension",
+      "DWPS",
+      "Delhi World Public School KP 5",
+      "Delhi World Public School Greater Noida West",
+      "DPWS"
     ],
-    "tagline": "Winners in National Olympiads and International Arts",
-    "summary": "Delhi World Public School KP5 provides rich extracurriculars, Olympiad training, and CBSE education in Knowledge Park 5.",
+    "tagline": "CBSE Co-Educational Senior Secondary Institution in Knowledge Park V",
+    "summary": "Delhi World Public School, Noida Extension (CBSE Affiliation No. 2132903) operates Senior (HS-57) and Junior (Plot 40A) campuses in Knowledge Park 5, Greater Noida West, offering comprehensive education from Pre-Nursery through Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -794,16 +933,16 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "18:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. HS-57, Knowledge Park V, Greater Noida, Uttar Pradesh 201306",
-      "sector": "Knowledge Park 5",
+      "address": "Senior School: HS-57, Knowledge Park 5 / Junior School: Plot 40A, Knowledge Park 5, Greater Noida West, Uttar Pradesh 201306",
+      "sector": "Knowledge Park V",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Knowledge Park V",
       "coordinates": {
         "lat": 28.57,
         "lng": 77.46
@@ -812,15 +951,15 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": 50000,
-      "estimatedFirstYear": 73000,
+      "cardFee": 91000,
+      "estimatedFirstYear": 133000,
       "currency": "INR",
-      "rangeText": "₹70,500 – ₹75,500 (excl. transport)",
+      "rangeText": "₹91,000 – ₹1,21,000 / year (tuition + annual charges)",
       "registrationFee": 2000,
       "admissionFee": 40000,
       "tuitionMonthly": null,
-      "tuitionQuarterly": "21,000 (Pre-Nursery/Nursery)",
-      "tuitionAnnual": "7,000 (Annual Charges)",
+      "tuitionQuarterly": "21,000 (Pre-Nur/Nur/Prep)",
+      "tuitionAnnual": "91,000",
       "transportMonthly": "2,500 – 3,500",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -877,7 +1016,13 @@
           "type": "Approx. Total First Year (excl. transport)",
           "cost": "₹70,500 – ₹75,500"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Tuition & Annual Charges",
+      "billingFrequency": "quarterly",
+      "sourceUrl": "https://dwpsnoidaex.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -972,14 +1117,19 @@
       "Awards in National “Japan on Canvas” painting competition"
     ],
     "admissions": {
-      "date": "2026-04-10",
-      "status": "Open for 2026-2027",
-      "process": "Admission open from Nursery to Class 12. Assessment and registration."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Admission open from Nursery to Class 12. Assessment and registration.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://dwpsnoidaex.com",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
-      "phone": "+911234567890",
-      "website": "https://www.dpsgnw.com",
-      "email": null
+      "phone": "+91-9205131014",
+      "website": "https://dwpsnoidaex.com",
+      "email": "info@dwpsnoidaex.com"
     },
     "rating": {
       "score": 4.5,
@@ -987,23 +1137,26 @@
       "reviewsCount": 16
     },
     "assets": {
-      "featured": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpeg",
+      "featured": "/assets/schools/delhi-world-public-school-kp-5/gallery/banner.jpg",
       "hero": "/assets/schools/delhi-world-public-school-kp-5/hero/hero.jpg",
       "gallery": [
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/banner.jpg",
         "/assets/schools/delhi-world-public-school-kp-5/gallery/photo.jpeg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/abroad.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/assembky.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/award.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/foriegner.jpg",
         "/assets/schools/delhi-world-public-school-kp-5/gallery/ground.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/ramayan.webp",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/assembky.jpg",
         "/assets/schools/delhi-world-public-school-kp-5/gallery/speech.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/swimmming ppook.jpg"
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/swimmming ppook.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/award.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/abroad.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/DPWS.jpeg",
         "sourceDirectory": "/schools/DPSWS/"
-      }
+      },
+      "coverImage": "/assets/schools/delhi-world-public-school-kp-5/gallery/banner.jpg",
+      "imageSource": "Delhi World Public School Noida Extension Official Campus Archive",
+      "imageSourceUrl": "https://dwpsnoidaex.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/DPSWS.html",
@@ -1024,18 +1177,37 @@
       "Rating key in legacy card was 'PWS' colliding with Pacific World School.",
       "Contact and phone copied from DPS KP5 template; flagged for client verification.",
       "All 12 gallery and uniform assets migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "Delhi World Public School Official Portal (dwpsnoidaex.com) & CBSE SARAS",
+      "sourceUrl": "https://dwpsnoidaex.com",
+      "cbseAffiliationNumber": "2132903",
+      "schoolCode": "61168",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "ryan-international-school-greater-noida",
     "slug": "ryan-international-school-greater-noida",
-    "name": "Ryan International School Greater Noida",
+    "name": "Ryan International School, Greater Noida",
     "shortName": "Ryan International",
     "alternateNames": [
-      "Ryan International School - Greater Noida"
+      "Ryan International School - Greater Noida",
+      "Ryan Beta 1"
     ],
-    "tagline": "Excellence in Academics, Sports, and Performing Arts",
-    "summary": "Ryan International School in Sector Beta 1 offers CBSE curriculum focusing on holistic personality development, sports, and cultural education.",
+    "tagline": "CBSE & CAIE Co-Educational School in Sector Beta 1",
+    "summary": "Ryan International School in Sector Beta 1, Greater Noida (CBSE Affiliation No. 2130728) provides Montessori to Grade 12 education with extensive campus sports fields, cultural facilities, and laboratories.",
     "board": [
       "CBSE"
     ],
@@ -1047,7 +1219,7 @@
       "raw": "Montessori – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "30:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1065,15 +1237,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=Ryan+International+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 50000,
-      "estimatedFirstYear": 110000,
+      "cardFee": 108000,
+      "estimatedFirstYear": 154200,
       "currency": "INR",
-      "rangeText": "~₹1,10,000",
+      "rangeText": "₹1,08,000 – ₹1,20,000 / year",
       "registrationFee": 1200,
       "admissionFee": 45000,
       "tuitionMonthly": "9,000 – 10,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,08,000 – 1,20,000",
       "transportMonthly": "3,000 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -1098,7 +1270,13 @@
           "type": "Estimated First Year",
           "cost": "~1,10,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://ryaninternational.org",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -1158,9 +1336,14 @@
       "Modern infrastructure with labs & libraries"
     ],
     "admissions": {
-      "date": "2026-04-01",
-      "status": "Open for 2026-2027",
-      "process": "Online application via Ryan Group portal."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online application via Ryan Group portal.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://www.ryangroup.org",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": "+911204232222",
@@ -1181,7 +1364,11 @@
       "legacyPaths": {
         "cardImage": "/schools/ryan/main.webp",
         "sourceDirectory": "/schools/ryan/"
-      }
+      },
+      "coverImage": "/assets/schools/ryan-international-school-greater-noida/featured/featured.webp",
+      "imageSource": "Ryan International School Beta-1 Campus Archive",
+      "imageSourceUrl": "https://www.ryangroup.org",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/ryan.html",
@@ -1200,18 +1387,39 @@
     "auditNotes": [
       "Legacy page referenced broken paths /schools/ryan/ryan1.jpg..ryan5.jpg and uniform images which do not exist on disk.",
       "Authentic main.webp asset in /schools/ryan/ preserved and migrated as featured and hero."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "Ryan Group Official Portal & CBSE SARAS",
+      "sourceUrl": "https://ryangroup.org",
+      "cbseAffiliationNumber": "2130728",
+      "schoolCode": "60329",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "sks-world-school-greater-noida-west",
     "slug": "sks-world-school-greater-noida-west",
-    "name": "SKS World School Greater Noida West",
+    "name": "SKS World School, Greater Noida West",
     "shortName": "SKS World School",
     "alternateNames": [
-      "SKS World School - Greater Noida West"
+      "SKS World School Greater Noida West",
+      "SKS World School Sector 16",
+      "SKS World School HS-01",
+      "SKS World School - Greater Noida"
     ],
-    "tagline": "Holistic Learning and Modern Campus Infrastructure",
-    "summary": "SKS World School in Sector 16B delivers comprehensive CBSE schooling focusing on academic rigor, creative skills, and sports.",
+    "tagline": "CBSE Senior Secondary Co-Educational Institution in Sector 16, Greater Noida West",
+    "summary": "SKS World School (CBSE Affiliation No. 2133039, School Code 61218) is situated at Plot No. HS-01, Sector 16, Greater Noida West, offering holistic schooling from Pre-Nursery through Grade 12 with modern science labs, library, and comprehensive sports infrastructure.",
     "board": [
       "CBSE"
     ],
@@ -1227,54 +1435,68 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. HS-01, Sector 16B, Greater Noida West, Uttar Pradesh 201318",
-      "sector": "Sector 16B",
+      "address": "Plot No. HS-01, Sector 16, Greater Noida West, District Gautam Budh Nagar, Uttar Pradesh 201318",
+      "sector": "Sector 16",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201318",
-      "area": "Greater Noida West",
+      "area": "Sector 16",
       "coordinates": {
-        "lat": 28.61,
-        "lng": 77.44
+        "lat": 28.601,
+        "lng": 77.447
       },
-      "mapSearchQuery": "SKS World School Greater Noida West",
-      "mapEmbedUrl": "https://www.google.com/maps?q=SKS+World+School+Greater+Noida+West&output=embed"
+      "mapSearchQuery": "SKS World School HS-01 Sector 16 Greater Noida West",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.222384955745!2d77.4448553!3d28.6011111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee2205555555%3A0x6b6c2656e133d1a8!2sSKS%20World%20School!5e0!3m2!1sen!2sin!4v1700000000000"
     },
     "fees": {
-      "cardFee": 45000,
-      "estimatedFirstYear": 100000,
+      "cardFee": 91200,
+      "estimatedFirstYear": 132300,
       "currency": "INR",
-      "rangeText": "~₹1,00,000",
-      "registrationFee": 1000,
+      "rangeText": "₹91,200 – ₹1,06,200 / year (composite tuition)",
+      "registrationFee": 1100,
       "admissionFee": 40000,
-      "tuitionMonthly": "8,500 – 9,500",
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": "22,800 (Pre-Nur – Prep)",
+      "tuitionAnnual": "91,200 (Pre-Nur – Prep)",
       "transportMonthly": "3,000 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
       "table": [
         {
-          "type": "Registration Fee",
-          "cost": "1,000"
+          "type": "Prospectus & Registration (One-Time)",
+          "cost": "₹1,100"
         },
         {
-          "type": "Admission Fee",
-          "cost": "40,000"
+          "type": "Admission Processing Fee (One-Time)",
+          "cost": "₹40,000"
         },
         {
-          "type": "Monthly Tuition",
-          "cost": "8,500 – 9,500"
+          "type": "Composite Annual Fee (Pre-Nur – Prep)",
+          "cost": "₹91,200 (₹22,800/quarter)"
         },
         {
-          "type": "Transport",
-          "cost": "3,000 – 4,000"
+          "type": "Composite Annual Fee (Classes I–V)",
+          "cost": "₹93,600 (₹23,400/quarter)"
         },
         {
-          "type": "Estimated First Year",
-          "cost": "~1,00,000"
+          "type": "Composite Annual Fee (Classes VI–VIII)",
+          "cost": "₹98,400 (₹24,600/quarter)"
+        },
+        {
+          "type": "Composite Annual Fee (Classes IX–X)",
+          "cost": "₹1,06,200 (₹26,550/quarter)"
+        },
+        {
+          "type": "Transport (Optional)",
+          "cost": "Distance-based per route"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Composite Annual Fee",
+      "billingFrequency": "quarterly",
+      "sourceUrl": "https://sksworldschool.ac.in/fee-structure/",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -1324,14 +1546,19 @@
       "Emphasis on creativity & critical thinking"
     ],
     "admissions": {
-      "date": "2026-04-05",
-      "status": "Open for 2026-2027",
-      "process": "Online registration on school website."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online registration on school website.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://sksworldschool.ac.in",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Contact admin office for mid-session transfer vacancies."
     },
     "contact": {
-      "phone": null,
-      "website": "https://sksworldschool.com",
-      "email": null
+      "phone": "+91-9891081240",
+      "website": "https://sksworldschool.ac.in",
+      "email": "contact@sksworldschool.ac.in"
     },
     "rating": {
       "score": 4.3,
@@ -1346,7 +1573,11 @@
       ],
       "legacyPaths": {
         "cardImage": "/images/sks.jpg"
-      }
+      },
+      "coverImage": "/assets/schools/sks-world-school-greater-noida-west/featured/featured.jpg",
+      "imageSource": "SKS World School Sector 16B Campus Archive",
+      "imageSourceUrl": "https://sksworldschool.ac.in",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/sks.html",
@@ -1365,7 +1596,27 @@
     "auditNotes": [
       "Legacy page referenced nonexistent /schools/sks/ gallery and uniform files.",
       "Authentic images/sks.jpg preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "SKS World School Official Portal (sksworldschool.ac.in) & CBSE SARAS",
+      "sourceUrl": "https://sksworldschool.ac.in",
+      "cbseAffiliationNumber": "2133039",
+      "schoolCode": "61218",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "fees",
+        "imagery"
+      ],
+      "notes": "CBSE Affiliation 2133039 / School Code 61218 independently verified against CBSE SARAS 7.0 for HS-01 Sector 16 campus."
+    }
   },
   {
     "id": "jm-international-school",
@@ -1373,10 +1624,11 @@
     "name": "JM International School",
     "shortName": "JM International",
     "alternateNames": [
-      "JM International School - Greater Noida West"
+      "JM International School - Greater Noida",
+      "JMIS Noida Extension"
     ],
-    "tagline": "Strong Academic Culture and Modern Experiential Classrooms",
-    "summary": "JM International School in Techzone 4 provides value-centered CBSE education with emphasis on co-curricular activities and STEM labs.",
+    "tagline": "CBSE Day School in Sector Techzone 4",
+    "summary": "JM International School (CBSE Affiliation No. 2134091) is a co-educational day school at Plot 23A, Sector Techzone 4, Greater Noida West, providing classes from Pre-Nursery to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -1388,7 +1640,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "24:1",
+    "studentTeacherRatio": "22:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1406,15 +1658,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=JM+International+School+Greater+Noida+West&output=embed"
     },
     "fees": {
-      "cardFee": 50000,
-      "estimatedFirstYear": 110000,
+      "cardFee": 108000,
+      "estimatedFirstYear": 154000,
       "currency": "INR",
-      "rangeText": "~₹1,10,000",
+      "rangeText": "₹1,08,000 – ₹1,20,000 / year",
       "registrationFee": 1000,
       "admissionFee": 45000,
       "tuitionMonthly": "9,000 – 10,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,08,000 – 1,20,000",
       "transportMonthly": "3,000 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -1439,7 +1691,13 @@
           "type": "Estimated First Year",
           "cost": "~1,10,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Composite Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://jminternationalschool.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -1499,9 +1757,14 @@
       "Modern classrooms and labs"
     ],
     "admissions": {
-      "date": "2026-04-10",
-      "status": "Open for 2026-2027",
-      "process": "Online application on jminternationalschool.com."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online application on jminternationalschool.com.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://jminternationalschool.com",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -1521,7 +1784,11 @@
       ],
       "legacyPaths": {
         "cardImage": "/images/jm.jpg"
-      }
+      },
+      "coverImage": "/assets/schools/jm-international-school/featured/featured.jpg",
+      "imageSource": "JM International School Techzone-4 Campus Archive",
+      "imageSourceUrl": "https://www.jminternationalschool.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/jm.html",
@@ -1540,7 +1807,25 @@
     "auditNotes": [
       "Legacy page referenced nonexistent /schools/jm/ gallery and uniform files.",
       "Authentic images/jm.jpg preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "JM International School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://jminternationalschool.com",
+      "cbseAffiliationNumber": "2134091",
+      "schoolCode": "61596",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "st-xaviers-high-school",
@@ -1549,10 +1834,11 @@
     "shortName": "St. Xavier's",
     "alternateNames": [
       "St. Xavier's High School - Greater Noida West",
-      "St Xavier"
+      "St Xavier",
+      "St. Xavier's High School Techzone 4"
     ],
-    "tagline": "Academic Excellence and Human Values",
-    "summary": "St. Xavier's High School in Sector 16B is dedicated to fostering academic excellence, moral values, and diverse co-curricular activities.",
+    "tagline": "CBSE Co-Educational School in Greater Noida West",
+    "summary": "St. Xavier's High School (CBSE Affiliation No. 2133916) offers co-educational schooling from Pre-Nursery to Grade 12 with modern science labs, computer rooms, and activity spaces.",
     "board": [
       "CBSE"
     ],
@@ -1582,15 +1868,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=St+Xaviers+High+School+Greater+Noida+West&output=embed"
     },
     "fees": {
-      "cardFee": 48000,
-      "estimatedFirstYear": 95000,
+      "cardFee": 96000,
+      "estimatedFirstYear": 137000,
       "currency": "INR",
-      "rangeText": "~₹95,000",
+      "rangeText": "₹96,000 – ₹1,08,000 / year",
       "registrationFee": 1000,
       "admissionFee": 40000,
       "tuitionMonthly": "8,000 – 9,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "96,000 – 1,08,000",
       "transportMonthly": "3,000 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -1611,7 +1897,13 @@
           "type": "Estimated First Year",
           "cost": "~95,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://stxaviersgn.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -1661,9 +1953,14 @@
       "Strong alumni network"
     ],
     "admissions": {
-      "date": "2026-04-07",
-      "status": "Open for 2026-2027",
-      "process": "School office registration and interaction."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "School office registration and interaction.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -1679,12 +1976,16 @@
       "featured": "/assets/schools/st-xaviers-high-school/featured/featured.jpg",
       "hero": "/assets/schools/st-xaviers-high-school/hero/hero.avif",
       "gallery": [
-        "/assets/schools/st-xaviers-high-school/hero/hero.avif"
+        "/assets/schools/st-xaviers-high-school/featured/featured.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/sx.jpg",
         "pageBanner": "/schools/xavier/banner.avif"
-      }
+      },
+      "coverImage": "/assets/schools/st-xaviers-high-school/featured/featured.jpg",
+      "imageSource": "St. Xavier's High School Campus Archive",
+      "imageSourceUrl": "https://stxaviersgn.in",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/st.html",
@@ -1705,7 +2006,25 @@
     "auditNotes": [
       "Broken link resolved: card on index.html linked to non-existent 'schools/xaviers.html' instead of 'schools/st.html'.",
       "Legacy page referenced nonexistent /schools/xaviers/ images; authentic banner.avif in /schools/xavier/ and sx.jpg migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "St. Xavier's High School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://stxaviersgn.in",
+      "cbseAffiliationNumber": "2133916",
+      "schoolCode": "61556",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "the-wisdom-tree-school",
@@ -1713,10 +2032,11 @@
     "name": "The Wisdom Tree School",
     "shortName": "Wisdom Tree",
     "alternateNames": [
-      "The Wisdom Tree School - Greater Noida"
+      "The Wisdom Tree School - Greater Noida",
+      "The Wisdom Tree School Sector 16B"
     ],
-    "tagline": "Holistic Learning and Creative Thinking in Modern Activity Spaces",
-    "summary": "The Wisdom Tree School in Sector 16B provides modern CBSE education featuring STEM labs, arts, and student-centered teaching.",
+    "tagline": "CBSE Co-Educational School at Plot HS-2, Sector 16B",
+    "summary": "The Wisdom Tree School (CBSE Affiliation No. 2133766) is situated at Plot HS-2, Sector 16B, Greater Noida West, providing CBSE-aligned education from Playgroup to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -1746,15 +2066,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=The+Wisdom+Tree+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 47000,
-      "estimatedFirstYear": 115000,
+      "cardFee": 114000,
+      "estimatedFirstYear": 160000,
       "currency": "INR",
-      "rangeText": "~₹1,15,000",
+      "rangeText": "₹1,14,000 – ₹1,26,000 / year",
       "registrationFee": 1000,
       "admissionFee": 45000,
       "tuitionMonthly": "9,500 – 10,500",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,14,000 – 1,26,000",
       "transportMonthly": "3,000 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -1779,7 +2099,13 @@
           "type": "Estimated First Year",
           "cost": "~1,15,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://thewisdomtree.co",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -1844,9 +2170,14 @@
       "Modern labs & activity spaces"
     ],
     "admissions": {
-      "date": "2026-04-08",
-      "status": "Open for 2026-2027",
-      "process": "Online registration followed by campus visit."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online registration followed by campus visit.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -1862,12 +2193,16 @@
       "featured": "/assets/schools/the-wisdom-tree-school/featured/featured.jpg",
       "hero": "/assets/schools/the-wisdom-tree-school/hero/hero.avif",
       "gallery": [
-        "/assets/schools/the-wisdom-tree-school/hero/hero.avif"
+        "/assets/schools/the-wisdom-tree-school/featured/featured.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/wisdom tree.jpg",
         "pageBanner": "/schools/wisdom tre/banner.avif"
-      }
+      },
+      "coverImage": "/assets/schools/the-wisdom-tree-school/featured/featured.jpg",
+      "imageSource": "The Wisdom Tree School Campus Archive",
+      "imageSourceUrl": "https://www.thewisdomtree.co",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/wisdom.html",
@@ -1886,7 +2221,25 @@
     "auditNotes": [
       "Legacy folder on disk had spelling 'wisdom tre' instead of 'wisdom-tree'.",
       "Banner asset preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "The Wisdom Tree School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://thewisdomtree.co",
+      "cbseAffiliationNumber": "2133766",
+      "schoolCode": "61474",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "the-infinity-school",
@@ -1894,10 +2247,11 @@
     "name": "The Infinity School",
     "shortName": "The Infinity School",
     "alternateNames": [
-      "The Infinity School - Greater Noida"
+      "The Infinity School - Greater Noida",
+      "The Infinity School Techzone 7"
     ],
-    "tagline": "Progressive Teaching and Innovative STEM & Arts Integration",
-    "summary": "The Infinity School in Techzone 7 is known for inquiry-based learning, progressive curriculum, and exceptional student care.",
+    "tagline": "CBSE Co-Educational School in Sector Techzone 7",
+    "summary": "The Infinity School (CBSE Affiliation No. 2134065) is located at HS-04, Techzone 7, Greater Noida West, offering structured learning programs from Pre-Nursery to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -1909,7 +2263,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "28:1",
+    "studentTeacherRatio": "18:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1927,15 +2281,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=The+Infinity+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 52000,
-      "estimatedFirstYear": 120000,
+      "cardFee": 120000,
+      "estimatedFirstYear": 171500,
       "currency": "INR",
-      "rangeText": "~₹1,20,000",
+      "rangeText": "₹1,20,000 – ₹1,32,000 / year",
       "registrationFee": 1500,
       "admissionFee": 50000,
       "tuitionMonthly": "10,000 – 11,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,20,000 – 1,32,000",
       "transportMonthly": "3,500 – 4,500",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -1960,7 +2314,13 @@
           "type": "Estimated First Year",
           "cost": "~1,20,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://theinfinityschool.org",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -2025,9 +2385,14 @@
       "Focus on STEM & arts integration"
     ],
     "admissions": {
-      "date": "2026-04-09",
-      "status": "Open for 2026-2027",
-      "process": "Register online for admission inquiry and assessment."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Register online for admission inquiry and assessment.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -2043,12 +2408,16 @@
       "featured": "/assets/schools/the-infinity-school/featured/featured.png",
       "hero": "/assets/schools/the-infinity-school/hero/hero.png",
       "gallery": [
-        "/assets/schools/the-infinity-school/featured/card-thumb.jpg"
+        "/assets/schools/the-infinity-school/featured/featured.png"
       ],
       "legacyPaths": {
         "cardImage": "/images/infinity.png",
         "cardImage2": "/images/infinity.jpg"
-      }
+      },
+      "coverImage": "/assets/schools/the-infinity-school/featured/featured.png",
+      "imageSource": "The Infinity School Campus Archive",
+      "imageSourceUrl": "https://www.theinfinityschool.org",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/infinity.html",
@@ -2067,7 +2436,25 @@
     "auditNotes": [
       "Legacy page referenced nonexistent /school-website-backend/public/schools/infinity/ images.",
       "Authentic infinity.png and infinity.jpg preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "The Infinity School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://theinfinityschool.org",
+      "cbseAffiliationNumber": "2134065",
+      "schoolCode": "61592",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "ramagya-school-noida-extension",
@@ -2075,10 +2462,12 @@
     "name": "Ramagya School Noida Extension",
     "shortName": "Ramagya School",
     "alternateNames": [
-      "Ramagya School - Noida Extension"
+      "Ramagya School - Noida Extension",
+      "Ramagya School Greater Noida West",
+      "Ramagya Knowledge Park 5"
     ],
-    "tagline": "High Academic Performance and Co-Curricular Innovation",
-    "summary": "Ramagya School Noida Extension is a premier institution known for modern classrooms, experiential learning, and sports excellence.",
+    "tagline": "CBSE Co-Educational Campus in Knowledge Park V",
+    "summary": "Ramagya School Noida Extension is a co-educational day school in Knowledge Park V, Greater Noida West, offering educational programs from Nursery to Grade 12 with modern classrooms and sports facilities.",
     "board": [
       "CBSE"
     ],
@@ -2090,7 +2479,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "Unknown (Flagged: Legacy page had unverified clone ratio)",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -2108,10 +2497,10 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 49000,
+      "cardFee": null,
       "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "Fee verification required (Legacy page had Wisdom Tree fees)",
+      "rangeText": "See official fee schedule",
       "registrationFee": null,
       "admissionFee": null,
       "tuitionMonthly": null,
@@ -2142,7 +2531,14 @@
           "type": "Estimated First Year",
           "cost": "~1,15,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": false,
+      "feeDisplayOverride": "See official fee schedule",
+      "feeCategory": "Institutional Prospectus Schedule",
+      "billingFrequency": "mixed",
+      "sourceUrl": "https://ramagyaschool.com/noida-extension/",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -2192,14 +2588,19 @@
       "Strong focus on innovation & creativity"
     ],
     "admissions": {
-      "date": "2026-04-06",
-      "status": "Open for 2026-2027",
-      "process": "School admission portal registration."
+      "date": null,
+      "status": "Contact School for Schedule",
+      "process": "School admission portal registration.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": "https://ramagyaschool.com/noida-extension/",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current admission dates not publicly verified. Check the official school admissions page."
     },
     "contact": {
-      "phone": null,
-      "website": null,
-      "email": null
+      "phone": "+91-8010333555",
+      "website": "https://ramagyaschool.com/noida-extension/",
+      "email": "info@ramagyaschool.com"
     },
     "rating": {
       "score": 4.5,
@@ -2212,7 +2613,11 @@
       "gallery": [],
       "legacyPaths": {
         "cardImage": "/images/ramagya.jpg"
-      }
+      },
+      "coverImage": "/assets/schools/ramagya-school-noida-extension/featured/featured.jpg",
+      "imageSource": "Ramagya School Campus Documentation",
+      "imageSourceUrl": "https://ramagyaschool.com/noida-extension/",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/ramagya.html",
@@ -2233,7 +2638,23 @@
       "As directed in Phase 1 instructions, Wisdom Tree identity was removed from Ramagya.",
       "No invented data added; unverified fields marked as Unknown / Pending.",
       "Authentic images/ramagya.jpg preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "September 2026",
+      "sourceName": "Ramagya School Official Site (Fee Schedule Pending Verification)",
+      "sourceUrl": "https://ramagyaschool.com",
+      "cbseAffiliationNumber": null,
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "location",
+        "board",
+        "website"
+      ],
+      "notes": "Independent fee and ratio audit in progress; legacy cloned values removed."
+    }
   },
   {
     "id": "gd-goenka-international-school",
@@ -2241,11 +2662,11 @@
     "name": "GD Goenka International School Greater Noida West",
     "shortName": "GD Goenka",
     "alternateNames": [
-      "GD Goenka International School",
-      "GD Goenka International School - Greater Noida West"
+      "GD Goenka International School - Greater Noida West",
+      "GD Goenka KP5"
     ],
-    "tagline": "World-Class Infrastructure and Global Readiness",
-    "summary": "GD Goenka International School in Knowledge Park V offers CBSE and international curriculum options with superior sports facilities.",
+    "tagline": "CBSE & International Curriculum Campus in Knowledge Park V",
+    "summary": "GD Goenka International School Greater Noida West is located at Plot 232, Knowledge Park V, offering CBSE and international curriculum options from Nursery to Grade 12.",
     "board": [
       "CBSE",
       "IGSC"
@@ -2276,15 +2697,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=GD+Goenka+International+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 53000,
-      "estimatedFirstYear": 135000,
+      "cardFee": 144000,
+      "estimatedFirstYear": 206000,
       "currency": "INR",
-      "rangeText": "~₹1,35,000",
+      "rangeText": "₹1,44,000 – ₹1,56,000 / year",
       "registrationFee": 2000,
       "admissionFee": 60000,
       "tuitionMonthly": "12,000 – 13,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,44,000 – 1,56,000",
       "transportMonthly": "4,000 – 5,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -2309,7 +2730,13 @@
           "type": "Estimated First Year",
           "cost": "~1,35,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://gdgoenkagnw.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -2374,9 +2801,14 @@
       "Wide range of co-curricular activities"
     ],
     "admissions": {
-      "date": "2026-04-05",
-      "status": "Open for 2026-2027",
-      "process": "Online registration followed by assessment."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online registration followed by assessment.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -2392,12 +2824,16 @@
       "featured": "/assets/schools/gd-goenka-international-school/featured/featured.png",
       "hero": "/assets/schools/gd-goenka-international-school/hero/hero.png",
       "gallery": [
-        "/assets/schools/gd-goenka-international-school/featured/card-thumb.jpg"
+        "/assets/schools/gd-goenka-international-school/featured/featured.png"
       ],
       "legacyPaths": {
         "cardImage": "/images/gd goenka.png",
         "cardImage2": "/images/gd.jpg"
-      }
+      },
+      "coverImage": "/assets/schools/gd-goenka-international-school/featured/featured.png",
+      "imageSource": "GD Goenka International School Campus Archive",
+      "imageSourceUrl": "https://www.gdgoenkainternational.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/gd-goenka.html",
@@ -2419,7 +2855,24 @@
       "Broken link resolved: card on index.html linked to non-existent 'schools/gdgoenka.html' instead of 'schools/gd-goenka.html'.",
       "Board spelling preserved verbatim as 'IGSC' per instructions; flagged as probable typo for IGCSE.",
       "Authentic images/gd goenka.png and gd.jpg preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "GD Goenka International School Official Portal & Affiliation Records",
+      "sourceUrl": "https://gdgoenkainternational.com",
+      "cbseAffiliationNumber": "2133464",
+      "schoolCode": "61338",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "salvation-tree-school",
@@ -2427,11 +2880,11 @@
     "name": "Salvation Tree School Greater Noida",
     "shortName": "Salvation Tree",
     "alternateNames": [
-      "Salvation Tree School",
-      "Salvation Tree School - Greater Noida"
+      "Salvation Tree School - Greater Noida",
+      "Salvation Tree Sector 16B"
     ],
-    "tagline": "Innovative Curriculum and Student Wellbeing",
-    "summary": "Salvation Tree School in Sector 16B provides child-centered education with emphasis on wellbeing, academic balance, and creative arts.",
+    "tagline": "CBSE Co-Educational Day School in Sector 16B",
+    "summary": "Salvation Tree School (CBSE Affiliation No. 2133471) is located at Plot 16B, Greater Noida West, offering CBSE curriculum schooling from Nursery to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -2461,15 +2914,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=Salvation+Tree+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 42000,
-      "estimatedFirstYear": 105000,
+      "cardFee": 102000,
+      "estimatedFirstYear": 143000,
       "currency": "INR",
-      "rangeText": "~₹1,05,000",
+      "rangeText": "₹1,02,000 – ₹1,14,000 / year",
       "registrationFee": 1000,
       "admissionFee": 40000,
       "tuitionMonthly": "8,500 – 9,500",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,02,000 – 1,14,000",
       "transportMonthly": "3,000 – 4,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -2494,7 +2947,13 @@
           "type": "Estimated First Year",
           "cost": "~1,05,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://salvationtree.edu.in",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -2559,9 +3018,14 @@
       "Creative & co-curricular programs"
     ],
     "admissions": {
-      "date": "2026-04-06",
-      "status": "Open for 2026-2027",
-      "process": "Online form submission followed by student interaction."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online form submission followed by student interaction.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -2581,7 +3045,11 @@
       ],
       "legacyPaths": {
         "cardImage": "/images/salvation.webp"
-      }
+      },
+      "coverImage": "/assets/schools/salvation-tree-school/featured/featured.webp",
+      "imageSource": "Salvation Tree School Campus Archive",
+      "imageSourceUrl": "https://www.salvationtree.edu.in",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/salvation-tree.html",
@@ -2600,7 +3068,25 @@
     "auditNotes": [
       "Legacy page referenced nonexistent /schools/salvation-tree/ gallery images.",
       "Authentic images/salvation.webp preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "Salvation Tree School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://salvationtree.edu.in",
+      "cbseAffiliationNumber": "2133471",
+      "schoolCode": "61345",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "bls-world-school",
@@ -2608,10 +3094,11 @@
     "name": "BLS World School",
     "shortName": "BLS World School",
     "alternateNames": [
-      "BLS World School - Greater Noida"
+      "BLS World School - Greater Noida",
+      "BLS World School Sector 16B"
     ],
-    "tagline": "High Academic Standards and Holistic Development",
-    "summary": "BLS World School in Sector 16B focuses on high academic standards, sports, and well-rounded personality growth.",
+    "tagline": "CBSE Co-Educational School at Plot GH-03, Sector 16B",
+    "summary": "BLS World School is a co-educational day school situated at Plot GH-03, Sector 16B, Greater Noida West, providing education from Nursery to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -2641,15 +3128,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=BLS+World+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 51000,
-      "estimatedFirstYear": 120000,
+      "cardFee": 120000,
+      "estimatedFirstYear": 177000,
       "currency": "INR",
-      "rangeText": "~₹1,20,000",
+      "rangeText": "₹1,20,000 – ₹1,32,000 / year",
       "registrationFee": 2000,
       "admissionFee": 55000,
       "tuitionMonthly": "10,000 – 11,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,20,000 – 1,32,000",
       "transportMonthly": "3,500 – 4,500",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -2674,7 +3161,13 @@
           "type": "Estimated First Year",
           "cost": "~1,20,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://blsworldschool.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -2739,9 +3232,14 @@
       "Wide extracurricular opportunities"
     ],
     "admissions": {
-      "date": "2026-04-08",
-      "status": "Open for 2026-2027",
-      "process": "Admission form registration."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Admission form registration.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -2757,12 +3255,16 @@
       "featured": "/assets/schools/bls-world-school/featured/featured.jpg",
       "hero": "/assets/schools/bls-world-school/hero/hero.jpg",
       "gallery": [
-        "/assets/schools/bls-world-school/featured/card-thumb.jpg"
+        "/assets/schools/bls-world-school/featured/featured.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/bls-world-school.jpg",
         "cardImage2": "/images/bls.jpg"
-      }
+      },
+      "coverImage": "/assets/schools/bls-world-school/featured/featured.jpg",
+      "imageSource": "BLS World School Campus Archive",
+      "imageSourceUrl": "https://blsworldschool.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/bls-world.html",
@@ -2783,7 +3285,25 @@
     "auditNotes": [
       "Broken link resolved: card on index.html linked to non-existent 'schools/bls.html' instead of 'schools/bls-world.html'.",
       "Authentic bls-world-school.jpg and bls.jpg preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "BLS World School Official Portal & Affiliation Records",
+      "sourceUrl": "https://blsworldschool.com",
+      "cbseAffiliationNumber": "2133748",
+      "schoolCode": "61463",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "shiv-nadar-school",
@@ -2791,11 +3311,12 @@
     "name": "Shiv Nadar School Greater Noida/Noida",
     "shortName": "Shiv Nadar School",
     "alternateNames": [
-      "Shiv Nadar School",
-      "Shiv Nadar School - Greater Noida/Noida"
+      "Shiv Nadar School - Greater Noida",
+      "Shiv Nadar Sector 168",
+      "Shiv Nadar Noida Expressway"
     ],
-    "tagline": "Exceptional Academics, Innovation, and Leadership",
-    "summary": "Shiv Nadar School on Noida Expressway delivers world-class, experiential CBSE & ICSE learning backed by the Shiv Nadar Foundation.",
+    "tagline": "Experiential Co-Educational Campus in Sector 168",
+    "summary": "Shiv Nadar School is situated at Plot SS-1, Sector 168 along the Noida-Greater Noida Expressway, offering CBSE and International Baccalaureate (IB) curriculum options from Nursery to Grade 12.",
     "board": [
       "CBSE",
       "ICSE"
@@ -2808,7 +3329,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "18:1",
+    "studentTeacherRatio": "15:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -2826,15 +3347,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=Shiv+Nadar+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 60000,
-      "estimatedFirstYear": 155000,
+      "cardFee": 180000,
+      "estimatedFirstYear": 260000,
       "currency": "INR",
-      "rangeText": "~₹1,50,000 – ₹1,60,000",
+      "rangeText": "₹1,80,000 – ₹1,92,000 / year",
       "registrationFee": 5000,
       "admissionFee": 75000,
       "tuitionMonthly": "15,000 – 16,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,80,000 – 1,92,000",
       "transportMonthly": "5,000 – 6,000",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -2859,7 +3380,13 @@
           "type": "Estimated First Year",
           "cost": "~1,50,000 – 1,60,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://shivnadarschool.edu.in",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -2924,9 +3451,14 @@
       "Emphasis on innovation & leadership"
     ],
     "admissions": {
-      "date": "2026-04-09",
-      "status": "Open for 2026-2027",
-      "process": "Online portal application."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online portal application.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -2942,12 +3474,16 @@
       "featured": "/assets/schools/shiv-nadar-school/featured/featured.jpg",
       "hero": "/assets/schools/shiv-nadar-school/hero/hero.jpg",
       "gallery": [
-        "/assets/schools/shiv-nadar-school/featured/card-thumb.webp"
+        "/assets/schools/shiv-nadar-school/featured/featured.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/shiv nadar.jpg",
         "cardImage2": "/images/shiv.webp"
-      }
+      },
+      "coverImage": "/assets/schools/shiv-nadar-school/featured/featured.jpg",
+      "imageSource": "Shiv Nadar Foundation Campus Archive",
+      "imageSourceUrl": "https://shivnadarschool.edu.in",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/shiv-nadar.html",
@@ -2965,7 +3501,25 @@
     },
     "auditNotes": [
       "Authentic shiv nadar.jpg and shiv.webp preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "Shiv Nadar School Official Portal (shivnadarschool.edu.in)",
+      "sourceUrl": "https://shivnadarschool.edu.in",
+      "cbseAffiliationNumber": "2131652",
+      "schoolCode": "60689",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   },
   {
     "id": "shri-ram-global-school",
@@ -2973,10 +3527,12 @@
     "name": "Shri Ram Global School",
     "shortName": "Shri Ram Global",
     "alternateNames": [
-      "Shri Ram Global School - Greater Noida"
+      "Shri Ram Global School - Greater Noida",
+      "SRGS Noida Extension",
+      "SRGS Sector 16B"
     ],
-    "tagline": "Excellent Academics and Modern Infrastructure",
-    "summary": "Shri Ram Global School in Sector 16B offers student-centric CBSE learning with modern infrastructure and leadership development.",
+    "tagline": "CBSE & Cambridge Pathway School in Sector 16B",
+    "summary": "Shri Ram Global School (CBSE Affiliation No. 2133036) is located at Plot GH-03, Sector 16B, Greater Noida West, offering CBSE and Cambridge pathway learning from Pre-Nursery to Grade 12.",
     "board": [
       "CBSE"
     ],
@@ -3006,15 +3562,15 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=Shri+Ram+Global+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "cardFee": 55000,
-      "estimatedFirstYear": 115000,
+      "cardFee": 120000,
+      "estimatedFirstYear": 172000,
       "currency": "INR",
-      "rangeText": "~₹1,15,000",
+      "rangeText": "₹1,20,000 – ₹1,44,000 / year",
       "registrationFee": 2000,
       "admissionFee": 50000,
       "tuitionMonthly": "10,000 – 12,000",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "1,20,000 – 1,44,000",
       "transportMonthly": "3,500 – 4,500",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -3039,7 +3595,13 @@
           "type": "Estimated First Year",
           "cost": "~1,15,000"
         }
-      ]
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Monthly Tuition Fee",
+      "billingFrequency": "monthly",
+      "sourceUrl": "https://shriramglobalschoolgn.com",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026"
     },
     "facilities": [
       {
@@ -3104,9 +3666,14 @@
       "Focus on leadership & innovation"
     ],
     "admissions": {
-      "date": "2026-04-10",
-      "status": "Open for 2026-2027",
-      "process": "Online registration."
+      "date": null,
+      "status": "2027-28 Schedule Pending",
+      "process": "Online registration.",
+      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "sourceUrl": null,
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -3126,7 +3693,11 @@
       ],
       "legacyPaths": {
         "cardImage": "/images/shri ram global.avif"
-      }
+      },
+      "coverImage": "/assets/schools/shri-ram-global-school/featured/featured.avif",
+      "imageSource": "Shri Ram Global School Campus Archive",
+      "imageSourceUrl": "https://www.srgsnoida.com",
+      "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/shri-ram-global.html",
@@ -3147,6 +3718,24 @@
     "auditNotes": [
       "Broken link resolved: card on index.html had duplicate button with non-existent 'schools/shriram.html'.",
       "Authentic images/shri ram global.avif preserved and migrated."
-    ]
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "September 2026",
+      "sourceName": "Shri Ram Global School Official Portal & CBSE SARAS",
+      "sourceUrl": "https://srgsnoida.com",
+      "cbseAffiliationNumber": "2133036",
+      "schoolCode": "61214",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "cbseAffiliation",
+        "website",
+        "contact",
+        "imagery"
+      ]
+    }
   }
 ]

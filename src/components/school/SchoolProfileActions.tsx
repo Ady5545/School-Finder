@@ -2,18 +2,49 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Heart, Scale, Share2, Check, ExternalLink } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useSchoolStore } from '../../lib/schoolStore';
+import { useAuth } from '../../lib/authContext';
+import { useToast } from '../ui/Toast';
 import { cn } from '../../lib/utils';
 import type { School } from '../../types/school';
 
 export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) => {
-  const { isInShortlist, toggleShortlist, isInCompare, toggleCompare, compareList } = useSchoolStore();
+  const router = useRouter();
+  const { isInShortlist, toggleShortlist, isInCompare, toggleCompare, compareList, openAuthPrompt } = useSchoolStore();
+  const { isAuthenticated } = useAuth();
+  const { showToast } = useToast();
   const [copied, setCopied] = useState(false);
 
   const isSaved = isInShortlist(school.slug);
   const isCompared = isInCompare(school.slug);
+
+  const handleToggleShortlist = async () => {
+    if (!isAuthenticated) {
+      openAuthPrompt({
+        slug: school.slug,
+        name: school.name,
+        image: school.assets.featured,
+        area: school.location.area,
+      });
+      return;
+    }
+
+    toggleShortlist(school.slug, school.name);
+
+    // Sync with backend API
+    try {
+      await fetch('/api/auth/wishlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: school.slug, action: 'toggle' }),
+      });
+    } catch {
+      // Local state already updated
+    }
+  };
 
   const handleShare = async () => {
     if (navigator.clipboard) {
@@ -28,7 +59,7 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
       {/* Shortlist Button */}
       <button
         type="button"
-        onClick={() => toggleShortlist(school.slug, school.name)}
+        onClick={handleToggleShortlist}
         className={cn(
           'w-full py-2.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 border transition-all cursor-pointer shadow-2xs',
           isSaved

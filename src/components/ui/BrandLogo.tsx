@@ -13,23 +13,23 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   size = 'md',
   variant = 'full',
   theme = 'light',
-  subtext = 'Greater Noida West',
+  subtext = 'GREATER NOIDA WEST',
   className,
 }) => {
   const iconSizes = {
-    xs: 'w-6 h-6',
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-12 h-12',
-    xl: 'w-16 h-16',
+    xs: 'w-6 h-6 rounded-lg',
+    sm: 'w-8 h-8 rounded-xl',
+    md: 'w-10 h-10 rounded-2xl',
+    lg: 'w-12 h-12 rounded-2xl',
+    xl: 'w-16 h-16 rounded-3xl',
   };
 
   const titleSizes = {
     xs: 'text-xs',
     sm: 'text-sm font-bold',
-    md: 'text-base font-extrabold',
-    lg: 'text-xl font-extrabold',
-    xl: 'text-2xl font-extrabold',
+    md: 'text-lg font-black',
+    lg: 'text-xl font-black',
+    xl: 'text-2xl font-black',
   };
 
   const subtextSizes = {
@@ -42,12 +42,11 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   return (
     <div className={cn('flex items-center gap-2.5 select-none', className)}>
-      {/* Brand Vector Emblem (The Pitara - Treasure of School Intelligence) */}
+      {/* Brand Vector Emblem (The Pitara Treasure Box with Radiant Golden Sunbeams) */}
       <div
         className={cn(
-          'relative shrink-0 rounded-xl flex items-center justify-center transition-transform shadow-xs',
-          iconSizes[size],
-          theme === 'light' ? 'bg-[var(--color-primary)] text-white' : 'bg-white text-[var(--color-primary)]'
+          'relative shrink-0 flex items-center justify-center transition-transform shadow-xs overflow-hidden bg-[#0f253e]',
+          iconSizes[size]
         )}
       >
         <svg
@@ -57,74 +56,67 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
-          {/* Radiant Sunburst Rays */}
-          <g stroke="var(--color-rating)" strokeWidth="1.5" strokeLinecap="round" opacity="0.9">
-            <line x1="24" y1="6" x2="24" y2="10" />
-            <line x1="16" y1="8" x2="18" y2="11" />
-            <line x1="32" y1="8" x2="30" y2="11" />
+          {/* Radiant Golden Sunburst Rays */}
+          <g stroke="#f59e0b" strokeWidth="2.2" strokeLinecap="round">
+            <line x1="24" y1="5" x2="24" y2="10" />
+            <line x1="16" y1="8" x2="19" y2="12" />
+            <line x1="32" y1="8" x2="29" y2="12" />
           </g>
 
-          {/* Golden Sun Wisdom */}
+          {/* Golden Sun Wisdom / Glow arch */}
           <path
-            d="M18 18C18 14.686 20.686 12 24 12C27.314 12 30 14.686 30 18H18Z"
-            fill="var(--color-rating)"
+            d="M18 17C18 13.686 20.686 11 24 11C27.314 11 30 13.686 30 17H18Z"
+            fill="#f59e0b"
           />
 
-          {/* Pitara Lid */}
+          {/* Pitara Lid (Curved Chest Top in Terracotta/Rust) */}
           <path
-            d="M10 22C10 18.5 13 16 16.5 16H31.5C35 16 38 18.5 38 22V24H10V22Z"
-            fill="var(--color-accent)"
-          />
-          <path
-            d="M10 22C10 18.5 13 16 16.5 16H31.5C35 16 38 18.5 38 22"
-            stroke="#fed7aa"
-            strokeWidth="1"
+            d="M11 22C11 17.5 14.5 15 18 15H30C33.5 15 37 17.5 37 22V24H11V22Z"
+            fill="#a64019"
           />
 
-          {/* Central Ornament */}
-          <rect x="21.5" y="16" width="5" height="8" fill="var(--color-accent-hover)" />
-          <rect x="21.5" y="16" width="5" height="8" stroke="#fef3c7" strokeWidth="0.8" fill="none" />
+          {/* Horizontal Golden Band / Latch Rim */}
+          <rect x="10" y="23" width="28" height="2" fill="#f59e0b" rx="1" />
 
-          {/* Pitara Trunk */}
+          {/* Pitara Trunk (Tapered Chest Base in Terracotta/Rust) */}
           <path
-            d="M11 24H37L35.5 38C35.2 39.5 34 40.5 32.5 40.5H15.5C14 40.5 12.8 39.5 12.5 38L11 24Z"
-            fill="var(--color-accent-hover)"
+            d="M12 24.5H36L34.2 38.5C34 39.9 32.8 41 31.4 41H16.6C15.2 41 14 39.9 13.8 38.5L12 24.5Z"
+            fill="#8e3311"
           />
 
-          {/* Lock Plaque */}
+          {/* Golden U-shaped Lock Clasp / Plaque */}
           <path
-            d="M21 24H27V29.5C27 31.157 25.657 32.5 24 32.5C22.343 32.5 21 31.157 21 29.5V24Z"
-            fill="var(--color-rating)"
-            stroke="#fef3c7"
-            strokeWidth="0.8"
+            d="M21 21.5H27V28C27 29.657 25.657 31 24 31C22.343 31 21 29.657 21 28V21.5Z"
+            fill="#f59e0b"
+            stroke="#b45309"
+            strokeWidth="0.6"
           />
-          <circle cx="24" cy="27" r="1" fill="var(--color-primary)" />
-
-          {/* Horizontal Band */}
-          <line x1="11" y1="24" x2="37" y2="24" stroke="#fef3c7" strokeWidth="1" />
+          {/* Keyhole / Latch Center */}
+          <circle cx="24" cy="26" r="1.3" fill="#0f253e" />
+          <path d="M23.3 26.5L24.7 26.5L24.4 28.8H23.6L23.3 26.5Z" fill="#0f253e" />
         </svg>
       </div>
 
       {/* Typography Wordmark */}
       {variant === 'full' && (
         <div className="flex flex-col">
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 leading-none">
             <span
               className={cn(
                 'tracking-tight leading-tight',
                 titleSizes[size],
-                theme === 'light' ? 'text-[var(--color-content)]' : 'text-white'
+                theme === 'light' ? 'text-[#0f172a]' : 'text-white'
               )}
             >
-              Admission <span className="text-[var(--color-accent)]">Pitara</span>
+              Admission <span className={theme === 'light' ? 'text-[#dc2626]' : 'text-[#ef4444]'}>Pitara</span>
             </span>
           </div>
           {subtext && (
             <span
               className={cn(
-                'font-medium tracking-wider uppercase',
+                'font-bold tracking-[0.22em] uppercase mt-0.5',
                 subtextSizes[size],
-                theme === 'light' ? 'text-[var(--color-content-muted)]' : 'text-slate-300'
+                theme === 'light' ? 'text-[#52657e]' : 'text-slate-300'
               )}
             >
               {subtext}

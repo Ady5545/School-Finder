@@ -89,12 +89,12 @@ export const SchoolComparisonView: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-xl border border-[var(--color-border)] bg-slate-50 flex flex-col justify-between">
+            <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
-                <span className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">
+                <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
                   Knowledge Park 5 Giants
                 </span>
-                <p className="text-xs font-semibold text-[var(--color-content)] mt-1.5">
+                <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
                   DPS KP5 vs Ryan International vs Gaur International
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
@@ -110,18 +110,18 @@ export const SchoolComparisonView: React.FC = () => {
                     'gaurs-international-school-greater-noida-west',
                   ])
                 }
-                className="mt-4 text-xs font-bold text-[var(--color-primary)] hover:underline flex items-center gap-1 cursor-pointer"
+                className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"
               >
                 Load this comparison →
               </button>
             </div>
 
-            <div className="p-4 rounded-xl border border-[var(--color-border)] bg-slate-50 flex flex-col justify-between">
+            <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
-                <span className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">
+                <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
                   Techzone 4 Corridors
                 </span>
-                <p className="text-xs font-semibold text-[var(--color-content)] mt-1.5">
+                <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
                   Pacific World School vs BLS World vs Sarvottam
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
@@ -137,18 +137,18 @@ export const SchoolComparisonView: React.FC = () => {
                     'sarvottam-international-school-greater-noida-west',
                   ])
                 }
-                className="mt-4 text-xs font-bold text-[var(--color-primary)] hover:underline flex items-center gap-1 cursor-pointer"
+                className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"
               >
                 Load this comparison →
               </button>
             </div>
 
-            <div className="p-4 rounded-xl border border-[var(--color-border)] bg-slate-50 flex flex-col justify-between">
+            <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
-                <span className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">
+                <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
                   Global Curriculum
                 </span>
-                <p className="text-xs font-semibold text-[var(--color-content)] mt-1.5">
+                <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
                   Lotus Valley vs The Millennium School vs Aster Public
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
@@ -164,7 +164,7 @@ export const SchoolComparisonView: React.FC = () => {
                     'aster-public-school-greater-noida-west',
                   ])
                 }
-                className="mt-4 text-xs font-bold text-[var(--color-primary)] hover:underline flex items-center gap-1 cursor-pointer"
+                className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"
               >
                 Load this comparison →
               </button>
@@ -195,7 +195,7 @@ export const SchoolComparisonView: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsSelectorOpen(!isSelectorOpen)}
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-colors flex items-center gap-1 cursor-pointer"
+                className="text-xs font-bold px-3 py-1.5 rounded-lg border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent-light)] transition-colors flex items-center gap-1 cursor-pointer"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add School</span>
@@ -264,8 +264,8 @@ export const SchoolComparisonView: React.FC = () => {
         <table className="w-full border-collapse text-left">
           <thead>
             {/* School Header Cards Row */}
-            <tr className="border-b border-[var(--color-border)] bg-slate-50/70">
-              <th className="p-4 w-48 min-w-44 text-xs font-bold text-[var(--color-content-muted)] uppercase tracking-wider align-top">
+            <tr className="border-b border-[var(--color-border)] bg-[var(--color-surface-subtle)]">
+              <th className="p-4 w-48 min-w-44 text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider align-top">
                 Metric
               </th>
               {selectedSchools.map(school => (
@@ -280,7 +280,7 @@ export const SchoolComparisonView: React.FC = () => {
                       <X className="w-3.5 h-3.5" />
                     </button>
 
-                    <div className="relative rounded-xl overflow-hidden mb-2.5 border border-slate-200">
+                    <div className="relative rounded-xl overflow-hidden mb-2.5 border border-[var(--color-border)] shadow-xs">
                       <SchoolImage
                         src={school.assets.featured}
                         alt={school.name}
@@ -296,11 +296,11 @@ export const SchoolComparisonView: React.FC = () => {
                     </Link>
 
                     <div className="flex items-center gap-2 text-xs text-[var(--color-content-muted)] mt-1">
-                      <MapPin className="w-3 h-3 text-slate-400" />
+                      <MapPin className="w-3 h-3 text-[var(--color-accent)]" />
                       <span>{school.location.area || school.location.sector}</span>
                     </div>
 
-                    <div className="flex items-center gap-2 mt-3 pt-2 border-t border-slate-200">
+                    <div className="flex items-center gap-2 mt-3 pt-2.5 border-t border-[var(--color-border-subtle)]">
                       <button
                         type="button"
                         onClick={() => toggleShortlist(school.slug, school.name)}
@@ -308,7 +308,7 @@ export const SchoolComparisonView: React.FC = () => {
                           'p-1.5 rounded-lg border text-xs font-semibold flex items-center gap-1 transition-colors cursor-pointer',
                           isInShortlist(school.slug)
                             ? 'bg-rose-50 border-rose-300 text-rose-600'
-                            : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                            : 'bg-white border-[var(--color-border-strong)] text-slate-700 hover:bg-[var(--color-surface-subtle)]'
                         )}
                       >
                         <Heart className={cn('w-3.5 h-3.5', isInShortlist(school.slug) && 'fill-rose-500')} />
@@ -316,7 +316,7 @@ export const SchoolComparisonView: React.FC = () => {
                       </button>
 
                       <Link href={`/schools/${school.slug}`} className="flex-1">
-                        <Button variant="primary" size="sm" className="w-full text-xs">
+                        <Button variant="accent" size="sm" className="w-full text-xs font-bold text-white">
                           Profile
                         </Button>
                       </Link>
@@ -329,8 +329,8 @@ export const SchoolComparisonView: React.FC = () => {
 
           <tbody className="divide-y divide-[var(--color-border-subtle)] text-xs text-[var(--color-content)]">
             {/* Section 1: Core Institutional Facts */}
-            <tr className="bg-slate-100/70">
-              <td colSpan={selectedSchools.length + 1} className="px-4 py-2 font-bold text-slate-800 uppercase tracking-wider text-[11px]">
+            <tr className="bg-[var(--color-surface-muted)] border-y border-[var(--color-border)]">
+              <td colSpan={selectedSchools.length + 1} className="px-4 py-2.5 font-black text-[var(--color-primary)] uppercase tracking-wider text-[11px]">
                 1. Institutional Profile
               </td>
             </tr>
@@ -372,25 +372,41 @@ export const SchoolComparisonView: React.FC = () => {
             </tr>
 
             {/* Section 2: Verified Fees */}
-            <tr className="bg-slate-100/70">
-              <td colSpan={selectedSchools.length + 1} className="px-4 py-2 font-bold text-slate-800 uppercase tracking-wider text-[11px]">
+            <tr className="bg-[var(--color-surface-muted)] border-y border-[var(--color-border)]">
+              <td colSpan={selectedSchools.length + 1} className="px-4 py-2.5 font-black text-[var(--color-primary)] uppercase tracking-wider text-[11px]">
                 2. Fee Structure (Audited)
               </td>
             </tr>
 
-            <tr className={cn(highlightDiff && isRowDifferent(s => s.fees.cardFee) && 'bg-amber-50/50')}>
+            <tr className={cn(highlightDiff && isRowDifferent(s => s.fees.cardFee) && 'bg-amber-50/70 border-l-2 border-l-[var(--color-accent)]')}>
               <td className="p-4 font-semibold text-[var(--color-content-muted)]">Annual Fee</td>
-              {selectedSchools.map(s => (
-                <td key={s.id} className="p-4">
-                  <span className="text-sm font-extrabold text-[var(--color-content)]">
-                    {formatCurrency(s.fees.cardFee)}
-                  </span>
-                  <span className="text-[10px] text-slate-400 block">/ year</span>
-                </td>
-              ))}
+              {selectedSchools.map(s => {
+                const isComparable =
+                  s.fees.cardFee !== null &&
+                  s.fees.cardFee !== undefined &&
+                  s.fees.comparableAnnualAvailable !== false &&
+                  s.fees.verificationStatus === 'verified_from_source';
+
+                return (
+                  <td key={s.id} className="p-4">
+                    {isComparable ? (
+                      <>
+                        <span className="text-sm font-extrabold text-[var(--color-primary)]">
+                          {formatCurrency(s.fees.cardFee!)}
+                        </span>
+                        <span className="text-[10px] text-[var(--color-content-muted)] block font-medium">/ year</span>
+                      </>
+                    ) : (
+                      <span className="text-xs font-semibold text-slate-500">
+                        See official fee schedule
+                      </span>
+                    )}
+                  </td>
+                );
+              })}
             </tr>
 
-            <tr className={cn(highlightDiff && isRowDifferent(s => s.fees.admissionFee) && 'bg-amber-50/50')}>
+            <tr className={cn(highlightDiff && isRowDifferent(s => s.fees.admissionFee) && 'bg-amber-50/70 border-l-2 border-l-[var(--color-accent)]')}>
               <td className="p-4 font-semibold text-[var(--color-content-muted)]">One-Time Admission Fee</td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-medium">
@@ -399,7 +415,7 @@ export const SchoolComparisonView: React.FC = () => {
               ))}
             </tr>
 
-            <tr className={cn(highlightDiff && isRowDifferent(s => s.fees.verificationStatus) && 'bg-amber-50/50')}>
+            <tr className={cn(highlightDiff && isRowDifferent(s => s.fees.verificationStatus) && 'bg-amber-50/70 border-l-2 border-l-[var(--color-accent)]')}>
               <td className="p-4 font-semibold text-[var(--color-content-muted)]">Fee Verification Status</td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4">
@@ -411,46 +427,46 @@ export const SchoolComparisonView: React.FC = () => {
                         : 'bg-amber-50 text-amber-700 border border-amber-200'
                     )}
                   >
-                    {s.fees.verificationStatus === 'verified_from_source' ? 'Verified Source' : 'Wisdom Tree'}
+                    {s.fees.verificationStatus === 'verified_from_source' ? 'Verified Source' : 'Under Verification'}
                   </span>
                 </td>
               ))}
             </tr>
 
             {/* Section 3: Facilities & Infrastructure */}
-            <tr className="bg-slate-100/70">
-              <td colSpan={selectedSchools.length + 1} className="px-4 py-2 font-bold text-slate-800 uppercase tracking-wider text-[11px]">
+            <tr className="bg-[var(--color-surface-muted)] border-y border-[var(--color-border)]">
+              <td colSpan={selectedSchools.length + 1} className="px-4 py-2.5 font-black text-[var(--color-primary)] uppercase tracking-wider text-[11px]">
                 3. Campus & Facilities
               </td>
             </tr>
 
-            <tr className={cn(highlightDiff && isRowDifferent(s => s.facilities.length) && 'bg-amber-50/50')}>
+            <tr className={cn(highlightDiff && isRowDifferent(s => s.facilities.length) && 'bg-amber-50/70 border-l-2 border-l-[var(--color-accent)]')}>
               <td className="p-4 font-semibold text-[var(--color-content-muted)]">Campus Facilities</td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-medium">
                   {s.facilities && s.facilities.length > 0 ? (
                     <div className="flex flex-wrap gap-1">
                       {s.facilities.slice(0, 4).map((fac, idx) => (
-                        <span key={idx} className="px-1.5 py-0.5 bg-slate-100 rounded text-[10px]">
+                        <span key={idx} className="px-2 py-0.5 bg-[var(--color-surface-subtle)] border border-[var(--color-border)] rounded text-[10px] text-[var(--color-content)]">
                           {fac.name}
                         </span>
                       ))}
                     </div>
                   ) : (
-                    <span className="text-slate-400">Indoor/Outdoor Infrastructure</span>
+                    <span className="text-[var(--color-content-muted)]">Indoor/Outdoor Infrastructure</span>
                   )}
                 </td>
               ))}
             </tr>
 
             {/* Section 4: Admissions & Timeline */}
-            <tr className="bg-slate-100/70">
-              <td colSpan={selectedSchools.length + 1} className="px-4 py-2 font-bold text-slate-800 uppercase tracking-wider text-[11px]">
+            <tr className="bg-[var(--color-surface-muted)] border-y border-[var(--color-border)]">
+              <td colSpan={selectedSchools.length + 1} className="px-4 py-2.5 font-black text-[var(--color-primary)] uppercase tracking-wider text-[11px]">
                 4. Admission Timeline
               </td>
             </tr>
 
-            <tr className={cn(highlightDiff && isRowDifferent(s => s.admissions.status) && 'bg-amber-50/50')}>
+            <tr className={cn(highlightDiff && isRowDifferent(s => s.admissions.status) && 'bg-amber-50/70 border-l-2 border-l-[var(--color-accent)]')}>
               <td className="p-4 font-semibold text-[var(--color-content-muted)]">Admission Status</td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4">
@@ -470,22 +486,22 @@ export const SchoolComparisonView: React.FC = () => {
               ))}
             </tr>
 
-            <tr className={cn(highlightDiff && isRowDifferent(s => s.admissions.date) && 'bg-amber-50/50')}>
+            <tr className={cn(highlightDiff && isRowDifferent(s => s.admissions.date) && 'bg-amber-50/70 border-l-2 border-l-[var(--color-accent)]')}>
               <td className="p-4 font-semibold text-[var(--color-content-muted)]">Admissions Date / Window</td>
               {selectedSchools.map(s => (
-                <td key={s.id} className="p-4 font-semibold text-slate-800">
+                <td key={s.id} className="p-4 font-semibold text-[var(--color-content)]">
                   {s.admissions.date || 'Open for 2025–2026'}
                 </td>
               ))}
             </tr>
 
             {/* Action Row */}
-            <tr className="bg-slate-50/60">
-              <td className="p-4 font-semibold text-[var(--color-content-muted)]">Next Steps</td>
+            <tr className="bg-[var(--color-surface-subtle)] border-t border-[var(--color-border)]">
+              <td className="p-4 font-bold text-[var(--color-primary)]">Next Steps</td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4">
                   <Link href={`/schools/${s.slug}`}>
-                    <Button variant="primary" size="sm" className="w-full text-xs font-bold">
+                    <Button variant="accent" size="sm" className="w-full text-xs font-bold text-white">
                       View Full Details
                     </Button>
                   </Link>

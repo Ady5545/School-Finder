@@ -1,85 +1,88 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
-  getUserByEmailOrMobile,
+  getUserByEmail,
   verifyPassword,
   createSessionToken,
   sanitizeUser,
   verifyOtpCode,
+  recordActivityEvent,
 } from '../../../../lib/authStore';
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { email, identifier, password, mobile, otp, loginType = 'password' } = body;
+    const { email, identifier, password, otp, loginType = 'password' } = body;
+
+    const emailToUse = (email || identifier || '').trim().toLowerCase();
+
+    if (!emailToUse) {
+      return NextResponse.json(
+        { success: false, message: 'Email address is required.' },
+        { status: 400 }
+      );
+    }
+
+    const user = getUserByEmail(emailToUse);
+    if (!user) {
+      return NextResponse.json(
+        {
+          success: false,
+          notFound: true,
+          email: emailToUse,
+          message: 'No registered parent account found with this email. Please sign up.',
+        },
+        { status: 401 }
+      );
+    }
 
     if (loginType === 'otp') {
-      const emailOrMobile = email || identifier || mobile;
-      if (!emailOrMobile || !otp) {
+      if (!otp) {
         return NextResponse.json(
-          { success: false, message: 'Email address and verification code are required for OTP sign in.' },
+          { success: false, message: 'Verification code is required for OTP sign in.' },
           { status: 400 }
         );
       }
 
-      const cleanIdentifier = String(emailOrMobile).trim().toLowerCase();
-      const user = getUserByEmailOrMobile(cleanIdentifier);
-      if (!user) {
-        return NextResponse.json(
-          { success: false, message: 'No registered parent account found with this email. Please create an account first.' },
-          { status: 404 }
-        );
-      }
-
-      const verifyResult = verifyOtpCode(cleanIdentifier, otp);
+      const verifyResult = verifyOtpCode(emailToUse, otp);
       if (!verifyResult.success) {
         return NextResponse.json(
           { success: false, message: verifyResult.error || 'Invalid verification code.' },
           { status: 400 }
         );
       }
+    } else {
+      // Password Sign In
+      if (!password) {
+        return NextResponse.json(
+          { success: false, message: 'Password is required.' },
+          { status: 400 }
+        );
+      }
 
-      const token = createSessionToken(user);
-      const response = NextResponse.json({
-        success: true,
-        message: 'Signed in successfully.',
-        user: sanitizeUser(user),
-        token,
-      });
+      if (!user.passwordHash) {
+        return NextResponse.json(
+          { success: false, message: 'This account was set up via email OTP. Please sign in using OTP code.' },
+          { status: 400 }
+        );
+      }
 
-      response.cookies.set('ap_session', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 7 * 24 * 60 * 60,
-      });
-
-      return response;
+      const isValid = verifyPassword(password, user.passwordHash);
+      if (!isValid) {
+        return NextResponse.json(
+          { success: false, message: 'Invalid password. Please check your password and try again.' },
+          { status: 401 }
+        );
+      }
     }
 
-    // Password Sign In
-    if (!identifier || !password) {
-      return NextResponse.json(
-        { success: false, message: 'Email/Mobile and password are required.' },
-        { status: 400 }
-      );
-    }
+    user.lastLoginAt = new Date().toISOString();
+    user.lastActivityAt = user.lastLoginAt;
 
-    const user = getUserByEmailOrMobile(identifier);
-    if (!user) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid login credentials. Please verify your email or mobile.' },
-        { status: 401 }
-      );
-    }
-
-    const isValid = verifyPassword(password, user.passwordHash);
-    if (!isValid) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid password. Please try again.' },
-        { status: 401 }
-      );
-    }
+    recordActivityEvent({
+      type: 'user_login',
+      userId: user.id,
+      locality: user.preferredSchoolLocality,
+    });
 
     const token = createSessionToken(user);
     const response = NextResponse.json({
@@ -101,7 +104,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Error in login API:', error);
     return NextResponse.json(
-      { success: false, message: 'Internal server error while logging in.' },
+      { success: false, message: 'Internal server error during login.' },
       { status: 500 }
     );
   }

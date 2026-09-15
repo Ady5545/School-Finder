@@ -11,6 +11,9 @@ import { AdmissionStatus } from '../../../components/school/AdmissionStatus';
 import { RatingDisplay } from '../../../components/ui/RatingDisplay';
 import { SchoolProfileActions } from '../../../components/school/SchoolProfileActions';
 import { SchoolCard } from '../../../components/school/SchoolCard';
+import { SchoolGallery } from '../../../components/school/SchoolGallery';
+import { CampusInteractiveMap } from '../../../components/school/CampusInteractiveMap';
+import { SchoolRatingsSection } from '../../../components/school/SchoolRatingsSection';
 import { Button } from '../../../components/ui/Button';
 import {
   MapPin,
@@ -115,9 +118,9 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         </div>
 
         {/* Admission Action Card */}
-        <div className="w-full lg:w-80 shrink-0 bg-white p-5 rounded-2xl border border-[var(--color-border)] shadow-xs space-y-4">
+        <div className="w-full lg:w-80 shrink-0 bg-white p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
           <div>
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
+            <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider block mb-2">
               Admission Status
             </span>
             <AdmissionStatus admissions={school.admissions} />
@@ -132,7 +135,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         {/* Left 2 Cols: Imagery, Overview, Facilities */}
         <div className="lg:col-span-2 space-y-8">
           {/* Featured / Hero Visual */}
-          <div className="rounded-2xl overflow-hidden border border-[var(--color-border)] shadow-xs">
+          <div className="rounded-2xl overflow-hidden border border-[var(--color-border)] shadow-warm-sm">
             <SchoolImage
               src={school.assets.hero || school.assets.featured}
               alt={school.name}
@@ -143,47 +146,47 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           </div>
 
           {/* Quick Specifications Matrix */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl bg-white border border-[var(--color-border)] shadow-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs">
             <div className="space-y-1">
-              <span className="text-[11px] font-semibold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1">
-                <GraduationCap className="w-3.5 h-3.5 text-slate-400" /> Grades
+              <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
+                <GraduationCap className="w-3.5 h-3.5 text-[var(--color-primary)]" /> Grades
               </span>
               <p className="text-sm font-bold text-[var(--color-content)]">{school.gradeRange.raw}</p>
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-semibold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1">
-                <Users className="w-3.5 h-3.5 text-slate-400" /> Ratio
+              <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
+                <Users className="w-3.5 h-3.5 text-[var(--color-primary)]" /> Ratio
               </span>
               <p className="text-sm font-bold text-[var(--color-content)]">{school.studentTeacherRatio}</p>
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-semibold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1">
-                <Building className="w-3.5 h-3.5 text-slate-400" /> Type
+              <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
+                <Building className="w-3.5 h-3.5 text-[var(--color-primary)]" /> Type
               </span>
               <p className="text-sm font-bold text-[var(--color-content)]">{school.dayOrBoarding || 'Day School'}</p>
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-semibold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1">
-                <Calendar className="w-3.5 h-3.5 text-slate-400" /> Age Entry
+              <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-[var(--color-primary)]" /> Age Entry
               </span>
               <p className="text-sm font-bold text-[var(--color-content)]">{school.admissionAge || '3+ for Nursery'}</p>
             </div>
           </div>
 
           {/* About Section */}
-          <section className="bg-white p-6 rounded-2xl border border-[var(--color-border)] shadow-xs space-y-3">
-            <h2 className="text-lg font-bold text-[var(--color-content)]">About {school.name}</h2>
+          <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-3.5">
+            <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">About {school.name}</h2>
             <p className="text-sm text-[var(--color-content-muted)] leading-relaxed">{school.summary}</p>
             {school.achievements && school.achievements.length > 0 && (
-              <div className="mt-4 pt-4 border-t border-[var(--color-border-subtle)]">
-                <h3 className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider mb-2">
+              <div className="mt-5 pt-4.5 border-t border-[var(--color-border-subtle)]">
+                <h3 className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider mb-2.5">
                   Recognitions & Highlights
                 </h3>
-                <ul className="space-y-1.5 text-xs text-[var(--color-content-muted)] list-none p-0">
+                <ul className="space-y-2 text-xs text-[var(--color-content-muted)] list-none p-0">
                   {school.achievements.map((ach, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
+                    <li key={idx} className="flex items-start gap-2.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{ach}</span>
+                      <span className="leading-relaxed">{ach}</span>
                     </li>
                   ))}
                 </ul>
@@ -193,16 +196,16 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
           {/* Campus Facilities */}
           {school.facilities && school.facilities.length > 0 && (
-            <section className="bg-white p-6 rounded-2xl border border-[var(--color-border)] shadow-xs space-y-4">
-              <h2 className="text-lg font-bold text-[var(--color-content)]">Campus Infrastructure & Facilities</h2>
+            <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+              <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">Campus Infrastructure & Facilities</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {school.facilities.map((fac, idx) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2.5"
+                    className="p-3.5 rounded-xl bg-[#faf8f5] border border-[var(--color-border)] flex items-center gap-2.5 hover:border-[var(--color-primary)] transition-colors"
                   >
                     <Building className="w-4 h-4 text-[var(--color-primary)] shrink-0" />
-                    <span className="text-xs font-medium text-[var(--color-content)] truncate">
+                    <span className="text-xs font-semibold text-[var(--color-content)] truncate">
                       {fac.name}
                     </span>
                   </div>
@@ -210,54 +213,79 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               </div>
             </section>
           )}
+
+          {/* Real Campus Photo Gallery */}
+          <SchoolGallery school={school} />
         </div>
 
 
         {/* Right Col: Fees & Contact */}
         <div className="space-y-6">
+          {/* Institutional Verification Card */}
+          {school.verification && (
+            <section className="bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-2.5">
+              <div className="flex items-center gap-2 text-emerald-900 font-bold text-xs">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Source-Verified Institutional Profile</span>
+              </div>
+              <p className="text-[11px] text-emerald-800 leading-relaxed">
+                Information, address, and imagery audited from {school.verification.sourceName}.
+              </p>
+              {school.verification.cbseAffiliationNumber && (
+                <div className="pt-2 border-t border-emerald-200/60 flex items-center justify-between text-[11px] font-mono text-emerald-900">
+                  <span>CBSE Affiliation:</span>
+                  <span className="font-bold">{school.verification.cbseAffiliationNumber}</span>
+                </div>
+              )}
+              <div className="text-[10px] text-emerald-700/80">
+                Audited: {school.verification.lastVerified}
+              </div>
+            </section>
+          )}
+
           {/* Detailed Fees Card */}
           <section>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-base font-bold text-[var(--color-content)]">Fee Structure</h2>
-              <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
-                Verified
+              <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
+              <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
+                Audited &amp; Verified
               </span>
             </div>
             <FeeDisplay fees={school.fees} variant="detailed" />
           </section>
 
           {/* Contact Details Card */}
-          <section className="bg-white p-5 rounded-2xl border border-[var(--color-border)] shadow-xs space-y-4">
-            <h2 className="text-base font-bold text-[var(--color-content)]">School Contact & Address</h2>
-            <div className="space-y-3 text-xs">
+          <section className="bg-white p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+            <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">School Contact & Address</h2>
+            <div className="space-y-3.5 text-xs">
               <div className="flex items-start gap-2.5 text-[var(--color-content-muted)]">
-                <MapPin className="w-4 h-4 text-slate-400 shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{school.location.address || `${school.location.area}, Greater Noida West`}</span>
+                <MapPin className="w-4 h-4 text-[var(--color-accent)] shrink-0 mt-0.5" />
+                <span className="leading-relaxed font-medium">{school.location.address || `${school.location.area}, Greater Noida West`}</span>
               </div>
               {school.contact.phone && (
                 <div className="flex items-center gap-2.5 text-[var(--color-content-muted)]">
-                  <Phone className="w-4 h-4 text-slate-400 shrink-0" />
-                  <a href={`tel:${school.contact.phone}`} className="hover:text-[var(--color-primary)]">
+                  <Phone className="w-4 h-4 text-[var(--color-primary)] shrink-0" />
+                  <a href={`tel:${school.contact.phone}`} className="hover:text-[var(--color-primary)] font-semibold">
                     {school.contact.phone}
                   </a>
                 </div>
               )}
               {school.contact.email && (
                 <div className="flex items-center gap-2.5 text-[var(--color-content-muted)]">
-                  <Mail className="w-4 h-4 text-slate-400 shrink-0" />
-                  <a href={`mailto:${school.contact.email}`} className="hover:text-[var(--color-primary)]">
+                  <Mail className="w-4 h-4 text-[var(--color-primary)] shrink-0" />
+                  <a href={`mailto:${school.contact.email}`} className="hover:text-[var(--color-primary)] font-semibold">
                     {school.contact.email}
                   </a>
                 </div>
               )}
               {school.contact.website && (
                 <div className="flex items-center gap-2.5 text-[var(--color-content-muted)]">
-                  <Globe className="w-4 h-4 text-slate-400 shrink-0" />
+                  <Globe className="w-4 h-4 text-[var(--color-primary)] shrink-0" />
                   <a
                     href={school.contact.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-[var(--color-primary)] truncate"
+                    className="hover:text-[var(--color-primary)] font-semibold truncate"
                   >
                     {school.contact.website.replace(/^https?:\/\//, '')}
                   </a>
@@ -267,6 +295,14 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           </section>
         </div>
       </div>
+
+      {/* Campus Location & Interactive Map Visualizer */}
+      <section className="mt-12">
+        <CampusInteractiveMap school={school} nearbySchools={similarSchools} />
+      </section>
+
+      {/* Verified Parent Community Ratings & Reviews */}
+      <SchoolRatingsSection schoolSlug={school.slug} schoolName={school.name} />
 
       {/* Similar Schools in Locality */}
       {similarSchools.length > 0 && (

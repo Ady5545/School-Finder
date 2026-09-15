@@ -1,18 +1,87 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Heart, Scale, Trash2, ArrowRight, Sparkles, Building, IndianRupee } from 'lucide-react';
+import { Heart, Scale, Trash2, Lock, ShieldCheck, ArrowRight } from 'lucide-react';
 import { SchoolCard } from './SchoolCard';
 import { EmptyState } from '../ui/EmptyState';
 import { Button } from '../ui/Button';
 import { useSchoolStore } from '../../lib/schoolStore';
+import { useAuth } from '../../lib/authContext';
 import { getSchoolBySlug } from '../../lib/schools';
 import { formatCurrency } from '../../lib/utils';
 import type { School } from '../../types/school';
 
 export const WishlistContentView: React.FC = () => {
-  const { shortlist, clearShortlist, addCompare, clearCompare } = useSchoolStore();
+  const { shortlist, clearShortlist, addCompare, clearCompare, addToShortlist } = useSchoolStore();
+  const { isAuthenticated, isLoading } = useAuth();
+
+  // Sync with cloud wishlist when authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetch('/api/auth/wishlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'sync', list: shortlist }),
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && Array.isArray(data.wishlist)) {
+            data.wishlist.forEach((s: string) => {
+              addToShortlist(s);
+            });
+          }
+        })
+        .catch(() => {});
+    }
+  }, [isAuthenticated]);
+
+  if (isLoading) {
+    return (
+      <div className="max-w-2xl mx-auto w-full py-12 text-center text-xs text-slate-400">
+        Loading saved shortlist...
+      </div>
+    );
+  }
+
+  // Access Control: Wishlist restricted to authenticated parents
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-2xl mx-auto w-full py-8">
+        <div className="bg-white rounded-2xl border border-[var(--color-border)] p-8 shadow-warm-xs text-center flex flex-col items-center">
+          <div className="w-14 h-14 rounded-2xl bg-sky-50 border border-sky-200 text-sky-700 flex items-center justify-center mb-4 shadow-2xs">
+            <Lock className="w-7 h-7" />
+          </div>
+
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold mb-3">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Private Parent Access Only</span>
+          </div>
+
+          <h2 className="text-xl font-black text-slate-900 tracking-tight mb-2">
+            Parent Account Required for Shortlists
+          </h2>
+
+          <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed mb-6">
+            Your saved institutions, fee comparisons, and admission deadline alerts are securely associated with your Parent Account to synchronize across your phone and desktop.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+            <Link href="/auth/login" className="w-full sm:w-auto">
+              <Button variant="primary" size="md" className="w-full sm:w-auto font-bold shadow-warm-xs">
+                Sign In to View Shortlist
+              </Button>
+            </Link>
+            <Link href="/auth/register" className="w-full sm:w-auto">
+              <Button variant="outline" size="md" className="w-full sm:w-auto font-bold">
+                Create Parent Account
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const savedSchools: School[] = shortlist
     .map(slug => getSchoolBySlug(slug))
@@ -66,21 +135,21 @@ export const WishlistContentView: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-[var(--color-content-muted)] mt-1">
-              Locality: Greater Noida West & Noida Extension • Data preserved across browser sessions
+              Locality: Greater Noida West & Noida Extension • Synchronized with your Parent Account
             </p>
           </div>
         </div>
 
         {/* Budget Snapshot Strip */}
-        <div className="flex flex-wrap items-center gap-4 bg-[var(--color-surface-muted)] px-4 py-2.5 rounded-xl border border-[var(--color-border-subtle)] text-xs">
+        <div className="flex flex-wrap items-center gap-4 bg-[var(--color-surface-muted)] px-4 py-2.5 rounded-xl border border-[var(--color-border)] text-xs">
           <div>
-            <span className="text-[10px] uppercase font-bold text-slate-400 block">Avg Budget</span>
-            <strong className="text-slate-800 font-extrabold">{formatCurrency(avgTuition)}/yr</strong>
+            <span className="text-[10px] uppercase font-bold text-[var(--color-content-muted)] block">Avg Budget</span>
+            <strong className="text-[var(--color-primary)] font-extrabold">{formatCurrency(avgTuition)}/yr</strong>
           </div>
-          <div className="h-6 w-px bg-slate-200" />
+          <div className="h-6 w-px bg-[var(--color-border)]" />
           <div>
-            <span className="text-[10px] uppercase font-bold text-slate-400 block">Budget Span</span>
-            <strong className="text-slate-800 font-bold">{formatCurrency(minTuition)} – {formatCurrency(maxTuition)}</strong>
+            <span className="text-[10px] uppercase font-bold text-[var(--color-content-muted)] block">Budget Span</span>
+            <strong className="text-[var(--color-accent)] font-bold">{formatCurrency(minTuition)} – {formatCurrency(maxTuition)}</strong>
           </div>
         </div>
 
@@ -88,11 +157,11 @@ export const WishlistContentView: React.FC = () => {
           {savedSchools.length >= 2 && (
             <Link href="/compare">
               <Button
-                variant="primary"
+                variant="accent"
                 size="sm"
                 onClick={compareAllSaved}
                 leftIcon={<Scale className="w-3.5 h-3.5" />}
-                className="text-xs font-bold bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)]"
+                className="text-xs font-bold text-white"
               >
                 Compare Shortlist
               </Button>

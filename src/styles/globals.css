@@ -13,24 +13,24 @@
 
   --color-primary: #0f2d4a;
   --color-primary-hover: #0a1f33;
-  --color-primary-light: #eff5fa;
+  --color-primary-light: #edf3f9;
 
-  --color-accent: #c25425;
-  --color-accent-hover: #a34117;
-  --color-accent-light: #fef5f0;
+  --color-accent: #0f2d4a;
+  --color-accent-hover: #153f65;
+  --color-accent-light: #edf3f9;
 
   --color-surface: #ffffff;
   --color-surface-elevated: #ffffff;
-  --color-surface-muted: #faf8f5;
-  --color-surface-subtle: #f3efe6;
+  --color-surface-muted: #faf7f2;
+  --color-surface-subtle: #f3ede2;
 
   --color-content: #111c2a;
   --color-content-muted: #4e5d71;
   --color-content-subtle: #8493a6;
 
-  --color-border: #e6e1d7;
-  --color-border-subtle: #f0ece3;
-  --color-border-strong: #cac1b2;
+  --color-border: #e5dfd3;
+  --color-border-subtle: #eee9df;
+  --color-border-strong: #c9bead;
 
   --color-success: #047857;
   --color-success-bg: #ecfdf5;
@@ -54,24 +54,24 @@
 :root {
   --color-primary: #0f2d4a;
   --color-primary-hover: #0a1f33;
-  --color-primary-light: #eff5fa;
+  --color-primary-light: #edf3f9;
 
-  --color-accent: #c25425;
-  --color-accent-hover: #a34117;
-  --color-accent-light: #fef5f0;
+  --color-accent: #0f2d4a;
+  --color-accent-hover: #153f65;
+  --color-accent-light: #edf3f9;
 
   --color-surface: #ffffff;
   --color-surface-elevated: #ffffff;
-  --color-surface-muted: #faf8f5;
-  --color-surface-subtle: #f3efe6;
+  --color-surface-muted: #faf7f2;
+  --color-surface-subtle: #f3ede2;
 
   --color-content: #111c2a;
   --color-content-muted: #4e5d71;
   --color-content-subtle: #8493a6;
 
-  --color-border: #e6e1d7;
-  --color-border-subtle: #f0ece3;
-  --color-border-strong: #cac1b2;
+  --color-border: #e5dfd3;
+  --color-border-subtle: #eee9df;
+  --color-border-strong: #c9bead;
 
   --color-success: #047857;
   --color-success-bg: #ecfdf5;
@@ -94,6 +94,7 @@
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
 }
 
 html {
@@ -123,6 +124,42 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* Editorial typography and subtle tracking */
+.font-editorial {
+  font-family: var(--font-serif);
+  letter-spacing: -0.015em;
+}
+
+.heading-tight {
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* Layered warm shadows tailored for academic navy & terracotta palette */
+.shadow-warm-2xs {
+  box-shadow: 0 1px 2px rgba(15, 45, 74, 0.04);
+}
+
+.shadow-warm-xs {
+  box-shadow: 0 1px 3px rgba(15, 45, 74, 0.05), 0 1px 2px rgba(15, 45, 74, 0.03);
+}
+
+.shadow-warm-sm {
+  box-shadow: 0 2px 6px -1px rgba(15, 45, 74, 0.06), 0 1px 3px -1px rgba(15, 45, 74, 0.04);
+}
+
+.shadow-warm-md {
+  box-shadow: 0 8px 20px -3px rgba(15, 45, 74, 0.08), 0 3px 8px -2px rgba(15, 45, 74, 0.04);
+}
+
+.shadow-warm-lg {
+  box-shadow: 0 16px 36px -6px rgba(15, 45, 74, 0.1), 0 6px 14px -3px rgba(15, 45, 74, 0.05);
+}
+
+.shadow-warm-xl {
+  box-shadow: 0 24px 48px -8px rgba(15, 45, 74, 0.14), 0 8px 20px -4px rgba(15, 45, 74, 0.06);
+}
+
 /* Smooth microinteractions & Vibe-Coded Keyframe Choreography */
 @keyframes subtle-float {
   0%, 100% { transform: translateY(0px); }
@@ -140,8 +177,8 @@ html {
 }
 
 @keyframes badge-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(15, 50, 86, 0.2); }
-  50% { box-shadow: 0 0 12px 2px rgba(200, 90, 40, 0.3); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(15, 45, 74, 0.2); }
+  50% { box-shadow: 0 0 12px 2px rgba(15, 45, 74, 0.25); }
 }
 
 .animate-subtle-float {
@@ -177,21 +214,21 @@ html {
 }
 
 .bg-radial-hero {
-  background: radial-gradient(circle at 50% 0%, rgba(15, 50, 86, 0.06) 0%, rgba(200, 90, 40, 0.03) 45%, transparent 75%);
+  background: radial-gradient(circle at 50% 0%, rgba(15, 45, 74, 0.06) 0%, rgba(15, 45, 74, 0.02) 45%, transparent 75%);
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(230, 227, 220, 0.8);
+  border: 1px solid rgba(229, 223, 211, 0.85);
 }
 
 .glass-panel-dark {
-  background: rgba(15, 28, 46, 0.92);
+  background: rgba(10, 30, 51, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* Card tactile feel */
@@ -201,7 +238,7 @@ html {
 
 .tactile-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px -6px rgba(15, 50, 86, 0.12), 0 4px 8px -2px rgba(15, 50, 86, 0.04);
+  box-shadow: 0 14px 30px -6px rgba(15, 45, 74, 0.12), 0 4px 10px -2px rgba(15, 45, 74, 0.05);
 }
 
 /* Lenis smooth momentum scrolling architecture */

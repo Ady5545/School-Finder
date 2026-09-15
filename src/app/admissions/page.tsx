@@ -42,7 +42,7 @@ export default function AdmissionsPage() {
                 <th scope="col" className="p-4">Location</th>
                 <th scope="col" className="p-4">Board</th>
                 <th scope="col" className="p-4">Status</th>
-                <th scope="col" className="p-4">Admission Date</th>
+                <th scope="col" className="p-4">Academic Session &amp; Schedule</th>
                 <th scope="col" className="p-4 text-right">Details</th>
               </tr>
             </thead>
@@ -61,7 +61,14 @@ export default function AdmissionsPage() {
                   <td className="p-4">
                     <AdmissionStatus admissions={school.admissions} showDate={false} />
                   </td>
-                  <td className="p-4">{school.admissions.date || 'Contact School'}</td>
+                  <td className="p-4 max-w-xs">
+                    <div className="font-semibold text-slate-800">
+                      {school.admissions.session || '2026–2027 (Ongoing)'}
+                    </div>
+                    <div className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                      {school.admissions.timelineDescription || 'Check official school admissions page'}
+                    </div>
+                  </td>
                   <td className="p-4 text-right">
                     <Link
                       href={`/schools/${school.slug}`}

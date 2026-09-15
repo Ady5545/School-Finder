@@ -13,58 +13,86 @@ import {
   ShieldCheck,
   Mail,
   User,
-  Phone,
   Lock,
+  Eye,
+  EyeOff,
+  Check,
   ArrowRight,
   CheckCircle2,
   RefreshCw,
   Info,
   Edit3,
+  MapPin,
+  Sparkles,
 } from 'lucide-react';
 
-const GREATER_NOIDA_LOCALITIES = [
-  { value: 'Techzone 4, Greater Noida West', label: 'Techzone 4 (Near Gaur City)' },
-  { value: 'Sector 1, Greater Noida West', label: 'Sector 1' },
-  { value: 'Sector 2, Greater Noida West', label: 'Sector 2' },
-  { value: 'Sector 3, Greater Noida West', label: 'Sector 3' },
-  { value: 'Sector 4, Greater Noida West', label: 'Sector 4 / Gaur City 1' },
-  { value: 'Sector 10, Greater Noida West', label: 'Sector 10' },
-  { value: 'Sector 12, Greater Noida West', label: 'Sector 12' },
-  { value: 'Sector 16B, Greater Noida West', label: 'Sector 16B / Gaur City 2' },
-  { value: 'Sector 16C, Greater Noida West', label: 'Sector 16C' },
-  { value: 'Knowledge Park 5, Greater Noida West', label: 'Knowledge Park 5' },
-  { value: 'Zeta 1, Greater Noida', label: 'Zeta 1' },
-  { value: 'Chi 4, Greater Noida', label: 'Chi 4' },
-  { value: 'Beta 1 & 2, Greater Noida', label: 'Beta 1 & 2' },
-  { value: 'Gamma 1 & 2, Greater Noida', label: 'Gamma 1 & 2' },
-  { value: 'Delta 1 & 2, Greater Noida', label: 'Delta 1 & 2' },
-  { value: 'Other Locality in Greater Noida', label: 'Other Locality / Sector' },
+const SCHOOL_SEARCH_LOCALITIES = [
+  { value: 'Greater Noida West', label: 'Greater Noida West (Entire Area)' },
+  { value: 'Sector 16B', label: 'Sector 16B / Gaur City 2' },
+  { value: 'Sector 4', label: 'Sector 4 / Gaur City 1' },
+  { value: 'Techzone 4', label: 'Techzone 4' },
+  { value: 'Knowledge Park 5', label: 'Knowledge Park 5' },
+  { value: 'Sector 1', label: 'Sector 1' },
+  { value: 'Sector 2', label: 'Sector 2' },
+  { value: 'Sector 3', label: 'Sector 3' },
+  { value: 'Sector 10', label: 'Sector 10' },
+  { value: 'Sector 12', label: 'Sector 12' },
+  { value: 'Sector 16C', label: 'Sector 16C' },
+  { value: 'Zeta 1', label: 'Zeta 1' },
+  { value: 'Delta & Gamma Sectors', label: 'Delta / Gamma Sectors' },
+  { value: 'Other Locality', label: 'Other Sector / Locality' },
 ];
 
 export const RegisterForm: React.FC = () => {
   const router = useRouter();
   const { sendOtp, verifyOtp, register, isAuthenticated } = useAuth();
 
-  // Step 1: Parent Details, Step 2: Email OTP Verification
+  // Step 1: Parent Details & Location Preference, Step 2: Email OTP Verification
   const [step, setStep] = useState<1 | 2>(1);
 
   // Form Fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [locality, setLocality] = useState('Techzone 4, Greater Noida West');
+  const [preferredSchoolLocality, setPreferredSchoolLocality] = useState('Greater Noida West');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [childGrade, setChildGrade] = useState('Nursery / Pre-K');
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [marketingConsent, setMarketingConsent] = useState(false);
+  const [analyticsConsent, setAnalyticsConsent] = useState(true);
 
-  // OTP Verification States
-  const [otp, setOtp] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  // Password Complexity
+  const passwordCriteria = [
+    { id: 'length', label: 'Minimum 8 characters', met: password.length >= 8 },
+    { id: 'uppercase', label: 'At least one uppercase letter (A-Z)', met: /[A-Z]/.test(password) },
+    { id: 'lowercase', label: 'At least one lowercase letter (a-z)', met: /[a-z]/.test(password) },
+    { id: 'number', label: 'At least one number (0-9)', met: /[0-9]/.test(password) },
+    { id: 'special', label: 'At least one special character (!@#$%^&*)', met: /[^A-Za-z0-9]/.test(password) },
+  ];
+  const metCriteriaCount = passwordCriteria.filter(c => c.met).length;
+  const isPasswordComplex = metCriteriaCount === passwordCriteria.length;
+  const passwordsMatch = Boolean(confirmPassword) && password === confirmPassword;
+
+  // Email OTP Verification States
+  const [emailOtp, setEmailOtp] = useState('');
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [verificationToken, setVerificationToken] = useState<string | null>(null);
   const [resendCooldown, setResendCooldown] = useState(0);
   const [devOtpHint, setDevOtpHint] = useState<string | null>(null);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const emailParam = params.get('email');
+      if (emailParam) {
+        setEmail(emailParam);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -85,402 +113,491 @@ export const RegisterForm: React.FC = () => {
     setErrorMessage(null);
 
     if (!name.trim() || name.trim().length < 2) {
-      setErrorMessage('Please enter your full parent / guardian name (minimum 2 characters).');
+      setErrorMessage('Please enter your full Parent / Guardian name.');
       return;
     }
 
-    const emailClean = email.trim().toLowerCase();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailClean)) {
-      setErrorMessage('Please provide a valid email address (e.g. parent@example.com).');
+    if (!email.trim() || !emailRegex.test(email.trim())) {
+      setErrorMessage('Please enter a valid email address.');
       return;
     }
 
-    const cleanMobile = mobile.replace(/\D/g, '').slice(-10);
-    if (cleanMobile.length !== 10 || !/^[6-9]\d{9}$/.test(cleanMobile)) {
-      setErrorMessage('Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.');
+    if (!isPasswordComplex) {
+      setErrorMessage('Please ensure your password meets all security criteria.');
       return;
     }
 
-    if (!locality) {
-      setErrorMessage('Please select your sector / locality in Greater Noida.');
-      return;
-    }
-
-    if (password.length < 6) {
-      setErrorMessage('Password must be at least 6 characters long.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
+    if (!passwordsMatch) {
       setErrorMessage('Passwords do not match. Please re-enter.');
       return;
     }
 
     if (!termsAccepted) {
-      setErrorMessage('Please accept the Terms of Service and Privacy Policy to continue.');
+      setErrorMessage('You must accept the Terms of Service & Privacy Policy.');
       return;
     }
 
     setIsSubmitting(true);
-    const res = await sendOtp(emailClean, { purpose: 'register', name: name.trim() });
-    setIsSubmitting(false);
 
-    if (res.success) {
-      setStep(2);
-      setResendCooldown(45);
-      if (res.devOtp) {
-        setDevOtpHint(res.devOtp);
+    try {
+      const result = await sendOtp(email.trim(), { purpose: 'register', name: name.trim() });
+      if (result.success) {
+        setStep(2);
+        setResendCooldown(60);
+        if (result.devOtp) {
+          setDevOtpHint(result.devOtp);
+        }
+      } else {
+        setErrorMessage(result.message || 'Failed to dispatch verification code. Please try again.');
       }
-    } else {
-      setErrorMessage(res.message || 'Failed to dispatch verification email. Please check the email entered.');
+    } catch {
+      setErrorMessage('Network error occurred while sending verification code.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleVerifyEmail = async () => {
+    const cleanOtp = emailOtp.trim();
+    if (!cleanOtp || cleanOtp.length !== 6) {
+      setErrorMessage('Please enter the 6-digit verification code sent to your email.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const res = await verifyOtp(email.trim(), cleanOtp);
+      if (res.success && res.verificationToken) {
+        setEmailVerified(true);
+        setVerificationToken(res.verificationToken);
+        setDevOtpHint(null);
+
+        // Auto complete registration
+        const regRes = await register({
+          name: name.trim(),
+          email: email.trim().toLowerCase(),
+          preferredSchoolLocality,
+          password,
+          verificationToken: res.verificationToken,
+          childGrade,
+          termsAccepted: true,
+          analyticsConsent,
+        });
+
+        if (regRes.success) {
+          router.push('/dashboard');
+        } else {
+          setErrorMessage(regRes.message || 'Account registration failed.');
+        }
+      } else {
+        setErrorMessage(res.message || 'Invalid verification code. Please check and retry.');
+      }
+    } catch {
+      setErrorMessage('An error occurred during verification.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleResendOtp = async () => {
     if (resendCooldown > 0 || isSubmitting) return;
-    setErrorMessage(null);
     setIsSubmitting(true);
+    setErrorMessage(null);
 
-    const emailClean = email.trim().toLowerCase();
-    const res = await sendOtp(emailClean, { purpose: 'register', name: name.trim() });
-    setIsSubmitting(false);
-
-    if (res.success) {
-      setResendCooldown(60);
-      if (res.devOtp) {
-        setDevOtpHint(res.devOtp);
+    try {
+      const res = await sendOtp(email.trim(), { purpose: 'register', name: name.trim() });
+      if (res.success) {
+        setResendCooldown(60);
+        if (res.devOtp) {
+          setDevOtpHint(res.devOtp);
+        }
+      } else {
+        setErrorMessage(res.message || 'Failed to resend code.');
       }
-    } else {
-      setErrorMessage(res.message || 'Failed to resend verification email.');
-    }
-  };
-
-  const handleVerifyAndRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage(null);
-
-    const cleanOtp = otp.trim();
-    if (!cleanOtp || cleanOtp.length !== 6) {
-      setErrorMessage('Please enter the complete 6-digit verification code sent to your email.');
-      return;
-    }
-
-    setIsSubmitting(true);
-    const emailClean = email.trim().toLowerCase();
-    const cleanMobile = mobile.replace(/\D/g, '').slice(-10);
-
-    // 1. Verify OTP with backend
-    const verifyRes = await verifyOtp(emailClean, cleanOtp);
-
-    if (!verifyRes.success || !verifyRes.verificationToken) {
+    } catch {
+      setErrorMessage('Network error while resending code.');
+    } finally {
       setIsSubmitting(false);
-      setErrorMessage(verifyRes.message || 'Invalid or expired verification code. Please try again.');
-      return;
-    }
-
-    // 2. Complete Account Registration
-    const regRes = await register({
-      name: name.trim(),
-      email: emailClean,
-      mobile: cleanMobile,
-      locality,
-      password,
-      verificationToken: verifyRes.verificationToken,
-      childGrade,
-      termsAccepted,
-      marketingConsent,
-    });
-
-    setIsSubmitting(false);
-
-    if (regRes.success) {
-      router.push('/dashboard');
-    } else {
-      setErrorMessage(regRes.message || 'Failed to finalize parent account registration.');
     }
   };
 
   return (
-    <Card className="w-full max-w-lg shadow-sm border border-[var(--color-border)] bg-white">
-      <CardHeader className="space-y-1.5 pb-4 border-b border-[var(--color-border-subtle)]">
-        <div className="flex items-center justify-between">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-800 text-[11px] font-bold">
-            <ShieldCheck className="w-3.5 h-3.5 text-sky-600" />
-            <span>Parent Verification</span>
-          </div>
-          <span className="text-xs font-semibold text-[var(--color-content-subtle)]">
-            {step === 1 ? 'Step 1 of 2: Details' : 'Step 2 of 2: Email Verification'}
-          </span>
+    <Card id="parent-registration-card" className="w-full max-w-xl mx-auto shadow-xl border-stone-200 bg-white">
+      <CardHeader className="text-center pb-4 pt-6 px-6 sm:px-8 border-b border-stone-100">
+        <div className="mx-auto w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center mb-3 text-amber-700">
+          <ShieldCheck className="w-6 h-6 stroke-[2.2]" />
         </div>
-
-        <CardTitle className="text-xl sm:text-2xl font-black text-[var(--color-content)] tracking-tight">
-          {step === 1 ? 'Create Parent Account' : 'Verify your email'}
+        <CardTitle className="text-2xl font-serif text-stone-900 tracking-tight">
+          Create Verified Parent Account
         </CardTitle>
-
-        <CardDescription className="text-xs text-[var(--color-content-muted)]">
-          {step === 1
-            ? 'Join Greater Noida parents to compare verified school fees and track admission updates.'
-            : `We've sent a 6-digit verification code to ${email.trim().toLowerCase()}.`}
+        <CardDescription className="text-stone-600 text-sm mt-1 max-w-md mx-auto">
+          Access verified fee tables, save your shortlist, submit genuine school reviews, and track admissions.
         </CardDescription>
 
-        {/* Progress bar */}
-        <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mt-3">
+        {/* Step Indicator */}
+        <div className="flex items-center justify-center gap-3 mt-4">
           <div
-            className="bg-[var(--color-primary)] h-full transition-all duration-300"
-            style={{ width: `${(step / 2) * 100}%` }}
-          />
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full ${
+              step === 1 ? 'bg-amber-100 text-amber-900' : 'bg-emerald-50 text-emerald-800'
+            }`}
+          >
+            {step === 2 ? <Check className="w-3.5 h-3.5" /> : <span>1</span>}
+            <span>Parent Profile & Location</span>
+          </div>
+          <div className="w-6 h-px bg-stone-300" />
+          <div
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full ${
+              step === 2 ? 'bg-amber-100 text-amber-900' : 'bg-stone-100 text-stone-500'
+            }`}
+          >
+            <span>2</span>
+            <span>Email Verification</span>
+          </div>
         </div>
       </CardHeader>
 
-      <CardContent className="pt-6">
+      <CardContent className="p-6 sm:p-8 space-y-6">
         {errorMessage && (
-          <div className="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium flex items-start gap-2.5 animate-fadeIn">
-            <Info className="w-4 h-4 shrink-0 text-rose-500 mt-0.5" />
-            <span className="leading-relaxed">{errorMessage}</span>
+          <div
+            id="register-error-banner"
+            className="p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg text-sm flex items-start gap-3 animate-shake"
+          >
+            <Info className="w-5 h-5 shrink-0 text-red-600 mt-0.5" />
+            <div className="flex-1">
+              <p className="font-semibold text-red-900">Registration Note</p>
+              <p className="mt-0.5 text-xs text-red-800 leading-relaxed">{errorMessage}</p>
+            </div>
           </div>
         )}
 
-        {/* STEP 1: Registration Form */}
+        {/* STEP 1: Parent Details & Location */}
         {step === 1 && (
-          <form onSubmit={handleInitiateSignup} className="space-y-4">
-            <Input
-              label="Parent / Guardian Full Name"
-              placeholder="e.g. Priya Sharma / Amit Verma"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              leftIcon={<User className="w-4 h-4 text-slate-400" />}
-              required
-            />
+          <form id="step-1-parent-details" onSubmit={handleInitiateSignup} className="space-y-4">
+            <div>
+              <label htmlFor="reg-name" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Parent / Guardian Full Name <span className="text-amber-700">*</span>
+              </label>
+              <div className="relative">
+                <Input
+                  id="reg-name"
+                  type="text"
+                  placeholder="e.g. Priya Sharma"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  className="pl-10"
+                />
+                <User className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
+            </div>
 
-            <Input
-              label="Email Address (Verification OTP will be sent here)"
-              placeholder="parent@example.com"
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              leftIcon={<Mail className="w-4 h-4 text-slate-400" />}
-              helperText="We will send a 6-digit single-use OTP to this email."
-              required
-            />
+            <div>
+              <label htmlFor="reg-email" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Email Address <span className="text-amber-700">*</span>
+              </label>
+              <div className="relative">
+                <Input
+                  id="reg-email"
+                  type="email"
+                  placeholder="e.g. parent@example.com"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  className="pl-10"
+                />
+                <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
+              <p className="text-[11px] text-stone-500 mt-1">
+                A 6-digit verification code will be sent to this email address.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Input
-                label="Mobile Number (10 Digits)"
-                placeholder="e.g. 9876543210"
-                type="tel"
-                maxLength={10}
-                value={mobile}
-                onChange={e => setMobile(e.target.value.replace(/\D/g, ''))}
-                leftIcon={<Phone className="w-4 h-4 text-slate-400" />}
-                required
-              />
+            {/* School Search Locality */}
+            <div>
+              <label htmlFor="reg-locality" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Which area are you looking for a school in?
+              </label>
+              <div className="relative">
+                <Select
+                  id="reg-locality"
+                  options={SCHOOL_SEARCH_LOCALITIES}
+                  value={preferredSchoolLocality}
+                  onChange={e => setPreferredSchoolLocality(e.target.value)}
+                  disabled={isSubmitting}
+                  className="pl-10"
+                />
+                <MapPin className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
+              <p className="text-[11px] text-stone-500 mt-1">
+                Helps prioritize schools near your preferred search sectors. We never ask for or store your home address.
+              </p>
+            </div>
 
+            <div>
+              <label htmlFor="reg-child-grade" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Target Admission Class
+              </label>
               <Select
-                label="Locality in Greater Noida"
-                value={locality}
-                onChange={e => setLocality(e.target.value)}
-                options={GREATER_NOIDA_LOCALITIES}
+                id="reg-child-grade"
+                options={[
+                  { value: 'Nursery / Pre-K', label: 'Nursery / Pre-School (Ages 3-4)' },
+                  { value: 'KG / Kindergarten', label: 'Kindergarten / KG' },
+                  { value: 'Primary (Grades 1-5)', label: 'Primary School (Grades 1-5)' },
+                  { value: 'Middle School (Grades 6-8)', label: 'Middle School (Grades 6-8)' },
+                  { value: 'Secondary (Grades 9-10)', label: 'Secondary (Grades 9-10)' },
+                  { value: 'Senior Secondary (Grades 11-12)', label: 'Senior Secondary (Grades 11-12)' },
+                ]}
+                value={childGrade}
+                onChange={e => setChildGrade(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
 
-            <Select
-              label="Child's Target Grade"
-              value={childGrade}
-              onChange={e => setChildGrade(e.target.value)}
-              options={[
-                { value: 'Playgroup / Daycare', label: 'Playgroup / Daycare' },
-                { value: 'Nursery / Pre-K', label: 'Nursery / Pre-K' },
-                { value: 'KG / Kindergarten', label: 'KG / Kindergarten' },
-                { value: 'Grade 1 - 5 (Primary)', label: 'Grade 1 – 5 (Primary)' },
-                { value: 'Grade 6 - 8 (Middle)', label: 'Grade 6 – 8 (Middle)' },
-                { value: 'Grade 9 - 10 (Secondary)', label: 'Grade 9 – 10 (Secondary)' },
-                { value: 'Grade 11 - 12 (Senior Secondary)', label: 'Grade 11 – 12 (Senior Secondary)' },
-              ]}
-            />
+            {/* Password */}
+            <div>
+              <label htmlFor="reg-password" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Create Account Password <span className="text-amber-700">*</span>
+              </label>
+              <div className="relative">
+                <Input
+                  id="reg-password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="At least 8 characters..."
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  className="pl-10 pr-10"
+                />
+                <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Input
-                label="Create Password"
-                type="password"
-                placeholder="Min 6 characters"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                leftIcon={<Lock className="w-4 h-4 text-slate-400" />}
-                required
-              />
-              <Input
-                label="Confirm Password"
-                type="password"
-                placeholder="Repeat password"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-                leftIcon={<Lock className="w-4 h-4 text-slate-400" />}
-                required
-              />
+              {/* Password criteria checklist */}
+              {password.length > 0 && (
+                <div className="mt-2.5 p-2.5 bg-stone-50 border border-stone-200 rounded-md text-[11px] space-y-1">
+                  <div className="font-semibold text-stone-700 flex justify-between">
+                    <span>Password Strength:</span>
+                    <span className={metCriteriaCount === 5 ? 'text-emerald-700' : 'text-amber-700'}>
+                      {metCriteriaCount} of 5 rules met
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 pt-1">
+                    {passwordCriteria.map(crit => (
+                      <div
+                        key={crit.id}
+                        className={`flex items-center gap-1.5 ${crit.met ? 'text-emerald-700 font-medium' : 'text-stone-400'}`}
+                      >
+                        {crit.met ? <Check className="w-3 h-3 stroke-[3]" /> : <span className="w-3 text-center">•</span>}
+                        <span>{crit.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Consent Safeguards */}
-            <div className="pt-2 space-y-3 border-t border-[var(--color-border-subtle)]">
-              <Checkbox
-                checked={termsAccepted}
-                onChange={e => setTermsAccepted(e.target.checked)}
-                label={
-                  <span className="text-xs text-[var(--color-content)] leading-tight">
-                    I agree to the{' '}
-                    <Link href="/terms" target="_blank" className="font-semibold text-sky-700 underline">
-                      Terms of Service
-                    </Link>{' '}
-                    and{' '}
-                    <Link href="/privacy" target="_blank" className="font-semibold text-sky-700 underline">
-                      Privacy Policy
-                    </Link>
-                    . (Mandatory)
-                  </span>
-                }
-              />
-
-              <Checkbox
-                checked={marketingConsent}
-                onChange={e => setMarketingConsent(e.target.checked)}
-                label={
-                  <span className="text-xs text-[var(--color-content-muted)] leading-tight">
-                    Send me admission deadline alerts and verified fee update digests for Greater Noida schools. (Optional)
-                  </span>
-                }
-              />
+            {/* Confirm Password */}
+            <div>
+              <label htmlFor="reg-confirm-password" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                Confirm Password <span className="text-amber-700">*</span>
+              </label>
+              <div className="relative">
+                <Input
+                  id="reg-confirm-password"
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder="Repeat your password..."
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  required
+                  disabled={isSubmitting}
+                  className="pl-10 pr-10"
+                />
+                <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+              {confirmPassword.length > 0 && !passwordsMatch && (
+                <p className="text-red-600 text-xs mt-1">Passwords do not match.</p>
+              )}
             </div>
 
-            <div className="pt-3">
-              <Button
-                type="submit"
-                variant="primary"
-                size="md"
-                isLoading={isSubmitting}
-                className="w-full font-bold"
-                rightIcon={<ArrowRight className="w-4 h-4" />}
-              >
-                Send Verification Code
-              </Button>
+            {/* Terms and Privacy Consent */}
+            <div className="pt-2 space-y-2 border-t border-stone-100">
+              <div className="flex items-start gap-2.5">
+                <Checkbox
+                  id="reg-terms"
+                  checked={termsAccepted}
+                  onChange={e => setTermsAccepted(e.target.checked)}
+                  required
+                  className="mt-0.5"
+                />
+                <label htmlFor="reg-terms" className="text-xs text-stone-600 leading-relaxed cursor-pointer">
+                  I agree to the{' '}
+                  <Link href="/terms" className="text-amber-800 underline font-medium hover:text-amber-900">
+                    Terms of Service
+                  </Link>{' '}
+                  and{' '}
+                  <Link href="/privacy" className="text-amber-800 underline font-medium hover:text-amber-900">
+                    Privacy Policy
+                  </Link>
+                  .
+                </label>
+              </div>
+
+              <div className="flex items-start gap-2.5">
+                <Checkbox
+                  id="reg-analytics"
+                  checked={analyticsConsent}
+                  onChange={e => setAnalyticsConsent(e.target.checked)}
+                  className="mt-0.5"
+                />
+                <label htmlFor="reg-analytics" className="text-xs text-stone-500 leading-relaxed cursor-pointer">
+                  Allow privacy-conscious anonymous school view metrics to help improve editorial directory data.
+                </label>
+              </div>
             </div>
+
+            <Button
+              id="continue-to-email-verification-btn"
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full justify-center mt-4 bg-amber-800 hover:bg-amber-900 text-white font-medium"
+              disabled={isSubmitting || !isPasswordComplex || !passwordsMatch || !termsAccepted}
+            >
+              {isSubmitting ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                  Generating Verification Code...
+                </>
+              ) : (
+                <>
+                  <span>Continue to Email Verification</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </>
+              )}
+            </Button>
           </form>
         )}
 
-        {/* STEP 2: Email OTP Verification Screen */}
+        {/* STEP 2: Email OTP Verification */}
         {step === 2 && (
-          <form onSubmit={handleVerifyAndRegister} className="space-y-5">
-            {/* Email verification recipient banner */}
-            <div className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-sky-100 flex items-center justify-center text-sky-700">
-                  <Mail className="w-4 h-4" />
+          <div id="step-2-email-verification" className="space-y-6">
+            <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-800">
+                  <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px] font-medium">Verification Code sent to:</span>
-                  <strong className="text-slate-900 font-bold text-xs">{email.trim().toLowerCase()}</strong>
+                  <p className="text-xs font-semibold text-amber-950">Verification Code Sent To</p>
+                  <p className="text-sm font-medium text-stone-800">{email}</p>
                 </div>
               </div>
               <button
                 type="button"
-                onClick={() => {
-                  setStep(1);
-                  setOtp('');
-                  setErrorMessage(null);
-                  setDevOtpHint(null);
-                }}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-sky-700 hover:text-sky-800 hover:underline cursor-pointer"
+                onClick={() => setStep(1)}
+                className="text-xs text-amber-800 hover:text-amber-950 font-semibold flex items-center gap-1 underline"
               >
-                <Edit3 className="w-3 h-3" />
-                <span>Change Email</span>
+                <Edit3 className="w-3.5 h-3.5" />
+                <span>Edit</span>
               </button>
             </div>
 
-            {/* Development helper banner when email config is in test mode */}
             {devOtpHint && (
-              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center justify-between animate-fadeIn">
-                <div>
-                  <span className="font-semibold block">[Sandbox Preview] Verification Code:</span>
-                  <strong className="font-mono text-sm tracking-widest text-emerald-950 font-black">
-                    {devOtpHint}
-                  </strong>
-                </div>
+              <div className="p-3 bg-stone-100 border border-stone-300 rounded-lg text-xs text-stone-700 flex items-center justify-between">
+                <span>
+                  <strong>Development Mode OTP:</strong> {devOtpHint}
+                </span>
                 <button
                   type="button"
-                  onClick={() => setOtp(devOtpHint)}
-                  className="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[11px] hover:bg-emerald-700 cursor-pointer"
+                  onClick={() => setEmailOtp(devOtpHint)}
+                  className="px-2 py-1 bg-white border border-stone-300 rounded text-stone-800 hover:bg-stone-50 font-medium"
                 >
-                  Auto Fill Code
+                  Auto Fill
                 </button>
               </div>
             )}
 
-            {/* OTP Input Box */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-[var(--color-content)] block">
-                Enter 6-Digit Email Verification Code
+            <div className="space-y-3">
+              <label htmlFor="email-otp-input" className="block text-xs font-bold uppercase tracking-wider text-stone-700">
+                Enter 6-Digit Email Code
               </label>
-              <input
-                type="text"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                maxLength={6}
-                autoFocus
-                placeholder="••••••"
-                value={otp}
-                onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
-                className="w-full text-center tracking-[0.4em] text-2xl font-mono py-3 px-4 rounded-xl border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary)]/10 focus:outline-none font-black text-slate-900 bg-white"
-              />
-              <p className="text-[11px] text-slate-500 text-center">
-                Valid for 10 minutes. Please check your spam or junk folder if not in inbox.
-              </p>
+              <div className="relative">
+                <Input
+                  id="email-otp-input"
+                  type="text"
+                  maxLength={6}
+                  placeholder="• • • • • •"
+                  value={emailOtp}
+                  onChange={e => setEmailOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  disabled={isSubmitting || emailVerified}
+                  className="text-center font-mono text-xl tracking-widest pl-4"
+                  autoFocus
+                />
+              </div>
+              <div className="flex items-center justify-between text-xs text-stone-500 pt-1">
+                <span>Didn&apos;t receive the code?</span>
+                <button
+                  type="button"
+                  onClick={handleResendOtp}
+                  disabled={resendCooldown > 0 || isSubmitting}
+                  className="text-amber-800 font-semibold hover:underline disabled:text-stone-400 disabled:no-underline"
+                >
+                  {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend Code'}
+                </button>
+              </div>
             </div>
 
-            {/* Resend Cooldown */}
-            <div className="flex items-center justify-between text-xs text-slate-600 pt-1">
-              <span>Didn&apos;t receive the email?</span>
-              <button
-                type="button"
-                disabled={resendCooldown > 0 || isSubmitting}
-                onClick={handleResendOtp}
-                className="font-bold text-sky-700 disabled:text-slate-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
-              >
-                <RefreshCw className={`w-3 h-3 ${resendCooldown > 0 ? 'animate-spin' : ''}`} />
-                <span>{resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend Code'}</span>
-              </button>
-            </div>
-
-            {/* Buttons */}
-            <div className="flex items-center gap-3 pt-3">
-              <Button
-                type="button"
-                variant="outline"
-                size="md"
-                onClick={() => {
-                  setStep(1);
-                  setErrorMessage(null);
-                }}
-                className="w-1/3"
-              >
-                Back
-              </Button>
-              <Button
-                type="submit"
-                variant="primary"
-                size="md"
-                isLoading={isSubmitting}
-                className="w-2/3 font-bold"
-              >
-                Verify & Create Account
-              </Button>
-            </div>
-          </form>
+            <Button
+              id="verify-and-register-btn"
+              type="button"
+              variant="primary"
+              size="lg"
+              onClick={handleVerifyEmail}
+              className="w-full justify-center bg-amber-800 hover:bg-amber-900 text-white font-medium"
+              disabled={isSubmitting || emailOtp.length !== 6}
+            >
+              {isSubmitting ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin mr-2" />
+                  Verifying & Registering...
+                </>
+              ) : (
+                <>
+                  <CheckCircle2 className="w-4 h-4 mr-2" />
+                  <span>Verify Email & Complete Registration</span>
+                </>
+              )}
+            </Button>
+          </div>
         )}
       </CardContent>
 
-      <CardFooter className="justify-center border-t border-[var(--color-border-subtle)] py-4 text-xs text-[var(--color-content-muted)]">
-        Already have a parent account?{' '}
-        <Link href="/auth/login" className="font-bold text-[var(--color-primary)] ml-1 hover:underline">
-          Sign in here
+      <CardFooter className="bg-stone-50/80 px-6 sm:px-8 py-4 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-600">
+        <span>Already have a parent account?</span>
+        <Link
+          id="login-link-from-register"
+          href="/login"
+          className="font-semibold text-amber-800 hover:text-amber-950 transition-colors"
+        >
+          Sign In to Pitara &rarr;
         </Link>
       </CardFooter>
     </Card>

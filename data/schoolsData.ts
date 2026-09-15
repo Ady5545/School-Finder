@@ -31,6 +31,11 @@ export interface SchoolFees {
   transportMonthly: string | null;
   transportAnnual: string | null;
   verificationStatus: 'verified_from_source' | 'unverified_copied_from_wisdom_tree';
+  comparableAnnualAvailable?: boolean;
+  feeCategory?: string;
+  academicSession?: string;
+  lastVerifiedDate?: string;
+  sourceUrl?: string;
   table: FeeItem[];
   legacyRawFees?: FeeItem[];
 }
@@ -56,6 +61,8 @@ export interface SchoolAdmissions {
   date: string;
   status: string;
   process: string;
+  session?: string;
+  timelineDescription?: string;
 }
 
 export interface SchoolContact {
@@ -74,7 +81,23 @@ export interface SchoolAssets {
   featured: string;
   hero: string;
   gallery: string[];
+  coverImage?: string;
+  imageSource?: string;
+  imageSourceUrl?: string | null;
+  imageVerifiedAt?: string;
   legacyPaths: Record<string, string>;
+}
+
+export interface SchoolVerification {
+  isVerified: boolean;
+  status: 'verified_official' | 'pending_audit' | 'partially_verified';
+  lastVerified: string;
+  sourceName: string;
+  sourceUrl?: string | null;
+  cbseAffiliationNumber?: string | null;
+  schoolCode?: string | null;
+  verifiedFields: string[];
+  notes?: string;
 }
 
 export interface LegacyIdentifiers {
@@ -113,6 +136,7 @@ export interface School {
   contact: SchoolContact;
   rating: SchoolRating;
   assets: SchoolAssets;
+  verification?: SchoolVerification;
   legacyIdentifiers: LegacyIdentifiers;
   auditNotes: string[];
 }

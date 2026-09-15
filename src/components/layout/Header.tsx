@@ -8,6 +8,7 @@ import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
 import { BrandLogo } from '../ui/BrandLogo';
+import { NotificationCenter } from './NotificationCenter';
 import { useSchoolStore } from '../../lib/schoolStore';
 import { useAuth } from '../../lib/authContext';
 import { cn } from '../../lib/utils';
@@ -25,6 +26,7 @@ export const Header: React.FC = () => {
       href: '/compare',
       icon: <Scale className="w-4 h-4" />,
       badge: compareList.length > 0 ? compareList.length : null,
+      badgeColor: 'bg-[var(--color-accent)] text-white',
     },
     { label: 'Admissions 2026-27', href: '/admissions', icon: <Calendar className="w-4 h-4" /> },
     {
@@ -43,7 +45,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-[var(--color-border)] shadow-2xs">
+    <header className="sticky top-0 z-40 w-full bg-[#fcfbf9]/95 backdrop-blur-md border-t-2 border-t-[var(--color-accent)] border-b border-[var(--color-border)] shadow-2xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Logo / Brand Mark */}
         <div className="flex items-center gap-6">
@@ -60,8 +62,8 @@ export const Header: React.FC = () => {
                 className={cn(
                   'px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 relative',
                   isActive(link.href)
-                    ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] font-bold'
-                    : 'text-[var(--color-content-muted)] hover:text-[var(--color-content)] hover:bg-[var(--color-surface-subtle)]'
+                    ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] border border-[var(--color-brand-200)]/70 font-bold shadow-2xs'
+                    : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface-subtle)]/70'
                 )}
               >
                 {link.icon}
@@ -70,7 +72,7 @@ export const Header: React.FC = () => {
                   <span
                     className={cn(
                       'text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight shrink-0',
-                      link.badgeColor || 'bg-[var(--color-primary)] text-white'
+                      link.badgeColor || 'bg-[var(--color-accent)] text-white'
                     )}
                   >
                     {link.badge}
@@ -111,26 +113,40 @@ export const Header: React.FC = () => {
           </Link>
 
           {isAuthenticated && user ? (
-            <Link href="/dashboard">
-              <Button
-                variant="secondary"
-                size="sm"
-                className="text-xs font-bold border border-sky-200 bg-sky-50 text-sky-900 hover:bg-sky-100"
-                leftIcon={<LayoutDashboard className="w-3.5 h-3.5 text-sky-700" />}
-              >
-                <span>{user.name.split(' ')[0]}</span>
-                {user.mobileVerified && <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 ml-1" />}
-              </Button>
-            </Link>
+            <div className="flex items-center gap-1.5">
+              <NotificationCenter />
+              {user.role === 'admin' && (
+                <Link href="/admin">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-xs font-bold border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100"
+                  >
+                    Admin Audit
+                  </Button>
+                </Link>
+              )}
+              <Link href="/dashboard">
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  className="text-xs font-bold border border-sky-200 bg-sky-50 text-sky-900 hover:bg-sky-100"
+                  leftIcon={<LayoutDashboard className="w-3.5 h-3.5 text-sky-700" />}
+                >
+                  <span>{user.name.split(' ')[0]}</span>
+                  {user.emailVerified && <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 ml-1" />}
+                </Button>
+              </Link>
+            </div>
           ) : (
             <div className="flex items-center gap-1.5">
               <Link href="/auth/login">
-                <Button variant="ghost" size="sm" leftIcon={<User className="w-3.5 h-3.5" />} className="text-xs font-medium">
+                <Button variant="ghost" size="sm" leftIcon={<User className="w-3.5 h-3.5" />} className="text-xs font-semibold text-[var(--color-primary)]">
                   Sign in
                 </Button>
               </Link>
               <Link href="/auth/register">
-                <Button variant="primary" size="sm" className="text-xs font-bold">
+                <Button variant="accent" size="sm" className="text-xs font-bold">
                   Parent Signup
                 </Button>
               </Link>
@@ -140,6 +156,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Navigation Affordances */}
         <div className="flex items-center gap-1.5 sm:hidden">
+          {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
             <IconButton
               aria-label="Search schools"
@@ -192,9 +209,9 @@ export const Header: React.FC = () => {
               <div className="overflow-hidden">
                 <div className="flex items-center gap-1">
                   <span className="font-bold text-xs text-sky-950 truncate">{user.name}</span>
-                  {user.mobileVerified && <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />}
+                  {user.emailVerified && <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />}
                 </div>
-                <span className="text-[11px] text-sky-700 truncate block">{user.locality}</span>
+                <span className="text-[11px] text-sky-700 truncate block">{user.preferredSchoolLocality || 'Parent Account'}</span>
               </div>
             </div>
           )}
@@ -233,21 +250,41 @@ export const Header: React.FC = () => {
             ))}
 
             {isAuthenticated && (
-              <Link
-                href="/dashboard"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={cn(
-                  'flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                  isActive('/dashboard')
-                    ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] font-semibold'
-                    : 'text-[var(--color-content)] hover:bg-[var(--color-surface-subtle)]'
+              <>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    'flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                    isActive('/dashboard')
+                      ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] font-semibold'
+                      : 'text-[var(--color-content)] hover:bg-[var(--color-surface-subtle)]'
+                  )}
+                >
+                  <div className="flex items-center gap-3">
+                    <LayoutDashboard className="w-4 h-4 text-sky-600" />
+                    <span>Parent Dashboard</span>
+                  </div>
+                </Link>
+
+                {user?.role === 'admin' && (
+                  <Link
+                    href="/admin"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      'flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                      isActive('/admin')
+                        ? 'text-amber-800 bg-amber-50 font-semibold'
+                        : 'text-amber-700 hover:bg-amber-50/70'
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <ShieldCheck className="w-4 h-4 text-amber-600" />
+                      <span>Admin Telemetry</span>
+                    </div>
+                  </Link>
                 )}
-              >
-                <div className="flex items-center gap-3">
-                  <LayoutDashboard className="w-4 h-4 text-sky-600" />
-                  <span>Parent Dashboard</span>
-                </div>
-              </Link>
+              </>
             )}
           </div>
 

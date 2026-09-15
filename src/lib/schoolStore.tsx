@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useToast } from '../components/ui/Toast';
+import { WishlistLoginModal, type WishlistModalTarget } from '../components/auth/WishlistLoginModal';
 
 interface SchoolStoreContextType {
   shortlist: string[];
@@ -11,6 +12,7 @@ interface SchoolStoreContextType {
   addToShortlist: (slug: string, schoolName?: string) => void;
   removeFromShortlist: (slug: string) => void;
   clearShortlist: () => void;
+  setShortlistFromServer: (slugs: string[]) => void;
   isInCompare: (slug: string) => boolean;
   toggleCompare: (slug: string, schoolName?: string) => void;
   addCompare: (slug: string, schoolName?: string) => void;
@@ -19,6 +21,9 @@ interface SchoolStoreContextType {
   removeFromCompare: (slug: string) => void;
   clearCompare: () => void;
   isHydrated: boolean;
+  authPromptTarget: WishlistModalTarget | null;
+  openAuthPrompt: (target: WishlistModalTarget) => void;
+  closeAuthPrompt: () => void;
 }
 
 const SchoolStoreContext = createContext<SchoolStoreContextType | undefined>(undefined);
@@ -31,6 +36,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [shortlist, setShortlist] = useState<string[]>([]);
   const [compareList, setCompareList] = useState<string[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [authPromptTarget, setAuthPromptTarget] = useState<WishlistModalTarget | null>(null);
   const { showToast } = useToast();
 
   // Hydrate from localStorage once on mount
@@ -72,6 +78,18 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
       }
     }
   }, [compareList, isHydrated]);
+
+  const setShortlistFromServer = useCallback((slugs: string[]) => {
+    setShortlist(slugs);
+  }, []);
+
+  const openAuthPrompt = useCallback((target: WishlistModalTarget) => {
+    setAuthPromptTarget(target);
+  }, []);
+
+  const closeAuthPrompt = useCallback(() => {
+    setAuthPromptTarget(null);
+  }, []);
 
   const isInShortlist = useCallback(
     (slug: string) => shortlist.includes(slug),
@@ -181,6 +199,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
         addToShortlist,
         removeFromShortlist,
         clearShortlist,
+        setShortlistFromServer,
         isInCompare,
         toggleCompare,
         addCompare,
@@ -189,9 +208,17 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
         removeFromCompare,
         clearCompare,
         isHydrated,
+        authPromptTarget,
+        openAuthPrompt,
+        closeAuthPrompt,
       }}
     >
       {children}
+      <WishlistLoginModal
+        isOpen={Boolean(authPromptTarget)}
+        onClose={closeAuthPrompt}
+        targetSchool={authPromptTarget}
+      />
     </SchoolStoreContext.Provider>
   );
 };
@@ -203,3 +230,4 @@ export const useSchoolStore = () => {
   }
   return context;
 };
+

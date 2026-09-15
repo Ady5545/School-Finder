@@ -50,14 +50,19 @@ export async function POST(req: NextRequest) {
       const existing = getUserByEmailOrMobile(cleanEmail);
       if (!existing) {
         return NextResponse.json(
-          { success: false, message: 'No registered parent account found for this email. Please create an account first.' },
+          {
+            success: false,
+            notFound: true,
+            email: cleanEmail,
+            message: 'No registered parent account found for this email. Please create an account first.',
+          },
           { status: 404 }
         );
       }
     }
 
     // Generate secure 6-digit OTP with 10-minute expiry
-    const { code, expiresInSeconds } = generateAndStoreOtp(cleanEmail, purpose);
+    const { code, expiresInSeconds, otpSessionToken } = generateAndStoreOtp(cleanEmail, purpose);
 
     // Send email using Nodemailer & Admission Pitara configured credentials
     const emailResult = await sendOtpEmail({
@@ -72,15 +77,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message: emailResult.error || 'Failed to dispatch verification email. Please check server email configuration.',
+          category: emailResult.category,
+          message:
+            emailResult.error ||
+            "We couldn't send the verification email right now. Please try again in a moment.",
         },
-        { status: 500 }
+        { status: emailResult.category === 'INVALID_RECIPIENT' ? 400 : 500 }
       );
     }
 
     const isProd = process.env.NODE_ENV === 'production';
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       message: `Verification code sent to ${cleanEmail}. Please check your inbox and spam folder.`,
       email: cleanEmail,
@@ -88,6 +96,17 @@ export async function POST(req: NextRequest) {
       // Only include devOtp in local development when email credentials are not yet configured
       ...(emailResult.devMode && !isProd ? { devOtp: code, isDevFallback: true } : {}),
     });
+
+    // Set secure HTTP-only signed cookie for serverless durability across lambda instances
+    response.cookies.set('ap_otp_session', otpSessionToken, {
+      httpOnly: true,
+      secure: isProd,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: expiresInSeconds,
+    });
+
+    return response;
   } catch (error) {
     console.error('Error in send-otp API:', error);
     return NextResponse.json(

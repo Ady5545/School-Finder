@@ -1,0 +1,116 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { requireAdminAuth } from '../../../../lib/adminAuth';
+import {
+  getAllRatings,
+  adminDeleteRating,
+  adminRestoreRating,
+  getUserById,
+  getSchoolRatingStats,
+} from '../../../../lib/authStore';
+import { getSchoolBySlug } from '../../../../lib/schools';
+
+export async function GET(req: NextRequest) {
+  const auth = requireAdminAuth(req);
+  if (!auth.authorized) {
+    return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(req.url);
+  const schoolSlug = searchParams.get('schoolSlug');
+  const userId = searchParams.get('userId');
+  const star = searchParams.get('star');
+  const search = (searchParams.get('q') || '').toLowerCase().trim();
+  const includeDeleted = searchParams.get('includeDeleted') === 'true';
+
+  let ratings = getAllRatings(includeDeleted);
+
+  if (schoolSlug) {
+    ratings = ratings.filter(r => r.schoolSlug === schoolSlug);
+  }
+  if (userId) {
+    ratings = ratings.filter(r => r.userId === userId);
+  }
+  if (star) {
+    const starNum = parseInt(star, 10);
+    if (!isNaN(starNum)) {
+      ratings = ratings.filter(r => Math.round(r.score) === starNum);
+    }
+  }
+  if (search) {
+    ratings = ratings.filter(r =>
+      r.comment.toLowerCase().includes(search) ||
+      (r.title && r.title.toLowerCase().includes(search)) ||
+      r.userName.toLowerCase().includes(search) ||
+      r.schoolSlug.toLowerCase().includes(search)
+    );
+  }
+
+  const enriched = ratings.map(r => {
+    const school = getSchoolBySlug(r.schoolSlug);
+    const user = getUserById(r.userId);
+    return {
+      ...r,
+      schoolName: school?.name || r.schoolSlug,
+      userEmail: user?.email || '',
+      userStatus: user?.status || 'active',
+    };
+  });
+
+  return NextResponse.json({
+    success: true,
+    reviews: enriched,
+    total: enriched.length,
+  });
+}
+
+export async function DELETE(req: NextRequest) {
+  const auth = requireAdminAuth(req);
+  if (!auth.authorized || !auth.user) {
+    return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
+  }
+
+  const { searchParams } = new URL(req.url);
+  const reviewId = searchParams.get('id');
+  const reason = searchParams.get('reason') || 'Removed by platform administrator';
+
+  if (!reviewId) {
+    return NextResponse.json({ success: false, message: 'Review ID required' }, { status: 400 });
+  }
+
+  const deleted = adminDeleteRating(reviewId, auth.user.id, reason);
+  if (!deleted) {
+    return NextResponse.json({ success: false, message: 'Review not found' }, { status: 404 });
+  }
+
+  return NextResponse.json({
+    success: true,
+    message: 'Review removed successfully and school aggregates recalculated.',
+  });
+}
+
+export async function POST(req: NextRequest) {
+  const auth = requireAdminAuth(req);
+  if (!auth.authorized || !auth.user) {
+    return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
+  }
+
+  const body = await req.json();
+  const { reviewId, action } = body;
+
+  if (!reviewId) {
+    return NextResponse.json({ success: false, message: 'Review ID required' }, { status: 400 });
+  }
+
+  if (action === 'restore') {
+    const restored = adminRestoreRating(reviewId, auth.user.id);
+    if (!restored) {
+      return NextResponse.json({ success: false, message: 'Review not found or could not be restored' }, { status: 404 });
+    }
+    return NextResponse.json({
+      success: true,
+      message: 'Review restored successfully and school aggregates updated.',
+    });
+  }
+
+  return NextResponse.json({ success: false, message: 'Invalid action' }, { status: 400 });
+}

@@ -7,6 +7,8 @@ import { getAllSchools } from '../../lib/schools';
 import type { School } from '../../types/school';
 import { cn } from '../../lib/utils';
 
+import { trackClientSearch } from '../../lib/tracker';
+
 interface LocationSuggestion {
   name: string;
   count: number;
@@ -139,6 +141,7 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
 
   const handleSelectLocation = (locationName: string) => {
     setIsOpen(false);
+    trackClientSearch(locationName, locationName);
     router.push(`/schools?q=${encodeURIComponent(locationName)}`);
   };
 
@@ -146,6 +149,7 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
     e.preventDefault();
     setIsOpen(false);
     if (query.trim()) {
+      trackClientSearch(query.trim());
       router.push(`/schools?q=${encodeURIComponent(query.trim())}`);
     } else {
       router.push('/schools');

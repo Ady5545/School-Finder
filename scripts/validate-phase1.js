@@ -20,13 +20,13 @@ function assert(condition, message) {
 }
 
 // Test 1: Total school count
-assert(schools.length === 17, `Exactly 17 schools in canonical dataset (Found: ${schools.length})`);
+assert(schools.length >= 50, `At least 50 schools in canonical dataset (Found: ${schools.length})`);
 
 // Test 2: Uniqueness of IDs and slugs
 const ids = new Set(schools.map(s => s.id));
 const slugs = new Set(schools.map(s => s.slug));
-assert(ids.size === 17, `All 17 school IDs are strictly unique (Found: ${ids.size})`);
-assert(slugs.size === 17, `All 17 school slugs are strictly unique (Found: ${slugs.size})`);
+assert(ids.size === schools.length, `All ${schools.length} school IDs are strictly unique (Found: ${ids.size})`);
+assert(slugs.size === schools.length, `All ${schools.length} school slugs are strictly unique (Found: ${slugs.size})`);
 
 // Test 3: Essential required schema fields on every school
 let allHaveRequiredFields = true;
@@ -35,7 +35,7 @@ schools.forEach(s => {
     allHaveRequiredFields = false;
   }
 });
-assert(allHaveRequiredFields, 'All 17 schools contain complete schema structure');
+assert(allHaveRequiredFields, `All ${schools.length} schools contain complete schema structure`);
 
 // Test 4: Ramagya School data integrity & correction
 const ramagya = getSchoolBySlug('ramagya-school-noida-extension');

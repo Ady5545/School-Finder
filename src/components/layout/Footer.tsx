@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 text-xs text-emerald-300 bg-[#0f2d4a] border border-[#1d4b75] px-2.5 py-1.5 rounded-lg w-fit mt-1 shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" aria-hidden="true" />
-              <span>100% Unbiased & Independent • Zero Paid Promotions</span>
+              <span>Independent Directory • Verified Parent Reviews & Fee Insights</span>
             </div>
           </div>
 

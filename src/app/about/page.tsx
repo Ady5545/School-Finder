@@ -57,7 +57,7 @@ export default function AboutPage() {
             <Users className="w-5 h-5 text-amber-600" />
             <h3 className="font-bold text-sm">Parent Advocates</h3>
             <p className="text-xs text-[var(--color-content-muted)]">
-              Zero paid rankings or sponsored placements that distort objective comparison.
+              Independent data architecture where organic ratings and fee comparisons are never distorted.
             </p>
           </div>
         </section>

@@ -30,7 +30,7 @@ export interface SchoolFees {
   tuitionAnnual: string | null;
   transportMonthly: string | null;
   transportAnnual: string | null;
-  verificationStatus: 'verified_from_source' | 'unverified_copied_from_wisdom_tree';
+  verificationStatus: 'verified_from_source' | 'unverified_copied_from_wisdom_tree' | 'partially_verified' | 'unverified_undisclosed' | 'not_publicly_verified';
   comparableAnnualAvailable?: boolean;
   feeCategory?: string;
   academicSession?: string;
@@ -139,6 +139,8 @@ export interface School {
   verification?: SchoolVerification;
   legacyIdentifiers: LegacyIdentifiers;
   auditNotes: string[];
+  classification?: 'core_greater_noida_west' | 'nearby_surrounding';
+  sports?: string[];
 }
 
 export const schools: School[] = schoolsJson as unknown as School[];

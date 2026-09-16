@@ -142,14 +142,14 @@ export const HomeRatingsDiscovery: React.FC = () => {
               <ShieldCheck className="w-4 h-4 text-blue-700" />
             </div>
             <h3 className="text-base font-bold text-stone-900 font-serif">
-              Unbiased & Independent
+              Unbiased Ratings
             </h3>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Admission Pitara does not accept payment from schools for rankings or preferred rating placements.
+              School ratings and parent reviews are 100% organic. Paid partner placements are always transparently labeled and never alter user scores or organic search rank.
             </p>
             <div className="pt-2">
               <span className="text-[11px] font-medium text-stone-500">
-                100% Parent-driven transparency
+                Verified Parent-driven transparency
               </span>
             </div>
           </div>

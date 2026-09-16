@@ -370,10 +370,10 @@ export default function HomePage() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <h3 className="text-lg font-bold text-[var(--color-content)]">
-                No paid rankings
+                Transparent evaluation
               </h3>
               <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-2.5 leading-relaxed">
-                Schools do not receive preferential placement in the directory.
+                Organic directory rankings and verified parent reviews are never altered by commercial promotions.
               </p>
             </div>
           </div>

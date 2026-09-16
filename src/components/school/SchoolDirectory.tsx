@@ -20,6 +20,7 @@ import {
   Star,
 } from 'lucide-react';
 import { SchoolCard } from './SchoolCard';
+import { SponsoredPlacementCard } from './SponsoredPlacementCard';
 import { EmptyState } from '../ui/EmptyState';
 import { Button } from '../ui/Button';
 import { BackToTop } from '../ui/BackToTop';
@@ -414,6 +415,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           onSelectSchool={school => setActiveMapSchoolSlug(school.slug)}
         />
       )}
+
+      {/* Promoted / Sponsored Partner Placement if Active */}
+      <SponsoredPlacementCard placement="featured_card" className="mb-6" />
 
       {/* Results Header Status */}
       <div className="flex items-center justify-between mb-4">

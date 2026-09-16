@@ -1,0 +1,47 @@
+{
+  "users": {
+    "usr_demo_parent_gnw": {
+      "id": "usr_demo_parent_gnw",
+      "name": "Rohit Sharma",
+      "email": "parent@example.com",
+      "preferredSchoolLocality": "Sector 16B",
+      "preferredBoards": [
+        "CBSE",
+        "IB"
+      ],
+      "childGrade": "Grade 1 (Primary)",
+      "passwordHash": "9c6af849ed0138c17b926dd71d1f6420182f655163fe9f66a725981492920f1c35363ba6ef686d5ed570df93d17287d095d53ee8221c4f4519b3a3cd46ef09cd:ap_salt_demo_2025",
+      "emailVerified": true,
+      "analyticsConsent": true,
+      "role": "parent",
+      "createdAt": "2026-09-15T15:37:08.492Z",
+      "lastLoginAt": "2026-09-15T15:37:08.493Z",
+      "wishlist": [
+        "delhi-public-school-knowledge-park-5",
+        "lotus-valley-international-school-noida-extension"
+      ],
+      "compareList": [
+        "delhi-public-school-knowledge-park-5",
+        "delhi-world-public-school-kp-5"
+      ]
+    },
+    "usr_admin_portal_lead": {
+      "id": "usr_admin_portal_lead",
+      "name": "Admissions Lead Auditor",
+      "email": "admin@admissionpitara.com",
+      "preferredSchoolLocality": "Knowledge Park 5",
+      "passwordHash": "1b068707bf4d5fe1269492de2f262e3baca8e31f51fd2ff967b9a4b73564018c75b7f9afd1a4d59c6797141883cd8d3523fb3ec660e602af2be6c525368aef1c:ap_salt_admin_2025",
+      "emailVerified": true,
+      "analyticsConsent": true,
+      "role": "admin",
+      "createdAt": "2026-09-15T15:37:08.500Z",
+      "lastLoginAt": "2026-09-15T15:37:08.500Z",
+      "wishlist": [],
+      "compareList": []
+    }
+  },
+  "ratings": [],
+  "schoolViews": {},
+  "schoolSaves": {},
+  "activityEvents": []
+}

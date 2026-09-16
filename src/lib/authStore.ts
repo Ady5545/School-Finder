@@ -6,13 +6,14 @@ export interface ParentUser {
   id: string;
   name: string;
   email: string;
+  status: 'active' | 'disabled';
   preferredSchoolLocality?: string; // e.g. "Sector 16B", "Techzone 4", "Knowledge Park 5", "Greater Noida West"
   preferredBoards?: string[];
   childGrade?: string;
   passwordHash?: string;
   emailVerified: boolean;
   analyticsConsent: boolean;
-  role?: 'parent' | 'admin';
+  role: 'parent' | 'admin';
   createdAt: string;
   lastLoginAt?: string;
   lastActivityAt?: string;
@@ -44,8 +45,12 @@ export interface SchoolRating {
     safety?: number;
   };
   verifiedParent: boolean;
+  status: 'published' | 'deleted';
   createdAt: string;
   updatedAt: string;
+  deletedAt?: string;
+  deletedBy?: string;
+  deletionReason?: string;
 }
 
 export type ActivityEventType =
@@ -53,22 +58,59 @@ export type ActivityEventType =
   | 'wishlist_add'
   | 'wishlist_remove'
   | 'compare_add'
+  | 'compare_view'
   | 'rating_submitted'
   | 'rating_edited'
   | 'rating_deleted'
   | 'search_performed'
   | 'search_area_selected'
   | 'user_signup'
-  | 'user_login';
+  | 'user_login'
+  | 'admin_action';
 
 export interface ActivityEvent {
   id: string;
   type: ActivityEventType;
+  userId?: string;
+  targetType?: 'school' | 'user' | 'review' | 'search' | 'promotion' | 'system';
+  targetId?: string;
   schoolSlug?: string;
   locality?: string;
-  userId?: string;
-  approximateTimeSpent?: string; // e.g., "< 1 min", "1-3 min", "3-5 min", "5+ min"
+  searchQuery?: string;
+  approximateTimeSpent?: string;
   details?: Record<string, unknown>;
+  timestamp: string;
+}
+
+export interface SchoolPromotionCampaign {
+  id: string;
+  schoolSlug: string;
+  campaignName: string;
+  placementType: 'homepage_hero' | 'featured_card' | 'sponsored_search' | 'sponsored_category';
+  title: string;
+  description: string;
+  badgeLabel: string; // e.g. "Sponsored", "Promoted", "Featured Partner"
+  ctaText: string;
+  ctaLink: string;
+  startDate: string;
+  endDate: string;
+  status: 'active' | 'paused' | 'expired' | 'draft';
+  priority: number;
+  impressions: number;
+  clicks: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AdminAuditLog {
+  id: string;
+  adminUserId: string;
+  adminEmail: string;
+  action: string;
+  targetType: string;
+  targetId: string;
+  details?: Record<string, unknown>;
+  result: 'success' | 'failed';
   timestamp: string;
 }
 
@@ -78,6 +120,8 @@ interface PersistentDbSchema {
   schoolViews: Record<string, number>;
   schoolSaves: Record<string, number>;
   activityEvents: ActivityEvent[];
+  promotions: SchoolPromotionCampaign[];
+  auditLogs: AdminAuditLog[];
 }
 
 // Global reference to withstand HMR and serverless restarts
@@ -90,6 +134,8 @@ const globalAuthStore = globalThis as unknown as {
   __ADMISSION_PITARA_SCHOOL_VIEWS__?: Map<string, number>;
   __ADMISSION_PITARA_SCHOOL_SAVES__?: Map<string, number>;
   __ADMISSION_PITARA_ACTIVITY__?: ActivityEvent[];
+  __ADMISSION_PITARA_PROMOTIONS__?: SchoolPromotionCampaign[];
+  __ADMISSION_PITARA_AUDIT_LOGS__?: AdminAuditLog[];
   __ADMISSION_PITARA_DB_LOADED__?: boolean;
 };
 
@@ -117,6 +163,12 @@ if (!globalAuthStore.__ADMISSION_PITARA_SCHOOL_SAVES__) {
 if (!globalAuthStore.__ADMISSION_PITARA_ACTIVITY__) {
   globalAuthStore.__ADMISSION_PITARA_ACTIVITY__ = [];
 }
+if (!globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__) {
+  globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__ = [];
+}
+if (!globalAuthStore.__ADMISSION_PITARA_AUDIT_LOGS__) {
+  globalAuthStore.__ADMISSION_PITARA_AUDIT_LOGS__ = [];
+}
 
 const users = globalAuthStore.__ADMISSION_PITARA_USERS__;
 const otps = globalAuthStore.__ADMISSION_PITARA_OTPS__;
@@ -126,6 +178,8 @@ let ratings = globalAuthStore.__ADMISSION_PITARA_RATINGS__;
 const schoolViews = globalAuthStore.__ADMISSION_PITARA_SCHOOL_VIEWS__;
 const schoolSaves = globalAuthStore.__ADMISSION_PITARA_SCHOOL_SAVES__;
 let activityEvents = globalAuthStore.__ADMISSION_PITARA_ACTIVITY__;
+let promotions = globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__;
+let auditLogs = globalAuthStore.__ADMISSION_PITARA_AUDIT_LOGS__;
 
 const JWT_SECRET = process.env.JWT_SECRET || 'ap_super_secure_jwt_secret_greater_noida_2025';
 
@@ -181,7 +235,9 @@ export function saveStoreToDisk(immediate = false): void {
         ratings,
         schoolViews: viewsRecord,
         schoolSaves: savesRecord,
-        activityEvents: activityEvents.slice(0, 500), // Retain latest 500 privacy-conscious events
+        activityEvents: activityEvents.slice(0, 5000), // Retain up to 5,000 persistent activity events
+        promotions,
+        auditLogs: auditLogs.slice(0, 1000),
       };
 
       const tempFile = `${DB_FILE}.tmp.${Date.now()}`;
@@ -219,13 +275,16 @@ function initDb(): void {
 
       if (data.users) {
         for (const user of Object.values(data.users)) {
+          // ensure default status
+          if (!user.status) user.status = 'active';
+          if (!user.role) user.role = 'parent';
           users.set(user.email.toLowerCase(), user);
         }
       }
 
       if (Array.isArray(data.ratings)) {
         ratings.length = 0;
-        ratings.push(...data.ratings);
+        ratings.push(...data.ratings.map(r => ({ ...r, status: r.status || 'published' })));
       }
 
       if (data.schoolViews) {
@@ -244,6 +303,16 @@ function initDb(): void {
         activityEvents.length = 0;
         activityEvents.push(...data.activityEvents);
       }
+
+      if (Array.isArray(data.promotions)) {
+        promotions.length = 0;
+        promotions.push(...data.promotions);
+      }
+
+      if (Array.isArray(data.auditLogs)) {
+        auditLogs.length = 0;
+        auditLogs.push(...data.auditLogs);
+      }
     }
   } catch (err) {
     console.warn('[AUTH_DB_WARN] Failed reading existing DB file, re-initializing:', err);
@@ -254,11 +323,12 @@ function initDb(): void {
   if (!users.has(demoEmail)) {
     const demoSalt = 'ap_salt_demo_2025';
     const demoHash = crypto.pbkdf2Sync('Parent@12345', demoSalt, 10000, 64, 'sha512').toString('hex') + ':' + demoSalt;
-    
+
     const demoUser: ParentUser = {
       id: 'usr_demo_parent_gnw',
       name: 'Rohit Sharma',
       email: demoEmail,
+      status: 'active',
       preferredSchoolLocality: 'Sector 16B',
       preferredBoards: ['CBSE', 'IB'],
       childGrade: 'Grade 1 (Primary)',
@@ -268,6 +338,7 @@ function initDb(): void {
       role: 'parent',
       createdAt: new Date().toISOString(),
       lastLoginAt: new Date().toISOString(),
+      lastActivityAt: new Date().toISOString(),
       wishlist: ['delhi-public-school-knowledge-park-5', 'lotus-valley-international-school-noida-extension'],
       compareList: ['delhi-public-school-knowledge-park-5', 'delhi-world-public-school-kp-5'],
     };
@@ -285,6 +356,7 @@ function initDb(): void {
       id: 'usr_admin_portal_lead',
       name: 'Admissions Lead Auditor',
       email: adminEmail,
+      status: 'active',
       preferredSchoolLocality: 'Knowledge Park 5',
       passwordHash: adminHash,
       emailVerified: true,
@@ -292,6 +364,7 @@ function initDb(): void {
       role: 'admin',
       createdAt: new Date().toISOString(),
       lastLoginAt: new Date().toISOString(),
+      lastActivityAt: new Date().toISOString(),
       wishlist: [],
       compareList: [],
     };
@@ -299,14 +372,40 @@ function initDb(): void {
     users.set(adminUser.email.toLowerCase(), adminUser);
   }
 
-  // Real ratings start empty - no fake seeded reviews
+  // Initial Promotion: Delhi World Public School (admin controllable, easily modified/expired)
+  if (promotions.length === 0) {
+    const initialCampaign: SchoolPromotionCampaign = {
+      id: 'promo_dwps_inaugural_2026',
+      schoolSlug: 'delhi-world-public-school-kp-5',
+      campaignName: 'DWPS Greater Noida West - Premier Admissions 2026-27',
+      placementType: 'homepage_hero',
+      title: 'Delhi World Public School, Knowledge Park 5',
+      description: 'Admissions open for Nursery to Grade XI. World-class 5-acre smart campus with audited transparent fee structure.',
+      badgeLabel: 'Sponsored',
+      ctaText: 'Explore Campus & Fee Structure',
+      ctaLink: '/schools/delhi-world-public-school-kp-5',
+      startDate: new Date().toISOString(),
+      endDate: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString(), // 6 months
+      status: 'active',
+      priority: 1,
+      impressions: 0,
+      clicks: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    promotions.push(initialCampaign);
+  }
+
   saveStoreToDisk();
 }
 
 // Initialize immediately
 initDb();
 
-// Password Hashing (PBKDF2 with salt)
+// ----------------------------------------------------------------------------
+// PASSWORD HASHING & JWT SESSION UTILITIES
+// ----------------------------------------------------------------------------
+
 export function hashPassword(password: string): string {
   const salt = crypto.randomBytes(16).toString('hex');
   const hash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
@@ -324,7 +423,6 @@ export function verifyPassword(password: string, storedHash: string): boolean {
   }
 }
 
-// JWT Token Creation & Verification
 export function createSessionToken(user: ParentUser): string {
   const payload = {
     sub: user.id,
@@ -332,6 +430,7 @@ export function createSessionToken(user: ParentUser): string {
     name: user.name,
     preferredSchoolLocality: user.preferredSchoolLocality || '',
     role: user.role || 'parent',
+    status: user.status || 'active',
     exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60, // 7 days
   };
 
@@ -351,6 +450,7 @@ export function verifySessionToken(token: string): {
   name: string;
   preferredSchoolLocality?: string;
   role?: 'parent' | 'admin';
+  status?: 'active' | 'disabled';
 } | null {
   try {
     const parts = token.split('.');
@@ -427,7 +527,6 @@ export function createStatelessOtpToken(
   return `${payloadStr}.${signature}`;
 }
 
-// Signed verification token after OTP verification
 export function createSignedVerificationToken(email: string): string {
   const cleanEmail = email.trim().toLowerCase();
   const exp = Math.floor(Date.now() / 1000) + 15 * 60; // 15 minutes validity
@@ -446,7 +545,6 @@ export function createSignedVerificationToken(email: string): string {
 
   const token = `${payloadStr}.${signature}`;
 
-  // Cache in memory
   verificationTokens.set(token, {
     email: cleanEmail,
     expiresAt: Date.now() + 15 * 60 * 1000,
@@ -455,7 +553,7 @@ export function createSignedVerificationToken(email: string): string {
   return token;
 }
 
-// OTP Operations (Email Only)
+// OTP Operations
 export function generateAndStoreOtp(
   email: string,
   purpose: 'register' | 'login'
@@ -563,7 +661,6 @@ export function verifyOtpCode(
 export function checkVerificationToken(token: string): string | null {
   if (!token || typeof token !== 'string') return null;
 
-  // 1. In-memory map
   const record = verificationTokens.get(token);
   if (record) {
     if (Date.now() > record.expiresAt) {
@@ -573,7 +670,6 @@ export function checkVerificationToken(token: string): string | null {
     return record.email;
   }
 
-  // 2. Stateless HMAC verification
   try {
     const parts = token.split('.');
     if (parts.length === 2) {
@@ -597,7 +693,10 @@ export function checkVerificationToken(token: string): string | null {
   return null;
 }
 
-// User CRUD Operations
+// ----------------------------------------------------------------------------
+// USER DIRECTORY & MANAGEMENT CRUD
+// ----------------------------------------------------------------------------
+
 export function getUserByEmail(email: string): ParentUser | null {
   const normalized = email.trim().toLowerCase();
   return users.get(normalized) || null;
@@ -635,6 +734,7 @@ export function createParentUser(userData: {
     id: `usr_${crypto.randomBytes(8).toString('hex')}`,
     name: userData.name.trim(),
     email: emailKey,
+    status: 'active',
     preferredSchoolLocality: userData.preferredSchoolLocality?.trim() || '',
     preferredBoards: userData.preferredBoards || [],
     childGrade: userData.childGrade || '',
@@ -655,6 +755,8 @@ export function createParentUser(userData: {
   recordActivityEvent({
     type: 'user_signup',
     userId: newUser.id,
+    targetType: 'user',
+    targetId: newUser.id,
     locality: newUser.preferredSchoolLocality,
   });
 
@@ -669,6 +771,8 @@ export function updateUserProfile(
     preferredBoards?: string[];
     childGrade?: string;
     analyticsConsent?: boolean;
+    status?: 'active' | 'disabled';
+    role?: 'parent' | 'admin';
   }
 ): ParentUser | null {
   const user = getUserById(userId);
@@ -686,10 +790,58 @@ export function updateUserProfile(
   if (updates.preferredBoards !== undefined) user.preferredBoards = updates.preferredBoards;
   if (updates.childGrade !== undefined) user.childGrade = updates.childGrade;
   if (updates.analyticsConsent !== undefined) user.analyticsConsent = updates.analyticsConsent;
+  if (updates.status !== undefined) user.status = updates.status;
+  if (updates.role !== undefined) user.role = updates.role;
 
   user.lastActivityAt = new Date().toISOString();
   saveStoreToDisk();
   return user;
+}
+
+export function updateUserStatus(userId: string, status: 'active' | 'disabled', adminUserId?: string, reason?: string): boolean {
+  const user = getUserById(userId);
+  if (!user) return false;
+
+  user.status = status;
+  user.lastActivityAt = new Date().toISOString();
+  saveStoreToDisk();
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      status === 'disabled' ? 'disable_account' : 'enable_account',
+      'user',
+      userId,
+      { targetEmail: user.email, reason },
+      'success'
+    );
+  }
+
+  return true;
+}
+
+export function updateUserRole(userId: string, role: 'parent' | 'admin', adminUserId?: string): boolean {
+  const user = getUserById(userId);
+  if (!user) return false;
+
+  user.role = role;
+  user.lastActivityAt = new Date().toISOString();
+  saveStoreToDisk();
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'change_user_role',
+      'user',
+      userId,
+      { targetEmail: user.email, newRole: role },
+      'success'
+    );
+  }
+
+  return true;
 }
 
 export function updateUserLists(userId: string, wishlist?: string[], compareList?: string[]) {
@@ -702,17 +854,74 @@ export function updateUserLists(userId: string, wishlist?: string[], compareList
   }
 }
 
-export function deleteParentUser(userId: string): boolean {
+export function removeWishlistItemForUser(userId: string, schoolSlug: string, adminUserId?: string): boolean {
+  const user = getUserById(userId);
+  if (!user || !user.wishlist.includes(schoolSlug)) return false;
+
+  user.wishlist = user.wishlist.filter(s => s !== schoolSlug);
+  user.lastActivityAt = new Date().toISOString();
+
+  // Decrement aggregate school save
+  const current = schoolSaves.get(schoolSlug) || 0;
+  schoolSaves.set(schoolSlug, Math.max(0, current - 1));
+
+  recordActivityEvent({
+    type: 'wishlist_remove',
+    userId,
+    schoolSlug,
+    targetType: 'school',
+    targetId: schoolSlug,
+    details: adminUserId ? { removedByAdmin: adminUserId } : undefined,
+  });
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'remove_user_shortlist_item',
+      'user',
+      userId,
+      { schoolSlug, targetEmail: user.email },
+      'success'
+    );
+  }
+
+  saveStoreToDisk();
+  return true;
+}
+
+export function deleteParentUser(userId: string, adminUserId?: string): boolean {
   const user = getUserById(userId);
   if (!user) return false;
 
-  // Remove ratings authored by this user
+  // Cleanup: Remove ratings authored by this user
   ratings = ratings.filter(r => r.userId !== userId);
   globalAuthStore.__ADMISSION_PITARA_RATINGS__ = ratings;
 
-  // Delete user from map
+  // Adjust school save tallies
+  if (Array.isArray(user.wishlist)) {
+    for (const slug of user.wishlist) {
+      const current = schoolSaves.get(slug) || 0;
+      schoolSaves.set(slug, Math.max(0, current - 1));
+    }
+  }
+
+  // Delete user record
   users.delete(user.email.toLowerCase());
   saveStoreToDisk();
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'delete_user_account',
+      'user',
+      userId,
+      { targetEmail: user.email, name: user.name },
+      'success'
+    );
+  }
+
   return true;
 }
 
@@ -721,21 +930,266 @@ export function sanitizeUser(user: ParentUser) {
   return safe;
 }
 
+export function getAllUsersSanitized() {
+  const uniqueUsers = new Map<string, ReturnType<typeof sanitizeUser>>();
+  for (const user of users.values()) {
+    if (!uniqueUsers.has(user.id)) {
+      uniqueUsers.set(user.id, sanitizeUser(user));
+    }
+  }
+  return Array.from(uniqueUsers.values());
+}
+
 // ----------------------------------------------------------------------------
-// RATINGS & REVIEWS SUBSYSTEM (Genuine Authenticated Reviews Only)
+// ACTIVITY TRACKING & CONCURRENCY-ISOLATED TELEMETRY
+// ----------------------------------------------------------------------------
+
+export function recordActivityEvent(params: {
+  type: ActivityEventType;
+  userId?: string;
+  targetType?: 'school' | 'user' | 'review' | 'search' | 'promotion' | 'system';
+  targetId?: string;
+  schoolSlug?: string;
+  locality?: string;
+  searchQuery?: string;
+  approximateTimeSpent?: string;
+  details?: Record<string, unknown>;
+}): ActivityEvent {
+  const { type, userId, targetType, targetId, schoolSlug, locality, searchQuery, approximateTimeSpent, details } = params;
+
+  // Update user's lastActivityAt if userId is provided
+  if (userId) {
+    const user = getUserById(userId);
+    if (user) {
+      user.lastActivityAt = new Date().toISOString();
+    }
+  }
+
+  // Aggregate counters for school metrics
+  if (schoolSlug) {
+    if (type === 'school_view') {
+      const current = schoolViews.get(schoolSlug) || 0;
+      schoolViews.set(schoolSlug, current + 1);
+    } else if (type === 'wishlist_add') {
+      const current = schoolSaves.get(schoolSlug) || 0;
+      schoolSaves.set(schoolSlug, current + 1);
+    } else if (type === 'wishlist_remove') {
+      const current = schoolSaves.get(schoolSlug) || 0;
+      schoolSaves.set(schoolSlug, Math.max(0, current - 1));
+    }
+  }
+
+  const evt: ActivityEvent = {
+    id: `evt_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`,
+    type,
+    userId,
+    targetType: targetType || (schoolSlug ? 'school' : undefined),
+    targetId: targetId || schoolSlug,
+    schoolSlug,
+    locality,
+    searchQuery,
+    approximateTimeSpent,
+    details,
+    timestamp: new Date().toISOString(),
+  };
+
+  activityEvents.unshift(evt);
+  if (activityEvents.length > 5000) {
+    activityEvents.length = 5000;
+  }
+
+  saveStoreToDisk();
+  return evt;
+}
+
+export function recordSchoolView(slug: string, approximateTimeSpent?: string, userId?: string): void {
+  recordActivityEvent({
+    type: 'school_view',
+    schoolSlug: slug,
+    targetType: 'school',
+    targetId: slug,
+    userId,
+    approximateTimeSpent,
+  });
+}
+
+export function recordSchoolSave(slug: string, userId?: string): void {
+  recordActivityEvent({
+    type: 'wishlist_add',
+    schoolSlug: slug,
+    targetType: 'school',
+    targetId: slug,
+    userId,
+  });
+}
+
+export function recordSearchEvent(params: {
+  query: string;
+  locality?: string;
+  resultsCount?: number;
+  userId?: string;
+}): void {
+  recordActivityEvent({
+    type: 'search_performed',
+    searchQuery: params.query,
+    locality: params.locality,
+    userId: params.userId,
+    targetType: 'search',
+    details: { resultsCount: params.resultsCount },
+  });
+}
+
+export function recordCompareEvent(params: {
+  schoolSlugs: string[];
+  userId?: string;
+}): void {
+  recordActivityEvent({
+    type: 'compare_view',
+    targetType: 'school',
+    userId: params.userId,
+    details: { schoolSlugs: params.schoolSlugs, count: params.schoolSlugs.length },
+  });
+}
+
+export function getActivityEvents(limit = 100, filters?: {
+  userId?: string;
+  type?: string;
+  schoolSlug?: string;
+  since?: string;
+}): ActivityEvent[] {
+  let filtered = activityEvents;
+
+  if (filters?.userId) {
+    filtered = filtered.filter(e => e.userId === filters.userId);
+  }
+  if (filters?.type && filters.type !== 'all') {
+    filtered = filtered.filter(e => e.type === filters.type);
+  }
+  if (filters?.schoolSlug) {
+    filtered = filtered.filter(e => e.schoolSlug === filters.schoolSlug);
+  }
+  if (filters?.since) {
+    const sinceTime = new Date(filters.since).getTime();
+    filtered = filtered.filter(e => new Date(e.timestamp).getTime() >= sinceTime);
+  }
+
+  return filtered.slice(0, limit);
+}
+
+export function getUserActivityTimeline(userId: string): {
+  timeline: ActivityEvent[];
+  summary: {
+    schoolsViewedCount: number;
+    searchesPerformedCount: number;
+    comparisonsCount: number;
+    shortlistedCount: number;
+    reviewsSubmittedCount: number;
+    reviewsEditedCount: number;
+    reviewsDeletedCount: number;
+    totalEvents: number;
+  };
+  uniqueSchoolsViewed: { slug: string; visitCount: number; lastViewed: string; firstViewed: string }[];
+  searchHistory: { query: string; locality?: string; timestamp: string; resultsCount?: number }[];
+  comparisons: { schools: string[]; timestamp: string }[];
+} {
+  const userEvents = activityEvents.filter(e => e.userId === userId);
+
+  let schoolsViewedCount = 0;
+  let searchesPerformedCount = 0;
+  let comparisonsCount = 0;
+  let shortlistedCount = 0;
+  let reviewsSubmittedCount = 0;
+  let reviewsEditedCount = 0;
+  let reviewsDeletedCount = 0;
+
+  const schoolViewMap = new Map<string, { count: number; first: string; last: string }>();
+  const searchHistory: { query: string; locality?: string; timestamp: string; resultsCount?: number }[] = [];
+  const comparisons: { schools: string[]; timestamp: string }[] = [];
+
+  for (const evt of userEvents) {
+    if (evt.type === 'school_view' && evt.schoolSlug) {
+      schoolsViewedCount += 1;
+      const current = schoolViewMap.get(evt.schoolSlug);
+      if (current) {
+        current.count += 1;
+        current.last = evt.timestamp;
+      } else {
+        schoolViewMap.set(evt.schoolSlug, { count: 1, first: evt.timestamp, last: evt.timestamp });
+      }
+    } else if (evt.type === 'search_performed') {
+      searchesPerformedCount += 1;
+      if (evt.searchQuery) {
+        searchHistory.push({
+          query: evt.searchQuery,
+          locality: evt.locality,
+          timestamp: evt.timestamp,
+          resultsCount: typeof evt.details?.resultsCount === 'number' ? evt.details.resultsCount : undefined,
+        });
+      }
+    } else if (evt.type === 'compare_view' || evt.type === 'compare_add') {
+      comparisonsCount += 1;
+      const slugs = Array.isArray(evt.details?.schoolSlugs) ? (evt.details.schoolSlugs as string[]) : evt.schoolSlug ? [evt.schoolSlug] : [];
+      if (slugs.length > 0) {
+        comparisons.push({ schools: slugs, timestamp: evt.timestamp });
+      }
+    } else if (evt.type === 'wishlist_add') {
+      shortlistedCount += 1;
+    } else if (evt.type === 'rating_submitted') {
+      reviewsSubmittedCount += 1;
+    } else if (evt.type === 'rating_edited') {
+      reviewsEditedCount += 1;
+    } else if (evt.type === 'rating_deleted') {
+      reviewsDeletedCount += 1;
+    }
+  }
+
+  const uniqueSchoolsViewed = Array.from(schoolViewMap.entries()).map(([slug, data]) => ({
+    slug,
+    visitCount: data.count,
+    firstViewed: data.first,
+    lastViewed: data.last,
+  }));
+
+  return {
+    timeline: userEvents,
+    summary: {
+      schoolsViewedCount,
+      searchesPerformedCount,
+      comparisonsCount,
+      shortlistedCount,
+      reviewsSubmittedCount,
+      reviewsEditedCount,
+      reviewsDeletedCount,
+      totalEvents: userEvents.length,
+    },
+    uniqueSchoolsViewed,
+    searchHistory,
+    comparisons,
+  };
+}
+
+// ----------------------------------------------------------------------------
+// RATINGS & REVIEWS SUBSYSTEM (Genuine Authenticated Reviews + Admin Moderation)
 // ----------------------------------------------------------------------------
 
 export function getSchoolRatings(slug: string): SchoolRating[] {
-  return ratings.filter(r => r.schoolSlug === slug).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  return ratings
+    .filter(r => r.schoolSlug === slug && r.status !== 'deleted')
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
-export function getAllRatings(): SchoolRating[] {
-  return [...ratings].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+export function getAllRatings(includeDeleted = false): SchoolRating[] {
+  const filtered = includeDeleted ? ratings : ratings.filter(r => r.status !== 'deleted');
+  return [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
 export function getUserRatingForSchool(schoolSlug: string, userId: string): SchoolRating | null {
-  const found = ratings.find(r => r.schoolSlug === schoolSlug && r.userId === userId);
+  const found = ratings.find(r => r.schoolSlug === schoolSlug && r.userId === userId && r.status !== 'deleted');
   return found || null;
+}
+
+export function getUserRatings(userId: string): SchoolRating[] {
+  return ratings.filter(r => r.userId === userId && r.status !== 'deleted');
 }
 
 export function getSchoolRatingStats(slug: string): {
@@ -822,10 +1276,8 @@ export function saveSchoolRating(ratingData: {
     safety?: number;
   };
 }): SchoolRating {
-  // Validate score bounds
   const boundedScore = Math.max(1, Math.min(5, Math.round(ratingData.score)));
 
-  // Prevent duplicate review per user per school: update if exists
   const existingIdx = ratings.findIndex(
     r => r.schoolSlug === ratingData.schoolSlug && r.userId === ratingData.userId
   );
@@ -841,6 +1293,7 @@ export function saveSchoolRating(ratingData: {
       categories: ratingData.categories || existing.categories,
       userChildGrade: ratingData.userChildGrade || existing.userChildGrade,
       userName: ratingData.userName || existing.userName,
+      status: 'published',
       updatedAt: now,
     };
     ratings[existingIdx] = updated;
@@ -850,6 +1303,8 @@ export function saveSchoolRating(ratingData: {
       type: 'rating_edited',
       schoolSlug: ratingData.schoolSlug,
       userId: ratingData.userId,
+      targetType: 'review',
+      targetId: existing.id,
       details: { score: boundedScore },
     });
 
@@ -867,6 +1322,7 @@ export function saveSchoolRating(ratingData: {
     comment: ratingData.comment.trim(),
     categories: ratingData.categories,
     verifiedParent: true,
+    status: 'published',
     createdAt: now,
     updatedAt: now,
   };
@@ -878,6 +1334,8 @@ export function saveSchoolRating(ratingData: {
     type: 'rating_submitted',
     schoolSlug: ratingData.schoolSlug,
     userId: ratingData.userId,
+    targetType: 'review',
+    targetId: newRating.id,
     details: { score: boundedScore },
   });
 
@@ -885,113 +1343,545 @@ export function saveSchoolRating(ratingData: {
 }
 
 export function deleteSchoolRating(schoolSlug: string, userId: string): boolean {
-  const initialLen = ratings.length;
-  ratings = ratings.filter(r => !(r.schoolSlug === schoolSlug && r.userId === userId));
-  globalAuthStore.__ADMISSION_PITARA_RATINGS__ = ratings;
-  if (ratings.length !== initialLen) {
-    saveStoreToDisk();
-    recordActivityEvent({
-      type: 'rating_deleted',
-      schoolSlug,
-      userId,
-    });
-    return true;
-  }
-  return false;
+  const target = ratings.find(r => r.schoolSlug === schoolSlug && r.userId === userId && r.status !== 'deleted');
+  if (!target) return false;
+
+  target.status = 'deleted';
+  target.deletedAt = new Date().toISOString();
+  target.deletedBy = userId;
+  saveStoreToDisk();
+
+  recordActivityEvent({
+    type: 'rating_deleted',
+    schoolSlug,
+    userId,
+    targetType: 'review',
+    targetId: target.id,
+  });
+
+  return true;
 }
 
-export function adminDeleteRating(ratingId: string): boolean {
+export function adminDeleteRating(
+  ratingId: string,
+  adminUserId?: string,
+  reason = 'Violates platform review guidelines'
+): boolean {
   const target = ratings.find(r => r.id === ratingId);
-  const initialLen = ratings.length;
-  ratings = ratings.filter(r => r.id !== ratingId);
-  globalAuthStore.__ADMISSION_PITARA_RATINGS__ = ratings;
-  if (ratings.length !== initialLen) {
-    saveStoreToDisk();
-    if (target) {
-      recordActivityEvent({
-        type: 'rating_deleted',
-        schoolSlug: target.schoolSlug,
-        details: { ratingId, adminAction: true },
+  if (!target) return false;
+
+  target.status = 'deleted';
+  target.deletedAt = new Date().toISOString();
+  target.deletedBy = adminUserId || 'admin';
+  target.deletionReason = reason;
+  saveStoreToDisk();
+
+  recordActivityEvent({
+    type: 'rating_deleted',
+    schoolSlug: target.schoolSlug,
+    targetType: 'review',
+    targetId: ratingId,
+    details: { ratingId, adminAction: true, reason, adminUserId },
+  });
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'delete_school_review',
+      'review',
+      ratingId,
+      { schoolSlug: target.schoolSlug, authorUserId: target.userId, reason },
+      'success'
+    );
+  }
+
+  return true;
+}
+
+export function adminRestoreRating(ratingId: string, adminUserId?: string): boolean {
+  const target = ratings.find(r => r.id === ratingId);
+  if (!target || target.status !== 'deleted') return false;
+
+  target.status = 'published';
+  target.deletedAt = undefined;
+  target.deletedBy = undefined;
+  target.deletionReason = undefined;
+  target.updatedAt = new Date().toISOString();
+  saveStoreToDisk();
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'restore_school_review',
+      'review',
+      ratingId,
+      { schoolSlug: target.schoolSlug, authorUserId: target.userId },
+      'success'
+    );
+  }
+
+  return true;
+}
+
+// ----------------------------------------------------------------------------
+// SCHOOL CENTRIC & AGGREGATE ANALYTICS
+// ----------------------------------------------------------------------------
+
+export function getAdminSchoolAnalytics(slug: string) {
+  initDb();
+  const views = schoolViews.get(slug) || 0;
+  const saves = schoolSaves.get(slug) || 0;
+  const ratingStats = getSchoolRatingStats(slug);
+  const schoolRatings = getSchoolRatings(slug);
+
+  // Trace user interactions with this school
+  const viewers = new Map<string, { count: number; first: string; last: string }>();
+  const shortlisters: { userId: string; userEmail: string; userName: string; addedAt?: string }[] = [];
+  const comparers = new Set<string>();
+
+  for (const evt of activityEvents) {
+    if (evt.schoolSlug === slug && evt.userId) {
+      if (evt.type === 'school_view') {
+        const cur = viewers.get(evt.userId) || { count: 0, first: evt.timestamp, last: evt.timestamp };
+        cur.count += 1;
+        cur.last = evt.timestamp;
+        viewers.set(evt.userId, cur);
+      }
+    }
+    if ((evt.type === 'compare_view' || evt.type === 'compare_add') && evt.userId) {
+      const slugs = Array.isArray(evt.details?.schoolSlugs) ? (evt.details.schoolSlugs as string[]) : evt.schoolSlug ? [evt.schoolSlug] : [];
+      if (slugs.includes(slug)) {
+        comparers.add(evt.userId);
+      }
+    }
+  }
+
+  // Check which currently active users have it saved in wishlist
+  for (const user of users.values()) {
+    if (Array.isArray(user.wishlist) && user.wishlist.includes(slug)) {
+      shortlisters.push({
+        userId: user.id,
+        userEmail: user.email,
+        userName: user.name,
       });
     }
+  }
+
+  const uniqueViewersList = Array.from(viewers.entries()).map(([userId, data]) => {
+    const user = getUserById(userId);
+    return {
+      userId,
+      userName: user?.name || 'Parent User',
+      userEmail: user?.email || '',
+      viewCount: data.count,
+      firstViewed: data.first,
+      lastViewed: data.last,
+    };
+  });
+
+  const repeatViewersCount = uniqueViewersList.filter(v => v.viewCount > 1).length;
+
+  return {
+    slug,
+    traffic: {
+      totalViews: views,
+      uniqueAuthenticatedViewers: uniqueViewersList.length,
+      repeatViewers: repeatViewersCount,
+      uniqueViewers: uniqueViewersList,
+    },
+    engagement: {
+      wishlistSaves: saves,
+      shortlistedByUsers: shortlisters,
+      comparedCount: comparers.size,
+      comparersCount: comparers.size,
+      reviewsCount: ratingStats.totalReviews,
+      averageRating: ratingStats.averageScore,
+      ratingDistribution: ratingStats.distribution,
+      categoryAverages: ratingStats.categoryAverages,
+      reviews: schoolRatings,
+    },
+  };
+}
+
+export function getAllSchoolsAdminOverview() {
+  initDb();
+  const summaryMap = new Map<
+    string,
+    {
+      slug: string;
+      views: number;
+      saves: number;
+      reviewsCount: number;
+      averageRating: number;
+      activePromotion?: SchoolPromotionCampaign;
+    }
+  >();
+
+  for (const [slug, views] of schoolViews.entries()) {
+    const saves = schoolSaves.get(slug) || 0;
+    const stats = getSchoolRatingStats(slug);
+    const activePromo = promotions.find(p => p.schoolSlug === slug && p.status === 'active');
+    summaryMap.set(slug, {
+      slug,
+      views,
+      saves,
+      reviewsCount: stats.totalReviews,
+      averageRating: stats.averageScore,
+      activePromotion: activePromo,
+    });
+  }
+
+  return Array.from(summaryMap.values());
+}
+
+export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d' | 'all' = '30d') {
+  initDb();
+  let timeThreshold = 0;
+  const now = Date.now();
+
+  if (timeRange === 'today') {
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+    timeThreshold = startOfToday.getTime();
+  } else if (timeRange === '7d') {
+    timeThreshold = now - 7 * 24 * 60 * 60 * 1000;
+  } else if (timeRange === '30d') {
+    timeThreshold = now - 30 * 24 * 60 * 60 * 1000;
+  } else if (timeRange === '90d') {
+    timeThreshold = now - 90 * 24 * 60 * 60 * 1000;
+  }
+
+  const allUsersList = Array.from(new Set(Array.from(users.values()).map(u => u.id)))
+    .map(id => getUserById(id))
+    .filter((u): u is ParentUser => u !== null);
+
+  const totalAccounts = allUsersList.length;
+  const verifiedAccounts = allUsersList.filter(u => u.emailVerified).length;
+  const newAccountsInRange = allUsersList.filter(
+    u => timeThreshold === 0 || new Date(u.createdAt).getTime() >= timeThreshold
+  ).length;
+
+  const activeUsersInRange = allUsersList.filter(u => {
+    const actTime = u.lastActivityAt
+      ? new Date(u.lastActivityAt).getTime()
+      : u.lastLoginAt
+      ? new Date(u.lastLoginAt).getTime()
+      : new Date(u.createdAt).getTime();
+    return timeThreshold === 0 ? actTime >= now - 30 * 24 * 60 * 60 * 1000 : actTime >= timeThreshold;
+  }).length;
+
+  const activeRatings = ratings.filter(r => r.status !== 'deleted');
+  let ratingSum = 0;
+  for (const r of activeRatings) ratingSum += r.score;
+  const averageRating = activeRatings.length > 0 ? Math.round((ratingSum / activeRatings.length) * 10) / 10 : 0;
+
+  // Most shortlisted schools
+  const topShortlisted = Array.from(schoolSaves.entries())
+    .map(([slug, count]) => ({ slug, saves: count }))
+    .sort((a, b) => b.saves - a.saves)
+    .slice(0, 8);
+
+  // Most viewed schools
+  const topViewed = Array.from(schoolViews.entries())
+    .map(([slug, count]) => ({ slug, views: count }))
+    .sort((a, b) => b.views - a.views)
+    .slice(0, 8);
+
+  // Highest rated schools (minimum 1 review)
+  const highestRated = Object.keys(Object.fromEntries(schoolViews))
+    .map(slug => {
+      const stats = getSchoolRatingStats(slug);
+      return { slug, averageScore: stats.averageScore, totalReviews: stats.totalReviews };
+    })
+    .filter(s => s.totalReviews > 0)
+    .sort((a, b) => b.averageScore - a.averageScore || b.totalReviews - a.totalReviews)
+    .slice(0, 8);
+
+  // Recent activity in time range
+  const filteredActivity = activityEvents.filter(
+    e => timeThreshold === 0 || new Date(e.timestamp).getTime() >= timeThreshold
+  );
+
+  return {
+    timeRange,
+    users: {
+      totalAccounts,
+      verifiedAccounts,
+      newAccountsInRange,
+      activeUsersInRange,
+      disabledAccounts: allUsersList.filter(u => u.status === 'disabled').length,
+    },
+    schools: {
+      topViewed,
+      topShortlisted,
+      highestRated,
+      totalViewsCount: Array.from(schoolViews.values()).reduce((a, b) => a + b, 0),
+      totalSavesCount: Array.from(schoolSaves.values()).reduce((a, b) => a + b, 0),
+    },
+    reviews: {
+      totalReviews: activeRatings.length,
+      averageRating,
+      recentReviews: activeRatings.slice(0, 5),
+    },
+    activity: {
+      totalEventsInRange: filteredActivity.length,
+      recentEvents: filteredActivity.slice(0, 25),
+    },
+  };
+}
+
+export function getWishlistAnalytics() {
+  initDb();
+  const schoolCounts = new Map<string, { count: number; users: { userId: string; email: string; name: string }[] }>();
+
+  for (const user of users.values()) {
+    if (Array.isArray(user.wishlist)) {
+      for (const slug of user.wishlist) {
+        const cur = schoolCounts.get(slug) || { count: 0, users: [] };
+        cur.count += 1;
+        cur.users.push({ userId: user.id, email: user.email, name: user.name });
+        schoolCounts.set(slug, cur);
+      }
+    }
+  }
+
+  return Array.from(schoolCounts.entries())
+    .map(([slug, data]) => ({ slug, count: data.count, users: data.users }))
+    .sort((a, b) => b.count - a.count);
+}
+
+export function getComparisonAnalytics() {
+  initDb();
+  const pairCounts = new Map<string, { pair: string[]; count: number }>();
+  const schoolCompareFrequency = new Map<string, number>();
+
+  for (const evt of activityEvents) {
+    if ((evt.type === 'compare_view' || evt.type === 'compare_add') && evt.details?.schoolSlugs) {
+      const slugs = evt.details.schoolSlugs as string[];
+      if (Array.isArray(slugs) && slugs.length >= 2) {
+        for (const s of slugs) {
+          schoolCompareFrequency.set(s, (schoolCompareFrequency.get(s) || 0) + 1);
+        }
+        // sorted pair key
+        for (let i = 0; i < slugs.length; i++) {
+          for (let j = i + 1; j < slugs.length; j++) {
+            const key = [slugs[i], slugs[j]].sort().join(' vs ');
+            const current = pairCounts.get(key) || { pair: [slugs[i], slugs[j]].sort(), count: 0 };
+            current.count += 1;
+            pairCounts.set(key, current);
+          }
+        }
+      }
+    }
+  }
+
+  const commonPairs = Array.from(pairCounts.values()).sort((a, b) => b.count - a.count).slice(0, 10);
+  const mostComparedSchools = Array.from(schoolCompareFrequency.entries())
+    .map(([slug, count]) => ({ slug, count }))
+    .sort((a, b) => b.count - a.count);
+
+  return {
+    commonPairs,
+    mostComparedSchools,
+  };
+}
+
+export function getSearchAnalytics() {
+  initDb();
+  const queryCounts = new Map<string, { query: string; count: number; lastSearched: string; locality?: string }>();
+  const localityCounts = new Map<string, number>();
+
+  for (const evt of activityEvents) {
+    if (evt.type === 'search_performed' && evt.searchQuery) {
+      const q = evt.searchQuery.trim().toLowerCase();
+      const current = queryCounts.get(q) || { query: evt.searchQuery, count: 0, lastSearched: evt.timestamp, locality: evt.locality };
+      current.count += 1;
+      current.lastSearched = evt.timestamp;
+      queryCounts.set(q, current);
+    }
+    if (evt.locality) {
+      localityCounts.set(evt.locality, (localityCounts.get(evt.locality) || 0) + 1);
+    }
+  }
+
+  return {
+    topQueries: Array.from(queryCounts.values()).sort((a, b) => b.count - a.count).slice(0, 20),
+    topLocalities: Array.from(localityCounts.entries()).map(([locality, count]) => ({ locality, count })).sort((a, b) => b.count - a.count),
+  };
+}
+
+// ----------------------------------------------------------------------------
+// PAID SCHOOL PROMOTION SYSTEM (Transparent, Admin-Controlled, Organic-Preserving)
+// ----------------------------------------------------------------------------
+
+export function getActivePromotions(placement?: string): SchoolPromotionCampaign[] {
+  initDb();
+  const now = new Date().toISOString();
+  return promotions.filter(p => {
+    const isTimeValid = (!p.startDate || p.startDate <= now) && (!p.endDate || p.endDate >= now);
+    const isPlacementValid = !placement || p.placementType === placement;
+    return p.status === 'active' && isTimeValid && isPlacementValid;
+  }).sort((a, b) => a.priority - b.priority);
+}
+
+export function getAllPromotions(): SchoolPromotionCampaign[] {
+  initDb();
+  return [...promotions].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
+
+export function getPromotionById(id: string): SchoolPromotionCampaign | null {
+  initDb();
+  return promotions.find(p => p.id === id) || null;
+}
+
+export function createPromotionCampaign(
+  data: Omit<SchoolPromotionCampaign, 'id' | 'impressions' | 'clicks' | 'createdAt' | 'updatedAt'>,
+  adminUserId?: string
+): SchoolPromotionCampaign {
+  initDb();
+  const now = new Date().toISOString();
+  const newPromo: SchoolPromotionCampaign = {
+    ...data,
+    id: `promo_${crypto.randomBytes(6).toString('hex')}`,
+    impressions: 0,
+    clicks: 0,
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  promotions.push(newPromo);
+  saveStoreToDisk();
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'create_promotion_campaign',
+      'promotion',
+      newPromo.id,
+      { campaignName: newPromo.campaignName, schoolSlug: newPromo.schoolSlug },
+      'success'
+    );
+  }
+
+  return newPromo;
+}
+
+export function updatePromotionCampaign(
+  id: string,
+  updates: Partial<Omit<SchoolPromotionCampaign, 'id' | 'createdAt'>>,
+  adminUserId?: string
+): SchoolPromotionCampaign | null {
+  initDb();
+  const promo = promotions.find(p => p.id === id);
+  if (!promo) return null;
+
+  Object.assign(promo, updates, { updatedAt: new Date().toISOString() });
+  saveStoreToDisk();
+
+  if (adminUserId) {
+    recordAdminAudit(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'update_promotion_campaign',
+      'promotion',
+      id,
+      { updates },
+      'success'
+    );
+  }
+
+  return promo;
+}
+
+export function deletePromotionCampaign(id: string, adminUserId?: string): boolean {
+  initDb();
+  const initialLen = promotions.length;
+  promotions = promotions.filter(p => p.id !== id);
+  globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__ = promotions;
+
+  if (promotions.length !== initialLen) {
+    saveStoreToDisk();
+    if (adminUserId) {
+      recordAdminAudit(
+        adminUserId,
+        getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+        'delete_promotion_campaign',
+        'promotion',
+        id,
+        {},
+        'success'
+      );
+    }
     return true;
   }
   return false;
 }
 
-// ----------------------------------------------------------------------------
-// ACTIVITY TRACKING & PRIVACY-CONSCIOUS TELEMETRY
-// ----------------------------------------------------------------------------
-
-export function recordActivityEvent(
-  arg1:
-    | ActivityEventType
-    | {
-        type: ActivityEventType;
-        schoolSlug?: string;
-        locality?: string;
-        userId?: string;
-        approximateTimeSpent?: string;
-        details?: Record<string, unknown>;
-      },
-  arg2?: string,
-  arg3?: string
-): void {
-  let type: ActivityEventType;
-  let schoolSlug: string | undefined;
-  let locality: string | undefined;
-  let userId: string | undefined;
-  let approximateTimeSpent: string | undefined;
-  let details: Record<string, unknown> | undefined;
-
-  if (typeof arg1 === 'object' && arg1 !== null) {
-    type = arg1.type;
-    schoolSlug = arg1.schoolSlug;
-    locality = arg1.locality;
-    userId = arg1.userId;
-    approximateTimeSpent = arg1.approximateTimeSpent;
-    details = arg1.details;
-  } else {
-    type = arg1;
-    schoolSlug = arg2;
-    locality = arg3;
+export function recordPromotionImpression(id: string): void {
+  const promo = promotions.find(p => p.id === id);
+  if (promo) {
+    promo.impressions = (promo.impressions || 0) + 1;
+    saveStoreToDisk();
   }
+}
 
-  // Aggregate counters
-  if (schoolSlug) {
-    if (type === 'school_view') {
-      const current = schoolViews.get(schoolSlug) || 0;
-      schoolViews.set(schoolSlug, current + 1);
-    } else if (type === 'wishlist_add') {
-      const current = schoolSaves.get(schoolSlug) || 0;
-      schoolSaves.set(schoolSlug, current + 1);
-    } else if (type === 'wishlist_remove') {
-      const current = schoolSaves.get(schoolSlug) || 0;
-      schoolSaves.set(schoolSlug, Math.max(0, current - 1));
-    }
+export function recordPromotionClick(id: string): void {
+  const promo = promotions.find(p => p.id === id);
+  if (promo) {
+    promo.clicks = (promo.clicks || 0) + 1;
+    saveStoreToDisk();
   }
+}
 
-  // Record zero-PII privacy event
-  const evt: ActivityEvent = {
-    id: `evt_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
-    type,
-    schoolSlug,
-    locality,
-    userId,
-    approximateTimeSpent,
+// ----------------------------------------------------------------------------
+// ADMINISTRATIVE AUDIT LOG
+// ----------------------------------------------------------------------------
+
+export function recordAdminAudit(
+  adminUserId: string,
+  adminEmail: string,
+  action: string,
+  targetType: string,
+  targetId: string,
+  details?: Record<string, unknown>,
+  result: 'success' | 'failed' = 'success'
+): AdminAuditLog {
+  const log: AdminAuditLog = {
+    id: `aud_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`,
+    adminUserId,
+    adminEmail,
+    action,
+    targetType,
+    targetId,
     details,
+    result,
     timestamp: new Date().toISOString(),
   };
 
-  activityEvents.unshift(evt);
-  if (activityEvents.length > 500) {
-    activityEvents.length = 500;
+  auditLogs.unshift(log);
+  if (auditLogs.length > 1000) {
+    auditLogs.length = 1000;
   }
 
   saveStoreToDisk();
+  return log;
 }
 
-export function getActivityAnalytics() {
+export function getAdminAuditLogs(limit = 100, filters?: { adminUserId?: string; action?: string; targetType?: string }): AdminAuditLog[] {
+  initDb();
+  let filtered = auditLogs;
+  if (filters?.adminUserId) filtered = filtered.filter(l => l.adminUserId === filters.adminUserId);
+  if (filters?.action) filtered = filtered.filter(l => l.action === filters.action);
+  if (filters?.targetType) filtered = filtered.filter(l => l.targetType === filters.targetType);
+  return filtered.slice(0, limit);
+}
+
+// Backward-compatible export for existing components
+export const getDashboardAnalytics = () => {
+  const overview = getAdminOverviewMetrics('30d');
   const uniqueUsers = new Set<string>();
   let verifiedEmails = 0;
   const localityDistribution: Record<string, number> = {};
@@ -1005,131 +1895,36 @@ export function getActivityAnalytics() {
     }
   }
 
-  const viewsObj: Record<string, number> = {};
-  for (const [slug, count] of schoolViews.entries()) {
-    viewsObj[slug] = count;
-  }
-
-  const savesObj: Record<string, number> = {};
-  for (const [slug, count] of schoolSaves.entries()) {
-    savesObj[slug] = count;
-  }
-
   return {
-    totalRegisteredParents: uniqueUsers.size,
+    totalParents: overview.users.totalAccounts,
+    activeParents: overview.users.activeUsersInRange,
     verifiedEmails,
-    totalRatings: ratings.length,
-    schoolViews: viewsObj,
-    schoolSaves: savesObj,
+    totalViews: overview.schools.totalViewsCount,
+    totalSaves: overview.schools.totalSavesCount,
+    totalRatings: overview.reviews.totalReviews,
+    averageRating: overview.reviews.averageRating,
+    topViewedSchools: overview.schools.topViewed,
+    topSavedSchools: overview.schools.topShortlisted,
     localityDistribution,
+  };
+};
+
+export const getActivityAnalytics = () => {
+  const analytics = getDashboardAnalytics();
+  return {
+    totalRegisteredParents: analytics.totalParents,
+    verifiedEmails: analytics.verifiedEmails,
+    totalRatings: analytics.totalRatings,
+    schoolViews: Object.fromEntries(schoolViews),
+    schoolSaves: Object.fromEntries(schoolSaves),
+    localityDistribution: analytics.localityDistribution,
     recentEvents: activityEvents.slice(0, 50),
   };
-}
+};
 
-export function getAllUsersSanitized() {
-  const uniqueUsers = new Map<string, ReturnType<typeof sanitizeUser>>();
-  for (const user of users.values()) {
-    if (!uniqueUsers.has(user.id)) {
-      uniqueUsers.set(user.id, sanitizeUser(user));
-    }
-  }
-  return Array.from(uniqueUsers.values());
-}
-
-// Convenient named exports for analytics and views
 export const getSchoolRatingSummary = getSchoolRatingStats;
 
-export function getActivityEvents(limit = 50): ActivityEvent[] {
-  return activityEvents.slice(0, limit);
-}
-
-export function recordSchoolView(slug: string, approximateTimeSpent?: string, userId?: string): void {
-  recordActivityEvent({
-    type: 'school_view',
-    schoolSlug: slug,
-    userId,
-    approximateTimeSpent,
-  });
-}
-
-export function recordSchoolSave(slug: string, userId?: string): void {
-  recordActivityEvent({
-    type: 'wishlist_add',
-    schoolSlug: slug,
-    userId,
-  });
-}
-
-export function getDashboardAnalytics() {
-  const analytics = getActivityAnalytics();
-  
-  // Calculate active parents: users with lastActivityAt/lastLoginAt within last 30 days
-  const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
-  let activeParentsCount = 0;
-  const uniqueUsers = new Set<string>();
-
-  for (const user of users.values()) {
-    if (!uniqueUsers.has(user.id)) {
-      uniqueUsers.add(user.id);
-      const activityTimestamp = user.lastActivityAt
-        ? new Date(user.lastActivityAt).getTime()
-        : user.lastLoginAt
-        ? new Date(user.lastLoginAt).getTime()
-        : new Date(user.createdAt).getTime();
-
-      if (activityTimestamp >= thirtyDaysAgo) {
-        activeParentsCount += 1;
-      }
-    }
-  }
-
-  // Calculate average rating across real ratings
-  let totalScore = 0;
-  for (const r of ratings) {
-    totalScore += r.score;
-  }
-  const averageRating = ratings.length > 0 ? Math.round((totalScore / ratings.length) * 10) / 10 : 0;
-
-  // Compute top viewed and saved schools
-  const topViewedSchools = Object.entries(analytics.schoolViews)
-    .map(([slug, views]) => ({ slug, views }))
-    .sort((a, b) => b.views - a.views)
-    .slice(0, 5);
-
-  const topSavedSchools = Object.entries(analytics.schoolSaves)
-    .map(([slug, saves]) => ({ slug, saves }))
-    .sort((a, b) => b.saves - a.saves)
-    .slice(0, 5);
-
-  let totalViews = 0;
-  for (const v of Object.values(analytics.schoolViews)) totalViews += v;
-
-  let totalSaves = 0;
-  for (const s of Object.values(analytics.schoolSaves)) totalSaves += s;
-
-  return {
-    totalParents: analytics.totalRegisteredParents,
-    activeParents: activeParentsCount,
-    verifiedEmails: analytics.verifiedEmails,
-    totalViews,
-    totalSaves,
-    totalRatings: analytics.totalRatings,
-    averageRating,
-    topViewedSchools,
-    topSavedSchools,
-    localityDistribution: analytics.localityDistribution,
-  };
-}
-
-export interface SchoolPopularityMetric {
-  slug: string;
-  views: number;
-  saves: number;
-  reviewsCount: number;
-  averageScore: number;
-}
-
-export function getPublicSchoolPopularity(slug?: string): Record<string, SchoolPopularityMetric> | SchoolPopularityMetric {
+export function getPublicSchoolPopularity(slug?: string) {
   initDb();
   if (slug) {
     const views = schoolViews.get(slug) || 0;
@@ -1144,7 +1939,7 @@ export function getPublicSchoolPopularity(slug?: string): Record<string, SchoolP
     };
   }
 
-  const result: Record<string, SchoolPopularityMetric> = {};
+  const result: Record<string, { slug: string; views: number; saves: number; reviewsCount: number; averageScore: number }> = {};
   for (const [s, views] of schoolViews.entries()) {
     const saves = schoolSaves.get(s) || 0;
     const stats = getSchoolRatingStats(s);

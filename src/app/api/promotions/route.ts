@@ -5,6 +5,9 @@ import {
   recordPromotionClick,
 } from '../../../lib/authStore';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -12,21 +15,28 @@ export async function GET(req: NextRequest) {
 
     const campaigns = getActivePromotions(placement);
 
-    return NextResponse.json({
-      success: true,
-      promotions: campaigns.map(c => ({
-        id: c.id,
-        schoolSlug: c.schoolSlug,
-        campaignName: c.campaignName,
-        placementType: c.placementType,
-        title: c.title,
-        description: c.description,
-        badgeLabel: c.badgeLabel || 'Sponsored',
-        ctaText: c.ctaText,
-        ctaLink: c.ctaLink,
-        priority: c.priority,
-      })),
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        promotions: campaigns.map(c => ({
+          id: c.id,
+          schoolSlug: c.schoolSlug,
+          campaignName: c.campaignName,
+          placementType: c.placementType,
+          title: c.title,
+          description: c.description,
+          badgeLabel: c.badgeLabel || 'Sponsored',
+          ctaText: c.ctaText,
+          ctaLink: c.ctaLink,
+          priority: c.priority,
+        })),
+      },
+      {
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+      }
+    );
   } catch (error) {
     console.error('Error in public promotions GET:', error);
     return NextResponse.json({ success: false, promotions: [] }, { status: 500 });

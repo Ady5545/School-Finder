@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs text-slate-300 list-none p-0 m-0">
               <li>
                 <Link href="/schools" className="hover:text-[#f7a072] transition-colors">
-                  All 17 Schools
+                  All Schools
                 </Link>
               </li>
               <li>

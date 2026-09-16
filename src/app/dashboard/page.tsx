@@ -407,7 +407,7 @@ export default function DashboardPage() {
             </p>
             <Link href="/schools">
               <Button variant="primary" size="sm" className="bg-amber-800 hover:bg-amber-900 text-white">
-                Browse 17 Greater Noida Schools
+                Browse Greater Noida Schools
               </Button>
             </Link>
           </div>

@@ -590,7 +590,7 @@ export default function AdminPage() {
             { id: 'users', label: `User Directory (${usersList.length})`, icon: Users },
             { id: 'activity', label: 'Activity Feed', icon: Activity },
             { id: 'reviews', label: `Reviews Moderation (${reviewsList.length})`, icon: Star },
-            { id: 'schools', label: 'School Analytics (17)', icon: Building },
+            { id: 'schools', label: `School Analytics (${schoolsList.length})`, icon: Building },
             { id: 'wishlists', label: 'Shortlists', icon: Heart },
             { id: 'comparisons', label: 'Comparisons', icon: Scale },
             { id: 'searches', label: 'Searches & Keywords', icon: Search },
@@ -658,7 +658,7 @@ export default function AdminPage() {
                   <span className="text-xs text-slate-400 font-semibold">Total clicks</span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Across all 17 canonical school profiles
+                  Across all {schoolsList.length || 62} canonical school profiles
                 </p>
               </div>
 
@@ -1184,7 +1184,7 @@ export default function AdminPage() {
         )}
 
         {/* =================================================================== */}
-        {/* TAB 5: SCHOOL ANALYTICS (17 SCHOOLS)                                */}
+        {/* TAB 5: SCHOOL ANALYTICS                                             */}
         {/* =================================================================== */}
         {activeTab === 'schools' && (
           <div className="space-y-6">

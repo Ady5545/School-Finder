@@ -87,22 +87,26 @@ legacyFiles.forEach(file => {
 });
 assert(allLegacyHtmlExist, 'All 17 original legacy HTML files remain 100% preserved and untouched');
 
-// Test 8: Standardized assets exist on disk for all 17 schools
+// Test 8: Standardized assets exist on disk for all schools with verified images
 let allAssetsExist = true;
-const assetBase = path.join(__dirname, '../school-website-backend/public');
+const assetBase = path.join(__dirname, '../public');
 schools.forEach(s => {
-  const feat = path.join(assetBase, s.assets.featured);
-  const hero = path.join(assetBase, s.assets.hero);
-  if (!fs.existsSync(feat)) {
-    console.error(`Featured asset missing for ${s.slug}: ${feat}`);
-    allAssetsExist = false;
+  if (s.assets.featured) {
+    const feat = path.join(assetBase, s.assets.featured);
+    if (!fs.existsSync(feat)) {
+      console.error(`Featured asset missing for ${s.slug}: ${feat}`);
+      allAssetsExist = false;
+    }
   }
-  if (!fs.existsSync(hero)) {
-    console.error(`Hero asset missing for ${s.slug}: ${hero}`);
-    allAssetsExist = false;
+  if (s.assets.hero) {
+    const hero = path.join(assetBase, s.assets.hero);
+    if (!fs.existsSync(hero)) {
+      console.error(`Hero asset missing for ${s.slug}: ${hero}`);
+      allAssetsExist = false;
+    }
   }
 });
-assert(allAssetsExist, 'All 17 schools have verified featured and hero assets in standardized hierarchy');
+assert(allAssetsExist, 'All schools with verified photo records have authentic assets in standardized hierarchy');
 
 // Test 9: Backend auth and static assets preserved
 assert(fs.existsSync(path.join(__dirname, '../school-website-backend/server.js')), 'server.js preserved');

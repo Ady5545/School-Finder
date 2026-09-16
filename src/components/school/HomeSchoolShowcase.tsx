@@ -108,7 +108,7 @@ export const HomeSchoolShowcase: React.FC<HomeSchoolShowcaseProps> = ({ schools 
           href="/schools"
           className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[var(--color-primary)] hover:text-[var(--color-accent)] transition-colors group px-6 py-3 rounded-xl bg-white border border-[var(--color-border-strong)] hover:border-[var(--color-primary)] shadow-warm-xs hover:shadow-warm-sm"
         >
-          <span>View all 17 schools</span>
+          <span>View all {schools.length} schools</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[var(--color-accent)]" />
         </Link>
       </div>

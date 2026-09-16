@@ -78,8 +78,8 @@ export interface SchoolRating {
 }
 
 export interface SchoolAssets {
-  featured: string;
-  hero: string;
+  featured: string | null;
+  hero: string | null;
   gallery: string[];
   coverImage?: string;
   imageSource?: string;

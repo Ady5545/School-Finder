@@ -283,7 +283,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
               <span className="text-[11px] font-black text-amber-700 uppercase tracking-wider">
-                17 Campus Spatial Map &amp; Proximity Filter
+                Spatial Map &amp; Proximity Filter
               </span>
             </div>
             <h2 className="text-base sm:text-lg font-black text-[var(--color-content)] tracking-tight mt-0.5">
@@ -448,7 +448,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
             />
             <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-warm-xs text-xs">
               <span className="font-bold text-[var(--color-content)]">
-                Showing all 17 Greater Noida West campuses
+                Showing all {schools.length} Greater Noida West campuses
               </span>
               <span className="text-[10px] text-slate-500 block">
                 Click "Street Map / Sector Navigator" to toggle spatial mode.
@@ -516,7 +516,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
               })()
             )}
 
-            {/* School Pins for all 17 Schools */}
+            {/* School Pins for all Schools */}
             {schoolsWithDistance.map(({ school, lat, lng, distanceKm, isWithinRadius }) => {
               const pos = getCanvasPos(lat, lng);
               const isSelected = selectedPinSlug === school.slug;
@@ -654,7 +654,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
             <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-warm-xs text-[11px] flex items-center gap-3">
               <span className="flex items-center gap-1 font-bold text-slate-700">
                 <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)] inline-block" />
-                <span>17 Institutions</span>
+                <span>{schools.length} Institutions</span>
               </span>
               <span className="flex items-center gap-1 font-bold text-slate-700">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block" />

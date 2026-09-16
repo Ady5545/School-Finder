@@ -291,7 +291,7 @@ export const Header: React.FC = () => {
           <div className="pt-4 border-t border-[var(--color-border-subtle)] flex flex-col gap-2.5">
             <Link href="/schools" onClick={() => setIsMobileMenuOpen(false)}>
               <Button variant="primary" size="md" className="w-full">
-                Explore 17 Verified Schools
+                Explore All Schools
               </Button>
             </Link>
             {!isAuthenticated ? (

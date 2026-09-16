@@ -33,6 +33,7 @@ export async function GET(req: NextRequest) {
         id: payload.sub,
         name: payload.name || 'Parent',
         email: payload.email,
+        status: 'active',
         preferredSchoolLocality: payload.preferredSchoolLocality || 'Greater Noida West',
         emailVerified: true,
         analyticsConsent: true,

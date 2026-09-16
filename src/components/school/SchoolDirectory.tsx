@@ -290,7 +290,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                   ? 'bg-amber-50 text-amber-900 border-amber-300'
                   : 'bg-white text-slate-600 border-[var(--color-border-strong)] hover:text-slate-900'
               )}
-              title={showMap ? 'Hide interactive map' : 'Show interactive map of all 17 schools'}
+              title={showMap ? 'Hide interactive map' : 'Show interactive map of all schools'}
             >
               <MapPin className={cn('w-3.5 h-3.5', showMap ? 'text-amber-600' : 'text-slate-500')} />
               <span>{showMap ? 'Map Active' : 'View Map'}</span>
@@ -404,7 +404,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         </div>
       </div>
 
-      {/* Interactive Map Component for All 17 Schools with Proximity Filtering */}
+      {/* Interactive Map Component with Proximity Filtering */}
       {showMap && (
         <DirectoryInteractiveMap
           schools={initialSchools}

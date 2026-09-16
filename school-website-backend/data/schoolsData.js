@@ -1622,15 +1622,10 @@ const schools = [
       "reviewsCount": 11
     },
     "assets": {
-      "featured": "/assets/schools/sks-world-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/sks-world-school-greater-noida-west/hero/hero.jpg",
-      "gallery": [
-        "/assets/schools/sks-world-school-greater-noida-west/featured/featured.jpg"
-      ],
-      "legacyPaths": {
-        "cardImage": "/images/sks.jpg"
-      },
-      "coverImage": "/assets/schools/sks-world-school-greater-noida-west/featured/featured.jpg",
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {},
       "imageSource": "SKS World School Sector 16B Campus Archive",
       "imageSourceUrl": "https://sksworldschool.ac.in",
       "imageVerifiedAt": "September 2026"
@@ -4020,8 +4015,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/florence-international-school/featured/featured.jpg",
-      "hero": "/assets/schools/florence-international-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -4192,8 +4187,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/st-teresa-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/st-teresa-school-greater-noida-west/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -4365,8 +4360,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/st-johns-senior-secondary-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/st-johns-senior-secondary-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -4537,8 +4532,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/mount-olympus-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/mount-olympus-school-greater-noida-west/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -4711,8 +4706,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/prudence-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/prudence-school-greater-noida-west/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -4884,8 +4879,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/shemford-futuristic-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/shemford-futuristic-school-greater-noida-west/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -5055,8 +5050,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/scholars-rosary-school-noida-extension/featured/featured.jpg",
-      "hero": "/assets/schools/scholars-rosary-school-noida-extension/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -5224,8 +5219,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/oxford-green-public-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/oxford-green-public-school-greater-noida-west/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -5395,8 +5390,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/the-icon-international-school/featured/featured.jpg",
-      "hero": "/assets/schools/the-icon-international-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -5565,8 +5560,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/cambridge-school-greater-noida/featured/featured.jpg",
-      "hero": "/assets/schools/cambridge-school-greater-noida/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -5740,8 +5735,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/apeejay-international-school-greater-noida/featured/featured.jpg",
-      "hero": "/assets/schools/apeejay-international-school-greater-noida/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -5915,8 +5910,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/crossings-republic-dav-public-school/featured/featured.jpg",
-      "hero": "/assets/schools/crossings-republic-dav-public-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -6087,8 +6082,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/vishwa-bharati-public-school-greater-noida/featured/featured.jpg",
-      "hero": "/assets/schools/vishwa-bharati-public-school-greater-noida/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -6260,8 +6255,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/st-mary-convent-school-greater-noida/featured/featured.jpg",
-      "hero": "/assets/schools/st-mary-convent-school-greater-noida/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -6432,8 +6427,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/kalka-public-school-greater-noida/featured/featured.jpg",
-      "hero": "/assets/schools/kalka-public-school-greater-noida/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -6604,8 +6599,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/indus-valley-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/indus-valley-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -6776,8 +6771,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/renaissance-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/renaissance-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -6948,8 +6943,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/vienna-public-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/vienna-public-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -7120,8 +7115,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/modern-public-school-noida-extension/featured/featured.jpg",
-      "hero": "/assets/schools/modern-public-school-noida-extension/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -7292,8 +7287,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/golden-valley-public-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/golden-valley-public-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -7464,8 +7459,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/blooming-buds-senior-secondary-school/featured/featured.jpg",
-      "hero": "/assets/schools/blooming-buds-senior-secondary-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -7636,8 +7631,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/jinvani-bharti-public-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/jinvani-bharti-public-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -7808,8 +7803,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/glorious-public-school/featured/featured.jpg",
-      "hero": "/assets/schools/glorious-public-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -7980,8 +7975,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/green-valley-academy-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/green-valley-academy-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -8152,8 +8147,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/royal-international-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/royal-international-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -8324,8 +8319,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/aditi-public-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/aditi-public-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -8496,8 +8491,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/sunshine-public-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/sunshine-public-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -8668,8 +8663,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/bright-beginnings-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/bright-beginnings-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -8840,8 +8835,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/navjeevan-mission-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/navjeevan-mission-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -9012,8 +9007,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/mother-teresa-public-school-noida-ext/featured/featured.jpg",
-      "hero": "/assets/schools/mother-teresa-public-school-noida-ext/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -9184,8 +9179,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/d-point-high-school/featured/featured.jpg",
-      "hero": "/assets/schools/d-point-high-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -9356,8 +9351,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/dps-monarch-international-school/featured/featured.jpg",
-      "hero": "/assets/schools/dps-monarch-international-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -9529,8 +9524,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/shree-thakur-dwara-balika-vidyalaya-gr-noida/featured/featured.jpg",
-      "hero": "/assets/schools/shree-thakur-dwara-balika-vidyalaya-gr-noida/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -9701,8 +9696,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/pragyan-public-school-jewar-extension/featured/featured.jpg",
-      "hero": "/assets/schools/pragyan-public-school-jewar-extension/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -9873,8 +9868,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/om-sun-international-school/featured/featured.jpg",
-      "hero": "/assets/schools/om-sun-international-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -10045,8 +10040,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/dps-world-school-noida-extension/featured/featured.jpg",
-      "hero": "/assets/schools/dps-world-school-noida-extension/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -10218,8 +10213,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/step-by-step-school-noida-feeder/featured/featured.jpg",
-      "hero": "/assets/schools/step-by-step-school-noida-feeder/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -10390,8 +10385,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/amity-international-school-gn-feeder/featured/featured.jpg",
-      "hero": "/assets/schools/amity-international-school-gn-feeder/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -10562,8 +10557,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/somerville-school-greater-noida/featured/featured.jpg",
-      "hero": "/assets/schools/somerville-school-greater-noida/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -10734,8 +10729,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/aster-public-school-kp5/featured/featured.jpg",
-      "hero": "/assets/schools/aster-public-school-kp5/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -10906,8 +10901,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/the-manthan-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/the-manthan-school-greater-noida-west/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -11078,8 +11073,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/bgs-vijnatham-school/featured/featured.jpg",
-      "hero": "/assets/schools/bgs-vijnatham-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -11250,8 +11245,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/sarvottam-international-school/featured/featured.jpg",
-      "hero": "/assets/schools/sarvottam-international-school/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -11422,8 +11417,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/the-millennium-school-noida-extension/featured/featured.jpg",
-      "hero": "/assets/schools/the-millennium-school-noida-extension/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
@@ -11594,8 +11589,8 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/schools/st-xaviers-high-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/st-xaviers-high-school-greater-noida-west/hero/hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },

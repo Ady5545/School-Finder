@@ -317,7 +317,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               </p>
             </div>
             <Link href="/schools" className="text-xs font-bold text-[var(--color-primary)] hover:underline">
-              View All 17 Schools →
+              View All Schools →
             </Link>
           </div>
 

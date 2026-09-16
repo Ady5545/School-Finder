@@ -43,7 +43,7 @@ export default function NotFound() {
             </div>
             <Link href="/schools">
               <Button variant="outline" size="sm" rightIcon={<Compass className="w-4 h-4" />}>
-                View All 17 Schools
+                View All Schools
               </Button>
             </Link>
           </div>

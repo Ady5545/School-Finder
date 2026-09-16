@@ -71,7 +71,7 @@ export default function AboutPage() {
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-              <span>All 17 initial school profiles are mapped directly to genuine geographical locations in Greater Noida West.</span>
+              <span>All canonical school profiles are mapped directly to genuine geographical locations in Greater Noida West and surrounding sectors.</span>
             </li>
             <li className="flex items-start gap-2">
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />

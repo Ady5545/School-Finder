@@ -4,6 +4,7 @@ import { getAllSchools } from '../lib/schools';
 import { HomeSearch } from '../components/school/HomeSearch';
 import { HomeSchoolShowcase } from '../components/school/HomeSchoolShowcase';
 import { HomeRatingsDiscovery } from '../components/home/HomeRatingsDiscovery';
+import { SponsoredPlacementCard } from '../components/school/SponsoredPlacementCard';
 import { Button } from '../components/ui/Button';
 import {
   ShieldCheck,
@@ -38,7 +39,7 @@ export default function HomePage() {
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#c2410c] shrink-0" />
               <span className="font-semibold text-slate-900">Greater Noida West &amp; Noida Extension School Directory</span>
               <span className="text-slate-400 mx-0.5">•</span>
-              <span className="text-slate-600 font-normal">17 Verified Campuses</span>
+              <span className="text-slate-600 font-normal">{allSchools.length} Verified Campuses</span>
             </div>
 
             {/* Main Confident Headline matching Image 1 */}
@@ -53,7 +54,7 @@ export default function HomePage() {
             {/* Supporting Subtitle matching Image 1 */}
             <p className="text-base sm:text-lg text-slate-600 mt-5 sm:mt-6 leading-relaxed max-w-2xl sm:max-w-3xl text-center mx-auto">
               Transparent fee breakdowns, authentic facilities, verified boards (CBSE, ICSE, IB),<br className="hidden sm:inline" />
-              and side-by-side comparisons for 17 institutions across Noida Extension.
+              and side-by-side comparisons for {allSchools.length} institutions across Noida Extension.
             </p>
 
             {/* Search Bar */}
@@ -100,7 +101,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-center gap-4 mt-8 pt-6 border-t border-[var(--color-border-subtle)] w-full max-w-4xl mx-auto">
               <Link href="/schools">
                 <Button variant="primary" size="lg" className="text-white font-bold shadow-warm-xs hover:shadow-warm-md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Explore All 17 Verified Schools
+                  Explore All {allSchools.length} Verified Schools
                 </Button>
               </Link>
               <Link href="/compare">
@@ -114,6 +115,13 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
+      {/* PROMOTED / SPONSORED PARTNER BANNER (IF ACTIVE CAMPAIGN CONFIGURED)       */}
+      {/* ========================================================================= */}
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <SponsoredPlacementCard placement="homepage_hero" />
+      </div>
+
+      {/* ========================================================================= */}
       {/* 2. COMPACT PROOF STRIP (SINGLE HORIZONTAL BENCHMARK SECTION)              */}
       {/* ========================================================================= */}
       <section className="w-full bg-[#f4f7fb] border-b border-[var(--color-border)] py-8 sm:py-10">
@@ -121,7 +129,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
             <div className="text-center pt-3 sm:pt-0">
               <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-primary)] block tracking-tight">
-                17
+                {allSchools.length}
               </span>
               <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
                 Verified Campuses

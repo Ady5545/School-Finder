@@ -51,9 +51,14 @@ export const SchoolImage: React.FC<SchoolImageProps> = ({
           onError={() => setHasError(true)}
         />
       ) : (
-        <div className="flex flex-col items-center justify-center p-4 text-center text-slate-400">
-          <SchoolIcon className="w-8 h-8 stroke-[1.5] mb-1" aria-hidden="true" />
-          <span className="text-[11px] font-medium text-slate-500 line-clamp-1">{alt}</span>
+        <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-slate-50 via-slate-100 to-amber-50/40 relative">
+          <div className="w-10 h-10 rounded-full bg-white shadow-xs border border-slate-200/80 flex items-center justify-center text-[#0f2d4a] mb-2">
+            <SchoolIcon className="w-5 h-5 stroke-[1.75]" aria-hidden="true" />
+          </div>
+          <span className="text-xs font-bold text-slate-800 line-clamp-1 max-w-[85%]">{alt}</span>
+          <span className="text-[10px] font-semibold text-slate-400 mt-0.5 tracking-wide uppercase">
+            Admission Pitara Directory
+          </span>
         </div>
       )}
     </div>

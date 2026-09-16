@@ -29,7 +29,9 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
     let isMounted = true;
     async function loadPromo() {
       try {
-        const res = await fetch(`/api/promotions?placement=${encodeURIComponent(placement)}`);
+        const res = await fetch(`/api/promotions?placement=${encodeURIComponent(placement)}`, {
+          cache: 'no-store',
+        });
         if (res.ok) {
           const data = await res.json();
           if (data.promotions && data.promotions.length > 0 && isMounted) {
@@ -44,6 +46,9 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ campaignId: first.id, action: 'impression' }),
             }).catch(() => {});
+          } else if (isMounted) {
+            setPromo(null);
+            setSchool(null);
           }
         }
       } catch {

@@ -9,7 +9,7 @@ import { Button } from '../ui/Button';
 export interface WishlistModalTarget {
   slug: string;
   name: string;
-  image?: string;
+  image?: string | null;
   area?: string;
 }
 

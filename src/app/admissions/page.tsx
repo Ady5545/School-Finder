@@ -29,7 +29,7 @@ export default function AdmissionsPage() {
           Greater Noida West Admission Tracker
         </h1>
         <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1">
-          Real-time admission status, eligibility age benchmarks, and direct official application links across all 17 institutions.
+          Real-time admission status, eligibility age benchmarks, and direct official application links across all {schools.length} institutions.
         </p>
       </div>
 

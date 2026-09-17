@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getActivityEvents, getUserById } from '../../../../lib/authStore';
+import { getActivityEvents, getUserByIdAsync } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
@@ -24,11 +24,11 @@ export async function GET(req: NextRequest) {
   });
 
   // Enrich events with user names and school names
-  const enrichedEvents = events.map(evt => {
+  const enrichedEvents = await Promise.all(events.map(async evt => {
     let userName: string | undefined = undefined;
     let userEmail: string | undefined = undefined;
     if (evt.userId) {
-      const user = getUserById(evt.userId);
+      const user = await getUserByIdAsync(evt.userId);
       if (user) {
         userName = user.name;
         userEmail = user.email;
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       userEmail,
       schoolName,
     };
-  });
+  }));
 
   return NextResponse.json({
     success: true,

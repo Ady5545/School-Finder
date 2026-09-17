@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   verifySessionToken,
-  getUserById,
-  updateUserLists,
+  getUserByIdAsync,
+  updateUserListsAsync,
   recordActivityEvent,
   recordSchoolSave,
 } from '../../../../lib/authStore';
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    const user = getUserById(session.sub);
+    const user = await getUserByIdAsync(session.sub);
     if (!user) {
       return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
     }
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const user = getUserById(session.sub);
+    const user = await getUserByIdAsync(session.sub);
     if (!user) {
       return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
     }
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
 
     if (action === 'clear') {
       current = [];
-      updateUserLists(user.id, current);
+      await updateUserListsAsync(user.id, current);
       return NextResponse.json({
         success: true,
         wishlist: [],
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
         .filter((s: string) => typeof s === 'string' && getSchoolBySlug(s))
         .map((s: string) => getCanonicalSlug(s));
       const combined = Array.from(new Set([...current.map(s => getCanonicalSlug(s)), ...validList]));
-      updateUserLists(user.id, combined);
+      await updateUserListsAsync(user.id, combined);
       return NextResponse.json({ success: true, wishlist: combined });
     }
 
@@ -127,7 +127,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    updateUserLists(user.id, current);
+    await updateUserListsAsync(user.id, current);
 
     return NextResponse.json({
       success: true,

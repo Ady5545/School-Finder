@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
-  createParentUser,
+  createParentUserAsync,
   checkVerificationToken,
   createSessionToken,
   sanitizeUser,
-  getUserByEmail,
+  getUserByEmailAsync,
   normalizeIndianPhone,
   validateResidentialSociety,
   validateChildName,
@@ -116,7 +116,7 @@ export async function POST(req: NextRequest) {
     const cleanMotherName = motherValidation.cleaned;
 
     // 9. Check duplicate email
-    const existingEmail = getUserByEmail(cleanEmail);
+    const existingEmail = await getUserByEmailAsync(cleanEmail);
     if (existingEmail) {
       return NextResponse.json(
         { success: false, message: 'An account with this email address already exists. Please sign in.' },
@@ -134,7 +134,7 @@ export async function POST(req: NextRequest) {
     }
 
     // 11. Create User
-    const result = createParentUser({
+    const result = await createParentUserAsync({
       name: cleanParentName,
       email: cleanEmail,
       phone: cleanPhone,

@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   verifySessionToken,
-  getUserById,
+  getUserByIdAsync,
   sanitizeUser,
-  updateUserProfile,
-  deleteParentUser,
+  updateUserProfileAsync,
+  deleteParentUserAsync,
   normalizeIndianPhone,
   validateResidentialSociety,
   validateChildName,
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ authenticated: false, user: null }, { status: 401 });
     }
 
-    let user = getUserById(payload.sub);
+    let user = await getUserByIdAsync(payload.sub);
     if (!user && payload.sub && payload.email) {
       // Reconstruct user from cryptographically verified session token for serverless resilience
       user = {
@@ -173,7 +173,7 @@ export async function PATCH(req: NextRequest) {
       updates.analyticsConsent = body.analyticsConsent;
     }
 
-    const updatedUser = updateUserProfile(payload.sub, updates);
+    const updatedUser = await updateUserProfileAsync(payload.sub, updates);
 
     if (!updatedUser) {
       return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
@@ -209,7 +209,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Invalid session' }, { status: 401 });
     }
 
-    const deleted = deleteParentUser(payload.sub);
+    const deleted = await deleteParentUserAsync(payload.sub);
     const response = NextResponse.json({
       success: deleted,
       message: deleted ? 'Account and associated data removed.' : 'User not found',

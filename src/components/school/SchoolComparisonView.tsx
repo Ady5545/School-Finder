@@ -26,6 +26,7 @@ import { SchoolImage } from './SchoolImage';
 import { RatingDisplay } from '../ui/RatingDisplay';
 import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
+import { AdmissionStatus } from './AdmissionStatus';
 import { useSchoolStore } from '../../lib/schoolStore';
 import { getAllSchools, getSchoolBySlug } from '../../lib/schools';
 import { formatCurrency } from '../../lib/utils';
@@ -426,11 +427,9 @@ export const SchoolComparisonView: React.FC = () => {
               <div className="grid grid-cols-1 gap-3">
                 {selectedSchools.map(s => (
                   <div key={s.id} className="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-xs text-slate-900">{s.name}</span>
-                      <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
-                        {s.admissions.status.replace('-', ' ')}
-                      </span>
+                    <div className="flex items-start justify-between gap-2 min-w-0">
+                      <span className="font-bold text-xs text-slate-900 truncate flex-1 min-w-0">{s.name}</span>
+                      <AdmissionStatus admissions={s.admissions} showDate={false} className="shrink-0" />
                     </div>
                     <p className="text-[11px] text-slate-600">Window: {s.admissions.date || '2025–2026 Open'}</p>
                     <Link href={`/schools/${s.slug}`} className="block pt-1">
@@ -733,18 +732,7 @@ export const SchoolComparisonView: React.FC = () => {
               <td className="p-4 font-semibold text-[var(--color-content-muted)] sticky left-0 z-10 bg-white border-r border-[var(--color-border)] shadow-2xs">Admission Status</td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4">
-                  <span
-                    className={cn(
-                      'px-2 py-0.5 rounded text-[11px] font-bold capitalize',
-                      s.admissions.status === 'open'
-                        ? 'bg-emerald-50 text-emerald-700'
-                        : s.admissions.status === 'closing-soon'
-                        ? 'bg-amber-50 text-amber-700'
-                        : 'bg-slate-100 text-slate-600'
-                    )}
-                  >
-                    {s.admissions.status.replace('-', ' ')}
-                  </span>
+                  <AdmissionStatus admissions={s.admissions} showDate={false} />
                 </td>
               ))}
             </tr>

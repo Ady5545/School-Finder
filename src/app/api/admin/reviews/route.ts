@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
 import {
-  getAllRatings,
-  adminDeleteRating,
-  adminRestoreRating,
-  getUserById,
-  getSchoolRatingStats,
+  getAllRatingsAsync,
+  adminDeleteRatingAsync,
+  adminRestoreRatingAsync,
+  getUserByIdAsync,
 } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
@@ -22,7 +21,7 @@ export async function GET(req: NextRequest) {
   const search = (searchParams.get('q') || '').toLowerCase().trim();
   const includeDeleted = searchParams.get('includeDeleted') === 'true';
 
-  let ratings = getAllRatings(includeDeleted);
+  let ratings = await getAllRatingsAsync(includeDeleted);
 
   if (schoolSlug) {
     ratings = ratings.filter(r => r.schoolSlug === schoolSlug);
@@ -45,16 +44,18 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const enriched = ratings.map(r => {
-    const school = getSchoolBySlug(r.schoolSlug);
-    const user = getUserById(r.userId);
-    return {
-      ...r,
-      schoolName: school?.name || r.schoolSlug,
-      userEmail: user?.email || '',
-      userStatus: user?.status || 'active',
-    };
-  });
+  const enriched = await Promise.all(
+    ratings.map(async r => {
+      const school = getSchoolBySlug(r.schoolSlug);
+      const user = await getUserByIdAsync(r.userId);
+      return {
+        ...r,
+        schoolName: school?.name || r.schoolSlug,
+        userEmail: user?.email || '',
+        userStatus: user?.status || 'active',
+      };
+    })
+  );
 
   return NextResponse.json({
     success: true,
@@ -77,7 +78,7 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ success: false, message: 'Review ID required' }, { status: 400 });
   }
 
-  const deleted = adminDeleteRating(reviewId, auth.user.id, reason);
+  const deleted = await adminDeleteRatingAsync(reviewId, auth.user.id, reason);
   if (!deleted) {
     return NextResponse.json({ success: false, message: 'Review not found' }, { status: 404 });
   }
@@ -102,7 +103,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (action === 'restore') {
-    const restored = adminRestoreRating(reviewId, auth.user.id);
+    const restored = await adminRestoreRatingAsync(reviewId, auth.user.id);
     if (!restored) {
       return NextResponse.json({ success: false, message: 'Review not found or could not be restored' }, { status: 404 });
     }
@@ -113,7 +114,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (action === 'delete') {
-    const deleted = adminDeleteRating(reviewId, auth.user.id, reason || 'Removed by moderator');
+    const deleted = await adminDeleteRatingAsync(reviewId, auth.user.id, reason || 'Removed by moderator');
     if (!deleted) {
       return NextResponse.json({ success: false, message: 'Review not found' }, { status: 404 });
     }

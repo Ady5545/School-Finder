@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
-  getUserByEmail,
+  getUserByEmailAsync,
   verifyPassword,
   createSessionToken,
   sanitizeUser,
   verifyOtpCode,
   recordActivityEvent,
   isUserSuspendedOrBanned,
+  updateUserProfileAsync,
 } from '../../../../lib/authStore';
 
 export async function POST(req: NextRequest) {
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const user = getUserByEmail(emailToUse);
+    const user = await getUserByEmailAsync(emailToUse);
     if (!user) {
       return NextResponse.json(
         {
@@ -87,8 +88,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    user.lastLoginAt = new Date().toISOString();
-    user.lastActivityAt = user.lastLoginAt;
+    const now = new Date().toISOString();
+    user.lastLoginAt = now;
+    user.lastActivityAt = now;
+    await updateUserProfileAsync(user.id, {});
 
     recordActivityEvent({
       type: 'user_login',

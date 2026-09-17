@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '@/lib/adminAuth';
 import { getCanonicalSchools, getArchivedSchools } from '@data/schoolsData';
-import { getAllParentUsers, getAllRatings, getAdminAuditLogs } from '@/lib/authStore';
+import { getAllParentUsersAsync, getAllRatingsAsync, getAdminAuditLogs } from '@/lib/authStore';
 import { getEmailCredentials } from '@/lib/emailService';
 
 export async function GET(req: NextRequest) {
@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
 
   const activeSchools = getCanonicalSchools();
   const archivedSchools = getArchivedSchools();
-  const users = getAllParentUsers();
-  const ratings = getAllRatings();
+  const users = await getAllParentUsersAsync();
+  const ratings = await getAllRatingsAsync();
   const creds = getEmailCredentials();
   const auditLogs = getAdminAuditLogs(1);
 

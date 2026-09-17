@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
-  getSchoolRatings,
-  getSanitizedSchoolRatings,
-  getSchoolRatingSummary,
-  saveSchoolRating,
-  deleteSchoolRating,
+  getSanitizedSchoolRatingsAsync,
+  getSchoolRatingStatsAsync,
+  saveSchoolRatingAsync,
+  deleteSchoolRatingAsync,
   verifySessionToken,
-  getUserById,
-  getUserRatingForSchool,
+  getUserByIdAsync,
+  getUserRatingForSchoolAsync,
   sanitizePublicRating,
 } from '../../../../../lib/authStore';
 import { getSchoolBySlug, getCanonicalSlug } from '../../../../../lib/schools';
@@ -29,8 +28,8 @@ export async function GET(
     }
 
     const canonicalSlug = getCanonicalSlug(slug);
-    const summary = getSchoolRatingSummary(canonicalSlug);
-    const ratings = getSanitizedSchoolRatings(canonicalSlug);
+    const summary = await getSchoolRatingStatsAsync(canonicalSlug);
+    const ratings = await getSanitizedSchoolRatingsAsync(canonicalSlug);
 
     // If user is authenticated, also return their specific rating
     const cookieToken = req.cookies.get('ap_session')?.value;
@@ -42,7 +41,7 @@ export async function GET(
     if (token) {
       const session = verifySessionToken(token);
       if (session?.sub) {
-        userRating = getUserRatingForSchool(canonicalSlug, session.sub);
+        userRating = await getUserRatingForSchoolAsync(canonicalSlug, session.sub);
       }
     }
 
@@ -95,7 +94,7 @@ export async function POST(
       );
     }
 
-    const user = getUserById(session.sub);
+    const user = await getUserByIdAsync(session.sub);
     if (!user) {
       return NextResponse.json(
         { success: false, message: 'Parent account not found.' },
@@ -130,7 +129,7 @@ export async function POST(
 
     const canonicalSlug = getCanonicalSlug(slug);
 
-    const rating = saveSchoolRating({
+    const rating = await saveSchoolRatingAsync({
       schoolSlug: canonicalSlug,
       userId: user.id,
       userName: user.name,
@@ -147,13 +146,15 @@ export async function POST(
       } : undefined,
     });
 
+    const updatedSummary = await getSchoolRatingStatsAsync(canonicalSlug);
+
     return NextResponse.json({
       success: true,
       message: rating.isAnonymous
         ? 'Thank you! Your verified parent rating has been published anonymously.'
         : 'Thank you! Your verified parent rating has been published.',
       rating: sanitizePublicRating(rating),
-      summary: getSchoolRatingSummary(canonicalSlug),
+      summary: updatedSummary,
     });
   } catch (error) {
     console.error('Error submitting school rating:', error);
@@ -187,11 +188,12 @@ export async function DELETE(
       return NextResponse.json({ success: false, message: 'Invalid session' }, { status: 401 });
     }
 
-    const deleted = deleteSchoolRating(canonicalSlug, session.sub);
+    const deleted = await deleteSchoolRatingAsync(canonicalSlug, session.sub);
+    const updatedSummary = await getSchoolRatingStatsAsync(canonicalSlug);
     return NextResponse.json({
       success: deleted,
       message: deleted ? 'Your review has been removed.' : 'Review not found.',
-      summary: getSchoolRatingSummary(canonicalSlug),
+      summary: updatedSummary,
     });
   } catch (error) {
     console.error('Error deleting school rating:', error);

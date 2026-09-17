@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, Bell, ShieldCheck, CheckCircle2, Clock, ExternalLink, AlertCircle, Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { AdmissionReminderModal } from './AdmissionReminderModal';
+import { formatAdmissionStatus } from './AdmissionStatus';
+import { cn } from '../../lib/utils';
 import type { School, AdmissionMilestone } from '@data/schoolsData';
 
 interface SchoolAdmissionsSectionProps {
@@ -17,6 +19,11 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
 
   const milestones = school.admissions?.milestones || [];
   const hasVerifiedMilestones = milestones.length > 0;
+
+  const rawStatus = school.admissions?.status || 'Admissions Active';
+  const statusLower = rawStatus.toLowerCase();
+  const isOpen = statusLower.includes('open') || statusLower.includes('ongoing') || statusLower.includes('active');
+  const isPending = statusLower.includes('pending') || statusLower.includes('inquire') || statusLower.includes('contact') || statusLower.includes('release');
 
   useEffect(() => {
     async function checkAuthAndReminders() {
@@ -106,9 +113,12 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
           <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
             Current Status
           </span>
-          <p className="text-sm font-bold text-emerald-800 flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>{school.admissions?.status || 'Admissions Active'}</span>
+          <p className={cn(
+            'text-sm font-bold flex items-center gap-1.5 flex-wrap',
+            isOpen ? 'text-emerald-800' : isPending ? 'text-amber-800' : 'text-slate-800'
+          )}>
+            <Clock className={cn('w-4 h-4 shrink-0', isOpen ? 'text-emerald-600' : isPending ? 'text-amber-600' : 'text-slate-600')} />
+            <span>{formatAdmissionStatus(rawStatus)}</span>
           </p>
         </div>
       </div>

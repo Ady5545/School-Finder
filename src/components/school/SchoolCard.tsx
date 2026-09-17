@@ -132,9 +132,9 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
       <div className="p-4.5 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Location & Status */}
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <LocationDisplay location={school.location} />
-            <AdmissionStatus admissions={school.admissions} showDate={false} />
+          <div className="flex items-center justify-between gap-2 mb-2 min-w-0">
+            <LocationDisplay location={school.location} className="min-w-0 flex-1" />
+            <AdmissionStatus admissions={school.admissions} showDate={false} className="shrink-0" />
           </div>
 
           {/* School Name */}

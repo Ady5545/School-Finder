@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateAndStoreOtp, checkRateLimit, getUserByEmailOrMobile } from '../../../../lib/authStore';
+import { generateAndStoreOtp, checkRateLimit, getUserByEmailOrMobileAsync } from '../../../../lib/authStore';
 import { sendOtpEmail } from '../../../../lib/emailService';
 
 export async function POST(req: NextRequest) {
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
     // Check existing account if purpose is register
     if (purpose === 'register') {
-      const existing = getUserByEmailOrMobile(cleanEmail);
+      const existing = await getUserByEmailOrMobileAsync(cleanEmail);
       if (existing) {
         return NextResponse.json(
           { success: false, message: 'An account is already registered with this email address. Please sign in instead.' },
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
 
     // Check if account exists if purpose is login
     if (purpose === 'login') {
-      const existing = getUserByEmailOrMobile(cleanEmail);
+      const existing = await getUserByEmailOrMobileAsync(cleanEmail);
       if (!existing) {
         return NextResponse.json(
           {

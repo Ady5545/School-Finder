@@ -1,15 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   verifySessionToken,
-  getUserById,
-  getUserReminders,
-  createAdmissionReminder,
-  updateReminderStatus,
-  deleteReminder,
+  getUserByIdAsync,
+  getUserRemindersAsync,
+  createAdmissionReminderAsync,
+  updateReminderStatusAsync,
+  deleteReminderAsync,
 } from '@/lib/authStore';
 import { getSchoolBySlug } from '@/lib/schools';
 
-function getAuthenticatedUser(req: NextRequest) {
+async function getAuthenticatedUser(req: NextRequest) {
   const authHeader = req.headers.get('authorization');
   const cookieToken = req.cookies.get('ap_session')?.value;
 
@@ -22,7 +22,7 @@ function getAuthenticatedUser(req: NextRequest) {
   const payload = verifySessionToken(token);
   if (!payload || !payload.sub || !payload.email) return null;
 
-  const user = getUserById(payload.sub);
+  const user = await getUserByIdAsync(payload.sub);
   return {
     id: payload.sub,
     email: payload.email,
@@ -32,12 +32,12 @@ function getAuthenticatedUser(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    const auth = getAuthenticatedUser(req);
+    const auth = await getAuthenticatedUser(req);
     if (!auth) {
       return NextResponse.json({ success: false, message: 'Unauthorized. Sign in to view admission reminders.' }, { status: 401 });
     }
 
-    const reminders = getUserReminders(auth.id);
+    const reminders = await getUserRemindersAsync(auth.id);
     return NextResponse.json({ success: true, reminders });
   } catch (error) {
     console.error('Error fetching reminders:', error);
@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = getAuthenticatedUser(req);
+    const auth = await getAuthenticatedUser(req);
     if (!auth) {
       return NextResponse.json({ success: false, message: 'Unauthorized. Sign in to create admission reminders.' }, { status: 401 });
     }
@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Valid admission milestone and date are required.' }, { status: 400 });
     }
 
-    const result = createAdmissionReminder({
+    const result = await createAdmissionReminderAsync({
       userId: auth.id,
       userEmail: auth.email,
       schoolSlug,
@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
 
 export async function PATCH(req: NextRequest) {
   try {
-    const auth = getAuthenticatedUser(req);
+    const auth = await getAuthenticatedUser(req);
     if (!auth) {
       return NextResponse.json({ success: false, message: 'Unauthorized.' }, { status: 401 });
     }
@@ -104,7 +104,7 @@ export async function PATCH(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Invalid parameters. Status must be active or disabled.' }, { status: 400 });
     }
 
-    const result = updateReminderStatus(auth.id, reminderId, status);
+    const result = await updateReminderStatusAsync(auth.id, reminderId, status);
     if (!result.success) {
       return NextResponse.json({ success: false, message: result.error }, { status: 400 });
     }
@@ -118,7 +118,7 @@ export async function PATCH(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const auth = getAuthenticatedUser(req);
+    const auth = await getAuthenticatedUser(req);
     if (!auth) {
       return NextResponse.json({ success: false, message: 'Unauthorized.' }, { status: 401 });
     }
@@ -139,7 +139,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Reminder ID is required.' }, { status: 400 });
     }
 
-    const result = deleteReminder(auth.id, reminderId);
+    const result = await deleteReminderAsync(auth.id, reminderId);
     if (!result.success) {
       return NextResponse.json({ success: false, message: result.error }, { status: 400 });
     }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getAllUsersSanitized, getUserActivityTimeline } from '../../../../lib/authStore';
+import { getAllUsersSanitizedAsync, getUserActivityTimeline } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
   const auth = requireAdminAuth(req);
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
   const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10));
   const limit = Math.max(1, Math.min(100, parseInt(searchParams.get('limit') || '25', 10)));
 
-  const allUsers = getAllUsersSanitized();
+  const allUsers = await getAllUsersSanitizedAsync();
 
   // Augment with activity summary metrics
   const augmentedUsers = allUsers.map(u => {

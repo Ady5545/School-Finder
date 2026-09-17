@@ -1,6 +1,17 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import {
+  getUsersCollection,
+  getRatingsCollection,
+  getRemindersCollection,
+  getActivityCollection,
+  getAuditLogsCollection,
+  getPromotionsCollection,
+  getSchoolViewsCollection,
+  getSchoolSavesCollection,
+  isMongoConfigured,
+} from './mongodb';
 
 export interface ParentUser {
   id: string;
@@ -531,8 +542,103 @@ function initDb(): void {
   saveStoreToDisk();
 }
 
+let mongoSyncPromise: Promise<void> | null = null;
+
+export async function ensureMongoSync(): Promise<void> {
+  if (!isMongoConfigured()) return;
+  if (mongoSyncPromise) return mongoSyncPromise;
+
+  mongoSyncPromise = (async () => {
+    try {
+      const usersCol = await getUsersCollection();
+      if (!usersCol) return;
+
+      // 1. Fetch all users from Mongo into memory
+      const mongoUsers = await usersCol.find({}).toArray();
+      if (mongoUsers.length > 0) {
+        for (const u of mongoUsers) {
+          if (!u.status) u.status = 'active';
+          if (!u.role) u.role = 'parent';
+          users.set(u.email.toLowerCase(), u);
+        }
+      } else {
+        // Mongo is empty, seed with current memory / file users
+        for (const u of users.values()) {
+          await usersCol.updateOne({ id: u.id }, { $set: u }, { upsert: true });
+        }
+      }
+
+      // 2. Ratings
+      const ratingsCol = await getRatingsCollection();
+      if (ratingsCol) {
+        const mongoRatings = await ratingsCol.find({}).toArray();
+        if (mongoRatings.length > 0) {
+          ratings.length = 0;
+          ratings.push(...mongoRatings.map(r => ({ ...r, status: r.status || 'published' })));
+        } else if (ratings.length > 0) {
+          for (const r of ratings) {
+            await ratingsCol.updateOne({ id: r.id }, { $set: r }, { upsert: true });
+          }
+        }
+      }
+
+      // 3. Reminders
+      const remindersCol = await getRemindersCollection();
+      if (remindersCol) {
+        const mongoReminders = await remindersCol.find({}).toArray();
+        if (mongoReminders.length > 0) {
+          reminders.length = 0;
+          reminders.push(...mongoReminders);
+        } else if (reminders.length > 0) {
+          for (const rem of reminders) {
+            await remindersCol.updateOne({ id: rem.id }, { $set: rem }, { upsert: true });
+          }
+        }
+      }
+
+      // 4. Promotions
+      const promoCol = await getPromotionsCollection();
+      if (promoCol) {
+        const mongoPromos = await promoCol.find({}).toArray();
+        if (mongoPromos.length > 0) {
+          promotions.length = 0;
+          promotions.push(...mongoPromos);
+        } else if (promotions.length > 0) {
+          for (const p of promotions) {
+            await promoCol.updateOne({ id: p.id }, { $set: p }, { upsert: true });
+          }
+        }
+      }
+
+      // 5. School views & saves
+      const viewsCol = await getSchoolViewsCollection();
+      if (viewsCol) {
+        const mongoViews = await viewsCol.find({}).toArray();
+        for (const v of mongoViews) {
+          schoolViews.set(v.slug, v.count);
+        }
+      }
+
+      const savesCol = await getSchoolSavesCollection();
+      if (savesCol) {
+        const mongoSaves = await savesCol.find({}).toArray();
+        for (const s of mongoSaves) {
+          schoolSaves.set(s.slug, s.count);
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_INIT_SYNC_ERROR]', err);
+    }
+  })();
+
+  return mongoSyncPromise;
+}
+
 // Initialize immediately
 initDb();
+if (isMongoConfigured()) {
+  ensureMongoSync().catch(() => {});
+}
 
 // ----------------------------------------------------------------------------
 // PASSWORD HASHING & JWT SESSION UTILITIES
@@ -845,7 +951,7 @@ export function checkVerificationToken(token: string): string | null {
 }
 
 // ----------------------------------------------------------------------------
-// USER DIRECTORY & MANAGEMENT CRUD
+// USER DIRECTORY & MANAGEMENT CRUD (Sync & Async with MongoDB)
 // ----------------------------------------------------------------------------
 
 export function getUserByEmail(email: string): ParentUser | null {
@@ -860,6 +966,62 @@ export function getUserByEmailOrMobile(identifier: string): ParentUser | null {
 export function getUserById(id: string): ParentUser | null {
   for (const user of users.values()) {
     if (user.id === id) return user;
+  }
+  return null;
+}
+
+export async function getUserByEmailAsync(email: string): Promise<ParentUser | null> {
+  const normalized = email.trim().toLowerCase();
+  await ensureMongoSync();
+
+  const memUser = users.get(normalized);
+  if (memUser) return memUser;
+
+  if (isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      if (usersCol) {
+        const doc = await usersCol.findOne({ email: normalized });
+        if (doc) {
+          if (!doc.status) doc.status = 'active';
+          if (!doc.role) doc.role = 'parent';
+          users.set(normalized, doc);
+          return doc;
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_GET_USER_BY_EMAIL_ERROR]', err);
+    }
+  }
+  return getUserByEmail(normalized);
+}
+
+export async function getUserByEmailOrMobileAsync(identifier: string): Promise<ParentUser | null> {
+  return getUserByEmailAsync(identifier);
+}
+
+export async function getUserByIdAsync(id: string): Promise<ParentUser | null> {
+  if (!id) return null;
+  await ensureMongoSync();
+
+  const memUser = getUserById(id);
+  if (memUser) return memUser;
+
+  if (isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      if (usersCol) {
+        const doc = await usersCol.findOne({ id });
+        if (doc) {
+          if (!doc.status) doc.status = 'active';
+          if (!doc.role) doc.role = 'parent';
+          users.set(doc.email.toLowerCase(), doc);
+          return doc;
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_GET_USER_BY_ID_ERROR]', err);
+    }
   }
   return null;
 }
@@ -924,6 +1086,43 @@ export function createParentUser(userData: {
   return { user: newUser };
 }
 
+export async function createParentUserAsync(userData: {
+  name: string;
+  email: string;
+  phone?: string;
+  childName?: string;
+  childGrade?: string;
+  residentialSociety?: string;
+  fatherName?: string;
+  motherName?: string;
+  preferredSchoolLocality?: string;
+  password?: string;
+  preferredBoards?: string[];
+  analyticsConsent?: boolean;
+  role?: 'parent' | 'admin';
+}): Promise<{ user?: ParentUser; error?: string }> {
+  await ensureMongoSync();
+  const emailKey = userData.email.trim().toLowerCase();
+
+  const existing = await getUserByEmailAsync(emailKey);
+  if (existing) {
+    return { error: 'An account with this email address already exists.' };
+  }
+
+  const res = createParentUser(userData);
+  if (res.user && isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      if (usersCol) {
+        await usersCol.updateOne({ id: res.user.id }, { $set: res.user }, { upsert: true });
+      }
+    } catch (err) {
+      console.warn('[MONGO_CREATE_PARENT_USER_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function updateUserProfile(
   userId: string,
   updates: {
@@ -967,6 +1166,38 @@ export function updateUserProfile(
 
   user.lastActivityAt = new Date().toISOString();
   saveStoreToDisk();
+  return user;
+}
+
+export async function updateUserProfileAsync(
+  userId: string,
+  updates: {
+    name?: string;
+    phone?: string;
+    childName?: string;
+    childGrade?: string;
+    residentialSociety?: string;
+    fatherName?: string;
+    motherName?: string;
+    preferredSchoolLocality?: string;
+    preferredBoards?: string[];
+    analyticsConsent?: boolean;
+    status?: 'active' | 'disabled';
+    role?: 'parent' | 'admin';
+  }
+): Promise<ParentUser | null> {
+  await ensureMongoSync();
+  const user = updateUserProfile(userId, updates);
+  if (user && isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      if (usersCol) {
+        await usersCol.updateOne({ id: user.id }, { $set: user }, { upsert: true });
+      }
+    } catch (err) {
+      console.warn('[MONGO_UPDATE_USER_PROFILE_ERROR]', err);
+    }
+  }
   return user;
 }
 
@@ -1019,6 +1250,29 @@ export function updateUserStatus(
   return true;
 }
 
+export async function updateUserStatusAsync(
+  userId: string,
+  status: 'active' | 'disabled' | 'suspended' | 'banned',
+  adminUserId?: string,
+  reason?: string,
+  durationDays?: number
+): Promise<boolean> {
+  await ensureMongoSync();
+  const res = updateUserStatus(userId, status, adminUserId, reason, durationDays);
+  if (res && isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      const user = getUserById(userId);
+      if (usersCol && user) {
+        await usersCol.updateOne({ id: user.id }, { $set: user }, { upsert: true });
+      }
+    } catch (err) {
+      console.warn('[MONGO_UPDATE_STATUS_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function isUserSuspendedOrBanned(userId: string): { blocked: boolean; status?: string; reason?: string } {
   const user = getUserById(userId);
   if (!user) return { blocked: true, status: 'not_found', reason: 'Account not found.' };
@@ -1064,6 +1318,23 @@ export function updateUserRole(userId: string, role: 'parent' | 'admin', adminUs
   return true;
 }
 
+export async function updateUserRoleAsync(userId: string, role: 'parent' | 'admin', adminUserId?: string): Promise<boolean> {
+  await ensureMongoSync();
+  const res = updateUserRole(userId, role, adminUserId);
+  if (res && isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      const user = getUserById(userId);
+      if (usersCol && user) {
+        await usersCol.updateOne({ id: user.id }, { $set: user }, { upsert: true });
+      }
+    } catch (err) {
+      console.warn('[MONGO_UPDATE_ROLE_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function updateUserLists(userId: string, wishlist?: string[], compareList?: string[]) {
   const user = getUserById(userId);
   if (user) {
@@ -1072,6 +1343,35 @@ export function updateUserLists(userId: string, wishlist?: string[], compareList
     user.lastActivityAt = new Date().toISOString();
     saveStoreToDisk();
   }
+}
+
+export async function updateUserListsAsync(userId: string, wishlist?: string[], compareList?: string[]): Promise<ParentUser | null> {
+  await ensureMongoSync();
+  const user = await getUserByIdAsync(userId);
+  if (user) {
+    if (wishlist) user.wishlist = wishlist;
+    if (compareList) user.compareList = compareList;
+    user.lastActivityAt = new Date().toISOString();
+    users.set(user.email.toLowerCase(), user);
+    saveStoreToDisk();
+
+    if (isMongoConfigured()) {
+      try {
+        const usersCol = await getUsersCollection();
+        if (usersCol) {
+          await usersCol.updateOne(
+            { id: user.id },
+            { $set: { wishlist: user.wishlist, compareList: user.compareList, lastActivityAt: user.lastActivityAt } },
+            { upsert: true }
+          );
+        }
+      } catch (err) {
+        console.warn('[MONGO_UPDATE_LISTS_ERROR]', err);
+      }
+    }
+    return user;
+  }
+  return null;
 }
 
 export function removeWishlistItemForUser(userId: string, schoolSlug: string, adminUserId?: string): boolean {
@@ -1110,6 +1410,27 @@ export function removeWishlistItemForUser(userId: string, schoolSlug: string, ad
   return true;
 }
 
+export async function removeWishlistItemForUserAsync(userId: string, schoolSlug: string, adminUserId?: string): Promise<boolean> {
+  await ensureMongoSync();
+  const res = removeWishlistItemForUser(userId, schoolSlug, adminUserId);
+  if (res && isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      const user = getUserById(userId);
+      if (usersCol && user) {
+        await usersCol.updateOne(
+          { id: user.id },
+          { $set: { wishlist: user.wishlist, lastActivityAt: user.lastActivityAt } },
+          { upsert: true }
+        );
+      }
+    } catch (err) {
+      console.warn('[MONGO_REMOVE_WISHLIST_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function deleteParentUser(userId: string, adminUserId?: string): boolean {
   const user = getUserById(userId);
   if (!user) return false;
@@ -1145,6 +1466,27 @@ export function deleteParentUser(userId: string, adminUserId?: string): boolean 
   return true;
 }
 
+export async function deleteParentUserAsync(userId: string, adminUserId?: string): Promise<boolean> {
+  await ensureMongoSync();
+  const user = getUserById(userId);
+  const res = deleteParentUser(userId, adminUserId);
+  if (res && isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection();
+      if (usersCol && user) {
+        await usersCol.deleteOne({ id: userId });
+      }
+      const ratingsCol = await getRatingsCollection();
+      if (ratingsCol) {
+        await ratingsCol.deleteMany({ userId });
+      }
+    } catch (err) {
+      console.warn('[MONGO_DELETE_USER_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function sanitizeUser(user: ParentUser) {
   const { passwordHash, ...safe } = user;
   return safe;
@@ -1160,8 +1502,17 @@ export function getAllUsersSanitized() {
   return Array.from(uniqueUsers.values());
 }
 
+export async function getAllUsersSanitizedAsync() {
+  await ensureMongoSync();
+  return getAllUsersSanitized();
+}
+
 export function getAllParentUsers() {
   return getAllUsersSanitized();
+}
+
+export async function getAllParentUsersAsync() {
+  return getAllUsersSanitizedAsync();
 }
 
 // ----------------------------------------------------------------------------
@@ -1404,9 +1755,19 @@ export function getSchoolRatings(slug: string): SchoolRating[] {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
+export async function getSchoolRatingsAsync(slug: string): Promise<SchoolRating[]> {
+  await ensureMongoSync();
+  return getSchoolRatings(slug);
+}
+
 export function getAllRatings(includeDeleted = false): SchoolRating[] {
   const filtered = includeDeleted ? ratings : ratings.filter(r => r.status !== 'deleted');
   return [...filtered].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
+
+export async function getAllRatingsAsync(includeDeleted = false): Promise<SchoolRating[]> {
+  await ensureMongoSync();
+  return getAllRatings(includeDeleted);
 }
 
 export function getUserRatingForSchool(schoolSlug: string, userId: string): SchoolRating | null {
@@ -1414,8 +1775,18 @@ export function getUserRatingForSchool(schoolSlug: string, userId: string): Scho
   return found || null;
 }
 
+export async function getUserRatingForSchoolAsync(schoolSlug: string, userId: string): Promise<SchoolRating | null> {
+  await ensureMongoSync();
+  return getUserRatingForSchool(schoolSlug, userId);
+}
+
 export function getUserRatings(userId: string): SchoolRating[] {
   return ratings.filter(r => r.userId === userId && r.status !== 'deleted');
+}
+
+export async function getUserRatingsAsync(userId: string): Promise<SchoolRating[]> {
+  await ensureMongoSync();
+  return getUserRatings(userId);
 }
 
 export function getSchoolRatingStats(slug: string): {
@@ -1487,6 +1858,21 @@ export function getSchoolRatingStats(slug: string): {
   };
 }
 
+export async function getSchoolRatingStatsAsync(slug: string): Promise<{
+  averageScore: number;
+  totalReviews: number;
+  distribution: Record<number, number>;
+  categoryAverages: {
+    academics: number;
+    infrastructure: number;
+    faculty: number;
+    safety: number;
+  };
+}> {
+  await ensureMongoSync();
+  return getSchoolRatingStats(slug);
+}
+
 export function sanitizePublicRating(r: SchoolRating): Omit<SchoolRating, 'userId' | 'userEmail'> & { userId?: string } {
   if (r.isAnonymous) {
     return {
@@ -1523,6 +1909,11 @@ export function sanitizePublicRating(r: SchoolRating): Omit<SchoolRating, 'userI
 
 export function getSanitizedSchoolRatings(slug: string) {
   return getSchoolRatings(slug).map(r => sanitizePublicRating(r));
+}
+
+export async function getSanitizedSchoolRatingsAsync(slug: string) {
+  await ensureMongoSync();
+  return getSanitizedSchoolRatings(slug);
 }
 
 export function saveSchoolRating(ratingData: {
@@ -1609,6 +2000,37 @@ export function saveSchoolRating(ratingData: {
   return newRating;
 }
 
+export async function saveSchoolRatingAsync(ratingData: {
+  schoolSlug: string;
+  userId: string;
+  userName: string;
+  userChildGrade?: string;
+  score: number;
+  title?: string;
+  comment: string;
+  categories?: {
+    academics?: number;
+    infrastructure?: number;
+    faculty?: number;
+    safety?: number;
+  };
+  isAnonymous?: boolean;
+}): Promise<SchoolRating> {
+  await ensureMongoSync();
+  const rating = saveSchoolRating(ratingData);
+  if (isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection();
+      if (ratingsCol) {
+        await ratingsCol.updateOne({ id: rating.id }, { $set: rating }, { upsert: true });
+      }
+    } catch (err) {
+      console.warn('[MONGO_SAVE_RATING_ERROR]', err);
+    }
+  }
+  return rating;
+}
+
 export function deleteSchoolRating(schoolSlug: string, userId: string): boolean {
   const target = ratings.find(r => r.schoolSlug === schoolSlug && r.userId === userId && r.status !== 'deleted');
   if (!target) return false;
@@ -1627,6 +2049,25 @@ export function deleteSchoolRating(schoolSlug: string, userId: string): boolean 
   });
 
   return true;
+}
+
+export async function deleteSchoolRatingAsync(schoolSlug: string, userId: string): Promise<boolean> {
+  await ensureMongoSync();
+  const res = deleteSchoolRating(schoolSlug, userId);
+  if (res && isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection();
+      if (ratingsCol) {
+        await ratingsCol.updateOne(
+          { schoolSlug, userId },
+          { $set: { status: 'deleted', deletedAt: new Date().toISOString(), deletedBy: userId } }
+        );
+      }
+    } catch (err) {
+      console.warn('[MONGO_DELETE_RATING_ERROR]', err);
+    }
+  }
+  return res;
 }
 
 export function adminDeleteRating(
@@ -1666,6 +2107,29 @@ export function adminDeleteRating(
   return true;
 }
 
+export async function adminDeleteRatingAsync(
+  ratingId: string,
+  adminUserId?: string,
+  reason = 'Violates platform review guidelines'
+): Promise<boolean> {
+  await ensureMongoSync();
+  const res = adminDeleteRating(ratingId, adminUserId, reason);
+  if (res && isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection();
+      if (ratingsCol) {
+        await ratingsCol.updateOne(
+          { id: ratingId },
+          { $set: { status: 'deleted', deletedAt: new Date().toISOString(), deletedBy: adminUserId || 'admin', deletionReason: reason } }
+        );
+      }
+    } catch (err) {
+      console.warn('[MONGO_ADMIN_DELETE_RATING_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function adminRestoreRating(ratingId: string, adminUserId?: string): boolean {
   const target = ratings.find(r => r.id === ratingId);
   if (!target || target.status !== 'deleted') return false;
@@ -1690,6 +2154,25 @@ export function adminRestoreRating(ratingId: string, adminUserId?: string): bool
   }
 
   return true;
+}
+
+export async function adminRestoreRatingAsync(ratingId: string, adminUserId?: string): Promise<boolean> {
+  await ensureMongoSync();
+  const res = adminRestoreRating(ratingId, adminUserId);
+  if (res && isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection();
+      if (ratingsCol) {
+        await ratingsCol.updateOne(
+          { id: ratingId },
+          { $set: { status: 'published', updatedAt: new Date().toISOString() }, $unset: { deletedAt: '', deletedBy: '', deletionReason: '' } }
+        );
+      }
+    } catch (err) {
+      console.warn('[MONGO_ADMIN_RESTORE_RATING_ERROR]', err);
+    }
+  }
+  return res;
 }
 
 // ----------------------------------------------------------------------------
@@ -2351,10 +2834,40 @@ export function createAdmissionReminder({
   return { success: true, reminder: newReminder };
 }
 
+export async function createAdmissionReminderAsync(params: {
+  userId: string;
+  userEmail: string;
+  schoolSlug: string;
+  schoolName: string;
+  milestoneId: string;
+  milestoneLabel: string;
+  targetDate: string;
+  timing: ReminderTiming;
+}): Promise<{ success: boolean; reminder?: AdmissionReminder; error?: string }> {
+  await ensureMongoSync();
+  const res = createAdmissionReminder(params);
+  if (res.success && res.reminder && isMongoConfigured()) {
+    try {
+      const remCol = await getRemindersCollection();
+      if (remCol) {
+        await remCol.updateOne({ id: res.reminder.id }, { $set: res.reminder }, { upsert: true });
+      }
+    } catch (err) {
+      console.warn('[MONGO_CREATE_REMINDER_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function getUserReminders(userId: string): AdmissionReminder[] {
   initDb();
   if (!userId) return [];
   return (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).filter(r => r.userId === userId);
+}
+
+export async function getUserRemindersAsync(userId: string): Promise<AdmissionReminder[]> {
+  await ensureMongoSync();
+  return getUserReminders(userId);
 }
 
 export function updateReminderStatus(
@@ -2376,6 +2889,29 @@ export function updateReminderStatus(
   return { success: true, reminder };
 }
 
+export async function updateReminderStatusAsync(
+  userId: string,
+  reminderId: string,
+  status: 'active' | 'disabled'
+): Promise<{ success: boolean; reminder?: AdmissionReminder; error?: string }> {
+  await ensureMongoSync();
+  const res = updateReminderStatus(userId, reminderId, status);
+  if (res.success && res.reminder && isMongoConfigured()) {
+    try {
+      const remCol = await getRemindersCollection();
+      if (remCol) {
+        await remCol.updateOne(
+          { id: reminderId, userId },
+          { $set: { status, updatedAt: new Date().toISOString() } }
+        );
+      }
+    } catch (err) {
+      console.warn('[MONGO_UPDATE_REMINDER_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function deleteReminder(
   userId: string,
   reminderId: string
@@ -2392,8 +2928,32 @@ export function deleteReminder(
   return { success: true };
 }
 
+export async function deleteReminderAsync(
+  userId: string,
+  reminderId: string
+): Promise<{ success: boolean; error?: string }> {
+  await ensureMongoSync();
+  const res = deleteReminder(userId, reminderId);
+  if (res.success && isMongoConfigured()) {
+    try {
+      const remCol = await getRemindersCollection();
+      if (remCol) {
+        await remCol.deleteOne({ id: reminderId, userId });
+      }
+    } catch (err) {
+      console.warn('[MONGO_DELETE_REMINDER_ERROR]', err);
+    }
+  }
+  return res;
+}
+
 export function getAllActiveReminders(): AdmissionReminder[] {
   initDb();
+  return (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).filter(r => r.status === 'active');
+}
+
+export async function getAllActiveRemindersAsync(): Promise<AdmissionReminder[]> {
+  await ensureMongoSync();
   return (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).filter(r => r.status === 'active');
 }
 
@@ -2403,6 +2963,27 @@ export function markReminderNotified(reminderId: string): void {
   if (reminder) {
     reminder.lastNotifiedAt = new Date().toISOString();
     saveStoreToDisk();
+  }
+}
+
+export async function markReminderNotifiedAsync(reminderId: string): Promise<void> {
+  await ensureMongoSync();
+  const reminder = (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).find(r => r.id === reminderId);
+  if (reminder) {
+    reminder.lastNotifiedAt = new Date().toISOString();
+    saveStoreToDisk();
+
+    try {
+      const col = await getRemindersCollection();
+      if (col) {
+        await col.updateOne(
+          { id: reminderId },
+          { $set: { lastNotifiedAt: reminder.lastNotifiedAt } }
+        );
+      }
+    } catch (e) {
+      console.error('MongoDB sync error in markReminderNotifiedAsync:', e);
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '@/lib/adminAuth';
-import { getAllActiveReminders, markReminderNotified, getUserById } from '@/lib/authStore';
+import { getAllActiveRemindersAsync, markReminderNotifiedAsync, getUserByIdAsync } from '@/lib/authStore';
 import { sendAdmissionDeadlineAlertEmail } from '@/lib/emailService';
 
 export async function POST(req: NextRequest) {
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Admin authorization required.' }, { status: 403 });
     }
 
-    const activeReminders = getAllActiveReminders();
+    const activeReminders = await getAllActiveRemindersAsync();
     const now = new Date();
     const todayStr = now.toISOString().split('T')[0];
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 
       if (todayStr >= triggerStr) {
         // Due for notification!
-        const user = getUserById(reminder.userId);
+        const user = await getUserByIdAsync(reminder.userId);
         const parentName = user?.name || 'Parent';
 
         const daysRemaining = Math.max(0, Math.ceil((target.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)));
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         });
 
         if (emailResult.success) {
-          markReminderNotified(reminder.id);
+          await markReminderNotifiedAsync(reminder.id);
           dispatched.push(reminder.id);
         }
       }

@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../../lib/adminAuth';
 import {
-  getUserById,
+  getUserByIdAsync,
   sanitizeUser,
   getUserActivityTimeline,
-  getUserRatings,
-  updateUserStatus,
-  updateUserRole,
-  removeWishlistItemForUser,
-  deleteParentUser,
+  getUserRatingsAsync,
+  updateUserStatusAsync,
+  updateUserRoleAsync,
+  removeWishlistItemForUserAsync,
+  deleteParentUserAsync,
 } from '../../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../../lib/schools';
 
@@ -26,7 +26,7 @@ export async function GET(
     return NextResponse.json({ success: false, message: 'User ID required' }, { status: 400 });
   }
 
-  const user = getUserById(userId);
+  const user = await getUserByIdAsync(userId);
   if (!user) {
     return NextResponse.json({ success: false, message: 'Parent user not found' }, { status: 404 });
   }
@@ -35,7 +35,7 @@ export async function GET(
   const activityData = getUserActivityTimeline(userId);
 
   // Get ratings authored by this user
-  const reviews = getUserRatings(userId);
+  const reviews = await getUserRatingsAsync(userId);
 
   // Enhance wishlist with school details
   const wishlistDetails = (user.wishlist || []).map(slug => {
@@ -91,7 +91,7 @@ export async function PATCH(
   }
 
   const { userId } = await params;
-  const user = getUserById(userId);
+  const user = await getUserByIdAsync(userId);
   if (!user) {
     return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
   }
@@ -104,12 +104,12 @@ export async function PATCH(
   if (action === 'update_status' || status) {
     const validStatuses = ['active', 'disabled', 'suspended', 'banned'] as const;
     const newStatus = validStatuses.includes(status) ? status : 'active';
-    updateUserStatus(userId, newStatus, adminUserId, reason, durationDays ? Number(durationDays) : undefined);
+    await updateUserStatusAsync(userId, newStatus, adminUserId, reason, durationDays ? Number(durationDays) : undefined);
   }
 
   if (action === 'update_role' || role) {
     const newRole = role === 'admin' ? 'admin' : 'parent';
-    updateUserRole(userId, newRole, adminUserId);
+    await updateUserRoleAsync(userId, newRole, adminUserId);
   }
 
   if (adminRole !== undefined && auth.user.adminRole === 'super_admin') {
@@ -117,10 +117,10 @@ export async function PATCH(
   }
 
   if (action === 'remove_wishlist_item' && removeWishlistSlug) {
-    removeWishlistItemForUser(userId, removeWishlistSlug, adminUserId);
+    await removeWishlistItemForUserAsync(userId, removeWishlistSlug, adminUserId);
   }
 
-  const updatedUser = getUserById(userId);
+  const updatedUser = await getUserByIdAsync(userId);
   return NextResponse.json({
     success: true,
     message: 'User account updated successfully',
@@ -150,7 +150,7 @@ export async function DELETE(
     );
   }
 
-  const deleted = deleteParentUser(userId, auth.user.id);
+  const deleted = await deleteParentUserAsync(userId, auth.user.id);
   if (!deleted) {
     return NextResponse.json({ success: false, message: 'User not found or could not be removed' }, { status: 404 });
   }

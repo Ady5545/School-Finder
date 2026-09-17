@@ -28,6 +28,7 @@ interface SmtpCredentials {
   smtpHost: string;
   smtpPort: number;
   smtpSecure: boolean;
+  smtpFrom: string;
   hasUser: boolean;
   hasPass: boolean;
 }
@@ -45,12 +46,15 @@ export function getEmailCredentials(): SmtpCredentials {
       ? process.env.SMTP_SECURE === 'true'
       : smtpPort === 465;
 
+  const smtpFrom = (process.env.SMTP_FROM || process.env.EMAIL_FROM || `"Admission Pitara" <${emailUser}>`).trim();
+
   return {
     emailUser,
     emailPass,
     smtpHost,
     smtpPort,
     smtpSecure,
+    smtpFrom,
     hasUser: Boolean(emailUser),
     hasPass: Boolean(emailPass),
   };

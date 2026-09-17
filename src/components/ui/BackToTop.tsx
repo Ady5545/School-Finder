@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useSmoothScroll } from '../layout/SmoothScrollProvider';
 
 interface BackToTopProps {
   threshold?: number;
@@ -14,6 +15,7 @@ export const BackToTop: React.FC<BackToTopProps> = ({
   className,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { scrollTo } = useSmoothScroll();
 
   useEffect(() => {
     let ticking = false;
@@ -38,10 +40,7 @@ export const BackToTop: React.FC<BackToTopProps> = ({
   }, [threshold]);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    scrollTo(0, { duration: 0.8 });
   };
 
   if (!isVisible) {

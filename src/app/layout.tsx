@@ -8,6 +8,7 @@ import { AuthProvider } from '../lib/authContext';
 import { SchoolStoreProvider } from '../lib/schoolStore';
 import { ComparisonDock } from '../components/school/ComparisonDock';
 import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
+import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://admissionpitara.com'),
@@ -29,19 +30,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col bg-[var(--color-surface-muted)] text-[var(--color-content)] antialiased">
-        <ToastProvider>
-          <AuthProvider>
-            <SchoolStoreProvider>
-              <Header />
-              <main className="flex-1 w-full flex flex-col" id="main-content">
-                {children}
-              </main>
-              <Footer />
-              <ComparisonDock />
-              <ScrollRevealManager />
-            </SchoolStoreProvider>
-          </AuthProvider>
-        </ToastProvider>
+        <SmoothScrollProvider>
+          <ToastProvider>
+            <AuthProvider>
+              <SchoolStoreProvider>
+                <Header />
+                <main className="flex-1 w-full flex flex-col" id="main-content">
+                  {children}
+                </main>
+                <Footer />
+                <ComparisonDock />
+                <ScrollRevealManager />
+              </SchoolStoreProvider>
+            </AuthProvider>
+          </ToastProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );

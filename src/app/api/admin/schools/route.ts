@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getAllSchools, getRawSchools } from '../../../../lib/schools';
+import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
+import { getAdminSchoolsList, createAdminSchool } from '@/lib/schoolAdminService';
+import { getRawSchools } from '@/lib/schools';
 import {
   getAdminSchoolAnalytics,
   getAllPromotions,
-} from '../../../../lib/authStore';
+} from '@/lib/authStore';
 
 export async function GET(req: NextRequest) {
   const auth = requireAdminAuth(req);
@@ -12,7 +13,22 @@ export async function GET(req: NextRequest) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const schools = getAllSchools();
+  const { searchParams } = new URL(req.url);
+  const searchQuery = searchParams.get('q') || undefined;
+  const statusFilter = searchParams.get('status') || undefined;
+  const verificationFilter = searchParams.get('verification') || undefined;
+  const areaFilter = searchParams.get('area') || undefined;
+  const boardFilter = searchParams.get('board') || undefined;
+
+  const schools = getAdminSchoolsList({
+    includeArchived: statusFilter !== 'active',
+    filterStatus: statusFilter,
+    searchQuery,
+    verificationStatus: verificationFilter,
+    area: areaFilter,
+    board: boardFilter,
+  });
+
   const allPromotions = getAllPromotions();
 
   const schoolMetrics = schools.map(school => {
@@ -25,9 +41,23 @@ export async function GET(req: NextRequest) {
       name: school.name,
       shortName: school.shortName,
       sector: school.location.sector || school.location.area,
+      address: school.location.address,
       board: school.board.join(', '),
-      establishedYear: 2015,
+      boardsList: school.board,
+      schoolType: school.schoolType,
+      establishedYear: school.establishedYear || 2015,
       verifiedFee: school.fees?.rangeText || school.fees?.tuitionAnnual || `₹${school.fees?.cardFee?.toLocaleString('en-IN') || '1,20,000'}/yr`,
+      tuitionAnnual: school.fees?.tuitionAnnual,
+      cardFee: school.fees?.cardFee,
+      isArchived: Boolean(school.isArchived),
+      archiveReason: school.archiveReason,
+      status: school.status || (school.isArchived ? 'archived' : 'active'),
+      isDuplicate: Boolean(school.isDuplicate),
+      hasCoordinates: Boolean((school.location?.coordinates?.lat ?? school.location?.coordinates?.latitude) && (school.location?.coordinates?.lng ?? school.location?.coordinates?.longitude)),
+      coordinates: school.location?.coordinates,
+      affiliationNumber: school.affiliationNumber || school.verification?.cbseAffiliationNumber,
+      verificationStatus: school.verification?.status || 'pending_audit',
+      completeness: school.completeness,
       views: analytics.traffic.totalViews,
       uniqueViewersCount: analytics.traffic.uniqueAuthenticatedViewers,
       saves: analytics.engagement.wishlistSaves,
@@ -35,6 +65,9 @@ export async function GET(req: NextRequest) {
       comparedCount: analytics.engagement.comparedCount,
       reviewsCount: analytics.engagement.reviewsCount,
       averageRating: analytics.engagement.averageRating,
+      contact: school.contact,
+      admissions: school.admissions,
+      assets: school.assets,
       activePromotion: activePromo ? {
         id: activePromo.id,
         campaignName: activePromo.campaignName,
@@ -49,7 +82,45 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({
     success: true,
     schools: schoolMetrics,
-    totalSchools: schools.length,
+    totalSchools: schoolMetrics.length,
     rawRecordsTotal: getRawSchools().length,
   });
+}
+
+export async function POST(req: NextRequest) {
+  const auth = requireAdminAuth(req);
+  if (!auth.authorized || !auth.user) {
+    return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
+  }
+  if (!hasAdminPermission(auth.user, 'schools:write')) {
+    return NextResponse.json({ success: false, message: 'Forbidden' }, { status: 403 });
+  }
+
+  try {
+    const body = await req.json();
+    const { schoolData, reason } = body || {};
+
+    if (!schoolData) {
+      return NextResponse.json({ success: false, message: 'Missing school payload data' }, { status: 400 });
+    }
+
+    const result = createAdminSchool(
+      schoolData,
+      { id: auth.user.id, email: auth.user.email, name: auth.user.name },
+      reason || 'School created via Admin CMS'
+    );
+
+    if (!result.success) {
+      return NextResponse.json({ success: false, message: result.error }, { status: 400 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      school: result.school,
+      message: 'School successfully created and added to directory registry.',
+    });
+  } catch (error) {
+    console.error('Error creating school via admin:', error);
+    return NextResponse.json({ success: false, message: 'Failed to create school record.' }, { status: 500 });
+  }
 }

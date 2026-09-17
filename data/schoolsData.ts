@@ -4,13 +4,19 @@ import legacyUrlMapJson from './legacyUrlMap.json';
 export interface SchoolLocation {
   address: string;
   sector: string;
-  city: string;
-  state: string;
-  pincode: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
   area: string;
-  coordinates: { lat: number | null; lng: number | null };
-  mapSearchQuery: string;
-  mapEmbedUrl: string | null;
+  coordinates: {
+    lat: number | null;
+    lng: number | null;
+    latitude?: number | null;
+    longitude?: number | null;
+    isVerified?: boolean;
+  };
+  mapSearchQuery?: string;
+  mapEmbedUrl?: string | null;
 }
 
 export interface FeeItem {
@@ -20,30 +26,35 @@ export interface FeeItem {
 
 export interface SchoolFees {
   cardFee: number;
-  estimatedFirstYear: number | null;
-  currency: string;
+  estimatedFirstYear?: number | null;
+  currency?: string;
   rangeText: string;
-  registrationFee: number | null;
-  admissionFee: number | null;
-  tuitionMonthly: string | null;
-  tuitionQuarterly: string | null;
-  tuitionAnnual: string | null;
-  transportMonthly: string | null;
-  transportAnnual: string | null;
-  verificationStatus: 'verified_from_source' | 'unverified_copied_from_wisdom_tree' | 'partially_verified' | 'unverified_undisclosed' | 'not_publicly_verified';
+  registrationFee?: number | null;
+  admissionFee?: number | null;
+  tuitionMonthly?: string | null;
+  tuitionQuarterly?: string | null;
+  tuitionAnnual?: string | null;
+  transportMonthly?: string | null;
+  transportAnnual?: string | null;
+  verificationStatus?: 'verified_from_source' | 'unverified_copied_from_wisdom_tree' | 'partially_verified' | 'unverified_undisclosed' | 'not_publicly_verified';
+  isVerified?: boolean;
   comparableAnnualAvailable?: boolean;
   feeCategory?: string;
   academicSession?: string;
+  academicYear?: string;
+  source?: string;
   lastVerifiedDate?: string;
+  verifiedDate?: string;
   sourceUrl?: string;
-  table: FeeItem[];
+  table?: FeeItem[];
   legacyRawFees?: FeeItem[];
 }
 
 export interface Facility {
   name: string;
   category: string;
-  icon: string;
+  icon?: string;
+  available?: boolean;
 }
 
 export interface UniformItem {
@@ -52,24 +63,28 @@ export interface UniformItem {
 }
 
 export interface SchoolUniforms {
-  boys: UniformItem;
-  girls: UniformItem;
+  boys?: UniformItem;
+  girls?: UniformItem;
   winter?: UniformItem;
+  notes?: string;
 }
 
 export interface AdmissionMilestone {
   id: string; // e.g. "app_opening", "app_deadline", "assessment_date"
   label: string; // e.g. "Application Opening", "Application Deadline", "Campus Interaction / Test"
   date: string; // YYYY-MM-DD e.g. "2026-10-15"
-  verified: boolean;
+  type?: string;
+  status?: string;
+  verified?: boolean;
   notes?: string;
 }
 
 export interface SchoolAdmissions {
-  date: string | null;
+  date?: string | null;
   status: string;
   process: string;
   session?: string;
+  academicYear?: string;
   timelineDescription?: string;
   sourceUrl?: string;
   lastVerifiedDate?: string;
@@ -85,8 +100,9 @@ export interface SchoolContact {
 
 export interface SchoolRating {
   score: number;
-  scale: number;
+  scale?: number;
   reviewsCount: number;
+  breakdown?: Record<string, number>;
 }
 
 export interface SchoolAssets {

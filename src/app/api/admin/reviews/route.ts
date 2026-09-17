@@ -89,13 +89,13 @@ export async function DELETE(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = requireAdminAuth(req, 'reviews:moderate');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
   const body = await req.json();
-  const { reviewId, action } = body;
+  const { reviewId, action, reason } = body;
 
   if (!reviewId) {
     return NextResponse.json({ success: false, message: 'Review ID required' }, { status: 400 });
@@ -109,6 +109,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       success: true,
       message: 'Review restored successfully and school aggregates updated.',
+    });
+  }
+
+  if (action === 'delete') {
+    const deleted = adminDeleteRating(reviewId, auth.user.id, reason || 'Removed by moderator');
+    if (!deleted) {
+      return NextResponse.json({ success: false, message: 'Review not found' }, { status: 404 });
+    }
+    return NextResponse.json({
+      success: true,
+      message: 'Review hidden/removed successfully.',
     });
   }
 

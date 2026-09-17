@@ -170,24 +170,7 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. MAIN SECTION: SCHOOL DISCOVERY SHOWCASE                                */}
-      {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 sm:mb-10 text-left reveal-on-scroll">
-          <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
-            Explore schools
-          </h2>
-          <p className="text-sm sm:text-base text-[var(--color-content-muted)] mt-1.5">
-            Compare campuses using the same transparent criteria.
-          </p>
-        </div>
-
-        {/* Dynamic Showcase with Equal Visual Status */}
-        <HomeSchoolShowcase schools={allSchools} />
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 4. METHODOLOGY: EXACT REPLICATION FROM USER IMAGE 3                       */}
+      {/* 3. METHODOLOGY: PARENT-CENTRIC METHODOLOGY                                 */}
       {/* ========================================================================= */}
       <section className="w-full py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -323,6 +306,23 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. MAIN SECTION: SCHOOL DISCOVERY SHOWCASE                                */}
+      {/* ========================================================================= */}
+      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 sm:mb-10 text-left reveal-on-scroll">
+          <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
+            Explore schools
+          </h2>
+          <p className="text-sm sm:text-base text-[var(--color-content-muted)] mt-1.5">
+            Compare campuses using the same transparent criteria.
+          </p>
+        </div>
+
+        {/* Dynamic Showcase with Equal Visual Status */}
+        <HomeSchoolShowcase schools={allSchools} />
       </section>
 
       {/* ========================================================================= */}

@@ -12,7 +12,13 @@ export interface ParentUser {
   residentialSociety?: string;
   fatherName?: string;
   motherName?: string;
-  status: 'active' | 'disabled';
+  status: 'active' | 'disabled' | 'suspended' | 'banned';
+  suspensionReason?: string;
+  suspensionDuration?: string;
+  suspensionExpiresAt?: string;
+  suspendedAt?: string;
+  suspendedBy?: string;
+  adminRole?: 'super_admin' | 'directory_admin' | 'review_moderator' | 'support_admin' | 'editorial_admin' | 'business_admin' | 'analyst';
   preferredSchoolLocality?: string; // e.g. "Sector 16B", "Techzone 4", "Knowledge Park 5", "Greater Noida West"
   preferredBoards?: string[];
   passwordHash?: string;
@@ -964,27 +970,75 @@ export function updateUserProfile(
   return user;
 }
 
-export function updateUserStatus(userId: string, status: 'active' | 'disabled', adminUserId?: string, reason?: string): boolean {
+export function updateUserStatus(
+  userId: string,
+  status: 'active' | 'disabled' | 'suspended' | 'banned',
+  adminUserId?: string,
+  reason?: string,
+  durationDays?: number
+): boolean {
   const user = getUserById(userId);
   if (!user) return false;
 
   user.status = status;
   user.lastActivityAt = new Date().toISOString();
+
+  if (status === 'suspended' || status === 'banned') {
+    user.suspensionReason = reason || 'Administrative action';
+    user.suspendedAt = new Date().toISOString();
+    user.suspendedBy = adminUserId;
+    if (status === 'suspended' && durationDays && durationDays > 0) {
+      user.suspensionDuration = `${durationDays} days`;
+      user.suspensionExpiresAt = new Date(Date.now() + durationDays * 24 * 60 * 60 * 1000).toISOString();
+    } else {
+      delete user.suspensionDuration;
+      delete user.suspensionExpiresAt;
+    }
+  } else {
+    delete user.suspensionReason;
+    delete user.suspensionDuration;
+    delete user.suspensionExpiresAt;
+    delete user.suspendedAt;
+    delete user.suspendedBy;
+  }
+
   saveStoreToDisk();
 
   if (adminUserId) {
     recordAdminAudit(
       adminUserId,
       getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
-      status === 'disabled' ? 'disable_account' : 'enable_account',
+      status === 'disabled' || status === 'banned' || status === 'suspended' ? `account_${status}` : 'enable_account',
       'user',
       userId,
-      { targetEmail: user.email, reason },
+      { targetEmail: user.email, reason, durationDays },
       'success'
     );
   }
 
   return true;
+}
+
+export function isUserSuspendedOrBanned(userId: string): { blocked: boolean; status?: string; reason?: string } {
+  const user = getUserById(userId);
+  if (!user) return { blocked: true, status: 'not_found', reason: 'Account not found.' };
+  if (user.status === 'banned') {
+    return { blocked: true, status: 'banned', reason: user.suspensionReason || 'Account permanently banned.' };
+  }
+  if (user.status === 'suspended') {
+    if (user.suspensionExpiresAt && new Date(user.suspensionExpiresAt).getTime() < Date.now()) {
+      user.status = 'active';
+      delete user.suspensionReason;
+      delete user.suspensionExpiresAt;
+      saveStoreToDisk();
+      return { blocked: false };
+    }
+    return { blocked: true, status: 'suspended', reason: user.suspensionReason || 'Account suspended.' };
+  }
+  if (user.status === 'disabled') {
+    return { blocked: true, status: 'disabled', reason: 'Account disabled.' };
+  }
+  return { blocked: false };
 }
 
 export function updateUserRole(userId: string, role: 'parent' | 'admin', adminUserId?: string): boolean {
@@ -1104,6 +1158,10 @@ export function getAllUsersSanitized() {
     }
   }
   return Array.from(uniqueUsers.values());
+}
+
+export function getAllParentUsers() {
+  return getAllUsersSanitized();
 }
 
 // ----------------------------------------------------------------------------
@@ -2347,3 +2405,327 @@ export function markReminderNotified(reminderId: string): void {
     saveStoreToDisk();
   }
 }
+
+// ----------------------------------------------------------------------------
+// PLATFORM ANNOUNCEMENTS
+// ----------------------------------------------------------------------------
+export interface PlatformAnnouncement {
+  id: string;
+  title: string;
+  body: string;
+  ctaText?: string;
+  ctaLink?: string;
+  startDate: string;
+  endDate: string;
+  priority: 'low' | 'normal' | 'high' | 'urgent';
+  targetAudience: 'all' | 'parents' | 'unverified';
+  status: 'draft' | 'published' | 'archived';
+  createdAt: string;
+  updatedAt: string;
+  createdBy?: string;
+}
+
+const globalAnnouncementsStore = globalThis as unknown as {
+  __ADMISSION_PITARA_ANNOUNCEMENTS__?: PlatformAnnouncement[];
+};
+if (!globalAnnouncementsStore.__ADMISSION_PITARA_ANNOUNCEMENTS__) {
+  globalAnnouncementsStore.__ADMISSION_PITARA_ANNOUNCEMENTS__ = [
+    {
+      id: 'ann-2025-admissions',
+      title: '2025-2026 Greater Noida West Nursery Admissions Open',
+      body: 'Verified admission dates and online registration links for top schools in Techzone 4, Sector 16B, and Knowledge Park are now active.',
+      ctaText: 'Explore Schools',
+      ctaLink: '/schools',
+      startDate: '2025-08-01',
+      endDate: '2025-12-31',
+      priority: 'high',
+      targetAudience: 'all',
+      status: 'published',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      createdBy: 'admin@admissionpitara.com',
+    },
+  ];
+}
+const announcements = globalAnnouncementsStore.__ADMISSION_PITARA_ANNOUNCEMENTS__;
+
+export function getAllAnnouncements(includeDrafts = true): PlatformAnnouncement[] {
+  if (includeDrafts) return [...announcements];
+  return announcements.filter(a => a.status === 'published');
+}
+
+export function createAnnouncement(data: Omit<PlatformAnnouncement, 'id' | 'createdAt' | 'updatedAt'>, adminEmail = 'admin@admissionpitara.com'): PlatformAnnouncement {
+  const newAnn: PlatformAnnouncement = {
+    ...data,
+    id: `ann-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    createdBy: adminEmail,
+  };
+  announcements.unshift(newAnn);
+  return newAnn;
+}
+
+export function updateAnnouncement(id: string, updates: Partial<PlatformAnnouncement>): PlatformAnnouncement | null {
+  const ann = announcements.find(a => a.id === id);
+  if (!ann) return null;
+  Object.assign(ann, updates, { updatedAt: new Date().toISOString() });
+  return ann;
+}
+
+export function deleteAnnouncement(id: string): boolean {
+  const idx = announcements.findIndex(a => a.id === id);
+  if (idx === -1) return false;
+  announcements.splice(idx, 1);
+  return true;
+}
+
+// ----------------------------------------------------------------------------
+// INBOX: CORRECTIONS, ENQUIRIES & SCHOOL SUBMISSIONS
+// ----------------------------------------------------------------------------
+export interface SchoolSubmission {
+  id: string;
+  type: 'school_submission' | 'data_correction' | 'parent_enquiry' | 'partnership';
+  schoolName?: string;
+  schoolSlug?: string;
+  submitterName: string;
+  submitterEmail: string;
+  submitterPhone?: string;
+  submitterRole?: 'parent' | 'school_admin' | 'other';
+  title: string;
+  description: string;
+  proposedChanges?: Record<string, unknown>;
+  sourceReference?: string;
+  status: 'new' | 'in_review' | 'resolved' | 'rejected';
+  adminNotes?: string;
+  assignedAdmin?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+const globalSubmissionsStore = globalThis as unknown as {
+  __ADMISSION_PITARA_SUBMISSIONS__?: SchoolSubmission[];
+};
+if (!globalSubmissionsStore.__ADMISSION_PITARA_SUBMISSIONS__) {
+  globalSubmissionsStore.__ADMISSION_PITARA_SUBMISSIONS__ = [
+    {
+      id: 'sub-sample-1',
+      type: 'data_correction',
+      schoolName: 'Delhi World Public School (KP-3)',
+      schoolSlug: 'delhi-world-public-school-noida-extension',
+      submitterName: 'Rohan Sharma',
+      submitterEmail: 'rohan.sharma.parent@gmail.com',
+      submitterRole: 'parent',
+      title: 'Fee structure revision for 2025-2026 Nursery',
+      description: 'The school announced updated tuition fee of ₹1,40,000 for upcoming session at parent orientation.',
+      status: 'new',
+      createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 24).toISOString(),
+    },
+    {
+      id: 'sub-sample-2',
+      type: 'parent_enquiry',
+      submitterName: 'Priya Mehra',
+      submitterEmail: 'priya.mehra@gmail.com',
+      submitterRole: 'parent',
+      title: 'Transport route confirmation for Sector 16B',
+      description: 'Looking to know which schools provide direct AC bus pickup from Panchsheel Greens.',
+      status: 'in_review',
+      assignedAdmin: 'admin@admissionpitara.com',
+      createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
+      updatedAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+    },
+  ];
+}
+const submissions = globalSubmissionsStore.__ADMISSION_PITARA_SUBMISSIONS__;
+
+export function getAllSubmissions(): SchoolSubmission[] {
+  return [...submissions];
+}
+
+export function createSchoolSubmission(data: Omit<SchoolSubmission, 'id' | 'createdAt' | 'updatedAt' | 'status'>): SchoolSubmission {
+  const newSub: SchoolSubmission = {
+    ...data,
+    id: `sub-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    status: 'new',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  submissions.unshift(newSub);
+  return newSub;
+}
+
+export function updateSubmissionStatus(
+  id: string,
+  status: SchoolSubmission['status'],
+  adminNotes?: string,
+  assignedAdmin?: string
+): SchoolSubmission | null {
+  const item = submissions.find(s => s.id === id);
+  if (!item) return null;
+  item.status = status;
+  if (adminNotes !== undefined) item.adminNotes = adminNotes;
+  if (assignedAdmin !== undefined) item.assignedAdmin = assignedAdmin;
+  item.updatedAt = new Date().toISOString();
+  return item;
+}
+
+// ----------------------------------------------------------------------------
+// EMAIL CAMPAIGN HISTORY
+// ----------------------------------------------------------------------------
+export interface EmailCampaignRecord {
+  id: string;
+  subject: string;
+  bodySnippet: string;
+  recipientType: 'individual' | 'all_parents' | 'verified_parents' | 'schools';
+  recipientCount: number;
+  recipientsPreview: string[];
+  sentBy: string;
+  sentAt: string;
+  status: 'sent' | 'partially_failed' | 'test';
+}
+
+const globalEmailHistory = globalThis as unknown as {
+  __ADMISSION_PITARA_EMAIL_HISTORY__?: EmailCampaignRecord[];
+};
+if (!globalEmailHistory.__ADMISSION_PITARA_EMAIL_HISTORY__) {
+  globalEmailHistory.__ADMISSION_PITARA_EMAIL_HISTORY__ = [
+    {
+      id: 'email-camp-1',
+      subject: 'Admission Pitara: 2025-26 School Admissions Now Active',
+      bodySnippet: 'Dear Parent, School admissions for the upcoming academic session are now verified...',
+      recipientType: 'verified_parents',
+      recipientCount: 24,
+      recipientsPreview: ['parent1@gmail.com', 'parent2@gmail.com'],
+      sentBy: 'admin@admissionpitara.com',
+      sentAt: new Date(Date.now() - 3600000 * 72).toISOString(),
+      status: 'sent',
+    },
+  ];
+}
+const emailCampaigns = globalEmailHistory.__ADMISSION_PITARA_EMAIL_HISTORY__;
+
+export function getEmailCampaigns(): EmailCampaignRecord[] {
+  return [...emailCampaigns];
+}
+
+export function recordEmailCampaign(data: Omit<EmailCampaignRecord, 'id' | 'sentAt'>): EmailCampaignRecord {
+  const record: EmailCampaignRecord = {
+    ...data,
+    id: `email-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    sentAt: new Date().toISOString(),
+  };
+  emailCampaigns.unshift(record);
+  return record;
+}
+
+// ----------------------------------------------------------------------------
+// SECURITY EVENTS LOG
+// ----------------------------------------------------------------------------
+export interface SecurityEvent {
+  id: string;
+  type: 'failed_login' | 'suspicious_activity' | 'user_suspended' | 'user_banned' | 'unauthorized_admin_attempt' | 'bulk_operation';
+  ip?: string;
+  identifier?: string;
+  userId?: string;
+  userEmail?: string;
+  details: string;
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  timestamp: string;
+}
+
+const globalSecurityEvents = globalThis as unknown as {
+  __ADMISSION_PITARA_SECURITY_EVENTS__?: SecurityEvent[];
+};
+if (!globalSecurityEvents.__ADMISSION_PITARA_SECURITY_EVENTS__) {
+  globalSecurityEvents.__ADMISSION_PITARA_SECURITY_EVENTS__ = [
+    {
+      id: 'sec-1',
+      type: 'failed_login',
+      identifier: 'unknown@external.net',
+      details: 'Multiple invalid OTP attempts from unrecognized client address.',
+      severity: 'low',
+      timestamp: new Date(Date.now() - 3600000 * 3).toISOString(),
+    },
+  ];
+}
+const securityEvents = globalSecurityEvents.__ADMISSION_PITARA_SECURITY_EVENTS__;
+
+export function getSecurityEvents(limit = 100): SecurityEvent[] {
+  return securityEvents.slice(0, limit);
+}
+
+export function recordSecurityEvent(event: Omit<SecurityEvent, 'id' | 'timestamp'>): SecurityEvent {
+  const newEv: SecurityEvent = {
+    ...event,
+    id: `sec-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    timestamp: new Date().toISOString(),
+  };
+  securityEvents.unshift(newEv);
+  return newEv;
+}
+
+// ----------------------------------------------------------------------------
+// ADMIN NOTIFICATIONS BELL CENTER
+// ----------------------------------------------------------------------------
+export interface AdminNotification {
+  id: string;
+  type: 'new_submission' | 'flagged_review' | 'data_alert' | 'security_event' | 'reminder_failure';
+  title: string;
+  message: string;
+  link?: string;
+  read: boolean;
+  createdAt: string;
+}
+
+const globalAdminNotifications = globalThis as unknown as {
+  __ADMISSION_PITARA_ADMIN_NOTIFS__?: AdminNotification[];
+};
+if (!globalAdminNotifications.__ADMISSION_PITARA_ADMIN_NOTIFS__) {
+  globalAdminNotifications.__ADMISSION_PITARA_ADMIN_NOTIFS__ = [
+    {
+      id: 'notif-1',
+      type: 'new_submission',
+      title: 'New Data Correction Request',
+      message: 'Parent submitted updated 2025 fee schedule for Delhi World Public School.',
+      link: '/admin?tab=submissions',
+      read: false,
+      createdAt: new Date().toISOString(),
+    },
+    {
+      id: 'notif-2',
+      type: 'data_alert',
+      title: 'Unverified Coordinates Notice',
+      message: '14 schools in directory currently have no verified GPS coordinates.',
+      link: '/admin?tab=location-audit',
+      read: false,
+      createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
+    },
+  ];
+}
+const adminNotifs = globalAdminNotifications.__ADMISSION_PITARA_ADMIN_NOTIFS__;
+
+export function getAdminNotifications(): AdminNotification[] {
+  return [...adminNotifs];
+}
+
+export function markNotificationRead(id: string): void {
+  const n = adminNotifs.find(item => item.id === id);
+  if (n) n.read = true;
+}
+
+export function markAllNotificationsRead(): void {
+  adminNotifs.forEach(n => { n.read = true; });
+}
+
+export function addAdminNotification(data: Omit<AdminNotification, 'id' | 'read' | 'createdAt'>): AdminNotification {
+  const n: AdminNotification = {
+    ...data,
+    id: `notif-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    read: false,
+    createdAt: new Date().toISOString(),
+  };
+  adminNotifs.unshift(n);
+  return n;
+}
+

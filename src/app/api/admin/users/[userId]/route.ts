@@ -85,7 +85,7 @@ export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ userId: string }> }
 ) {
-  const auth = requireAdminAuth(req);
+  const auth = requireAdminAuth(req, 'users:manage');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -97,18 +97,23 @@ export async function PATCH(
   }
 
   const body = await req.json();
-  const { action, status, role, removeWishlistSlug, reason } = body;
+  const { action, status, role, adminRole, removeWishlistSlug, reason, durationDays } = body;
 
   const adminUserId = auth.user.id;
 
   if (action === 'update_status' || status) {
-    const newStatus = status === 'disabled' ? 'disabled' : 'active';
-    updateUserStatus(userId, newStatus, adminUserId, reason);
+    const validStatuses = ['active', 'disabled', 'suspended', 'banned'] as const;
+    const newStatus = validStatuses.includes(status) ? status : 'active';
+    updateUserStatus(userId, newStatus, adminUserId, reason, durationDays ? Number(durationDays) : undefined);
   }
 
   if (action === 'update_role' || role) {
     const newRole = role === 'admin' ? 'admin' : 'parent';
     updateUserRole(userId, newRole, adminUserId);
+  }
+
+  if (adminRole !== undefined && auth.user.adminRole === 'super_admin') {
+    user.adminRole = adminRole || undefined;
   }
 
   if (action === 'remove_wishlist_item' && removeWishlistSlug) {

@@ -1,6 +1,115 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySessionToken, getUserById, ParentUser } from './authStore';
 
+export type AdminRole =
+  | 'super_admin'
+  | 'directory_admin'
+  | 'review_moderator'
+  | 'support_admin'
+  | 'editorial_admin'
+  | 'business_admin'
+  | 'analyst';
+
+export type AdminPermission =
+  | 'schools:read'
+  | 'schools:write'
+  | 'schools:archive'
+  | 'reviews:moderate'
+  | 'users:manage'
+  | 'users:suspend'
+  | 'email:send'
+  | 'announcements:manage'
+  | 'sponsorships:manage'
+  | 'analytics:view'
+  | 'reports:export'
+  | 'reports:import'
+  | 'system:health'
+  | 'system:settings'
+  | 'audit:view';
+
+const ROLE_PERMISSIONS: Record<AdminRole, AdminPermission[]> = {
+  super_admin: [
+    'schools:read',
+    'schools:write',
+    'schools:archive',
+    'reviews:moderate',
+    'users:manage',
+    'users:suspend',
+    'email:send',
+    'announcements:manage',
+    'sponsorships:manage',
+    'analytics:view',
+    'reports:export',
+    'reports:import',
+    'system:health',
+    'system:settings',
+    'audit:view',
+  ],
+  directory_admin: [
+    'schools:read',
+    'schools:write',
+    'schools:archive',
+    'analytics:view',
+    'reports:export',
+    'reports:import',
+    'audit:view',
+  ],
+  review_moderator: [
+    'schools:read',
+    'reviews:moderate',
+    'audit:view',
+  ],
+  support_admin: [
+    'schools:read',
+    'users:manage',
+    'users:suspend',
+    'email:send',
+    'reviews:moderate',
+    'audit:view',
+  ],
+  editorial_admin: [
+    'schools:read',
+    'schools:write',
+    'announcements:manage',
+    'audit:view',
+  ],
+  business_admin: [
+    'schools:read',
+    'sponsorships:manage',
+    'analytics:view',
+    'audit:view',
+  ],
+  analyst: [
+    'schools:read',
+    'analytics:view',
+    'reports:export',
+    'audit:view',
+  ],
+};
+
+export function getEffectiveAdminRole(user: ParentUser): AdminRole {
+  // If user has specific adminRole assigned in profile, use it
+  if (user.adminRole) {
+    return user.adminRole;
+  }
+  // Default to super_admin for configured admin emails or standard 'admin' role
+  return 'super_admin';
+}
+
+export function hasAdminPermission(userOrRole: ParentUser | AdminRole | string | undefined, permission: AdminPermission): boolean {
+  if (!userOrRole) return false;
+  let role: AdminRole = 'super_admin';
+  if (typeof userOrRole === 'string') {
+    if (userOrRole in ROLE_PERMISSIONS) {
+      role = userOrRole as AdminRole;
+    }
+  } else if (typeof userOrRole === 'object') {
+    role = getEffectiveAdminRole(userOrRole as ParentUser);
+  }
+  const permissions = ROLE_PERMISSIONS[role] || [];
+  return permissions.includes(permission);
+}
+
 export interface AdminAuthResult {
   authorized: boolean;
   user?: ParentUser;
@@ -10,9 +119,10 @@ export interface AdminAuthResult {
 /**
  * Server-side authorization check for all administrative APIs.
  * Requires an authenticated user whose email is in ADMIN_EMAILS or whose role is 'admin'.
+ * Can optionally enforce a specific AdminPermission.
  * Never exposes secrets.
  */
-export function requireAdminAuth(req: NextRequest): AdminAuthResult {
+export function requireAdminAuth(req: NextRequest, requiredPermission?: AdminPermission): AdminAuthResult {
   try {
     const cookieToken = req.cookies.get('ap_session')?.value;
     const authHeader = req.headers.get('Authorization') || req.headers.get('authorization');
@@ -96,6 +206,20 @@ export function requireAdminAuth(req: NextRequest): AdminAuthResult {
             success: false,
             message: 'Access denied: You do not possess administrator authorization for Admission Pitara.',
             code: 'FORBIDDEN',
+          },
+          { status: 403 }
+        ),
+      };
+    }
+
+    if (requiredPermission && !hasAdminPermission(user, requiredPermission)) {
+      return {
+        authorized: false,
+        errorResponse: NextResponse.json(
+          {
+            success: false,
+            message: `Access denied: Your administrative role does not grant permission '${requiredPermission}'.`,
+            code: 'FORBIDDEN_INSUFFICIENT_ROLE',
           },
           { status: 403 }
         ),

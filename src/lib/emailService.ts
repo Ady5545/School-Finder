@@ -358,7 +358,7 @@ Admission Pitara - Greater Noida West School Discovery
     `.trim();
 
     await transporter.sendMail({
-      from: `"Admission Pitara" <${creds.emailUser}>`,
+      from: creds.smtpFrom,
       to,
       subject,
       text: textContent,
@@ -534,7 +534,7 @@ Admission Pitara - Greater Noida West
     `.trim();
 
     await transporter.sendMail({
-      from: `"Admission Pitara" <${creds.emailUser}>`,
+      from: creds.smtpFrom,
       to,
       subject,
       text: textContent,

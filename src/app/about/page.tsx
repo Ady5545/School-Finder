@@ -9,6 +9,8 @@ export const metadata = buildPageMetadata(
   '/about'
 );
 
+export const dynamic = 'force-dynamic';
+
 export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col flex-1">

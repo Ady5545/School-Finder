@@ -99,7 +99,8 @@ export function checkShortlistDeadlines(
       // If deadline is in past or too far, check if simulated within 7 days for test verification
       if (alert.daysRemaining < 0 || alert.daysRemaining > 30) {
         // Compute cyclic target relative to school's original day of month to simulate realistic cycle
-        const dayOfMonth = parseInt(school.admissions.date.split('-')[2] || '5', 10);
+        const dateStr = school.admissions.date || '2026-03-31';
+        const dayOfMonth = parseInt(dateStr.split('-')[2] || '5', 10);
         const simDate = new Date();
         // Set target to today + (dayOfMonth % 7) days (so between 0 and 6 days remaining!)
         const targetDays = ((dayOfMonth % 6) + 1); // 1 to 6 days

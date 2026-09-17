@@ -296,7 +296,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    return {
+      user: null,
+      isAuthenticated: false,
+      isAdmin: false,
+      isLoading: false,
+      token: null,
+      sendOtp: async (): Promise<{ success: boolean; message?: string; devOtp?: string; category?: string; notFound?: boolean }> => ({ success: false, message: 'Auth context unavailable', notFound: false, devOtp: undefined, category: undefined }),
+      verifyOtp: async (): Promise<{ success: boolean; verificationToken?: string; message?: string }> => ({ success: false, message: 'Auth context unavailable', verificationToken: undefined }),
+      register: async () => ({ success: false, message: 'Auth context unavailable' }),
+      login: async (): Promise<{ success: boolean; message?: string; notFound?: boolean }> => ({ success: false, message: 'Auth context unavailable', notFound: false }),
+      logout: async () => {},
+      updateProfile: async () => ({ success: false, message: 'Auth context unavailable' }),
+      refreshProfile: async () => {},
+    };
   }
   return context;
 };

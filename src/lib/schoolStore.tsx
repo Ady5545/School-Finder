@@ -325,7 +325,27 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
 export const useSchoolStore = () => {
   const context = useContext(SchoolStoreContext);
   if (!context) {
-    throw new Error('useSchoolStore must be used within a SchoolStoreProvider');
+    return {
+      shortlist: [],
+      compareList: [],
+      isInShortlist: () => false,
+      toggleShortlist: () => {},
+      addToShortlist: () => {},
+      removeFromShortlist: () => {},
+      clearShortlist: () => {},
+      setShortlistFromServer: () => {},
+      isInCompare: () => false,
+      toggleCompare: () => {},
+      addCompare: () => {},
+      addToCompare: () => {},
+      removeCompare: () => {},
+      removeFromCompare: () => {},
+      clearCompare: () => {},
+      isHydrated: false,
+      authPromptTarget: null,
+      openAuthPrompt: () => {},
+      closeAuthPrompt: () => {},
+    };
   }
   return context;
 };

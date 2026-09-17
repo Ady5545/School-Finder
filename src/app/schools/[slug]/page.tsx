@@ -39,6 +39,8 @@ interface SchoolDetailPageProps {
   }>;
 }
 
+export const dynamic = 'force-dynamic';
+
 export async function generateStaticParams() {
   const slugs = getAllSchoolSlugs();
   return slugs.map(slug => ({ slug }));

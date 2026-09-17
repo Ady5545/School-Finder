@@ -1,5 +1,7 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import React, { useState } from 'react';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { Input } from '../../components/ui/Input';

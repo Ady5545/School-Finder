@@ -13,6 +13,8 @@ export const metadata = buildPageMetadata(
   '/admissions'
 );
 
+export const dynamic = 'force-dynamic';
+
 export default function AdmissionsPage() {
   const schools = getAllSchools();
 

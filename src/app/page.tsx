@@ -20,6 +20,8 @@ import {
   Sparkles,
 } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default function HomePage() {
   const allSchools = getAllSchools();
 
@@ -118,7 +120,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* PROMOTED / SPONSORED PARTNER BANNER (IF ACTIVE CAMPAIGN CONFIGURED)       */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 reveal-on-scroll">
         <SponsoredPlacementCard placement="homepage_hero" />
       </div>
 
@@ -206,7 +208,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
             {/* 01 Discover */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="1">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#eff6ff] text-[#1e40af] font-bold text-xs mb-5">
                   01
@@ -229,7 +231,7 @@ export default function HomePage() {
             </div>
 
             {/* 02 Understand */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="2">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff7ed] text-[#9a3412] font-bold text-xs mb-5">
                   02
@@ -252,7 +254,7 @@ export default function HomePage() {
             </div>
 
             {/* 03 Compare */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="3">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#ecfdf5] text-[#065f46] font-bold text-xs mb-5">
                   03
@@ -275,7 +277,7 @@ export default function HomePage() {
             </div>
 
             {/* 04 Shortlist */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="4">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff1f2] text-[#9f1239] font-bold text-xs mb-5">
                   04
@@ -298,7 +300,7 @@ export default function HomePage() {
             </div>
 
             {/* 05 Apply */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full">
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="5">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#f0f9ff] text-[#0369a1] font-bold text-xs mb-5">
                   05

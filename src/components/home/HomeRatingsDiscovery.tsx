@@ -99,7 +99,7 @@ export const HomeRatingsDiscovery: React.FC = () => {
         {/* Editorial Community Invitation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Transparent Evaluation Criteria */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-2xs space-y-3">
+          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-2xs space-y-3 reveal-on-scroll" data-reveal-delay="1">
             <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 flex items-center justify-center font-bold text-sm">
               <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
             </div>
@@ -118,7 +118,7 @@ export const HomeRatingsDiscovery: React.FC = () => {
           </div>
 
           {/* Card 2: Honest Community Growth */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-2xs space-y-3">
+          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-2xs space-y-3 reveal-on-scroll" data-reveal-delay="2">
             <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-center font-bold text-sm">
               <MessageSquare className="w-4 h-4 text-emerald-700" />
             </div>
@@ -137,7 +137,7 @@ export const HomeRatingsDiscovery: React.FC = () => {
           </div>
 
           {/* Card 3: Editorial Independence */}
-          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-2xs space-y-3">
+          <div className="bg-white rounded-2xl p-6 border border-stone-200 shadow-2xs space-y-3 reveal-on-scroll" data-reveal-delay="3">
             <div className="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200 text-blue-800 flex items-center justify-center font-bold text-sm">
               <ShieldCheck className="w-4 h-4 text-blue-700" />
             </div>

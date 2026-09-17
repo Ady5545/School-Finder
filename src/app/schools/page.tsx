@@ -10,6 +10,8 @@ export const metadata = buildPageMetadata(
   '/schools'
 );
 
+export const dynamic = 'force-dynamic';
+
 interface SchoolsPageProps {
   searchParams: Promise<{
     q?: string;

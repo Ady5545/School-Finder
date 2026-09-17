@@ -199,23 +199,18 @@ export const RegisterForm: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      console.log('[FRONTEND_DIAGNOSTIC] Calling sendOtp for registration...');
       const result = await sendOtp(email.trim(), { purpose: 'register', name: name.trim() });
-      console.log('[FRONTEND_DIAGNOSTIC] sendOtp result:', result);
       
       if (result.success) {
-        console.log('[FRONTEND_DIAGNOSTIC] Success! Transitioning to OTP entry step.');
         setStep(2);
         setResendCooldown(60);
         if (result.devOtp) {
           setDevOtpHint(result.devOtp);
         }
       } else {
-        console.error('[FRONTEND_DIAGNOSTIC] sendOtp failed. Setting error message:', result.message);
         setErrorMessage(result.message || 'Failed to dispatch verification code. Please try again.');
       }
-    } catch (err) {
-      console.error('[FRONTEND_DIAGNOSTIC] Caught error in handleRequestLoginOtp:', err);
+    } catch {
       setErrorMessage('Network error occurred while sending verification code.');
     } finally {
       setIsSubmitting(false);

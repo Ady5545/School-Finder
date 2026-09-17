@@ -93,20 +93,16 @@ export const LoginForm: React.FC = () => {
     }
 
     setIsSubmitting(true);
-    console.log('[FRONTEND_DIAGNOSTIC] Calling sendOtp for login...');
     const res = await sendOtp(cleanEmail, { purpose: 'login' });
-    console.log('[FRONTEND_DIAGNOSTIC] sendOtp result:', res);
     setIsSubmitting(false);
 
     if (res.success) {
-      console.log('[FRONTEND_DIAGNOSTIC] Success! Transitioning to OTP entry step.');
       setOtpSent(true);
       setResendCooldown(60);
       if (res.devOtp) {
         setDevOtpHint(res.devOtp);
       }
     } else {
-      console.error('[FRONTEND_DIAGNOSTIC] sendOtp failed. Setting error message:', res.message);
       if (res.notFound) {
         setNoAccountFound({ email: cleanEmail, message: res.message });
       } else {

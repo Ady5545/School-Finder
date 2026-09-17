@@ -74,15 +74,18 @@ export async function POST(req: NextRequest) {
     });
 
     if (!emailResult.success) {
-      console.error('[OTP_DIAGNOSTICS] Email sending failed:', emailResult);
-      // Determine error details safely (some errors have 'error', others might have 'detail' or 'message')
-      const errorDetail = 'error' in emailResult ? emailResult.error : ('detail' in emailResult ? emailResult.detail : 'Unknown SMTP error');
+      console.error('[OTP_DIAGNOSTICS] Email sending failed:', {
+        category: emailResult.category,
+        error: emailResult.error,
+      });
       
       return NextResponse.json(
         {
           success: false,
           category: emailResult.category,
-          message: `[DIAGNOSTIC] Failed to send email. Category: ${emailResult.category}. Details: ${errorDetail}`,
+          message:
+            emailResult.error ||
+            "We couldn't send the verification email right now. Please try again in a moment.",
         },
         { status: emailResult.category === 'INVALID_RECIPIENT' ? 400 : 500 }
       );

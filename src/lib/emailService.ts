@@ -34,9 +34,9 @@ interface SmtpCredentials {
 }
 
 export function getEmailCredentials(): SmtpCredentials {
-  const emailUser = (process.env.EMAIL_USER || process.env.SMTP_USER || '').trim();
+  const emailUser = (process.env.EMAIL_USER || '').trim();
   // Strip all whitespace from App Passwords (e.g. Google generates "abcd efgh ijkl mnop")
-  const rawPass = (process.env.EMAIL_PASS || process.env.SMTP_PASS || '').trim();
+  const rawPass = (process.env.EMAIL_PASS || '').trim();
   const emailPass = rawPass.replace(/\s+/g, '');
 
   const smtpHost = (process.env.SMTP_HOST || 'smtp.gmail.com').trim();
@@ -46,7 +46,7 @@ export function getEmailCredentials(): SmtpCredentials {
       ? process.env.SMTP_SECURE === 'true'
       : smtpPort === 465;
 
-  const smtpFrom = (process.env.SMTP_FROM || process.env.EMAIL_FROM || `"Admission Pitara" <${emailUser}>`).trim();
+  const smtpFrom = (process.env.SMTP_FROM || `"Admission Pitara" <${emailUser}>`).trim();
 
   return {
     emailUser,

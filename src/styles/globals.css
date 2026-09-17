@@ -103,6 +103,7 @@ html {
   background-color: var(--color-surface-muted);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -111,6 +112,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
 }
 
 /* Accessible focus styling */
@@ -241,38 +243,26 @@ html {
   box-shadow: 0 14px 30px -6px rgba(15, 45, 74, 0.12), 0 4px 10px -2px rgba(15, 45, 74, 0.05);
 }
 
-/* Native document scrolling: 100% native physics across all browsers & display refresh rates */
-html {
-  overflow-x: hidden;
-}
-
-body {
-  overflow-x: hidden;
-}
-
 /* Progressive enhancement scroll reveal system
    Guaranteed default: Content is 100% visible (opacity: 1, transform: none) on SSR,
-   initial HTML render, JS-disabled, and before client observer arms offscreen elements.
-   Under no circumstances is content hidden without active client-side JS. */
+   initial HTML render, JS-disabled, and before client observer arms offscreen elements. */
 [data-reveal],
 .reveal-on-scroll {
   opacity: 1;
   transform: none;
 }
 
-/* ONLY when client JS is initialized (html.has-scroll-reveal)
-   AND the element has been explicitly armed because it is strictly below the fold */
+/* ONLY when client JS is initialized (html.has-scroll-reveal) */
 html.has-scroll-reveal .reveal-on-scroll.is-pending {
   opacity: 0;
-  transform: translateY(var(--reveal-distance, 32px));
-  will-change: opacity, transform;
+  transform: translateY(16px);
 }
 
 html.has-scroll-reveal .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity var(--reveal-duration, 680ms) cubic-bezier(0.16, 1, 0.3, 1),
-              transform var(--reveal-duration, 680ms) cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -280,28 +270,15 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
   opacity: 1;
   transform: none;
   transition: none;
-  will-change: auto;
 }
 
-/* Tactile Card hover refinement: card hover transforms cleanly */
-.tactile-card.is-settled,
-.tactile-card:not(.is-pending) {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease;
-}
-
-/* Subtle parallax nodes */
-[data-parallax] {
-  will-change: transform;
-}
-
-[data-reveal-delay="1"] { --reveal-delay: 90ms; }
-[data-reveal-delay="2"] { --reveal-delay: 180ms; }
-[data-reveal-delay="3"] { --reveal-delay: 270ms; }
-[data-reveal-delay="4"] { --reveal-delay: 360ms; }
-[data-reveal-delay="5"] { --reveal-delay: 450ms; }
-[data-reveal-delay="6"] { --reveal-delay: 540ms; }
+/* Stagger delays */
+[data-reveal-delay="1"] { --reveal-delay: 80ms; }
+[data-reveal-delay="2"] { --reveal-delay: 160ms; }
+[data-reveal-delay="3"] { --reveal-delay: 240ms; }
+[data-reveal-delay="4"] { --reveal-delay: 320ms; }
+[data-reveal-delay="5"] { --reveal-delay: 400ms; }
+[data-reveal-delay="6"] { --reveal-delay: 480ms; }
 
 /* Respect user preferences: All content immediately visible */
 @media (prefers-reduced-motion: reduce) {
@@ -318,9 +295,7 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
 
   [data-reveal],
   .reveal-on-scroll,
-  .reveal-on-scroll.is-pending,
   .reveal-on-scroll.is-revealed,
-  .reveal-on-scroll.is-settled,
   [data-parallax] {
     opacity: 1 !important;
     transform: none !important;

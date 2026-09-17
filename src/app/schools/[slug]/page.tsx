@@ -16,6 +16,7 @@ import { SchoolGallery } from '../../../components/school/SchoolGallery';
 import { CampusInteractiveMap } from '../../../components/school/CampusInteractiveMap';
 import { SchoolRatingsSection } from '../../../components/school/SchoolRatingsSection';
 import { SchoolAdmissionsSection } from '../../../components/school/SchoolAdmissionsSection';
+import { SchoolViewTracker } from '../../../components/school/SchoolViewTracker';
 import { Button } from '../../../components/ui/Button';
 import {
   MapPin,
@@ -77,6 +78,9 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8 w-full flex flex-col flex-1">
+      {/* Telemetry Tracking with Session Deduplication */}
+      <SchoolViewTracker slug={school.slug} />
+
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"

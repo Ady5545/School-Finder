@@ -172,8 +172,8 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 3. MAIN SECTION: SCHOOL DISCOVERY SHOWCASE                                */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
-        <div className="mb-8 sm:mb-10 text-left">
+      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 sm:mb-10 text-left reveal-on-scroll">
           <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
             Explore schools
           </h2>
@@ -189,9 +189,9 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 4. METHODOLOGY: EXACT REPLICATION FROM USER IMAGE 3                       */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)] reveal-on-scroll">
+      <section className="w-full py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 flex flex-col items-center">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 flex flex-col items-center reveal-on-scroll">
             {/* Top Badge matching Image 3 */}
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50/90 border border-blue-100 text-blue-900 text-xs font-semibold mb-4 mx-auto shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />

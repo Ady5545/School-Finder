@@ -1,10 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   recordSchoolView,
-  recordActivityEvent,
   verifySessionToken,
 } from '../../../../../lib/authStore';
 import { getCanonicalSlug } from '../../../../../lib/schools';
+
+// In-memory sliding window cache to deduplicate rapid view calls (within 30 seconds)
+const recentViewsCache = new Map<string, number>();
+
+function isDuplicateView(key: string): boolean {
+  const now = Date.now();
+  const lastTime = recentViewsCache.get(key);
+  if (lastTime && now - lastTime < 30 * 1000) {
+    return true;
+  }
+  recentViewsCache.set(key, now);
+
+  // Periodic pruning if cache exceeds 2000 entries
+  if (recentViewsCache.size > 2000) {
+    for (const [k, t] of recentViewsCache.entries()) {
+      if (now - t > 60 * 1000) recentViewsCache.delete(k);
+    }
+  }
+  return false;
+}
 
 export async function POST(
   req: NextRequest,
@@ -31,9 +50,16 @@ export async function POST(
       }
     }
 
-    recordSchoolView(canonicalSlug, userId);
+    // Deduplicate rapid successive views from the same user/client IP
+    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'client';
+    const dedupKey = `${userId || clientIp}:${canonicalSlug}`;
+    if (isDuplicateView(dedupKey)) {
+      return NextResponse.json({ success: true, duplicate: true });
+    }
 
-    return NextResponse.json({ success: true });
+    recordSchoolView(canonicalSlug, undefined, userId);
+
+    return NextResponse.json({ success: true, duplicate: false });
   } catch (error) {
     console.error('Error logging school view:', error);
     return NextResponse.json({ success: false }, { status: 500 });

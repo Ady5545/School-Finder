@@ -98,15 +98,21 @@ export const ScrollRevealManager: React.FC = () => {
             observer.unobserve(el);
             el.classList.remove('is-pending');
             el.classList.add('is-revealed');
+
+            // Calculate exact settle duration based on stagger delay + animation duration
+            const delayAttr = el.getAttribute('data-reveal-delay');
+            const delayIdx = delayAttr ? Math.max(0, parseInt(delayAttr, 10) || 0) : 0;
+            const settleDuration = 680 + (delayIdx * 90) + 100;
+
             setTimeout(() => {
               el.classList.add('is-settled');
-            }, 600);
+            }, settleDuration);
           }
         });
       },
       {
         threshold: 0.05,
-        rootMargin: '0px 0px -20px 0px',
+        rootMargin: '0px 0px -40px 0px',
       }
     );
 
@@ -121,8 +127,8 @@ export const ScrollRevealManager: React.FC = () => {
         }
 
         const rect = el.getBoundingClientRect();
-        // If in initial above-the-fold viewport, reveal immediately
-        if (rect.top < vh - 20 && rect.bottom > 0) {
+        // If in initial above-the-fold viewport or already scrolled above, reveal immediately
+        if (rect.top < vh - 40) {
           el.classList.remove('is-pending');
           el.classList.add('is-revealed', 'is-settled');
         } else {
@@ -133,10 +139,10 @@ export const ScrollRevealManager: React.FC = () => {
       });
     };
 
-    // Initial scan
+    // Initial scan on mount and route change
     scanAndObserve();
 
-    // Observe DOM mutations for dynamic client-side lists/tabs (e.g. school filtering)
+    // Observe DOM mutations for dynamic client-side lists/tabs (e.g. school filtering, review loads)
     let rafId: number | null = null;
     const mutationObserver = new MutationObserver(() => {
       if (rafId) cancelAnimationFrame(rafId);
@@ -148,19 +154,8 @@ export const ScrollRevealManager: React.FC = () => {
       subtree: true,
     });
 
-    // Safety fallback: after 2.5s, forcefully settle any remaining pending elements
-    const safetyTimeout = setTimeout(() => {
-      const stuckElements = document.querySelectorAll<HTMLElement>('.reveal-on-scroll.is-pending');
-      stuckElements.forEach((el) => {
-        el.classList.remove('is-pending');
-        el.classList.add('is-revealed', 'is-settled');
-        observer.unobserve(el);
-      });
-    }, 2500);
-
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
-      clearTimeout(safetyTimeout);
       observer.disconnect();
       mutationObserver.disconnect();
     };

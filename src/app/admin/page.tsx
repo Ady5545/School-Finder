@@ -721,10 +721,12 @@ export default function AdminPage() {
                   <span className="text-3xl font-black text-white font-serif">
                     {overviewData?.schools.totalViewsCount || 0}
                   </span>
-                  <span className="text-xs text-slate-400 font-semibold">Total clicks</span>
+                  <span className="text-xs text-amber-400 font-semibold">
+                    {timeRange === 'all' ? 'All-time views' : `in ${timeRange}`}
+                  </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Across all {schoolsList.length || 62} canonical school profiles
+                  {overviewData?.schools.uniqueViewersInRange || 0} unique parents ({overviewData?.schools.allTimeViewsCount || overviewData?.schools.totalViewsCount || 0} all-time clicks)
                 </p>
               </div>
 
@@ -737,10 +739,12 @@ export default function AdminPage() {
                   <span className="text-3xl font-black text-white font-serif">
                     {overviewData?.schools.totalSavesCount || 0}
                   </span>
-                  <span className="text-xs text-rose-400 font-semibold">Shortlists</span>
+                  <span className="text-xs text-rose-400 font-semibold">
+                    {timeRange === 'all' ? 'All-time' : `in ${timeRange}`}
+                  </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  Total saved admissions bookmarks
+                  {overviewData?.schools.allTimeSavesCount || overviewData?.schools.totalSavesCount || 0} total saved admissions bookmarks
                 </p>
               </div>
 

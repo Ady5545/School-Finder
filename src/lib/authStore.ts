@@ -1168,7 +1168,9 @@ export function recordActivityEvent(params: {
   return evt;
 }
 
-export function recordSchoolView(slug: string, approximateTimeSpent?: string, userId?: string): void {
+export function recordSchoolView(slug: string, userIdOrTimeSpent?: string, maybeUserId?: string): void {
+  const userId = maybeUserId || (userIdOrTimeSpent && userIdOrTimeSpent.startsWith('usr_') ? userIdOrTimeSpent : undefined);
+  const approximateTimeSpent = userIdOrTimeSpent && !userIdOrTimeSpent.startsWith('usr_') ? userIdOrTimeSpent : undefined;
   recordActivityEvent({
     type: 'school_view',
     schoolSlug: slug,
@@ -1784,17 +1786,62 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
   for (const r of activeRatings) ratingSum += r.score;
   const averageRating = activeRatings.length > 0 ? Math.round((ratingSum / activeRatings.length) * 10) / 10 : 0;
 
-  // Most shortlisted schools
-  const topShortlisted = Array.from(schoolSaves.entries())
+  // Recent activity in time range
+  const filteredActivity = activityEvents.filter(
+    e => timeThreshold === 0 || new Date(e.timestamp).getTime() >= timeThreshold
+  );
+
+  // Time-period filtered metrics
+  const viewsEventsInRange = filteredActivity.filter(e => e.type === 'school_view');
+  const savesEventsInRange = filteredActivity.filter(e => e.type === 'wishlist_add');
+
+  const viewsCountInRange = viewsEventsInRange.length;
+  const savesCountInRange = savesEventsInRange.length;
+
+  const uniqueParentsViewing = new Set(
+    viewsEventsInRange.map(e => e.userId).filter(Boolean)
+  ).size;
+
+  // Top viewed schools in selected time range
+  const viewsMapInRange = new Map<string, number>();
+  for (const ev of viewsEventsInRange) {
+    if (ev.schoolSlug) {
+      viewsMapInRange.set(ev.schoolSlug, (viewsMapInRange.get(ev.schoolSlug) || 0) + 1);
+    }
+  }
+  const topViewedInRange = Array.from(viewsMapInRange.entries())
+    .map(([slug, count]) => ({ slug, views: count }))
+    .sort((a, b) => b.views - a.views)
+    .slice(0, 8);
+
+  // Top shortlisted schools in selected time range
+  const savesMapInRange = new Map<string, number>();
+  for (const ev of savesEventsInRange) {
+    if (ev.schoolSlug) {
+      savesMapInRange.set(ev.schoolSlug, (savesMapInRange.get(ev.schoolSlug) || 0) + 1);
+    }
+  }
+  const topShortlistedInRange = Array.from(savesMapInRange.entries())
     .map(([slug, count]) => ({ slug, saves: count }))
     .sort((a, b) => b.saves - a.saves)
     .slice(0, 8);
 
-  // Most viewed schools
-  const topViewed = Array.from(schoolViews.entries())
-    .map(([slug, count]) => ({ slug, views: count }))
-    .sort((a, b) => b.views - a.views)
-    .slice(0, 8);
+  const topViewed = timeRange === 'all' || topViewedInRange.length === 0
+    ? Array.from(schoolViews.entries())
+        .map(([slug, count]) => ({ slug, views: count }))
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 8)
+    : topViewedInRange;
+
+  const topShortlisted = timeRange === 'all' || topShortlistedInRange.length === 0
+    ? Array.from(schoolSaves.entries())
+        .map(([slug, count]) => ({ slug, saves: count }))
+        .sort((a, b) => b.saves - a.saves)
+        .slice(0, 8)
+    : topShortlistedInRange;
+
+  const allTimeViews = Array.from(schoolViews.values()).reduce((a, b) => a + b, 0);
+  const allTimeSaves = Array.from(schoolSaves.values()).reduce((a, b) => a + b, 0);
 
   // Highest rated schools (minimum 1 review)
   const highestRated = Object.keys(Object.fromEntries(schoolViews))
@@ -1805,11 +1852,6 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
     .filter(s => s.totalReviews > 0)
     .sort((a, b) => b.averageScore - a.averageScore || b.totalReviews - a.totalReviews)
     .slice(0, 8);
-
-  // Recent activity in time range
-  const filteredActivity = activityEvents.filter(
-    e => timeThreshold === 0 || new Date(e.timestamp).getTime() >= timeThreshold
-  );
 
   return {
     timeRange,
@@ -1824,8 +1866,13 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
       topViewed,
       topShortlisted,
       highestRated,
-      totalViewsCount: Array.from(schoolViews.values()).reduce((a, b) => a + b, 0),
-      totalSavesCount: Array.from(schoolSaves.values()).reduce((a, b) => a + b, 0),
+      totalViewsCount: timeRange === 'all' ? allTimeViews : viewsCountInRange,
+      totalSavesCount: timeRange === 'all' ? allTimeSaves : savesCountInRange,
+      allTimeViewsCount: allTimeViews,
+      allTimeSavesCount: allTimeSaves,
+      viewsInRange: viewsCountInRange,
+      savesInRange: savesCountInRange,
+      uniqueViewersInRange: uniqueParentsViewing,
     },
     reviews: {
       totalReviews: activeRatings.length,

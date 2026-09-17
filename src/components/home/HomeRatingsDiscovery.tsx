@@ -54,10 +54,10 @@ export const HomeRatingsDiscovery: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-[#f7f5f0] border-y border-stone-200/80 reveal-on-scroll">
+    <section className="py-16 bg-[#f7f5f0] border-y border-stone-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4 reveal-on-scroll">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100/80 border border-amber-300 text-amber-900 text-xs font-bold mb-3">
               <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />

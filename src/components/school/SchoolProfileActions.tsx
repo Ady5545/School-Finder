@@ -33,17 +33,6 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
     }
 
     toggleShortlist(school.slug, school.name);
-
-    // Sync with backend API
-    try {
-      await fetch('/api/auth/wishlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: school.slug, action: 'toggle' }),
-      });
-    } catch {
-      // Local state already updated
-    }
   };
 
   const handleShare = async () => {

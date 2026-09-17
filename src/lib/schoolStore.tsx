@@ -53,6 +53,15 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           setCompareList(Array.from(new Set(parsed.map(s => getCanonicalSlug(String(s))))));
         }
       }
+
+      // If not authenticated on initial load, hydrate anonymous shortlist
+      const savedAnon = localStorage.getItem(ANON_SHORTLIST_KEY);
+      if (savedAnon) {
+        const parsed = JSON.parse(savedAnon);
+        if (Array.isArray(parsed)) {
+          setShortlist(Array.from(new Set(parsed.map(s => getCanonicalSlug(String(s))))));
+        }
+      }
     } catch {
       // Storage unavailable
     } finally {
@@ -65,19 +74,73 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
     if (isAuthLoading) return;
 
     if (isAuthenticated && user?.id) {
-      // User is authenticated: load THIS user's server-backed wishlist
       currentUserIdRef.current = user.id;
-      const userWishlist = Array.isArray(user.wishlist)
-        ? Array.from(new Set(user.wishlist.map(s => getCanonicalSlug(String(s)))))
-        : [];
-      setShortlist(userWishlist);
 
+      // Check if anonymous wishlist exists to merge on first login
+      let anonList: string[] = [];
       try {
-        localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(userWishlist));
+        const savedAnon = localStorage.getItem(ANON_SHORTLIST_KEY);
+        if (savedAnon) {
+          const parsed = JSON.parse(savedAnon);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            anonList = parsed.map(s => getCanonicalSlug(String(s)));
+          }
+        }
       } catch {}
+
+      if (anonList.length > 0) {
+        // Sync anonymous wishlist to authenticated account
+        fetch('/api/auth/wishlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'sync', list: anonList }),
+        })
+          .then(r => r.json())
+          .then(data => {
+            if (data?.success && Array.isArray(data.wishlist)) {
+              const merged: string[] = Array.from(new Set<string>((data.wishlist as string[]).map((s: string) => getCanonicalSlug(s))));
+              setShortlist(merged);
+              try {
+                localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(merged));
+                localStorage.removeItem(ANON_SHORTLIST_KEY);
+              } catch {}
+            }
+          })
+          .catch(() => {
+            // Fallback to local merge
+            const existingUserList = Array.isArray(user.wishlist) ? user.wishlist.map(s => getCanonicalSlug(String(s))) : [];
+            const merged: string[] = Array.from(new Set<string>([...existingUserList, ...anonList]));
+            setShortlist(merged);
+            try {
+              localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(merged));
+              localStorage.removeItem(ANON_SHORTLIST_KEY);
+            } catch {}
+          });
+      } else {
+        // User is authenticated: load THIS user's server-backed wishlist
+        const userWishlist: string[] = Array.isArray(user.wishlist)
+          ? Array.from(new Set<string>(user.wishlist.map(s => getCanonicalSlug(String(s)))))
+          : [];
+        setShortlist(userWishlist);
+
+        try {
+          localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(userWishlist));
+        } catch {}
+      }
     } else {
-      // User is unauthenticated / logged out: CLEAR in-memory wishlist immediately
+      // User is unauthenticated / logged out: restore local anonymous shortlist if present
       currentUserIdRef.current = null;
+      try {
+        const savedAnon = localStorage.getItem(ANON_SHORTLIST_KEY);
+        if (savedAnon) {
+          const parsed = JSON.parse(savedAnon);
+          if (Array.isArray(parsed)) {
+            const anonRestored: string[] = Array.from(new Set<string>(parsed.map(s => getCanonicalSlug(String(s)))));
+            setShortlist(anonRestored);
+            return;
+          }
+        }
+      } catch {}
       setShortlist([]);
     }
   }, [isAuthenticated, user?.id, user?.wishlist, isAuthLoading]);
@@ -182,6 +245,10 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ slug: canonical, action: 'add' }),
         }).catch(() => {});
+      } else {
+        try {
+          localStorage.setItem(ANON_SHORTLIST_KEY, JSON.stringify(nextList));
+        } catch {}
       }
     },
     [showToast, isAuthenticated, user?.id]
@@ -207,6 +274,10 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ slug: canonical, action: 'remove' }),
         }).catch(() => {});
+      } else {
+        try {
+          localStorage.setItem(ANON_SHORTLIST_KEY, JSON.stringify(nextList));
+        } catch {}
       }
     },
     [isAuthenticated, user?.id]
@@ -226,6 +297,10 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'clear', slug: 'all' }),
       }).catch(() => {});
+    } else {
+      try {
+        localStorage.removeItem(ANON_SHORTLIST_KEY);
+      } catch {}
     }
   }, [showToast, isAuthenticated, user?.id]);
 

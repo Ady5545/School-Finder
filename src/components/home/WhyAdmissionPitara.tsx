@@ -88,10 +88,10 @@ export function WhyAdmissionPitara() {
   ];
 
   return (
-    <section className="w-full py-16 sm:py-24 bg-[#faf8f5] border-y border-[var(--color-border)] reveal-on-scroll">
+    <section className="w-full py-16 sm:py-24 bg-[#faf8f5] border-y border-[var(--color-border)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 flex flex-col items-center">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 flex flex-col items-center reveal-on-scroll">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[var(--color-border)] text-slate-800 text-xs font-semibold mb-4 shadow-2xs">
             <ShieldCheck className="w-4 h-4 text-[var(--color-primary)] shrink-0" />
             <span>Parent-First School Discovery</span>

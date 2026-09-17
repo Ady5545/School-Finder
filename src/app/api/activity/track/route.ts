@@ -6,6 +6,7 @@ import {
   recordActivityEvent,
   ActivityEventType,
 } from '../../../../lib/authStore';
+import { getCanonicalSlug } from '../../../../lib/schools';
 
 export async function POST(req: NextRequest) {
   try {
@@ -24,6 +25,11 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { type, query, locality, resultsCount, schoolSlugs, schoolSlug, details } = body;
 
+    const canonicalSchoolSlug = schoolSlug ? getCanonicalSlug(String(schoolSlug)) : undefined;
+    const canonicalSchoolSlugs = Array.isArray(schoolSlugs)
+      ? Array.from(new Set(schoolSlugs.map((s: string) => getCanonicalSlug(String(s)))))
+      : undefined;
+
     if (type === 'search_performed' && query) {
       recordSearchEvent({
         query: String(query).slice(0, 100),
@@ -31,16 +37,16 @@ export async function POST(req: NextRequest) {
         resultsCount: typeof resultsCount === 'number' ? resultsCount : undefined,
         userId,
       });
-    } else if (type === 'compare_view' && Array.isArray(schoolSlugs)) {
+    } else if (type === 'compare_view' && Array.isArray(canonicalSchoolSlugs)) {
       recordCompareEvent({
-        schoolSlugs: schoolSlugs.slice(0, 4),
+        schoolSlugs: canonicalSchoolSlugs.slice(0, 4),
         userId,
       });
     } else if (type && typeof type === 'string') {
       recordActivityEvent({
         type: type as ActivityEventType,
         userId,
-        schoolSlug: schoolSlug ? String(schoolSlug) : undefined,
+        schoolSlug: canonicalSchoolSlug,
         locality: locality ? String(locality) : undefined,
         searchQuery: query ? String(query) : undefined,
         details: typeof details === 'object' ? details : undefined,

@@ -6,6 +6,7 @@ import { buildSchoolMetadata, generateSchoolJsonLd } from '../../../lib/seo';
 import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { SchoolImage } from '../../../components/school/SchoolImage';
 import { SchoolBadge } from '../../../components/school/SchoolBadge';
+import { SchoolHeroVisual } from '../../../components/school/SchoolHeroVisual';
 import { FeeDisplay } from '../../../components/school/FeeDisplay';
 import { AdmissionStatus } from '../../../components/school/AdmissionStatus';
 import { RatingDisplay } from '../../../components/ui/RatingDisplay';
@@ -27,6 +28,7 @@ import {
   CheckCircle2,
   ExternalLink,
   ShieldCheck,
+  AlertCircle,
   Compass,
 } from 'lucide-react';
 
@@ -71,7 +73,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
     .slice(0, 3);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8 w-full flex flex-col flex-1">
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
@@ -86,6 +88,25 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         ]}
         className="mb-6"
       />
+
+      {/* Duplicate Listing Notice */}
+      {school.isDuplicate && school.duplicateOf && (
+        <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between">
+          <span>
+            <strong>Note:</strong> This is an alternate directory listing. The primary verified profile is available at{' '}
+            <Link href={`/schools/${school.duplicateOf}`} className="font-bold underline text-[var(--color-primary)]">
+              Primary School Profile →
+            </Link>
+          </span>
+        </div>
+      )}
+
+      {/* Regional Outlier Notice */}
+      {school.geographicClassification === 'geographic_outlier' && (
+        <div className="mb-6 p-4 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 text-xs">
+          <strong>Regional Location Notice:</strong> This institution is situated in {school.location.sector} outside core Greater Noida West. It is listed as an expanded regional reference for parents considering broader NCR options.
+        </div>
+      )}
 
       {/* Header Banner */}
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-[var(--color-border)]">
@@ -135,15 +156,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         {/* Left 2 Cols: Imagery, Overview, Facilities */}
         <div className="lg:col-span-2 space-y-8">
           {/* Featured / Hero Visual */}
-          <div className="rounded-2xl overflow-hidden border border-[var(--color-border)] shadow-warm-sm">
-            <SchoolImage
-              src={school.assets.hero || school.assets.featured}
-              alt={school.name}
-              aspectRatio="video"
-              priority
-              className="w-full h-64 sm:h-96"
-            />
-          </div>
+          <SchoolHeroVisual school={school} />
 
           {/* Quick Specifications Matrix */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs">
@@ -223,13 +236,24 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         <div className="space-y-6">
           {/* Institutional Verification Card */}
           {school.verification && (
-            <section className="bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-2.5">
-              <div className="flex items-center gap-2 text-emerald-900 font-bold text-xs">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Source-Verified Institutional Profile</span>
+            <section className={school.verification.isVerified ? "bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-2.5" : "bg-amber-50/60 p-5 rounded-2xl border border-amber-200 shadow-warm-xs space-y-2.5"}>
+              <div className="flex items-center gap-2 font-bold text-xs">
+                {school.verification.isVerified ? (
+                  <>
+                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span className="text-emerald-900">Source-Verified Institutional Profile</span>
+                  </>
+                ) : (
+                  <>
+                    <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                    <span className="text-amber-900">Institutional Audit Pending</span>
+                  </>
+                )}
               </div>
-              <p className="text-[11px] text-emerald-800 leading-relaxed">
-                Information, address, and imagery audited from {school.verification.sourceName}.
+              <p className={school.verification.isVerified ? "text-[11px] text-emerald-800 leading-relaxed" : "text-[11px] text-amber-800 leading-relaxed"}>
+                {school.verification.isVerified
+                  ? `Information, address, and affiliation audited from ${school.verification.sourceName}.`
+                  : 'This school directory entry is awaiting direct institutional disclosure. Synthetic attributes have been removed in accordance with Admission Pitara data accuracy standards.'}
               </p>
               {school.verification.cbseAffiliationNumber && (
                 <div className="pt-2 border-t border-emerald-200/60 flex items-center justify-between text-[11px] font-mono text-emerald-900">
@@ -237,7 +261,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                   <span className="font-bold">{school.verification.cbseAffiliationNumber}</span>
                 </div>
               )}
-              <div className="text-[10px] text-emerald-700/80">
+              <div className={school.verification.isVerified ? "text-[10px] text-emerald-700/80" : "text-[10px] text-amber-700/80"}>
                 Audited: {school.verification.lastVerified}
               </div>
             </section>
@@ -247,9 +271,15 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <section>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
-              <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
-                Audited &amp; Verified
-              </span>
+              {school.fees.verificationStatus === 'verified_from_source' ? (
+                <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
+                  Audited &amp; Verified
+                </span>
+              ) : (
+                <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
+                  Audit Pending
+                </span>
+              )}
             </div>
             <FeeDisplay fees={school.fees} variant="detailed" />
           </section>

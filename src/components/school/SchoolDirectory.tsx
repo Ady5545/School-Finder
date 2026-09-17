@@ -23,6 +23,7 @@ import { SchoolCard } from './SchoolCard';
 import { SponsoredPlacementCard } from './SponsoredPlacementCard';
 import { EmptyState } from '../ui/EmptyState';
 import { Button } from '../ui/Button';
+import { Drawer } from '../ui/Drawer';
 import { BackToTop } from '../ui/BackToTop';
 import { DirectoryInteractiveMap, calculateDistance, POPULAR_PROXIMITY_AREAS } from './DirectoryInteractiveMap';
 import { useSchoolStore } from '../../lib/schoolStore';
@@ -160,28 +161,37 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
       });
     }
 
-    // Sort
-    if (sortBy === 'distance' && proximityCoords) {
-      result.sort((a, b) => (schoolDistances.get(a.id) ?? 999) - (schoolDistances.get(b.id) ?? 999));
-    } else if (sortBy === 'name') {
-      result.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortBy === 'fee-asc') {
-      result.sort((a, b) => {
-        const feeA = (a.fees.comparableAnnualAvailable !== false && a.fees.cardFee) ? a.fees.cardFee : Infinity;
-        const feeB = (b.fees.comparableAnnualAvailable !== false && b.fees.cardFee) ? b.fees.cardFee : Infinity;
-        return feeA - feeB;
-      });
-    } else if (sortBy === 'fee-desc') {
-      result.sort((a, b) => {
-        const feeA = (a.fees.comparableAnnualAvailable !== false && a.fees.cardFee) ? a.fees.cardFee : -Infinity;
-        const feeB = (b.fees.comparableAnnualAvailable !== false && b.fees.cardFee) ? b.fees.cardFee : -Infinity;
-        return feeB - feeA;
-      });
-    } else if (sortBy === 'rating') {
-      result.sort((a, b) => ((b.rating?.score || 0) - (a.rating?.score || 0)) || ((b.rating?.reviewsCount || 0) - (a.rating?.reviewsCount || 0)));
-    }
+    // Partition into Section A (Verified Images) and Section B (Photo Pending)
+    const hasPhoto = (s: School) => Boolean(s.assets && s.assets.featured);
+    const verifiedSchools = result.filter(s => hasPhoto(s));
+    const pendingSchools = result.filter(s => !hasPhoto(s));
 
-    return result;
+    // Secondary sort within each section
+    const sortSection = (list: School[]) => {
+      const copy = [...list];
+      if (sortBy === 'distance' && proximityCoords) {
+        copy.sort((a, b) => (schoolDistances.get(a.id) ?? 999) - (schoolDistances.get(b.id) ?? 999));
+      } else if (sortBy === 'name') {
+        copy.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sortBy === 'fee-asc') {
+        copy.sort((a, b) => {
+          const feeA = (a.fees.comparableAnnualAvailable !== false && a.fees.cardFee) ? a.fees.cardFee : Infinity;
+          const feeB = (b.fees.comparableAnnualAvailable !== false && b.fees.cardFee) ? b.fees.cardFee : Infinity;
+          return feeA - feeB;
+        });
+      } else if (sortBy === 'fee-desc') {
+        copy.sort((a, b) => {
+          const feeA = (a.fees.comparableAnnualAvailable !== false && a.fees.cardFee) ? a.fees.cardFee : -Infinity;
+          const feeB = (b.fees.comparableAnnualAvailable !== false && b.fees.cardFee) ? b.fees.cardFee : -Infinity;
+          return feeB - feeA;
+        });
+      } else if (sortBy === 'rating') {
+        copy.sort((a, b) => ((b.rating?.score || 0) - (a.rating?.score || 0)) || ((b.rating?.reviewsCount || 0) - (a.rating?.reviewsCount || 0)));
+      }
+      return copy;
+    };
+
+    return [...sortSection(verifiedSchools), ...sortSection(pendingSchools)];
   }, [initialSchools, searchQuery, selectedBoard, selectedArea, selectedFeeTier, selectedRadiusKm, proximityCoords, schoolDistances, sortBy]);
 
   const activeFiltersCount =
@@ -204,10 +214,13 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     setSortBy('featured');
   };
 
+  // Mobile Filter Sheet Drawer state
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
   return (
     <div className="w-full flex flex-col relative">
       {/* Search and Quick Filters Bar */}
-      <div className="bg-white rounded-2xl border border-[var(--color-border)] p-4 sm:p-5 shadow-warm-xs mb-6">
+      <div className="bg-white rounded-2xl border border-[var(--color-border)] p-3.5 sm:p-5 shadow-warm-xs mb-6">
         <div className="flex flex-col md:flex-row items-center gap-3">
           {/* Main Search Input */}
           <div className="relative flex-1 w-full">
@@ -216,22 +229,22 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search by school name, sector, board (e.g., DPS, Techzone 4, CBSE)..."
-              className="w-full pl-10 pr-9 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-sm text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 focus:border-[var(--color-primary)] focus:ring-3 focus:ring-[var(--color-primary-light)] outline-none transition-all shadow-warm-2xs"
+              placeholder="Search school name, sector, board (e.g., DPS, Techzone 4, CBSE)..."
+              className="w-full pl-10 pr-9 py-2.5 sm:py-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs sm:text-sm text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 focus:border-[var(--color-primary)] focus:ring-3 focus:ring-[var(--color-primary-light)] outline-none transition-all shadow-warm-2xs"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1.5 transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
               >
                 <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          {/* Sort Dropdown, Rating Toggle, Map Toggle, and View Mode */}
-          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
+          {/* Desktop Controls: Sort Dropdown, Rating Toggle, Map Toggle, and View Mode */}
+          <div className="hidden md:flex flex-wrap items-center gap-2 w-auto">
             {/* 1-Click Rating Sort Toggle */}
             <button
               type="button"
@@ -246,11 +259,6 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                   : 'bg-white text-slate-700 border-[var(--color-border-strong)] hover:border-amber-400 hover:text-amber-800'
               )}
               aria-pressed={sortBy === 'rating'}
-              title={
-                sortBy === 'rating'
-                  ? 'Currently sorted by highest rating (Click to return to Featured)'
-                  : 'Sort schools by review rating (highest first)'
-              }
             >
               <Star
                 className={cn(
@@ -262,7 +270,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             </button>
 
             {/* Sort Dropdown */}
-            <div className="relative flex-1 md:w-44">
+            <div className="relative w-44">
               <select
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value as any)}
@@ -290,7 +298,6 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                   ? 'bg-amber-50 text-amber-900 border-amber-300'
                   : 'bg-white text-slate-600 border-[var(--color-border-strong)] hover:text-slate-900'
               )}
-              title={showMap ? 'Hide interactive map' : 'Show interactive map of all schools'}
             >
               <MapPin className={cn('w-3.5 h-3.5', showMap ? 'text-amber-600' : 'text-slate-500')} />
               <span>{showMap ? 'Map Active' : 'View Map'}</span>
@@ -322,10 +329,64 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               </button>
             </div>
           </div>
+
+          {/* Mobile Specific Filter Control Bar (< md) */}
+          <div className="flex md:hidden items-center gap-2 w-full pt-1">
+            {/* Filter Drawer Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setIsMobileFilterOpen(true)}
+              className={cn(
+                'flex-1 flex items-center justify-center gap-2 py-2.5 px-3.5 rounded-xl border text-xs font-bold transition-all min-h-[44px] cursor-pointer active:scale-95 shadow-warm-2xs',
+                activeFiltersCount > 0
+                  ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
+                  : 'bg-white text-[var(--color-content)] border-[var(--color-border-strong)]'
+              )}
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              <span>Filters</span>
+              {activeFiltersCount > 0 && (
+                <span className="w-5 h-5 rounded-full bg-amber-500 text-white text-[10px] font-extrabold flex items-center justify-center shrink-0">
+                  {activeFiltersCount}
+                </span>
+              )}
+            </button>
+
+            {/* Sort Select on Mobile */}
+            <div className="relative flex-1">
+              <select
+                value={sortBy}
+                onChange={e => setSortBy(e.target.value as any)}
+                className="w-full appearance-none pl-3 pr-7 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] cursor-pointer focus:border-[var(--color-primary)] outline-none min-h-[44px] shadow-warm-2xs"
+              >
+                <option value="featured">Sort: Featured</option>
+                <option value="rating">Sort: Top Rated</option>
+                <option value="name">Sort: Name A-Z</option>
+                <option value="fee-asc">Fees: Low-High</option>
+                <option value="fee-desc">Fees: High-Low</option>
+              </select>
+              <ArrowUpDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
+            </div>
+
+            {/* Map Toggle Button Mobile */}
+            <button
+              type="button"
+              onClick={() => setShowMap(!showMap)}
+              className={cn(
+                'p-2.5 rounded-xl border text-xs font-bold transition-all min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer active:scale-95 shadow-warm-2xs shrink-0',
+                showMap
+                  ? 'bg-amber-50 text-amber-900 border-amber-300'
+                  : 'bg-white text-slate-600 border-[var(--color-border-strong)]'
+              )}
+              aria-label={showMap ? 'Hide interactive map' : 'Show interactive map'}
+            >
+              <MapPin className={cn('w-4 h-4', showMap ? 'text-amber-600' : 'text-slate-500')} />
+            </button>
+          </div>
         </div>
 
-        {/* Filter Pills Ribbon */}
-        <div className="flex flex-wrap items-center gap-2 mt-3.5 pt-3.5 border-t border-[var(--color-border-subtle)] text-xs">
+        {/* Desktop Filter Pills Ribbon (>= md) */}
+        <div className="hidden md:flex flex-wrap items-center gap-2 mt-3.5 pt-3.5 border-t border-[var(--color-border-subtle)] text-xs">
           <span className="font-bold text-[var(--color-content)] flex items-center gap-1.5 mr-1">
             <Filter className="w-3.5 h-3.5 text-[var(--color-primary)]" />
             <span>Board:</span>
@@ -402,7 +463,159 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             </button>
           )}
         </div>
+
+        {/* Active Filter Chips Ribbon (Mobile) */}
+        {activeFiltersCount > 0 && (
+          <div className="flex md:hidden items-center gap-1.5 mt-3 pt-2.5 border-t border-[var(--color-border-subtle)] overflow-x-auto no-scrollbar text-[11px]">
+            <span className="font-bold text-[var(--color-content-muted)] shrink-0 mr-1">Active:</span>
+            
+            {selectedBoard && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[var(--color-primary-light)] text-[var(--color-primary)] font-bold border border-[var(--color-brand-200)] shrink-0">
+                Board: {selectedBoard}
+                <button type="button" onClick={() => setSelectedBoard('')} className="p-0.5 hover:text-rose-600">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+
+            {selectedArea && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-50 text-amber-900 font-bold border border-amber-200 shrink-0">
+                Sector: {selectedArea}
+                <button type="button" onClick={() => setSelectedArea('')} className="p-0.5 hover:text-rose-600">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+
+            {selectedFeeTier !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-900 font-bold border border-emerald-200 shrink-0">
+                Fee: {selectedFeeTier.replace('-', ' ')}
+                <button type="button" onClick={() => setSelectedFeeTier('all')} className="p-0.5 hover:text-rose-600">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+
+            {searchQuery && (
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-100 text-slate-800 font-bold border border-slate-300 shrink-0 max-w-[140px] truncate">
+                "{searchQuery}"
+                <button type="button" onClick={() => setSearchQuery('')} className="p-0.5 hover:text-rose-600 shrink-0">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+
+            <button
+              type="button"
+              onClick={resetAllFilters}
+              className="text-rose-600 font-bold underline shrink-0 ml-1 py-1 px-1.5"
+            >
+              Clear All
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Mobile Bottom Filter Sheet Drawer */}
+      <Drawer
+        isOpen={isMobileFilterOpen}
+        onClose={() => setIsMobileFilterOpen(false)}
+        title="Filter Schools"
+        side="bottom"
+      >
+        <div className="flex flex-col gap-5 pb-4">
+          {/* Board Selection */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
+              Curriculum / Board
+            </label>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setSelectedBoard('')}
+                className={cn(
+                  'px-3.5 py-2 rounded-xl border text-xs font-bold transition-all min-h-[40px]',
+                  !selectedBoard
+                    ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
+                    : 'bg-white text-slate-700 border-[var(--color-border-strong)]'
+                )}
+              >
+                All Boards
+              </button>
+              {distinctBoards.map(board => (
+                <button
+                  key={board}
+                  type="button"
+                  onClick={() => setSelectedBoard(selectedBoard === board ? '' : board)}
+                  className={cn(
+                    'px-3.5 py-2 rounded-xl border text-xs font-bold transition-all min-h-[40px]',
+                    selectedBoard === board
+                      ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
+                      : 'bg-white text-slate-700 border-[var(--color-border-strong)]'
+                  )}
+                >
+                  {board}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Sector / Area Dropdown */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
+              Greater Noida Sector / Locality
+            </label>
+            <select
+              value={selectedArea}
+              onChange={e => setSelectedArea(e.target.value)}
+              className="w-full p-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[44px]"
+            >
+              <option value="">All Greater Noida Sectors</option>
+              {distinctAreas.map(area => (
+                <option key={area} value={area}>
+                  {area}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Fee Range Selector */}
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
+              Audited Annual Fee Range
+            </label>
+            <select
+              value={selectedFeeTier}
+              onChange={e => setSelectedFeeTier(e.target.value)}
+              className="w-full p-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[44px]"
+            >
+              <option value="all">Any Annual Fee Range</option>
+              <option value="under-100k">Under ₹1,00,000 / year</option>
+              <option value="100k-150k">₹1,00,000 – ₹1,50,000 / year</option>
+              <option value="150k-200k">₹1,50,000 – ₹2,00,000 / year</option>
+              <option value="above-200k">Above ₹2,00,000 / year</option>
+            </select>
+          </div>
+
+          {/* Action Footer in Filter Drawer */}
+          <div className="pt-4 border-t border-[var(--color-border-subtle)] flex items-center gap-3 mt-2">
+            <button
+              type="button"
+              onClick={resetAllFilters}
+              className="flex-1 py-3 px-4 rounded-xl border border-rose-200 text-rose-700 bg-rose-50 font-bold text-xs hover:bg-rose-100 transition-colors text-center min-h-[44px]"
+            >
+              Reset Filters
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsMobileFilterOpen(false)}
+              className="flex-2 py-3 px-4 rounded-xl bg-[var(--color-primary)] text-white font-bold text-xs shadow-warm-xs text-center min-h-[44px]"
+            >
+              Show {filteredSchools.length} {filteredSchools.length === 1 ? 'School' : 'Schools'}
+            </button>
+          </div>
+        </div>
+      </Drawer>
 
       {/* Interactive Map Component with Proximity Filtering */}
       {showMap && (
@@ -466,12 +679,17 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               : 'flex flex-col space-y-4'
           )}
         >
-          {filteredSchools.map(school => (
-            <SchoolCard
+          {filteredSchools.map((school, index) => (
+            <div
               key={school.id}
-              school={school}
-              distanceKm={schoolDistances.get(school.id)}
-            />
+              className="reveal-on-scroll"
+              data-reveal-delay={String((index % 3) + 1)}
+            >
+              <SchoolCard
+                school={school}
+                distanceKm={schoolDistances.get(school.id)}
+              />
+            </div>
           ))}
         </div>
       ) : (

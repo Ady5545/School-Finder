@@ -39,9 +39,11 @@ export function buildPageMetadata(title: string, description?: string, path: str
 }
 
 export function buildSchoolMetadata(school: School): Metadata {
+  const isDup = Boolean(school.isDuplicate && school.duplicateOf);
+  const primarySlug = isDup ? school.duplicateOf! : school.slug;
   const title = `${school.name} | ${SITE_SHORT_NAME}`;
   const description = `${school.name} in ${school.location.area || school.location.city}, Greater Noida. Affiliated to ${school.board.join(', ')}. Grade range: ${school.gradeRange.raw}. Verified fee structure: ${school.fees.cardFee ? '₹' + school.fees.cardFee.toLocaleString('en-IN') + '/yr' : 'Available on request'}. Review verified admissions, teacher-student ratios, and campus facilities.`;
-  const canonicalUrl = `${BASE_URL}/schools/${school.slug}`;
+  const canonicalUrl = `${BASE_URL}/schools/${primarySlug}`;
 
   return {
     title,
@@ -49,6 +51,7 @@ export function buildSchoolMetadata(school: School): Metadata {
     alternates: {
       canonical: canonicalUrl,
     },
+    robots: isDup ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
       title,
       description,

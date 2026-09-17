@@ -4,6 +4,7 @@ import {
   recordActivityEvent,
   verifySessionToken,
 } from '../../../../../lib/authStore';
+import { getCanonicalSlug } from '../../../../../lib/schools';
 
 export async function POST(
   req: NextRequest,
@@ -15,7 +16,7 @@ export async function POST(
       return NextResponse.json({ success: false }, { status: 400 });
     }
 
-    recordSchoolView(slug);
+    const canonicalSlug = getCanonicalSlug(slug);
 
     // Optional user activity tracking
     const cookieToken = req.cookies.get('ap_session')?.value;
@@ -30,11 +31,7 @@ export async function POST(
       }
     }
 
-    recordActivityEvent({
-      type: 'school_view',
-      userId,
-      schoolSlug: slug,
-    });
+    recordSchoolView(canonicalSlug, userId);
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Users,
   Eye,
+  EyeOff,
   Heart,
   Star,
   Activity,
@@ -37,6 +38,8 @@ import {
   UserCheck,
   UserX,
   Building,
+  FileSpreadsheet,
+  Download,
 } from 'lucide-react';
 import { BrandLogo } from '../../components/ui/BrandLogo';
 
@@ -50,7 +53,9 @@ type AdminTab =
   | 'comparisons'
   | 'searches'
   | 'promotions'
-  | 'audit';
+  | 'reports'
+  | 'audit'
+  | 'settings';
 
 interface AdminUser {
   id: string;
@@ -59,6 +64,10 @@ interface AdminUser {
   role: 'parent' | 'admin';
   status: 'active' | 'disabled';
   emailVerified: boolean;
+  phone?: string;
+  childName?: string;
+  childGrade?: string;
+  residentialSociety?: string;
   preferredSchoolLocality?: string;
   createdAt: string;
   lastLoginAt?: string;
@@ -206,6 +215,11 @@ export default function AdminPage() {
     status: 'active',
     priority: 1,
   });
+
+  // Monthly Excel Report State
+  const [reportMonth, setReportMonth] = useState<number>(() => new Date().getUTCMonth() + 1);
+  const [reportYear, setReportYear] = useState<number>(() => new Date().getUTCFullYear());
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
 
   // Check auth and initial load
   const loadAdminData = async () => {
@@ -402,6 +416,50 @@ export default function AdminPage() {
     }
   };
 
+  // Monthly Excel Report Download Handler
+  const handleDownloadReport = async (overrideMonth?: number, overrideYear?: number) => {
+    const targetMonth = overrideMonth ?? reportMonth;
+    const targetYear = overrideYear ?? reportYear;
+
+    setIsGeneratingReport(true);
+    try {
+      const res = await fetch(`/api/admin/reports?month=${targetMonth}&year=${targetYear}`);
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        showNotification('error', errorData.message || 'Failed to generate Excel report.');
+        setIsGeneratingReport(false);
+        return;
+      }
+
+      const blob = await res.blob();
+      const formattedMonth = targetMonth.toString().padStart(2, '0');
+      const filename = `admission-pitara-report-${targetYear}-${formattedMonth}.xlsx`;
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      showNotification('success', `Excel report for ${formattedMonth}/${targetYear} generated and downloaded.`);
+
+      // Refresh audit logs so admin sees the new download audit entry immediately
+      fetch('/api/admin/audit-log?limit=100')
+        .then(r => r.json())
+        .then(auRes => {
+          if (auRes.success) setAuditLogsList(auRes.logs);
+        })
+        .catch(() => {});
+    } catch {
+      showNotification('error', 'Network or server error while generating Excel report.');
+    } finally {
+      setIsGeneratingReport(false);
+    }
+  };
+
   // Filtered Users
   const filteredUsers = useMemo(() => {
     return usersList.filter(u => {
@@ -411,7 +469,10 @@ export default function AdminPage() {
         const mEmail = u.email?.toLowerCase().includes(q);
         const mId = u.id?.toLowerCase().includes(q);
         const mLoc = u.preferredSchoolLocality?.toLowerCase().includes(q);
-        if (!mName && !mEmail && !mId && !mLoc) return false;
+        const mPhone = u.phone?.toLowerCase().includes(q);
+        const mChild = u.childName?.toLowerCase().includes(q);
+        const mSoc = u.residentialSociety?.toLowerCase().includes(q);
+        if (!mName && !mEmail && !mId && !mLoc && !mPhone && !mChild && !mSoc) return false;
       }
       if (userStatusFilter !== 'all' && u.status !== userStatusFilter) return false;
       if (userVerifiedFilter === 'verified' && !u.emailVerified) return false;
@@ -595,7 +656,9 @@ export default function AdminPage() {
             { id: 'comparisons', label: 'Comparisons', icon: Scale },
             { id: 'searches', label: 'Searches & Keywords', icon: Search },
             { id: 'promotions', label: `Paid Promotions (${promotionsList.length})`, icon: Sparkles },
+            { id: 'reports', label: 'Monthly Excel Reports', icon: FileSpreadsheet },
             { id: 'audit', label: 'Audit Log', icon: FileText },
+            { id: 'settings', label: 'Settings & Security', icon: Lock },
           ].map(tab => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -908,12 +971,25 @@ export default function AdminPage() {
                               <ChevronRight className="w-3 h-3 text-slate-400" />
                             </Link>
                             <p className="text-[11px] text-slate-400">{user.email}</p>
+                            {user.phone && (
+                              <p className="text-[10px] text-slate-300 font-mono">{user.phone}</p>
+                            )}
                             <span className="font-mono text-[9px] text-slate-500 bg-[#07172b] px-1.5 py-0.5 rounded border border-white/5">
                               {user.id}
                             </span>
                           </td>
                           <td className="py-3.5 px-4 text-slate-300">
-                            {user.preferredSchoolLocality || 'N/A'}
+                            <div className="space-y-0.5">
+                              <p className="font-medium text-slate-200">{user.residentialSociety || user.preferredSchoolLocality || 'N/A'}</p>
+                              {user.residentialSociety && user.preferredSchoolLocality && (
+                                <p className="text-[10px] text-slate-400">{user.preferredSchoolLocality}</p>
+                              )}
+                              {user.childName && (
+                                <p className="text-[10px] text-sky-300">
+                                  {user.childName} {user.childGrade ? `(${user.childGrade})` : ''}
+                                </p>
+                              )}
+                            </div>
                           </td>
                           <td className="py-3.5 px-4">
                             <div className="flex flex-col gap-1">
@@ -1536,7 +1612,269 @@ export default function AdminPage() {
         )}
 
         {/* =================================================================== */}
-        {/* TAB 10: ADMINISTRATIVE AUDIT LOG                                    */}
+        {/* TAB 10: MONTHLY EXCEL REPORTING SYSTEM                             */}
+        {/* =================================================================== */}
+        {activeTab === 'reports' && (
+          <div className="space-y-6">
+            {/* Header / Intro Card */}
+            <div className="p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                      <FileSpreadsheet className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold text-white font-serif">
+                        Monthly Excel Reporting System (.xlsx)
+                      </h3>
+                      <p className="text-xs text-slate-400">
+                        Secure, server-compiled multi-sheet spreadsheets with strict monthly date filtering (UTC).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Live Telemetry Engine Ready
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Generator Controls Card */}
+            <div className="p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-6">
+              <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                <div>
+                  <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                    1. Select Reporting Period
+                  </h4>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Choose the calendar month and year to compile telemetry and account activity.
+                  </p>
+                </div>
+
+                {/* Quick Shortcuts */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      const now = new Date();
+                      setReportMonth(now.getUTCMonth() + 1);
+                      setReportYear(now.getUTCFullYear());
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#0a1e38] hover:bg-[#14365f] text-slate-300 border border-[#1d4b7c] transition-colors cursor-pointer"
+                  >
+                    Current Month
+                  </button>
+                  <button
+                    onClick={() => {
+                      const now = new Date();
+                      let m = now.getUTCMonth(); // previous month (0-indexed)
+                      let y = now.getUTCFullYear();
+                      if (m === 0) {
+                        m = 12;
+                        y -= 1;
+                      }
+                      setReportMonth(m);
+                      setReportYear(y);
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#0a1e38] hover:bg-[#14365f] text-slate-300 border border-[#1d4b7c] transition-colors cursor-pointer"
+                  >
+                    Previous Month
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-2">Month</label>
+                  <select
+                    value={reportMonth}
+                    onChange={e => setReportMonth(parseInt(e.target.value, 10))}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 text-sm font-semibold outline-none focus:border-amber-400 transition-colors"
+                  >
+                    <option value={1}>01 - January</option>
+                    <option value={2}>02 - February</option>
+                    <option value={3}>03 - March</option>
+                    <option value={4}>04 - April</option>
+                    <option value={5}>05 - May</option>
+                    <option value={6}>06 - June</option>
+                    <option value={7}>07 - July</option>
+                    <option value={8}>08 - August</option>
+                    <option value={9}>09 - September</option>
+                    <option value={10}>10 - October</option>
+                    <option value={11}>11 - November</option>
+                    <option value={12}>12 - December</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-2">Year</label>
+                  <select
+                    value={reportYear}
+                    onChange={e => setReportYear(parseInt(e.target.value, 10))}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 text-sm font-semibold outline-none focus:border-amber-400 transition-colors"
+                  >
+                    <option value={2024}>2024</option>
+                    <option value={2025}>2025</option>
+                    <option value={2026}>2026 (Current Academic Cycle)</option>
+                    <option value={2027}>2027</option>
+                    <option value={2028}>2028</option>
+                    <option value={2029}>2029</option>
+                    <option value={2030}>2030</option>
+                  </select>
+                </div>
+
+                <div>
+                  <button
+                    onClick={() => handleDownloadReport()}
+                    disabled={isGeneratingReport}
+                    className="w-full flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-950/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isGeneratingReport ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                        <span>Compiling XLSX...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-4 h-4" />
+                        <span>Download Report (.xlsx)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#07172b] border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-slate-400">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>
+                    Output File:{' '}
+                    <strong className="text-slate-200 font-mono">
+                      admission-pitara-report-{reportYear}-{reportMonth.toString().padStart(2, '0')}.xlsx
+                    </strong>
+                  </span>
+                </div>
+                <span className="text-[11px] text-slate-500">
+                  Strict UTC Time Boundaries • 5 Structured Sheets
+                </span>
+              </div>
+            </div>
+
+            {/* Workbook Architecture Breakdown */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">
+                2. Report Worksheets &amp; Data Structure
+              </h4>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Sheet 1 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                      SHEET 1
+                    </span>
+                    <span className="text-[10px] text-slate-400">Accounts</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Parent Accounts</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    New parent registrations during the month with parent/guardian names, email, contact phone, child name, grade/class, and residential society name.
+                  </p>
+                  <div className="text-[11px] text-emerald-400/90 font-mono pt-1">
+                    ✓ Privacy-safe (no OTPs or passwords)
+                  </div>
+                </div>
+
+                {/* Sheet 2 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-400/10 text-blue-300 border border-blue-400/20">
+                      SHEET 2
+                    </span>
+                    <span className="text-[10px] text-slate-400">Traffic</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">School Visits</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Every timestamped school view event with target school name, slug, sector locality, user identifier (if authenticated), and estimated visit duration.
+                  </p>
+                  <div className="text-[11px] text-blue-400/90 font-mono pt-1">
+                    ✓ Real activity event telemetry
+                  </div>
+                </div>
+
+                {/* Sheet 3 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-400/10 text-rose-300 border border-rose-400/20">
+                      SHEET 3
+                    </span>
+                    <span className="text-[10px] text-slate-400">Intent</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Wishlists &amp; Shortlists</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Granular log of wishlist additions and removals during the period, providing clear insights into parental interest trends and school bookmarks.
+                  </p>
+                  <div className="text-[11px] text-rose-400/90 font-mono pt-1">
+                    ✓ Full addition / removal audit trail
+                  </div>
+                </div>
+
+                {/* Sheet 4 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                      SHEET 4
+                    </span>
+                    <span className="text-[10px] text-slate-400">Feedback</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Parent Reviews &amp; Ratings</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Complete ratings and text reviews created in the month with scores (1-5), verified parent badge status, published/moderated state, and admin notes.
+                  </p>
+                  <div className="text-[11px] text-amber-400/90 font-mono pt-1">
+                    ✓ Moderation &amp; anonymous integrity
+                  </div>
+                </div>
+
+                {/* Sheet 5 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2 md:col-span-2 lg:col-span-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-400/10 text-purple-300 border border-purple-400/20">
+                      SHEET 5
+                    </span>
+                    <span className="text-[10px] text-slate-400">Benchmark</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Canonical School Summary (63 Schools)</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Side-by-side performance matrix for all 63 Greater Noida West schools: monthly recorded views, monthly wishlist adds, monthly reviews &amp; monthly average rating, juxtaposed against all-time views, active shortlists, and overall rating.
+                  </p>
+                  <div className="text-[11px] text-purple-400/90 font-mono pt-1">
+                    ✓ Comprehensive canonical school coverage
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Security & Access Notice */}
+            <div className="p-4 rounded-xl bg-[#081b33] border border-[#19426f] flex items-start gap-3 text-xs text-slate-400">
+              <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <p className="font-bold text-slate-200">
+                  Data Privacy &amp; Administrative Compliance Guarantees
+                </p>
+                <p className="leading-relaxed">
+                  Excel reports are strictly restricted to authenticated administrators. Generation operations are audited and stored in the security log. Passwords, verification OTP tokens, rate-limiters, and detailed apartment/flat numbers are strictly excluded to maintain complete parental privacy and zero-trust security.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 11: ADMINISTRATIVE AUDIT LOG                                   */}
         {/* =================================================================== */}
         {activeTab === 'audit' && (
           <div className="space-y-6">
@@ -1576,6 +1914,11 @@ export default function AdminPage() {
             </div>
           </div>
         )}
+
+        {/* =================================================================== */}
+        {/* TAB 12: SYSTEM SETTINGS & CHANGE PASSWORD                          */}
+        {/* =================================================================== */}
+        {activeTab === 'settings' && <AdminSettingsSection />}
       </main>
 
       {/* --------------------------------------------------------------------- */}
@@ -1693,6 +2036,289 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function AdminSettingsSection() {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  // Criteria calculations
+  const hasMinLength = newPassword.length >= 8;
+  const hasUpper = /[A-Z]/.test(newPassword);
+  const hasLower = /[a-z]/.test(newPassword);
+  const hasNumberOrSpecial = /[0-9]|[^A-Za-z0-9]/.test(newPassword);
+  const isMatching = newPassword.length > 0 && newPassword === confirmPassword;
+  const isValid = hasMinLength && hasUpper && hasLower && hasNumberOrSpecial && isMatching;
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatusMsg(null);
+
+    if (!currentPassword) {
+      setStatusMsg({ type: 'error', text: 'Current password is required.' });
+      return;
+    }
+
+    if (!isValid) {
+      setStatusMsg({
+        type: 'error',
+        text: 'Please ensure all password policy requirements and matching criteria are satisfied.',
+      });
+      return;
+    }
+
+    setIsUpdating(true);
+    try {
+      const res = await fetch('/api/admin/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+          confirmPassword,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatusMsg({ type: 'success', text: data.message || 'Administrator password successfully updated.' });
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        setStatusMsg({ type: 'error', text: data.message || 'Failed to update administrator password.' });
+      }
+    } catch (err: any) {
+      setStatusMsg({ type: 'error', text: 'Network or server error occurred while updating password.' });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header banner */}
+      <div className="p-4 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg flex items-center justify-between">
+        <h3 className="text-sm font-bold text-white flex items-center gap-2">
+          <Lock className="w-4 h-4 text-amber-400" />
+          <span>System Security &amp; Administrative Credentials</span>
+        </h3>
+        <span className="text-xs text-slate-400">
+          Enforce authentication integrity, rotate master credentials, and review security policies
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main Password Change Form */}
+        <div className="lg:col-span-2 p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-5">
+          <div>
+            <h4 className="text-base font-bold text-white flex items-center gap-2 font-serif">
+              <ShieldCheck className="w-5 h-5 text-emerald-400" />
+              <span>Change Administrator Password</span>
+            </h4>
+            <p className="text-xs text-slate-300 mt-1">
+              Update your administrative master account password. Password updates take effect immediately and are logged to the security audit trail.
+            </p>
+          </div>
+
+          {statusMsg && (
+            <div
+              className={`p-3.5 rounded-xl text-xs font-bold flex items-start gap-2.5 ${
+                statusMsg.type === 'success'
+                  ? 'bg-emerald-950/70 border border-emerald-500/40 text-emerald-200'
+                  : 'bg-rose-950/70 border border-rose-500/40 text-rose-200'
+              }`}
+            >
+              {statusMsg.type === 'success' ? (
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              ) : (
+                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+              )}
+              <span>{statusMsg.text}</span>
+            </div>
+          )}
+
+          <form onSubmit={handlePasswordSubmit} className="space-y-4 text-xs">
+            {/* Current Password */}
+            <div>
+              <label className="block text-slate-200 font-bold mb-1.5 uppercase tracking-wider text-[11px]">
+                Current Administrator Password <span className="text-amber-400">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showCurrent ? 'text' : 'password'}
+                  value={currentPassword}
+                  onChange={e => setCurrentPassword(e.target.value)}
+                  placeholder="Enter current password..."
+                  required
+                  disabled={isUpdating}
+                  className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 placeholder:text-slate-500 focus:border-amber-400 outline-none text-xs font-mono"
+                />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrent(!showCurrent)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                >
+                  {showCurrent ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* New Password */}
+            <div>
+              <label className="block text-slate-200 font-bold mb-1.5 uppercase tracking-wider text-[11px]">
+                New Password <span className="text-amber-400">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showNew ? 'text' : 'password'}
+                  value={newPassword}
+                  onChange={e => setNewPassword(e.target.value)}
+                  placeholder="Enter new strong password..."
+                  required
+                  disabled={isUpdating}
+                  className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 placeholder:text-slate-500 focus:border-amber-400 outline-none text-xs font-mono"
+                />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowNew(!showNew)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                >
+                  {showNew ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Confirm New Password */}
+            <div>
+              <label className="block text-slate-200 font-bold mb-1.5 uppercase tracking-wider text-[11px]">
+                Confirm New Password <span className="text-amber-400">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showConfirm ? 'text' : 'password'}
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  placeholder="Re-enter new password..."
+                  required
+                  disabled={isUpdating}
+                  className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 placeholder:text-slate-500 focus:border-amber-400 outline-none text-xs font-mono"
+                />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                >
+                  {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Live Criteria Indicators */}
+            <div className="p-3.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] space-y-2">
+              <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+                Security Policy Criteria:
+              </span>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <div className={`flex items-center gap-1.5 ${hasMinLength ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasMinLength ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>At least 8 characters long</span>
+                </div>
+                <div className={`flex items-center gap-1.5 ${hasUpper ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasUpper ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>Uppercase letter (A-Z)</span>
+                </div>
+                <div className={`flex items-center gap-1.5 ${hasLower ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasLower ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>Lowercase letter (a-z)</span>
+                </div>
+                <div className={`flex items-center gap-1.5 ${hasNumberOrSpecial ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasNumberOrSpecial ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>Number or special character</span>
+                </div>
+                <div className={`col-span-2 flex items-center gap-1.5 ${isMatching ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {isMatching ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>New password and confirmation match</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isUpdating || !currentPassword || !isValid}
+              className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                isUpdating || !currentPassword || !isValid
+                  ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed'
+                  : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold shadow-lg shadow-amber-500/20'
+              }`}
+            >
+              {isUpdating ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <span>Updating Password...</span>
+                </>
+              ) : (
+                <>
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Update Administrator Password</span>
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+
+        {/* Security Overview Sidebar */}
+        <div className="p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-4 text-xs">
+          <h4 className="text-sm font-bold text-white flex items-center gap-2 font-serif">
+            <Sliders className="w-4 h-4 text-amber-400" />
+            <span>Active Security Posture</span>
+          </h4>
+
+          <div className="space-y-3 divide-y divide-white/10">
+            <div className="pt-2">
+              <span className="text-[11px] text-slate-400 block font-medium">Password Hash Algorithm</span>
+              <span className="text-slate-200 font-mono font-bold">PBKDF2-SHA512 (10,000 iter)</span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Salt Generation</span>
+              <span className="text-slate-200 font-mono font-bold">128-bit Cryptographic Random</span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Session Verification</span>
+              <span className="text-slate-200 font-mono font-bold">Server-Signed JWT Cookies</span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Admin Authorization Boundary</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1 mt-0.5">
+                <ShieldCheck className="w-3.5 h-3.5" /> Enforced Server-Side
+              </span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Audit Trail Logging</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1 mt-0.5">
+                <CheckCircle2 className="w-3.5 h-3.5" /> Active &amp; Immutable
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

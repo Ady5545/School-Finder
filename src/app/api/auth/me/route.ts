@@ -5,6 +5,10 @@ import {
   sanitizeUser,
   updateUserProfile,
   deleteParentUser,
+  normalizeIndianPhone,
+  validateResidentialSociety,
+  validateChildName,
+  validateOptionalParentName,
 } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
@@ -78,7 +82,98 @@ export async function PATCH(req: NextRequest) {
     }
 
     const body = await req.json();
-    const updatedUser = updateUserProfile(payload.sub, body);
+    const updates: {
+      name?: string;
+      phone?: string;
+      childName?: string;
+      childGrade?: string;
+      residentialSociety?: string;
+      fatherName?: string;
+      motherName?: string;
+      preferredSchoolLocality?: string;
+      preferredBoards?: string[];
+      analyticsConsent?: boolean;
+    } = {};
+
+    if (body.name !== undefined) {
+      if (typeof body.name !== 'string' || body.name.trim().length < 2) {
+        return NextResponse.json(
+          { success: false, message: 'Parent / Guardian name must be at least 2 characters.' },
+          { status: 400 }
+        );
+      }
+      updates.name = body.name.trim();
+    }
+
+    if (body.phone !== undefined) {
+      if (body.phone) {
+        const pVal = normalizeIndianPhone(body.phone);
+        if (!pVal.valid) {
+          return NextResponse.json({ success: false, message: pVal.error }, { status: 400 });
+        }
+        updates.phone = pVal.normalized;
+      } else {
+        updates.phone = undefined;
+      }
+    }
+
+    if (body.childName !== undefined) {
+      if (body.childName) {
+        const cVal = validateChildName(body.childName);
+        if (!cVal.valid) {
+          return NextResponse.json({ success: false, message: cVal.error }, { status: 400 });
+        }
+        updates.childName = cVal.cleaned;
+      } else {
+        updates.childName = undefined;
+      }
+    }
+
+    if (body.childGrade !== undefined && typeof body.childGrade === 'string') {
+      updates.childGrade = body.childGrade.trim();
+    }
+
+    if (body.residentialSociety !== undefined) {
+      if (body.residentialSociety) {
+        const sVal = validateResidentialSociety(body.residentialSociety);
+        if (!sVal.valid) {
+          return NextResponse.json({ success: false, message: sVal.error }, { status: 400 });
+        }
+        updates.residentialSociety = sVal.cleaned;
+      } else {
+        updates.residentialSociety = undefined;
+      }
+    }
+
+    if (body.fatherName !== undefined) {
+      const fVal = validateOptionalParentName(body.fatherName);
+      if (!fVal.valid) {
+        return NextResponse.json({ success: false, message: fVal.error }, { status: 400 });
+      }
+      updates.fatherName = fVal.cleaned;
+    }
+
+    if (body.motherName !== undefined) {
+      const mVal = validateOptionalParentName(body.motherName);
+      if (!mVal.valid) {
+        return NextResponse.json({ success: false, message: mVal.error }, { status: 400 });
+      }
+      updates.motherName = mVal.cleaned;
+    }
+
+    if (body.preferredSchoolLocality !== undefined && typeof body.preferredSchoolLocality === 'string') {
+      updates.preferredSchoolLocality = body.preferredSchoolLocality.trim();
+    }
+
+    if (Array.isArray(body.preferredBoards)) {
+      updates.preferredBoards = body.preferredBoards;
+    }
+
+    if (typeof body.analyticsConsent === 'boolean') {
+      updates.analyticsConsent = body.analyticsConsent;
+    }
+
+    const updatedUser = updateUserProfile(payload.sub, updates);
 
     if (!updatedUser) {
       return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });

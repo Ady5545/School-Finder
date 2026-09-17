@@ -6,7 +6,7 @@ import {
   recordActivityEvent,
   recordSchoolSave,
 } from '../../../../lib/authStore';
-import { getSchoolBySlug } from '../../../../lib/schools';
+import { getSchoolBySlug, getCanonicalSlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
   try {
@@ -77,10 +77,21 @@ export async function POST(req: NextRequest) {
 
     let current = Array.isArray(user.wishlist) ? [...user.wishlist] : [];
 
+    if (action === 'clear') {
+      current = [];
+      updateUserLists(user.id, current);
+      return NextResponse.json({
+        success: true,
+        wishlist: [],
+      });
+    }
+
     if (action === 'sync' && Array.isArray(list)) {
-      // Validate all slugs
-      const validList = list.filter((s: string) => typeof s === 'string' && getSchoolBySlug(s));
-      const combined = Array.from(new Set([...current, ...validList]));
+      // Validate all slugs and convert to canonical slugs
+      const validList = list
+        .filter((s: string) => typeof s === 'string' && getSchoolBySlug(s))
+        .map((s: string) => getCanonicalSlug(s));
+      const combined = Array.from(new Set([...current.map(s => getCanonicalSlug(s)), ...validList]));
       updateUserLists(user.id, combined);
       return NextResponse.json({ success: true, wishlist: combined });
     }
@@ -89,32 +100,31 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Valid school slug required' }, { status: 400 });
     }
 
-    const cleanSlug = slug.trim();
-    // Validate canonical school existence
-    if (!getSchoolBySlug(cleanSlug)) {
+    const rawCleanSlug = slug.trim();
+    // Validate school existence
+    if (!getSchoolBySlug(rawCleanSlug)) {
       return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
     }
+
+    // Always resolve to canonical slug so aliases do not create duplicate identities
+    const cleanSlug = getCanonicalSlug(rawCleanSlug);
 
     if (action === 'add') {
       if (!current.includes(cleanSlug)) {
         current.push(cleanSlug);
         recordActivityEvent({ type: 'wishlist_add', userId: user.id, schoolSlug: cleanSlug });
-        recordSchoolSave(cleanSlug);
       }
     } else if (action === 'remove') {
-      current = current.filter(s => s !== cleanSlug);
+      current = current.filter(s => s !== cleanSlug && s !== rawCleanSlug);
       recordActivityEvent({ type: 'wishlist_remove', userId: user.id, schoolSlug: cleanSlug });
     } else if (action === 'toggle') {
-      if (current.includes(cleanSlug)) {
-        current = current.filter(s => s !== cleanSlug);
+      if (current.includes(cleanSlug) || current.includes(rawCleanSlug)) {
+        current = current.filter(s => s !== cleanSlug && s !== rawCleanSlug);
         recordActivityEvent({ type: 'wishlist_remove', userId: user.id, schoolSlug: cleanSlug });
       } else {
         current.push(cleanSlug);
         recordActivityEvent({ type: 'wishlist_add', userId: user.id, schoolSlug: cleanSlug });
-        recordSchoolSave(cleanSlug);
       }
-    } else if (action === 'clear') {
-      current = [];
     }
 
     updateUserLists(user.id, current);

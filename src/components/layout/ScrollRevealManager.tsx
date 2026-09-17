@@ -2,50 +2,31 @@
 
 import React, { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
-import Lenis from 'lenis';
-
-interface ParallaxNode {
-  element: HTMLElement;
-  factor: number;
-  maxOffset: number;
-  currentOffset: number;
-  targetOffset: number;
-}
 
 /**
- * Global ScrollRevealManager & Lenis Smooth Scrolling Engine
+ * High-Performance Native Scroll & Progressive Reveal Coordinator
  *
- * Architecture:
- * 1. Fluid Momentum Scrolling via Lenis:
- *    - Normalizes discrete mouse-wheel notches into buttery, natural momentum.
- *    - Exponential deceleration curve for a luxury, fluid feel without sluggishness.
- *    - Strictly preserves native touch scrolling on mobile (syncTouch: false).
- *    - Ignores dialogs and modals ([data-lenis-prevent], [role="dialog"]).
- *    - Bypassed entirely when `prefers-reduced-motion` is active.
- * 2. Progressive Enhancement Scroll Reveals:
- *    - Default CSS state is 100% visible (opacity: 1, transform: none) on SSR/initial load.
- *    - Above-the-fold elements are immediately marked 'settled' with zero animation or delay.
- *    - Only elements strictly below the fold are placed in 'pending' state.
- *    - Anticipatory trigger (rootMargin: '0px 0px 75px 0px') starts the reveal before the
- *      element enters the viewport so it is already gliding into place, eliminating sudden pops.
- *    - Staggers groups of sibling cards slightly (70ms intervals) for a natural wave effect.
- *    - Transitions to 'settled' state after completion so hover states are immediately responsive.
- * 3. Micro-Parallax & Top Scroll Progress:
- *    - Clamped depth offsets (max ±16px) for decorative background nodes.
- *    - Ultra-subtle, non-intrusive 2px top gradient scroll progress line.
+ * Architecture & Safety Directives:
+ * 1. Content Visibility First (Zero Dependency on JS):
+ *    - All content is 100% visible (opacity: 1, transform: none) by default in CSS and HTML.
+ *    - JS only progressively enhances below-the-fold elements as they scroll into view.
+ *    - Elements already inside the viewport are NEVER hidden or delayed.
+ * 2. Active Viewport Scanning:
+ *    - Automatically scans on route changes and DOM mutations (dynamic school filters/tabs).
+ *    - Uses a generous rootMargin (120px) to trigger reveals smoothly before elements enter the screen.
+ * 3. Fallback Safety Timer:
+ *    - Guarantees that any pending element is forcefully settled after 2 seconds so no content can ever be stuck.
+ * 4. Respects Accessibility:
+ *    - Completely disabled under `prefers-reduced-motion: reduce`.
  */
 export const ScrollRevealManager: React.FC = () => {
   const pathname = usePathname();
-  const lenisRef = useRef<Lenis | null>(null);
-  const observerRef = useRef<IntersectionObserver | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
-  const parallaxNodesRef = useRef<ParallaxNode[]>([]);
-  const rafIdRef = useRef<number | null>(null);
 
+  // 1. Passive RAF-throttled scroll progress bar
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Accessibility check: immediately abort and keep everything native if reduced motion is requested
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       if (progressBarRef.current) {
@@ -54,236 +35,135 @@ export const ScrollRevealManager: React.FC = () => {
       return;
     }
 
-    // 1. Initialize Lenis Smooth Momentum Scrolling
-    let lenis: Lenis | null = null;
-    try {
-      lenis = new Lenis({
-        duration: 1.15,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-        syncTouch: false, // strictly preserve native touch scrolling on mobile
-        wheelMultiplier: 0.95,
-        touchMultiplier: 1.0,
-        autoRaf: true,
-        prevent: (node) => node.closest('[data-lenis-prevent], [role="dialog"], [aria-modal="true"]') !== null,
-      });
+    let ticking = false;
 
-      lenisRef.current = lenis;
-
-      // Make lenis accessible globally for any programmatic smooth scrolling
-      (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
-    } catch {
-      // Graceful fallback to native scroll if Lenis fails to initialize
-      lenis = null;
-    }
-
-    // 2. Parallax Nodes Setup
-    const setupParallaxElements = () => {
-      const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax]');
-      const nodes: ParallaxNode[] = [];
-
-      parallaxEls.forEach((el) => {
-        const rawFactor = parseFloat(el.getAttribute('data-parallax') || '0.05');
-        const factor = isNaN(rawFactor) ? 0.05 : Math.max(-0.15, Math.min(0.15, rawFactor));
-        const rawMax = parseFloat(el.getAttribute('data-parallax-max') || '16');
-        const maxOffset = isNaN(rawMax) ? 16 : Math.max(4, Math.min(32, rawMax));
-
-        nodes.push({
-          element: el,
-          factor,
-          maxOffset,
-          currentOffset: 0,
-          targetOffset: 0,
-        });
-      });
-
-      parallaxNodesRef.current = nodes;
-    };
-
-    setupParallaxElements();
-
-    // 3. Scroll Frame Coordinator (Progress Bar & Parallax)
-    const updateScrollMetrics = (scrollY: number, maxScroll: number) => {
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-
-      // Update progress bar
-      if (progressBarRef.current) {
-        if (maxScroll > 40) {
-          const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
-          progressBarRef.current.style.transform = `scaleX(${progress.toFixed(4)})`;
-          progressBarRef.current.style.opacity = scrollY > 20 ? '0.9' : '0';
-        } else {
-          progressBarRef.current.style.opacity = '0';
-        }
+    const updateProgressBar = () => {
+      if (!progressBarRef.current) {
+        ticking = false;
+        return;
       }
-
-      // Process subtle parallax nodes
-      const vCenter = vh / 2;
-      const nodes = parallaxNodesRef.current;
-      for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        const rect = node.element.getBoundingClientRect();
-        if (rect.bottom < -100 || rect.top > vh + 100) continue;
-
-        const elemCenter = rect.top + rect.height / 2;
-        const distFromCenter = elemCenter - vCenter;
-        const offset = Math.max(-node.maxOffset, Math.min(node.maxOffset, -distFromCenter * node.factor));
-        node.element.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
-      }
-    };
-
-    // Bind Lenis scroll listener or native scroll listener
-    if (lenis) {
-      lenis.on('scroll', (e: { scroll: number; limit: number }) => {
-        updateScrollMetrics(e.scroll, e.limit);
-      });
-    }
-
-    const handleNativeScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
       const vh = window.innerHeight || document.documentElement.clientHeight;
-      const maxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight) - vh;
-      updateScrollMetrics(scrollY, maxScroll);
+      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+      const maxScroll = scrollHeight - vh;
+
+      if (maxScroll > 60) {
+        const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
+        progressBarRef.current.style.transform = `scaleX(${progress.toFixed(4)})`;
+        progressBarRef.current.style.opacity = scrollY > 20 ? '0.95' : '0';
+      } else {
+        progressBarRef.current.style.opacity = '0';
+      }
+      ticking = false;
     };
 
-    window.addEventListener('scroll', handleNativeScroll, { passive: true });
-    window.addEventListener('resize', setupParallaxElements, { passive: true });
-
-    // Initial pass
-    handleNativeScroll();
-
-    // 4. Anticipatory Scroll Reveal System with Staggering
-    if ('IntersectionObserver' in window) {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateProgressBar);
+        ticking = true;
       }
+    };
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const intersecting = entries.filter((entry) => entry.isIntersecting);
-
-          intersecting.forEach((entry, idx) => {
-            const el = entry.target as HTMLElement;
-            observer.unobserve(el);
-
-            // Calculate subtle stagger delay if multiple sibling items enter in the same batch
-            const customDelay = el.getAttribute('data-reveal-delay');
-            let delayMs = 0;
-            if (customDelay) {
-              delayMs = parseInt(customDelay, 10);
-            } else if (intersecting.length > 1) {
-              // Subtle stagger: 65ms per item in this batch, max 260ms
-              delayMs = Math.min(idx * 65, 260);
-            }
-
-            if (delayMs > 0) {
-              el.style.setProperty('--reveal-delay', `${delayMs}ms`);
-            }
-
-            el.setAttribute('data-reveal', 'revealed');
-            el.classList.remove('is-pending');
-            el.classList.add('is-revealed');
-
-            // After animation transition completes, transition to 'settled'
-            // so hover effects and active states operate with zero delay or interference
-            const durationMs = 600 + delayMs + 60;
-            setTimeout(() => {
-              el.setAttribute('data-reveal', 'settled');
-              el.classList.remove('is-revealed');
-              el.classList.add('is-settled');
-              el.style.removeProperty('--reveal-delay');
-              el.style.willChange = 'auto';
-            }, durationMs);
-          });
-        },
-        {
-          threshold: 0.01,
-          rootMargin: '0px 0px 75px 0px', // Anticipate 75px before entering viewport
-        }
-      );
-
-      observerRef.current = observer;
-
-      const setupRevealElements = () => {
-        const elements = document.querySelectorAll<HTMLElement>('[data-reveal], .reveal-on-scroll');
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-        elements.forEach((el) => {
-          const currentStatus = el.getAttribute('data-reveal');
-          if (
-            currentStatus === 'revealed' ||
-            currentStatus === 'settled' ||
-            el.classList.contains('is-revealed') ||
-            el.classList.contains('is-settled')
-          ) {
-            return;
-          }
-
-          const rect = el.getBoundingClientRect();
-
-          // Above-the-fold or already visible: mark settled immediately so zero content is hidden
-          if (rect.top < viewportHeight + 40) {
-            el.setAttribute('data-reveal', 'settled');
-            el.classList.remove('is-pending');
-            el.classList.add('is-settled');
-          } else {
-            // Off-screen element below the fold: progressively reveal
-            el.setAttribute('data-reveal', 'pending');
-            el.classList.add('is-pending');
-            observer.observe(el);
-          }
-        });
-      };
-
-      setupRevealElements();
-      const timer = setTimeout(setupRevealElements, 120);
-
-      // Watch for dynamically rendered items
-      let mutationFrameId: number | null = null;
-      const mutationObserver = new MutationObserver(() => {
-        if (mutationFrameId) cancelAnimationFrame(mutationFrameId);
-        mutationFrameId = requestAnimationFrame(setupRevealElements);
-      });
-
-      if (document.body) {
-        mutationObserver.observe(document.body, {
-          childList: true,
-          subtree: true,
-        });
-      }
-
-      return () => {
-        clearTimeout(timer);
-        if (mutationFrameId) cancelAnimationFrame(mutationFrameId);
-        if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-        observer.disconnect();
-        mutationObserver.disconnect();
-        window.removeEventListener('scroll', handleNativeScroll);
-        window.removeEventListener('resize', setupParallaxElements);
-        if (lenis) {
-          lenis.destroy();
-          lenisRef.current = null;
-        }
-      };
-    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateProgressBar();
 
     return () => {
-      window.removeEventListener('scroll', handleNativeScroll);
-      window.removeEventListener('resize', setupParallaxElements);
-      if (lenis) {
-        lenis.destroy();
-        lenisRef.current = null;
-      }
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [pathname]);
 
-  // Reset scroll position on route change
+  // 2. High-Performance IntersectionObserver for Below-the-Fold Reveals
   useEffect(() => {
-    if (lenisRef.current) {
-      lenisRef.current.scrollTo(0, { immediate: true });
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.documentElement.classList.remove('has-scroll-reveal');
+      return;
     }
+
+    if (!('IntersectionObserver' in window)) {
+      document.documentElement.classList.remove('has-scroll-reveal');
+      return;
+    }
+
+    // Enable scroll reveal styling only after JS confirmation
+    document.documentElement.classList.add('has-scroll-reveal');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            observer.unobserve(el);
+            el.classList.remove('is-pending');
+            el.classList.add('is-revealed');
+            setTimeout(() => {
+              el.classList.add('is-settled');
+            }, 600);
+          }
+        });
+      },
+      {
+        threshold: 0.01,
+        rootMargin: '0px 0px 120px 0px',
+      }
+    );
+
+    const scanAndObserve = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const elements = document.querySelectorAll<HTMLElement>('.reveal-on-scroll');
+
+      elements.forEach((el) => {
+        // If already settled or revealed, skip
+        if (el.classList.contains('is-settled') || el.classList.contains('is-revealed')) {
+          return;
+        }
+
+        const rect = el.getBoundingClientRect();
+        // If in viewport or near viewport (within 60px), reveal immediately
+        if (rect.top < vh + 60 && rect.bottom > -60) {
+          el.classList.remove('is-pending');
+          el.classList.add('is-revealed', 'is-settled');
+        } else {
+          // Strictly below the fold: arm for progressive reveal on scroll
+          el.classList.add('is-pending');
+          observer.observe(el);
+        }
+      });
+    };
+
+    // Initial scan
+    scanAndObserve();
+
+    // Observe DOM mutations for dynamic client-side lists/tabs (e.g. school filtering)
+    let rafId: number | null = null;
+    const mutationObserver = new MutationObserver(() => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(scanAndObserve);
+    });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // Safety fallback: after 2.5s, forcefully settle any remaining pending elements
+    const safetyTimeout = setTimeout(() => {
+      const stuckElements = document.querySelectorAll<HTMLElement>('.reveal-on-scroll.is-pending');
+      stuckElements.forEach((el) => {
+        el.classList.remove('is-pending');
+        el.classList.add('is-revealed', 'is-settled');
+        observer.unobserve(el);
+      });
+    }, 2500);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(safetyTimeout);
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
   }, [pathname]);
 
   return (

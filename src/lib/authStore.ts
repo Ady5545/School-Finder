@@ -6,10 +6,15 @@ export interface ParentUser {
   id: string;
   name: string;
   email: string;
+  phone?: string;
+  childName?: string;
+  childGrade?: string;
+  residentialSociety?: string;
+  fatherName?: string;
+  motherName?: string;
   status: 'active' | 'disabled';
   preferredSchoolLocality?: string; // e.g. "Sector 16B", "Techzone 4", "Knowledge Park 5", "Greater Noida West"
   preferredBoards?: string[];
-  childGrade?: string;
   passwordHash?: string;
   emailVerified: boolean;
   analyticsConsent: boolean;
@@ -19,6 +24,89 @@ export interface ParentUser {
   lastActivityAt?: string;
   wishlist: string[];
   compareList: string[];
+}
+
+// ----------------------------------------------------------------------------
+// PARENT PROFILE VALIDATION & SANITIZATION HELPERS
+// ----------------------------------------------------------------------------
+
+/**
+ * Validates and standardizes Indian mobile numbers.
+ * Accepts 10 digits, optionally prefixed with +91, 91, or 0.
+ * Must start with valid Indian mobile prefixes: 6, 7, 8, or 9.
+ */
+export function normalizeIndianPhone(input: string): { valid: boolean; normalized?: string; error?: string } {
+  if (!input || typeof input !== 'string') {
+    return { valid: false, error: 'Phone number is required.' };
+  }
+  const cleaned = input.trim().replace(/[\s\-\(\)\.]/g, '');
+  const match = cleaned.match(/^(?:\+91|91|0)?([6-9]\d{9})$/);
+  if (!match) {
+    return {
+      valid: false,
+      error: 'Please enter a valid 10-digit Indian mobile number (e.g., 9876543210 or +91 98765 43210).',
+    };
+  }
+  const tenDigits = match[1];
+  const formatted = `+91 ${tenDigits.slice(0, 5)} ${tenDigits.slice(5)}`;
+  return { valid: true, normalized: formatted };
+}
+
+/**
+ * Validates residential society name.
+ * Respects strict parent privacy: collects ONLY society/apartment complex name,
+ * forbidding flat, house, tower, or floor numbers.
+ */
+export function validateResidentialSociety(input: string): { valid: boolean; cleaned?: string; error?: string } {
+  if (!input || typeof input !== 'string') {
+    return { valid: false, error: 'Residential society or apartment complex name is required.' };
+  }
+  const trimmed = input.trim();
+  if (trimmed.length < 3) {
+    return { valid: false, error: 'Residential society name must be at least 3 characters.' };
+  }
+  if (trimmed.length > 120) {
+    return { valid: false, error: 'Residential society name must not exceed 120 characters.' };
+  }
+  return { valid: true, cleaned: trimmed };
+}
+
+/**
+ * Validates child / student full name.
+ */
+export function validateChildName(input: string): { valid: boolean; cleaned?: string; error?: string } {
+  if (!input || typeof input !== 'string') {
+    return { valid: false, error: 'Child / student name is required.' };
+  }
+  const trimmed = input.trim();
+  if (trimmed.length < 2) {
+    return { valid: false, error: 'Child / student name must be at least 2 characters.' };
+  }
+  if (trimmed.length > 80) {
+    return { valid: false, error: 'Child / student name must not exceed 80 characters.' };
+  }
+  return { valid: true, cleaned: trimmed };
+}
+
+/**
+ * Validates optional parent names (Father or Mother).
+ * Either or both may be omitted.
+ */
+export function validateOptionalParentName(input?: string): { valid: boolean; cleaned?: string; error?: string } {
+  if (!input || typeof input !== 'string') {
+    return { valid: true, cleaned: undefined };
+  }
+  const trimmed = input.trim();
+  if (!trimmed) {
+    return { valid: true, cleaned: undefined };
+  }
+  if (trimmed.length < 2) {
+    return { valid: false, error: 'Name must be at least 2 characters if provided.' };
+  }
+  if (trimmed.length > 80) {
+    return { valid: false, error: 'Name must not exceed 80 characters.' };
+  }
+  return { valid: true, cleaned: trimmed };
 }
 
 export interface OtpRecord {
@@ -318,13 +406,14 @@ function initDb(): void {
     console.warn('[AUTH_DB_WARN] Failed reading existing DB file, re-initializing:', err);
   }
 
-  // Ensure default demo parent account exists
+  // Ensure default parent account exists
   const demoEmail = 'parent@example.com';
-  if (!users.has(demoEmail)) {
-    const demoSalt = 'ap_salt_demo_2025';
-    const demoHash = crypto.pbkdf2Sync('Parent@12345', demoSalt, 10000, 64, 'sha512').toString('hex') + ':' + demoSalt;
+  let demoUser = users.get(demoEmail);
+  if (!demoUser) {
+    const parentInitPass = process.env.PARENT_INITIAL_PASSWORD || 'Parent@12345';
+    const demoHash = hashPassword(parentInitPass);
 
-    const demoUser: ParentUser = {
+    demoUser = {
       id: 'usr_demo_parent_gnw',
       name: 'Rohit Sharma',
       email: demoEmail,
@@ -344,17 +433,20 @@ function initDb(): void {
     };
 
     users.set(demoUser.email.toLowerCase(), demoUser);
+  } else if (demoUser.passwordHash && demoUser.passwordHash.includes('ap_salt_demo_2025')) {
+    demoUser.passwordHash = hashPassword('Parent@12345');
   }
 
-  // Ensure default administrative auditor account exists
+  // Ensure default administrative account exists
   const adminEmail = 'admin@admissionpitara.com';
-  if (!users.has(adminEmail)) {
-    const adminSalt = 'ap_salt_admin_2025';
-    const adminHash = crypto.pbkdf2Sync('Admin@Pitara2025', adminSalt, 10000, 64, 'sha512').toString('hex') + ':' + adminSalt;
+  let adminUser = users.get(adminEmail);
+  if (!adminUser) {
+    const adminInitPass = process.env.ADMIN_INITIAL_PASSWORD || process.env.ADMIN_PASSWORD || 'Admin@Pitara2025';
+    const adminHash = hashPassword(adminInitPass);
 
-    const adminUser: ParentUser = {
+    adminUser = {
       id: 'usr_admin_portal_lead',
-      name: 'Admissions Lead Auditor',
+      name: 'Admissions Lead Administrator',
       email: adminEmail,
       status: 'active',
       preferredSchoolLocality: 'Knowledge Park 5',
@@ -370,6 +462,9 @@ function initDb(): void {
     };
 
     users.set(adminUser.email.toLowerCase(), adminUser);
+  } else if (adminUser.passwordHash && adminUser.passwordHash.includes('ap_salt_admin_2025')) {
+    const adminInitPass = process.env.ADMIN_INITIAL_PASSWORD || process.env.ADMIN_PASSWORD || 'Admin@Pitara2025';
+    adminUser.passwordHash = hashPassword(adminInitPass);
   }
 
   // Initial Promotion: Delhi World Public School (admin controllable, easily modified/expired)
@@ -423,11 +518,26 @@ export function verifyPassword(password: string, storedHash: string): boolean {
   }
 }
 
+export function updateUserPassword(userId: string, newPassword: string): boolean {
+  initDb();
+  const user = getUserById(userId);
+  if (!user) return false;
+
+  user.passwordHash = hashPassword(newPassword);
+  user.lastActivityAt = new Date().toISOString();
+  saveStoreToDisk(true);
+  return true;
+}
+
 export function createSessionToken(user: ParentUser): string {
   const payload = {
     sub: user.id,
     email: user.email,
     name: user.name,
+    phone: user.phone || '',
+    childName: user.childName || '',
+    childGrade: user.childGrade || '',
+    residentialSociety: user.residentialSociety || '',
     preferredSchoolLocality: user.preferredSchoolLocality || '',
     role: user.role || 'parent',
     status: user.status || 'active',
@@ -448,6 +558,10 @@ export function verifySessionToken(token: string): {
   sub: string;
   email: string;
   name: string;
+  phone?: string;
+  childName?: string;
+  childGrade?: string;
+  residentialSociety?: string;
   preferredSchoolLocality?: string;
   role?: 'parent' | 'admin';
   status?: 'active' | 'disabled';
@@ -716,10 +830,15 @@ export function getUserById(id: string): ParentUser | null {
 export function createParentUser(userData: {
   name: string;
   email: string;
+  phone?: string;
+  childName?: string;
+  childGrade?: string;
+  residentialSociety?: string;
+  fatherName?: string;
+  motherName?: string;
   preferredSchoolLocality?: string;
   password?: string;
   preferredBoards?: string[];
-  childGrade?: string;
   analyticsConsent?: boolean;
   role?: 'parent' | 'admin';
 }): { user?: ParentUser; error?: string } {
@@ -734,10 +853,15 @@ export function createParentUser(userData: {
     id: `usr_${crypto.randomBytes(8).toString('hex')}`,
     name: userData.name.trim(),
     email: emailKey,
+    phone: userData.phone ? userData.phone.trim() : undefined,
+    childName: userData.childName ? userData.childName.trim() : undefined,
+    childGrade: userData.childGrade ? userData.childGrade.trim() : '',
+    residentialSociety: userData.residentialSociety ? userData.residentialSociety.trim() : undefined,
+    fatherName: userData.fatherName ? userData.fatherName.trim() : undefined,
+    motherName: userData.motherName ? userData.motherName.trim() : undefined,
     status: 'active',
     preferredSchoolLocality: userData.preferredSchoolLocality?.trim() || '',
     preferredBoards: userData.preferredBoards || [],
-    childGrade: userData.childGrade || '',
     passwordHash: userData.password ? hashPassword(userData.password) : undefined,
     emailVerified: true,
     analyticsConsent: userData.analyticsConsent ?? true,
@@ -767,9 +891,14 @@ export function updateUserProfile(
   userId: string,
   updates: {
     name?: string;
+    phone?: string;
+    childName?: string;
+    childGrade?: string;
+    residentialSociety?: string;
+    fatherName?: string;
+    motherName?: string;
     preferredSchoolLocality?: string;
     preferredBoards?: string[];
-    childGrade?: string;
     analyticsConsent?: boolean;
     status?: 'active' | 'disabled';
     role?: 'parent' | 'admin';
@@ -779,6 +908,12 @@ export function updateUserProfile(
   if (!user) return null;
 
   if (updates.name !== undefined) user.name = updates.name.trim();
+  if (updates.phone !== undefined) user.phone = updates.phone ? updates.phone.trim() : undefined;
+  if (updates.childName !== undefined) user.childName = updates.childName ? updates.childName.trim() : undefined;
+  if (updates.childGrade !== undefined) user.childGrade = updates.childGrade.trim();
+  if (updates.residentialSociety !== undefined) user.residentialSociety = updates.residentialSociety ? updates.residentialSociety.trim() : undefined;
+  if (updates.fatherName !== undefined) user.fatherName = updates.fatherName ? updates.fatherName.trim() : undefined;
+  if (updates.motherName !== undefined) user.motherName = updates.motherName ? updates.motherName.trim() : undefined;
   if (updates.preferredSchoolLocality !== undefined) {
     user.preferredSchoolLocality = updates.preferredSchoolLocality.trim();
     recordActivityEvent({

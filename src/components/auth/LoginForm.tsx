@@ -14,7 +14,6 @@ import {
   Eye,
   EyeOff,
   Info,
-  Sparkles,
   ArrowRight,
   RefreshCw,
   Edit3,
@@ -131,20 +130,6 @@ export const LoginForm: React.FC = () => {
     }
   };
 
-  const fillDemoParent = () => {
-    setEmail('parent@example.com');
-    setPassword('Parent@12345');
-    setActiveTab('password');
-    setErrorMessage(null);
-  };
-
-  const fillDemoAdmin = () => {
-    setEmail('admin@admissionpitara.com');
-    setPassword('Admin@Pitara2025');
-    setActiveTab('password');
-    setErrorMessage(null);
-  };
-
   return (
     <Card className="w-full max-w-md mx-auto shadow-xl border-stone-200 bg-white">
       <CardHeader className="space-y-2 pb-4 pt-6 px-6 border-b border-stone-100 text-center">
@@ -157,26 +142,6 @@ export const LoginForm: React.FC = () => {
         <CardDescription className="text-xs text-stone-600">
           Sign in to access your shortlisted Greater Noida schools, saved comparisons, and verified reviews.
         </CardDescription>
-
-        {/* Quick Demo Fills */}
-        <div className="flex items-center justify-center gap-3 pt-2">
-          <button
-            type="button"
-            onClick={fillDemoParent}
-            className="text-[11px] font-semibold text-amber-800 hover:text-amber-950 hover:underline inline-flex items-center gap-1 cursor-pointer"
-          >
-            <Sparkles className="w-3 h-3 text-amber-600" />
-            <span>Fill Demo Parent</span>
-          </button>
-          <span className="text-stone-300">•</span>
-          <button
-            type="button"
-            onClick={fillDemoAdmin}
-            className="text-[11px] font-semibold text-stone-600 hover:text-stone-900 hover:underline inline-flex items-center gap-1 cursor-pointer"
-          >
-            <span>Admin Auditor</span>
-          </button>
-        </div>
 
         {/* Tab switch */}
         <div className="grid grid-cols-2 gap-1 p-1 bg-stone-100 rounded-lg mt-3">
@@ -275,7 +240,7 @@ export const LoginForm: React.FC = () => {
                 <Input
                   id="login-email"
                   type="email"
-                  placeholder="parent@example.com"
+                  placeholder="name@example.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   disabled={isSubmitting}
@@ -345,7 +310,7 @@ export const LoginForm: React.FC = () => {
                     <Input
                       id="login-otp-email"
                       type="email"
-                      placeholder="parent@example.com"
+                      placeholder="name@example.com"
                       value={email}
                       onChange={e => setEmail(e.target.value)}
                       disabled={isSubmitting}

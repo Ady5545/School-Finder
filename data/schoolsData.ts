@@ -140,11 +140,62 @@ export interface School {
   legacyIdentifiers: LegacyIdentifiers;
   auditNotes: string[];
   classification?: 'core_greater_noida_west' | 'nearby_surrounding';
+  geographicClassification?: 'core_greater_noida_west' | 'nearby_surrounding' | 'geographic_outlier';
+  recordType?: 'canonical' | 'alias' | 'nearby_surrounding' | 'geographic_outlier';
+  canonicalSlug?: string;
+  isDuplicate?: boolean;
+  duplicateOf?: string | null;
+  isArchived?: boolean;
+  archiveReason?: string;
+  status?: 'active' | 'archived' | 'alias';
+  affiliationNumber?: string | null;
+  establishedYear?: number | null;
   sports?: string[];
 }
 
 export const schools: School[] = schoolsJson as unknown as School[];
 export const legacyUrlMap: Record<string, string> = legacyUrlMapJson as Record<string, string>;
+
+/**
+ * Returns raw all schools including aliases, duplicates, and archived records (total 70).
+ */
+export function getRawSchools(): School[] {
+  return schools;
+}
+
+/**
+ * Returns strictly unique active canonical schools (excluding aliases, duplicate records, and archived records).
+ */
+export function getCanonicalSchools(): School[] {
+  return schools.filter(s => !s.isDuplicate && !s.isArchived);
+}
+
+/**
+ * Returns all archived schools that remain in historical repository.
+ */
+export function getArchivedSchools(): School[] {
+  return schools.filter(s => Boolean(s.isArchived));
+}
+
+/**
+ * Single canonical count helper. Always derived from active canonical dataset.
+ */
+export function getCanonicalSchoolsCount(): number {
+  return getCanonicalSchools().length;
+}
+
+/**
+ * Resolves any slug or ID (including legacy aliases) to its canonical school slug.
+ */
+export function getCanonicalSlug(slugOrId: string): string {
+  if (!slugOrId) return '';
+  const s = schools.find(item => item.slug === slugOrId || item.id === slugOrId);
+  if (!s) return slugOrId;
+  if (s.isDuplicate && s.duplicateOf) {
+    return s.duplicateOf;
+  }
+  return s.slug;
+}
 
 export function getSchoolBySlug(slug: string): School | undefined {
   return schools.find(s => s.slug === slug || s.id === slug);

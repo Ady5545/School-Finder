@@ -23,7 +23,8 @@
       "compareList": [
         "delhi-public-school-knowledge-park-5",
         "delhi-world-public-school-kp-5"
-      ]
+      ],
+      "status": "active"
     },
     "usr_admin_portal_lead": {
       "id": "usr_admin_portal_lead",
@@ -37,11 +38,46 @@
       "createdAt": "2026-09-15T15:37:08.500Z",
       "lastLoginAt": "2026-09-15T15:37:08.500Z",
       "wishlist": [],
-      "compareList": []
+      "compareList": [],
+      "status": "active"
     }
   },
   "ratings": [],
   "schoolViews": {},
-  "schoolSaves": {},
-  "activityEvents": []
+  "schoolSaves": {
+    "lotus-valley-international-school": 1
+  },
+  "activityEvents": [
+    {
+      "id": "evt_1789586307945_3a0b49f8",
+      "type": "wishlist_add",
+      "userId": "usr_test_account_a",
+      "targetType": "school",
+      "targetId": "lotus-valley-international-school",
+      "schoolSlug": "lotus-valley-international-school",
+      "timestamp": "2026-09-16T19:18:27.945Z"
+    }
+  ],
+  "promotions": [
+    {
+      "id": "promo_dwps_inaugural_2026",
+      "schoolSlug": "delhi-world-public-school-kp-5",
+      "campaignName": "DWPS Greater Noida West - Premier Admissions 2026-27",
+      "placementType": "homepage_hero",
+      "title": "Delhi World Public School, Knowledge Park 5",
+      "description": "Admissions open for Nursery to Grade XI. World-class 5-acre smart campus with audited transparent fee structure.",
+      "badgeLabel": "Sponsored",
+      "ctaText": "Explore Campus & Fee Structure",
+      "ctaLink": "/schools/delhi-world-public-school-kp-5",
+      "startDate": "2026-09-16T12:21:10.649Z",
+      "endDate": "2027-03-15T12:21:10.649Z",
+      "status": "active",
+      "priority": 1,
+      "impressions": 0,
+      "clicks": 0,
+      "createdAt": "2026-09-16T12:21:10.649Z",
+      "updatedAt": "2026-09-16T12:21:10.649Z"
+    }
+  ],
+  "auditLogs": []
 }

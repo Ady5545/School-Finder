@@ -7,9 +7,14 @@ export interface ParentUserProfile {
   id: string;
   name: string;
   email: string;
+  phone?: string;
+  childName?: string;
+  childGrade?: string;
+  residentialSociety?: string;
+  fatherName?: string;
+  motherName?: string;
   preferredSchoolLocality?: string;
   preferredBoards?: string[];
-  childGrade?: string;
   emailVerified: boolean;
   role?: 'parent' | 'admin';
   analyticsConsent: boolean;
@@ -32,11 +37,16 @@ interface AuthContextType {
   register: (data: {
     name: string;
     email: string;
+    phone: string;
+    childName: string;
+    childGrade: string;
+    residentialSociety: string;
+    fatherName?: string;
+    motherName?: string;
     preferredSchoolLocality?: string;
     password?: string;
     verificationToken?: string;
     preferredBoards?: string[];
-    childGrade?: string;
     termsAccepted: boolean;
     analyticsConsent?: boolean;
   }) => Promise<{ success: boolean; message?: string }>;
@@ -49,9 +59,14 @@ interface AuthContextType {
   logout: () => Promise<void>;
   updateProfile: (updates: {
     name?: string;
+    phone?: string;
+    childName?: string;
+    childGrade?: string;
+    residentialSociety?: string;
+    fatherName?: string;
+    motherName?: string;
     preferredSchoolLocality?: string;
     preferredBoards?: string[];
-    childGrade?: string;
     analyticsConsent?: boolean;
   }) => Promise<{ success: boolean; message?: string }>;
   refreshProfile: () => Promise<void>;
@@ -142,11 +157,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (formData: {
     name: string;
     email: string;
+    phone: string;
+    childName: string;
+    childGrade: string;
+    residentialSociety: string;
+    fatherName?: string;
+    motherName?: string;
     preferredSchoolLocality?: string;
     password?: string;
     verificationToken?: string;
     preferredBoards?: string[];
-    childGrade?: string;
     termsAccepted: boolean;
     analyticsConsent?: boolean;
   }) => {
@@ -208,9 +228,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const updateProfile = async (updates: {
     name?: string;
+    phone?: string;
+    childName?: string;
+    childGrade?: string;
+    residentialSociety?: string;
+    fatherName?: string;
+    motherName?: string;
     preferredSchoolLocality?: string;
     preferredBoards?: string[];
-    childGrade?: string;
     analyticsConsent?: boolean;
   }) => {
     try {

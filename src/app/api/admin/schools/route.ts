@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getAllSchools } from '../../../../lib/schools';
+import { getAllSchools, getRawSchools } from '../../../../lib/schools';
 import {
   getAdminSchoolAnalytics,
   getAllPromotions,
@@ -50,5 +50,6 @@ export async function GET(req: NextRequest) {
     success: true,
     schools: schoolMetrics,
     totalSchools: schools.length,
+    rawRecordsTotal: getRawSchools().length,
   });
 }

@@ -241,68 +241,55 @@ html {
   box-shadow: 0 14px 30px -6px rgba(15, 45, 74, 0.12), 0 4px 10px -2px rgba(15, 45, 74, 0.05);
 }
 
-/* Lenis smooth momentum scrolling architecture */
-html.lenis,
-html.lenis body {
-  height: auto;
+/* Native smooth momentum scrolling */
+html {
+  scroll-behavior: smooth;
 }
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: clip;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Progressive enhancement scroll reveal system
-   Guaranteed default: Content is 100% visible (opacity: 1, transform: none).
-   If JavaScript fails or is disabled, NO content is hidden or obscured.
-   Only elements explicitly placed in 'pending' state by the active client observer
-   will animate gently into view as they enter the viewport. */
+   Guaranteed default: Content is 100% visible (opacity: 1, transform: none) on SSR,
+   initial HTML render, JS-disabled, and before client observer arms offscreen elements.
+   Under no circumstances is content hidden without active client-side JS. */
 [data-reveal],
 .reveal-on-scroll {
   opacity: 1;
   transform: none;
 }
 
-[data-reveal="pending"],
-.reveal-on-scroll.is-pending {
+/* ONLY when client JS is initialized (html.has-scroll-reveal)
+   AND the element has been explicitly armed because it is strictly below the fold */
+html.has-scroll-reveal .reveal-on-scroll.is-pending {
   opacity: 0;
-  transform: translateY(var(--reveal-distance, 16px));
-  transition: opacity var(--reveal-duration, 600ms) cubic-bezier(0.22, 1, 0.36, 1),
-              transform var(--reveal-duration, 600ms) cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(var(--reveal-distance, 14px));
+  transition: opacity var(--reveal-duration, 500ms) cubic-bezier(0.22, 1, 0.36, 1),
+              transform var(--reveal-duration, 500ms) cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
-[data-reveal="revealed"],
-.reveal-on-scroll.is-revealed {
+html.has-scroll-reveal .reveal-on-scroll.is-revealed {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity var(--reveal-duration, 600ms) cubic-bezier(0.22, 1, 0.36, 1),
-              transform var(--reveal-duration, 600ms) cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity var(--reveal-duration, 500ms) cubic-bezier(0.22, 1, 0.36, 1),
+              transform var(--reveal-duration, 500ms) cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-[data-reveal="settled"],
-.reveal-on-scroll.is-settled {
+html.has-scroll-reveal .reveal-on-scroll.is-settled {
   opacity: 1;
   transform: none;
   transition: none;
   will-change: auto;
 }
 
-/* Tactile Card hover refinement: when settled, card hover transforms cleanly without reveal interference */
+/* Tactile Card hover refinement: card hover transforms cleanly */
 .tactile-card.is-settled,
-.tactile-card:not(.is-pending):not(.is-revealed) {
+.tactile-card:not(.is-pending) {
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s ease;
@@ -313,14 +300,14 @@ html.lenis body {
   will-change: transform;
 }
 
-[data-reveal-delay="1"] { --reveal-delay: 60ms; }
-[data-reveal-delay="2"] { --reveal-delay: 120ms; }
-[data-reveal-delay="3"] { --reveal-delay: 180ms; }
-[data-reveal-delay="4"] { --reveal-delay: 240ms; }
-[data-reveal-delay="5"] { --reveal-delay: 300ms; }
-[data-reveal-delay="6"] { --reveal-delay: 360ms; }
+[data-reveal-delay="1"] { --reveal-delay: 40ms; }
+[data-reveal-delay="2"] { --reveal-delay: 80ms; }
+[data-reveal-delay="3"] { --reveal-delay: 120ms; }
+[data-reveal-delay="4"] { --reveal-delay: 160ms; }
+[data-reveal-delay="5"] { --reveal-delay: 200ms; }
+[data-reveal-delay="6"] { --reveal-delay: 240ms; }
 
-/* Respect user preferences */
+/* Respect user preferences: All content immediately visible */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
@@ -334,9 +321,6 @@ html.lenis body {
   }
 
   [data-reveal],
-  [data-reveal="pending"],
-  [data-reveal="revealed"],
-  [data-reveal="settled"],
   .reveal-on-scroll,
   .reveal-on-scroll.is-pending,
   .reveal-on-scroll.is-revealed,

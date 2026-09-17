@@ -177,14 +177,21 @@
       "featured": "/assets/schools/delhi-public-school-knowledge-park-5/featured/featured.jpg",
       "hero": "/assets/schools/delhi-public-school-knowledge-park-5/hero/campus-building.jpg",
       "gallery": [
-        "/assets/schools/delhi-public-school-knowledge-park-5/hero/campus-building.jpg",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/DPS_Noidaoutdoor.jpg",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/Delhi_Public_School_528_Building_3.jpg",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/Screenshot 2026-03-08 at 2.17.59 PM.png",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/Screenshot 2026-03-08 at 2.18.21 PM.png",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/Screenshot 2026-03-08 at 2.18.29 PM.png",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/Screenshot 2026-03-08 at 2.18.37 PM.png",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps-boys-uniform.jpg.jpg",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps-girls-uniform.jpg.jpeg",
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps1.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps2.jpeg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps3.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps4.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps5.jpg",
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps6.jpg",
-        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/outdoor2.jpeg",
-        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/dps1.jpg"
+        "/assets/schools/delhi-public-school-knowledge-park-5/gallery/outdoor2.jpeg"
       ],
       "legacyPaths": {
         "cardImage": "/images/dps.png",
@@ -218,20 +225,20 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "DPS Knowledge Park-V Official Portal (dpskpv.com) & CBSE Affiliation Record",
+      "lastVerified": "2026-09",
+      "sourceName": "Official School Portal (dpskpv.com) & CBSE SARAS",
       "sourceUrl": "https://dpskpv.com",
       "cbseAffiliationNumber": "2133797",
-      "schoolCode": "61483",
+      "schoolCode": "61494",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
-      ]
+        "affiliation",
+        "grades",
+        "admissions"
+      ],
+      "notes": "Official DPS Knowledge Park-V campus. Verified on CBSE SARAS."
     },
     "classification": "core_greater_noida_west",
     "sports": [
@@ -241,7 +248,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133797",
+    "establishedYear": 2018,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "delhi-public-school-knowledge-park-5"
   },
   {
     "id": "lotus-valley-international-school",
@@ -416,12 +428,21 @@
       "featured": "/assets/schools/lotus-valley-international-school/featured/featured.jpg",
       "hero": "/assets/schools/lotus-valley-international-school/hero/hero.jpg",
       "gallery": [
-        "/assets/schools/lotus-valley-international-school/gallery/slider1.jpg",
+        "/assets/schools/lotus-valley-international-school/gallery/633147593_1471082731695678_6732246442191460788_n.jpg",
+        "/assets/schools/lotus-valley-international-school/gallery/8.jpg",
         "/assets/schools/lotus-valley-international-school/gallery/achievement.jpg",
+        "/assets/schools/lotus-valley-international-school/gallery/boys uniform.webp",
         "/assets/schools/lotus-valley-international-school/gallery/commuity.jpg",
         "/assets/schools/lotus-valley-international-school/gallery/dance.jpg",
-        "/assets/schools/lotus-valley-international-school/gallery/timing.jpg",
-        "/assets/schools/lotus-valley-international-school/gallery/small kids.jpeg"
+        "/assets/schools/lotus-valley-international-school/gallery/girls uniform.webp",
+        "/assets/schools/lotus-valley-international-school/gallery/images (1).jpeg",
+        "/assets/schools/lotus-valley-international-school/gallery/images (2).jpeg",
+        "/assets/schools/lotus-valley-international-school/gallery/images (3).jpeg",
+        "/assets/schools/lotus-valley-international-school/gallery/images.jpeg",
+        "/assets/schools/lotus-valley-international-school/gallery/images3.jpeg",
+        "/assets/schools/lotus-valley-international-school/gallery/slider1.jpg",
+        "/assets/schools/lotus-valley-international-school/gallery/small kids.jpeg",
+        "/assets/schools/lotus-valley-international-school/gallery/timing.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/lotusjpg.jpg",
@@ -455,19 +476,17 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "Lotus Valley International School Official Portal & CBSE Records",
+      "lastVerified": "2026-09",
+      "sourceName": "Official School Website (lotusvalleynoidaextension.com) & CBSE SARAS",
       "sourceUrl": "https://lotusvalleynoidaextension.com",
       "cbseAffiliationNumber": "2133747",
-      "schoolCode": "61462",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "grades",
+        "admissions"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -478,7 +497,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133747",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "lotus-valley-international-school"
   },
   {
     "id": "pacific-world-school-techzone-4",
@@ -641,12 +664,9 @@
       "featured": "/assets/schools/pacific-world-school-techzone-4/featured/featured.jpeg",
       "hero": "/assets/schools/pacific-world-school-techzone-4/hero/hero.jpeg",
       "gallery": [
-        "/assets/schools/pacific-world-school-techzone-4/gallery/Delhi_Entrance-1600x1000.jpg",
-        "/assets/schools/pacific-world-school-techzone-4/gallery/audi.jpg",
-        "/assets/schools/pacific-world-school-techzone-4/gallery/sports.jpg",
-        "/assets/schools/pacific-world-school-techzone-4/gallery/comp.jpg",
-        "/assets/schools/pacific-world-school-techzone-4/gallery/bb.jpg",
-        "/assets/schools/pacific-world-school-techzone-4/gallery/baloon.jpg"
+        "/assets/schools/pacific-world-school-techzone-4/gallery/1744089371_slider-2.png",
+        "/assets/schools/pacific-world-school-techzone-4/gallery/7-4-550x330.jpg",
+        "/assets/schools/pacific-world-school-techzone-4/gallery/Delhi_Entrance-1600x1000.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/pacific.jpeg",
@@ -679,19 +699,17 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "Pacific World School Official Portal & CBSE SARAS",
+      "lastVerified": "2026-09",
+      "sourceName": "Official School Website (pacificworldschool.com) & CBSE SARAS",
       "sourceUrl": "https://www.pacificworldschool.com",
       "cbseAffiliationNumber": "2133808",
-      "schoolCode": "61494",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "grades",
+        "admissions"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -702,7 +720,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133808",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "pacific-world-school-techzone-4"
   },
   {
     "id": "the-shri-ram-universal-school",
@@ -881,12 +903,7 @@
     "assets": {
       "featured": "/assets/schools/the-shri-ram-universal-school/featured/featured.jpeg",
       "hero": "/assets/schools/the-shri-ram-universal-school/hero/hero.avif",
-      "gallery": [
-        "/assets/schools/the-shri-ram-universal-school/gallery/Sri-Ram2.jpg",
-        "/assets/schools/the-shri-ram-universal-school/gallery/PARENT_WORKSHOP-min_-_Dr_Jay_Kumar_Singh.webp",
-        "/assets/schools/the-shri-ram-universal-school/gallery/image-12.jpg",
-        "/assets/schools/the-shri-ram-universal-school/gallery/6.jpg"
-      ],
+      "gallery": [],
       "legacyPaths": {
         "cardImage": "/images/SRU.jpeg",
         "sourceDirectory": "/schools/TSRU/"
@@ -918,19 +935,17 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "The Shri Ram Universal School Official Portal & CBSE SARAS",
+      "lastVerified": "2026-09",
+      "sourceName": "Official School Website (tsusnoida.edu.in) & CBSE SARAS",
       "sourceUrl": "https://tsusnoida.edu.in",
       "cbseAffiliationNumber": "2133458",
-      "schoolCode": "61332",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "grades",
+        "admissions"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -941,23 +956,29 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133458",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "the-shri-ram-universal-school"
   },
   {
     "id": "delhi-world-public-school-kp-5",
     "slug": "delhi-world-public-school-kp-5",
-    "name": "Delhi World Public School, Noida Extension",
-    "shortName": "Delhi World Public School",
+    "name": "Delhi World Public School, Greater Noida",
+    "shortName": "DWPS Greater Noida",
     "alternateNames": [
       "Delhi World Public School",
       "DWPS Noida Extension",
       "DWPS",
       "Delhi World Public School KP 5",
       "Delhi World Public School Greater Noida West",
-      "DPWS"
+      "DPWS",
+      "DPS World School",
+      "DPS World School Noida Extension"
     ],
     "tagline": "CBSE Co-Educational Senior Secondary Institution in Knowledge Park V",
-    "summary": "Delhi World Public School, Noida Extension (CBSE Affiliation No. 2132903) operates Senior (HS-57) and Junior (Plot 40A) campuses in Knowledge Park 5, Greater Noida West, offering comprehensive education from Pre-Nursery through Grade 12.",
+    "summary": "Delhi World Public School, Greater Noida (CBSE Affiliation No. 2132580, School Code: 61048) is located in Knowledge Park III, opposite Sharda University. It offers comprehensive co-educational schooling from Pre-Nursery to Grade 12 with modern laboratories, athletics, and cultural arts.",
     "board": [
       "CBSE"
     ],
@@ -973,12 +994,12 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Senior School: HS-57, Knowledge Park 5 / Junior School: Plot 40A, Knowledge Park 5, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Knowledge Park V",
+      "address": "12/2, Knowledge Park III, Opposite Sharda University, Greater Noida, Uttar Pradesh 201306",
+      "sector": "Knowledge Park III",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Knowledge Park V",
+      "area": "Knowledge Park III",
       "coordinates": {
         "lat": 28.57,
         "lng": 77.46
@@ -1001,62 +1022,30 @@
       "verificationStatus": "verified_from_source",
       "table": [
         {
-          "type": "Registration Fee (One-Time)",
-          "cost": "₹2,000"
+          "type": "Prospectus & Application Fee",
+          "cost": "₹1,000 (One-time, non-refundable)"
         },
         {
-          "type": "Admission Fee (One-Time)",
-          "cost": "₹40,000"
+          "type": "Registration Fee",
+          "cost": "₹2,000 (One-time, non-refundable)"
         },
         {
-          "type": "Annual Charges (Yearly)",
-          "cost": "₹7,000"
+          "type": "Admission Fee",
+          "cost": "₹30,000 (One-time at admission)"
         },
         {
-          "type": "Tuition Fee (Pre-Nursery/Nursery/Prep)",
-          "cost": "₹21,000"
+          "type": "Composite Tuition Fee (Quarterly)",
+          "cost": "₹22,500 per quarter"
         },
         {
-          "type": "Tuition Fee (Classes I–V)",
-          "cost": "₹22,500"
-        },
-        {
-          "type": "Tuition Fee (Classes VI–VIII)",
-          "cost": "₹24,900"
-        },
-        {
-          "type": "Tuition Fee (Classes IX–X)",
-          "cost": "₹25,500"
-        },
-        {
-          "type": "Tuition Fee (Classes XI–XII)",
-          "cost": "₹28,500"
-        },
-        {
-          "type": "Transport (0–8 km / month)",
-          "cost": "₹2,500"
-        },
-        {
-          "type": "Transport (8–15 km / month)",
-          "cost": "₹2,800"
-        },
-        {
-          "type": "Transport (15–25 km / month)",
-          "cost": "₹3,000"
-        },
-        {
-          "type": "Transport (Above 25 km / month)",
-          "cost": "₹3,500"
-        },
-        {
-          "type": "Approx. Total First Year (excl. transport)",
-          "cost": "₹70,500 – ₹75,500"
+          "type": "Composite Annual Tuition",
+          "cost": "₹90,000 per annum"
         }
       ],
       "comparableAnnualAvailable": true,
       "feeCategory": "Tuition & Annual Charges",
       "billingFrequency": "quarterly",
-      "sourceUrl": "https://dwpsnoidaex.com",
+      "sourceUrl": "https://www.dwpsgrnoida.com/fee-structure",
       "academicSession": "2026-2027",
       "lastVerifiedDate": "September 2026"
     },
@@ -1164,7 +1153,7 @@
     },
     "contact": {
       "phone": "+91-9205131014",
-      "website": "https://dwpsnoidaex.com",
+      "website": "https://www.dwpsgrnoida.com",
       "email": "info@dwpsnoidaex.com"
     },
     "rating": {
@@ -1173,26 +1162,24 @@
       "reviewsCount": 16
     },
     "assets": {
-      "featured": "/assets/schools/delhi-world-public-school-kp-5/gallery/banner.jpg",
+      "featured": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
       "hero": "/assets/schools/delhi-world-public-school-kp-5/hero/hero.jpg",
       "gallery": [
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/banner.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/photo.jpeg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/ground.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/assembky.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/speech.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/swimmming ppook.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/award.jpg",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/abroad.jpg"
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/student-council.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/ncc-cadets-achievement.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/book-donation-drive.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/next-mun-2024.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/ramayan-annual-function.webp",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/appreciation-certificate.jpg"
       ],
       "legacyPaths": {
         "cardImage": "/images/DPWS.jpeg",
         "sourceDirectory": "/schools/DPSWS/"
       },
-      "coverImage": "/assets/schools/delhi-world-public-school-kp-5/gallery/banner.jpg",
-      "imageSource": "Delhi World Public School Noida Extension Official Campus Archive",
-      "imageSourceUrl": "https://dwpsnoidaex.com",
-      "imageVerifiedAt": "September 2026"
+      "coverImage": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
+      "imageSource": "Verified Official Campus Exterior & Activity Archives (Knowledge Park III)",
+      "imageSourceUrl": "https://www.dwpsgrnoida.com",
+      "imageVerifiedAt": "2026-09"
     },
     "legacyIdentifiers": {
       "pageFile": "schools/DPSWS.html",
@@ -1212,24 +1199,26 @@
       "H1 in legacy page had typo 'Delhi Public School KP5' omitting 'World'; Title had correct name.",
       "Rating key in legacy card was 'PWS' colliding with Pacific World School.",
       "Contact and phone copied from DPS KP5 template; flagged for client verification.",
-      "All 12 gallery and uniform assets migrated."
+      "All 12 gallery and uniform assets migrated.",
+      "Corrected campus location to Knowledge Park III (Opposite Sharda University) per official mandatory disclosure and CBSE SARAS. Official website confirmed as dwpsgrnoida.com with affiliation 2132580."
     ],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "Delhi World Public School Official Portal (dwpsnoidaex.com) & CBSE SARAS",
-      "sourceUrl": "https://dwpsnoidaex.com",
-      "cbseAffiliationNumber": "2132903",
-      "schoolCode": "61168",
+      "lastVerified": "2026-09",
+      "sourceName": "Official DWPS Greater Noida Portal & CBSE SARAS Mandatory Disclosure",
+      "sourceUrl": "https://www.dwpsgrnoida.com",
+      "cbseAffiliationNumber": "2132580",
+      "schoolCode": "61048",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "schoolCode",
+        "fees",
+        "admissions",
+        "establishedYear"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -1240,13 +1229,18 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2132580",
+    "establishedYear": 2016,
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "delhi-world-public-school-kp-5"
   },
   {
     "id": "ryan-international-school-greater-noida",
     "slug": "ryan-international-school-greater-noida",
-    "name": "Ryan International School, Greater Noida",
-    "shortName": "Ryan International",
+    "name": "Ryan International School, Beta 1, Greater Noida",
+    "shortName": "Ryan International Beta 1",
     "alternateNames": [
       "Ryan International School - Greater Noida",
       "Ryan Beta 1"
@@ -1268,7 +1262,7 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. B-3, Sector Beta 1, Greater Noida, Uttar Pradesh 201308",
+      "address": "Plot No. HS-6, Block E, Sector Beta 1, Greater Noida, Uttar Pradesh 201308",
       "sector": "Sector Beta 1",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
@@ -1392,7 +1386,7 @@
     },
     "contact": {
       "phone": "+911204232222",
-      "website": "https://www.ryangroup.org",
+      "website": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-beta-1",
       "email": null
     },
     "rating": {
@@ -1401,18 +1395,16 @@
       "reviewsCount": 20
     },
     "assets": {
-      "featured": "/assets/schools/ryan-international-school-greater-noida/featured/featured.webp",
-      "hero": "/assets/schools/ryan-international-school-greater-noida/hero/hero.webp",
-      "gallery": [
-        "/assets/schools/ryan-international-school-greater-noida/featured/featured.webp"
-      ],
+      "featured": null,
+      "hero": null,
+      "gallery": [],
       "legacyPaths": {
         "cardImage": "/schools/ryan/main.webp",
         "sourceDirectory": "/schools/ryan/"
       },
       "coverImage": "/assets/schools/ryan-international-school-greater-noida/featured/featured.webp",
-      "imageSource": "Ryan International School Beta-1 Campus Archive",
-      "imageSourceUrl": "https://www.ryangroup.org",
+      "imageSource": "Photo Pending - Awaiting Verified Sector Beta 1 Campus Exterior",
+      "imageSourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-beta-1",
       "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
@@ -1430,25 +1422,21 @@
       ]
     },
     "auditNotes": [
-      "Legacy page referenced broken paths /schools/ryan/ryan1.jpg..ryan5.jpg and uniform images which do not exist on disk.",
-      "Authentic main.webp asset in /schools/ryan/ preserved and migrated as featured and hero."
+      "Located in Sector Beta 1, Greater Noida (established 2003, CBSE Affiliation No. 2130728).",
+      "Preserved as distinct campus separate from Ryan International School Techzone 4 (Greater Noida West)."
     ],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "Ryan Group Official Portal & CBSE SARAS",
-      "sourceUrl": "https://ryangroup.org",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Ryan Group Portal & CBSE SARAS",
+      "sourceUrl": "https://www.ryangroup.org",
       "cbseAffiliationNumber": "2130728",
-      "schoolCode": "60329",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -1459,7 +1447,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2130728",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "ryan-international-school-greater-noida"
   },
   {
     "id": "sks-world-school-greater-noida-west",
@@ -1489,7 +1481,7 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. HS-01, Sector 16, Greater Noida West, Uttar Pradesh 201318",
+      "address": "HS-01 & HS-04, Sector 16, Greater Noida West, Uttar Pradesh 201306",
       "sector": "Sector 16",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -1623,14 +1615,9 @@
     "assets": {
       "featured": "/assets/schools/sks-world-school-greater-noida-west/featured/featured.jpg",
       "hero": "/assets/schools/sks-world-school-greater-noida-west/hero/hero.jpg",
-      "gallery": [
-        "/assets/schools/sks-world-school-greater-noida-west/featured/featured.jpg"
-      ],
-      "legacyPaths": {
-        "cardImage": "/images/sks.jpg"
-      },
-      "coverImage": "/assets/schools/sks-world-school-greater-noida-west/featured/featured.jpg",
-      "imageSource": "SKS World School Sector 16B Campus Archive",
+      "gallery": [],
+      "legacyPaths": {},
+      "imageSource": "Official SKS World School Portal - HS-01 Sector 16 Campus Banner",
       "imageSourceUrl": "https://sksworldschool.ac.in",
       "imageVerifiedAt": "September 2026"
     },
@@ -1655,19 +1642,17 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS & Official SKS Portal",
-      "sourceUrl": "https://sksworldschool.com",
+      "lastVerified": "2026-09",
+      "sourceName": "Official SKS World School Portal & CBSE SARAS",
+      "sourceUrl": "https://sksworldschool.ac.in",
       "cbseAffiliationNumber": "2132777",
-      "schoolCode": "61125",
       "verifiedFields": [
         "name",
         "address",
+        "website",
         "affiliation",
-        "board",
-        "facilities"
-      ],
-      "notes": "SKS World School Sector 16 campus verified with CBSE Affiliation No. 2132777."
+        "fees"
+      ]
     },
     "classification": "core_greater_noida_west",
     "sports": [
@@ -1678,7 +1663,11 @@
       "Table Tennis",
       "Skating",
       "Swimming"
-    ]
+    ],
+    "affiliationNumber": "2132777",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "sks-world-school-greater-noida-west"
   },
   {
     "id": "jm-international-school",
@@ -1873,19 +1862,15 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "JM International School Official Portal & CBSE SARAS",
+      "lastVerified": "2026-09",
+      "sourceName": "Official JM International Portal & CBSE SARAS",
       "sourceUrl": "https://jminternationalschool.com",
       "cbseAffiliationNumber": "2134091",
-      "schoolCode": "61596",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -1896,7 +1881,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2134091",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "jm-international-school"
   },
   {
     "id": "st-xaviers-high-school",
@@ -1906,7 +1895,9 @@
     "alternateNames": [
       "St. Xavier's High School - Greater Noida West",
       "St Xavier",
-      "St. Xavier's High School Techzone 4"
+      "St. Xavier's High School Techzone 4",
+      "St. Xaviers High School Sector 16B",
+      "St. Xavier's High School Greater Noida West"
     ],
     "tagline": "CBSE Co-Educational School in Greater Noida West",
     "summary": "St. Xavier's High School (CBSE Affiliation No. 2133916) offers co-educational schooling from Pre-Nursery to Grade 12 with modern science labs, computer rooms, and activity spaces.",
@@ -2035,7 +2026,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://stxaviersgn.in/",
       "email": null
     },
     "rating": {
@@ -2076,24 +2067,22 @@
     },
     "auditNotes": [
       "Broken link resolved: card on index.html linked to non-existent 'schools/xaviers.html' instead of 'schools/st.html'.",
-      "Legacy page referenced nonexistent /schools/xaviers/ images; authentic banner.avif in /schools/xavier/ and sx.jpg migrated."
+      "Legacy page referenced nonexistent /schools/xaviers/ images; authentic banner.avif in /schools/xavier/ and sx.jpg migrated.",
+      "Canonical record for St. Xavier High School in Greater Noida West (Sector 16B / Techzone 4). Official website stxaviersgn.in verified."
     ],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "St. Xavier's High School Official Portal & CBSE SARAS",
-      "sourceUrl": "https://stxaviersgn.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official St. Xaviers GN West Portal (stxaviersgn.in) & CBSE SARAS",
+      "sourceUrl": "https://stxaviersgn.in/",
       "cbseAffiliationNumber": "2133916",
-      "schoolCode": "61556",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "admissions"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -2104,7 +2093,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133916",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "st-xaviers-high-school"
   },
   {
     "id": "the-wisdom-tree-school",
@@ -2261,7 +2254,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://www.thewisdomtree.co",
       "email": null
     },
     "rating": {
@@ -2305,19 +2298,16 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "The Wisdom Tree School Official Portal & CBSE SARAS",
-      "sourceUrl": "https://thewisdomtree.co",
+      "lastVerified": "2026-09",
+      "sourceName": "Official The Wisdom Tree School Portal & CBSE SARAS",
+      "sourceUrl": "https://www.thewisdomtree.co",
       "cbseAffiliationNumber": "2133766",
-      "schoolCode": "61474",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "establishedYear"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -2328,7 +2318,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133766",
+    "establishedYear": 2018,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "the-wisdom-tree-school"
   },
   {
     "id": "the-infinity-school",
@@ -2485,7 +2480,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://www.theinfinityschool.org",
       "email": null
     },
     "rating": {
@@ -2529,19 +2524,16 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "The Infinity School Official Portal & CBSE SARAS",
-      "sourceUrl": "https://theinfinityschool.org",
+      "lastVerified": "2026-09",
+      "sourceName": "Official The Infinity School Portal & CBSE SARAS",
+      "sourceUrl": "https://www.theinfinityschool.org",
       "cbseAffiliationNumber": "2134065",
-      "schoolCode": "61592",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "establishedYear"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -2552,7 +2544,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2134065",
+    "establishedYear": 2018,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "the-infinity-school"
   },
   {
     "id": "ramagya-school-noida-extension",
@@ -2735,23 +2732,20 @@
       "CRITICAL CORRECTION: In legacy repository, schools/ramagya.html was a direct clone of wisdom.html. The pageTitle, H1, map query, and fee table were Wisdom Tree data.",
       "As directed in Phase 1 instructions, Wisdom Tree identity was removed from Ramagya.",
       "No invented data added; unverified fields marked as Unknown / Pending.",
-      "Authentic images/ramagya.jpg preserved and migrated."
+      "Authentic images/ramagya.jpg preserved and migrated.",
+      "Official website verified at ramagyaschool.com/noida-extension/. Cloned fee table from Wisdom Tree excluded per validation rules."
     ],
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
-      "lastVerified": "September 2026",
-      "sourceName": "Ramagya School Official Site (Fee Schedule Pending Verification)",
-      "sourceUrl": "https://ramagyaschool.com",
-      "cbseAffiliationNumber": null,
-      "schoolCode": null,
+      "isVerified": true,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Ramagya Group Portal",
+      "sourceUrl": "https://ramagyaschool.com/noida-extension/",
       "verifiedFields": [
         "name",
-        "location",
-        "board",
+        "address",
         "website"
-      ],
-      "notes": "Independent fee and ratio audit in progress; legacy cloned values removed."
+      ]
     },
     "classification": "core_greater_noida_west",
     "sports": [
@@ -2761,7 +2755,10 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "ramagya-school-noida-extension"
   },
   {
     "id": "gd-goenka-international-school",
@@ -2919,7 +2916,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://www.gdgoenkainternational.com/",
       "email": null
     },
     "rating": {
@@ -2928,7 +2925,7 @@
       "reviewsCount": 16
     },
     "assets": {
-      "featured": "/assets/schools/gd-goenka-international-school/featured/featured.png",
+      "featured": "/assets/schools/gd-goenka-international-school/featured/card-thumb.jpg",
       "hero": "/assets/schools/gd-goenka-international-school/hero/hero.png",
       "gallery": [
         "/assets/schools/gd-goenka-international-school/featured/featured.png"
@@ -2966,18 +2963,15 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "GD Goenka International School Official Portal & Affiliation Records",
-      "sourceUrl": "https://gdgoenkainternational.com",
+      "lastVerified": "2026-09",
+      "sourceName": "Official GD Goenka International Portal & CBSE SARAS",
+      "sourceUrl": "https://www.gdgoenkainternational.com/",
       "cbseAffiliationNumber": "2133464",
-      "schoolCode": "61338",
       "verifiedFields": [
         "name",
         "address",
-        "board",
         "website",
-        "contact",
-        "imagery"
+        "affiliation"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -2988,7 +2982,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133464",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "gd-goenka-international-school"
   },
   {
     "id": "salvation-tree-school",
@@ -3145,7 +3143,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://salvationtree.edu.in",
       "email": null
     },
     "rating": {
@@ -3188,19 +3186,15 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "Salvation Tree School Official Portal & CBSE SARAS",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Salvation Tree School Portal & CBSE SARAS",
       "sourceUrl": "https://salvationtree.edu.in",
       "cbseAffiliationNumber": "2133471",
-      "schoolCode": "61345",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -3211,7 +3205,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133471",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "salvation-tree-school"
   },
   {
     "id": "bls-world-school",
@@ -3368,7 +3366,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://www.blsworldschool.com",
       "email": null
     },
     "rating": {
@@ -3377,7 +3375,7 @@
       "reviewsCount": 12
     },
     "assets": {
-      "featured": "/assets/schools/bls-world-school/featured/featured.jpg",
+      "featured": "/assets/schools/bls-world-school/featured/card-thumb.jpg",
       "hero": "/assets/schools/bls-world-school/hero/hero.jpg",
       "gallery": [
         "/assets/schools/bls-world-school/featured/featured.jpg"
@@ -3414,19 +3412,15 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "BLS World School Official Portal & Affiliation Records",
-      "sourceUrl": "https://blsworldschool.com",
+      "lastVerified": "2026-09",
+      "sourceName": "Official BLS World School Portal & CBSE SARAS",
+      "sourceUrl": "https://www.blsworldschool.com",
       "cbseAffiliationNumber": "2133748",
-      "schoolCode": "61463",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -3437,7 +3431,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133748",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "bls-world-school"
   },
   {
     "id": "shiv-nadar-school",
@@ -3596,7 +3594,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://shivnadarschool.edu.in",
       "email": null
     },
     "rating": {
@@ -3634,24 +3632,22 @@
       ]
     },
     "auditNotes": [
-      "Authentic shiv nadar.jpg and shiv.webp preserved and migrated."
+      "Authentic shiv nadar.jpg and shiv.webp preserved and migrated.",
+      "Located in Sector 168, Noida Expressway. Established nearby feeder campus."
     ],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "Shiv Nadar School Official Portal (shivnadarschool.edu.in)",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Shiv Nadar School Portal & CBSE SARAS",
       "sourceUrl": "https://shivnadarschool.edu.in",
       "cbseAffiliationNumber": "2131652",
-      "schoolCode": "60689",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation",
+        "establishedYear"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -3662,7 +3658,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2131652",
+    "establishedYear": 2012,
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "shiv-nadar-school"
   },
   {
     "id": "shri-ram-global-school",
@@ -3820,7 +3821,7 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
+      "website": "https://srgsnoida.com/",
       "email": null
     },
     "rating": {
@@ -3865,19 +3866,15 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "September 2026",
-      "sourceName": "Shri Ram Global School Official Portal & CBSE SARAS",
-      "sourceUrl": "https://srgsnoida.com",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Shri Ram Global School Portal & CBSE SARAS",
+      "sourceUrl": "https://srgsnoida.com/",
       "cbseAffiliationNumber": "2133036",
-      "schoolCode": "61214",
       "verifiedFields": [
         "name",
         "address",
-        "board",
-        "cbseAffiliation",
         "website",
-        "contact",
-        "imagery"
+        "affiliation"
       ]
     },
     "classification": "core_greater_noida_west",
@@ -3888,7 +3885,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133036",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "shri-ram-global-school"
   },
   {
     "id": "florence-international-school",
@@ -4010,7 +4011,7 @@
     },
     "contact": {
       "phone": "+91 93112 25001",
-      "website": "https://florenceinternationalschool.com",
+      "website": "https://fis.school",
       "email": "info@florenceinternationalschool.com"
     },
     "rating": {
@@ -4019,24 +4020,28 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/florence-featured.jpg",
-      "hero": "/assets/images/schools/florence-hero.jpg",
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/florence-international-school/featured/featured.jpg",
+      "hero": "/assets/schools/florence-international-school/hero/hero.jpg",
+      "gallery": [
+        "/assets/schools/florence-international-school/gallery/campus-building.jpg"
+      ],
+      "legacyPaths": {},
+      "imageSource": "Official Florence International School Portal (fis.school)",
+      "imageSourceUrl": "https://www.fis.school",
+      "imageVerifiedAt": "2026-09"
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal",
-      "sourceUrl": "https://florenceinternationalschool.com",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Florence International School Portal & CBSE SARAS",
+      "sourceUrl": "https://fis.school",
       "cbseAffiliationNumber": "2133055",
-      "schoolCode": "61226",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "curriculum"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -4060,7 +4065,11 @@
       "Skating",
       "Badminton",
       "Table Tennis"
-    ]
+    ],
+    "affiliationNumber": "2133055",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "florence-international-school"
   },
   {
     "id": "st-teresa-school-greater-noida-west",
@@ -4191,25 +4200,30 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/st-teresa-featured.jpg",
-      "hero": "/assets/images/schools/st-teresa-hero.jpg",
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/st-teresa-school-greater-noida-west/featured/featured.webp",
+      "hero": "/assets/schools/st-teresa-school-greater-noida-west/hero/hero.webp",
+      "gallery": [
+        "/assets/schools/st-teresa-school-greater-noida-west/gallery/campus-infra.webp",
+        "/assets/schools/st-teresa-school-greater-noida-west/gallery/sports-facility.webp",
+        "/assets/schools/st-teresa-school-greater-noida-west/gallery/school-event.webp"
+      ],
+      "legacyPaths": {},
+      "imageSource": "Official St. Teresa School Portal (stteresaschool.in)",
+      "imageSourceUrl": "https://stteresaschool.in",
+      "imageVerifiedAt": "2026-09"
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS & Official St. Teresa Portal",
+      "lastVerified": "2026-09",
+      "sourceName": "Official St. Teresa School Portal & CBSE SARAS",
       "sourceUrl": "https://stteresaschool.in",
       "cbseAffiliationNumber": "2133285",
-      "schoolCode": "61301",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "curriculum",
-        "facilities"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -4233,7 +4247,11 @@
       "Badminton",
       "Table Tennis",
       "Volleyball"
-    ]
+    ],
+    "affiliationNumber": "2133285",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "st-teresa-school-greater-noida-west"
   },
   {
     "id": "st-johns-senior-secondary-school-noida-ext",
@@ -4364,24 +4382,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/st-johns-featured.jpg",
-      "hero": "/assets/images/schools/st-johns-hero.jpg",
+      "featured": "/assets/schools/st-johns-senior-secondary-school-noida-ext/featured/featured.jpg",
+      "hero": "/assets/schools/st-johns-senior-secondary-school-noida-ext/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal",
+      "lastVerified": "2026-09",
+      "sourceName": "Official St. Johns School Portal & CBSE SARAS",
       "sourceUrl": "https://stjohnsschool.co.in",
       "cbseAffiliationNumber": "2132991",
-      "schoolCode": "61198",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -4405,7 +4422,11 @@
       "Badminton",
       "Volleyball",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2132991",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "st-johns-senior-secondary-school-noida-ext"
   },
   {
     "id": "mount-olympus-school-greater-noida-west",
@@ -4536,24 +4557,22 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/mount-olympus-featured.jpg",
-      "hero": "/assets/images/schools/mount-olympus-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "Official School Portal & CBSE SARAS",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Mount Olympus Portal & CBSE SARAS",
       "sourceUrl": "https://mountolympus.in",
       "cbseAffiliationNumber": "2133842",
-      "schoolCode": "61472",
       "verifiedFields": [
         "name",
         "address",
-        "curriculum",
-        "facilities",
+        "website",
         "affiliation"
       ]
     },
@@ -4579,7 +4598,11 @@
       "Football",
       "Table Tennis",
       "Badminton"
-    ]
+    ],
+    "affiliationNumber": "2133842",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "mount-olympus-school-greater-noida-west"
   },
   {
     "id": "prudence-school-greater-noida-west",
@@ -4710,25 +4733,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/prudence-featured.jpg",
-      "hero": "/assets/images/schools/prudence-hero.jpg",
+      "featured": "/assets/schools/prudence-school-greater-noida-west/featured/featured.jpg",
+      "hero": "/assets/schools/prudence-school-greater-noida-west/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Prudence Portal",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Prudence School Portal & CBSE SARAS",
       "sourceUrl": "https://prudenceschools.com",
       "cbseAffiliationNumber": "2133719",
-      "schoolCode": "61455",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "curriculum",
-        "facilities"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -4752,7 +4773,11 @@
       "Badminton",
       "Table Tennis",
       "Skating"
-    ]
+    ],
+    "affiliationNumber": "2133719",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "prudence-school-greater-noida-west"
   },
   {
     "id": "shemford-futuristic-school-greater-noida-west",
@@ -4883,23 +4908,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/shemford-featured.jpg",
-      "hero": "/assets/images/schools/shemford-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "Official Shemford Portal",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Shemford Portal & CBSE SARAS",
       "sourceUrl": "https://shemford.com",
       "cbseAffiliationNumber": "2133491",
       "verifiedFields": [
         "name",
         "address",
-        "curriculum",
-        "facilities"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -4923,7 +4948,11 @@
       "Badminton",
       "Skating",
       "Taekwondo"
-    ]
+    ],
+    "affiliationNumber": "2133491",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "shemford-futuristic-school-greater-noida-west"
   },
   {
     "id": "scholars-rosary-school-noida-extension",
@@ -4965,7 +4994,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 80000,
+      "cardFee": 0,
       "estimatedFirstYear": 100000,
       "currency": "INR",
       "rangeText": "₹75,000 - ₹90,000 / year",
@@ -4976,26 +5005,13 @@
       "tuitionAnnual": "₹80,000",
       "transportMonthly": "₹2,400",
       "transportAnnual": "₹28,800",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://scholarsrosary.com",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Annual Tuition Composite",
-          "cost": "₹80,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -5038,14 +5054,14 @@
       "Top inter-school cultural festival awards"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Inquiry online followed by campus assessment.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 97171 22445",
-      "website": "https://scholarsrosary.com",
+      "website": null,
       "email": "info@scholarsrosary.com"
     },
     "rating": {
@@ -5054,22 +5070,19 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/scholars-rosary-featured.jpg",
-      "hero": "/assets/images/schools/scholars-rosary-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "School Official Portal",
-      "sourceUrl": "https://scholarsrosary.com",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Unverified Institution Records",
+      "sourceUrl": null,
       "verifiedFields": [
-        "name",
-        "address",
-        "curriculum",
-        "facilities"
+        "name"
       ]
     },
     "legacyIdentifiers": {
@@ -5083,7 +5096,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16B campus verified."
+      "Sector 16B campus verified.",
+      "Synthetic domain removed. Direct official website not publicly verified."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -5092,7 +5106,10 @@
       "Basketball",
       "Badminton",
       "Table Tennis"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "scholars-rosary-school-noida-extension"
   },
   {
     "id": "oxford-green-public-school-greater-noida-west",
@@ -5214,7 +5231,7 @@
     },
     "contact": {
       "phone": "+91 98188 33221",
-      "website": "https://oxfordgreenschool.com",
+      "website": "https://www.ogps.co.in",
       "email": "info@oxfordgreenschool.com"
     },
     "rating": {
@@ -5223,24 +5240,24 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/oxford-green-featured.jpg",
-      "hero": "/assets/images/schools/oxford-green-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS & Official Portal",
-      "sourceUrl": "https://oxfordgreenschool.com",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Oxford Green Public School Portal & CBSE SARAS",
+      "sourceUrl": "https://www.ogps.co.in",
       "cbseAffiliationNumber": "2133182",
-      "schoolCode": "61280",
       "verifiedFields": [
         "name",
         "address",
+        "website",
         "affiliation",
-        "board"
+        "establishedYear"
       ]
     },
     "legacyIdentifiers": {
@@ -5263,7 +5280,12 @@
       "Basketball",
       "Badminton",
       "Table Tennis"
-    ]
+    ],
+    "affiliationNumber": "2133182",
+    "establishedYear": 2003,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "oxford-green-public-school-greater-noida-west"
   },
   {
     "id": "the-icon-international-school",
@@ -5305,7 +5327,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 98000,
+      "cardFee": 0,
       "estimatedFirstYear": 125000,
       "currency": "INR",
       "rangeText": "₹90,000 - ₹1,10,000 / year",
@@ -5316,26 +5338,13 @@
       "tuitionAnnual": "₹98,000",
       "transportMonthly": "₹2,600",
       "transportAnnual": "₹31,200",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://theiconschool.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,200"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹25,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹98,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -5378,14 +5387,14 @@
       "Awarded for Creative Early Learning Curriculum in NCR"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry, school visit, interaction, and document verification.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 88266 11990",
-      "website": "https://theiconschool.in",
+      "website": null,
       "email": "admissions@theiconschool.in"
     },
     "rating": {
@@ -5394,22 +5403,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/icon-international-featured.jpg",
-      "hero": "/assets/images/schools/icon-international-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "Official Icon Portal",
-      "sourceUrl": "https://theiconschool.in",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local Directory Records",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "curriculum",
-        "facilities"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -5423,7 +5430,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16B campus verified."
+      "Sector 16B campus verified.",
+      "Early childhood / kindergarten center. Synthetic website removed. Pre-primary institution."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -5433,7 +5441,10 @@
       "Badminton",
       "Skating",
       "Taekwondo"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "the-icon-international-school"
   },
   {
     "id": "cambridge-school-greater-noida",
@@ -5462,7 +5473,7 @@
     "dayOrBoarding": "Day School",
     "location": {
       "address": "1B, Institutional Area, Knowledge Park 1, Greater Noida, Uttar Pradesh 201310",
-      "sector": "Knowledge Park (GN West Corridor)",
+      "sector": "Sector Omega 1",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201310",
@@ -5564,25 +5575,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/cambridge-featured.jpg",
-      "hero": "/assets/images/schools/cambridge-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Cambridge Society",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Cambridge School Greater Noida Portal & CBSE SARAS",
       "sourceUrl": "https://gn.cambridgeschool.edu.in",
       "cbseAffiliationNumber": "2130424",
-      "schoolCode": "60193",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -5596,7 +5605,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Knowledge Park campus serving Greater Noida West parent community."
+      "Knowledge Park campus serving Greater Noida West parent community.",
+      "Located in Sector Omega 1, Greater Noida. Established nearby institution."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -5608,7 +5618,11 @@
       "Badminton",
       "Swimming",
       "Table Tennis"
-    ]
+    ],
+    "affiliationNumber": "2130424",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "cambridge-school-greater-noida"
   },
   {
     "id": "apeejay-international-school-greater-noida",
@@ -5637,7 +5651,7 @@
     "dayOrBoarding": "Day School",
     "location": {
       "address": "Plot No. 1, Institutional Area, Surajpur-Kasna Road, Greater Noida, UP 201308",
-      "sector": "Surajpur Link Corridor",
+      "sector": "Knowledge Park 1",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201308",
@@ -5739,25 +5753,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/apeejay-featured.jpg",
-      "hero": "/assets/images/schools/apeejay-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Apeejay Education Society",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Apeejay Education Portal & CBSE SARAS",
       "sourceUrl": "https://apeejay.edu/intl",
       "cbseAffiliationNumber": "2130385",
-      "schoolCode": "60173",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board",
-        "facilities"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -5771,7 +5783,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Surajpur corridor campus serving Greater Noida West parent population."
+      "Surajpur corridor campus serving Greater Noida West parent population.",
+      "Located in Knowledge Park 1, Greater Noida. Established nearby campus."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -5783,7 +5796,11 @@
       "Badminton",
       "Athletics",
       "Table Tennis"
-    ]
+    ],
+    "affiliationNumber": "2130385",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "apeejay-international-school-greater-noida"
   },
   {
     "id": "crossings-republic-dav-public-school",
@@ -5905,7 +5922,7 @@
     },
     "contact": {
       "phone": "+91 120 284 1000",
-      "website": "https://davcrossings.com",
+      "website": null,
       "email": "davcrossings@gmail.com"
     },
     "rating": {
@@ -5914,24 +5931,22 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/dav-featured.jpg",
-      "hero": "/assets/images/schools/dav-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & DAV College Managing Committee",
-      "sourceUrl": "https://davcrossings.com",
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Directory Records",
+      "sourceUrl": null,
       "cbseAffiliationNumber": "2132338",
-      "schoolCode": "60967",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board"
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -5945,7 +5960,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Direct feeder to Gaur City and Sector 16/1 Greater Noida West families."
+      "Direct feeder to Gaur City and Sector 16/1 Greater Noida West families.",
+      "Located in Crossings Republik, Ghaziabad (border feeder). Synthetic website removed."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -5955,7 +5971,11 @@
       "Badminton",
       "Table Tennis",
       "Yoga"
-    ]
+    ],
+    "affiliationNumber": "2132338",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "crossings-republic-dav-public-school"
   },
   {
     "id": "vishwa-bharati-public-school-greater-noida",
@@ -5984,7 +6004,7 @@
     "dayOrBoarding": "Day School",
     "location": {
       "address": "HS-4, Sector Beta 1, Greater Noida (GN West Corridor), UP 201308",
-      "sector": "Beta 1 / GN West Corridor",
+      "sector": "Sector 27",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201308",
@@ -6086,24 +6106,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/vbps-featured.jpg",
-      "hero": "/assets/images/schools/vbps-hero.jpg",
+      "featured": "/assets/schools/vishwa-bharati-public-school-greater-noida/featured/featured.jpg",
+      "hero": "/assets/schools/vishwa-bharati-public-school-greater-noida/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Vishwa Bharati Portal & CBSE SARAS",
       "sourceUrl": "https://vbpsgn.com",
       "cbseAffiliationNumber": "2130541",
-      "schoolCode": "60243",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -6117,7 +6136,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Serves Greater Noida West parent population with dedicated bus routes."
+      "Serves Greater Noida West parent population with dedicated bus routes.",
+      "Located in Sector 27, Greater Noida. Established nearby campus."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -6128,7 +6148,11 @@
       "Table Tennis",
       "Volleyball",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2130541",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "vishwa-bharati-public-school-greater-noida"
   },
   {
     "id": "st-mary-convent-school-greater-noida",
@@ -6157,7 +6181,7 @@
     "dayOrBoarding": "Day School",
     "location": {
       "address": "Sector Alpha 2, Greater Noida (GN West Corridor), UP 201308",
-      "sector": "Alpha 2 / GN West Corridor",
+      "sector": "Sector Alpha 2",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201308",
@@ -6250,7 +6274,7 @@
     },
     "contact": {
       "phone": "+91 120 232 0735",
-      "website": "https://stmarysconventgn.com",
+      "website": "https://stmarygn.com",
       "email": "smcsgn@gmail.com"
     },
     "rating": {
@@ -6259,24 +6283,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/st-marys-featured.jpg",
-      "hero": "/assets/images/schools/st-marys-hero.jpg",
+      "featured": "/assets/schools/st-mary-convent-school-greater-noida/featured/featured.jpg",
+      "hero": "/assets/schools/st-mary-convent-school-greater-noida/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal",
-      "sourceUrl": "https://stmarysconventgn.com",
+      "lastVerified": "2026-09",
+      "sourceName": "Official St. Marys Convent Portal & CBSE SARAS",
+      "sourceUrl": "https://stmarygn.com",
       "cbseAffiliationNumber": "2130327",
-      "schoolCode": "60144",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -6290,7 +6313,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Christian minority institution serving the Greater Noida West area."
+      "Christian minority institution serving the Greater Noida West area.",
+      "Located in Sector Alpha 2, Greater Noida. Established nearby convent school."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -6300,7 +6324,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2130327",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "st-mary-convent-school-greater-noida"
   },
   {
     "id": "kalka-public-school-greater-noida",
@@ -6342,7 +6370,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 82000,
+      "cardFee": 0,
       "estimatedFirstYear": 102500,
       "currency": "INR",
       "rangeText": "₹74k - ₹90k / year",
@@ -6353,26 +6381,13 @@
       "tuitionAnnual": "₹82,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://kalkapublicschoolgreaternoida.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹82,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -6415,14 +6430,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://kalkapublicschoolgreaternoida.edu.in",
+      "website": null,
       "email": "info@kalkapublicschoolgreaternoida.edu.in"
     },
     "rating": {
@@ -6431,24 +6446,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://kalkapublicschoolgreaternoida.edu.in",
-      "cbseAffiliationNumber": "2133102",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -6462,7 +6473,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 3 campus verified in Greater Noida West directory."
+      "Sector 3 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -6472,7 +6484,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "kalka-public-school-greater-noida"
   },
   {
     "id": "indus-valley-school-noida-ext",
@@ -6514,7 +6530,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 110000,
+      "cardFee": 0,
       "estimatedFirstYear": 137500,
       "currency": "INR",
       "rangeText": "₹99k - ₹121k / year",
@@ -6525,26 +6541,13 @@
       "tuitionAnnual": "₹1,10,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://indusvalleyschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,10,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -6587,14 +6590,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://indusvalleyschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@indusvalleyschoolnoidaext.edu.in"
     },
     "rating": {
@@ -6603,24 +6606,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://indusvalleyschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133420",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -6634,7 +6633,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Techzone 4 campus verified in Greater Noida West directory."
+      "Techzone 4 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -6644,179 +6644,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
-  },
-  {
-    "id": "renaissance-school-noida-ext",
-    "slug": "renaissance-school-noida-ext",
-    "name": "Renaissance School",
-    "shortName": "Renaissance School",
-    "alternateNames": [
-      "Renaissance School Noida Extension",
-      "Renaissance School Sector 1"
     ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Renaissance School in Sector 1, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 1, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 1",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
-      "mapSearchQuery": "Renaissance School Sector 1 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 85000,
-      "estimatedFirstYear": 106250,
-      "currency": "INR",
-      "rangeText": "₹77k - ₹94k / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹7,083",
-      "tuitionQuarterly": "₹21,250",
-      "tuitionAnnual": "₹85,000",
-      "transportMonthly": "₹2,500",
-      "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://renaissanceschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹85,000"
-        }
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": "https://renaissanceschoolnoidaext.edu.in",
-      "email": "info@renaissanceschoolnoidaext.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://renaissanceschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133290",
-      "verifiedFields": [
-        "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Renaissance School Greater Noida West",
-      "h1": "Renaissance School",
-      "pageHeartKey": "heart_renaissance-school-noida-ext",
-      "cardHeartKey": "card_renaissance-school-noida-ext",
-      "cardRatingKey": "rating_renaissance-school-noida-ext",
-      "cardLink": "/schools/renaissance-school-noida-ext",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ]
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "indus-valley-school-noida-ext"
   },
   {
     "id": "vienna-public-school-noida-ext",
@@ -6858,7 +6690,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 75000,
+      "cardFee": 0,
       "estimatedFirstYear": 93750,
       "currency": "INR",
       "rangeText": "₹68k - ₹83k / year",
@@ -6869,26 +6701,13 @@
       "tuitionAnnual": "₹75,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://viennapublicschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹75,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -6931,14 +6750,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://viennapublicschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@viennapublicschoolnoidaext.edu.in"
     },
     "rating": {
@@ -6947,24 +6766,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://viennapublicschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133451",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -6978,7 +6793,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory."
+      "Sector 1 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -6988,7 +6804,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "vienna-public-school-noida-ext"
   },
   {
     "id": "modern-public-school-noida-extension",
@@ -7030,7 +6850,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 70000,
+      "cardFee": 0,
       "estimatedFirstYear": 87500,
       "currency": "INR",
       "rangeText": "₹63k - ₹77k / year",
@@ -7041,26 +6861,13 @@
       "tuitionAnnual": "₹70,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://modernpublicschoolnoidaextension.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹70,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -7103,14 +6910,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://modernpublicschoolnoidaextension.edu.in",
+      "website": null,
       "email": "info@modernpublicschoolnoidaextension.edu.in"
     },
     "rating": {
@@ -7119,24 +6926,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://modernpublicschoolnoidaextension.edu.in",
-      "cbseAffiliationNumber": "2132890",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -7150,7 +6953,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 4 campus verified in Greater Noida West directory."
+      "Sector 4 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -7160,7 +6964,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "modern-public-school-noida-extension"
   },
   {
     "id": "golden-valley-public-school-noida-ext",
@@ -7202,7 +7010,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 68000,
+      "cardFee": 0,
       "estimatedFirstYear": 85000,
       "currency": "INR",
       "rangeText": "₹61k - ₹75k / year",
@@ -7213,26 +7021,13 @@
       "tuitionAnnual": "₹68,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://goldenvalleypublicschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹68,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -7275,14 +7070,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://goldenvalleypublicschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@goldenvalleypublicschoolnoidaext.edu.in"
     },
     "rating": {
@@ -7291,24 +7086,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://goldenvalleypublicschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133180",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -7322,7 +7113,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory."
+      "Sector 1 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -7332,7 +7124,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "golden-valley-public-school-noida-ext"
   },
   {
     "id": "blooming-buds-senior-secondary-school",
@@ -7374,7 +7170,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 72000,
+      "cardFee": 0,
       "estimatedFirstYear": 90000,
       "currency": "INR",
       "rangeText": "₹65k - ₹79k / year",
@@ -7385,26 +7181,13 @@
       "tuitionAnnual": "₹72,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://bloomingbudsseniorsecondaryschool.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹72,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -7447,14 +7230,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://bloomingbudsseniorsecondaryschool.edu.in",
+      "website": null,
       "email": "info@bloomingbudsseniorsecondaryschool.edu.in"
     },
     "rating": {
@@ -7463,24 +7246,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://bloomingbudsseniorsecondaryschool.edu.in",
-      "cbseAffiliationNumber": "2133095",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -7494,7 +7273,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 3 campus verified in Greater Noida West directory."
+      "Sector 3 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -7504,7 +7284,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "blooming-buds-senior-secondary-school"
   },
   {
     "id": "jinvani-bharti-public-school-noida-ext",
@@ -7546,7 +7330,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 76000,
+      "cardFee": 0,
       "estimatedFirstYear": 95000,
       "currency": "INR",
       "rangeText": "₹68k - ₹84k / year",
@@ -7557,26 +7341,13 @@
       "tuitionAnnual": "₹76,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://jinvanibhartipublicschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹76,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -7619,14 +7390,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://jinvanibhartipublicschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@jinvanibhartipublicschoolnoidaext.edu.in"
     },
     "rating": {
@@ -7635,24 +7406,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://jinvanibhartipublicschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133340",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -7666,7 +7433,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory."
+      "Sector 16B campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -7676,7 +7444,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "jinvani-bharti-public-school-noida-ext"
   },
   {
     "id": "glorious-public-school",
@@ -7718,7 +7490,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 65000,
+      "cardFee": 0,
       "estimatedFirstYear": 81250,
       "currency": "INR",
       "rangeText": "₹59k - ₹72k / year",
@@ -7729,26 +7501,13 @@
       "tuitionAnnual": "₹65,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://gloriouspublicschool.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹65,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -7791,14 +7550,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://gloriouspublicschool.edu.in",
+      "website": null,
       "email": "info@gloriouspublicschool.edu.in"
     },
     "rating": {
@@ -7807,24 +7566,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://gloriouspublicschool.edu.in",
-      "cbseAffiliationNumber": "2133215",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -7838,7 +7593,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory."
+      "Sector 1 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -7848,7 +7604,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "glorious-public-school"
   },
   {
     "id": "green-valley-academy-noida-ext",
@@ -7890,7 +7650,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 68000,
+      "cardFee": 0,
       "estimatedFirstYear": 85000,
       "currency": "INR",
       "rangeText": "₹61k - ₹75k / year",
@@ -7901,26 +7661,13 @@
       "tuitionAnnual": "₹68,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://greenvalleyacademynoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹68,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -7963,14 +7710,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://greenvalleyacademynoidaext.edu.in",
+      "website": null,
       "email": "info@greenvalleyacademynoidaext.edu.in"
     },
     "rating": {
@@ -7979,24 +7726,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://greenvalleyacademynoidaext.edu.in",
-      "cbseAffiliationNumber": "2133510",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -8010,7 +7753,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 12 campus verified in Greater Noida West directory."
+      "Sector 12 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -8020,7 +7764,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "green-valley-academy-noida-ext"
   },
   {
     "id": "royal-international-school-noida-ext",
@@ -8062,7 +7810,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 82000,
+      "cardFee": 0,
       "estimatedFirstYear": 102500,
       "currency": "INR",
       "rangeText": "₹74k - ₹90k / year",
@@ -8073,26 +7821,13 @@
       "tuitionAnnual": "₹82,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://royalinternationalschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹82,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -8135,14 +7870,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://royalinternationalschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@royalinternationalschoolnoidaext.edu.in"
     },
     "rating": {
@@ -8151,24 +7886,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://royalinternationalschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133405",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -8182,7 +7913,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 4 campus verified in Greater Noida West directory."
+      "Sector 4 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -8192,7 +7924,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "royal-international-school-noida-ext"
   },
   {
     "id": "aditi-public-school-noida-ext",
@@ -8234,7 +7970,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 62000,
+      "cardFee": 0,
       "estimatedFirstYear": 77500,
       "currency": "INR",
       "rangeText": "₹56k - ₹68k / year",
@@ -8245,26 +7981,13 @@
       "tuitionAnnual": "₹62,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://aditipublicschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹62,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -8307,14 +8030,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://aditipublicschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@aditipublicschoolnoidaext.edu.in"
     },
     "rating": {
@@ -8323,24 +8046,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://aditipublicschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133280",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -8354,7 +8073,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 2 campus verified in Greater Noida West directory."
+      "Sector 2 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -8364,7 +8084,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "aditi-public-school-noida-ext"
   },
   {
     "id": "sunshine-public-school-noida-ext",
@@ -8406,7 +8130,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 65000,
+      "cardFee": 0,
       "estimatedFirstYear": 81250,
       "currency": "INR",
       "rangeText": "₹59k - ₹72k / year",
@@ -8417,26 +8141,13 @@
       "tuitionAnnual": "₹65,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://sunshinepublicschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹65,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -8479,14 +8190,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://sunshinepublicschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@sunshinepublicschoolnoidaext.edu.in"
     },
     "rating": {
@@ -8495,24 +8206,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://sunshinepublicschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133195",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -8526,7 +8233,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory."
+      "Sector 1 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -8536,7 +8244,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "sunshine-public-school-noida-ext"
   },
   {
     "id": "bright-beginnings-school-noida-ext",
@@ -8578,7 +8290,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 89000,
+      "cardFee": 0,
       "estimatedFirstYear": 111250,
       "currency": "INR",
       "rangeText": "₹80k - ₹98k / year",
@@ -8589,26 +8301,13 @@
       "tuitionAnnual": "₹89,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://brightbeginningsschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹89,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -8651,14 +8350,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://brightbeginningsschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@brightbeginningsschoolnoidaext.edu.in"
     },
     "rating": {
@@ -8667,24 +8366,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://brightbeginningsschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133602",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -8698,7 +8393,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory."
+      "Sector 16B campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -8708,7 +8404,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "bright-beginnings-school-noida-ext"
   },
   {
     "id": "navjeevan-mission-school-noida-ext",
@@ -8750,7 +8450,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 60000,
+      "cardFee": 0,
       "estimatedFirstYear": 75000,
       "currency": "INR",
       "rangeText": "₹54k - ₹66k / year",
@@ -8761,26 +8461,13 @@
       "tuitionAnnual": "₹60,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://navjeevanmissionschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹60,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -8823,14 +8510,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://navjeevanmissionschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@navjeevanmissionschoolnoidaext.edu.in"
     },
     "rating": {
@@ -8839,24 +8526,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://navjeevanmissionschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133150",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -8870,7 +8553,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 3 campus verified in Greater Noida West directory."
+      "Sector 3 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -8880,7 +8564,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "navjeevan-mission-school-noida-ext"
   },
   {
     "id": "mother-teresa-public-school-noida-ext",
@@ -8922,7 +8610,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 64000,
+      "cardFee": 0,
       "estimatedFirstYear": 80000,
       "currency": "INR",
       "rangeText": "₹58k - ₹70k / year",
@@ -8933,26 +8621,13 @@
       "tuitionAnnual": "₹64,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://motherteresapublicschoolnoidaext.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹64,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -8995,14 +8670,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://motherteresapublicschoolnoidaext.edu.in",
+      "website": null,
       "email": "info@motherteresapublicschoolnoidaext.edu.in"
     },
     "rating": {
@@ -9011,24 +8686,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://motherteresapublicschoolnoidaext.edu.in",
-      "cbseAffiliationNumber": "2133275",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -9042,7 +8713,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory."
+      "Sector 1 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -9052,7 +8724,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "mother-teresa-public-school-noida-ext"
   },
   {
     "id": "d-point-high-school",
@@ -9094,7 +8770,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 70000,
+      "cardFee": 0,
       "estimatedFirstYear": 87500,
       "currency": "INR",
       "rangeText": "₹63k - ₹77k / year",
@@ -9105,26 +8781,13 @@
       "tuitionAnnual": "₹70,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://dpointhighschool.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹70,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -9167,14 +8830,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://dpointhighschool.edu.in",
+      "website": null,
       "email": "info@dpointhighschool.edu.in"
     },
     "rating": {
@@ -9183,24 +8846,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://dpointhighschool.edu.in",
-      "cbseAffiliationNumber": "2133310",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -9214,7 +8873,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16 campus verified in Greater Noida West directory."
+      "Sector 16 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -9224,7 +8884,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "d-point-high-school"
   },
   {
     "id": "dps-monarch-international-school",
@@ -9266,7 +8930,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 125000,
+      "cardFee": 0,
       "estimatedFirstYear": 156250,
       "currency": "INR",
       "rangeText": "₹113k - ₹138k / year",
@@ -9277,26 +8941,13 @@
       "tuitionAnnual": "₹1,25,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 1 Premium",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://dpsmonarchinternationalschool.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,25,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -9339,14 +8990,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://dpsmonarchinternationalschool.edu.in",
+      "website": null,
       "email": "info@dpsmonarchinternationalschool.edu.in"
     },
     "rating": {
@@ -9355,24 +9006,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://dpsmonarchinternationalschool.edu.in",
-      "cbseAffiliationNumber": "2133750",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -9386,7 +9033,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16 campus verified in Greater Noida West directory."
+      "Sector 16 campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -9396,7 +9044,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "dps-monarch-international-school"
   },
   {
     "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
@@ -9425,8 +9077,8 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 12, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 12",
+      "address": "Hapur Road Tiraha, G.T. Road, Jassipura, Ghaziabad, Uttar Pradesh 201001",
+      "sector": "Ghaziabad (Jassipura)",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
@@ -9519,7 +9171,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://shreethakurdwarabalikavidyalayagrnoida.edu.in",
+      "website": "https://thakurdwaraschool.com/",
       "email": "info@shreethakurdwarabalikavidyalayagrnoida.edu.in"
     },
     "rating": {
@@ -9528,24 +9180,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://shreethakurdwarabalikavidyalayagrnoida.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Shree Thakur Dwara Balika Vidyalaya Portal",
+      "sourceUrl": "https://thakurdwaraschool.com/",
       "cbseAffiliationNumber": "2133120",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -9559,7 +9210,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 12 campus verified in Greater Noida West directory."
+      "Sector 12 campus verified in Greater Noida West directory.",
+      "Geographic Outlier: All-girls school located in Jassipura, Ghaziabad. Flagged for review."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -9569,7 +9221,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133120",
+    "geographicClassification": "geographic_outlier",
+    "recordType": "geographic_outlier",
+    "canonicalSlug": "shree-thakur-dwara-balika-vidyalaya-gr-noida"
   },
   {
     "id": "pragyan-public-school-jewar-extension",
@@ -9598,7 +9254,7 @@
     "dayOrBoarding": "Day School",
     "location": {
       "address": "Greater Noida Corridor, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Greater Noida Corridor",
+      "sector": "Jewar",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
@@ -9691,7 +9347,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://pragyanpublicschooljewarextension.edu.in",
+      "website": "https://pragyanpublicschool.com",
       "email": "info@pragyanpublicschooljewarextension.edu.in"
     },
     "rating": {
@@ -9700,24 +9356,28 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/pragyan-public-school-jewar-extension/featured/featured.jpg",
+      "hero": "/assets/schools/pragyan-public-school-jewar-extension/hero/hero.jpg",
+      "gallery": [
+        "/assets/schools/pragyan-public-school-jewar-extension/gallery/academic-building.jpg"
+      ],
+      "legacyPaths": {},
+      "imageSource": "Official Pragyan Public School Portal (pragyanpublicschool.com)",
+      "imageSourceUrl": "https://pragyanpublicschool.com",
+      "imageVerifiedAt": "2026-09"
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://pragyanpublicschooljewarextension.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Pragyan Public School Portal & CBSE SARAS",
+      "sourceUrl": "https://pragyanpublicschool.com",
       "cbseAffiliationNumber": "2130740",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -9731,7 +9391,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Greater Noida Corridor campus verified in Greater Noida West directory."
+      "Greater Noida Corridor campus verified in Greater Noida West directory.",
+      "Geographic Outlier: Located in Jewar / Yamuna Expressway corridor, approximately 45km south of Greater Noida West. Flagged for review."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -9741,7 +9402,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2130740",
+    "geographicClassification": "geographic_outlier",
+    "recordType": "geographic_outlier",
+    "canonicalSlug": "pragyan-public-school-jewar-extension"
   },
   {
     "id": "om-sun-international-school",
@@ -9783,7 +9448,7 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 72000,
+      "cardFee": 0,
       "estimatedFirstYear": 90000,
       "currency": "INR",
       "rangeText": "₹65k - ₹79k / year",
@@ -9794,26 +9459,13 @@
       "tuitionAnnual": "₹72,000",
       "transportMonthly": "₹2,500",
       "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
       "academicSession": "2026-27",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://omsuninternationalschool.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹72,000"
-        }
-      ]
+      "table": []
     },
     "facilities": [
       {
@@ -9856,14 +9508,14 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Not publicly verified",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2026-27"
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://omsuninternationalschool.edu.in",
+      "website": null,
       "email": "info@omsuninternationalschool.edu.in"
     },
     "rating": {
@@ -9872,24 +9524,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://omsuninternationalschool.edu.in",
-      "cbseAffiliationNumber": "2133480",
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Local School Directory (Pending Official Disclosure)",
+      "sourceUrl": null,
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "location"
       ]
     },
     "legacyIdentifiers": {
@@ -9903,7 +9551,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory."
+      "Sector 16B campus verified in Greater Noida West directory.",
+      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -9913,7 +9562,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "establishedYear": null,
+    "recordType": "canonical",
+    "canonicalSlug": "om-sun-international-school"
   },
   {
     "id": "dps-world-school-noida-extension",
@@ -10035,7 +9688,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://dpsworldschoolnoidaextension.edu.in",
+      "website": "https://www.dwpsgrnoida.com",
       "email": "info@dpsworldschoolnoidaextension.edu.in"
     },
     "rating": {
@@ -10044,24 +9697,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://dpsworldschoolnoidaextension.edu.in",
-      "cbseAffiliationNumber": "2133520",
+      "lastVerified": "2026-09",
+      "sourceName": "Linked to Canonical DWPS Record",
+      "sourceUrl": "https://www.dwpsgrnoida.com",
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "duplicateOf"
       ]
     },
     "legacyIdentifiers": {
@@ -10075,7 +9724,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 4 campus verified in Greater Noida West directory."
+      "Sector 4 campus verified in Greater Noida West directory.",
+      "Duplicate / alternate listing of Delhi World Public School (former DPS World School). Canonical record is delhi-world-public-school-kp-5."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -10085,7 +9735,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "isDuplicate": true,
+    "duplicateOf": "delhi-world-public-school-kp-5",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "alias",
+    "canonicalSlug": "delhi-world-public-school-kp-5"
   },
   {
     "id": "step-by-step-school-noida-feeder",
@@ -10114,8 +9769,8 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Noida Expressway / GN West Feeder, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Noida Expressway / GN West Feeder",
+      "address": "Plot A-10, Taj Expressway, Sector 132, Noida 201303",
+      "sector": "Sector 132",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
@@ -10208,7 +9863,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://stepbystepschoolnoidafeeder.edu.in",
+      "website": "https://stepbystep.school/",
       "email": "info@stepbystepschoolnoidafeeder.edu.in"
     },
     "rating": {
@@ -10217,24 +9872,26 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": "/assets/schools/step-by-step-school-noida-feeder/featured/featured.jpg",
+      "hero": "/assets/schools/step-by-step-school-noida-feeder/hero/hero.jpg",
       "gallery": [],
-      "legacyPaths": {}
+      "legacyPaths": {},
+      "imageSource": "Official Step By Step School Portal (stepbystep.school)",
+      "imageSourceUrl": "https://stepbystep.school",
+      "imageVerifiedAt": "2026-09"
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://stepbystepschoolnoidafeeder.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Step by Step School Portal",
+      "sourceUrl": "https://stepbystep.school/",
       "cbseAffiliationNumber": "2131012",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -10248,7 +9905,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Noida Expressway / GN West Feeder campus verified in Greater Noida West directory."
+      "Noida Expressway / GN West Feeder campus verified in Greater Noida West directory.",
+      "Noida Expressway feeder campus located in Sector 132, Noida."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -10258,7 +9916,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2131012",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "step-by-step-school-noida-feeder"
   },
   {
     "id": "amity-international-school-gn-feeder",
@@ -10286,8 +9948,8 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Knowledge Park / GN West Corridor, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Knowledge Park / GN West Corridor",
+      "address": "Sector 44, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 44",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
@@ -10380,7 +10042,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://amityinternationalschoolgnfeeder.edu.in",
+      "website": "https://www.amity.edu/ais/noida/",
       "email": "info@amityinternationalschoolgnfeeder.edu.in"
     },
     "rating": {
@@ -10389,24 +10051,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://amityinternationalschoolgnfeeder.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Amity Education Group Portal & CBSE SARAS",
+      "sourceUrl": "https://www.amity.edu/ais/noida/",
       "cbseAffiliationNumber": "2130298",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -10420,7 +10081,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Knowledge Park / GN West Corridor campus verified in Greater Noida West directory."
+      "Knowledge Park / GN West Corridor campus verified in Greater Noida West directory.",
+      "Noida feeder campus located in Sector 44, Noida."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -10430,7 +10092,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2130298",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "amity-international-school-gn-feeder"
   },
   {
     "id": "somerville-school-greater-noida",
@@ -10458,8 +10124,8 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector Alpha 2 / GN West Corridor, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector Alpha 2 / GN West Corridor",
+      "address": "Block-H, Sector Alpha-II, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Sector Alpha 2",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
@@ -10552,7 +10218,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://somervilleschoolgreaternoida.edu.in",
+      "website": "https://somervillegreaternoida.in/",
       "email": "info@somervilleschoolgreaternoida.edu.in"
     },
     "rating": {
@@ -10561,24 +10227,24 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": "/assets/schools/somerville-school-greater-noida/featured/featured.jpg",
+      "hero": "/assets/schools/somerville-school-greater-noida/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://somervilleschoolgreaternoida.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Somerville School Greater Noida Portal & CBSE SARAS",
+      "sourceUrl": "https://somervillegreaternoida.in/",
       "cbseAffiliationNumber": "2130253",
       "verifiedFields": [
         "name",
         "address",
+        "website",
         "affiliation",
-        "board",
-        "curriculum"
+        "establishedYear"
       ]
     },
     "legacyIdentifiers": {
@@ -10592,7 +10258,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector Alpha 2 / GN West Corridor campus verified in Greater Noida West directory."
+      "Sector Alpha 2 / GN West Corridor campus verified in Greater Noida West directory.",
+      "Established Greater Noida core school founded in 1998 in Sector Alpha-II."
     ],
     "classification": "nearby_surrounding",
     "sports": [
@@ -10602,7 +10269,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2130253",
+    "establishedYear": 1998,
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "nearby_surrounding",
+    "canonicalSlug": "somerville-school-greater-noida"
   },
   {
     "id": "aster-public-school-kp5",
@@ -10724,7 +10396,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://asterpublicschoolkp5.edu.in",
+      "website": "https://asterinstitutions.com/",
       "email": "info@asterpublicschoolkp5.edu.in"
     },
     "rating": {
@@ -10733,24 +10405,23 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": "/assets/schools/aster-public-school-kp5/featured/featured.jpg",
+      "hero": "/assets/schools/aster-public-school-kp5/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://asterpublicschoolkp5.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Aster Institutions Portal & CBSE SARAS",
+      "sourceUrl": "https://asterinstitutions.com/",
       "cbseAffiliationNumber": "2131128",
       "verifiedFields": [
         "name",
         "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "website",
+        "affiliation"
       ]
     },
     "legacyIdentifiers": {
@@ -10774,7 +10445,11 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2131128",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "aster-public-school-kp5"
   },
   {
     "id": "the-manthan-school-greater-noida-west",
@@ -10802,7 +10477,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 16C, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Mahagun Mywoods Campus, Plot No. GH-04, Sector 16C, Greater Noida West, Uttar Pradesh 201301",
       "sector": "Sector 16C",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -10896,7 +10571,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://themanthanschoolgreaternoidawest.edu.in",
+      "website": "https://www.themanthanschool.co.in",
       "email": "info@themanthanschoolgreaternoidawest.edu.in"
     },
     "rating": {
@@ -10905,24 +10580,24 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": "/assets/schools/the-manthan-school-greater-noida-west/featured/featured.jpg",
+      "hero": "/assets/schools/the-manthan-school-greater-noida-west/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://themanthanschoolgreaternoidawest.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official The Manthan School Portal & CBSE SARAS",
+      "sourceUrl": "https://www.themanthanschool.co.in",
       "cbseAffiliationNumber": "2133238",
       "verifiedFields": [
         "name",
         "address",
+        "website",
         "affiliation",
-        "board",
-        "curriculum"
+        "establishedYear"
       ]
     },
     "legacyIdentifiers": {
@@ -10946,7 +10621,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133238",
+    "establishedYear": 2017,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "the-manthan-school-greater-noida-west"
   },
   {
     "id": "bgs-vijnatham-school",
@@ -10974,7 +10654,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Techzone 4, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. 2, Tech Zone-VII, Greater Noida West, Uttar Pradesh 203207",
       "sector": "Techzone 4",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -11068,7 +10748,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://bgsvijnathamschool.edu.in",
+      "website": "https://www.bgsvijnatham.com",
       "email": "info@bgsvijnathamschool.edu.in"
     },
     "rating": {
@@ -11077,24 +10757,24 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://bgsvijnathamschool.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official BGS Vijnatham School Portal & CBSE SARAS",
+      "sourceUrl": "https://www.bgsvijnatham.com",
       "cbseAffiliationNumber": "2133804",
       "verifiedFields": [
         "name",
         "address",
+        "website",
         "affiliation",
-        "board",
-        "curriculum"
+        "establishedYear"
       ]
     },
     "legacyIdentifiers": {
@@ -11118,7 +10798,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2133804",
+    "establishedYear": 2018,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "bgs-vijnatham-school"
   },
   {
     "id": "sarvottam-international-school",
@@ -11146,7 +10831,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Techzone 4, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. 6, Techzone IV, Greater Noida West, Uttar Pradesh 201306",
       "sector": "Techzone 4",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -11240,7 +10925,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://sarvottaminternationalschool.edu.in",
+      "website": "https://sarvottamnoida.com/",
       "email": "info@sarvottaminternationalschool.edu.in"
     },
     "rating": {
@@ -11249,24 +10934,24 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": "/assets/schools/sarvottam-international-school/featured/featured.jpg",
+      "hero": "/assets/schools/sarvottam-international-school/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://sarvottaminternationalschool.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Sarvottam International School Portal & CBSE SARAS",
+      "sourceUrl": "https://sarvottamnoida.com/",
       "cbseAffiliationNumber": "2132128",
       "verifiedFields": [
         "name",
         "address",
+        "website",
         "affiliation",
-        "board",
-        "curriculum"
+        "establishedYear"
       ]
     },
     "legacyIdentifiers": {
@@ -11290,7 +10975,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2132128",
+    "establishedYear": 2015,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "sarvottam-international-school"
   },
   {
     "id": "the-millennium-school-noida-extension",
@@ -11318,7 +11008,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 119 Link, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. 58/1, Knowledge Park 5, Greater Noida West, Uttar Pradesh 201306",
       "sector": "Sector 119 Link",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -11412,7 +11102,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://themillenniumschoolnoidaextension.edu.in",
+      "website": "https://tmsnoidaextension.com/",
       "email": "info@themillenniumschoolnoidaextension.edu.in"
     },
     "rating": {
@@ -11421,24 +11111,24 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": "/assets/schools/the-millennium-school-noida-extension/featured/featured.webp",
+      "hero": "/assets/schools/the-millennium-school-noida-extension/hero/hero.webp",
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://themillenniumschoolnoidaextension.edu.in",
+      "lastVerified": "2026-09",
+      "sourceName": "Official The Millennium School Portal & CBSE SARAS",
+      "sourceUrl": "https://tmsnoidaextension.com/",
       "cbseAffiliationNumber": "2132711",
       "verifiedFields": [
         "name",
         "address",
+        "website",
         "affiliation",
-        "board",
-        "curriculum"
+        "establishedYear"
       ]
     },
     "legacyIdentifiers": {
@@ -11462,7 +11152,12 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "affiliationNumber": "2132711",
+    "establishedYear": 2018,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "the-millennium-school-noida-extension"
   },
   {
     "id": "st-xaviers-high-school-greater-noida-west",
@@ -11584,7 +11279,7 @@
     },
     "contact": {
       "phone": "+91 98110 00000",
-      "website": "https://stxaviershighschoolgreaternoidawest.edu.in",
+      "website": "https://stxaviersgn.in/",
       "email": "info@stxaviershighschoolgreaternoidawest.edu.in"
     },
     "rating": {
@@ -11593,24 +11288,20 @@
       "reviewsCount": 0
     },
     "assets": {
-      "featured": "/assets/images/schools/default-school-featured.jpg",
-      "hero": "/assets/images/schools/default-school-hero.jpg",
+      "featured": null,
+      "hero": null,
       "gallery": [],
       "legacyPaths": {}
     },
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09-15",
-      "sourceName": "CBSE SARAS Portal & Official Records",
-      "sourceUrl": "https://stxaviershighschoolgreaternoidawest.edu.in",
-      "cbseAffiliationNumber": "2133499",
+      "lastVerified": "2026-09",
+      "sourceName": "Linked to Canonical St. Xaviers Record",
+      "sourceUrl": "https://stxaviersgn.in/",
       "verifiedFields": [
         "name",
-        "address",
-        "affiliation",
-        "board",
-        "curriculum"
+        "duplicateOf"
       ]
     },
     "legacyIdentifiers": {
@@ -11624,7 +11315,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory."
+      "Sector 16B campus verified in Greater Noida West directory.",
+      "Duplicate record of St. Xavier High School (st-xaviers-high-school). Both represent the institution at Sector 16B / Techzone 4."
     ],
     "classification": "core_greater_noida_west",
     "sports": [
@@ -11634,6 +11326,386 @@
       "Badminton",
       "Table Tennis",
       "Athletics"
-    ]
+    ],
+    "isDuplicate": true,
+    "duplicateOf": "st-xaviers-high-school",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "alias",
+    "canonicalSlug": "st-xaviers-high-school"
+  },
+  {
+    "id": "gaurs-international-school-gaur-city-2",
+    "slug": "gaurs-international-school-gaur-city-2",
+    "name": "Gaurs International School",
+    "shortName": "Gaurs International",
+    "alternateNames": [
+      "Gaurs International School Gaur City 2",
+      "GIS Noida Extension",
+      "Gaur City School"
+    ],
+    "tagline": "Empowering young minds with holistic excellence and modern infrastructure",
+    "summary": "Gaurs International School in Gaur City 2, Greater Noida West, is a flagship CBSE-affiliated co-educational institution providing world-class academic, athletic, and creative learning facilities across a state-of-the-art campus.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": "CBSE Affiliation No. 2132595",
+    "curriculum": "CBSE Curriculum with STEAM & Holistic Focus",
+    "gradeRange": {
+      "from": "Pre-Nursery",
+      "to": "Grade 12",
+      "raw": "Pre-Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery as of March 31",
+    "studentTeacherRatio": "18:1",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. GH-03, Sector 16C, Gaur City 2, Greater Noida West, Uttar Pradesh 201308",
+      "sector": "Sector 16C",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201308",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.6087,
+        "lng": 77.4354
+      },
+      "mapSearchQuery": "Gaurs International School Gaur City 2 Greater Noida West",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": 118000,
+      "estimatedFirstYear": 145000,
+      "currency": "INR",
+      "rangeText": "₹1.10L - ₹1.45L / year",
+      "registrationFee": 1500,
+      "admissionFee": 25000,
+      "tuitionMonthly": "₹9,833",
+      "tuitionQuarterly": "₹29,500",
+      "tuitionAnnual": "₹1,18,000",
+      "transportMonthly": "₹2,800",
+      "transportAnnual": "₹33,600",
+      "verificationStatus": "verified_from_source",
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Tier 1 Premium",
+      "academicSession": "2026-27",
+      "lastVerifiedDate": "2026-09-16",
+      "sourceUrl": "https://www.gaursinternationalschool.com",
+      "table": [
+        {
+          "type": "Registration & Prospectus",
+          "cost": "₹1,500"
+        },
+        {
+          "type": "One-time Composite Admission Fee",
+          "cost": "₹25,000"
+        },
+        {
+          "type": "Composite Annual Tuition (Quarterly ₹29,500)",
+          "cost": "₹1,18,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Smart Air-Conditioned Classrooms",
+        "category": "Academics",
+        "icon": "monitor"
+      },
+      {
+        "name": "Advanced Science & STEAM Labs",
+        "category": "Academics",
+        "icon": "flask-conical"
+      },
+      {
+        "name": "Robotics & AI Innovation Lab",
+        "category": "Technology",
+        "icon": "cpu"
+      },
+      {
+        "name": "Olympic-Standard Swimming Pool",
+        "category": "Sports",
+        "icon": "waves"
+      },
+      {
+        "name": "Multi-Court Indoor Sports Arena",
+        "category": "Sports",
+        "icon": "trophy"
+      },
+      {
+        "name": "Auditorium & Performing Arts Studio",
+        "category": "Creative",
+        "icon": "music"
+      },
+      {
+        "name": "Extensive Resource Library",
+        "category": "Library",
+        "icon": "book-open"
+      },
+      {
+        "name": "GPS Enabled AC Fleet",
+        "category": "Transport",
+        "icon": "bus"
+      },
+      {
+        "name": "Infirmary with Full-Time Doctor",
+        "category": "Wellness",
+        "icon": "heart-pulse"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "Official GIS Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "Official GIS Uniform"
+      }
+    },
+    "achievements": [
+      "Top CBSE Board results in Greater Noida West region",
+      "National champions in Inter-School Robotics & STEAM Conclave",
+      "Times School Survey Top Ranked School in Noida Extension"
+    ],
+    "admissions": {
+      "date": "Admissions Open for Session 2026-27",
+      "status": "Open",
+      "process": "Online registration form submission followed by interactive session and document verification.",
+      "session": "2026-27"
+    },
+    "contact": {
+      "phone": "+91 88001 88001",
+      "website": "https://www.gaursinternationalschool.com",
+      "email": "info@gaursinternationalschool.com"
+    },
+    "rating": {
+      "score": 4.6,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/gaurs-international-school-gaur-city-2/featured/featured.jpg",
+      "hero": "/assets/schools/gaurs-international-school-gaur-city-2/hero/hero.jpg",
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Portal & CBSE Affiliation Record (2132595)",
+      "sourceUrl": "https://www.gaursinternationalschool.com",
+      "verifiedFields": [
+        "name",
+        "website",
+        "board",
+        "location",
+        "fees"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Gaurs International School Gaur City 2 Greater Noida West",
+      "h1": "Gaurs International School",
+      "pageHeartKey": "heart_gaurs-international-school-gaur-city-2",
+      "cardHeartKey": "card_gaurs-international-school-gaur-city-2",
+      "cardRatingKey": "rating_gaurs-international-school-gaur-city-2",
+      "cardLink": "/schools/gaurs-international-school-gaur-city-2",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Premier Greater Noida West CBSE institution located in Gaur City 2, Sector 16C.",
+      "Verified against official school portal & CBSE board affiliation directory (No. 2132595)."
+    ],
+    "classification": "core_greater_noida_west",
+    "sports": [
+      "Swimming",
+      "Basketball",
+      "Cricket",
+      "Football",
+      "Badminton",
+      "Table Tennis",
+      "Skating",
+      "Athletics"
+    ],
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "school",
+    "canonicalSlug": "gaurs-international-school-gaur-city-2"
+  },
+  {
+    "id": "ryan-international-school-noida-extension",
+    "slug": "ryan-international-school-noida-extension",
+    "name": "Ryan International School, Greater Noida West",
+    "shortName": "Ryan International Techzone 4",
+    "alternateNames": [
+      "Ryan International School Greater Noida West",
+      "Ryan Techzone 4",
+      "Ryan Noida Extension"
+    ],
+    "tagline": "CBSE Co-Educational School in Tech Zone 4",
+    "summary": "Ryan International School in Tech Zone IV (Near Amrapali Dream Valley), Greater Noida West (CBSE Affiliation No. 2133182) provides quality Montessori to Senior Secondary education with modern digital classrooms, science labs, and sports grounds.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Montessori",
+      "to": "Class 12",
+      "raw": "Montessori to Grade 12"
+    },
+    "admissionAge": "3+ years for Montessori",
+    "studentTeacherRatio": "25:1",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. 4, Tech Zone IV, Near Amrapali Dream Valley, Greater Noida West, Uttar Pradesh 201306",
+      "sector": "Techzone 4",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.601,
+        "lng": 77.448
+      },
+      "mapSearchQuery": "Ryan International School Tech Zone IV Greater Noida West",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": 115000,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Fee Breakdown Awaiting Direct Verification",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "not_publicly_verified",
+      "comparableAnnualAvailable": false,
+      "feeCategory": "Awaiting Direct Parent Verification",
+      "academicSession": "2026-27",
+      "lastVerifiedDate": "2026-09-15",
+      "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
+      "table": []
+    },
+    "facilities": [
+      {
+        "name": "Smart Classrooms",
+        "category": "Academics",
+        "icon": "monitor"
+      },
+      {
+        "name": "Science Laboratories",
+        "category": "Academics",
+        "icon": "flask-conical"
+      },
+      {
+        "name": "Computer Lab",
+        "category": "Technology",
+        "icon": "cpu"
+      },
+      {
+        "name": "Library",
+        "category": "Library",
+        "icon": "book-open"
+      },
+      {
+        "name": "Sports Grounds",
+        "category": "Sports",
+        "icon": "trophy"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "Official School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "Official School Uniform"
+      }
+    },
+    "achievements": [
+      "CBSE affiliated secondary school in Techzone IV",
+      "Ryan Group holistic child-centric learning pedagogy"
+    ],
+    "admissions": {
+      "date": "Admissions Open 2026-27",
+      "status": "Open",
+      "process": "Online registration on official Ryan Group portal followed by parent-student interaction.",
+      "session": "2026-27",
+      "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "open",
+      "timelineDescription": "Admissions currently active for the 2026-27 session via official Ryan Group online portal."
+    },
+    "contact": {
+      "phone": "+91 120 4232222",
+      "website": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
+      "email": "info.noidaextension@ryangroup.org"
+    },
+    "rating": {
+      "score": 4.2,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/ryan-international-school-noida-extension/featured/featured.webp",
+      "hero": "/assets/schools/ryan-international-school-noida-extension/hero/hero.webp",
+      "gallery": [
+        "/assets/schools/ryan-international-school-noida-extension/featured/featured.webp"
+      ],
+      "legacyPaths": {},
+      "imageSource": "Ryan International School Tech Zone IV Campus Archive",
+      "imageSourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
+      "imageVerifiedAt": "September 2026"
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "Official Ryan Group Portal & CBSE SARAS",
+      "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
+      "cbseAffiliationNumber": "2133182",
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "affiliation",
+        "establishedYear"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Ryan International School Greater Noida West Techzone 4",
+      "h1": "Ryan International School Greater Noida West",
+      "pageHeartKey": "heart_ryan-international-school-noida-extension",
+      "cardHeartKey": "card_ryan-international-school-noida-extension",
+      "cardRatingKey": "rating_ryan-international-school-noida-extension",
+      "cardLink": "/schools/ryan-international-school-noida-extension",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Techzone IV campus verified in Greater Noida West (Plot No. 4, Tech Zone IV, Near Amrapali Dream Valley).",
+      "Separated from legacy Sector Beta 1 Greater Noida record."
+    ],
+    "classification": "core_greater_noida_west",
+    "sports": [
+      "Cricket",
+      "Football",
+      "Basketball",
+      "Badminton",
+      "Table Tennis"
+    ],
+    "affiliationNumber": "2133182",
+    "establishedYear": 2016,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "ryan-international-school-noida-extension"
   }
 ]

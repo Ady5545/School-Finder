@@ -24,6 +24,10 @@ import {
   Mail,
   ShieldAlert,
   RefreshCw,
+  Phone,
+  GraduationCap,
+  Building2,
+  Users,
 } from 'lucide-react';
 import { BrandLogo } from '../../../../components/ui/BrandLogo';
 
@@ -35,6 +39,12 @@ interface UserProfileData {
     role: 'parent' | 'admin';
     status: 'active' | 'disabled';
     emailVerified: boolean;
+    phone?: string;
+    childName?: string;
+    childGrade?: string;
+    residentialSociety?: string;
+    fatherName?: string;
+    motherName?: string;
     preferredSchoolLocality?: string;
     createdAt: string;
     lastLoginAt?: string;
@@ -296,7 +306,7 @@ export default function UserDetailPage({
 
             <div className="space-y-2.5 text-xs">
               <div>
-                <span className="text-slate-400 text-[11px]">Full Name:</span>
+                <span className="text-slate-400 text-[11px]">Parent / Guardian Name:</span>
                 <p className="font-bold text-white text-sm">{user.name}</p>
               </div>
               <div>
@@ -308,9 +318,74 @@ export default function UserDetailPage({
                 </p>
               </div>
               <div>
-                <span className="text-slate-400 text-[11px]">Preferred Locality:</span>
-                <p className="font-semibold text-slate-200">{user.preferredSchoolLocality || 'Not specified'}</p>
+                <span className="text-slate-400 text-[11px]">Mobile Phone:</span>
+                <p className="font-semibold text-slate-200 flex items-center gap-1.5">
+                  <Phone className="w-3.5 h-3.5 text-amber-400" />
+                  <span>{user.phone || 'Not recorded'}</span>
+                </p>
               </div>
+
+              {/* Student Details Section */}
+              <div className="pt-2 border-t border-white/5 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-amber-400 font-semibold text-[11px]">
+                  <GraduationCap className="w-3.5 h-3.5" />
+                  <span>Student & Admission Profile</span>
+                </div>
+                <div className="grid grid-cols-2 gap-2 bg-[#0a1e38] p-2 rounded-xl border border-[#1b3d63]">
+                  <div>
+                    <span className="text-slate-400 text-[10px] block">Child Name:</span>
+                    <span className="font-bold text-slate-200 text-xs">{user.childName || 'Not specified'}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 text-[10px] block">Target Grade:</span>
+                    <span className="font-bold text-sky-300 text-xs">{user.childGrade || 'N/A'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Residential Society & Area */}
+              <div className="pt-2 border-t border-white/5 space-y-1.5">
+                <div className="flex items-center gap-1.5 text-amber-400 font-semibold text-[11px]">
+                  <Building2 className="w-3.5 h-3.5" />
+                  <span>Residence & Search Area</span>
+                </div>
+                <div>
+                  <span className="text-slate-400 text-[10px] block">Residential Society:</span>
+                  <p className="font-semibold text-slate-200 text-xs bg-[#0a1e38] px-2.5 py-1.5 rounded-lg border border-[#1b3d63]">
+                    {user.residentialSociety || 'Not recorded'}
+                  </p>
+                  <p className="text-[9px] text-slate-400 mt-0.5 italic">
+                    Society level only (privacy-preserving; no flat/tower collected)
+                  </p>
+                </div>
+                <div>
+                  <span className="text-slate-400 text-[10px] block">Preferred Locality:</span>
+                  <p className="font-semibold text-slate-200">{user.preferredSchoolLocality || 'Not specified'}</p>
+                </div>
+              </div>
+
+              {/* Family Details */}
+              <div className="pt-2 border-t border-white/5 space-y-1">
+                <div className="flex items-center gap-1.5 text-amber-400 font-semibold text-[11px]">
+                  <Users className="w-3.5 h-3.5" />
+                  <span>Father &amp; Mother Details</span>
+                </div>
+                {(user.fatherName || user.motherName) ? (
+                  <div className="grid grid-cols-2 gap-2 text-[11px] bg-[#0a1e38] p-2 rounded-xl border border-[#1b3d63]">
+                    <div>
+                      <span className="text-slate-400 text-[10px] block">Father&apos;s Name:</span>
+                      <span className="font-medium text-slate-200">{user.fatherName || 'Not provided'}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 text-[10px] block">Mother&apos;s Name:</span>
+                      <span className="font-medium text-slate-200">{user.motherName || 'Not provided'}</span>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-[11px] text-slate-400 italic">Not provided by parent</p>
+                )}
+              </div>
+
               <div>
                 <span className="text-slate-400 text-[11px]">Assigned Role:</span>
                 <div className="flex items-center gap-2 mt-0.5">

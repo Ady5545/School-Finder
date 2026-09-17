@@ -101,7 +101,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
             </>
           ) : (
             <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
-              See official fee schedule
+              {fees.verificationStatus === 'not_publicly_verified' ? 'Fee not publicly verified' : 'See official fee schedule'}
             </span>
           )}
         </div>
@@ -155,7 +155,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
             </div>
           </div>
           <div className={cn('font-black mt-0.5', isComparable ? 'text-2xl text-[var(--color-primary)]' : 'text-lg text-slate-700')}>
-            {isComparable ? formatCurrency(fees.cardFee!) : 'See official fee schedule'}
+            {isComparable ? formatCurrency(fees.cardFee!) : (fees.verificationStatus === 'not_publicly_verified' ? 'Fee not publicly verified' : 'See official fee schedule')}
           </div>
           {fees.academicSession && (
             <span className="text-[11px] text-[var(--color-content-muted)] font-medium block mt-0.5">

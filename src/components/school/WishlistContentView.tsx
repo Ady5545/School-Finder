@@ -13,28 +13,8 @@ import { formatCurrency } from '../../lib/utils';
 import type { School } from '../../types/school';
 
 export const WishlistContentView: React.FC = () => {
-  const { shortlist, clearShortlist, addCompare, clearCompare, addToShortlist } = useSchoolStore();
+  const { shortlist, clearShortlist, addCompare, clearCompare } = useSchoolStore();
   const { isAuthenticated, isLoading } = useAuth();
-
-  // Sync with cloud wishlist when authenticated
-  useEffect(() => {
-    if (isAuthenticated) {
-      fetch('/api/auth/wishlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'sync', list: shortlist }),
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.success && Array.isArray(data.wishlist)) {
-            data.wishlist.forEach((s: string) => {
-              addToShortlist(s);
-            });
-          }
-        })
-        .catch(() => {});
-    }
-  }, [isAuthenticated]);
 
   if (isLoading) {
     return (

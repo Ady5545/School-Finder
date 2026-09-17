@@ -8,6 +8,7 @@ import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import { Checkbox } from '../ui/Checkbox';
+import { Tooltip } from '../ui/Tooltip';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../ui/Card';
 import {
   ShieldCheck,
@@ -23,7 +24,13 @@ import {
   Info,
   Edit3,
   MapPin,
-  Sparkles,
+  Phone,
+  Building2,
+  GraduationCap,
+  ChevronDown,
+  ChevronUp,
+  Shield,
+  Users,
 } from 'lucide-react';
 
 const SCHOOL_SEARCH_LOCALITIES = [
@@ -50,15 +57,25 @@ export const RegisterForm: React.FC = () => {
   // Step 1: Parent Details & Location Preference, Step 2: Email OTP Verification
   const [step, setStep] = useState<1 | 2>(1);
 
-  // Form Fields
+  // Form Fields - Required
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [childName, setChildName] = useState('');
+  const [childGrade, setChildGrade] = useState('Nursery / Pre-K');
+  const [residentialSociety, setResidentialSociety] = useState('');
   const [preferredSchoolLocality, setPreferredSchoolLocality] = useState('Greater Noida West');
+
+  // Form Fields - Family Details (Expanded by default, collapsible, non-required)
+  const [showFamilyDetails, setShowFamilyDetails] = useState(true);
+  const [fatherName, setFatherName] = useState('');
+  const [motherName, setMotherName] = useState('');
+
+  // Password & Consents
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [childGrade, setChildGrade] = useState('Nursery / Pre-K');
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [analyticsConsent, setAnalyticsConsent] = useState(true);
 
@@ -112,19 +129,58 @@ export const RegisterForm: React.FC = () => {
     e.preventDefault();
     setErrorMessage(null);
 
+    // 1. Parent Name
     if (!name.trim() || name.trim().length < 2) {
-      setErrorMessage('Please enter your full Parent / Guardian name.');
+      setErrorMessage('Please enter your full Parent / Guardian name (minimum 2 characters).');
       return;
     }
 
+    // 2. Email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim() || !emailRegex.test(email.trim())) {
       setErrorMessage('Please enter a valid email address.');
       return;
     }
 
+    // 3. Phone Number (Indian mobile validation)
+    const cleanedPhone = phone.trim().replace(/[\s\-\(\)\.]/g, '');
+    const phoneRegex = /^(?:\+91|91|0)?([6-9]\d{9})$/;
+    if (!cleanedPhone || !phoneRegex.test(cleanedPhone)) {
+      setErrorMessage('Please enter a valid 10-digit Indian mobile number (e.g. 9876543210 or +91 98765 43210).');
+      return;
+    }
+
+    // 4. Child Name
+    if (!childName.trim() || childName.trim().length < 2) {
+      setErrorMessage('Please enter your child / student name (minimum 2 characters).');
+      return;
+    }
+
+    // 5. Child Grade
+    if (!childGrade.trim()) {
+      setErrorMessage('Please select target admission class/grade.');
+      return;
+    }
+
+    // 6. Residential Society
+    if (!residentialSociety.trim() || residentialSociety.trim().length < 3) {
+      setErrorMessage('Please enter your residential society or apartment complex name (minimum 3 characters).');
+      return;
+    }
+
+    // 7. Optional Family Names
+    if (fatherName.trim() && fatherName.trim().length < 2) {
+      setErrorMessage("Father's name must be at least 2 characters if provided.");
+      return;
+    }
+    if (motherName.trim() && motherName.trim().length < 2) {
+      setErrorMessage("Mother's name must be at least 2 characters if provided.");
+      return;
+    }
+
+    // 8. Password Security
     if (!isPasswordComplex) {
-      setErrorMessage('Please ensure your password meets all security criteria.');
+      setErrorMessage('Please ensure your password meets all 5 security criteria.');
       return;
     }
 
@@ -133,6 +189,7 @@ export const RegisterForm: React.FC = () => {
       return;
     }
 
+    // 9. Terms Acceptance
     if (!termsAccepted) {
       setErrorMessage('You must accept the Terms of Service & Privacy Policy.');
       return;
@@ -175,14 +232,19 @@ export const RegisterForm: React.FC = () => {
         setVerificationToken(res.verificationToken);
         setDevOtpHint(null);
 
-        // Auto complete registration
+        // Auto complete registration with all required and optional fields
         const regRes = await register({
           name: name.trim(),
           email: email.trim().toLowerCase(),
+          phone: phone.trim(),
+          childName: childName.trim(),
+          childGrade,
+          residentialSociety: residentialSociety.trim(),
+          fatherName: fatherName.trim() || undefined,
+          motherName: motherName.trim() || undefined,
           preferredSchoolLocality,
           password,
           verificationToken: res.verificationToken,
-          childGrade,
           termsAccepted: true,
           analyticsConsent,
         });
@@ -245,7 +307,7 @@ export const RegisterForm: React.FC = () => {
             }`}
           >
             {step === 2 ? <Check className="w-3.5 h-3.5" /> : <span>1</span>}
-            <span>Parent Profile & Location</span>
+            <span>Parent Profile & Child Details</span>
           </div>
           <div className="w-6 h-px bg-stone-300" />
           <div
@@ -276,166 +338,337 @@ export const RegisterForm: React.FC = () => {
         {/* STEP 1: Parent Details & Location */}
         {step === 1 && (
           <form id="step-1-parent-details" onSubmit={handleInitiateSignup} className="space-y-4">
-            <div>
-              <label htmlFor="reg-name" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Parent / Guardian Full Name <span className="text-amber-700">*</span>
-              </label>
-              <div className="relative">
-                <Input
-                  id="reg-name"
-                  type="text"
-                  placeholder="e.g. Priya Sharma"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  required
-                  disabled={isSubmitting}
-                  className="pl-10"
-                />
-                <User className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            {/* Section: Parent / Guardian Info */}
+            <div className="space-y-4">
+              {/* Field 1: Parent / Guardian Name */}
+              <div>
+                <label htmlFor="reg-name" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                  Parent / Guardian Name <span className="text-amber-700">*</span>
+                </label>
+                <div className="relative">
+                  <Input
+                    id="reg-name"
+                    type="text"
+                    placeholder="e.g. Priya Sharma"
+                    value={name}
+                    onChange={e => setName(e.target.value)}
+                    required
+                    disabled={isSubmitting}
+                    className="pl-10"
+                  />
+                  <User className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label htmlFor="reg-email" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Email Address <span className="text-amber-700">*</span>
-              </label>
-              <div className="relative">
-                <Input
-                  id="reg-email"
-                  type="email"
-                  placeholder="e.g. parent@example.com"
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                  disabled={isSubmitting}
-                  className="pl-10"
-                />
-                <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              </div>
-              <p className="text-[11px] text-stone-500 mt-1">
-                A 6-digit verification code will be sent to this email address.
-              </p>
-            </div>
-
-            {/* School Search Locality */}
-            <div>
-              <label htmlFor="reg-locality" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Which area are you looking for a school in?
-              </label>
-              <div className="relative">
-                <Select
-                  id="reg-locality"
-                  options={SCHOOL_SEARCH_LOCALITIES}
-                  value={preferredSchoolLocality}
-                  onChange={e => setPreferredSchoolLocality(e.target.value)}
-                  disabled={isSubmitting}
-                  className="pl-10"
-                />
-                <MapPin className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              </div>
-              <p className="text-[11px] text-stone-500 mt-1">
-                Helps prioritize schools near your preferred search sectors. We never ask for or store your home address.
-              </p>
-            </div>
-
-            <div>
-              <label htmlFor="reg-child-grade" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Target Admission Class
-              </label>
-              <Select
-                id="reg-child-grade"
-                options={[
-                  { value: 'Nursery / Pre-K', label: 'Nursery / Pre-School (Ages 3-4)' },
-                  { value: 'KG / Kindergarten', label: 'Kindergarten / KG' },
-                  { value: 'Primary (Grades 1-5)', label: 'Primary School (Grades 1-5)' },
-                  { value: 'Middle School (Grades 6-8)', label: 'Middle School (Grades 6-8)' },
-                  { value: 'Secondary (Grades 9-10)', label: 'Secondary (Grades 9-10)' },
-                  { value: 'Senior Secondary (Grades 11-12)', label: 'Senior Secondary (Grades 11-12)' },
-                ]}
-                value={childGrade}
-                onChange={e => setChildGrade(e.target.value)}
-                disabled={isSubmitting}
-              />
-            </div>
-
-            {/* Password */}
-            <div>
-              <label htmlFor="reg-password" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Create Account Password <span className="text-amber-700">*</span>
-              </label>
-              <div className="relative">
-                <Input
-                  id="reg-password"
-                  type={showPassword ? 'text' : 'password'}
-                  placeholder="At least 8 characters..."
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  required
-                  disabled={isSubmitting}
-                  className="pl-10 pr-10"
-                />
-                <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              {/* Fields 2 & 3: Father's Name & Mother's Name (Directly near Parent / Guardian Name, Expanded by default, Collapsible, No 'Optional' label, No asterisks) */}
+              <div className="bg-stone-50/80 rounded-xl border border-stone-200/80 overflow-hidden transition-all">
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
+                  id="toggle-family-details-btn"
+                  onClick={() => setShowFamilyDetails(!showFamilyDetails)}
+                  className="flex items-center justify-between w-full px-3.5 py-2.5 text-xs font-semibold text-stone-700 hover:text-stone-900 text-left transition-colors"
+                  aria-expanded={showFamilyDetails}
                 >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  <span className="flex items-center gap-1.5">
+                    <Users className="w-3.5 h-3.5 text-stone-500" />
+                    <span>Father &amp; Mother Details</span>
+                  </span>
+                  <span className="flex items-center gap-1 text-[11px] font-normal text-stone-500">
+                    <span>{showFamilyDetails ? 'Hide' : 'Show'}</span>
+                    {showFamilyDetails ? (
+                      <ChevronUp className="w-3.5 h-3.5 text-stone-400" />
+                    ) : (
+                      <ChevronDown className="w-3.5 h-3.5 text-stone-400" />
+                    )}
+                  </span>
                 </button>
+
+                {showFamilyDetails && (
+                  <div className="px-3.5 pb-3.5 pt-1 border-t border-stone-200/60 space-y-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label htmlFor="reg-father-name" className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1">
+                          Father&apos;s Name
+                        </label>
+                        <Input
+                          id="reg-father-name"
+                          type="text"
+                          placeholder="e.g. Rajesh Sharma"
+                          value={fatherName}
+                          onChange={e => setFatherName(e.target.value)}
+                          disabled={isSubmitting}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="reg-mother-name" className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1">
+                          Mother&apos;s Name
+                        </label>
+                        <Input
+                          id="reg-mother-name"
+                          type="text"
+                          placeholder="e.g. Sunita Sharma"
+                          value={motherName}
+                          onChange={e => setMotherName(e.target.value)}
+                          disabled={isSubmitting}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Password criteria checklist */}
-              {password.length > 0 && (
-                <div className="mt-2.5 p-2.5 bg-stone-50 border border-stone-200 rounded-md text-[11px] space-y-1">
-                  <div className="font-semibold text-stone-700 flex justify-between">
-                    <span>Password Strength:</span>
-                    <span className={metCriteriaCount === 5 ? 'text-emerald-700' : 'text-amber-700'}>
-                      {metCriteriaCount} of 5 rules met
-                    </span>
+              {/* Contact Information: Email & Phone visually close to one another */}
+              <div className="pt-2 border-t border-stone-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Field 4: Email Address */}
+                  <div>
+                    <label htmlFor="reg-email" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      Email Address <span className="text-amber-700">*</span>
+                    </label>
+                    <div className="relative">
+                      <Input
+                        id="reg-email"
+                        type="email"
+                        placeholder="e.g. name@example.com"
+                        value={email}
+                        onChange={e => setEmail(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                        className="pl-10"
+                      />
+                      <Mail className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
+                    {/* OTP explanation: visible directly below Email, NOT inside tooltip */}
+                    <p className="text-[11px] text-stone-500 mt-1 leading-normal">
+                      A 6-digit verification code (OTP) will be sent to this email address to activate your account.
+                    </p>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 pt-1">
-                    {passwordCriteria.map(crit => (
-                      <div
-                        key={crit.id}
-                        className={`flex items-center gap-1.5 ${crit.met ? 'text-emerald-700 font-medium' : 'text-stone-400'}`}
-                      >
-                        {crit.met ? <Check className="w-3 h-3 stroke-[3]" /> : <span className="w-3 text-center">•</span>}
-                        <span>{crit.label}</span>
-                      </div>
-                    ))}
+
+                  {/* Field 5: Phone Number with ? Tooltip */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <label htmlFor="reg-phone" className="block text-xs font-bold uppercase tracking-wider text-stone-700">
+                        Phone Number <span className="text-amber-700">*</span>
+                      </label>
+                      <Tooltip
+                        id="tooltip-reg-phone"
+                        align="right"
+                        text="Your phone number is part of your parent profile and may be used for relevant admission-related communication and deadline updates."
+                      />
+                    </div>
+                    <div className="relative">
+                      <Input
+                        id="reg-phone"
+                        type="tel"
+                        placeholder="e.g. 98765 43210"
+                        value={phone}
+                        onChange={e => setPhone(e.target.value)}
+                        required
+                        disabled={isSubmitting}
+                        className="pl-10"
+                      />
+                      <Phone className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
+                    <p className="text-[11px] text-stone-500 mt-1">
+                      10-digit Indian mobile number.
+                    </p>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
 
-            {/* Confirm Password */}
-            <div>
-              <label htmlFor="reg-confirm-password" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
-                Confirm Password <span className="text-amber-700">*</span>
-              </label>
-              <div className="relative">
-                <Input
-                  id="reg-confirm-password"
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  placeholder="Repeat your password..."
-                  value={confirmPassword}
-                  onChange={e => setConfirmPassword(e.target.value)}
-                  required
-                  disabled={isSubmitting}
-                  className="pl-10 pr-10"
-                />
-                <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
-                >
-                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
+            {/* Section: Child / Student Details */}
+            <div className="pt-2 border-t border-stone-100 space-y-4">
+              <div className="flex items-center gap-2 text-stone-800 font-semibold text-sm">
+                <GraduationCap className="w-4 h-4 text-amber-700" />
+                <span>Student &amp; Admission Profile</span>
               </div>
-              {confirmPassword.length > 0 && !passwordsMatch && (
-                <p className="text-red-600 text-xs mt-1">Passwords do not match.</p>
-              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Field 6: Child / Student Name */}
+                <div>
+                  <label htmlFor="reg-child-name" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                    Child / Student Name <span className="text-amber-700">*</span>
+                  </label>
+                  <div className="relative">
+                    <Input
+                      id="reg-child-name"
+                      type="text"
+                      placeholder="e.g. Aarav Sharma"
+                      value={childName}
+                      onChange={e => setChildName(e.target.value)}
+                      required
+                      disabled={isSubmitting}
+                      className="pl-10"
+                    />
+                    <User className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
+                </div>
+
+                {/* Field 7: Grade / Class */}
+                <div>
+                  <label htmlFor="reg-child-grade" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                    Grade / Class <span className="text-amber-700">*</span>
+                  </label>
+                  <Select
+                    id="reg-child-grade"
+                    options={[
+                      { value: 'Nursery / Pre-K', label: 'Nursery / Pre-School (Ages 3-4)' },
+                      { value: 'KG / Kindergarten', label: 'Kindergarten / KG' },
+                      { value: 'Primary (Grades 1-5)', label: 'Primary School (Grades 1-5)' },
+                      { value: 'Middle School (Grades 6-8)', label: 'Middle School (Grades 6-8)' },
+                      { value: 'Secondary (Grades 9-10)', label: 'Secondary (Grades 9-10)' },
+                      { value: 'Senior Secondary (Grades 11-12)', label: 'Senior Secondary (Grades 11-12)' },
+                    ]}
+                    value={childGrade}
+                    onChange={e => setChildGrade(e.target.value)}
+                    disabled={isSubmitting}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Section: Residence & Locality */}
+            <div className="pt-2 border-t border-stone-100 space-y-4">
+              <div className="flex items-center gap-2 text-stone-800 font-semibold text-sm">
+                <Building2 className="w-4 h-4 text-amber-700" />
+                <span>Residence &amp; Locality</span>
+              </div>
+
+              {/* Field 8: Residential Society / Apartment Complex with ? Tooltip */}
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label htmlFor="reg-residential-society" className="block text-xs font-bold uppercase tracking-wider text-stone-700">
+                    Residential Society / Apartment Complex <span className="text-amber-700">*</span>
+                  </label>
+                  <Tooltip
+                    id="tooltip-reg-society"
+                    align="right"
+                    text="This helps Admission Pitara understand which schools are realistically accessible from where families live and improve relevant school discovery and recommendations."
+                  />
+                </div>
+                <div className="relative">
+                  <Input
+                    id="reg-residential-society"
+                    type="text"
+                    placeholder="e.g. Gaur City 2, Panchsheel Greens, Nirala Estate, Arihant Arden"
+                    value={residentialSociety}
+                    onChange={e => setResidentialSociety(e.target.value)}
+                    required
+                    disabled={isSubmitting}
+                    className="pl-10"
+                  />
+                  <Building2 className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
+                <div className="mt-1.5 flex items-start gap-1.5 p-2 bg-stone-50 rounded border border-stone-200/80 text-[11px] text-stone-600">
+                  <Shield className="w-3.5 h-3.5 text-amber-700 shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Privacy Notice:</strong> Enter only your society or apartment complex name. Please don&apos;t enter your flat, tower, floor, or house number.
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="reg-locality" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                  Which area are you looking for a school in?
+                </label>
+                <div className="relative">
+                  <Select
+                    id="reg-locality"
+                    options={SCHOOL_SEARCH_LOCALITIES}
+                    value={preferredSchoolLocality}
+                    onChange={e => setPreferredSchoolLocality(e.target.value)}
+                    disabled={isSubmitting}
+                    className="pl-10"
+                  />
+                  <MapPin className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
+                <p className="text-[11px] text-stone-500 mt-1">
+                  Helps prioritize schools near your preferred search sectors.
+                </p>
+              </div>
+            </div>
+
+            {/* Section: Password & Security */}
+            <div className="pt-2 border-t border-stone-100 space-y-4">
+              <div>
+                <label htmlFor="reg-password" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                  Create Account Password <span className="text-amber-700">*</span>
+                </label>
+                <div className="relative">
+                  <Input
+                    id="reg-password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="At least 8 characters..."
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required
+                    disabled={isSubmitting}
+                    className="pl-10 pr-10"
+                  />
+                  <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+
+                {/* Password criteria checklist */}
+                {password.length > 0 && (
+                  <div className="mt-2.5 p-2.5 bg-stone-50 border border-stone-200 rounded-md text-[11px] space-y-1">
+                    <div className="font-semibold text-stone-700 flex justify-between">
+                      <span>Password Strength:</span>
+                      <span className={metCriteriaCount === 5 ? 'text-emerald-700' : 'text-amber-700'}>
+                        {metCriteriaCount} of 5 rules met
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 pt-1">
+                      {passwordCriteria.map(crit => (
+                        <div
+                          key={crit.id}
+                          className={`flex items-center gap-1.5 ${crit.met ? 'text-emerald-700 font-medium' : 'text-stone-400'}`}
+                        >
+                          {crit.met ? <Check className="w-3 h-3 stroke-[3]" /> : <span className="w-3 text-center">•</span>}
+                          <span>{crit.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Confirm Password */}
+              <div>
+                <label htmlFor="reg-confirm-password" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                  Confirm Password <span className="text-amber-700">*</span>
+                </label>
+                <div className="relative">
+                  <Input
+                    id="reg-confirm-password"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder="Repeat your password..."
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    required
+                    disabled={isSubmitting}
+                    className="pl-10 pr-10"
+                  />
+                  <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700"
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+                {confirmPassword.length > 0 && !passwordsMatch && (
+                  <p className="text-red-600 text-xs mt-1">Passwords do not match.</p>
+                )}
+              </div>
             </div>
 
             {/* Terms and Privacy Consent */}

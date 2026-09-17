@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(cleanEmail)) {
       return NextResponse.json(
-        { success: false, message: 'Please enter a valid email address (e.g. parent@example.com).' },
+        { success: false, message: 'Please enter a valid email address (e.g. name@example.com).' },
         { status: 400 }
       );
     }

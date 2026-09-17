@@ -43,6 +43,8 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
   const isSaved = propIsSaved !== undefined ? propIsSaved : store.isInShortlist(school.slug);
   const isCompared = propIsCompared !== undefined ? propIsCompared : store.isInCompare(school.slug);
+  const statusStr = (school.verification?.status as string) || '';
+  const isAuditVerified = statusStr === 'verified_official' || statusStr === 'VERIFIED' || (school.verification?.isVerified === true && statusStr !== 'pending_audit');
 
   const handleSave = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -62,11 +64,6 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
       onToggleSave(school.slug);
     } else {
       store.toggleShortlist(school.slug, school.name);
-      fetch('/api/auth/wishlist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: school.slug, action: 'toggle' }),
-      }).catch(() => {});
     }
   };
 
@@ -81,7 +78,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
   };
 
   return (
-    <Card hoverEffect className={cn('group flex flex-col overflow-hidden h-full bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] rounded-2xl shadow-warm-xs hover:shadow-warm-lg hover:-translate-y-1.5 transition-all duration-300 ease-out will-change-transform tactile-card', className)}>
+    <Card hoverEffect className={cn('group flex flex-col overflow-hidden h-full bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] rounded-2xl shadow-warm-xs hover:shadow-warm-lg hover:-translate-y-1.5 transition-all duration-300 ease-out tactile-card', className)}>
       {/* Featured Image & Overlays */}
       <div className="relative overflow-hidden">
         <Link href={`/schools/${school.slug}`} tabIndex={-1} aria-hidden="true" className="block overflow-hidden">
@@ -103,13 +100,13 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             onClick={handleSave}
             aria-label={isSaved ? `Remove ${school.name} from shortlist` : `Save ${school.name} to shortlist`}
             className={cn(
-              'w-8.5 h-8.5 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-200 cursor-pointer shadow-warm-xs active:scale-90',
+              'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer shadow-warm-xs active:scale-90 min-w-[40px] min-h-[40px]',
               isSaved
                 ? 'bg-rose-500 text-white hover:bg-rose-600 ring-2 ring-rose-300/60 shadow-warm-sm'
-                : 'bg-white/95 text-[var(--color-content-muted)] hover:bg-white hover:text-rose-600 border border-[var(--color-border)] hover:scale-105'
+                : 'bg-white text-[var(--color-content-muted)] hover:bg-white hover:text-rose-600 border border-[var(--color-border)] hover:scale-105 shadow-2xs'
             )}
           >
-            <Heart className={cn('w-4 h-4 transition-transform', isSaved ? 'fill-white scale-110' : 'group-hover/heart:scale-110')} />
+            <Heart className={cn('w-4.5 h-4.5 transition-transform', isSaved ? 'fill-white scale-110' : 'group-hover/heart:scale-110')} />
           </button>
         </div>
 
@@ -119,13 +116,13 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             {school.board.slice(0, 2).map(b => (
               <span
                 key={b}
-                className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-[#0a1e33]/90 text-white backdrop-blur-md border border-white/20 shadow-warm-2xs tracking-wide"
+                className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-[#0a1e33] text-white border border-white/20 shadow-warm-2xs tracking-wide"
               >
                 {b}
               </span>
             ))}
           </div>
-          <div className="bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-md shadow-warm-2xs border border-[var(--color-border)]">
+          <div className="bg-white px-2.5 py-0.5 rounded-md shadow-warm-2xs border border-[var(--color-border)]">
             <RatingDisplay score={school.rating.score} size="sm" showCount={false} />
           </div>
         </div>
@@ -154,7 +151,25 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
           {/* Key Quick Badges */}
           <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[var(--color-border-subtle)]">
+            {isAuditVerified && (
+              <SchoolBadge type="verified" value="Verified" />
+            )}
             <SchoolBadge type="verification" value={school.fees.verificationStatus} />
+            {school.geographicClassification === 'geographic_outlier' && (
+              <span className="text-[11px] text-purple-800 bg-purple-50 px-2 py-0.5 rounded-md font-semibold border border-purple-200">
+                Regional Outlier
+              </span>
+            )}
+            {school.geographicClassification === 'nearby_surrounding' && (
+              <span className="text-[11px] text-blue-800 bg-blue-50 px-2 py-0.5 rounded-md font-semibold border border-blue-200">
+                Surrounding Feeder
+              </span>
+            )}
+            {school.isDuplicate && (
+              <span className="text-[11px] text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md font-semibold border border-slate-200">
+                Duplicate Listing
+              </span>
+            )}
             <span className="text-[11px] text-[var(--color-content-muted)] bg-[var(--color-surface-subtle)] px-2 py-0.5 rounded-md font-semibold border border-[var(--color-border)]">
               Ratio: {school.studentTeacherRatio}
             </span>
@@ -168,15 +183,15 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
         </div>
 
         {/* Card Footer: Fees & Detail Link */}
-        <div className="mt-4.5 -mx-4.5 -mb-4.5 sm:-mx-5 sm:-mb-5 p-4 sm:p-4.5 bg-[#fbf9f5] rounded-b-2xl border-t border-[var(--color-border)] flex items-center justify-between gap-2">
+        <div className="mt-4 -mx-4.5 -mb-4.5 sm:-mx-5 sm:-mb-5 p-3.5 sm:p-4.5 bg-[#fbf9f5] rounded-b-2xl border-t border-[var(--color-border)] flex items-center justify-between gap-2">
           <FeeDisplay fees={school.fees} variant="compact" />
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 shrink-0">
             <button
               type="button"
               onClick={handleCompare}
               className={cn(
-                'text-xs px-3 py-1.5 rounded-xl border font-semibold transition-all duration-200 cursor-pointer active:scale-95 shadow-warm-2xs',
+                'text-xs px-3 py-2 rounded-xl border font-semibold transition-all duration-200 cursor-pointer active:scale-95 shadow-warm-2xs min-h-[38px]',
                 isCompared
                   ? 'border-[var(--color-primary)] bg-[var(--color-primary-light)] text-[var(--color-primary)] font-bold'
                   : 'border-[var(--color-border-strong)] bg-white text-[var(--color-content)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-light)] font-semibold'
@@ -193,7 +208,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
             <Link
               href={`/schools/${school.slug}`}
-              className="inline-flex items-center justify-center p-2 rounded-xl bg-white border border-[var(--color-border-strong)] text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] transition-all duration-200 hover:scale-105 active:scale-95 shadow-warm-2xs"
+              className="inline-flex items-center justify-center p-2.5 rounded-xl bg-white border border-[var(--color-border-strong)] text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] transition-all duration-200 hover:scale-105 active:scale-95 shadow-warm-2xs min-w-[38px] min-h-[38px]"
               aria-label={`View details for ${school.name}`}
             >
               <ArrowRight className="w-4 h-4" />

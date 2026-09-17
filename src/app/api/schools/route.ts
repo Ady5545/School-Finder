@@ -7,12 +7,13 @@ export async function GET(request: NextRequest) {
     const q = searchParams.get('q') || undefined;
     const boardParam = searchParams.get('board');
     const areaParam = searchParams.get('area');
+    const includeAliases = searchParams.get('includeAliases') === 'true';
 
     const board = boardParam ? boardParam.split(',') : undefined;
     const area = areaParam ? areaParam.split(',') : undefined;
 
     if (!q && !board && !area) {
-      const schools = getAllSchools();
+      const schools = getAllSchools({ includeAliases });
       return NextResponse.json({
         total: schools.length,
         schools,

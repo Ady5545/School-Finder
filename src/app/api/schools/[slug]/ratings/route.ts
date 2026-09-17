@@ -8,7 +8,7 @@ import {
   getUserById,
   getUserRatingForSchool,
 } from '../../../../../lib/authStore';
-import { getSchoolBySlug } from '../../../../../lib/schools';
+import { getSchoolBySlug, getCanonicalSlug } from '../../../../../lib/schools';
 
 export async function GET(
   req: NextRequest,
@@ -25,8 +25,9 @@ export async function GET(
       return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
     }
 
-    const summary = getSchoolRatingSummary(slug);
-    const ratings = getSchoolRatings(slug);
+    const canonicalSlug = getCanonicalSlug(slug);
+    const summary = getSchoolRatingSummary(canonicalSlug);
+    const ratings = getSchoolRatings(canonicalSlug);
 
     // If user is authenticated, also return their specific rating
     const cookieToken = req.cookies.get('ap_session')?.value;
@@ -38,7 +39,7 @@ export async function GET(
     if (token) {
       const session = verifySessionToken(token);
       if (session?.sub) {
-        userRating = getUserRatingForSchool(slug, session.sub);
+        userRating = getUserRatingForSchool(canonicalSlug, session.sub);
       }
     }
 
@@ -124,8 +125,10 @@ export async function POST(
       );
     }
 
+    const canonicalSlug = getCanonicalSlug(slug);
+
     const rating = saveSchoolRating({
-      schoolSlug: slug,
+      schoolSlug: canonicalSlug,
       userId: user.id,
       userName: user.name,
       userChildGrade: user.childGrade,
@@ -144,7 +147,7 @@ export async function POST(
       success: true,
       message: 'Thank you! Your verified parent rating has been published.',
       rating,
-      summary: getSchoolRatingSummary(slug),
+      summary: getSchoolRatingSummary(canonicalSlug),
     });
   } catch (error) {
     console.error('Error submitting school rating:', error);
@@ -162,6 +165,8 @@ export async function DELETE(
       return NextResponse.json({ success: false, message: 'School slug required' }, { status: 400 });
     }
 
+    const canonicalSlug = getCanonicalSlug(slug);
+
     const cookieToken = req.cookies.get('ap_session')?.value;
     const authHeader = req.headers.get('Authorization');
     const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
@@ -176,11 +181,11 @@ export async function DELETE(
       return NextResponse.json({ success: false, message: 'Invalid session' }, { status: 401 });
     }
 
-    const deleted = deleteSchoolRating(slug, session.sub);
+    const deleted = deleteSchoolRating(canonicalSlug, session.sub);
     return NextResponse.json({
       success: deleted,
       message: deleted ? 'Your review has been removed.' : 'Review not found.',
-      summary: getSchoolRatingSummary(slug),
+      summary: getSchoolRatingSummary(canonicalSlug),
     });
   } catch (error) {
     console.error('Error deleting school rating:', error);

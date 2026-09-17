@@ -124,7 +124,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 2. COMPACT PROOF STRIP (SINGLE HORIZONTAL BENCHMARK SECTION)              */}
       {/* ========================================================================= */}
-      <section className="w-full bg-[#f4f7fb] border-b border-[var(--color-border)] py-8 sm:py-10">
+      <section className="w-full bg-[#f4f7fb] border-b border-[var(--color-border)] py-8 sm:py-10 reveal-on-scroll">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
             <div className="text-center pt-3 sm:pt-0">
@@ -169,7 +169,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 3. MAIN SECTION: SCHOOL DISCOVERY SHOWCASE                                */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
         <div className="mb-8 sm:mb-10 text-left">
           <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
             Explore schools
@@ -186,7 +186,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 4. METHODOLOGY: EXACT REPLICATION FROM USER IMAGE 3                       */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)]">
+      <section className="w-full py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)] reveal-on-scroll">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 flex flex-col items-center">
             {/* Top Badge matching Image 3 */}
@@ -330,7 +330,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 6. WHY ADMISSION PITARA: CONCISE 3-PILLAR TRUST SECTION                   */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
         <div className="max-w-3xl mb-12">
           <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
             Why Admission Pitara
@@ -391,7 +391,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 6. FINAL COMPACT CTA                                                      */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-20 bg-[#f0f5fa] border-t border-[var(--color-border)]">
+      <section className="w-full py-16 sm:py-20 bg-[#f0f5fa] border-t border-[var(--color-border)] reveal-on-scroll">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
             Find the right school with clarity.

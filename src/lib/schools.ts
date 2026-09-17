@@ -1,10 +1,43 @@
-import { schools, type School, getSchoolBySlug as getBySlug } from '../../data/schoolsData';
+import {
+  schools,
+  type School,
+  getSchoolBySlug as getBySlug,
+  getCanonicalSchools,
+  getArchivedSchools,
+  getCanonicalSchoolsCount,
+  getCanonicalSlug,
+  getRawSchools,
+} from '../../data/schoolsData';
 import type { SchoolFilterOptions } from '../types/school';
 
-export function getAllSchools(): School[] {
-  return schools;
+export {
+  getCanonicalSchools,
+  getArchivedSchools,
+  getCanonicalSchoolsCount,
+  getCanonicalSlug,
+  getRawSchools,
+};
+
+/**
+ * Returns canonical unique active schools by default.
+ * Pass { includeAliases: true, includeArchived: true } for full dataset access.
+ */
+export function getAllSchools(options?: { includeAliases?: boolean; includeArchived?: boolean }): School[] {
+  if (options?.includeAliases && options?.includeArchived) {
+    return schools;
+  }
+  if (options?.includeArchived) {
+    return schools.filter(s => !s.isDuplicate);
+  }
+  if (options?.includeAliases) {
+    return schools.filter(s => !s.isArchived);
+  }
+  return getCanonicalSchools();
 }
 
+/**
+ * All 62 slugs so static routes and legacy URLs continue resolving without 404s.
+ */
 export function getAllSchoolSlugs(): string[] {
   return schools.map(s => s.slug);
 }
@@ -29,15 +62,15 @@ export function getSchoolByLegacyFile(filePath: string): School | undefined {
 }
 
 export function getPopularSchools(limit: number = 4): School[] {
-  // Sort by rating score descending, then reviewsCount
-  return [...schools]
+  // Sort canonical schools by rating score descending, then reviewsCount
+  return [...getCanonicalSchools()]
     .sort((a, b) => b.rating.score - a.rating.score || b.rating.reviewsCount - a.rating.reviewsCount)
     .slice(0, limit);
 }
 
 export function getDistinctAreas(): string[] {
   const areas = new Set<string>();
-  schools.forEach(s => {
+  getCanonicalSchools().forEach(s => {
     if (s.location.area) areas.add(s.location.area);
     if (s.location.sector) areas.add(s.location.sector);
   });
@@ -46,14 +79,15 @@ export function getDistinctAreas(): string[] {
 
 export function getDistinctBoards(): string[] {
   const boards = new Set<string>();
-  schools.forEach(s => {
+  getCanonicalSchools().forEach(s => {
     s.board.forEach(b => boards.add(b));
   });
   return Array.from(boards).sort();
 }
 
 export function filterSchools(options: SchoolFilterOptions): School[] {
-  return schools.filter(school => {
+  const baseSchools = getCanonicalSchools();
+  return baseSchools.filter(school => {
     if (options.searchQuery) {
       const q = options.searchQuery.toLowerCase().trim();
       const matchName = school.name.toLowerCase().includes(q);

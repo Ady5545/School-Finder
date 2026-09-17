@@ -132,6 +132,66 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
           </>
         )}
       </button>
+
+      {/* Persistent Sticky Mobile Bottom Action Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[var(--color-border)] p-3 px-4 shadow-xl flex items-center justify-between gap-2.5 lg:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+        <button
+          type="button"
+          onClick={handleToggleShortlist}
+          aria-label={isSaved ? 'Remove from shortlist' : 'Add to shortlist'}
+          className={cn(
+            'flex-1 py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 border transition-all cursor-pointer min-h-[44px]',
+            isSaved
+              ? 'bg-rose-50 border-rose-300 text-rose-600'
+              : 'bg-white border-[var(--color-border-strong)] text-slate-800'
+          )}
+        >
+          <Heart className={cn('w-4 h-4', isSaved ? 'fill-rose-500 text-rose-500' : 'text-slate-500')} />
+          <span className="truncate">{isSaved ? 'Saved' : 'Shortlist'}</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => toggleCompare(school.slug, school.name)}
+          aria-label={isCompared ? 'In compare list' : 'Compare school'}
+          className={cn(
+            'flex-1 py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 border transition-all cursor-pointer min-h-[44px]',
+            isCompared
+              ? 'bg-[var(--color-primary-light)] border-[var(--color-primary)] text-[var(--color-primary)]'
+              : 'bg-white border-[var(--color-border-strong)] text-slate-800'
+          )}
+        >
+          <Scale className="w-4 h-4" />
+          <span className="truncate">{isCompared ? 'Comparing' : 'Compare'}</span>
+        </button>
+
+        {school.contact.website ? (
+          <a
+            href={school.contact.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1"
+          >
+            <Button
+              variant="accent"
+              size="sm"
+              className="w-full text-xs font-extrabold text-white py-2.5 min-h-[44px]"
+              rightIcon={<ExternalLink className="w-3.5 h-3.5" />}
+            >
+              Apply
+            </Button>
+          </a>
+        ) : (
+          <button
+            type="button"
+            onClick={handleShare}
+            className="flex-1 py-2.5 px-3 rounded-xl bg-[var(--color-primary)] text-white font-bold text-xs flex items-center justify-center gap-1.5 min-h-[44px]"
+          >
+            <Share2 className="w-3.5 h-3.5" />
+            <span>Share</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 };

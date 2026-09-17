@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { School as SchoolIcon } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 export interface SchoolImageProps {
@@ -14,6 +13,8 @@ export interface SchoolImageProps {
   priority?: boolean;
 }
 
+const NEUTRAL_PLACEHOLDER = '/assets/images/placeholder-school.svg';
+
 export const SchoolImage: React.FC<SchoolImageProps> = ({
   src,
   alt,
@@ -22,7 +23,7 @@ export const SchoolImage: React.FC<SchoolImageProps> = ({
   fill = true,
   priority = false,
 }) => {
-  const [hasError, setHasError] = useState(!src);
+  const [hasError, setHasError] = useState(false);
 
   const aspectClasses = {
     video: 'aspect-[16/9]',
@@ -30,7 +31,14 @@ export const SchoolImage: React.FC<SchoolImageProps> = ({
     wide: 'aspect-[21/9]',
   };
 
-  const normalizedSrc = src ? (src.startsWith('/') ? src : `/${src}`) : null;
+  const isInvalid = !src || hasError;
+  const imageSource = isInvalid
+    ? NEUTRAL_PLACEHOLDER
+    : src.startsWith('/')
+      ? src
+      : `/${src}`;
+
+  const isPlaceholder = imageSource === NEUTRAL_PLACEHOLDER;
 
   return (
     <div
@@ -40,27 +48,28 @@ export const SchoolImage: React.FC<SchoolImageProps> = ({
         className
       )}
     >
-      {!hasError && normalizedSrc ? (
-        <Image
-          src={normalizedSrc}
-          alt={alt}
-          fill={fill}
-          priority={priority}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          onError={() => setHasError(true)}
-        />
-      ) : (
-        <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-slate-50 via-slate-100 to-amber-50/40 relative">
-          <div className="w-10 h-10 rounded-full bg-white shadow-xs border border-slate-200/80 flex items-center justify-center text-[#0f2d4a] mb-2">
-            <SchoolIcon className="w-5 h-5 stroke-[1.75]" aria-hidden="true" />
-          </div>
-          <span className="text-xs font-bold text-slate-800 line-clamp-1 max-w-[85%]">{alt}</span>
-          <span className="text-[10px] font-semibold text-slate-400 mt-0.5 tracking-wide uppercase">
-            Admission Pitara Directory
-          </span>
+      <Image
+        src={imageSource}
+        alt={isPlaceholder ? `${alt} — Official Verification Pending` : alt}
+        fill={fill}
+        priority={priority}
+        loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        className={cn(
+          'object-cover',
+          !isPlaceholder && 'transition-transform duration-300 group-hover:scale-105'
+        )}
+        onError={() => {
+          if (!hasError) setHasError(true);
+        }}
+      />
+      {isPlaceholder && (
+        <div className="absolute bottom-2 left-2 px-2 py-0.5 rounded bg-slate-900/80 text-white text-[10px] font-semibold tracking-wide uppercase pointer-events-none">
+          Photo Pending
         </div>
       )}
     </div>
   );
 };
+

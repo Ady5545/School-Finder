@@ -97,8 +97,14 @@ export const HomeSchoolShowcase: React.FC<HomeSchoolShowcaseProps> = ({ schools 
 
       {/* Grid of Distinctive School Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
-        {filteredSchools.map((school) => (
-          <SchoolCard key={school.id} school={school} />
+        {filteredSchools.map((school, index) => (
+          <div
+            key={school.id}
+            className="reveal-on-scroll"
+            data-reveal-delay={String((index % 3) + 1)}
+          >
+            <SchoolCard school={school} />
+          </div>
         ))}
       </div>
 

@@ -195,8 +195,8 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
-          placeholder="Search by school name, sector, board (e.g. DPS, Techzone 4, CBSE)..."
-          className="w-full py-2.5 text-sm sm:text-base text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 bg-transparent outline-none font-medium tracking-tight"
+          placeholder="Search schools, sector, board (e.g. DPS, Techzone 4)..."
+          className="w-full py-2.5 text-xs sm:text-base text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 bg-transparent outline-none font-medium tracking-tight"
           aria-autocomplete="list"
           aria-expanded={isOpen}
         />
@@ -208,7 +208,7 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
               setQuery('');
               inputRef.current?.focus();
             }}
-            className="p-1.5 mr-1 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors"
+            className="p-1.5 mr-1 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors min-w-[32px] min-h-[32px] flex items-center justify-center shrink-0"
             aria-label="Clear search input"
           >
             <X className="w-4 h-4" />
@@ -217,10 +217,11 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
 
         <button
           type="submit"
-          className="shrink-0 px-5 py-2.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-bold text-sm rounded-xl transition-all duration-150 flex items-center gap-2 shadow-warm-xs hover:shadow-warm-sm active:scale-[0.98] cursor-pointer"
+          className="shrink-0 px-3.5 sm:px-5 py-2.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white font-bold text-xs sm:text-sm rounded-xl transition-all duration-150 flex items-center gap-1.5 sm:gap-2 shadow-warm-xs hover:shadow-warm-sm active:scale-[0.98] cursor-pointer min-h-[40px]"
         >
-          <span>Find Schools</span>
-          <ArrowRight className="w-4 h-4 text-amber-300" />
+          <span>Find</span>
+          <span className="hidden sm:inline">Schools</span>
+          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-300" />
         </button>
       </form>
 

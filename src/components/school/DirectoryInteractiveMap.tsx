@@ -49,9 +49,21 @@ export const POPULAR_PROXIMITY_AREAS: ProximityAnchor[] = [
   },
   {
     id: 'techzone-4',
-    label: 'Techzone 4 (Amrapali / Cherry County area)',
+    label: 'Techzone 4 (Cherry County area)',
     sector: 'Techzone 4',
     coords: { lat: 28.595, lng: 77.442 },
+  },
+  {
+    id: 'sector-1',
+    label: 'Sector 1 (Nirala Estate / Ace City)',
+    sector: 'Sector 1',
+    coords: { lat: 28.585, lng: 77.448 },
+  },
+  {
+    id: 'sector-4',
+    label: 'Sector 4 (Gaur City 2 / Gaur Saundaryam)',
+    sector: 'Sector 4',
+    coords: { lat: 28.614, lng: 77.435 },
   },
   {
     id: 'kp-5',
@@ -64,18 +76,6 @@ export const POPULAR_PROXIMITY_AREAS: ProximityAnchor[] = [
     label: 'Techzone 7',
     sector: 'Techzone 7',
     coords: { lat: 28.582, lng: 77.480 },
-  },
-  {
-    id: 'sec-beta-1',
-    label: 'Sector Beta 1 (Greater Noida Core)',
-    sector: 'Sector Beta 1',
-    coords: { lat: 28.472, lng: 77.502 },
-  },
-  {
-    id: 'sec-168',
-    label: 'Sector 168 / Noida Expressway',
-    sector: 'Sector 168 / Noida Expressway',
-    coords: { lat: 28.510, lng: 77.400 },
   },
 ];
 
@@ -111,6 +111,7 @@ interface DirectoryInteractiveMapProps {
   ) => void;
   activeSchoolSlug?: string | null;
   onSelectSchool?: (school: School) => void;
+  onClose?: () => void;
   className?: string;
 }
 
@@ -121,6 +122,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
   onProximityChange,
   activeSchoolSlug,
   onSelectSchool,
+  onClose,
   className,
 }) => {
   const [mapMode, setMapMode] = useState<'interactive' | 'osm'>('interactive');
@@ -149,18 +151,23 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
     return POPULAR_PROXIMITY_AREAS.find(a => a.id === selectedProximityArea) || null;
   }, [selectedProximityArea, customUserCoords]);
 
+  // Only schools with real, verified coordinates are mapped
+  const schoolsWithCoordinates = useMemo(() => {
+    return schools.filter(
+      (s): s is School & { location: { coordinates: { lat: number; lng: number } } } =>
+        typeof s.location.coordinates?.lat === 'number' &&
+        typeof s.location.coordinates?.lng === 'number'
+    );
+  }, [schools]);
+
   // Compute school distances relative to active anchor
   const schoolsWithDistance = useMemo(() => {
-    return schools.map(s => {
-      const lat = s.location.coordinates?.lat;
-      const lng = s.location.coordinates?.lng;
+    return schoolsWithCoordinates.map(s => {
+      const lat: number = s.location.coordinates.lat;
+      const lng: number = s.location.coordinates.lng;
       let distanceKm: number | null = null;
 
-      if (
-        activeAnchor &&
-        typeof lat === 'number' &&
-        typeof lng === 'number'
-      ) {
+      if (activeAnchor) {
         distanceKm = calculateDistance(
           activeAnchor.coords.lat,
           activeAnchor.coords.lng,
@@ -171,8 +178,8 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
 
       return {
         school: s,
-        lat: lat || 28.58,
-        lng: lng || 77.45,
+        lat,
+        lng,
         distanceKm,
         isWithinRadius:
           selectedRadiusKm !== null && distanceKm !== null
@@ -180,7 +187,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
             : true,
       };
     });
-  }, [schools, activeAnchor, selectedRadiusKm]);
+  }, [schoolsWithCoordinates, activeAnchor, selectedRadiusKm]);
 
   // Find currently selected school pin details
   const activePinSchool = useMemo(() => {
@@ -276,167 +283,179 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
         className
       )}
     >
-      {/* Top Header & Interactive Filter Bar */}
-      <div className="p-4 sm:p-5 border-b border-[var(--color-border)] bg-[var(--color-surface-muted)]">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
-              <span className="text-[11px] font-black text-amber-700 uppercase tracking-wider">
-                Spatial Map &amp; Proximity Filter
+      {/* Compact Supporting Map Header */}
+      <div className="px-3.5 py-2.5 sm:px-4 sm:py-3 border-b border-[var(--color-border)] bg-[var(--color-surface-muted)] flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-6 h-6 rounded-lg bg-[var(--color-primary-light)] text-[var(--color-primary)] flex items-center justify-center shrink-0">
+            <MapPin className="w-3.5 h-3.5" />
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] truncate">
+                Campus Map
+              </span>
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                {schoolsWithCoordinates.length} mapped
               </span>
             </div>
-            <h2 className="text-base sm:text-lg font-black text-[var(--color-content)] tracking-tight mt-0.5">
-              Explore Greater Noida West Schools by Location &amp; Proximity
-            </h2>
-            <p className="text-xs text-[var(--color-content-muted)] mt-0.5">
-              Select your residential sector or set a distance radius to find institutions closest to your home.
+            <p className="text-[11px] text-[var(--color-content-muted)] hidden sm:block truncate">
+              {activeAnchor ? `Anchored near ${activeAnchor.label}` : 'Interactive Greater Noida West sectors & campuses'}
             </p>
           </div>
-
-          {/* Map Mode Selector & Clear Button */}
-          <div className="flex items-center gap-2 shrink-0">
-            <div className="inline-flex rounded-xl p-0.5 bg-white border border-[var(--color-border)] shadow-2xs">
-              <button
-                type="button"
-                onClick={() => setMapMode('interactive')}
-                className={cn(
-                  'px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5',
-                  mapMode === 'interactive'
-                    ? 'bg-[var(--color-primary)] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                )}
-              >
-                <Compass className="w-3.5 h-3.5" />
-                <span>Sector Navigator</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setMapMode('osm')}
-                className={cn(
-                  'px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5',
-                  mapMode === 'osm'
-                    ? 'bg-[var(--color-primary)] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                )}
-              >
-                <Layers className="w-3.5 h-3.5" />
-                <span>Street Map</span>
-              </button>
-            </div>
-
-            {(selectedProximityArea || selectedRadiusKm) && (
-              <button
-                type="button"
-                onClick={handleResetProximity}
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors cursor-pointer"
-                title="Reset proximity filters"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Reset</span>
-              </button>
-            )}
-          </div>
         </div>
 
-        {/* Proximity Controls Row */}
-        <div className="mt-4 pt-3.5 border-t border-[var(--color-border-subtle)] flex flex-wrap items-center gap-2 sm:gap-3 text-xs">
-          {/* Proximity Area Selector */}
-          <div className="flex items-center gap-1.5 font-bold text-[var(--color-content)]">
-            <MapPin className="w-4 h-4 text-amber-600 shrink-0" />
-            <span>My Area:</span>
-          </div>
-
-          <div className="relative flex-1 min-w-[200px] max-w-sm">
-            <select
-              value={selectedProximityArea}
-              onChange={e => {
-                const val = e.target.value;
-                if (val === 'my-location') {
-                  handleUseMyLocation();
-                } else {
-                  const anchor = POPULAR_PROXIMITY_AREAS.find(a => a.id === val);
-                  onProximityChange(val, selectedRadiusKm || 5, anchor?.coords || null);
-                }
-              }}
-              className="w-full px-3 py-1.5 pr-8 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)] shadow-warm-2xs"
-            >
-              <option value="">All Greater Noida West (Select Area)</option>
-              {customUserCoords && (
-                <option value="my-location">📍 My Detected Location</option>
-              )}
-              {POPULAR_PROXIMITY_AREAS.map(a => (
-                <option key={a.id} value={a.id}>
-                  {a.label}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
-          </div>
-
-          {/* Quick Locate Me Button */}
-          <button
-            type="button"
-            onClick={handleUseMyLocation}
-            disabled={isLocating}
-            className={cn(
-              'px-2.5 py-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-2xs',
-              selectedProximityArea === 'my-location'
-                ? 'bg-amber-500 text-white border-amber-600'
-                : 'bg-white text-[var(--color-content)] border-[var(--color-border)] hover:border-[var(--color-border-strong)]'
-            )}
-            title="Detect nearby schools using device location"
-          >
-            <LocateFixed className={cn('w-3.5 h-3.5', isLocating && 'animate-spin text-amber-500')} />
-            <span>{isLocating ? 'Detecting...' : 'Near Me'}</span>
-          </button>
-
-          {/* Distance Radius Pills */}
-          {selectedProximityArea && (
-            <div className="flex items-center gap-1 sm:ml-2">
-              <span className="font-bold text-[var(--color-content-muted)] mr-1">Radius:</span>
-              {RADIUS_OPTIONS.map(opt => (
-                <button
-                  key={opt.value}
-                  type="button"
-                  onClick={() => onProximityChange(selectedProximityArea, opt.value, activeAnchor?.coords || null)}
-                  className={cn(
-                    'px-2.5 py-1 rounded-lg font-bold text-xs transition-all cursor-pointer',
-                    selectedRadiusKm === opt.value
-                      ? 'bg-[var(--color-primary)] text-white shadow-xs'
-                      : 'bg-white border border-[var(--color-border)] text-slate-600 hover:text-slate-900'
-                  )}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {/* Proximity Result Tag */}
-          {selectedProximityArea && selectedRadiusKm && (
-            <span className="ml-auto text-[11px] font-black px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
-              {schoolsInRadiusCount} of {schools.length} schools within {selectedRadiusKm} km
-            </span>
-          )}
-        </div>
-
-        {locationError && (
-          <div className="mt-2 text-xs text-rose-600 bg-rose-50 px-3 py-1.5 rounded-lg border border-rose-200 flex items-center justify-between">
-            <span>{locationError}</span>
+        {/* Map Mode Selector & Optional Close Button */}
+        <div className="flex items-center gap-1.5 shrink-0">
+          <div className="inline-flex rounded-lg p-0.5 bg-white border border-[var(--color-border)] shadow-2xs">
             <button
               type="button"
-              onClick={() => setLocationError(null)}
-              className="text-rose-500 hover:text-rose-700"
+              onClick={() => setMapMode('interactive')}
+              className={cn(
+                'px-2 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer flex items-center gap-1',
+                mapMode === 'interactive'
+                  ? 'bg-[var(--color-primary)] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              )}
+            >
+              <Compass className="w-3 h-3" />
+              <span>Sectors</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMapMode('osm')}
+              className={cn(
+                'px-2 py-1 rounded-md text-[11px] font-bold transition-all cursor-pointer flex items-center gap-1',
+                mapMode === 'osm'
+                  ? 'bg-[var(--color-primary)] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              )}
+            >
+              <Layers className="w-3 h-3" />
+              <span>Streets</span>
+            </button>
+          </div>
+
+          {(selectedProximityArea || selectedRadiusKm) && (
+            <button
+              type="button"
+              onClick={handleResetProximity}
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-lg border border-rose-200 bg-rose-50 hover:bg-rose-100 text-rose-700 text-[11px] font-bold transition-colors cursor-pointer"
+              title="Reset proximity"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span className="hidden sm:inline">Reset</span>
+            </button>
+          )}
+
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-1.5 rounded-lg border border-[var(--color-border)] bg-white text-slate-500 hover:text-slate-800 transition-colors"
+              aria-label="Close Map"
+              title="Close Map"
             >
               <X className="w-3.5 h-3.5" />
             </button>
+          )}
+        </div>
+      </div>
+
+      {/* Proximity Quick Area Bar */}
+      <div className="px-3.5 py-2 border-b border-[var(--color-border-subtle)] bg-slate-50/70 flex flex-wrap items-center gap-2 text-xs">
+        <div className="flex items-center gap-1 text-[var(--color-content-muted)] font-medium text-[11px]">
+          <span>Sector:</span>
+        </div>
+
+        <div className="relative flex-1 min-w-[160px] max-w-xs">
+          <select
+            value={selectedProximityArea}
+            onChange={e => {
+              const val = e.target.value;
+              if (val === 'my-location') {
+                handleUseMyLocation();
+              } else {
+                const anchor = POPULAR_PROXIMITY_AREAS.find(a => a.id === val);
+                onProximityChange(val, selectedRadiusKm || 5, anchor?.coords || null);
+              }
+            }}
+            className="w-full px-2.5 py-1 pr-6 rounded-lg border border-[var(--color-border-strong)] bg-white text-[11px] font-bold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)]"
+          >
+            <option value="">All Greater Noida West (Select Sector)</option>
+            {customUserCoords && (
+              <option value="my-location">📍 My Location</option>
+            )}
+            {POPULAR_PROXIMITY_AREAS.map(a => (
+              <option key={a.id} value={a.id}>
+                {a.label}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-slate-400 pointer-events-none" />
+        </div>
+
+        {/* Quick Locate Me Button */}
+        <button
+          type="button"
+          onClick={handleUseMyLocation}
+          disabled={isLocating}
+          className={cn(
+            'px-2 py-1 rounded-lg border text-[11px] font-bold transition-all cursor-pointer flex items-center gap-1 shadow-2xs',
+            selectedProximityArea === 'my-location'
+              ? 'bg-amber-500 text-white border-amber-600'
+              : 'bg-white text-[var(--color-content)] border-[var(--color-border)] hover:border-[var(--color-border-strong)]'
+          )}
+          title="Detect nearby schools using device location"
+        >
+          <LocateFixed className={cn('w-3 h-3', isLocating && 'animate-spin text-amber-500')} />
+          <span>{isLocating ? 'Detecting...' : 'Near Me'}</span>
+        </button>
+
+        {/* Distance Radius Pills */}
+        {selectedProximityArea && (
+          <div className="flex items-center gap-1">
+            <span className="font-bold text-[var(--color-content-muted)] text-[10px] mr-0.5">Radius:</span>
+            {RADIUS_OPTIONS.map(opt => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => onProximityChange(selectedProximityArea, opt.value, activeAnchor?.coords || null)}
+                className={cn(
+                  'px-2 py-0.5 rounded-md font-bold text-[10px] transition-all cursor-pointer',
+                  selectedRadiusKm === opt.value
+                    ? 'bg-[var(--color-primary)] text-white shadow-xs'
+                    : 'bg-white border border-[var(--color-border)] text-slate-600 hover:text-slate-900'
+                )}
+              >
+                {opt.label.replace('Within ', '')}
+              </button>
+            ))}
           </div>
+        )}
+
+        {/* Proximity Result Tag */}
+        {selectedProximityArea && selectedRadiusKm && (
+          <span className="ml-auto text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+            {schoolsInRadiusCount} schools in {selectedRadiusKm}km
+          </span>
         )}
       </div>
 
+      {locationError && (
+        <div className="mx-3.5 mt-2 text-xs text-rose-600 bg-rose-50 px-3 py-1.5 rounded-lg border border-rose-200 flex items-center justify-between">
+          <span>{locationError}</span>
+          <button
+            type="button"
+            onClick={() => setLocationError(null)}
+            className="text-rose-500 hover:text-rose-700"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
+
       {/* Main Map Canvas Display */}
-      <div className="relative w-full h-[360px] sm:h-[420px] bg-[#f2f4f8] overflow-hidden select-none">
+      <div className="relative w-full h-[300px] sm:h-[350px] bg-[#f2f4f8] overflow-hidden select-none">
         {mapMode === 'osm' ? (
           /* OpenStreetMap Real-world Map View */
           <div className="relative w-full h-full">

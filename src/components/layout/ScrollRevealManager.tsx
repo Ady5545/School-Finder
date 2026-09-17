@@ -1,78 +1,28 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 /**
  * High-Performance Native Scroll & Progressive Reveal Coordinator
  *
  * Architecture & Safety Directives:
- * 1. Content Visibility First (Zero Dependency on JS):
+ * 1. 100% Native Document Scrolling:
+ *    - Absolutely ZERO scroll event listeners on window or document.
+ *    - Completely independent from browser document scrolling.
+ * 2. Content Visibility First (Zero Dependency on JS):
  *    - All content is 100% visible (opacity: 1, transform: none) by default in CSS and HTML.
  *    - JS only progressively enhances below-the-fold elements as they scroll into view.
- *    - Elements already inside the viewport are NEVER hidden or delayed.
- * 2. Active Viewport Scanning:
- *    - Automatically scans on route changes and DOM mutations (dynamic school filters/tabs).
- *    - Uses a generous rootMargin (120px) to trigger reveals smoothly before elements enter the screen.
- * 3. Fallback Safety Timer:
- *    - Guarantees that any pending element is forcefully settled after 2 seconds so no content can ever be stuck.
+ *    - Elements already inside the initial viewport are NEVER hidden or delayed.
+ * 3. High-Performance IntersectionObserver:
+ *    - Browser executes intersection checks asynchronously off the main scrolling thread.
+ *    - Once revealed, elements stay permanently revealed and unobserved.
  * 4. Respects Accessibility:
  *    - Completely disabled under `prefers-reduced-motion: reduce`.
  */
 export const ScrollRevealManager: React.FC = () => {
   const pathname = usePathname();
-  const progressBarRef = useRef<HTMLDivElement | null>(null);
 
-  // 1. Passive RAF-throttled scroll progress bar
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      if (progressBarRef.current) {
-        progressBarRef.current.style.display = 'none';
-      }
-      return;
-    }
-
-    let ticking = false;
-
-    const updateProgressBar = () => {
-      if (!progressBarRef.current) {
-        ticking = false;
-        return;
-      }
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-      const maxScroll = scrollHeight - vh;
-
-      if (maxScroll > 60) {
-        const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
-        progressBarRef.current.style.transform = `scaleX(${progress.toFixed(4)})`;
-        progressBarRef.current.style.opacity = scrollY > 20 ? '0.95' : '0';
-      } else {
-        progressBarRef.current.style.opacity = '0';
-      }
-      ticking = false;
-    };
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateProgressBar);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    updateProgressBar();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [pathname]);
-
-  // 2. High-Performance IntersectionObserver for Below-the-Fold Reveals
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -111,7 +61,7 @@ export const ScrollRevealManager: React.FC = () => {
         });
       },
       {
-        threshold: 0.05,
+        threshold: 0.1,
         rootMargin: '0px 0px -40px 0px',
       }
     );
@@ -127,12 +77,17 @@ export const ScrollRevealManager: React.FC = () => {
         }
 
         const rect = el.getBoundingClientRect();
-        // If in initial above-the-fold viewport or already scrolled above, reveal immediately
-        if (rect.top < vh - 40) {
+        // If already armed and observed, do not eagerly reveal in mutationObserver/rescan
+        if (el.classList.contains('is-pending')) {
+          return;
+        }
+
+        // Only reveal immediately if already visible inside initial viewport on mount
+        if (rect.top < vh - 20 && rect.bottom > 0) {
           el.classList.remove('is-pending');
           el.classList.add('is-revealed', 'is-settled');
         } else {
-          // Strictly below the fold: arm for progressive reveal on scroll
+          // Strictly below the viewport: arm for progressive reveal on scroll
           el.classList.add('is-pending');
           observer.observe(el);
         }
@@ -142,9 +97,13 @@ export const ScrollRevealManager: React.FC = () => {
     // Initial scan on mount and route change
     scanAndObserve();
 
-    // Observe DOM mutations for dynamic client-side lists/tabs (e.g. school filtering, review loads)
+    // Observe DOM mutations for dynamic client-side lists/tabs (e.g. school filtering)
     let rafId: number | null = null;
-    const mutationObserver = new MutationObserver(() => {
+    const mutationObserver = new MutationObserver((mutations) => {
+      // Ignore attribute mutations (class toggles like is-pending/is-revealed) to prevent recursive scans
+      const hasStructuralChanges = mutations.some(m => m.type === 'childList');
+      if (!hasStructuralChanges) return;
+
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(scanAndObserve);
     });
@@ -161,16 +120,5 @@ export const ScrollRevealManager: React.FC = () => {
     };
   }, [pathname]);
 
-  return (
-    <div
-      ref={progressBarRef}
-      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--color-primary)] via-[var(--color-accent)] to-[var(--color-rating)] z-50 pointer-events-none opacity-0 transition-opacity duration-300"
-      style={{
-        transform: 'scaleX(0)',
-        transformOrigin: '0% 50%',
-        willChange: 'transform',
-      }}
-      aria-hidden="true"
-    />
-  );
+  return null;
 };

@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
@@ -15,9 +15,53 @@ import { cn } from '../../lib/utils';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [navSearch, setNavSearch] = useState('');
   const { shortlist, compareList } = useSchoolStore();
   const { user, isAuthenticated } = useAuth();
+
+  // Sync navbar search with URL query when on /schools
+  useEffect(() => {
+    if (typeof window !== 'undefined' && pathname === '/schools') {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q') || '';
+      setNavSearch(q);
+    }
+  }, [pathname]);
+
+  const handleNavSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const query = navSearch.trim();
+    if (pathname === '/schools') {
+      const params = new URLSearchParams(window.location.search);
+      if (query) {
+        params.set('q', query);
+      } else {
+        params.delete('q');
+      }
+      const newUrl = `/schools${params.toString() ? '?' + params.toString() : ''}`;
+      window.history.replaceState({}, '', newUrl);
+      window.dispatchEvent(new CustomEvent('nav-search-change', { detail: query }));
+    } else {
+      router.push(`/schools${query ? `?q=${encodeURIComponent(query)}` : ''}`);
+    }
+  };
+
+  const handleNavSearchChange = (val: string) => {
+    setNavSearch(val);
+    if (pathname === '/schools') {
+      const params = new URLSearchParams(window.location.search);
+      if (val.trim()) {
+        params.set('q', val.trim());
+      } else {
+        params.delete('q');
+      }
+      const newUrl = `/schools${params.toString() ? '?' + params.toString() : ''}`;
+      window.history.replaceState({}, '', newUrl);
+      window.dispatchEvent(new CustomEvent('nav-search-change', { detail: val.trim() }));
+    }
+  };
 
   const navLinks = [
     { label: 'Schools', href: '/schools', icon: <Compass className="w-4 h-4" /> },
@@ -83,19 +127,38 @@ export const Header: React.FC = () => {
           </nav>
         </div>
 
-        {/* Desktop Actions */}
-        <div className="hidden sm:flex items-center gap-2.5">
-          <Link href="/schools">
-            <Button
-              variant="outline"
-              size="sm"
-              leftIcon={<Search className="w-3.5 h-3.5" />}
-              className="text-xs font-medium"
-            >
-              Search Greater Noida
-            </Button>
-          </Link>
+        {/* Desktop Search Field */}
+        <div className="hidden sm:flex items-center flex-1 max-w-xs md:max-w-sm lg:max-w-md mx-3">
+          <form onSubmit={handleNavSearchSubmit} className="relative w-full">
+            <label htmlFor="nav-school-search" className="sr-only">
+              Search schools, sectors, boards
+            </label>
+            <div className="relative w-full">
+              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
+              <input
+                id="nav-school-search"
+                type="text"
+                value={navSearch}
+                onChange={e => handleNavSearchChange(e.target.value)}
+                placeholder="Search schools, sectors, boards..."
+                className="w-full pl-8 pr-7 py-1.5 rounded-xl border border-[var(--color-border-strong)] bg-white/95 text-xs text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 focus:outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-light)] transition-all shadow-2xs"
+              />
+              {navSearch && (
+                <button
+                  type="button"
+                  onClick={() => handleNavSearchChange('')}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
+                  aria-label="Clear search"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
 
+        {/* Desktop Actions */}
+        <div className="hidden sm:flex items-center gap-2 shrink-0">
           <Link href="/wishlist">
             <IconButton
               aria-label={`Shortlisted Schools (${shortlist.length})`}
@@ -200,7 +263,40 @@ export const Header: React.FC = () => {
         title="Admission Pitara"
         side="right"
       >
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-5">
+          {/* Mobile Drawer Integrated Search */}
+          <form
+            onSubmit={e => {
+              handleNavSearchSubmit(e);
+              setIsMobileMenuOpen(false);
+            }}
+            className="relative w-full"
+          >
+            <label htmlFor="mobile-nav-search" className="sr-only">
+              Search schools, sectors, boards
+            </label>
+            <div className="relative w-full">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              <input
+                id="mobile-nav-search"
+                type="text"
+                value={navSearch}
+                onChange={e => handleNavSearchChange(e.target.value)}
+                placeholder="Search schools, sectors, boards..."
+                className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 focus:outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-light)] transition-all shadow-2xs"
+              />
+              {navSearch && (
+                <button
+                  type="button"
+                  onClick={() => handleNavSearchChange('')}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                  aria-label="Clear search"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </form>
           {isAuthenticated && user && (
             <div className="p-3.5 rounded-xl bg-sky-50 border border-sky-100 flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center shrink-0">

@@ -35,8 +35,8 @@
       "pincode": "201306",
       "area": "Knowledge Park V",
       "coordinates": {
-        "lat": 28.58,
-        "lng": 77.45
+        "lat": 28.5833,
+        "lng": 77.4667
       },
       "mapSearchQuery": "Delhi Public School Knowledge Park 5 Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20Public%20School%20Knowledge%20Park%20V!5e0!3m2!1sen!2sin!4v0000000000"
@@ -973,8 +973,8 @@
   {
     "id": "delhi-world-public-school-kp-5",
     "slug": "delhi-world-public-school-kp-5",
-    "name": "Delhi World Public School, Greater Noida",
-    "shortName": "DWPS Greater Noida",
+    "name": "Delhi World Public School",
+    "shortName": "DWPS Noida Extension",
     "alternateNames": [
       "Delhi World Public School",
       "DWPS Noida Extension",
@@ -1002,15 +1002,15 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "12/2, Knowledge Park III, Opposite Sharda University, Greater Noida, Uttar Pradesh 201306",
+      "address": "Plot No. 57, Knowledge Park III, Greater Noida, Uttar Pradesh 201306",
       "sector": "Knowledge Park III",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Knowledge Park III",
+      "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.57,
-        "lng": 77.46
+        "lat": 28.5833,
+        "lng": 77.4667
       },
       "mapSearchQuery": "Delhi World Public School Knowledge Park 5 Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
@@ -1240,12 +1240,11 @@
     ],
     "affiliationNumber": "2132580",
     "establishedYear": 2016,
-    "geographicClassification": "geographic_outlier",
-    "recordType": "nearby_surrounding",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
     "canonicalSlug": "delhi-world-public-school-kp-5",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Knowledge Park III, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "ryan-international-school-greater-noida",
@@ -5987,8 +5986,9 @@
     "geographicClassification": "nearby_surrounding",
     "recordType": "canonical",
     "canonicalSlug": "crossings-republic-dav-public-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Falsely located as Crossing Republik campus."
   },
   {
     "id": "vishwa-bharati-public-school-greater-noida",
@@ -6381,10 +6381,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Kalka Public School Sector 3 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -6514,8 +6511,8 @@
   {
     "id": "indus-valley-school-noida-ext",
     "slug": "indus-valley-school-noida-ext",
-    "name": "Indus Valley International School",
-    "shortName": "Indus Valley International School",
+    "name": "Indus Valley Public School",
+    "shortName": "Indus Valley Public School",
     "alternateNames": [
       "Indus Valley International School Noida Extension",
       "Indus Valley International School Techzone 4"
@@ -6537,16 +6534,13 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Techzone 4, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Techzone 4",
-      "city": "Greater Noida West",
+      "address": "Sector 62, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 62",
+      "city": "Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "pincode": "201301",
+      "area": "Noida",
+      "coordinates": null,
       "mapSearchQuery": "Indus Valley International School Techzone 4 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -6666,7 +6660,7 @@
       "Table Tennis",
       "Athletics"
     ],
-    "geographicClassification": "core_greater_noida_west",
+    "geographicClassification": "geographic_outlier",
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "indus-valley-school-noida-ext",
@@ -6705,10 +6699,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Vienna Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -6867,10 +6858,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Modern Public School Sector 4 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -7029,10 +7017,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Golden Valley Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -7191,10 +7176,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Blooming Buds Senior Secondary School Sector 3 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -7353,10 +7335,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Jinvani Bharti Public School Sector 16B Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -7515,10 +7494,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Glorious Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -7677,10 +7653,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Green Valley Academy Sector 12 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -7839,10 +7812,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Royal International School Sector 4 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -8001,10 +7971,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Aditi Public School Sector 2 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -8163,10 +8130,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Sunshine Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -8325,10 +8289,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Bright Beginnings School Sector 16B Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -8487,10 +8448,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Navjeevan Mission School Sector 3 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -8649,10 +8607,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Mother Teresa Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -8811,10 +8766,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "D-Point High School Sector 16 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -8973,10 +8925,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "DPS Monarch International School Sector 16 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -9100,8 +9049,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "dps-monarch-international-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Actually located in Doha, Qatar. Not Greater Noida West."
   },
   {
     "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
@@ -9136,10 +9086,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Shree Thakur Dwara Balika Vidyalaya Sector 12 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -9315,10 +9262,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Pragyan Public School Greater Noida Corridor Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -9499,10 +9443,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Om Sun International School Sector 16B Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -9661,10 +9602,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "DPS World School Noida Extension Sector 4 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -9836,10 +9774,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Step By Step School Noida Feeder Noida Expressway / GN West Feeder Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -10018,10 +9953,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Amity International School Knowledge Park / GN West Corridor Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -10197,10 +10129,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Somerville School Greater Noida Sector Alpha 2 / GN West Corridor Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -10378,10 +10307,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Aster Public School Knowledge Park 5 Knowledge Park 5 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -10555,10 +10481,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "The Manthan School Greater Noida West Sector 16C Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -10752,10 +10675,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "BGS Vijnatham School Techzone 4 Techzone 4 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -10949,10 +10869,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "Sarvottam International School Techzone 4 Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -11146,10 +11063,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "The Millennium School Noida Extension Sector 119 Link Greater Noida West",
       "mapEmbedUrl": null
     },
@@ -11325,10 +11239,7 @@
       "state": "Uttar Pradesh",
       "pincode": "201306",
       "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
-      },
+      "coordinates": null,
       "mapSearchQuery": "St. Xaviers High School Sector 16B Sector 16B Greater Noida West",
       "mapEmbedUrl": null
     },

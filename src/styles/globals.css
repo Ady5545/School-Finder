@@ -241,15 +241,13 @@ html {
   box-shadow: 0 14px 30px -6px rgba(15, 45, 74, 0.12), 0 4px 10px -2px rgba(15, 45, 74, 0.05);
 }
 
-/* Native smooth momentum scrolling */
+/* Native document scrolling: 100% native physics across all browsers & display refresh rates */
 html {
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+body {
+  overflow-x: hidden;
 }
 
 /* Progressive enhancement scroll reveal system

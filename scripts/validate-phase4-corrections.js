@@ -31,10 +31,10 @@ const schools = JSON.parse(fs.readFileSync(schoolsPath, 'utf8'));
 // 1. Total & Active Counts
 assert(schools.length === 70, 'Total raw records count is 70');
 const activeCanonical = schools.filter(s => !s.isArchived && !s.isDuplicate);
-assert(activeCanonical.length === 56, 'Active canonical count is exactly 56');
+assert(activeCanonical.length === 55, 'Active canonical count is exactly 55');
 
 const archivedCount = schools.filter(s => s.isArchived).length;
-assert(archivedCount === 12, 'Archived records count is exactly 12');
+assert(archivedCount === 13, 'Archived records count is exactly 13');
 
 const aliasCount = schools.filter(s => s.isDuplicate).length;
 assert(aliasCount === 2, 'Alias records count is exactly 2');

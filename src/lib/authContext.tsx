@@ -114,12 +114,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const purpose = typeof options === 'string' ? options : options?.purpose || 'register';
       const name = typeof options === 'object' ? options?.name : undefined;
 
+      console.log('[FRONTEND_DIAGNOSTIC] Sending OTP request for:', email, purpose);
       const res = await fetch('/api/auth/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, purpose, name }),
       });
+      console.log('[FRONTEND_DIAGNOSTIC] Response status:', res.status);
       const data = await res.json();
+      console.log('[FRONTEND_DIAGNOSTIC] Response data:', data);
+      
       if (!res.ok || !data.success) {
         showToast(data.message || 'Failed to dispatch verification code', 'error');
         return { success: false, notFound: data.notFound, message: data.message, category: data.category };

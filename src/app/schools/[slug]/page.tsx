@@ -123,7 +123,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               <SchoolBadge key={b} type="board" value={b} />
             ))}
             <SchoolBadge type="schoolType" value={school.schoolType} />
-            <SchoolBadge type="verification" value={school.fees.verificationStatus} />
+            <SchoolBadge type="verification" value={school.fees.verificationStatus || 'not_publicly_verified'} />
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-extrabold text-[var(--color-content)] tracking-tight">

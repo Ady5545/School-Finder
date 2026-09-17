@@ -154,7 +154,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             {isAuditVerified && (
               <SchoolBadge type="verified" value="Verified" />
             )}
-            <SchoolBadge type="verification" value={school.fees.verificationStatus} />
+            <SchoolBadge type="verification" value={school.fees.verificationStatus || 'not_publicly_verified'} />
             {school.geographicClassification === 'geographic_outlier' && (
               <span className="text-[11px] text-purple-800 bg-purple-50 px-2 py-0.5 rounded-md font-semibold border border-purple-200">
                 Regional Outlier

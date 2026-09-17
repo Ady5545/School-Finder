@@ -15,7 +15,7 @@
       "analyticsConsent": true,
       "role": "parent",
       "createdAt": "2026-09-15T15:37:08.492Z",
-      "lastLoginAt": "2026-09-15T15:37:08.493Z",
+      "lastLoginAt": "2026-09-17T13:29:53.873Z",
       "wishlist": [
         "delhi-public-school-knowledge-park-5",
         "lotus-valley-international-school-noida-extension"
@@ -24,7 +24,8 @@
         "delhi-public-school-knowledge-park-5",
         "delhi-world-public-school-kp-5"
       ],
-      "status": "active"
+      "status": "active",
+      "lastActivityAt": "2026-09-17T13:29:53.873Z"
     },
     "usr_admin_portal_lead": {
       "id": "usr_admin_portal_lead",
@@ -36,10 +37,11 @@
       "analyticsConsent": true,
       "role": "admin",
       "createdAt": "2026-09-15T15:37:08.500Z",
-      "lastLoginAt": "2026-09-15T15:37:08.500Z",
+      "lastLoginAt": "2026-09-17T13:29:03.300Z",
       "wishlist": [],
       "compareList": [],
-      "status": "active"
+      "status": "active",
+      "lastActivityAt": "2026-09-17T13:29:03.300Z"
     }
   },
   "ratings": [],
@@ -48,6 +50,20 @@
     "lotus-valley-international-school": 1
   },
   "activityEvents": [
+    {
+      "id": "evt_1789651793873_973e1ced",
+      "type": "user_login",
+      "userId": "usr_demo_parent_gnw",
+      "locality": "Sector 16B",
+      "timestamp": "2026-09-17T13:29:53.874Z"
+    },
+    {
+      "id": "evt_1789651743300_48235119",
+      "type": "user_login",
+      "userId": "usr_admin_portal_lead",
+      "locality": "Knowledge Park 5",
+      "timestamp": "2026-09-17T13:29:03.301Z"
+    },
     {
       "id": "evt_1789586307945_3a0b49f8",
       "type": "wishlist_add",

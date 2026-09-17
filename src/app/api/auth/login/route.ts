@@ -6,6 +6,7 @@ import {
   sanitizeUser,
   verifyOtpCode,
   recordActivityEvent,
+  isUserSuspendedOrBanned,
 } from '../../../../lib/authStore';
 
 export async function POST(req: NextRequest) {
@@ -32,6 +33,17 @@ export async function POST(req: NextRequest) {
           message: 'No registered parent account found with this email. Please sign up.',
         },
         { status: 401 }
+      );
+    }
+
+    const { blocked, status, reason } = isUserSuspendedOrBanned(user.id);
+    if (blocked) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: `Account is ${status}. Reason: ${reason}. Please contact support.`,
+        },
+        { status: 403 }
       );
     }
 

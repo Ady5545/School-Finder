@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '../../lib/authContext';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { OtpInput } from '../ui/OtpInput';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../ui/Card';
 import {
   ShieldCheck,
@@ -377,22 +378,18 @@ export const LoginForm: React.FC = () => {
                   </div>
                 )}
 
-                <div>
-                  <label htmlFor="login-otp-input" className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                <div className="space-y-3">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 text-center">
                     Enter 6-Digit Email Code
                   </label>
-                  <Input
-                    id="login-otp-input"
-                    type="text"
-                    maxLength={6}
-                    placeholder="• • • • • •"
+                  <OtpInput
+                    length={6}
                     value={otp}
-                    onChange={e => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    onChange={setOtp}
                     disabled={isSubmitting}
-                    className="text-center font-mono text-xl tracking-widest"
-                    autoFocus
+                    hasError={Boolean(errorMessage)}
                   />
-                  <div className="flex items-center justify-between text-xs text-stone-500 mt-2">
+                  <div className="flex items-center justify-between text-xs text-stone-500 pt-1">
                     <span>Didn&apos;t receive code?</span>
                     <button
                       type="button"

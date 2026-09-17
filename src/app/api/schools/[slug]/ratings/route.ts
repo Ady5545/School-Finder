@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   getSchoolRatings,
+  getSanitizedSchoolRatings,
   getSchoolRatingSummary,
   saveSchoolRating,
   deleteSchoolRating,
   verifySessionToken,
   getUserById,
   getUserRatingForSchool,
+  sanitizePublicRating,
 } from '../../../../../lib/authStore';
 import { getSchoolBySlug, getCanonicalSlug } from '../../../../../lib/schools';
+
 
 export async function GET(
   req: NextRequest,
@@ -27,7 +30,7 @@ export async function GET(
 
     const canonicalSlug = getCanonicalSlug(slug);
     const summary = getSchoolRatingSummary(canonicalSlug);
-    const ratings = getSchoolRatings(canonicalSlug);
+    const ratings = getSanitizedSchoolRatings(canonicalSlug);
 
     // If user is authenticated, also return their specific rating
     const cookieToken = req.cookies.get('ap_session')?.value;
@@ -108,7 +111,7 @@ export async function POST(
     }
 
     const body = await req.json();
-    const { score, title, comment, categories } = body;
+    const { score, title, comment, categories, isAnonymous } = body;
 
     const numScore = Number(score);
     if (!numScore || numScore < 1 || numScore > 5) {
@@ -135,6 +138,7 @@ export async function POST(
       score: Math.round(numScore),
       title: title ? String(title).trim().slice(0, 100) : undefined,
       comment: String(comment).trim().slice(0, 1000),
+      isAnonymous: Boolean(isAnonymous),
       categories: categories && typeof categories === 'object' ? {
         academics: categories.academics ? Math.min(5, Math.max(1, Number(categories.academics))) : undefined,
         infrastructure: categories.infrastructure ? Math.min(5, Math.max(1, Number(categories.infrastructure))) : undefined,
@@ -145,8 +149,10 @@ export async function POST(
 
     return NextResponse.json({
       success: true,
-      message: 'Thank you! Your verified parent rating has been published.',
-      rating,
+      message: rating.isAnonymous
+        ? 'Thank you! Your verified parent rating has been published anonymously.'
+        : 'Thank you! Your verified parent rating has been published.',
+      rating: sanitizePublicRating(rating),
       summary: getSchoolRatingSummary(canonicalSlug),
     });
   } catch (error) {

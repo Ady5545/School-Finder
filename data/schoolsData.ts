@@ -57,12 +57,24 @@ export interface SchoolUniforms {
   winter?: UniformItem;
 }
 
+export interface AdmissionMilestone {
+  id: string; // e.g. "app_opening", "app_deadline", "assessment_date"
+  label: string; // e.g. "Application Opening", "Application Deadline", "Campus Interaction / Test"
+  date: string; // YYYY-MM-DD e.g. "2026-10-15"
+  verified: boolean;
+  notes?: string;
+}
+
 export interface SchoolAdmissions {
-  date: string;
+  date: string | null;
   status: string;
   process: string;
   session?: string;
   timelineDescription?: string;
+  sourceUrl?: string;
+  lastVerifiedDate?: string;
+  verificationStatus?: string;
+  milestones?: AdmissionMilestone[];
 }
 
 export interface SchoolContact {

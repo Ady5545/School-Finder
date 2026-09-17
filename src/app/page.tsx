@@ -4,6 +4,7 @@ import { getAllSchools } from '../lib/schools';
 import { HomeSearch } from '../components/school/HomeSearch';
 import { HomeSchoolShowcase } from '../components/school/HomeSchoolShowcase';
 import { HomeRatingsDiscovery } from '../components/home/HomeRatingsDiscovery';
+import { WhyAdmissionPitara } from '../components/home/WhyAdmissionPitara';
 import { SponsoredPlacementCard } from '../components/school/SponsoredPlacementCard';
 import { Button } from '../components/ui/Button';
 import {
@@ -328,65 +329,9 @@ export default function HomePage() {
       <HomeRatingsDiscovery />
 
       {/* ========================================================================= */}
-      {/* 6. WHY ADMISSION PITARA: CONCISE 3-PILLAR TRUST SECTION                   */}
+      {/* 6. WHY ADMISSION PITARA: POLISHED 6-PILLAR TRUST & DISCOVERY SECTION      */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal-on-scroll">
-        <div className="max-w-3xl mb-12">
-          <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
-            Why Admission Pitara
-          </h2>
-          <p className="text-sm sm:text-base text-[var(--color-content-muted)] mt-2 leading-relaxed">
-            Built as an independent resource so families can evaluate schools with confidence.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {/* Pillar 1 */}
-          <div className="p-7 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-2xs flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center mb-5 border border-emerald-200">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-[var(--color-content)]">
-                Verified data
-              </h3>
-              <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-2.5 leading-relaxed">
-                Information is sourced from official disclosures and documented records where available.
-              </p>
-            </div>
-          </div>
-
-          {/* Pillar 2 */}
-          <div className="p-7 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-2xs flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-xl bg-[var(--color-primary-light)] text-[var(--color-primary)] flex items-center justify-center mb-5 border border-[var(--color-brand-200)]">
-                <Scale className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-[var(--color-content)]">
-                Comparable information
-              </h3>
-              <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-2.5 leading-relaxed">
-                Schools are presented using consistent fields so parents can make meaningful comparisons.
-              </p>
-            </div>
-          </div>
-
-          {/* Pillar 3 */}
-          <div className="p-7 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-2xs flex flex-col justify-between">
-            <div>
-              <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center mb-5 border border-amber-200">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-bold text-[var(--color-content)]">
-                Transparent evaluation
-              </h3>
-              <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-2.5 leading-relaxed">
-                Organic directory rankings and verified parent reviews are never altered by commercial promotions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WhyAdmissionPitara />
 
       {/* ========================================================================= */}
       {/* 6. FINAL COMPACT CTA                                                      */}

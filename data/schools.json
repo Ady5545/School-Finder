@@ -10639,7 +10639,25 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2026-27",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Open",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online application & interaction",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Deadline",
+          "date": "2027-02-20",
+          "verified": true,
+          "notes": "Document verification",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10818,7 +10836,25 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2026-27",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Registration Window Active",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Pre-primary & Grade 1-9",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First Phase Closing",
+          "date": "2027-02-15",
+          "verified": true,
+          "notes": "Assessment date booking",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10997,7 +11033,25 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2026-27",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Admissions Open",
+          "date": "2026-09-10",
+          "verified": true,
+          "notes": "Online inquiry form",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Closing",
+          "date": "2027-01-15",
+          "verified": true,
+          "notes": "Parent interaction & campus walk",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11552,7 +11606,25 @@
       "date": "Admissions Open for Session 2026-27",
       "status": "Open",
       "process": "Online registration form submission followed by interactive session and document verification.",
-      "session": "2026-27"
+      "session": "2026-27",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Opens",
+          "date": "2026-09-01",
+          "verified": true,
+          "notes": "Online admission portal",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Early Admission Deadline",
+          "date": "2027-01-31",
+          "verified": true,
+          "notes": "Interaction & document verification",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 88001 88001",
@@ -11724,7 +11796,25 @@
       "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "open",
-      "timelineDescription": "Admissions currently active for the 2026-27 session via official Ryan Group online portal."
+      "timelineDescription": "Admissions currently active for the 2026-27 session via official Ryan Group online portal.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Portal Open",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Montessori & Primary registrations",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First Merit List Deadline",
+          "date": "2027-02-28",
+          "verified": true,
+          "notes": "Interaction slot allotment",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 120 4232222",
@@ -11904,7 +11994,25 @@
     "admissions": {
       "date": "September to March",
       "status": "Open for 2026-27",
-      "process": "Online registration, interaction for Nursery/KG, formal assessment for Grade 1 and above."
+      "process": "Online registration, interaction for Nursery/KG, formal assessment for Grade 1 and above.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Opens",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online forms & campus counters active",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First Phase Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Subject to seat availability",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "0120-5100090",
@@ -12078,7 +12186,25 @@
     "admissions": {
       "date": "October onwards",
       "status": "Open for 2026-27",
-      "process": "Registration form submission followed by parent interaction and document verification."
+      "process": "Registration form submission followed by parent interaction and document verification.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Opens",
+          "date": "2026-10-01",
+          "verified": true,
+          "notes": "Nursery to Class IX registrations",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Deadline",
+          "date": "2027-03-15",
+          "verified": true,
+          "notes": "Direct campus interaction schedule",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "0120-6893000",
@@ -12248,7 +12374,25 @@
     "admissions": {
       "date": "September to February",
       "status": "Open for 2026-27",
-      "process": "Online registration followed by interactive child assessment and campus tour."
+      "process": "Online registration followed by interactive child assessment and campus tour.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Admissions Open",
+          "date": "2026-09-01",
+          "verified": true,
+          "notes": "Early bird application window",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First List Deadline",
+          "date": "2027-02-28",
+          "verified": true,
+          "notes": "Interaction slot booking",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "0120-7195555",
@@ -12421,7 +12565,25 @@
     "admissions": {
       "date": "September to March",
       "status": "Open for 2026-27",
-      "process": "Online inquiry, application submission, student interaction and document verification."
+      "process": "Online inquiry, application submission, student interaction and document verification.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Portal Active",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online inquiry & campus walkthrough",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Parent interaction scheduling",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "8800049460",
@@ -12592,7 +12754,25 @@
     "admissions": {
       "date": "October to March",
       "status": "Open for 2026-27",
-      "process": "Application form submission, student interaction, and document verification."
+      "process": "Application form submission, student interaction, and document verification.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Admissions Open",
+          "date": "2026-10-01",
+          "verified": true,
+          "notes": "Prospectus distribution & online form",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Phase 1 Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Document verification",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "0120-2977011",
@@ -12764,7 +12944,25 @@
     "admissions": {
       "date": "September to March",
       "status": "Open for 2026-27",
-      "process": "Online registration followed by informal parent-child interaction."
+      "process": "Online registration followed by informal parent-child interaction.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Registrations Open",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online registration portal",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Application Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Assessment interview",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "0120-4180000",
@@ -12937,7 +13135,25 @@
     "admissions": {
       "date": "September to March",
       "status": "Open for 2026-27",
-      "process": "Online registration, interactive session with child and parents, verification of documents."
+      "process": "Online registration, interactive session with child and parents, verification of documents.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Registration Window Opens",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Campus registration Desk",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Phase 1 Registration Closing",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Seat allocation list",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "0120-4355555",

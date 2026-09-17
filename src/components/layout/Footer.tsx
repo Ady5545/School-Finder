@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { MapPin, ShieldCheck, Heart } from 'lucide-react';
+import { MapPin, ShieldCheck, Heart, Mail } from 'lucide-react';
 import { BrandLogo } from '../ui/BrandLogo';
 
 export const Footer: React.FC = () => {
@@ -86,11 +86,11 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Platform Column */}
+          {/* Platform & Contact Column */}
           <div className="flex flex-col gap-2.5">
             <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
-              <span>Platform</span>
+              <span>Platform & Contact</span>
             </span>
             <ul className="space-y-2 text-xs text-slate-300 list-none p-0 m-0">
               <li>
@@ -102,6 +102,15 @@ export const Footer: React.FC = () => {
                 <Link href="/contact" className="hover:text-[#f7a072] transition-colors">
                   Contact & Feedback
                 </Link>
+              </li>
+              <li className="pt-1">
+                <a
+                  href="mailto:enquiry.admissionpitara@gmail.com"
+                  className="text-amber-300 hover:text-white transition-colors flex items-center gap-1.5 font-medium"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#f7a072] shrink-0" aria-hidden="true" />
+                  <span className="truncate">enquiry.admissionpitara@gmail.com</span>
+                </a>
               </li>
               <li>
                 <Link href="/privacy" className="hover:text-[#f7a072] transition-colors">

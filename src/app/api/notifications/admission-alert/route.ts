@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendAdmissionDeadlineAlertEmail } from '../../../../lib/emailService';
 import { checkShortlistDeadlines } from '../../../../lib/notifications';
+import { checkRateLimit, verifySessionToken } from '../../../../lib/authStore';
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,6 +12,33 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'A valid email address is required.' },
         { status: 400 }
+      );
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    // Verify session if user is logged in
+    const cookieToken = req.cookies.get('ap_session')?.value;
+    const authHeader = req.headers.get('Authorization');
+    const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+    const token = cookieToken || headerToken;
+
+    if (token) {
+      const session = verifySessionToken(token);
+      if (session && session.email && session.email.toLowerCase() !== cleanEmail) {
+        return NextResponse.json(
+          { success: false, error: 'Unauthorized: Cannot send notifications to an email address other than your account email.' },
+          { status: 403 }
+        );
+      }
+    }
+
+    // Rate Limiting Protection (Max 3 alerts per 10 minutes per email)
+    const allowed = checkRateLimit(`alert_${cleanEmail}`, 3, 10 * 60 * 1000);
+    if (!allowed) {
+      return NextResponse.json(
+        { success: false, error: 'Too many alert requests for this email address. Please wait 10 minutes.' },
+        { status: 429 }
       );
     }
 
@@ -33,7 +61,7 @@ export async function POST(req: NextRequest) {
 
     // Dispatch email
     const emailResult = await sendAdmissionDeadlineAlertEmail({
-      to: email,
+      to: cleanEmail,
       parentName,
       alerts: urgentAlerts.map(a => ({
         schoolName: a.schoolName,
@@ -71,3 +99,4 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+

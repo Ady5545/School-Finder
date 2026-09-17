@@ -15,6 +15,7 @@ import { SchoolCard } from '../../../components/school/SchoolCard';
 import { SchoolGallery } from '../../../components/school/SchoolGallery';
 import { CampusInteractiveMap } from '../../../components/school/CampusInteractiveMap';
 import { SchoolRatingsSection } from '../../../components/school/SchoolRatingsSection';
+import { SchoolAdmissionsSection } from '../../../components/school/SchoolAdmissionsSection';
 import { Button } from '../../../components/ui/Button';
 import {
   MapPin,
@@ -207,6 +208,9 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
             )}
           </section>
 
+          {/* Admissions Timelines & Reminders Section */}
+          <SchoolAdmissionsSection school={school} />
+
           {/* Campus Facilities */}
           {school.facilities && school.facilities.length > 0 && (
             <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
@@ -321,6 +325,23 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                   </a>
                 </div>
               )}
+            </div>
+
+            <div className="pt-3 border-t border-stone-100 flex items-start gap-2 text-[11px] text-stone-600 bg-amber-50/50 p-3 rounded-xl border border-amber-200/60">
+              <ShieldCheck className="w-4 h-4 text-amber-800 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-semibold text-stone-900 block">Report Data Correction or Submit Prospectus:</span>
+                <span>
+                  Parents or staff can email updated fee sheets to{' '}
+                  <a
+                    href={`mailto:enquiry.admissionpitara@gmail.com?subject=${encodeURIComponent(`Data Correction / Prospectus Update for ${school.name}`)}`}
+                    className="font-mono font-bold text-amber-900 underline hover:text-amber-950"
+                  >
+                    enquiry.admissionpitara@gmail.com
+                  </a>
+                  .
+                </span>
+              </div>
             </div>
           </section>
         </div>

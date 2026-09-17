@@ -39,6 +39,7 @@ import {
 } from 'lucide-react';
 import { checkShortlistDeadlines } from '../../lib/notifications';
 import { useToast } from '../../components/ui/Toast';
+import { ParentRemindersCard } from '../../components/parent/ParentRemindersCard';
 
 const SEARCH_LOCALITIES = [
   { value: 'Greater Noida West', label: 'Greater Noida West (Entire Area)' },
@@ -642,6 +643,9 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Parent Admission Reminders & Notifications */}
+      <ParentRemindersCard />
 
       {/* Urgent 7-Day Admission Deadline Alerts */}
       {urgentAlerts.length > 0 && (

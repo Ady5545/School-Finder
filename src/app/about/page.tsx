@@ -79,6 +79,20 @@ export default function AboutPage() {
             </li>
           </ul>
         </section>
+
+        <section className="mt-8 p-6 bg-amber-50/80 border border-amber-200/90 rounded-2xl space-y-2">
+          <h2 className="text-base font-bold text-amber-950">School Prospectus Audits & Parent Corrections</h2>
+          <p className="text-xs text-stone-700 leading-relaxed">
+            School administrators and parents who wish to submit updated prospectus circulars or fee breakdowns can reach our editorial desk directly at{' '}
+            <a
+              href="mailto:enquiry.admissionpitara@gmail.com"
+              className="font-mono font-bold text-amber-900 underline hover:text-amber-950"
+            >
+              enquiry.admissionpitara@gmail.com
+            </a>
+            .
+          </p>
+        </section>
       </div>
     </div>
   );

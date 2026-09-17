@@ -15,6 +15,10 @@ import {
   CheckCircle2,
   AlertCircle,
   LogIn,
+  EyeOff,
+  Eye,
+  Trash2,
+  Edit3,
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useToast } from '../ui/Toast';
@@ -27,6 +31,7 @@ interface RatingItem {
   title?: string;
   comment: string;
   verifiedParent: boolean;
+  isAnonymous?: boolean;
   createdAt: string;
   categories?: {
     academics?: number;
@@ -62,6 +67,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
   const [ratings, setRatings] = useState<RatingItem[]>([]);
   const [summary, setSummary] = useState<RatingSummary | null>(null);
+  const [userRating, setUserRating] = useState<RatingItem | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Form State
@@ -70,6 +76,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
   const [hoverScore, setHoverScore] = useState(0);
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
+  const [isAnonymous, setIsAnonymous] = useState(false);
   const [categoryRatings, setCategoryRatings] = useState({
     academics: 5,
     infrastructure: 5,
@@ -77,9 +84,10 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
     safety: 5,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
-  // Load existing ratings and log view
+  // Load existing ratings and user rating
   useEffect(() => {
     let mounted = true;
 
@@ -91,6 +99,21 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
           if (mounted && data.success) {
             setRatings(data.ratings || []);
             setSummary(data.summary || null);
+            if (data.userRating) {
+              setUserRating(data.userRating);
+              setScore(data.userRating.score || 5);
+              setTitle(data.userRating.title || '');
+              setComment(data.userRating.comment || '');
+              setIsAnonymous(Boolean(data.userRating.isAnonymous));
+              if (data.userRating.categories) {
+                setCategoryRatings({
+                  academics: data.userRating.categories.academics || 5,
+                  infrastructure: data.userRating.categories.infrastructure || 5,
+                  faculty: data.userRating.categories.faculty || 5,
+                  safety: data.userRating.categories.safety || 5,
+                });
+              }
+            }
           }
         }
       } catch (err) {
@@ -128,6 +151,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
           score,
           title: title.trim() || undefined,
           comment: comment.trim(),
+          isAnonymous,
           categories: categoryRatings,
         }),
       });
@@ -139,23 +163,73 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
         return;
       }
 
-      showToast('Thank you! Your verified parent rating has been published.', 'success');
+      showToast(
+        data.message || 'Thank you! Your verified parent rating has been saved.',
+        'success'
+      );
       setShowForm(false);
-      setTitle('');
-      setComment('');
 
-      // Refresh list
       if (data.rating) {
-        setRatings(prev => [data.rating, ...prev.filter(r => r.id !== data.rating.id)]);
+        setUserRating(data.rating);
       }
-      if (data.summary) {
-        setSummary(data.summary);
+
+      // Re-fetch ratings to update list and summary with sanitized public views
+      const refreshRes = await fetch(`/api/schools/${schoolSlug}/ratings`);
+      if (refreshRes.ok) {
+        const refreshData = await refreshRes.json();
+        if (refreshData.success) {
+          setRatings(refreshData.ratings || []);
+          setSummary(refreshData.summary || null);
+        }
       }
     } catch {
       setFormError('Network error while saving rating.');
       showToast('Network error while submitting rating', 'error');
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleDeleteRating = async () => {
+    if (!window.confirm('Are you sure you want to remove your review? This action cannot be undone.')) {
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/schools/${schoolSlug}/ratings`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        showToast(data.message || 'Failed to delete review.', 'error');
+        return;
+      }
+
+      showToast('Your review has been removed.', 'success');
+      setUserRating(null);
+      setScore(5);
+      setTitle('');
+      setComment('');
+      setIsAnonymous(false);
+      setShowForm(false);
+
+      if (data.summary) {
+        setSummary(data.summary);
+      }
+
+      // Refresh list
+      const refreshRes = await fetch(`/api/schools/${schoolSlug}/ratings`);
+      if (refreshRes.ok) {
+        const refreshData = await refreshRes.json();
+        if (refreshData.success) {
+          setRatings(refreshData.ratings || []);
+        }
+      }
+    } catch {
+      showToast('Network error while deleting review.', 'error');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -183,10 +257,14 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
             variant="primary"
             size="sm"
             onClick={() => setShowForm(prev => !prev)}
-            leftIcon={<Star className="w-4 h-4 fill-amber-300 text-amber-300" />}
+            leftIcon={userRating ? <Edit3 className="w-4 h-4" /> : <Star className="w-4 h-4 fill-amber-300 text-amber-300" />}
             className="font-bold shrink-0"
           >
-            {showForm ? 'Close Review Form' : 'Write Parent Review'}
+            {showForm
+              ? 'Close Review Form'
+              : userRating
+              ? 'Edit Your Review'
+              : 'Write Parent Review'}
           </Button>
         ) : (
           <Link href="/auth/login">
@@ -290,18 +368,33 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
           onSubmit={handleSubmitRating}
           className="bg-white rounded-2xl border border-sky-300 p-6 shadow-warm-sm mb-8 space-y-5 animate-fadeIn"
         >
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
             <div>
               <h3 className="text-base font-bold text-slate-900">
-                Write a Verified Parent Review for {schoolName}
+                {userRating ? `Edit Your Review for ${schoolName}` : `Write a Verified Parent Review for ${schoolName}`}
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Posting as: <strong>{user?.name}</strong> ({user?.preferredSchoolLocality || 'Greater Noida'})
+                {userRating
+                  ? 'Updating this form will modify your published review.'
+                  : `Posting as: ${user?.name || 'Verified Parent'} (${user?.preferredSchoolLocality || 'Greater Noida'})`}
               </p>
             </div>
-            <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-              ✓ Verified Account
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 shrink-0">
+                ✓ Verified Account
+              </span>
+              {userRating && (
+                <button
+                  type="button"
+                  onClick={handleDeleteRating}
+                  disabled={isDeleting}
+                  className="text-xs font-bold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-lg border border-rose-200 transition-colors cursor-pointer flex items-center gap-1"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  <span>Delete Review</span>
+                </button>
+              )}
+            </div>
           </div>
 
           {formError && (
@@ -375,6 +468,82 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
             </div>
           </div>
 
+          {/* Visibility Choice Option */}
+          <div className="p-4 bg-sky-50/70 border border-sky-200 rounded-xl space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold text-slate-800">
+                Public Review Visibility
+              </label>
+              <span className="text-[11px] font-semibold text-sky-800">Optional Anonymity</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <label
+                onClick={() => setIsAnonymous(false)}
+                className={`p-3 rounded-xl border cursor-pointer transition-all flex items-start gap-3 ${
+                  !isAnonymous
+                    ? 'bg-white border-sky-600 shadow-sm ring-1 ring-sky-600'
+                    : 'bg-white/60 border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="visibilityOption"
+                  checked={!isAnonymous}
+                  onChange={() => setIsAnonymous(false)}
+                  className="mt-0.5 text-sky-600 focus:ring-sky-500 cursor-pointer"
+                />
+                <div>
+                  <div className="flex items-center gap-1.5 font-bold text-slate-900">
+                    <Eye className="w-3.5 h-3.5 text-slate-600" />
+                    <span>Show my name</span>
+                  </div>
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    Published as <strong>{user?.name || 'Verified Parent'}</strong>
+                  </p>
+                </div>
+              </label>
+
+              <label
+                onClick={() => setIsAnonymous(true)}
+                className={`p-3 rounded-xl border cursor-pointer transition-all flex items-start gap-3 ${
+                  isAnonymous
+                    ? 'bg-white border-purple-600 shadow-sm ring-1 ring-purple-600'
+                    : 'bg-white/60 border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="visibilityOption"
+                  checked={isAnonymous}
+                  onChange={() => setIsAnonymous(true)}
+                  className="mt-0.5 text-purple-600 focus:ring-purple-500 cursor-pointer"
+                />
+                <div>
+                  <div className="flex items-center gap-1.5 font-bold text-purple-950">
+                    <EyeOff className="w-3.5 h-3.5 text-purple-600" />
+                    <span>Post anonymously</span>
+                  </div>
+                  <p className="text-[11px] text-purple-900 mt-1">
+                    Published publicly as <strong>Anonymous Parent</strong>
+                  </p>
+                </div>
+              </label>
+            </div>
+
+            {isAnonymous && (
+              <div className="p-3 bg-purple-50/90 border border-purple-200/80 rounded-lg text-[11px] text-purple-900 leading-relaxed space-y-1">
+                <div className="font-bold flex items-center gap-1.5 text-purple-950">
+                  <ShieldCheck className="w-3.5 h-3.5 text-purple-700" />
+                  <span>Public Anonymity Policy</span>
+                </div>
+                <p>
+                  Your review will be shown publicly without your name or identifying profile information. Admission Pitara retains the internal association with your verified account for moderation, duplicate review prevention, and policy enforcement.
+                </p>
+              </div>
+            )}
+          </div>
+
           {/* Review Title */}
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1">
@@ -392,15 +561,21 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
           {/* Review Details */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1">
-              Detailed Feedback for Parents <span className="text-rose-500">*</span>
-            </label>
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-xs font-bold text-slate-700">
+                Detailed Feedback for Parents <span className="text-rose-500">*</span>
+              </label>
+              <span className="text-[10px] text-slate-400 font-mono">
+                {comment.length} / 1000 chars
+              </span>
+            </div>
             <textarea
               rows={4}
               placeholder="Share details about classroom environment, fee transparency, transport convenience, extracurriculars, or administrative communication..."
               value={comment}
               onChange={e => setComment(e.target.value)}
               required
+              maxLength={1000}
               className="w-full text-xs p-3 border border-slate-300 rounded-lg focus:outline-none focus:border-sky-600 bg-white leading-relaxed"
             />
           </div>
@@ -423,7 +598,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
               leftIcon={<Send className="w-3.5 h-3.5" />}
               className="font-bold text-xs"
             >
-              Publish Verified Review
+              {userRating ? 'Update Verified Review' : 'Publish Verified Review'}
             </Button>
           </div>
         </form>
@@ -444,55 +619,106 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
             </p>
           </div>
         ) : (
-          ratings.map(item => (
-            <div
-              key={item.id}
-              className="p-5 rounded-2xl bg-white border border-[var(--color-border)] shadow-2xs space-y-3"
-            >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-sky-100 text-sky-800 font-bold text-xs flex items-center justify-center">
-                    {item.userName ? item.userName.charAt(0).toUpperCase() : 'P'}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-1.5">
-                      <h4 className="text-sm font-bold text-slate-900">{item.userName}</h4>
-                      {item.verifiedParent && (
-                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-200">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                          <span>Verified Parent</span>
-                        </span>
+          ratings.map(item => {
+            const isUserOwn = Boolean(userRating && userRating.id === item.id);
+            return (
+              <div
+                key={item.id}
+                className={`p-5 rounded-2xl bg-white border shadow-2xs space-y-3 transition-all ${
+                  isUserOwn ? 'border-sky-300 bg-sky-50/20' : 'border-[var(--color-border)]'
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <div
+                      className={`w-8 h-8 rounded-full font-bold text-xs flex items-center justify-center ${
+                        item.isAnonymous
+                          ? 'bg-purple-100 text-purple-800'
+                          : 'bg-sky-100 text-sky-800'
+                      }`}
+                    >
+                      {item.isAnonymous ? (
+                        <EyeOff className="w-4 h-4 text-purple-700" />
+                      ) : item.userName ? (
+                        item.userName.charAt(0).toUpperCase()
+                      ) : (
+                        'P'
                       )}
                     </div>
-                    <span className="text-[11px] text-slate-400">
-                      {item.userChildGrade ? `Child: ${item.userChildGrade}` : 'Parent in Greater Noida'}
-                    </span>
+                    <div>
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <h4 className="text-sm font-bold text-slate-900">
+                          {item.userName || 'Anonymous Parent'}
+                        </h4>
+                        {item.verifiedParent && (
+                          <span
+                            className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${
+                              item.isAnonymous
+                                ? 'text-purple-800 bg-purple-50 border-purple-200'
+                                : 'text-emerald-700 bg-emerald-50 border-emerald-200'
+                            }`}
+                          >
+                            <CheckCircle2
+                              className={`w-3 h-3 ${
+                                item.isAnonymous ? 'text-purple-600' : 'text-emerald-600'
+                              }`}
+                            />
+                            <span>
+                              {item.isAnonymous ? 'Verified Parent · Anonymous' : 'Verified Parent'}
+                            </span>
+                          </span>
+                        )}
+                        {isUserOwn && (
+                          <span className="text-[10px] font-bold text-sky-800 bg-sky-100 px-2 py-0.5 rounded-full border border-sky-200">
+                            Your Review
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-[11px] text-slate-400">
+                        {item.isAnonymous
+                          ? 'Parent in Greater Noida'
+                          : item.userChildGrade
+                          ? `Child: ${item.userChildGrade}`
+                          : 'Parent in Greater Noida'}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-0.5">
-                    {[1, 2, 3, 4, 5].map(s => (
-                      <Star
-                        key={s}
-                        className={`w-3.5 h-3.5 ${
-                          s <= item.score
-                            ? 'text-amber-400 fill-amber-400'
-                            : 'text-slate-200'
-                        }`}
-                      />
-                    ))}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-0.5">
+                        {[1, 2, 3, 4, 5].map(s => (
+                          <Star
+                            key={s}
+                            className={`w-3.5 h-3.5 ${
+                              s <= item.score
+                                ? 'text-amber-400 fill-amber-400'
+                                : 'text-slate-200'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-xs font-bold text-slate-700">{item.score}.0</span>
+                      <span className="text-[11px] text-slate-400 ml-1">
+                        {new Date(item.createdAt).toLocaleDateString(undefined, {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </span>
+                    </div>
+
+                    {isUserOwn && !showForm && (
+                      <button
+                        onClick={() => setShowForm(true)}
+                        className="text-xs font-bold text-sky-700 hover:text-sky-800 hover:underline cursor-pointer flex items-center gap-1"
+                      >
+                        <Edit3 className="w-3 h-3" />
+                        <span>Edit</span>
+                      </button>
+                    )}
                   </div>
-                  <span className="text-xs font-bold text-slate-700">{item.score}.0</span>
-                  <span className="text-[11px] text-slate-400 ml-2">
-                    {new Date(item.createdAt).toLocaleDateString(undefined, {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
-                  </span>
                 </div>
-              </div>
 
               {item.title && (
                 <h5 className="text-sm font-bold text-slate-800">{item.title}</h5>
@@ -525,8 +751,9 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
                 </div>
               )}
             </div>
-          ))
-        )}
+          );
+        })
+      )}
       </div>
     </section>
   );

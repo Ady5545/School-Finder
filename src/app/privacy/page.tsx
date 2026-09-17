@@ -33,9 +33,41 @@ export default function PrivacyPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[var(--color-content)]">3. Data Security</h2>
+          <h2 className="text-base font-bold text-[var(--color-content)]">3. Parent Reviews & Public Anonymity Handling</h2>
+          <p>
+            When you submit a rating or review for a school on Admission Pitara:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 text-xs">
+            <li>
+              <strong>Public Anonymity:</strong> You can select &quot;Post anonymously&quot;. When selected, our server strips your name, email address, and user ID from public API responses. The review appears publicly under the name &quot;Anonymous Parent&quot;.
+            </li>
+            <li>
+              <strong>Server-Side Record Keeping:</strong> The platform maintains an internal, server-side association between the review and your verified user account. This prevents duplicate rating manipulation, protects schools against fraudulent bots, and allows you to edit or delete your review in future sessions.
+            </li>
+            <li>
+              <strong>Identity Confidentiality:</strong> Your real name and email address for an anonymous review are strictly confidential and will never be shared with schools, site visitors, or external parties.
+            </li>
+          </ul>
+        </section>
+
+        <section className="space-y-2">
+          <h2 className="text-base font-bold text-[var(--color-content)]">4. Data Security</h2>
           <p>
             We implement industry-standard administrative and technical safeguards to protect stored user preferences and account credentials.
+          </p>
+        </section>
+
+        <section className="space-y-2 pt-2 border-t border-[var(--color-border)]">
+          <h2 className="text-base font-bold text-[var(--color-content)]">4. Privacy Contact</h2>
+          <p>
+            For questions or requests regarding your data and account privacy, contact our editorial team at{' '}
+            <a
+              href="mailto:enquiry.admissionpitara@gmail.com"
+              className="font-mono font-semibold text-[var(--color-primary)] hover:underline"
+            >
+              enquiry.admissionpitara@gmail.com
+            </a>
+            .
           </p>
         </section>
       </div>

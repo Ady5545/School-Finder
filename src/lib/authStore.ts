@@ -133,6 +133,7 @@ export interface SchoolRating {
     safety?: number;
   };
   verifiedParent: boolean;
+  isAnonymous?: boolean;
   status: 'published' | 'deleted';
   createdAt: string;
   updatedAt: string;
@@ -202,6 +203,24 @@ export interface AdminAuditLog {
   timestamp: string;
 }
 
+export type ReminderTiming = '7_days_before' | '3_days_before' | '1_day_before' | 'on_date';
+
+export interface AdmissionReminder {
+  id: string;
+  userId: string;
+  userEmail: string;
+  schoolSlug: string;
+  schoolName: string;
+  milestoneId: string;
+  milestoneLabel: string;
+  targetDate: string; // YYYY-MM-DD
+  timing: ReminderTiming;
+  status: 'active' | 'disabled';
+  createdAt: string;
+  updatedAt: string;
+  lastNotifiedAt?: string;
+}
+
 interface PersistentDbSchema {
   users: Record<string, ParentUser>;
   ratings: SchoolRating[];
@@ -210,6 +229,7 @@ interface PersistentDbSchema {
   activityEvents: ActivityEvent[];
   promotions: SchoolPromotionCampaign[];
   auditLogs: AdminAuditLog[];
+  reminders?: AdmissionReminder[];
 }
 
 // Global reference to withstand HMR and serverless restarts
@@ -224,6 +244,7 @@ const globalAuthStore = globalThis as unknown as {
   __ADMISSION_PITARA_ACTIVITY__?: ActivityEvent[];
   __ADMISSION_PITARA_PROMOTIONS__?: SchoolPromotionCampaign[];
   __ADMISSION_PITARA_AUDIT_LOGS__?: AdminAuditLog[];
+  __ADMISSION_PITARA_REMINDERS__?: AdmissionReminder[];
   __ADMISSION_PITARA_DB_LOADED__?: boolean;
 };
 
@@ -257,6 +278,9 @@ if (!globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__) {
 if (!globalAuthStore.__ADMISSION_PITARA_AUDIT_LOGS__) {
   globalAuthStore.__ADMISSION_PITARA_AUDIT_LOGS__ = [];
 }
+if (!globalAuthStore.__ADMISSION_PITARA_REMINDERS__) {
+  globalAuthStore.__ADMISSION_PITARA_REMINDERS__ = [];
+}
 
 const users = globalAuthStore.__ADMISSION_PITARA_USERS__;
 const otps = globalAuthStore.__ADMISSION_PITARA_OTPS__;
@@ -268,6 +292,7 @@ const schoolSaves = globalAuthStore.__ADMISSION_PITARA_SCHOOL_SAVES__;
 let activityEvents = globalAuthStore.__ADMISSION_PITARA_ACTIVITY__;
 let promotions = globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__;
 let auditLogs = globalAuthStore.__ADMISSION_PITARA_AUDIT_LOGS__;
+let reminders = globalAuthStore.__ADMISSION_PITARA_REMINDERS__;
 
 const JWT_SECRET = process.env.JWT_SECRET || 'ap_super_secure_jwt_secret_greater_noida_2025';
 
@@ -326,6 +351,7 @@ export function saveStoreToDisk(immediate = false): void {
         activityEvents: activityEvents.slice(0, 5000), // Retain up to 5,000 persistent activity events
         promotions,
         auditLogs: auditLogs.slice(0, 1000),
+        reminders,
       };
 
       const tempFile = `${DB_FILE}.tmp.${Date.now()}`;
@@ -400,6 +426,11 @@ function initDb(): void {
       if (Array.isArray(data.auditLogs)) {
         auditLogs.length = 0;
         auditLogs.push(...data.auditLogs);
+      }
+
+      if (Array.isArray(data.reminders)) {
+        reminders.length = 0;
+        reminders.push(...data.reminders);
       }
     }
   } catch (err) {
@@ -1396,6 +1427,44 @@ export function getSchoolRatingStats(slug: string): {
   };
 }
 
+export function sanitizePublicRating(r: SchoolRating): Omit<SchoolRating, 'userId' | 'userEmail'> & { userId?: string } {
+  if (r.isAnonymous) {
+    return {
+      id: r.id,
+      schoolSlug: r.schoolSlug,
+      score: r.score,
+      title: r.title,
+      comment: r.comment,
+      categories: r.categories,
+      verifiedParent: r.verifiedParent,
+      isAnonymous: true,
+      status: r.status,
+      createdAt: r.createdAt,
+      updatedAt: r.updatedAt,
+      userName: 'Anonymous Parent',
+    };
+  }
+  return {
+    id: r.id,
+    schoolSlug: r.schoolSlug,
+    score: r.score,
+    title: r.title,
+    comment: r.comment,
+    categories: r.categories,
+    verifiedParent: r.verifiedParent,
+    isAnonymous: false,
+    status: r.status,
+    createdAt: r.createdAt,
+    updatedAt: r.updatedAt,
+    userName: r.userName,
+    userChildGrade: r.userChildGrade,
+  };
+}
+
+export function getSanitizedSchoolRatings(slug: string) {
+  return getSchoolRatings(slug).map(r => sanitizePublicRating(r));
+}
+
 export function saveSchoolRating(ratingData: {
   schoolSlug: string;
   userId: string;
@@ -1410,6 +1479,7 @@ export function saveSchoolRating(ratingData: {
     faculty?: number;
     safety?: number;
   };
+  isAnonymous?: boolean;
 }): SchoolRating {
   const boundedScore = Math.max(1, Math.min(5, Math.round(ratingData.score)));
 
@@ -1423,11 +1493,12 @@ export function saveSchoolRating(ratingData: {
     const updated: SchoolRating = {
       ...existing,
       score: boundedScore,
-      title: ratingData.title?.trim() || existing.title,
+      title: ratingData.title !== undefined ? (ratingData.title ? ratingData.title.trim() : undefined) : existing.title,
       comment: ratingData.comment.trim(),
       categories: ratingData.categories || existing.categories,
       userChildGrade: ratingData.userChildGrade || existing.userChildGrade,
       userName: ratingData.userName || existing.userName,
+      isAnonymous: ratingData.isAnonymous !== undefined ? Boolean(ratingData.isAnonymous) : Boolean(existing.isAnonymous),
       status: 'published',
       updatedAt: now,
     };
@@ -1440,7 +1511,7 @@ export function saveSchoolRating(ratingData: {
       userId: ratingData.userId,
       targetType: 'review',
       targetId: existing.id,
-      details: { score: boundedScore },
+      details: { score: boundedScore, isAnonymous: updated.isAnonymous },
     });
 
     return updated;
@@ -1457,6 +1528,7 @@ export function saveSchoolRating(ratingData: {
     comment: ratingData.comment.trim(),
     categories: ratingData.categories,
     verifiedParent: true,
+    isAnonymous: Boolean(ratingData.isAnonymous),
     status: 'published',
     createdAt: now,
     updatedAt: now,
@@ -1471,7 +1543,7 @@ export function saveSchoolRating(ratingData: {
     userId: ratingData.userId,
     targetType: 'review',
     targetId: newRating.id,
-    details: { score: boundedScore },
+    details: { score: boundedScore, isAnonymous: newRating.isAnonymous },
   });
 
   return newRating;
@@ -2087,4 +2159,144 @@ export function getPublicSchoolPopularity(slug?: string) {
     };
   }
   return result;
+}
+
+// ----------------------------------------------------------------------------
+// ADMISSION REMINDERS & NOTIFICATIONS PERSISTENCE
+// ----------------------------------------------------------------------------
+
+export function createAdmissionReminder({
+  userId,
+  userEmail,
+  schoolSlug,
+  schoolName,
+  milestoneId,
+  milestoneLabel,
+  targetDate,
+  timing,
+}: {
+  userId: string;
+  userEmail: string;
+  schoolSlug: string;
+  schoolName: string;
+  milestoneId: string;
+  milestoneLabel: string;
+  targetDate: string;
+  timing: ReminderTiming;
+}): { success: boolean; reminder?: AdmissionReminder; error?: string } {
+  initDb();
+  if (!userId || !userEmail) {
+    return { success: false, error: 'Authentication required.' };
+  }
+  if (!schoolSlug || !schoolName) {
+    return { success: false, error: 'School information is required.' };
+  }
+  if (!milestoneId || !milestoneLabel || !targetDate) {
+    return { success: false, error: 'Valid admission milestone and date are required.' };
+  }
+  // Validate targetDate format YYYY-MM-DD or date
+  const parsedDate = new Date(targetDate);
+  if (isNaN(parsedDate.getTime())) {
+    return { success: false, error: 'Invalid target date for reminder.' };
+  }
+  const validTimings: ReminderTiming[] = ['7_days_before', '3_days_before', '1_day_before', 'on_date'];
+  if (!validTimings.includes(timing)) {
+    return { success: false, error: 'Invalid notification timing option.' };
+  }
+
+  const existingList = globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || [];
+  const existing = existingList.find(
+    r =>
+      r.userId === userId &&
+      r.schoolSlug === schoolSlug &&
+      r.milestoneId === milestoneId &&
+      r.timing === timing
+  );
+  if (existing) {
+    if (existing.status === 'disabled') {
+      existing.status = 'active';
+      existing.updatedAt = new Date().toISOString();
+      saveStoreToDisk();
+      return { success: true, reminder: existing };
+    }
+    return { success: false, error: 'An active reminder for this school date and timing option already exists.' };
+  }
+
+  const newReminder: AdmissionReminder = {
+    id: `rem_${crypto.randomBytes(8).toString('hex')}`,
+    userId,
+    userEmail,
+    schoolSlug,
+    schoolName,
+    milestoneId,
+    milestoneLabel,
+    targetDate,
+    timing,
+    status: 'active',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  if (!globalAuthStore.__ADMISSION_PITARA_REMINDERS__) {
+    globalAuthStore.__ADMISSION_PITARA_REMINDERS__ = [];
+  }
+  globalAuthStore.__ADMISSION_PITARA_REMINDERS__.push(newReminder);
+  saveStoreToDisk();
+
+  return { success: true, reminder: newReminder };
+}
+
+export function getUserReminders(userId: string): AdmissionReminder[] {
+  initDb();
+  if (!userId) return [];
+  return (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).filter(r => r.userId === userId);
+}
+
+export function updateReminderStatus(
+  userId: string,
+  reminderId: string,
+  status: 'active' | 'disabled'
+): { success: boolean; reminder?: AdmissionReminder; error?: string } {
+  initDb();
+  if (!userId || !reminderId) return { success: false, error: 'Invalid parameters.' };
+  const reminder = (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).find(
+    r => r.id === reminderId && r.userId === userId
+  );
+  if (!reminder) {
+    return { success: false, error: 'Reminder not found or permission denied.' };
+  }
+  reminder.status = status;
+  reminder.updatedAt = new Date().toISOString();
+  saveStoreToDisk();
+  return { success: true, reminder };
+}
+
+export function deleteReminder(
+  userId: string,
+  reminderId: string
+): { success: boolean; error?: string } {
+  initDb();
+  if (!userId || !reminderId) return { success: false, error: 'Invalid parameters.' };
+  const list = globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || [];
+  const idx = list.findIndex(r => r.id === reminderId && r.userId === userId);
+  if (idx === -1) {
+    return { success: false, error: 'Reminder not found or permission denied.' };
+  }
+  list.splice(idx, 1);
+  saveStoreToDisk();
+  return { success: true };
+}
+
+export function getAllActiveReminders(): AdmissionReminder[] {
+  initDb();
+  return (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).filter(r => r.status === 'active');
+}
+
+export function markReminderNotified(reminderId: string): void {
+  initDb();
+  const reminder = (globalAuthStore.__ADMISSION_PITARA_REMINDERS__ || []).find(r => r.id === reminderId);
+  if (reminder) {
+    reminder.lastNotifiedAt = new Date().toISOString();
+    saveStoreToDisk();
+  }
 }

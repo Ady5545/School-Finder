@@ -105,8 +105,8 @@ export const ScrollRevealManager: React.FC = () => {
         });
       },
       {
-        threshold: 0.01,
-        rootMargin: '0px 0px 120px 0px',
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px',
       }
     );
 
@@ -121,8 +121,8 @@ export const ScrollRevealManager: React.FC = () => {
         }
 
         const rect = el.getBoundingClientRect();
-        // If in viewport or near viewport (within 60px), reveal immediately
-        if (rect.top < vh + 60 && rect.bottom > -60) {
+        // If in initial above-the-fold viewport, reveal immediately
+        if (rect.top < vh - 20 && rect.bottom > 0) {
           el.classList.remove('is-pending');
           el.classList.add('is-revealed', 'is-settled');
         } else {

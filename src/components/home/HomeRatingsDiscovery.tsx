@@ -54,7 +54,7 @@ export const HomeRatingsDiscovery: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-[#f7f5f0] border-y border-stone-200/80">
+    <section className="py-16 bg-[#f7f5f0] border-y border-stone-200/80 reveal-on-scroll">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">

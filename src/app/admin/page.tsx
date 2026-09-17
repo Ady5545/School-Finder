@@ -109,6 +109,7 @@ interface ReviewItem {
   title?: string;
   comment: string;
   verifiedParent: boolean;
+  isAnonymous?: boolean;
   status: 'published' | 'deleted';
   createdAt: string;
   deletionReason?: string;
@@ -1199,11 +1200,16 @@ export default function AdminPage() {
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-3">
                       <div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <span className="font-bold text-sm text-white">{review.schoolName}</span>
                           <span className="flex items-center text-amber-400 font-black text-xs">
                             ★ {review.score}.0
                           </span>
+                          {review.isAnonymous && (
+                            <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold border border-purple-500/30">
+                              ANONYMOUS TO PUBLIC
+                            </span>
+                          )}
                           {review.status === 'deleted' && (
                             <span className="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 text-[10px] font-bold border border-rose-500/30">
                               DELETED / HIDDEN

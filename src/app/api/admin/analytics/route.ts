@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { requireAdminAuth } from '../../../../lib/adminAuth';
 import {
-  verifySessionToken,
-  getUserById,
   getDashboardAnalytics,
   getAllRatings,
   getActivityEvents,
@@ -11,40 +10,12 @@ import {
 
 export async function GET(req: NextRequest) {
   try {
-    const cookieToken = req.cookies.get('ap_session')?.value;
-    const authHeader = req.headers.get('Authorization');
-    const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    const token = cookieToken || headerToken;
-
-    if (!token) {
-      return NextResponse.json(
-        { success: false, message: 'Administrative authentication required.' },
-        { status: 401 }
-      );
+    const auth = requireAdminAuth(req);
+    if (!auth.authorized || !auth.user) {
+      return auth.errorResponse || NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
     }
 
-    const session = verifySessionToken(token);
-    if (!session || !session.sub) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid or expired administrative session.' },
-        { status: 401 }
-      );
-    }
-
-    const user = getUserById(session.sub);
-    const adminEmails = (process.env.ADMIN_EMAILS || 'admin@admissionpitara.com')
-      .split(',')
-      .map(e => e.trim().toLowerCase());
-
-    const isAdmin = user?.role === 'admin' || (user?.email && adminEmails.includes(user.email.toLowerCase()));
-
-    if (!user || !isAdmin) {
-      return NextResponse.json(
-        { success: false, message: 'Access denied: Admin privileges required.' },
-        { status: 403 }
-      );
-    }
-
+    const user = auth.user;
     const analytics = getDashboardAnalytics();
     const ratings = getAllRatings();
     const recentActivity = getActivityEvents(100);
@@ -74,38 +45,9 @@ export async function GET(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const cookieToken = req.cookies.get('ap_session')?.value;
-    const authHeader = req.headers.get('Authorization');
-    const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
-    const token = cookieToken || headerToken;
-
-    if (!token) {
-      return NextResponse.json(
-        { success: false, message: 'Administrative authentication required.' },
-        { status: 401 }
-      );
-    }
-
-    const session = verifySessionToken(token);
-    if (!session || !session.sub) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid or expired administrative session.' },
-        { status: 401 }
-      );
-    }
-
-    const user = getUserById(session.sub);
-    const adminEmails = (process.env.ADMIN_EMAILS || 'admin@admissionpitara.com')
-      .split(',')
-      .map(e => e.trim().toLowerCase());
-
-    const isAdmin = user?.role === 'admin' || (user?.email && adminEmails.includes(user.email.toLowerCase()));
-
-    if (!user || !isAdmin) {
-      return NextResponse.json(
-        { success: false, message: 'Access denied: Admin privileges required.' },
-        { status: 403 }
-      );
+    const auth = requireAdminAuth(req);
+    if (!auth.authorized || !auth.user) {
+      return auth.errorResponse || NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(req.url);
@@ -125,3 +67,4 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ success: false, message: 'Failed to delete rating' }, { status: 500 });
   }
 }
+

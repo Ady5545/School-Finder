@@ -1,8 +1,14 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { verifySmtpConfig } from '../../../../lib/emailService';
+import { requireAdminAuth } from '../../../../lib/adminAuth';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const auth = requireAdminAuth(req);
+    if (!auth.authorized) {
+      return auth.errorResponse || NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    }
+
     const result = await verifySmtpConfig();
     return NextResponse.json(result, { status: result.success ? 200 : 503 });
   } catch (err: unknown) {
@@ -16,3 +22,4 @@ export async function GET() {
     );
   }
 }
+

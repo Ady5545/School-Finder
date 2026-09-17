@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '../../lib/authContext';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { OtpInput } from '../ui/OtpInput';
 import { Select } from '../ui/Select';
 import { Checkbox } from '../ui/Checkbox';
 import { Tooltip } from '../ui/Tooltip';
@@ -735,56 +736,68 @@ export const RegisterForm: React.FC = () => {
           <div id="step-2-email-verification" className="space-y-6">
             <div className="bg-amber-50/70 border border-amber-200/80 rounded-xl p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-800">
+                <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-800 shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-amber-950">Verification Code Sent To</p>
-                  <p className="text-sm font-medium text-stone-800">{email}</p>
+                  <p className="text-sm font-medium text-stone-800 break-all">{email}</p>
                 </div>
               </div>
               <button
                 type="button"
-                onClick={() => setStep(1)}
-                className="text-xs text-amber-800 hover:text-amber-950 font-semibold flex items-center gap-1 underline"
+                onClick={() => {
+                  setStep(1);
+                  setErrorMessage(null);
+                }}
+                className="text-xs text-amber-800 hover:text-amber-950 font-semibold flex items-center gap-1 underline shrink-0 ml-2"
               >
                 <Edit3 className="w-3.5 h-3.5" />
-                <span>Edit</span>
+                <span>Change Email</span>
               </button>
             </div>
 
             {devOtpHint && (
               <div className="p-3 bg-stone-100 border border-stone-300 rounded-lg text-xs text-stone-700 flex items-center justify-between">
                 <span>
-                  <strong>Development Mode OTP:</strong> {devOtpHint}
+                  <strong>Development Mode Code:</strong> {devOtpHint}
                 </span>
                 <button
                   type="button"
                   onClick={() => setEmailOtp(devOtpHint)}
-                  className="px-2 py-1 bg-white border border-stone-300 rounded text-stone-800 hover:bg-stone-50 font-medium"
+                  className="px-2 py-1 bg-white border border-stone-300 rounded text-stone-800 hover:bg-stone-50 font-medium text-xs"
                 >
                   Auto Fill
                 </button>
               </div>
             )}
 
-            <div className="space-y-3">
-              <label htmlFor="email-otp-input" className="block text-xs font-bold uppercase tracking-wider text-stone-700">
+            <div className="space-y-4">
+              <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 text-center">
                 Enter 6-Digit Email Code
               </label>
-              <div className="relative">
-                <Input
-                  id="email-otp-input"
-                  type="text"
-                  maxLength={6}
-                  placeholder="• • • • • •"
-                  value={emailOtp}
-                  onChange={e => setEmailOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                  disabled={isSubmitting || emailVerified}
-                  className="text-center font-mono text-xl tracking-widest pl-4"
-                  autoFocus
-                />
+
+              <OtpInput
+                length={6}
+                value={emailOtp}
+                onChange={setEmailOtp}
+                onComplete={() => {
+                  // Optional auto-submit when all 6 digits are entered
+                }}
+                disabled={isSubmitting || emailVerified}
+                hasError={Boolean(errorMessage)}
+              />
+
+              <div className="p-3 bg-stone-50 rounded-xl border border-stone-200/80 text-[11px] text-stone-600 space-y-1">
+                <p className="font-semibold text-stone-800 flex items-center gap-1.5">
+                  <Info className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                  <span>Didn&apos;t see the email?</span>
+                </p>
+                <p className="leading-relaxed pl-5">
+                  Check your spam or junk folder. The code is valid for 10 minutes.
+                </p>
               </div>
+
               <div className="flex items-center justify-between text-xs text-stone-500 pt-1">
                 <span>Didn&apos;t receive the code?</span>
                 <button
@@ -793,7 +806,7 @@ export const RegisterForm: React.FC = () => {
                   disabled={resendCooldown > 0 || isSubmitting}
                   className="text-amber-800 font-semibold hover:underline disabled:text-stone-400 disabled:no-underline"
                 >
-                  {resendCooldown > 0 ? `Resend in ${resendCooldown}s` : 'Resend Code'}
+                  {resendCooldown > 0 ? `Resend Code in ${resendCooldown}s` : 'Resend Code'}
                 </button>
               </div>
             </div>
@@ -810,7 +823,7 @@ export const RegisterForm: React.FC = () => {
               {isSubmitting ? (
                 <>
                   <RefreshCw className="w-4 h-4 animate-spin mr-2" />
-                  Verifying & Registering...
+                  Verifying & Creating Account...
                 </>
               ) : (
                 <>

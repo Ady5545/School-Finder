@@ -166,8 +166,8 @@ export function calculateSchoolCompleteness(s: School): SchoolCompletenessCheckl
     {
       key: 'fees_structure',
       label: 'Transparent Fee Structure',
-      passed: Boolean(s.fees && (s.fees.cardFee > 0 || s.fees.rangeText || s.fees.tuitionAnnual)),
-      description: s.fees?.rangeText || `₹${s.fees?.cardFee?.toLocaleString('en-IN') || 0}/yr`,
+      passed: Boolean(s.fees && ((s.fees.cardFee !== null && s.fees.cardFee !== undefined && s.fees.cardFee > 0) || s.fees.rangeText || s.fees.tuitionAnnual)),
+      description: s.fees?.rangeText || (s.fees?.cardFee ? `₹${s.fees.cardFee.toLocaleString('en-IN')}/yr` : 'Disclosed upon request'),
       severity: 'required',
     },
     {

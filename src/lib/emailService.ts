@@ -395,7 +395,7 @@ export interface AdmissionAlertEmailItem {
   daysRemaining: number;
   process?: string;
   area?: string;
-  verifiedFee?: number;
+  verifiedFee?: number | null;
 }
 
 export interface SendAdmissionAlertEmailOptions {

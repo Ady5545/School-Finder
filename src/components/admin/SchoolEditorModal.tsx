@@ -249,6 +249,7 @@ export function SchoolEditorModal({
         mapEmbedUrl: null,
       },
       fees: {
+        ...(schoolToEdit?.fees || {}),
         cardFee: Number(cardFee) || 120000,
         currency: 'INR',
         rangeText: rangeText.trim() || `₹${Number(cardFee).toLocaleString('en-IN')}/yr`,
@@ -257,7 +258,7 @@ export function SchoolEditorModal({
         admissionFee: admissionFee ? Number(admissionFee) : null,
         verificationStatus: feeVerificationStatus,
         sourceUrl: feeSourceUrl.trim() || undefined,
-        table: [],
+        table: schoolToEdit?.fees?.table || [],
       },
       admissions: {
         status: admissionStatus,

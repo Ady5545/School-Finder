@@ -28,18 +28,34 @@ export const SchoolBadge: React.FC<SchoolBadgeProps> = ({ type, value, className
   }
 
   if (type === 'verification') {
-    if (value === 'verified_from_source') {
+    if (value === 'verified_from_source' || value === 'verified_official') {
       return (
-        <Badge variant="success" size="sm" className={className}>
+        <Badge variant="success" size="sm" className={cn('bg-emerald-50 text-emerald-800 border-emerald-200 gap-1', className)}>
           <CheckCircle2 className="w-3 h-3 text-emerald-600" aria-hidden="true" />
           <span>Verified Fees</span>
         </Badge>
       );
     }
+    if (value === 'calculated_from_official') {
+      return (
+        <Badge variant="info" size="sm" className={cn('bg-blue-50 text-blue-800 border-blue-200 gap-1', className)}>
+          <CheckCircle2 className="w-3 h-3 text-blue-600" aria-hidden="true" />
+          <span>Calculated Annual</span>
+        </Badge>
+      );
+    }
+    if (value === 'estimated_historical' || value === 'estimated') {
+      return (
+        <Badge variant="warning" size="sm" className={cn('bg-amber-50 text-amber-800 border-amber-200 gap-1', className)}>
+          <AlertCircle className="w-3 h-3 text-amber-600" aria-hidden="true" />
+          <span>Historical Fee Reference</span>
+        </Badge>
+      );
+    }
     return (
-      <Badge variant="warning" size="sm" className={className}>
-        <AlertCircle className="w-3 h-3 text-amber-600" aria-hidden="true" />
-        <span>Audit Pending</span>
+      <Badge variant="warning" size="sm" className={cn('bg-slate-100 text-slate-700 border-slate-200 gap-1', className)}>
+        <AlertCircle className="w-3 h-3 text-slate-500" aria-hidden="true" />
+        <span>Fee Audit Pending</span>
       </Badge>
     );
   }

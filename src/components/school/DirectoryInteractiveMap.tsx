@@ -155,8 +155,8 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
   const schoolsWithCoordinates = useMemo(() => {
     return schools.filter(
       (s): s is School & { location: { coordinates: { lat: number; lng: number } } } =>
-        typeof s.location.coordinates?.lat === 'number' &&
-        typeof s.location.coordinates?.lng === 'number'
+        typeof s.location?.coordinates?.lat === 'number' &&
+        typeof s.location?.coordinates?.lng === 'number'
     );
   }, [schools]);
 

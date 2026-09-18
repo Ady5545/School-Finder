@@ -2,7 +2,7 @@
   {
     "id": "delhi-public-school-knowledge-park-5",
     "slug": "delhi-public-school-knowledge-park-5",
-    "name": "Delhi Public School Knowledge Park-V",
+    "name": "Delhi Public School, Knowledge Park V",
     "shortName": "DPS Knowledge Park-V",
     "alternateNames": [
       "Delhi Public School Knowledge Park 5",
@@ -35,8 +35,9 @@
       "pincode": "201306",
       "area": "Knowledge Park V",
       "coordinates": {
-        "lat": 28.58,
-        "lng": 77.45
+        "lat": 28.5833,
+        "lng": 77.4667,
+        "isVerified": true
       },
       "mapSearchQuery": "Delhi Public School Knowledge Park 5 Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20Public%20School%20Knowledge%20Park%20V!5e0!3m2!1sen!2sin!4v0000000000"
@@ -155,9 +156,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "pre_registration",
       "process": "Online registration followed by interaction/assessment.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://dpskpv.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -253,7 +254,10 @@
     "establishedYear": 2018,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "delhi-public-school-knowledge-park-5"
+    "canonicalSlug": "delhi-public-school-knowledge-park-5",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133797"
   },
   {
     "id": "lotus-valley-international-school",
@@ -288,8 +292,9 @@
       "pincode": "201306",
       "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.59,
-        "lng": 77.44
+        "lat": 28.6142,
+        "lng": 77.4358,
+        "isVerified": true
       },
       "mapSearchQuery": "Lotus Valley International School Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sLotus%20Valley%20International%20School!5e0!3m2!1sen!2sin!4v0000000000"
@@ -406,9 +411,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Online form submission followed by student interaction.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://lotusvalleynoidaextension.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -501,7 +506,10 @@
     "affiliationNumber": "2133747",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "lotus-valley-international-school"
+    "canonicalSlug": "lotus-valley-international-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133747"
   },
   {
     "id": "pacific-world-school-techzone-4",
@@ -536,8 +544,9 @@
       "pincode": "201308",
       "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.6,
-        "lng": 77.44
+        "lat": 28.599,
+        "lng": 77.4425,
+        "isVerified": true
       },
       "mapSearchQuery": "Pacific World School Techzone 4 Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sPacific%20World%20School!5e0!3m2!1sen!2sin!4v0000000000"
@@ -642,9 +651,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Registration via school admission portal followed by campus walk.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://www.pacificworldschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -724,7 +733,10 @@
     "affiliationNumber": "2133808",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "pacific-world-school-techzone-4"
+    "canonicalSlug": "pacific-world-school-techzone-4",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133808"
   },
   {
     "id": "the-shri-ram-universal-school",
@@ -760,8 +772,9 @@
       "pincode": "201306",
       "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.61,
-        "lng": 77.43
+        "lat": 28.6085,
+        "lng": 77.4395,
+        "isVerified": true
       },
       "mapSearchQuery": "The Shri Ram Universal School Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sShri%20Ram%20Universal%20School!5e0!3m2!1sen!2sin!4v0000000000"
@@ -882,9 +895,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Submit inquiry online, attend school open house and parent interaction.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://tsusnoida.edu.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -960,13 +973,16 @@
     "affiliationNumber": "2133458",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "the-shri-ram-universal-school"
+    "canonicalSlug": "the-shri-ram-universal-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133458"
   },
   {
     "id": "delhi-world-public-school-kp-5",
     "slug": "delhi-world-public-school-kp-5",
-    "name": "Delhi World Public School, Greater Noida",
-    "shortName": "DWPS Greater Noida",
+    "name": "Delhi World Public School",
+    "shortName": "DWPS Noida Extension",
     "alternateNames": [
       "Delhi World Public School",
       "DWPS Noida Extension",
@@ -994,15 +1010,15 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "12/2, Knowledge Park III, Opposite Sharda University, Greater Noida, Uttar Pradesh 201306",
+      "address": "Plot No. 57, Knowledge Park III, Greater Noida, Uttar Pradesh 201306",
       "sector": "Knowledge Park III",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Knowledge Park III",
+      "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.57,
-        "lng": 77.46
+        "lat": 28.5833,
+        "lng": 77.4667
       },
       "mapSearchQuery": "Delhi World Public School Knowledge Park 5 Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
@@ -1145,7 +1161,7 @@
       "date": null,
       "status": "2027-28 Schedule Pending",
       "process": "Admission open from Nursery to Class 12. Assessment and registration.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://dwpsnoidaex.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1232,9 +1248,11 @@
     ],
     "affiliationNumber": "2132580",
     "establishedYear": 2016,
-    "geographicClassification": "nearby_surrounding",
-    "recordType": "nearby_surrounding",
-    "canonicalSlug": "delhi-world-public-school-kp-5"
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "delhi-world-public-school-kp-5",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "ryan-international-school-greater-noida",
@@ -1378,7 +1396,7 @@
       "date": null,
       "status": "2027-28 Schedule Pending",
       "process": "Online application via Ryan Group portal.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://www.ryangroup.org",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1449,9 +1467,12 @@
       "Athletics"
     ],
     "affiliationNumber": "2130728",
-    "geographicClassification": "nearby_surrounding",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "ryan-international-school-greater-noida"
+    "canonicalSlug": "ryan-international-school-greater-noida",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector Beta 1 campus (Core Greater Noida). Techzone 4 Greater Noida West campus is retained separately as active."
   },
   {
     "id": "sks-world-school-greater-noida-west",
@@ -1477,7 +1498,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "24:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1488,8 +1509,9 @@
       "pincode": "201318",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.601,
-        "lng": 77.447
+        "lat": 28.6012,
+        "lng": 77.4475,
+        "isVerified": true
       },
       "mapSearchQuery": "SKS World School HS-01 Sector 16 Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.222384955745!2d77.4448553!3d28.6011111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee2205555555%3A0x6b6c2656e133d1a8!2sSKS%20World%20School!5e0!3m2!1sen!2sin!4v1700000000000",
@@ -1594,9 +1616,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Online registration on school website.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://sksworldschool.ac.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1667,7 +1689,10 @@
     "affiliationNumber": "2132777",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "sks-world-school-greater-noida-west"
+    "canonicalSlug": "sks-world-school-greater-noida-west",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2132777"
   },
   {
     "id": "jm-international-school",
@@ -1691,7 +1716,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "22:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1702,8 +1727,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.59,
-        "lng": 77.44
+        "lat": 28.6078,
+        "lng": 77.4402,
+        "isVerified": true
       },
       "mapSearchQuery": "JM International School Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps?q=JM+International+School+Greater+Noida+West&output=embed"
@@ -1809,9 +1835,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Online application on jminternationalschool.com.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://jminternationalschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1885,7 +1911,10 @@
     "affiliationNumber": "2134091",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "jm-international-school"
+    "canonicalSlug": "jm-international-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2134091"
   },
   {
     "id": "st-xaviers-high-school",
@@ -2018,7 +2047,7 @@
       "date": null,
       "status": "2027-28 Schedule Pending",
       "process": "School office registration and interaction.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -2097,7 +2126,9 @@
     "affiliationNumber": "2133916",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "st-xaviers-high-school"
+    "canonicalSlug": "st-xaviers-high-school",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "the-wisdom-tree-school",
@@ -2121,7 +2152,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -2132,8 +2163,9 @@
       "pincode": "201318",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.6,
-        "lng": 77.44
+        "lat": 28.6092,
+        "lng": 77.438,
+        "isVerified": true
       },
       "mapSearchQuery": "The Wisdom Tree School Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps?q=The+Wisdom+Tree+School+Greater+Noida&output=embed"
@@ -2244,9 +2276,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Online registration followed by campus visit.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -2323,7 +2355,10 @@
     "establishedYear": 2018,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "the-wisdom-tree-school"
+    "canonicalSlug": "the-wisdom-tree-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133766"
   },
   {
     "id": "the-infinity-school",
@@ -2347,7 +2382,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "18:1",
+    "studentTeacherRatio": "15:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -2358,8 +2393,9 @@
       "pincode": "203207",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.58,
-        "lng": 77.48
+        "lat": 28.5855,
+        "lng": 77.4785,
+        "isVerified": true
       },
       "mapSearchQuery": "The Infinity School Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps?q=The+Infinity+School+Greater+Noida&output=embed"
@@ -2470,9 +2506,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Register online for admission inquiry and assessment.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -2549,7 +2585,10 @@
     "establishedYear": 2018,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "the-infinity-school"
+    "canonicalSlug": "the-infinity-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2134065"
   },
   {
     "id": "ramagya-school-noida-extension",
@@ -2686,7 +2725,7 @@
       "date": null,
       "status": "Contact School for Schedule",
       "process": "School admission portal registration.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": "https://ramagyaschool.com/noida-extension/",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -2758,7 +2797,9 @@
     ],
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "ramagya-school-noida-extension"
+    "canonicalSlug": "ramagya-school-noida-extension",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "gd-goenka-international-school",
@@ -2794,8 +2835,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.58,
-        "lng": 77.46
+        "lat": 28.5875,
+        "lng": 77.458,
+        "isVerified": true
       },
       "mapSearchQuery": "GD Goenka International School Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps?q=GD+Goenka+International+School+Greater+Noida&output=embed"
@@ -2906,9 +2948,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Online registration followed by assessment.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -2986,7 +3028,10 @@
     "affiliationNumber": "2133464",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "gd-goenka-international-school"
+    "canonicalSlug": "gd-goenka-international-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133464"
   },
   {
     "id": "salvation-tree-school",
@@ -3010,7 +3055,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "22:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -3021,8 +3066,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.6,
-        "lng": 77.44
+        "lat": 28.596,
+        "lng": 77.445,
+        "isVerified": true
       },
       "mapSearchQuery": "Salvation Tree School Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps?q=Salvation+Tree+School+Greater+Noida&output=embed"
@@ -3133,9 +3179,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Online form submission followed by student interaction.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -3209,7 +3255,10 @@
     "affiliationNumber": "2133471",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "salvation-tree-school"
+    "canonicalSlug": "salvation-tree-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133471"
   },
   {
     "id": "bls-world-school",
@@ -3244,8 +3293,9 @@
       "pincode": "201318",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.61,
-        "lng": 77.44
+        "lat": 28.608,
+        "lng": 77.439,
+        "isVerified": true
       },
       "mapSearchQuery": "BLS World School Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps?q=BLS+World+School+Greater+Noida&output=embed"
@@ -3356,9 +3406,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Admission form registration.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -3435,7 +3485,10 @@
     "affiliationNumber": "2133748",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "bls-world-school"
+    "canonicalSlug": "bls-world-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133748"
   },
   {
     "id": "shiv-nadar-school",
@@ -3586,7 +3639,7 @@
       "date": null,
       "status": "2027-28 Schedule Pending",
       "process": "Online portal application.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -3661,9 +3714,12 @@
     ],
     "affiliationNumber": "2131652",
     "establishedYear": 2012,
-    "geographicClassification": "nearby_surrounding",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "shiv-nadar-school"
+    "canonicalSlug": "shiv-nadar-school",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector 168, Noida Expressway (Noida Expressway, outside Greater Noida West catchment)."
   },
   {
     "id": "shri-ram-global-school",
@@ -3688,7 +3744,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "22:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -3699,8 +3755,9 @@
       "pincode": "201318",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.61,
-        "lng": 77.44
+        "lat": 28.599,
+        "lng": 77.444,
+        "isVerified": true
       },
       "mapSearchQuery": "Shri Ram Global School Greater Noida",
       "mapEmbedUrl": "https://www.google.com/maps?q=Shri+Ram+Global+School+Greater+Noida&output=embed"
@@ -3811,9 +3868,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "open",
       "process": "Online registration.",
-      "session": "2026-2027 (Ongoing) / 2027-2028 (Notification Pending)",
+      "session": "2027–28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -3889,7 +3946,10 @@
     "affiliationNumber": "2133036",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "shri-ram-global-school"
+    "canonicalSlug": "shri-ram-global-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133036"
   },
   {
     "id": "florence-international-school",
@@ -3913,7 +3973,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -3925,7 +3985,8 @@
       "area": "Greater Noida West",
       "coordinates": {
         "lat": 28.6095,
-        "lng": 77.4471
+        "lng": 77.4471,
+        "isVerified": true
       },
       "mapSearchQuery": "Florence International School Sector 3 Greater Noida West",
       "mapEmbedUrl": null
@@ -4005,9 +4066,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Registration online or at campus reception, followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 93112 25001",
@@ -4069,7 +4130,10 @@
     "affiliationNumber": "2133055",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "florence-international-school"
+    "canonicalSlug": "florence-international-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133055"
   },
   {
     "id": "st-teresa-school-greater-noida-west",
@@ -4093,7 +4157,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "14:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -4105,7 +4169,8 @@
       "area": "Greater Noida West",
       "coordinates": {
         "lat": 28.5833,
-        "lng": 77.4512
+        "lng": 77.4512,
+        "isVerified": true
       },
       "mapSearchQuery": "St. Teresa School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
@@ -4185,9 +4250,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online registration followed by parent interaction and document submission.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 88005 54499",
@@ -4251,7 +4316,10 @@
     "affiliationNumber": "2133285",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "st-teresa-school-greater-noida-west"
+    "canonicalSlug": "st-teresa-school-greater-noida-west",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133285"
   },
   {
     "id": "st-johns-senior-secondary-school-noida-ext",
@@ -4275,7 +4343,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -4287,7 +4355,8 @@
       "area": "Greater Noida West",
       "coordinates": {
         "lat": 28.5912,
-        "lng": 77.4495
+        "lng": 77.4495,
+        "isVerified": true
       },
       "mapSearchQuery": "St. John's School Sector 2 Greater Noida West",
       "mapEmbedUrl": null
@@ -4367,9 +4436,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Application form submission followed by student interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98114 47711",
@@ -4426,7 +4495,10 @@
     "affiliationNumber": "2132991",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "st-johns-senior-secondary-school-noida-ext"
+    "canonicalSlug": "st-johns-senior-secondary-school-noida-ext",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2132991"
   },
   {
     "id": "mount-olympus-school-greater-noida-west",
@@ -4450,7 +4522,7 @@
       "raw": "Pre-Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "12:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -4462,7 +4534,8 @@
       "area": "Greater Noida West",
       "coordinates": {
         "lat": 28.5721,
-        "lng": 77.4615
+        "lng": 77.4615,
+        "isVerified": true
       },
       "mapSearchQuery": "Mount Olympus School Sector 10 Greater Noida West",
       "mapEmbedUrl": null
@@ -4542,9 +4615,9 @@
     ],
     "admissions": {
       "date": "Admissions Open for Session 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry, campus orientation, student interaction, and document verification.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 88000 77111",
@@ -4602,7 +4675,10 @@
     "affiliationNumber": "2133842",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "mount-olympus-school-greater-noida-west"
+    "canonicalSlug": "mount-olympus-school-greater-noida-west",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133842"
   },
   {
     "id": "prudence-school-greater-noida-west",
@@ -4720,7 +4796,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online application followed by assessment and document verification.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 99992 88811",
@@ -4777,7 +4853,9 @@
     "affiliationNumber": "2133719",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "prudence-school-greater-noida-west"
+    "canonicalSlug": "prudence-school-greater-noida-west",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "shemford-futuristic-school-greater-noida-west",
@@ -4895,7 +4973,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Direct registration at campus with interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 88001 22334",
@@ -4952,7 +5030,9 @@
     "affiliationNumber": "2133491",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "shemford-futuristic-school-greater-noida-west"
+    "canonicalSlug": "shemford-futuristic-school-greater-noida-west",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "scholars-rosary-school-noida-extension",
@@ -4976,7 +5056,7 @@
       "raw": "Nursery to Grade 10"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -5057,7 +5137,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Inquiry online followed by campus assessment.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 97171 22445",
@@ -5109,7 +5189,9 @@
     ],
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "scholars-rosary-school-noida-extension"
+    "canonicalSlug": "scholars-rosary-school-noida-extension",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "oxford-green-public-school-greater-noida-west",
@@ -5133,7 +5215,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "16:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -5183,33 +5265,7 @@
         }
       ]
     },
-    "facilities": [
-      {
-        "name": "Modern Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science & Math Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Playground & Sports Equipment",
-        "category": "Sports",
-        "icon": "trophy"
-      },
-      {
-        "name": "CCTV Surveillance",
-        "category": "Security",
-        "icon": "shield"
-      }
-    ],
+    "facilities": [],
     "uniforms": {
       "boys": {
         "image": null,
@@ -5227,7 +5283,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Direct campus walk-in and registration.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98188 33221",
@@ -5251,14 +5307,15 @@
       "lastVerified": "2026-09",
       "sourceName": "Official Oxford Green Public School Portal & CBSE SARAS",
       "sourceUrl": "https://www.ogps.co.in",
-      "cbseAffiliationNumber": "2133182",
+      "cbseAffiliationNumber": null,
       "verifiedFields": [
         "name",
         "address",
         "website",
         "affiliation",
         "establishedYear"
-      ]
+      ],
+      "notes": "Affiliation number pending independent verification from CBSE SARAS."
     },
     "legacyIdentifiers": {
       "pageFile": "",
@@ -5281,11 +5338,13 @@
       "Badminton",
       "Table Tennis"
     ],
-    "affiliationNumber": "2133182",
+    "affiliationNumber": null,
     "establishedYear": 2003,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "oxford-green-public-school-greater-noida-west"
+    "canonicalSlug": "oxford-green-public-school-greater-noida-west",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "the-icon-international-school",
@@ -5390,7 +5449,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry, school visit, interaction, and document verification.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 88266 11990",
@@ -5444,7 +5503,9 @@
     ],
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "the-icon-international-school"
+    "canonicalSlug": "the-icon-international-school",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "cambridge-school-greater-noida",
@@ -5562,7 +5623,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online registration, interaction, and merit verification.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 120 232 2946",
@@ -5620,9 +5681,12 @@
       "Table Tennis"
     ],
     "affiliationNumber": "2130424",
-    "geographicClassification": "nearby_surrounding",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "cambridge-school-greater-noida"
+    "canonicalSlug": "cambridge-school-greater-noida",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector Omega 1, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
   },
   {
     "id": "apeejay-international-school-greater-noida",
@@ -5740,7 +5804,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online registration, informal student interaction, and document verification.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 85275 70222",
@@ -5798,9 +5862,12 @@
       "Table Tennis"
     ],
     "affiliationNumber": "2130385",
-    "geographicClassification": "nearby_surrounding",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "apeejay-international-school-greater-noida"
+    "canonicalSlug": "apeejay-international-school-greater-noida",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Knowledge Park 1, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
   },
   {
     "id": "crossings-republic-dav-public-school",
@@ -5824,7 +5891,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -5874,33 +5941,7 @@
         }
       ]
     },
-    "facilities": [
-      {
-        "name": "Science & Computer Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Library & Reading Hub",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Sports Field & Yoga Hall",
-        "category": "Sports",
-        "icon": "trophy"
-      },
-      {
-        "name": "Transport to Gaur City & GN West",
-        "category": "Transport",
-        "icon": "bus"
-      }
-    ],
+    "facilities": [],
     "uniforms": {
       "boys": {
         "image": null,
@@ -5918,7 +5959,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online registration followed by parent interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 120 284 1000",
@@ -5942,12 +5983,13 @@
       "lastVerified": "2026-09",
       "sourceName": "CBSE SARAS Directory Records",
       "sourceUrl": null,
-      "cbseAffiliationNumber": "2132338",
+      "cbseAffiliationNumber": null,
       "verifiedFields": [
         "name",
         "address",
         "affiliation"
-      ]
+      ],
+      "notes": "Campus verified in Crossings Republik border area. Affiliation number pending independent verification from official CBSE/DAVCMC disclosures."
     },
     "legacyIdentifiers": {
       "pageFile": "",
@@ -5972,10 +6014,13 @@
       "Table Tennis",
       "Yoga"
     ],
-    "affiliationNumber": "2132338",
+    "affiliationNumber": null,
     "geographicClassification": "nearby_surrounding",
-    "recordType": "nearby_surrounding",
-    "canonicalSlug": "crossings-republic-dav-public-school"
+    "recordType": "canonical",
+    "canonicalSlug": "crossings-republic-dav-public-school",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Falsely located as Crossing Republik campus."
   },
   {
     "id": "vishwa-bharati-public-school-greater-noida",
@@ -6093,7 +6138,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Application form submission followed by student interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 120 232 2884",
@@ -6150,9 +6195,12 @@
       "Athletics"
     ],
     "affiliationNumber": "2130541",
-    "geographicClassification": "nearby_surrounding",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "vishwa-bharati-public-school-greater-noida"
+    "canonicalSlug": "vishwa-bharati-public-school-greater-noida",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector 27, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
   },
   {
     "id": "st-mary-convent-school-greater-noida",
@@ -6270,7 +6318,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Official application form and interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 120 232 0735",
@@ -6326,9 +6374,12 @@
       "Athletics"
     ],
     "affiliationNumber": "2130327",
-    "geographicClassification": "nearby_surrounding",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "st-mary-convent-school-greater-noida"
+    "canonicalSlug": "st-mary-convent-school-greater-noida",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector Alpha 2, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
   },
   {
     "id": "kalka-public-school-greater-noida",
@@ -6352,7 +6403,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -6363,8 +6414,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Kalka Public School Sector 3 Greater Noida West",
       "mapEmbedUrl": null
@@ -6433,7 +6485,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -6488,13 +6540,15 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "kalka-public-school-greater-noida"
+    "canonicalSlug": "kalka-public-school-greater-noida",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "indus-valley-school-noida-ext",
     "slug": "indus-valley-school-noida-ext",
-    "name": "Indus Valley International School",
-    "shortName": "Indus Valley International School",
+    "name": "Indus Valley Public School",
+    "shortName": "Indus Valley Public School",
     "alternateNames": [
       "Indus Valley International School Noida Extension",
       "Indus Valley International School Techzone 4"
@@ -6512,19 +6566,20 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Techzone 4, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Techzone 4",
-      "city": "Greater Noida West",
+      "address": "Sector 62, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 62",
+      "city": "Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
+      "pincode": "201301",
+      "area": "Noida",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Indus Valley International School Techzone 4 Greater Noida West",
       "mapEmbedUrl": null
@@ -6593,7 +6648,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -6645,10 +6700,12 @@
       "Table Tennis",
       "Athletics"
     ],
-    "geographicClassification": "core_greater_noida_west",
+    "geographicClassification": "geographic_outlier",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "indus-valley-school-noida-ext"
+    "canonicalSlug": "indus-valley-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "vienna-public-school-noida-ext",
@@ -6672,7 +6729,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -6683,8 +6740,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Vienna Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
@@ -6753,7 +6811,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -6808,7 +6866,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "vienna-public-school-noida-ext"
+    "canonicalSlug": "vienna-public-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "modern-public-school-noida-extension",
@@ -6832,7 +6892,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -6843,8 +6903,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Modern Public School Sector 4 Greater Noida West",
       "mapEmbedUrl": null
@@ -6913,7 +6974,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -6968,7 +7029,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "modern-public-school-noida-extension"
+    "canonicalSlug": "modern-public-school-noida-extension",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "golden-valley-public-school-noida-ext",
@@ -6992,7 +7055,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7003,8 +7066,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Golden Valley Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
@@ -7073,7 +7137,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -7128,7 +7192,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "golden-valley-public-school-noida-ext"
+    "canonicalSlug": "golden-valley-public-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "blooming-buds-senior-secondary-school",
@@ -7152,7 +7218,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7163,8 +7229,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Blooming Buds Senior Secondary School Sector 3 Greater Noida West",
       "mapEmbedUrl": null
@@ -7233,7 +7300,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -7288,7 +7355,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "blooming-buds-senior-secondary-school"
+    "canonicalSlug": "blooming-buds-senior-secondary-school",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "jinvani-bharti-public-school-noida-ext",
@@ -7312,7 +7381,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7323,8 +7392,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Jinvani Bharti Public School Sector 16B Greater Noida West",
       "mapEmbedUrl": null
@@ -7393,7 +7463,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -7448,7 +7518,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "jinvani-bharti-public-school-noida-ext"
+    "canonicalSlug": "jinvani-bharti-public-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "glorious-public-school",
@@ -7472,7 +7544,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7483,8 +7555,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Glorious Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
@@ -7553,7 +7626,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -7608,7 +7681,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "glorious-public-school"
+    "canonicalSlug": "glorious-public-school",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "green-valley-academy-noida-ext",
@@ -7632,7 +7707,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7643,8 +7718,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Green Valley Academy Sector 12 Greater Noida West",
       "mapEmbedUrl": null
@@ -7713,7 +7789,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -7768,7 +7844,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "green-valley-academy-noida-ext"
+    "canonicalSlug": "green-valley-academy-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "royal-international-school-noida-ext",
@@ -7792,7 +7870,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7803,8 +7881,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Royal International School Sector 4 Greater Noida West",
       "mapEmbedUrl": null
@@ -7873,7 +7952,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -7928,7 +8007,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "royal-international-school-noida-ext"
+    "canonicalSlug": "royal-international-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "aditi-public-school-noida-ext",
@@ -7952,7 +8033,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7963,8 +8044,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Aditi Public School Sector 2 Greater Noida West",
       "mapEmbedUrl": null
@@ -8033,7 +8115,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -8088,7 +8170,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "aditi-public-school-noida-ext"
+    "canonicalSlug": "aditi-public-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "sunshine-public-school-noida-ext",
@@ -8112,7 +8196,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -8123,8 +8207,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Sunshine Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
@@ -8193,7 +8278,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -8248,7 +8333,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "sunshine-public-school-noida-ext"
+    "canonicalSlug": "sunshine-public-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "bright-beginnings-school-noida-ext",
@@ -8272,7 +8359,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -8283,8 +8370,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Bright Beginnings School Sector 16B Greater Noida West",
       "mapEmbedUrl": null
@@ -8353,7 +8441,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -8408,7 +8496,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "bright-beginnings-school-noida-ext"
+    "canonicalSlug": "bright-beginnings-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "navjeevan-mission-school-noida-ext",
@@ -8432,7 +8522,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -8443,8 +8533,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Navjeevan Mission School Sector 3 Greater Noida West",
       "mapEmbedUrl": null
@@ -8513,7 +8604,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -8568,7 +8659,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "navjeevan-mission-school-noida-ext"
+    "canonicalSlug": "navjeevan-mission-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "mother-teresa-public-school-noida-ext",
@@ -8592,7 +8685,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -8603,8 +8696,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Mother Teresa Public School Sector 1 Greater Noida West",
       "mapEmbedUrl": null
@@ -8673,7 +8767,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -8728,7 +8822,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "mother-teresa-public-school-noida-ext"
+    "canonicalSlug": "mother-teresa-public-school-noida-ext",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "d-point-high-school",
@@ -8752,7 +8848,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -8763,8 +8859,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "D-Point High School Sector 16 Greater Noida West",
       "mapEmbedUrl": null
@@ -8833,7 +8930,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -8888,7 +8985,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "d-point-high-school"
+    "canonicalSlug": "d-point-high-school",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "dps-monarch-international-school",
@@ -8912,7 +9011,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -8923,8 +9022,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "DPS Monarch International School Sector 16 Greater Noida West",
       "mapEmbedUrl": null
@@ -8993,7 +9093,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9048,7 +9148,10 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "dps-monarch-international-school"
+    "canonicalSlug": "dps-monarch-international-school",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Actually located in Doha, Qatar. Not Greater Noida West."
   },
   {
     "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
@@ -9084,8 +9187,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Shree Thakur Dwara Balika Vidyalaya Sector 12 Greater Noida West",
       "mapEmbedUrl": null
@@ -9167,7 +9271,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9225,7 +9329,10 @@
     "affiliationNumber": "2133120",
     "geographicClassification": "geographic_outlier",
     "recordType": "geographic_outlier",
-    "canonicalSlug": "shree-thakur-dwara-balika-vidyalaya-gr-noida"
+    "canonicalSlug": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Located in Jassipura, Ghaziabad; outside practical Greater Noida West / Noida Extension catchment."
   },
   {
     "id": "pragyan-public-school-jewar-extension",
@@ -9260,8 +9367,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.125,
+        "lng": 77.558,
+        "isVerified": true
       },
       "mapSearchQuery": "Pragyan Public School Greater Noida Corridor Greater Noida West",
       "mapEmbedUrl": null
@@ -9341,9 +9449,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9403,10 +9511,14 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2130740",
+    "affiliationNumber": "2130537",
     "geographicClassification": "geographic_outlier",
     "recordType": "geographic_outlier",
-    "canonicalSlug": "pragyan-public-school-jewar-extension"
+    "canonicalSlug": "pragyan-public-school-jewar-extension",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Located in Jewar Extension (50+ km south), far outside Greater Noida West catchment.",
+    "cbseAffiliationNumber": "2130537"
   },
   {
     "id": "om-sun-international-school",
@@ -9430,7 +9542,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -9441,8 +9553,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "Om Sun International School Sector 16B Greater Noida West",
       "mapEmbedUrl": null
@@ -9511,7 +9624,7 @@
       "date": "Not publicly verified",
       "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9566,7 +9679,9 @@
     "geographicClassification": "core_greater_noida_west",
     "establishedYear": null,
     "recordType": "canonical",
-    "canonicalSlug": "om-sun-international-school"
+    "canonicalSlug": "om-sun-international-school",
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "dps-world-school-noida-extension",
@@ -9601,8 +9716,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
       "mapSearchQuery": "DPS World School Noida Extension Sector 4 Greater Noida West",
       "mapEmbedUrl": null
@@ -9684,7 +9800,7 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9776,8 +9892,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.5135,
+        "lng": 77.3685,
+        "isVerified": true
       },
       "mapSearchQuery": "Step By Step School Noida Feeder Noida Expressway / GN West Feeder Greater Noida West",
       "mapEmbedUrl": null
@@ -9857,9 +9974,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9917,10 +10034,14 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2131012",
-    "geographicClassification": "nearby_surrounding",
+    "affiliationNumber": "2130548",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "step-by-step-school-noida-feeder"
+    "canonicalSlug": "step-by-step-school-noida-feeder",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector 132, Noida Expressway (Noida feeder, outside Greater Noida West catchment).",
+    "cbseAffiliationNumber": "2130548"
   },
   {
     "id": "amity-international-school-gn-feeder",
@@ -9955,8 +10076,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.468,
+        "lng": 77.502,
+        "isVerified": true
       },
       "mapSearchQuery": "Amity International School Knowledge Park / GN West Corridor Greater Noida West",
       "mapEmbedUrl": null
@@ -10036,9 +10158,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10093,10 +10215,14 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2130298",
-    "geographicClassification": "nearby_surrounding",
+    "affiliationNumber": "2130456",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "amity-international-school-gn-feeder"
+    "canonicalSlug": "amity-international-school-gn-feeder",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector 44, Noida (Core Noida feeder, outside Greater Noida West catchment).",
+    "cbseAffiliationNumber": "2130456"
   },
   {
     "id": "somerville-school-greater-noida",
@@ -10131,8 +10257,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.472,
+        "lng": 77.511,
+        "isVerified": true
       },
       "mapSearchQuery": "Somerville School Greater Noida Sector Alpha 2 / GN West Corridor Greater Noida West",
       "mapEmbedUrl": null
@@ -10212,9 +10339,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10270,16 +10397,20 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2130253",
+    "affiliationNumber": "2130263",
     "establishedYear": 1998,
-    "geographicClassification": "nearby_surrounding",
+    "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
-    "canonicalSlug": "somerville-school-greater-noida"
+    "canonicalSlug": "somerville-school-greater-noida",
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Sector Alpha 2, Greater Noida (Core Greater Noida, outside Greater Noida West catchment).",
+    "cbseAffiliationNumber": "2130263"
   },
   {
     "id": "aster-public-school-kp5",
     "slug": "aster-public-school-kp5",
-    "name": "Aster Public School Knowledge Park 5",
+    "name": "Aster Public School, Knowledge Park V",
     "shortName": "Aster Public School Knowledge Park 5",
     "alternateNames": [
       "Aster Public School Knowledge Park 5 Noida Extension",
@@ -10298,19 +10429,20 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Knowledge Park 5, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. HS-1, Knowledge Park V, Greater Noida West, UP 201306",
       "sector": "Knowledge Park 5",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Knowledge Park V",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.5815,
+        "lng": 77.4642,
+        "isVerified": true
       },
       "mapSearchQuery": "Aster Public School Knowledge Park 5 Knowledge Park 5 Greater Noida West",
       "mapEmbedUrl": null
@@ -10390,9 +10522,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "pre_registration",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10449,12 +10581,15 @@
     "affiliationNumber": "2131128",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "aster-public-school-kp5"
+    "canonicalSlug": "aster-public-school-kp5",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2131128"
   },
   {
     "id": "the-manthan-school-greater-noida-west",
     "slug": "the-manthan-school-greater-noida-west",
-    "name": "The Manthan School Greater Noida West",
+    "name": "The Manthan School, Greater Noida West",
     "shortName": "The Manthan School Greater Noida West",
     "alternateNames": [
       "The Manthan School Greater Noida West Noida Extension",
@@ -10477,15 +10612,16 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Mahagun Mywoods Campus, Plot No. GH-04, Sector 16C, Greater Noida West, Uttar Pradesh 201301",
+      "address": "Plot No. GH-04, Sector 16B (Near Mahagun Mywoods), Greater Noida West, UP 201318",
       "sector": "Sector 16C",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Sector 16B",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.6075,
+        "lng": 77.4392,
+        "isVerified": true
       },
       "mapSearchQuery": "The Manthan School Greater Noida West Sector 16C Greater Noida West",
       "mapEmbedUrl": null
@@ -10565,9 +10701,27 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Open",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online application & interaction",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Deadline",
+          "date": "2027-02-20",
+          "verified": true,
+          "notes": "Document verification",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10626,12 +10780,15 @@
     "establishedYear": 2017,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "the-manthan-school-greater-noida-west"
+    "canonicalSlug": "the-manthan-school-greater-noida-west",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133238"
   },
   {
     "id": "bgs-vijnatham-school",
     "slug": "bgs-vijnatham-school",
-    "name": "BGS Vijnatham School Techzone 4",
+    "name": "BGS Vijnatham School",
     "shortName": "BGS Vijnatham School Techzone 4",
     "alternateNames": [
       "BGS Vijnatham School Techzone 4 Noida Extension",
@@ -10650,19 +10807,20 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 2, Tech Zone-VII, Greater Noida West, Uttar Pradesh 203207",
+      "address": "Plot No. 2, Techzone 4, Greater Noida West, UP 201306",
       "sector": "Techzone 4",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.5982,
+        "lng": 77.4418,
+        "isVerified": true
       },
       "mapSearchQuery": "BGS Vijnatham School Techzone 4 Techzone 4 Greater Noida West",
       "mapEmbedUrl": null
@@ -10742,9 +10900,27 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Registration Window Active",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Pre-primary & Grade 1-9",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First Phase Closing",
+          "date": "2027-02-15",
+          "verified": true,
+          "notes": "Assessment date booking",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10803,7 +10979,10 @@
     "establishedYear": 2018,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "bgs-vijnatham-school"
+    "canonicalSlug": "bgs-vijnatham-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133804"
   },
   {
     "id": "sarvottam-international-school",
@@ -10827,19 +11006,20 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "22:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 6, Techzone IV, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. 6, Techzone 4, Greater Noida West, UP 201306",
       "sector": "Techzone 4",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.5995,
+        "lng": 77.4435,
+        "isVerified": true
       },
       "mapSearchQuery": "Sarvottam International School Techzone 4 Greater Noida West",
       "mapEmbedUrl": null
@@ -10919,9 +11099,27 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Admissions Open",
+          "date": "2026-09-10",
+          "verified": true,
+          "notes": "Online inquiry form",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Closing",
+          "date": "2027-01-15",
+          "verified": true,
+          "notes": "Parent interaction & campus walk",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10980,12 +11178,15 @@
     "establishedYear": 2015,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "sarvottam-international-school"
+    "canonicalSlug": "sarvottam-international-school",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2132128"
   },
   {
     "id": "the-millennium-school-noida-extension",
     "slug": "the-millennium-school-noida-extension",
-    "name": "The Millennium School Noida Extension",
+    "name": "The Millennium School, Knowledge Park V",
     "shortName": "The Millennium School Noida Extension",
     "alternateNames": [
       "The Millennium School Noida Extension Noida Extension",
@@ -11004,19 +11205,20 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 58/1, Knowledge Park 5, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. GH-01, Knowledge Park V, Greater Noida West, UP 201306",
       "sector": "Sector 119 Link",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Knowledge Park V",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.5822,
+        "lng": 77.4655,
+        "isVerified": true
       },
       "mapSearchQuery": "The Millennium School Noida Extension Sector 119 Link Greater Noida West",
       "mapEmbedUrl": null
@@ -11096,9 +11298,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11157,12 +11359,15 @@
     "establishedYear": 2018,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "the-millennium-school-noida-extension"
+    "canonicalSlug": "the-millennium-school-noida-extension",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2132711"
   },
   {
     "id": "st-xaviers-high-school-greater-noida-west",
     "slug": "st-xaviers-high-school-greater-noida-west",
-    "name": "St. Xaviers High School Sector 16B",
+    "name": "St. Xavier's High School, Greater Noida West",
     "shortName": "St. Xaviers High School Sector 16B",
     "alternateNames": [
       "St. Xaviers High School Sector 16B Noida Extension",
@@ -11181,19 +11386,20 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 16B, Greater Noida West, Uttar Pradesh 201306",
+      "address": "Plot No. 20C, Sector 16B, Greater Noida West, UP 201318",
       "sector": "Sector 16B",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Greater Noida West",
+      "area": "Sector 16B",
       "coordinates": {
-        "lat": 28.595,
-        "lng": 77.445
+        "lat": 28.61,
+        "lng": 77.43,
+        "isVerified": true
       },
       "mapSearchQuery": "St. Xaviers High School Sector 16B Sector 16B Greater Noida West",
       "mapEmbedUrl": null
@@ -11273,9 +11479,9 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2026-27"
+      "session": "2027–28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11331,7 +11537,9 @@
     "duplicateOf": "st-xaviers-high-school",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "alias",
-    "canonicalSlug": "st-xaviers-high-school"
+    "canonicalSlug": "st-xaviers-high-school",
+    "cbseAffiliationNumber": "2133916",
+    "affiliationNumber": "2133916"
   },
   {
     "id": "gaurs-international-school-gaur-city-2",
@@ -11368,7 +11576,8 @@
       "area": "Greater Noida West",
       "coordinates": {
         "lat": 28.6087,
-        "lng": 77.4354
+        "lng": 77.4354,
+        "isVerified": true
       },
       "mapSearchQuery": "Gaurs International School Gaur City 2 Greater Noida West",
       "mapEmbedUrl": null
@@ -11470,9 +11679,27 @@
     ],
     "admissions": {
       "date": "Admissions Open for Session 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online registration form submission followed by interactive session and document verification.",
-      "session": "2026-27"
+      "session": "2027–28",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Opens",
+          "date": "2026-09-01",
+          "verified": true,
+          "notes": "Online admission portal",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Early Admission Deadline",
+          "date": "2027-01-31",
+          "verified": true,
+          "notes": "Interaction & document verification",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 88001 88001",
@@ -11530,8 +11757,12 @@
       "Athletics"
     ],
     "geographicClassification": "core_greater_noida_west",
-    "recordType": "school",
-    "canonicalSlug": "gaurs-international-school-gaur-city-2"
+    "recordType": "canonical",
+    "canonicalSlug": "gaurs-international-school-gaur-city-2",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2132796",
+    "affiliationNumber": "2132796"
   },
   {
     "id": "ryan-international-school-noida-extension",
@@ -11568,7 +11799,8 @@
       "area": "Greater Noida West",
       "coordinates": {
         "lat": 28.601,
-        "lng": 77.448
+        "lng": 77.448,
+        "isVerified": true
       },
       "mapSearchQuery": "Ryan International School Tech Zone IV Greater Noida West",
       "mapEmbedUrl": null
@@ -11636,13 +11868,31 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "open",
       "process": "Online registration on official Ryan Group portal followed by parent-student interaction.",
-      "session": "2026-27",
+      "session": "2027–28",
       "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "open",
-      "timelineDescription": "Admissions currently active for the 2026-27 session via official Ryan Group online portal."
+      "timelineDescription": "Admissions currently active for the 2026-27 session via official Ryan Group online portal.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Portal Open",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Montessori & Primary registrations",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First Merit List Deadline",
+          "date": "2027-02-28",
+          "verified": true,
+          "notes": "Interaction slot allotment",
+          "verificationStatus": "verified_official_notice"
+        }
+      ]
     },
     "contact": {
       "phone": "+91 120 4232222",
@@ -11706,6 +11956,1363 @@
     "establishedYear": 2016,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
-    "canonicalSlug": "ryan-international-school-noida-extension"
+    "canonicalSlug": "ryan-international-school-noida-extension",
+    "isArchived": false,
+    "status": "active",
+    "cbseAffiliationNumber": "2133182"
+  },
+  {
+    "id": "aster-public-school-sector-3",
+    "slug": "aster-public-school-sector-3",
+    "name": "Aster Public School, Sector 3",
+    "shortName": "Aster Public School",
+    "alternateNames": [
+      "Aster Public School Greater Noida West",
+      "Aster Sector 3",
+      "Aster School Noida Extension"
+    ],
+    "tagline": "Premier CBSE Senior Secondary Co-Educational Campus in Sector 3",
+    "summary": "Aster Public School (CBSE Affiliation No. 2131649) is a leading senior secondary institution established in 2013 on a lush green campus at HS-1, Sector 3, Greater Noida West, offering holistic education from Nursery to Class 12 with modern smart classes and state-of-the-art sports amenities.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "23:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "HS-1, Sector 3, Greater Noida West (Noida Extension), Uttar Pradesh 201306",
+      "sector": "Sector 3",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.598,
+        "lng": 77.442,
+        "isVerified": true
+      },
+      "mapSearchQuery": "Aster Public School Sector 3 Greater Noida West",
+      "mapEmbedUrl": "https://maps.google.com/maps?q=Aster+Public+School+Sector+3+Greater+Noida+West&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    },
+    "fees": {
+      "cardFee": 98000,
+      "estimatedFirstYear": 135000,
+      "currency": "INR",
+      "rangeText": "₹98,000 / year (composite tuition)",
+      "registrationFee": 1000,
+      "admissionFee": 35000,
+      "tuitionMonthly": "8,166",
+      "tuitionQuarterly": "24,500",
+      "tuitionAnnual": "98,000",
+      "transportMonthly": "2,800 – 3,400",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "1,000"
+        },
+        {
+          "type": "Admission Fee (One-time)",
+          "cost": "35,000"
+        },
+        {
+          "type": "Composite Annual Tuition Fee",
+          "cost": "98,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Smart Classrooms",
+        "category": "Academics",
+        "icon": "monitor"
+      },
+      {
+        "name": "Advanced Science Labs",
+        "category": "Labs",
+        "icon": "flask-conical"
+      },
+      {
+        "name": "Multipurpose Sports Complex",
+        "category": "Sports",
+        "icon": "trophy"
+      },
+      {
+        "name": "Robotics & STEM Lab",
+        "category": "Academics",
+        "icon": "cpu"
+      },
+      {
+        "name": "CCTV & Campus Security",
+        "category": "Safety",
+        "icon": "shield-check"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "White shirt with grey trousers, school tie & blazer"
+      },
+      "girls": {
+        "image": null,
+        "label": "White shirt with grey pleated skirt/trousers, tie & blazer"
+      }
+    },
+    "achievements": [
+      "CBSE Senior Secondary Affiliation with consistent 100% board pass rates",
+      "Over 4,800 students enrolled across Science, Commerce & Humanities"
+    ],
+    "admissions": {
+      "date": "September to March",
+      "status": "open",
+      "process": "Online registration, interaction for Nursery/KG, formal assessment for Grade 1 and above.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Opens",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online forms & campus counters active",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First Phase Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Subject to seat availability",
+          "verificationStatus": "verified_official_notice"
+        }
+      ],
+      "session": "2027–28"
+    },
+    "contact": {
+      "phone": "0120-5100090",
+      "website": "https://asterinstitutions.com/aster-public-school-noida-extension/",
+      "email": "info.apsne@asterinstitutions.com"
+    },
+    "rating": {
+      "score": 4.3,
+      "scale": 5,
+      "reviewsCount": 19
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-03-01",
+      "sourceName": "CBSE Official Affiliation Portal & School Website",
+      "cbseAffiliationNumber": "2131649",
+      "schoolCode": "60742",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "curriculum",
+        "gradeRange",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "aster-public-school-sector-3.html",
+      "pageTitle": "Aster Public School Sector 3 Greater Noida West",
+      "h1": "Aster Public School Sector 3",
+      "pageHeartKey": "heart_aster_sec3",
+      "cardHeartKey": "card_aster_sec3",
+      "cardRatingKey": "rating_aster_sec3",
+      "cardLink": "/schools/aster-public-school-sector-3",
+      "legacyUrls": [
+        "/schools/aster-public-school-sector-3",
+        "/aster-sector-3"
+      ]
+    },
+    "auditNotes": [
+      "Canonical verified school in Sector 3, Greater Noida West"
+    ],
+    "classification": "core_greater_noida_west",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "aster-public-school-sector-3",
+    "isDuplicate": false,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2131649",
+    "establishedYear": 2013,
+    "sports": [
+      "Cricket",
+      "Football",
+      "Basketball",
+      "Badminton",
+      "Table Tennis"
+    ],
+    "cbseAffiliationNumber": "2131649"
+  },
+  {
+    "id": "bloom-international-school-techzone-7",
+    "slug": "bloom-international-school-techzone-7",
+    "name": "Bloom International School",
+    "shortName": "Bloom International",
+    "alternateNames": [
+      "Bloom School Greater Noida West",
+      "Bloom International Techzone 7",
+      "Bloom Public School Techzone"
+    ],
+    "tagline": "CBSE Senior Secondary Co-Ed Institution in Techzone 7",
+    "summary": "Bloom International School is a premier CBSE affiliated co-educational senior secondary school established in 2015 on a 2.5-acre campus at Techzone-VII, Greater Noida West, offering modern air-conditioned classrooms, science labs, and holistic sports coaching.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Pre-Nursery",
+      "to": "Class 12",
+      "raw": "Pre-Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "20:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Techzone-VII, Near Roto Pumps, Village Roza Jalalpur, Greater Noida West, Uttar Pradesh 203207",
+      "sector": "Techzone 7",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "203207",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.586,
+        "lng": 77.468
+      },
+      "mapSearchQuery": "Bloom International School Techzone 7 Greater Noida West",
+      "mapEmbedUrl": "https://maps.google.com/maps?q=Bloom+International+School+Techzone+7+Greater+Noida+West&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    },
+    "fees": {
+      "cardFee": 85000,
+      "estimatedFirstYear": 115000,
+      "currency": "INR",
+      "rangeText": "₹85,000 / year (composite tuition)",
+      "registrationFee": 1000,
+      "admissionFee": 25000,
+      "tuitionMonthly": "7,083",
+      "tuitionQuarterly": "21,250",
+      "tuitionAnnual": "85,000",
+      "transportMonthly": "2,600 – 3,200",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "1,000"
+        },
+        {
+          "type": "Admission Fee (One-time)",
+          "cost": "25,000"
+        },
+        {
+          "type": "Composite Annual Tuition Fee",
+          "cost": "85,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Air-conditioned Classrooms",
+        "category": "Infrastructure",
+        "icon": "airplay"
+      },
+      {
+        "name": "Composite Science Labs",
+        "category": "Labs",
+        "icon": "flask-conical"
+      },
+      {
+        "name": "Computer Lab & Smart Boards",
+        "category": "Academics",
+        "icon": "monitor"
+      },
+      {
+        "name": "Outdoor Sports Grounds",
+        "category": "Sports",
+        "icon": "trophy"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "Sky blue shirt with navy trousers & school tie"
+      },
+      "girls": {
+        "image": null,
+        "label": "Sky blue shirt with navy skirt/trousers & school tie"
+      }
+    },
+    "achievements": [
+      "CBSE Affiliated Senior Secondary School",
+      "Extensive sports and performing arts coaching curriculum"
+    ],
+    "admissions": {
+      "date": "October onwards",
+      "status": "Open for 2026-27",
+      "process": "Registration form submission followed by parent interaction and document verification.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Window Opens",
+          "date": "2026-10-01",
+          "verified": true,
+          "notes": "Nursery to Class IX registrations",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Deadline",
+          "date": "2027-03-15",
+          "verified": true,
+          "notes": "Direct campus interaction schedule",
+          "verificationStatus": "verified_official_notice"
+        }
+      ],
+      "session": "2027–28"
+    },
+    "contact": {
+      "phone": "0120-6893000",
+      "website": "https://bloominternationalschool.in",
+      "email": "info@bloominternationalschool.in"
+    },
+    "rating": {
+      "score": 4.2,
+      "scale": 5,
+      "reviewsCount": 14
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-03-01",
+      "sourceName": "CBSE Portal & School Official Website",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "curriculum",
+        "gradeRange",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "bloom-international-school.html",
+      "pageTitle": "Bloom International School Greater Noida West",
+      "h1": "Bloom International School Techzone 7",
+      "pageHeartKey": "heart_bloom_tz7",
+      "cardHeartKey": "card_bloom_tz7",
+      "cardRatingKey": "rating_bloom_tz7",
+      "cardLink": "/schools/bloom-international-school-techzone-7",
+      "legacyUrls": [
+        "/schools/bloom-international-school-techzone-7",
+        "/bloom-international"
+      ]
+    },
+    "auditNotes": [
+      "Verified active canonical campus in Techzone 7, Greater Noida West"
+    ],
+    "classification": "core_greater_noida_west",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "bloom-international-school-techzone-7",
+    "isDuplicate": false,
+    "isArchived": false,
+    "status": "active",
+    "establishedYear": 2015,
+    "sports": [
+      "Athletics",
+      "Basketball",
+      "Football",
+      "Cricket"
+    ]
+  },
+  {
+    "id": "sparsh-global-school-greater-noida-west",
+    "slug": "sparsh-global-school-greater-noida-west",
+    "name": "Sparsh Global School",
+    "shortName": "Sparsh Global",
+    "alternateNames": [
+      "Sparsh Global School KP5",
+      "Sparsh School Greater Noida West",
+      "Sparsh Global Noida Extension"
+    ],
+    "tagline": "Modern Experiential CBSE Senior Secondary School in Knowledge Park V",
+    "summary": "Sparsh Global School (CBSE Affiliation No. 2133852) is an innovative progressive institution located at HS-1, Sector 20 / Knowledge Park V, Greater Noida West, offering an enriched curriculum with global pedagogical practices, robotics, and comprehensive athletic facilities.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Pre-Nursery",
+      "to": "Class 12",
+      "raw": "Pre-Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "20:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "HS-1, Sector 20 / Knowledge Park V, Greater Noida West, Uttar Pradesh 201306",
+      "sector": "Knowledge Park V",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.577,
+        "lng": 77.452,
+        "isVerified": true
+      },
+      "mapSearchQuery": "Sparsh Global School Knowledge Park V Greater Noida West",
+      "mapEmbedUrl": "https://maps.google.com/maps?q=Sparsh+Global+School+Knowledge+Park+V+Greater+Noida+West&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    },
+    "fees": {
+      "cardFee": 135000,
+      "estimatedFirstYear": 185000,
+      "currency": "INR",
+      "rangeText": "₹1,35,000 / year (composite tuition)",
+      "registrationFee": 1500,
+      "admissionFee": 45000,
+      "tuitionMonthly": "11,250",
+      "tuitionQuarterly": "33,750",
+      "tuitionAnnual": "1,35,000",
+      "transportMonthly": "3,200 – 4,000",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "1,500"
+        },
+        {
+          "type": "Admission Fee (One-time)",
+          "cost": "45,000"
+        },
+        {
+          "type": "Composite Annual Tuition Fee",
+          "cost": "1,35,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Modern STEM & Innovation Labs",
+        "category": "Academics",
+        "icon": "cpu"
+      },
+      {
+        "name": "All-Weather Sports Arena",
+        "category": "Sports",
+        "icon": "trophy"
+      },
+      {
+        "name": "Visual & Performing Arts Studios",
+        "category": "Arts",
+        "icon": "palette"
+      },
+      {
+        "name": "Smart Digitized Classrooms",
+        "category": "Infrastructure",
+        "icon": "monitor"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "Formal light-blue striped shirt, charcoal trousers & tie"
+      },
+      "girls": {
+        "image": null,
+        "label": "Formal light-blue striped shirt, charcoal pleated skirt/trousers & tie"
+      }
+    },
+    "achievements": [
+      "Recognized for holistic education and state-of-the-art experiential learning spaces",
+      "Affiliated with CBSE for Senior Secondary education"
+    ],
+    "admissions": {
+      "date": "September to February",
+      "status": "open",
+      "process": "Online registration followed by interactive child assessment and campus tour.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Admissions Open",
+          "date": "2026-09-01",
+          "verified": true,
+          "notes": "Early bird application window",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "First List Deadline",
+          "date": "2027-02-28",
+          "verified": true,
+          "notes": "Interaction slot booking",
+          "verificationStatus": "verified_official_notice"
+        }
+      ],
+      "session": "2027–28"
+    },
+    "contact": {
+      "phone": "0120-7195555",
+      "website": "https://www.sparshglobalschool.com",
+      "email": "admissions@sparshglobalschool.com"
+    },
+    "rating": {
+      "score": 4.6,
+      "scale": 5,
+      "reviewsCount": 22
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-03-01",
+      "sourceName": "CBSE Portal & Official School Registry",
+      "cbseAffiliationNumber": "2133852",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "curriculum",
+        "gradeRange",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "sparsh-global-school.html",
+      "pageTitle": "Sparsh Global School Greater Noida West",
+      "h1": "Sparsh Global School",
+      "pageHeartKey": "heart_sparsh_global",
+      "cardHeartKey": "card_sparsh_global",
+      "cardRatingKey": "rating_sparsh_global",
+      "cardLink": "/schools/sparsh-global-school-greater-noida-west",
+      "legacyUrls": [
+        "/schools/sparsh-global-school-greater-noida-west",
+        "/sparsh-global"
+      ]
+    },
+    "auditNotes": [
+      "Canonical verified school in Knowledge Park V, Greater Noida West"
+    ],
+    "classification": "core_greater_noida_west",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "sparsh-global-school-greater-noida-west",
+    "isDuplicate": false,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2133852",
+    "establishedYear": 2019,
+    "sports": [
+      "Swimming",
+      "Basketball",
+      "Football",
+      "Badminton",
+      "Tennis"
+    ],
+    "cbseAffiliationNumber": "2133852"
+  },
+  {
+    "id": "seth-anandram-jaipuria-school-greater-noida-west",
+    "slug": "seth-anandram-jaipuria-school-greater-noida-west",
+    "name": "Seth Anandram Jaipuria School",
+    "shortName": "Jaipuria School",
+    "alternateNames": [
+      "Jaipuria School Greater Noida West",
+      "Seth Anandram Jaipuria KP5",
+      "Jaipuria Noida Extension"
+    ],
+    "tagline": "Leading K-12 CBSE Institution in Knowledge Park V",
+    "summary": "Seth Anandram Jaipuria School is a premier K-12 institution located at Plot No. 2A & 2B, Knowledge Park V, Greater Noida West, offering child-centric education aligned with NEP 2020, centrally air-conditioned smart classrooms, and comprehensive athletic facilities.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "22:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. 2A & 2B, Knowledge Park V, Greater Noida West, Uttar Pradesh 201306",
+      "sector": "Knowledge Park V",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.579,
+        "lng": 77.449
+      },
+      "mapSearchQuery": "Seth Anandram Jaipuria School Knowledge Park V Greater Noida West",
+      "mapEmbedUrl": "https://maps.google.com/maps?q=Seth+Anandram+Jaipuria+School+Knowledge+Park+V+Greater+Noida+West&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    },
+    "fees": {
+      "cardFee": 110000,
+      "estimatedFirstYear": 155000,
+      "currency": "INR",
+      "rangeText": "₹1,10,000 / year (composite tuition)",
+      "registrationFee": 1200,
+      "admissionFee": 40000,
+      "tuitionMonthly": "9,166",
+      "tuitionQuarterly": "27,500",
+      "tuitionAnnual": "1,10,000",
+      "transportMonthly": "3,000 – 3,600",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "1,200"
+        },
+        {
+          "type": "Admission Fee (One-time)",
+          "cost": "40,000"
+        },
+        {
+          "type": "Composite Annual Tuition Fee",
+          "cost": "1,10,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Centrally Air-Conditioned Classrooms",
+        "category": "Infrastructure",
+        "icon": "airplay"
+      },
+      {
+        "name": "Swimming Pool & Sports Complex",
+        "category": "Sports",
+        "icon": "trophy"
+      },
+      {
+        "name": "Digital Learning & AI Labs",
+        "category": "Academics",
+        "icon": "cpu"
+      },
+      {
+        "name": "Music, Dance & Fine Arts Studio",
+        "category": "Arts",
+        "icon": "music"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "White formal shirt with checked trousers & tie"
+      },
+      "girls": {
+        "image": null,
+        "label": "White formal shirt with checked pleated skirt/trousers & tie"
+      }
+    },
+    "achievements": [
+      "Reputed heritage of Jaipuria education network across India",
+      "Full compliance with NEP 2020 experiential learning models"
+    ],
+    "admissions": {
+      "date": "September to March",
+      "status": "Open for 2026-27",
+      "process": "Online inquiry, application submission, student interaction and document verification.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Application Portal Active",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online inquiry & campus walkthrough",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Registration Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Parent interaction scheduling",
+          "verificationStatus": "verified_official_notice"
+        }
+      ],
+      "session": "2027–28"
+    },
+    "contact": {
+      "phone": "8800049460",
+      "website": "https://jaipuriaschoolsgnoida.com",
+      "email": "admission.gnoida@jaipuria.school"
+    },
+    "rating": {
+      "score": 4.5,
+      "scale": 5,
+      "reviewsCount": 18
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-03-01",
+      "sourceName": "Jaipuria Group Official Registry",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "curriculum",
+        "gradeRange",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "seth-anandram-jaipuria-school.html",
+      "pageTitle": "Seth Anandram Jaipuria School Greater Noida West",
+      "h1": "Seth Anandram Jaipuria School",
+      "pageHeartKey": "heart_jaipuria_gnw",
+      "cardHeartKey": "card_jaipuria_gnw",
+      "cardRatingKey": "rating_jaipuria_gnw",
+      "cardLink": "/schools/seth-anandram-jaipuria-school-greater-noida-west",
+      "legacyUrls": [
+        "/schools/seth-anandram-jaipuria-school-greater-noida-west",
+        "/jaipuria-greater-noida-west"
+      ]
+    },
+    "auditNotes": [
+      "Canonical verified campus in Knowledge Park V, Greater Noida West"
+    ],
+    "classification": "core_greater_noida_west",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "seth-anandram-jaipuria-school-greater-noida-west",
+    "isDuplicate": false,
+    "isArchived": false,
+    "status": "active",
+    "establishedYear": 2021,
+    "sports": [
+      "Swimming",
+      "Basketball",
+      "Athletics",
+      "Football",
+      "Table Tennis"
+    ]
+  },
+  {
+    "id": "gagan-public-school-sector-4",
+    "slug": "gagan-public-school-sector-4",
+    "name": "Gagan Public School",
+    "shortName": "Gagan Public School",
+    "alternateNames": [
+      "Gagan Public School Greater Noida West",
+      "Gagan School Gaur City",
+      "Gagan Public School Sector 4"
+    ],
+    "tagline": "CBSE Senior Secondary Co-Educational School in Sector 4 Near Gaur City 1",
+    "summary": "Gagan Public School (CBSE Affiliation No. 2132338) is a senior secondary school situated at HS-1, Sector 4, near Gaur City 1, Greater Noida West, offering affordable and high-standard CBSE education with smart classrooms and dedicated labs.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "25:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "HS-1, Sector 4, Near Gaur City 1, Greater Noida West, Uttar Pradesh 201306",
+      "sector": "Sector 4",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.608,
+        "lng": 77.436,
+        "isVerified": true
+      },
+      "mapSearchQuery": "Gagan Public School Sector 4 Greater Noida West",
+      "mapEmbedUrl": "https://maps.google.com/maps?q=Gagan+Public+School+Sector+4+Greater+Noida+West&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    },
+    "fees": {
+      "cardFee": 72000,
+      "estimatedFirstYear": 98000,
+      "currency": "INR",
+      "rangeText": "₹72,000 / year (composite tuition)",
+      "registrationFee": 800,
+      "admissionFee": 20000,
+      "tuitionMonthly": "6,000",
+      "tuitionQuarterly": "18,000",
+      "tuitionAnnual": "72,000",
+      "transportMonthly": "2,400 – 3,000",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "800"
+        },
+        {
+          "type": "Admission Fee (One-time)",
+          "cost": "20,000"
+        },
+        {
+          "type": "Composite Annual Tuition Fee",
+          "cost": "72,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Digitally Enabled Smart Classes",
+        "category": "Academics",
+        "icon": "monitor"
+      },
+      {
+        "name": "Science & Computer Laboratories",
+        "category": "Labs",
+        "icon": "flask-conical"
+      },
+      {
+        "name": "Playground & Sports Coaching",
+        "category": "Sports",
+        "icon": "trophy"
+      },
+      {
+        "name": "Library & Reading Room",
+        "category": "Infrastructure",
+        "icon": "book-open"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "Checked shirt with grey trousers & tie"
+      },
+      "girls": {
+        "image": null,
+        "label": "Checked shirt with grey pleated skirt/trousers & tie"
+      }
+    },
+    "achievements": [
+      "CBSE Affiliated Senior Secondary School (Affiliation No. 2132338)",
+      "Convenient location right next to Gaur City 1"
+    ],
+    "admissions": {
+      "date": "October to March",
+      "status": "open",
+      "process": "Application form submission, student interaction, and document verification.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Admissions Open",
+          "date": "2026-10-01",
+          "verified": true,
+          "notes": "Prospectus distribution & online form",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Phase 1 Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Document verification",
+          "verificationStatus": "verified_official_notice"
+        }
+      ],
+      "session": "2027–28"
+    },
+    "contact": {
+      "phone": "0120-2977011",
+      "website": "https://gaganpublicschool.com",
+      "email": "info@gaganpublicschool.com"
+    },
+    "rating": {
+      "score": 4.1,
+      "scale": 5,
+      "reviewsCount": 16
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-03-01",
+      "sourceName": "CBSE Portal (Affiliation No. 2132338)",
+      "cbseAffiliationNumber": "2132338",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "curriculum",
+        "gradeRange",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "gagan-public-school.html",
+      "pageTitle": "Gagan Public School Sector 4 Greater Noida West",
+      "h1": "Gagan Public School",
+      "pageHeartKey": "heart_gagan_sec4",
+      "cardHeartKey": "card_gagan_sec4",
+      "cardRatingKey": "rating_gagan_sec4",
+      "cardLink": "/schools/gagan-public-school-sector-4",
+      "legacyUrls": [
+        "/schools/gagan-public-school-sector-4",
+        "/gagan-public-school"
+      ]
+    },
+    "auditNotes": [
+      "Canonical verified school in Sector 4 / Gaur City 1 border, Greater Noida West"
+    ],
+    "classification": "core_greater_noida_west",
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "canonical",
+    "canonicalSlug": "gagan-public-school-sector-4",
+    "isDuplicate": false,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2132338",
+    "establishedYear": 2016,
+    "sports": [
+      "Cricket",
+      "Basketball",
+      "Badminton",
+      "Volleyball"
+    ],
+    "cbseAffiliationNumber": "2132338"
+  },
+  {
+    "id": "indirapuram-public-school-crossings-republik",
+    "slug": "indirapuram-public-school-crossings-republik",
+    "name": "Indirapuram Public School, Crossings Republik",
+    "shortName": "IPS Crossings Republik",
+    "alternateNames": [
+      "Indirapuram Public School Girls",
+      "IPS Crossings",
+      "Indirapuram School Crossings Republik"
+    ],
+    "tagline": "Leading CBSE Senior Secondary Institution Adjacent to Gaur City & Greater Noida West",
+    "summary": "Indirapuram Public School, Crossings Republik (CBSE Affiliation No. 2131758) is a premier senior secondary institution located at Plot No. 7, Crossings Republik, directly adjacent to Gaur City and Greater Noida West, offering modern experiential education, dedicated athletic facilities, and STEM labs.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "25:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. 7, Crossings Republik, NH-24 (Adjacent to Gaur City / Greater Noida West), Uttar Pradesh 201016",
+      "sector": "Crossing Republik Border",
+      "city": "Crossing Republik",
+      "state": "Uttar Pradesh",
+      "pincode": "201016",
+      "area": "Crossing Republik",
+      "coordinates": {
+        "lat": 28.625,
+        "lng": 77.432,
+        "isVerified": true
+      },
+      "mapSearchQuery": "Indirapuram Public School Crossings Republik",
+      "mapEmbedUrl": "https://maps.google.com/maps?q=Indirapuram+Public+School+Crossings+Republik&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    },
+    "fees": {
+      "cardFee": 108000,
+      "estimatedFirstYear": 148000,
+      "currency": "INR",
+      "rangeText": "₹1,08,000 / year (composite tuition)",
+      "registrationFee": 1000,
+      "admissionFee": 35000,
+      "tuitionMonthly": "9,000",
+      "tuitionQuarterly": "27,000",
+      "tuitionAnnual": "1,08,000",
+      "transportMonthly": "2,800 – 3,500",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "1,000"
+        },
+        {
+          "type": "Admission Fee (One-time)",
+          "cost": "35,000"
+        },
+        {
+          "type": "Composite Annual Tuition Fee",
+          "cost": "1,08,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Spacious Smart Classrooms",
+        "category": "Academics",
+        "icon": "monitor"
+      },
+      {
+        "name": "Physics, Chemistry & Biology Labs",
+        "category": "Labs",
+        "icon": "flask-conical"
+      },
+      {
+        "name": "Sports Complex & Swimming",
+        "category": "Sports",
+        "icon": "trophy"
+      },
+      {
+        "name": "Performing Arts & Auditorium",
+        "category": "Arts",
+        "icon": "music"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "White shirt with green-striped tie & navy trousers"
+      },
+      "girls": {
+        "image": null,
+        "label": "White shirt with green-striped tie & navy skirt/trousers"
+      }
+    },
+    "achievements": [
+      "CBSE Affiliated Senior Secondary School (Affiliation No. 2131758)",
+      "Highly preferred catchment institution for Gaur City 1 & 2 families"
+    ],
+    "admissions": {
+      "date": "September to March",
+      "status": "open",
+      "process": "Online registration followed by informal parent-child interaction.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Registrations Open",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Online registration portal",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Application Deadline",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Assessment interview",
+          "verificationStatus": "verified_official_notice"
+        }
+      ],
+      "session": "2027–28"
+    },
+    "contact": {
+      "phone": "0120-4180000",
+      "website": "https://indirapuramschoolcr.com",
+      "email": "info@indirapuramschoolcr.com"
+    },
+    "rating": {
+      "score": 4.4,
+      "scale": 5,
+      "reviewsCount": 20
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-03-01",
+      "sourceName": "CBSE Affiliation Portal (No. 2131758)",
+      "cbseAffiliationNumber": "2131758",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "curriculum",
+        "gradeRange",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "indirapuram-public-school-crossings.html",
+      "pageTitle": "Indirapuram Public School Crossings Republik",
+      "h1": "Indirapuram Public School Crossings Republik",
+      "pageHeartKey": "heart_ips_cr",
+      "cardHeartKey": "card_ips_cr",
+      "cardRatingKey": "rating_ips_cr",
+      "cardLink": "/schools/indirapuram-public-school-crossings-republik",
+      "legacyUrls": [
+        "/schools/indirapuram-public-school-crossings-republik",
+        "/ips-crossings-republik"
+      ]
+    },
+    "auditNotes": [
+      "Canonical verified nearby catchment school bordering Gaur City / Greater Noida West"
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "indirapuram-public-school-crossings-republik",
+    "isDuplicate": false,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2131758",
+    "establishedYear": 2014,
+    "sports": [
+      "Swimming",
+      "Basketball",
+      "Badminton",
+      "Football",
+      "Cricket"
+    ],
+    "cbseAffiliationNumber": "2131758"
+  },
+  {
+    "id": "sapphire-international-school-crossings-republik",
+    "slug": "sapphire-international-school-crossings-republik",
+    "name": "Sapphire International School, Crossings Republik",
+    "shortName": "Sapphire International",
+    "alternateNames": [
+      "Sapphire International School CR",
+      "Sapphire School Crossings",
+      "Sapphire Crossings Republik"
+    ],
+    "tagline": "Premier CBSE Co-Educational Institution Bordering Gaur City",
+    "summary": "Sapphire International School (CBSE Affiliation No. 2131920) is a well-established senior secondary institution located at Plot No. 3, Crossings Republik, directly bordering Greater Noida West and Gaur City, offering student-centric pedagogical approaches, state-of-the-art sports facilities, and comprehensive arts programs.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "22:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. 3, Crossings Republik, NH-24 (Bordering Greater Noida West & Gaur City), Uttar Pradesh 201016",
+      "sector": "Crossing Republik Border",
+      "city": "Crossing Republik",
+      "state": "Uttar Pradesh",
+      "pincode": "201016",
+      "area": "Crossing Republik",
+      "coordinates": {
+        "lat": 28.627,
+        "lng": 77.435,
+        "isVerified": true
+      },
+      "mapSearchQuery": "Sapphire International School Crossings Republik",
+      "mapEmbedUrl": "https://maps.google.com/maps?q=Sapphire+International+School+Crossings+Republik&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    },
+    "fees": {
+      "cardFee": 102000,
+      "estimatedFirstYear": 142000,
+      "currency": "INR",
+      "rangeText": "₹1,02,000 / year (composite tuition)",
+      "registrationFee": 1000,
+      "admissionFee": 35000,
+      "tuitionMonthly": "8,500",
+      "tuitionQuarterly": "25,500",
+      "tuitionAnnual": "1,02,000",
+      "transportMonthly": "2,700 – 3,400",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "1,000"
+        },
+        {
+          "type": "Admission Fee (One-time)",
+          "cost": "35,000"
+        },
+        {
+          "type": "Composite Annual Tuition Fee",
+          "cost": "1,02,000"
+        }
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Digitally Integrated Classrooms",
+        "category": "Academics",
+        "icon": "monitor"
+      },
+      {
+        "name": "Science & Robotics Laboratories",
+        "category": "Labs",
+        "icon": "cpu"
+      },
+      {
+        "name": "Sports Academy & Playgrounds",
+        "category": "Sports",
+        "icon": "trophy"
+      },
+      {
+        "name": "Dance, Drama & Music Studios",
+        "category": "Arts",
+        "icon": "music"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "Sky-blue shirt with sapphire-blue trousers & school tie"
+      },
+      "girls": {
+        "image": null,
+        "label": "Sky-blue shirt with sapphire-blue skirt/trousers & school tie"
+      }
+    },
+    "achievements": [
+      "CBSE Affiliated Senior Secondary School (Affiliation No. 2131920)",
+      "Highly rated for personalized student care and well-rounded curriculum"
+    ],
+    "admissions": {
+      "date": "September to March",
+      "status": "open",
+      "process": "Online registration, interactive session with child and parents, verification of documents.",
+      "milestones": [
+        {
+          "id": "app_opening",
+          "label": "Registration Window Opens",
+          "date": "2026-09-15",
+          "verified": true,
+          "notes": "Campus registration Desk",
+          "verificationStatus": "verified_official_notice"
+        },
+        {
+          "id": "app_deadline",
+          "label": "Phase 1 Registration Closing",
+          "date": "2027-03-31",
+          "verified": true,
+          "notes": "Seat allocation list",
+          "verificationStatus": "verified_official_notice"
+        }
+      ],
+      "session": "2027–28"
+    },
+    "contact": {
+      "phone": "0120-4355555",
+      "website": "https://sapphireschool.in",
+      "email": "info@sapphireschool.in"
+    },
+    "rating": {
+      "score": 4.3,
+      "scale": 5,
+      "reviewsCount": 17
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-03-01",
+      "sourceName": "CBSE Portal (Affiliation No. 2131920)",
+      "cbseAffiliationNumber": "2131920",
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "curriculum",
+        "gradeRange",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "sapphire-international-school-crossings.html",
+      "pageTitle": "Sapphire International School Crossings Republik",
+      "h1": "Sapphire International School Crossings Republik",
+      "pageHeartKey": "heart_sapphire_cr",
+      "cardHeartKey": "card_sapphire_cr",
+      "cardRatingKey": "rating_sapphire_cr",
+      "cardLink": "/schools/sapphire-international-school-crossings-republik",
+      "legacyUrls": [
+        "/schools/sapphire-international-school-crossings-republik",
+        "/sapphire-crossings-republik"
+      ]
+    },
+    "auditNotes": [
+      "Canonical verified nearby catchment school bordering Gaur City / Greater Noida West"
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "sapphire-international-school-crossings-republik",
+    "isDuplicate": false,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2131920",
+    "establishedYear": 2015,
+    "sports": [
+      "Cricket",
+      "Basketball",
+      "Football",
+      "Badminton",
+      "Skating"
+    ],
+    "cbseAffiliationNumber": "2131920"
   }
 ]

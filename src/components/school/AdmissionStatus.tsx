@@ -13,7 +13,12 @@ export interface AdmissionStatusProps {
 export function formatAdmissionStatus(rawStatus?: string): string {
   if (!rawStatus) return 'Enquire for Dates';
   const lower = rawStatus.toLowerCase().trim();
-  if (lower === 'open') return 'Admissions Open';
+  if (lower === 'open' || lower === 'admissions open') return 'Admissions Open (2027–28)';
+  if (lower === 'pre_registration' || lower === 'pre-registration') return 'Pre-Registration Open (2027–28)';
+  if (lower === 'not_open' || lower === 'not open') return 'Admissions Not Yet Open (2027–28)';
+  if (lower === 'expected') return 'Admissions Expected Soon';
+  if (lower === 'not_publicly_confirmed' || lower === 'pending') return 'Schedule Pending Confirmation';
+  if (lower === 'closed') return 'Admissions Closed';
   if (lower === 'closing-soon' || lower === 'closing soon') return 'Closing Soon';
   // Replace simple hyphens in academic years with proper typographical en-dashes (e.g., 2027-28 -> 2027–28)
   return rawStatus.replace(/(\d{4})-(\d{2,4})/, '$1–$2');

@@ -24,8 +24,111 @@ export interface FeeItem {
   cost: string;
 }
 
+export type FeeFrequency =
+  | 'one_time'
+  | 'monthly'
+  | 'quarterly'
+  | 'annual'
+  | 'half_yearly'
+  | 'per_term'
+  | 'per_installment'
+  | 'as_applicable'
+  | 'optional';
+
+export type FeeVerificationStatus =
+  | 'verified_from_source'
+  | 'verified_official'
+  | 'calculated_from_official'
+  | 'estimated_historical'
+  | 'estimated'
+  | 'unverified_copied_from_wisdom_tree'
+  | 'partially_verified'
+  | 'unverified_undisclosed'
+  | 'not_publicly_verified'
+  | 'pending_audit';
+
+export interface DetailedFeeComponent {
+  id: string;
+  name: string;
+  category:
+    | 'one_time'
+    | 'recurring'
+    | 'grade_wise'
+    | 'special_curriculum'
+    | 'optional'
+    | 'deposit'
+    | 'activity'
+    | 'examination'
+    | 'transport'
+    | 'other';
+  amount?: number | null;
+  formattedAmount: string;
+  frequency: FeeFrequency;
+  gradesApplicable?: string;
+  mandatory: boolean;
+  refundable: boolean;
+  isCalculated?: boolean;
+  calculationNotes?: string;
+  isOfficial?: boolean;
+  sourceUrl?: string;
+  notes?: string;
+}
+
+export interface GradeWiseFeeTier {
+  gradeGroup: string;
+  grades?: string[];
+  tuitionFee: string;
+  tuitionFrequency: FeeFrequency;
+  calculatedAnnualEquivalent?: string;
+  totalAnnualPayable?: string;
+  isCalculated?: boolean;
+  curriculum?: string;
+  specialCharges?: { name: string; amount: string; frequency: string }[];
+  notes?: string;
+}
+
+export interface FeeConcession {
+  title: string;
+  category: 'sibling' | 'merit' | 'early_bird' | 'staff' | 'defense' | 'advance_payment' | 'other';
+  discountDescription: string;
+  discountValue?: string;
+  eligibilityCriteria?: string;
+  isOfficial: boolean;
+}
+
+export interface FeeCircularDocument {
+  title: string;
+  academicSession: string;
+  publishDate?: string;
+  circularType: 'official_pdf' | 'circular_document' | 'web_schedule' | 'institutional_letter';
+  sourceUrl?: string;
+  fileSize?: string;
+  summary?: string;
+  keyTerms?: string[];
+  officialNotes?: string[];
+}
+
+export interface TransportZoneSchedule {
+  zone: string;
+  distanceSlab?: string;
+  areasCovered?: string[];
+  frequency: FeeFrequency;
+  amount: string;
+  isOptional: boolean;
+}
+
+export interface HistoricalFeeStructure {
+  academicSession: string;
+  annualCardFee?: number | null;
+  rangeText: string;
+  verificationStatus: string;
+  summary: string;
+  sourceUrl?: string;
+  components?: DetailedFeeComponent[];
+}
+
 export interface SchoolFees {
-  cardFee: number;
+  cardFee: number | null;
   estimatedFirstYear?: number | null;
   currency?: string;
   rangeText: string;
@@ -36,9 +139,11 @@ export interface SchoolFees {
   tuitionAnnual?: string | null;
   transportMonthly?: string | null;
   transportAnnual?: string | null;
-  verificationStatus?: 'verified_from_source' | 'unverified_copied_from_wisdom_tree' | 'partially_verified' | 'unverified_undisclosed' | 'not_publicly_verified';
+  verificationStatus?: FeeVerificationStatus;
   isVerified?: boolean;
+  disclosed?: boolean;
   comparableAnnualAvailable?: boolean;
+  billingFrequency?: 'monthly' | 'quarterly' | 'annual' | string;
   feeCategory?: string;
   academicSession?: string;
   academicYear?: string;
@@ -46,7 +151,17 @@ export interface SchoolFees {
   lastVerifiedDate?: string;
   verifiedDate?: string;
   sourceUrl?: string;
+  feeDisplayOverride?: string;
   table?: FeeItem[];
+  components?: DetailedFeeComponent[];
+  gradeWiseTiers?: GradeWiseFeeTier[];
+  concessions?: FeeConcession[];
+  circular?: FeeCircularDocument;
+  transportSchedule?: TransportZoneSchedule[];
+  history?: HistoricalFeeStructure[];
+  footnotes?: string[];
+  disclaimer?: string;
+  calculatedAnnualNote?: string;
   legacyRawFees?: FeeItem[];
 }
 

@@ -3,12 +3,13 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Heart, Scale, Share2, Check, ExternalLink } from 'lucide-react';
+import { Heart, Scale, Share2, Check, ExternalLink, Sparkles, Calendar, ClipboardCheck } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { useSchoolStore } from '../../lib/schoolStore';
 import { useAuth } from '../../lib/authContext';
 import { useToast } from '../ui/Toast';
 import { cn } from '../../lib/utils';
+import { AdmissionRegisterModal } from './AdmissionRegisterModal';
 import type { School } from '../../types/school';
 
 export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) => {
@@ -17,6 +18,11 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
   const { isAuthenticated } = useAuth();
   const { showToast } = useToast();
   const [copied, setCopied] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+  const rawStatus = school.admissions?.status || '';
+  const statusLower = rawStatus.toLowerCase();
+  const isOpen = statusLower.includes('open') || statusLower.includes('ongoing') || statusLower.includes('active');
 
   const isSaved = isInShortlist(school.slug);
   const isCompared = isInCompare(school.slug);
@@ -45,6 +51,18 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
 
   return (
     <div className="flex flex-col gap-2.5 w-full">
+      {/* Primary CTA: Admission Pitara Registration / Pre-Registration */}
+      <Button
+        type="button"
+        variant="primary"
+        size="md"
+        onClick={() => setIsRegisterModalOpen(true)}
+        className="w-full text-xs sm:text-sm font-bold shadow-warm-sm py-3 justify-center text-white"
+        leftIcon={isOpen ? <ClipboardCheck className="w-4 h-4 text-emerald-300" /> : <Sparkles className="w-4 h-4 text-amber-300" />}
+      >
+        {isOpen ? 'Register on Admission Pitara' : 'Pre-register for 2027–28'}
+      </Button>
+
       {/* Shortlist Button */}
       <button
         type="button"
@@ -84,7 +102,7 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
         </Link>
       )}
 
-      {/* Official Website Button */}
+      {/* Official Website / External Portal Link */}
       {school.contact.website && (
         <a
           href={school.contact.website}
@@ -93,10 +111,10 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
           className="w-full"
         >
           <Button
-            variant="primary"
+            variant="outline"
             size="sm"
-            className="w-full text-xs font-bold"
-            rightIcon={<ExternalLink className="w-3.5 h-3.5" />}
+            className="w-full text-xs font-semibold text-slate-700 border-slate-200 hover:bg-slate-50"
+            rightIcon={<ExternalLink className="w-3.5 h-3.5 text-slate-400" />}
           >
             Official Website
           </Button>
@@ -123,13 +141,13 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
       </button>
 
       {/* Persistent Sticky Mobile Bottom Action Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[var(--color-border)] p-3 px-4 shadow-xl flex items-center justify-between gap-2.5 lg:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[var(--color-border)] p-3 px-4 shadow-xl flex items-center justify-between gap-2 lg:hidden pb-[max(0.75rem,env(safe-area-inset-bottom))]">
         <button
           type="button"
           onClick={handleToggleShortlist}
           aria-label={isSaved ? 'Remove from shortlist' : 'Add to shortlist'}
           className={cn(
-            'flex-1 py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 border transition-all cursor-pointer min-h-[44px]',
+            'flex-1 py-2.5 px-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 border transition-all cursor-pointer min-h-[44px]',
             isSaved
               ? 'bg-rose-50 border-rose-300 text-rose-600'
               : 'bg-white border-[var(--color-border-strong)] text-slate-800'
@@ -144,7 +162,7 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
           onClick={() => toggleCompare(school.slug, school.name)}
           aria-label={isCompared ? 'In compare list' : 'Compare school'}
           className={cn(
-            'flex-1 py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 border transition-all cursor-pointer min-h-[44px]',
+            'flex-1 py-2.5 px-2 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 border transition-all cursor-pointer min-h-[44px]',
             isCompared
               ? 'bg-[var(--color-primary-light)] border-[var(--color-primary)] text-[var(--color-primary)]'
               : 'bg-white border-[var(--color-border-strong)] text-slate-800'
@@ -154,33 +172,24 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
           <span className="truncate">{isCompared ? 'Comparing' : 'Compare'}</span>
         </button>
 
-        {school.contact.website ? (
-          <a
-            href={school.contact.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1"
-          >
-            <Button
-              variant="accent"
-              size="sm"
-              className="w-full text-xs font-extrabold text-white py-2.5 min-h-[44px]"
-              rightIcon={<ExternalLink className="w-3.5 h-3.5" />}
-            >
-              Apply
-            </Button>
-          </a>
-        ) : (
-          <button
-            type="button"
-            onClick={handleShare}
-            className="flex-1 py-2.5 px-3 rounded-xl bg-[var(--color-primary)] text-white font-bold text-xs flex items-center justify-center gap-1.5 min-h-[44px]"
-          >
-            <Share2 className="w-3.5 h-3.5" />
-            <span>Share</span>
-          </button>
-        )}
+        <Button
+          type="button"
+          variant="primary"
+          size="sm"
+          onClick={() => setIsRegisterModalOpen(true)}
+          className="flex-1.5 text-xs font-extrabold text-white py-2.5 min-h-[44px] justify-center px-2"
+        >
+          {isOpen ? 'Register' : 'Pre-register'}
+        </Button>
       </div>
+
+      {/* Admission Registration / Pre-Registration Modal */}
+      <AdmissionRegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+        school={school}
+        mode={isOpen ? 'register' : 'preregister'}
+      />
     </div>
   );
 };

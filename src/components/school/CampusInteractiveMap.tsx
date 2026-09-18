@@ -49,8 +49,8 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
   const [copiedCoords, setCopiedCoords] = useState(false);
   const [activePin, setActivePin] = useState<string | null>(school.id);
 
-  const lat = school.location.coordinates?.lat;
-  const lng = school.location.coordinates?.lng;
+  const lat = school.location?.coordinates?.lat;
+  const lng = school.location?.coordinates?.lng;
   if (typeof lat !== 'number' || typeof lng !== 'number') {
     return (
       <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-slate-50 text-slate-500 rounded-xl border border-slate-200">

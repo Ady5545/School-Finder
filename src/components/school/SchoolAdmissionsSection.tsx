@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, Bell, ShieldCheck, CheckCircle2, Clock, ExternalLink, AlertCircle, Sparkles } from 'lucide-react';
+import { Calendar, Bell, ShieldCheck, CheckCircle2, Clock, ExternalLink, AlertCircle, Sparkles, ClipboardCheck } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { AdmissionReminderModal } from './AdmissionReminderModal';
+import { AdmissionRegisterModal } from './AdmissionRegisterModal';
 import { formatAdmissionStatus } from './AdmissionStatus';
 import { cn } from '../../lib/utils';
 import type { School, AdmissionMilestone } from '@data/schoolsData';
@@ -14,6 +15,7 @@ interface SchoolAdmissionsSectionProps {
 
 export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = ({ school }) => {
   const [activeModalMilestone, setActiveModalMilestone] = useState<AdmissionMilestone | null>(null);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [userReminders, setUserReminders] = useState<Record<string, boolean>>({});
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
@@ -105,7 +107,7 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
             Academic Session
           </span>
           <p className="text-sm font-bold text-[#0f172a]">
-            {school.admissions?.session || '2026–2027'}
+            {school.admissions?.session || '2027–28'}
           </p>
         </div>
 
@@ -121,6 +123,32 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
             <span>{formatAdmissionStatus(rawStatus)}</span>
           </p>
         </div>
+      </div>
+
+      {/* Admission Pitara Guidance & Registration Card */}
+      <div className="p-4 sm:p-5 rounded-xl bg-gradient-to-br from-slate-50 to-stone-50 border border-slate-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[var(--color-primary)]">
+            <Sparkles className="w-3.5 h-3.5 text-[var(--color-primary)]" />
+            <span>Admission Pitara Priority Guidance</span>
+          </div>
+          <p className="text-xs text-slate-600 leading-relaxed max-w-xl">
+            {isOpen
+              ? "Register with Admission Pitara to receive direct timeline assistance, document checklists, and admission guidance for this institution."
+              : "Pre-register for Academic Session 2027–28 to receive instant alerts and criteria notifications as soon as official admissions open."}
+          </p>
+        </div>
+
+        <Button
+          type="button"
+          variant="primary"
+          size="sm"
+          onClick={() => setIsRegisterModalOpen(true)}
+          className="font-bold shrink-0 text-xs sm:text-sm py-2.5 px-4 shadow-warm-xs text-white"
+          leftIcon={isOpen ? <ClipboardCheck className="w-4 h-4 text-emerald-300" /> : <Sparkles className="w-4 h-4 text-amber-300" />}
+        >
+          {isOpen ? 'Register on Admission Pitara' : 'Pre-register for 2027–28'}
+        </Button>
       </div>
 
       {/* Procedure Text */}
@@ -224,6 +252,14 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
           isAuthenticated={isAuthenticated}
         />
       )}
+
+      {/* Admission Register / Pre-Register Modal */}
+      <AdmissionRegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+        school={school}
+        mode={isOpen ? 'register' : 'preregister'}
+      />
     </section>
   );
 };

@@ -8,6 +8,7 @@ import { SchoolImage } from '../../../components/school/SchoolImage';
 import { SchoolBadge } from '../../../components/school/SchoolBadge';
 import { SchoolHeroVisual } from '../../../components/school/SchoolHeroVisual';
 import { FeeDisplay } from '../../../components/school/FeeDisplay';
+import { ComprehensiveFeeBreakdown } from '../../../components/school/ComprehensiveFeeBreakdown';
 import { AdmissionStatus } from '../../../components/school/AdmissionStatus';
 import { RatingDisplay } from '../../../components/ui/RatingDisplay';
 import { SchoolProfileActions } from '../../../components/school/SchoolProfileActions';
@@ -216,6 +217,11 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
           {/* Admissions Timelines & Reminders Section */}
           <SchoolAdmissionsSection school={school} />
+
+          {/* Verified Fee Structure & Breakdown */}
+          <section id="fee-breakdown-section">
+            <ComprehensiveFeeBreakdown fees={school.fees} schoolName={school.name} />
+          </section>
 
           {/* Campus Facilities */}
           {school.facilities && school.facilities.length > 0 && (

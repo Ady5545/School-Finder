@@ -172,6 +172,8 @@ export type ActivityEventType =
   | 'search_area_selected'
   | 'user_signup'
   | 'user_login'
+  | 'admission_registration'
+  | 'admission_preregistration'
   | 'admin_action';
 
 export interface ActivityEvent {
@@ -4136,7 +4138,7 @@ export function deleteAnnouncement(id: string): boolean {
 // ----------------------------------------------------------------------------
 export interface SchoolSubmission {
   id: string;
-  type: 'school_submission' | 'data_correction' | 'parent_enquiry' | 'partnership';
+  type: 'school_submission' | 'data_correction' | 'parent_enquiry' | 'partnership' | 'admission_registration' | 'admission_preregistration';
   schoolName?: string;
   schoolSlug?: string;
   submitterName: string;
@@ -4145,6 +4147,11 @@ export interface SchoolSubmission {
   submitterRole?: 'parent' | 'school_admin' | 'other';
   title: string;
   description: string;
+  academicSession?: string;
+  childGrade?: string;
+  residentialSociety?: string;
+  consent?: boolean;
+  userId?: string;
   proposedChanges?: Record<string, unknown>;
   sourceReference?: string;
   status: 'new' | 'in_review' | 'resolved' | 'rejected';

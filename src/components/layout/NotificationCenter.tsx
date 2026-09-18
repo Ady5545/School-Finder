@@ -194,7 +194,7 @@ export const NotificationCenter: React.FC = () => {
                           {alert.schoolName}
                         </span>
                         <span className="text-[11px] text-[var(--color-content-muted)] mt-0.5">
-                          {alert.area} • Audited Fee: ₹{alert.verifiedFee.toLocaleString('en-IN')}/yr
+                          {alert.area} • {alert.verifiedFee ? `Audited Fee: ₹${alert.verifiedFee.toLocaleString('en-IN')}/yr` : 'Verified Admissions'}
                         </span>
                       </div>
 

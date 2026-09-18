@@ -91,7 +91,7 @@ export function generateSchoolJsonLd(school: School) {
       postalCode: school.location.pincode,
       addressCountry: 'IN',
     },
-    ...(school.location.coordinates.lat && school.location.coordinates.lng
+    ...(school.location?.coordinates?.lat && school.location?.coordinates?.lng
       ? {
           geo: {
             '@type': 'GeoCoordinates',

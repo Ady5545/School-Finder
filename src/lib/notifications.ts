@@ -13,7 +13,7 @@ export interface AdmissionDeadlineAlert {
   process?: string;
   area?: string;
   sector?: string;
-  verifiedFee: number;
+  verifiedFee?: number | null;
   status: string;
 }
 

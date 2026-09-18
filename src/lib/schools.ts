@@ -107,7 +107,9 @@ export function filterSchools(options: SchoolFilterOptions): School[] {
     }
 
     if (options.maxFee !== undefined && options.maxFee > 0) {
-      if (school.fees.cardFee > options.maxFee) return false;
+      if (school.fees.cardFee !== null && school.fees.cardFee !== undefined && school.fees.cardFee > options.maxFee) {
+        return false;
+      }
     }
 
     if (options.area && options.area.length > 0) {

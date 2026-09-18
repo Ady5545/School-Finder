@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getAllUsersSanitizedAsync, getUserActivityTimeline } from '../../../../lib/authStore';
+import { getAllUsersSanitizedAsync, getUserActivityTimelineAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
   const auth = requireAdminAuth(req);
@@ -21,20 +21,22 @@ export async function GET(req: NextRequest) {
   const allUsers = await getAllUsersSanitizedAsync();
 
   // Augment with activity summary metrics
-  const augmentedUsers = allUsers.map(u => {
-    const activity = getUserActivityTimeline(u.id);
-    return {
-      ...u,
-      engagement: {
-        schoolsViewedCount: activity.summary.schoolsViewedCount,
-        searchesPerformedCount: activity.summary.searchesPerformedCount,
-        comparisonsCount: activity.summary.comparisonsCount,
-        shortlistedCount: Array.isArray(u.wishlist) ? u.wishlist.length : 0,
-        reviewsSubmittedCount: activity.summary.reviewsSubmittedCount,
-        totalEvents: activity.summary.totalEvents,
-      },
-    };
-  });
+  const augmentedUsers = await Promise.all(
+    allUsers.map(async u => {
+      const activity = await getUserActivityTimelineAsync(u.id);
+      return {
+        ...u,
+        engagement: {
+          schoolsViewedCount: activity.summary.schoolsViewedCount,
+          searchesPerformedCount: activity.summary.searchesPerformedCount,
+          comparisonsCount: activity.summary.comparisonsCount,
+          shortlistedCount: Array.isArray(u.wishlist) ? u.wishlist.length : 0,
+          reviewsSubmittedCount: activity.summary.reviewsSubmittedCount,
+          totalEvents: activity.summary.totalEvents,
+        },
+      };
+    })
+  );
 
   // Filter
   let filtered = augmentedUsers.filter(u => {

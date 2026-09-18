@@ -2,9 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
 import {
   verifyPassword,
-  updateUserPassword,
+  updateUserPasswordAsync,
   checkRateLimit,
-  recordAdminAudit,
+  recordAdminAuditAsync,
+  getUserByIdAsync,
 } from '../../../../lib/authStore';
 
 export async function POST(req: NextRequest) {
@@ -66,10 +67,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Fetch fresh user record from MongoDB
+    const freshUser = await getUserByIdAsync(auth.user.id);
+    const passwordHash = freshUser?.passwordHash || auth.user.passwordHash || '';
+
     // Verify current password server-side
-    const isCurrentValid = verifyPassword(currentPassword, auth.user.passwordHash || '');
+    const isCurrentValid = verifyPassword(currentPassword, passwordHash);
     if (!isCurrentValid) {
-      recordAdminAudit(
+      await recordAdminAuditAsync(
         auth.user.id,
         auth.user.email,
         'change_password_attempt',
@@ -94,7 +99,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Execute secure password change
-    const updated = updateUserPassword(auth.user.id, newPassword);
+    const updated = await updateUserPasswordAsync(auth.user.id, newPassword);
     if (!updated) {
       return NextResponse.json(
         { success: false, message: 'Failed to update administrator password in user database.' },
@@ -103,7 +108,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Log security audit event (NEVER including passwords or hashes)
-    recordAdminAudit(
+    await recordAdminAuditAsync(
       auth.user.id,
       auth.user.email,
       'change_password',

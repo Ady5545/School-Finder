@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getWishlistAnalytics } from '../../../../lib/authStore';
+import { getWishlistAnalyticsAsync } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const rawAnalytics = getWishlistAnalytics();
+  const rawAnalytics = await getWishlistAnalyticsAsync();
 
   const enriched = rawAnalytics.map(item => {
     const school = getSchoolBySlug(item.slug);

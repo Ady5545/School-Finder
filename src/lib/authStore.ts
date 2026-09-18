@@ -454,37 +454,6 @@ function initDb(): void {
     console.warn('[AUTH_DB_WARN] Failed reading existing DB file, re-initializing:', err);
   }
 
-  // Ensure default parent account exists
-  const demoEmail = 'parent@example.com';
-  let demoUser = users.get(demoEmail);
-  if (!demoUser) {
-    const parentInitPass = process.env.PARENT_INITIAL_PASSWORD || 'Parent@12345';
-    const demoHash = hashPassword(parentInitPass);
-
-    demoUser = {
-      id: 'usr_demo_parent_gnw',
-      name: 'Rohit Sharma',
-      email: demoEmail,
-      status: 'active',
-      preferredSchoolLocality: 'Sector 16B',
-      preferredBoards: ['CBSE', 'IB'],
-      childGrade: 'Grade 1 (Primary)',
-      passwordHash: demoHash,
-      emailVerified: true,
-      analyticsConsent: true,
-      role: 'parent',
-      createdAt: new Date().toISOString(),
-      lastLoginAt: new Date().toISOString(),
-      lastActivityAt: new Date().toISOString(),
-      wishlist: ['delhi-public-school-knowledge-park-5', 'lotus-valley-international-school-noida-extension'],
-      compareList: ['delhi-public-school-knowledge-park-5', 'delhi-world-public-school-kp-5'],
-    };
-
-    users.set(demoUser.email.toLowerCase(), demoUser);
-  } else if (demoUser.passwordHash && demoUser.passwordHash.includes('ap_salt_demo_2025')) {
-    demoUser.passwordHash = hashPassword('Parent@12345');
-  }
-
   // Ensure default administrative account exists
   const adminEmail = 'admin@admissionpitara.com';
   let adminUser = users.get(adminEmail);
@@ -615,7 +584,8 @@ export async function ensureMongoSync(): Promise<void> {
       if (viewsCol) {
         const mongoViews = await viewsCol.find({}).toArray();
         for (const v of mongoViews) {
-          schoolViews.set(v.slug, v.count);
+          const count = typeof v.totalViews === 'number' ? v.totalViews : (typeof v.count === 'number' ? v.count : 0);
+          schoolViews.set(v.slug, count);
         }
       }
 
@@ -670,6 +640,36 @@ export function updateUserPassword(userId: string, newPassword: string): boolean
   user.lastActivityAt = new Date().toISOString();
   saveStoreToDisk(true);
   return true;
+}
+
+export async function updateUserPasswordAsync(userId: string, newPassword: string): Promise<boolean> {
+  const newHash = hashPassword(newPassword);
+  const nowIso = new Date().toISOString();
+  let updated = false;
+
+  if (isMongoConfigured()) {
+    const usersCol = await getUsersCollection(true);
+    if (usersCol) {
+      const res = await usersCol.updateOne(
+        { id: userId },
+        { $set: { passwordHash: newHash, lastActivityAt: nowIso } }
+      );
+      if (res.matchedCount > 0) {
+        updated = true;
+      }
+    }
+  }
+
+  // Update memory cache and disk store
+  const user = getUserById(userId);
+  if (user) {
+    user.passwordHash = newHash;
+    user.lastActivityAt = nowIso;
+    saveStoreToDisk(true);
+    updated = true;
+  }
+
+  return updated;
 }
 
 export function createSessionToken(user: ParentUser): string {
@@ -972,14 +972,10 @@ export function getUserById(id: string): ParentUser | null {
 
 export async function getUserByEmailAsync(email: string): Promise<ParentUser | null> {
   const normalized = email.trim().toLowerCase();
-  await ensureMongoSync();
-
-  const memUser = users.get(normalized);
-  if (memUser) return memUser;
 
   if (isMongoConfigured()) {
     try {
-      const usersCol = await getUsersCollection();
+      const usersCol = await getUsersCollection(true);
       if (usersCol) {
         const doc = await usersCol.findOne({ email: normalized });
         if (doc) {
@@ -988,11 +984,15 @@ export async function getUserByEmailAsync(email: string): Promise<ParentUser | n
           users.set(normalized, doc);
           return doc;
         }
+        return null;
       }
     } catch (err) {
-      console.warn('[MONGO_GET_USER_BY_EMAIL_ERROR]', err);
+      console.error('[MONGO_GET_USER_BY_EMAIL_ERROR]', err);
+      throw err;
     }
   }
+
+  await ensureMongoSync();
   return getUserByEmail(normalized);
 }
 
@@ -1002,14 +1002,10 @@ export async function getUserByEmailOrMobileAsync(identifier: string): Promise<P
 
 export async function getUserByIdAsync(id: string): Promise<ParentUser | null> {
   if (!id) return null;
-  await ensureMongoSync();
-
-  const memUser = getUserById(id);
-  if (memUser) return memUser;
 
   if (isMongoConfigured()) {
     try {
-      const usersCol = await getUsersCollection();
+      const usersCol = await getUsersCollection(true);
       if (usersCol) {
         const doc = await usersCol.findOne({ id });
         if (doc) {
@@ -1018,12 +1014,16 @@ export async function getUserByIdAsync(id: string): Promise<ParentUser | null> {
           users.set(doc.email.toLowerCase(), doc);
           return doc;
         }
+        return null;
       }
     } catch (err) {
-      console.warn('[MONGO_GET_USER_BY_ID_ERROR]', err);
+      console.error('[MONGO_GET_USER_BY_ID_ERROR]', err);
+      throw err;
     }
   }
-  return null;
+
+  await ensureMongoSync();
+  return getUserById(id);
 }
 
 export function createParentUser(userData: {
@@ -1346,6 +1346,29 @@ export function updateUserLists(userId: string, wishlist?: string[], compareList
 }
 
 export async function updateUserListsAsync(userId: string, wishlist?: string[], compareList?: string[]): Promise<ParentUser | null> {
+  if (isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection(true);
+      if (usersCol) {
+        const updateDoc: Record<string, unknown> = { lastActivityAt: new Date().toISOString() };
+        if (wishlist !== undefined) updateDoc.wishlist = wishlist;
+        if (compareList !== undefined) updateDoc.compareList = compareList;
+
+        await usersCol.updateOne({ id: userId }, { $set: updateDoc });
+        const updatedDoc = await usersCol.findOne({ id: userId });
+        if (updatedDoc) {
+          const { _id, ...safeUser } = updatedDoc as unknown as ParentUser & { _id?: unknown };
+          users.set(safeUser.email.toLowerCase(), safeUser as ParentUser);
+          saveStoreToDisk();
+          return safeUser as ParentUser;
+        }
+      }
+    } catch (err) {
+      console.error('[MONGO_UPDATE_LISTS_ERROR]', err);
+      throw err;
+    }
+  }
+
   await ensureMongoSync();
   const user = await getUserByIdAsync(userId);
   if (user) {
@@ -1354,21 +1377,6 @@ export async function updateUserListsAsync(userId: string, wishlist?: string[], 
     user.lastActivityAt = new Date().toISOString();
     users.set(user.email.toLowerCase(), user);
     saveStoreToDisk();
-
-    if (isMongoConfigured()) {
-      try {
-        const usersCol = await getUsersCollection();
-        if (usersCol) {
-          await usersCol.updateOne(
-            { id: user.id },
-            { $set: { wishlist: user.wishlist, compareList: user.compareList, lastActivityAt: user.lastActivityAt } },
-            { upsert: true }
-          );
-        }
-      } catch (err) {
-        console.warn('[MONGO_UPDATE_LISTS_ERROR]', err);
-      }
-    }
     return user;
   }
   return null;
@@ -1411,23 +1419,65 @@ export function removeWishlistItemForUser(userId: string, schoolSlug: string, ad
 }
 
 export async function removeWishlistItemForUserAsync(userId: string, schoolSlug: string, adminUserId?: string): Promise<boolean> {
-  await ensureMongoSync();
-  const res = removeWishlistItemForUser(userId, schoolSlug, adminUserId);
-  if (res && isMongoConfigured()) {
+  if (isMongoConfigured()) {
     try {
-      const usersCol = await getUsersCollection();
-      const user = getUserById(userId);
-      if (usersCol && user) {
-        await usersCol.updateOne(
-          { id: user.id },
-          { $set: { wishlist: user.wishlist, lastActivityAt: user.lastActivityAt } },
-          { upsert: true }
-        );
+      const usersCol = await getUsersCollection(true);
+      if (usersCol) {
+        const user = await usersCol.findOne({ id: userId });
+        if (!user || !Array.isArray(user.wishlist) || !user.wishlist.includes(schoolSlug)) {
+          return false;
+        }
+        const newWishlist = user.wishlist.filter((s: string) => s !== schoolSlug);
+        const now = new Date().toISOString();
+        await usersCol.updateOne({ id: userId }, { $set: { wishlist: newWishlist, lastActivityAt: now } });
+
+        const savesCol = await getSchoolSavesCollection(true);
+        if (savesCol) {
+          await savesCol.updateOne(
+            { slug: schoolSlug },
+            { $inc: { count: -1 }, $set: { lastSavedAt: now } },
+            { upsert: true }
+          );
+        }
+
+        await recordActivityEventAsync({
+          type: 'wishlist_remove',
+          userId,
+          schoolSlug,
+          targetType: 'school',
+          targetId: schoolSlug,
+          details: adminUserId ? { removedByAdmin: adminUserId } : undefined,
+        });
+
+        if (adminUserId) {
+          const adminUser = await getUserByIdAsync(adminUserId);
+          await recordAdminAuditAsync(
+            adminUserId,
+            adminUser?.email || 'admin@admissionpitara.com',
+            'remove_user_shortlist_item',
+            'user',
+            userId,
+            { schoolSlug, targetEmail: user.email },
+            'success'
+          );
+        }
+
+        const localUser = getUserById(userId);
+        if (localUser) {
+          localUser.wishlist = newWishlist;
+          localUser.lastActivityAt = now;
+          users.set(localUser.email.toLowerCase(), localUser);
+        }
+        return true;
       }
     } catch (err) {
-      console.warn('[MONGO_REMOVE_WISHLIST_ERROR]', err);
+      console.error('[MONGO_REMOVE_WISHLIST_ERROR]', err);
+      throw err;
     }
   }
+
+  await ensureMongoSync();
+  const res = removeWishlistItemForUser(userId, schoolSlug, adminUserId);
   return res;
 }
 
@@ -1467,24 +1517,41 @@ export function deleteParentUser(userId: string, adminUserId?: string): boolean 
 }
 
 export async function deleteParentUserAsync(userId: string, adminUserId?: string): Promise<boolean> {
-  await ensureMongoSync();
-  const user = getUserById(userId);
-  const res = deleteParentUser(userId, adminUserId);
-  if (res && isMongoConfigured()) {
+  if (isMongoConfigured()) {
     try {
-      const usersCol = await getUsersCollection();
-      if (usersCol && user) {
+      const usersCol = await getUsersCollection(true);
+      const user = usersCol ? await usersCol.findOne({ id: userId }) : null;
+      if (usersCol) {
         await usersCol.deleteOne({ id: userId });
       }
-      const ratingsCol = await getRatingsCollection();
+      const ratingsCol = await getRatingsCollection(true);
       if (ratingsCol) {
         await ratingsCol.deleteMany({ userId });
       }
+
+      if (adminUserId) {
+        const adminUser = await getUserByIdAsync(adminUserId);
+        await recordAdminAuditAsync(
+          adminUserId,
+          adminUser?.email || 'admin@admissionpitara.com',
+          'delete_user_account',
+          'user',
+          userId,
+          { targetEmail: user?.email, name: user?.name },
+          'success'
+        );
+      }
+
+      deleteParentUser(userId, adminUserId);
+      return true;
     } catch (err) {
-      console.warn('[MONGO_DELETE_USER_ERROR]', err);
+      console.error('[MONGO_DELETE_USER_ASYNC_ERROR]', err);
+      throw err;
     }
   }
-  return res;
+
+  await ensureMongoSync();
+  return deleteParentUser(userId, adminUserId);
 }
 
 export function sanitizeUser(user: ParentUser) {
@@ -1503,6 +1570,28 @@ export function getAllUsersSanitized() {
 }
 
 export async function getAllUsersSanitizedAsync() {
+  if (isMongoConfigured()) {
+    try {
+      const usersCol = await getUsersCollection(true);
+      if (usersCol) {
+        const mongoUsers = await usersCol.find({}).sort({ createdAt: -1 }).toArray();
+        const uniqueUsers = new Map<string, ReturnType<typeof sanitizeUser>>();
+        for (const u of mongoUsers) {
+          if (!u.status) u.status = 'active';
+          if (!u.role) u.role = 'parent';
+          users.set(u.email.toLowerCase(), u);
+          if (!uniqueUsers.has(u.id)) {
+            uniqueUsers.set(u.id, sanitizeUser(u));
+          }
+        }
+        return Array.from(uniqueUsers.values());
+      }
+    } catch (err) {
+      console.error('[MONGO_GET_ALL_USERS_ERROR]', err);
+      throw err;
+    }
+  }
+
   await ensureMongoSync();
   return getAllUsersSanitized();
 }
@@ -1574,6 +1663,111 @@ export function recordActivityEvent(params: {
   }
 
   saveStoreToDisk();
+
+  // Async persist to MongoDB without blocking synchronous callers
+  if (isMongoConfigured()) {
+    getActivityCollection().then(async col => {
+      if (col) {
+        await col.insertOne(evt);
+      }
+    }).catch(err => console.error('[MONGO_ACTIVITY_INSERT_ASYNC_ERR]', err));
+
+    if (schoolSlug && type === 'school_view') {
+      getSchoolViewsCollection().then(async col => {
+        if (col) {
+          const incFields: Record<string, number> = { totalViews: 1, count: 1 };
+          if (userId) {
+            incFields.authenticatedViews = 1;
+          } else {
+            incFields.anonymousViews = 1;
+          }
+          await col.updateOne(
+            { slug: schoolSlug },
+            {
+              $inc: incFields,
+              $set: { lastViewedAt: new Date().toISOString() },
+            },
+            { upsert: true }
+          );
+        }
+      }).catch(err => console.error('[MONGO_SCHOOL_VIEW_ASYNC_ERR]', err));
+    } else if (schoolSlug && (type === 'wishlist_add' || type === 'wishlist_remove')) {
+      getSchoolSavesCollection().then(async col => {
+        if (col) {
+          const inc = type === 'wishlist_add' ? 1 : -1;
+          await col.updateOne(
+            { slug: schoolSlug },
+            {
+              $inc: { count: inc },
+              $set: { lastSavedAt: new Date().toISOString() },
+            },
+            { upsert: true }
+          );
+        }
+      }).catch(err => console.error('[MONGO_SCHOOL_SAVE_ASYNC_ERR]', err));
+    }
+  }
+
+  return evt;
+}
+
+export async function recordActivityEventAsync(params: {
+  type: ActivityEventType;
+  userId?: string;
+  targetType?: 'school' | 'user' | 'review' | 'search' | 'promotion' | 'system';
+  targetId?: string;
+  schoolSlug?: string;
+  locality?: string;
+  searchQuery?: string;
+  approximateTimeSpent?: string;
+  details?: Record<string, unknown>;
+}): Promise<ActivityEvent> {
+  const evt = recordActivityEvent(params);
+
+  if (isMongoConfigured()) {
+    try {
+      const col = await getActivityCollection(true);
+      if (col) {
+        await col.updateOne({ id: evt.id }, { $set: evt }, { upsert: true });
+      }
+
+      if (params.schoolSlug && params.type === 'school_view') {
+        const viewsCol = await getSchoolViewsCollection(true);
+        if (viewsCol) {
+          const incFields: Record<string, number> = { totalViews: 1, count: 1 };
+          if (params.userId) {
+            incFields.authenticatedViews = 1;
+          } else {
+            incFields.anonymousViews = 1;
+          }
+          await viewsCol.updateOne(
+            { slug: params.schoolSlug },
+            {
+              $inc: incFields,
+              $set: { lastViewedAt: new Date().toISOString() },
+            },
+            { upsert: true }
+          );
+        }
+      } else if (params.schoolSlug && (params.type === 'wishlist_add' || params.type === 'wishlist_remove')) {
+        const savesCol = await getSchoolSavesCollection(true);
+        if (savesCol) {
+          const inc = params.type === 'wishlist_add' ? 1 : -1;
+          await savesCol.updateOne(
+            { slug: params.schoolSlug },
+            {
+              $inc: { count: inc },
+              $set: { lastSavedAt: new Date().toISOString() },
+            },
+            { upsert: true }
+          );
+        }
+      }
+    } catch (err) {
+      console.error('[MONGO_RECORD_ACTIVITY_ASYNC_ERR]', err);
+    }
+  }
+
   return evt;
 }
 
@@ -1581,6 +1775,19 @@ export function recordSchoolView(slug: string, userIdOrTimeSpent?: string, maybe
   const userId = maybeUserId || (userIdOrTimeSpent && userIdOrTimeSpent.startsWith('usr_') ? userIdOrTimeSpent : undefined);
   const approximateTimeSpent = userIdOrTimeSpent && !userIdOrTimeSpent.startsWith('usr_') ? userIdOrTimeSpent : undefined;
   recordActivityEvent({
+    type: 'school_view',
+    schoolSlug: slug,
+    targetType: 'school',
+    targetId: slug,
+    userId,
+    approximateTimeSpent,
+  });
+}
+
+export async function recordSchoolViewAsync(slug: string, userIdOrTimeSpent?: string, maybeUserId?: string): Promise<void> {
+  const userId = maybeUserId || (userIdOrTimeSpent && userIdOrTimeSpent.startsWith('usr_') ? userIdOrTimeSpent : undefined);
+  const approximateTimeSpent = userIdOrTimeSpent && !userIdOrTimeSpent.startsWith('usr_') ? userIdOrTimeSpent : undefined;
+  await recordActivityEventAsync({
     type: 'school_view',
     schoolSlug: slug,
     targetType: 'school',
@@ -1600,148 +1807,269 @@ export function recordSchoolSave(slug: string, userId?: string): void {
   });
 }
 
+export async function recordSchoolSaveAsync(slug: string, userId?: string): Promise<void> {
+  await recordActivityEventAsync({
+    type: 'wishlist_add',
+    schoolSlug: slug,
+    targetType: 'school',
+    targetId: slug,
+    userId,
+  });
+}
+
 export function recordSearchEvent(params: {
   query: string;
   locality?: string;
   resultsCount?: number;
   userId?: string;
-}): void {
-  recordActivityEvent({
+}): ActivityEvent {
+  return recordActivityEvent({
     type: 'search_performed',
-    searchQuery: params.query,
-    locality: params.locality,
     userId: params.userId,
     targetType: 'search',
-    details: { resultsCount: params.resultsCount },
+    searchQuery: params.query,
+    locality: params.locality,
+    details: {
+      resultsCount: params.resultsCount,
+    },
+  });
+}
+
+export async function recordSearchEventAsync(params: {
+  query: string;
+  locality?: string;
+  resultsCount?: number;
+  userId?: string;
+}): Promise<ActivityEvent> {
+  return recordActivityEventAsync({
+    type: 'search_performed',
+    userId: params.userId,
+    targetType: 'search',
+    searchQuery: params.query,
+    locality: params.locality,
+    details: {
+      resultsCount: params.resultsCount,
+    },
   });
 }
 
 export function recordCompareEvent(params: {
   schoolSlugs: string[];
   userId?: string;
-}): void {
-  recordActivityEvent({
+}): ActivityEvent {
+  return recordActivityEvent({
     type: 'compare_view',
-    targetType: 'school',
     userId: params.userId,
-    details: { schoolSlugs: params.schoolSlugs, count: params.schoolSlugs.length },
+    targetType: 'school',
+    details: {
+      schools: params.schoolSlugs,
+    },
   });
 }
 
-export function getActivityEvents(limit = 100, filters?: {
+export async function recordCompareEventAsync(params: {
+  schoolSlugs: string[];
   userId?: string;
-  type?: string;
-  schoolSlug?: string;
-  since?: string;
-}): ActivityEvent[] {
-  let filtered = activityEvents;
+}): Promise<ActivityEvent> {
+  return recordActivityEventAsync({
+    type: 'compare_view',
+    userId: params.userId,
+    targetType: 'school',
+    details: {
+      schools: params.schoolSlugs,
+    },
+  });
+}
 
-  if (filters?.userId) {
-    filtered = filtered.filter(e => e.userId === filters.userId);
+export function getActivityEvents(
+  limit = 100,
+  filters?: { type?: string; userId?: string; schoolSlug?: string; since?: string }
+): ActivityEvent[] {
+  initDb();
+  let events = [...activityEvents];
+
+  if (filters?.type) {
+    events = events.filter(e => e.type === filters.type);
   }
-  if (filters?.type && filters.type !== 'all') {
-    filtered = filtered.filter(e => e.type === filters.type);
+  if (filters?.userId) {
+    events = events.filter(e => e.userId === filters.userId);
   }
   if (filters?.schoolSlug) {
-    filtered = filtered.filter(e => e.schoolSlug === filters.schoolSlug);
+    events = events.filter(e => e.schoolSlug === filters.schoolSlug || (Array.isArray(e.details?.schools) && (e.details.schools as string[]).includes(filters.schoolSlug!)));
   }
   if (filters?.since) {
     const sinceTime = new Date(filters.since).getTime();
-    filtered = filtered.filter(e => new Date(e.timestamp).getTime() >= sinceTime);
+    if (!isNaN(sinceTime)) {
+      events = events.filter(e => new Date(e.timestamp).getTime() >= sinceTime);
+    }
   }
 
-  return filtered.slice(0, limit);
+  return events.slice(0, limit);
 }
 
-export function getUserActivityTimeline(userId: string): {
-  timeline: ActivityEvent[];
-  summary: {
-    schoolsViewedCount: number;
-    searchesPerformedCount: number;
-    comparisonsCount: number;
-    shortlistedCount: number;
-    reviewsSubmittedCount: number;
-    reviewsEditedCount: number;
-    reviewsDeletedCount: number;
-    totalEvents: number;
-  };
-  uniqueSchoolsViewed: { slug: string; visitCount: number; lastViewed: string; firstViewed: string }[];
-  searchHistory: { query: string; locality?: string; timestamp: string; resultsCount?: number }[];
-  comparisons: { schools: string[]; timestamp: string }[];
-} {
+export async function getActivityEventsAsync(
+  limit = 100,
+  filters?: { type?: string; userId?: string; schoolSlug?: string; since?: string }
+): Promise<ActivityEvent[]> {
+  if (isMongoConfigured()) {
+    try {
+      const col = await getActivityCollection(true);
+      if (col) {
+        const query: Record<string, unknown> = {};
+        if (filters?.type) query.type = filters.type;
+        if (filters?.userId) query.userId = filters.userId;
+        if (filters?.schoolSlug) {
+          query.$or = [
+            { schoolSlug: filters.schoolSlug },
+            { 'details.schools': filters.schoolSlug },
+          ];
+        }
+        if (filters?.since) {
+          query.timestamp = { $gte: filters.since };
+        }
+
+        const docs = await col
+          .find(query)
+          .sort({ timestamp: -1 })
+          .limit(limit)
+          .toArray();
+
+        return docs.map(doc => {
+          const { _id, ...rest } = doc as unknown as ActivityEvent & { _id?: unknown };
+          return rest as ActivityEvent;
+        });
+      }
+    } catch (err) {
+      console.error('[MONGO_GET_ACTIVITY_EVENTS_ERROR]', err);
+      throw err;
+    }
+  }
+
+  return getActivityEvents(limit, filters);
+}
+
+export function getUserActivityTimeline(userId: string) {
+  initDb();
   const userEvents = activityEvents.filter(e => e.userId === userId);
 
   let schoolsViewedCount = 0;
   let searchesPerformedCount = 0;
   let comparisonsCount = 0;
-  let shortlistedCount = 0;
   let reviewsSubmittedCount = 0;
-  let reviewsEditedCount = 0;
-  let reviewsDeletedCount = 0;
 
-  const schoolViewMap = new Map<string, { count: number; first: string; last: string }>();
-  const searchHistory: { query: string; locality?: string; timestamp: string; resultsCount?: number }[] = [];
-  const comparisons: { schools: string[]; timestamp: string }[] = [];
+  const viewsMap = new Map<string, { slug: string; count: number; lastViewed: string }>();
+  const searchHistory: { query: string; locality?: string; timestamp: string }[] = [];
+  const comparisons: { pair: string[]; timestamp: string }[] = [];
 
   for (const evt of userEvents) {
     if (evt.type === 'school_view' && evt.schoolSlug) {
-      schoolsViewedCount += 1;
-      const current = schoolViewMap.get(evt.schoolSlug);
-      if (current) {
-        current.count += 1;
-        current.last = evt.timestamp;
-      } else {
-        schoolViewMap.set(evt.schoolSlug, { count: 1, first: evt.timestamp, last: evt.timestamp });
+      schoolsViewedCount++;
+      const current = viewsMap.get(evt.schoolSlug) || { slug: evt.schoolSlug, count: 0, lastViewed: evt.timestamp };
+      current.count++;
+      if (new Date(evt.timestamp) > new Date(current.lastViewed)) {
+        current.lastViewed = evt.timestamp;
       }
+      viewsMap.set(evt.schoolSlug, current);
     } else if (evt.type === 'search_performed') {
-      searchesPerformedCount += 1;
+      searchesPerformedCount++;
       if (evt.searchQuery) {
         searchHistory.push({
           query: evt.searchQuery,
           locality: evt.locality,
           timestamp: evt.timestamp,
-          resultsCount: typeof evt.details?.resultsCount === 'number' ? evt.details.resultsCount : undefined,
         });
       }
-    } else if (evt.type === 'compare_view' || evt.type === 'compare_add') {
-      comparisonsCount += 1;
-      const slugs = Array.isArray(evt.details?.schoolSlugs) ? (evt.details.schoolSlugs as string[]) : evt.schoolSlug ? [evt.schoolSlug] : [];
-      if (slugs.length > 0) {
-        comparisons.push({ schools: slugs, timestamp: evt.timestamp });
+    } else if (evt.type === 'compare_view') {
+      comparisonsCount++;
+      if (Array.isArray(evt.details?.schools)) {
+        comparisons.push({
+          pair: evt.details.schools as string[],
+          timestamp: evt.timestamp,
+        });
       }
-    } else if (evt.type === 'wishlist_add') {
-      shortlistedCount += 1;
     } else if (evt.type === 'rating_submitted') {
-      reviewsSubmittedCount += 1;
-    } else if (evt.type === 'rating_edited') {
-      reviewsEditedCount += 1;
-    } else if (evt.type === 'rating_deleted') {
-      reviewsDeletedCount += 1;
+      reviewsSubmittedCount++;
     }
   }
 
-  const uniqueSchoolsViewed = Array.from(schoolViewMap.entries()).map(([slug, data]) => ({
-    slug,
-    visitCount: data.count,
-    firstViewed: data.first,
-    lastViewed: data.last,
-  }));
+  const user = users.get(userId);
+  const shortlistedCount = Array.isArray(user?.wishlist) ? user.wishlist.length : 0;
 
   return {
-    timeline: userEvents,
     summary: {
       schoolsViewedCount,
       searchesPerformedCount,
       comparisonsCount,
       shortlistedCount,
       reviewsSubmittedCount,
-      reviewsEditedCount,
-      reviewsDeletedCount,
       totalEvents: userEvents.length,
     },
-    uniqueSchoolsViewed,
-    searchHistory,
-    comparisons,
+    timeline: userEvents.slice(0, 100),
+    uniqueSchoolsViewed: Array.from(viewsMap.values()).sort((a, b) => b.count - a.count),
+    searchHistory: searchHistory.slice(0, 50),
+    comparisons: comparisons.slice(0, 50),
+  };
+}
+
+export async function getUserActivityTimelineAsync(userId: string) {
+  const userEvents = await getActivityEventsAsync(5000, { userId });
+  const user = await getUserByIdAsync(userId);
+
+  let schoolsViewedCount = 0;
+  let searchesPerformedCount = 0;
+  let comparisonsCount = 0;
+  let reviewsSubmittedCount = 0;
+
+  const viewsMap = new Map<string, { slug: string; count: number; lastViewed: string }>();
+  const searchHistory: { query: string; locality?: string; timestamp: string }[] = [];
+  const comparisons: { pair: string[]; timestamp: string }[] = [];
+
+  for (const evt of userEvents) {
+    if (evt.type === 'school_view' && evt.schoolSlug) {
+      schoolsViewedCount++;
+      const current = viewsMap.get(evt.schoolSlug) || { slug: evt.schoolSlug, count: 0, lastViewed: evt.timestamp };
+      current.count++;
+      if (new Date(evt.timestamp) > new Date(current.lastViewed)) {
+        current.lastViewed = evt.timestamp;
+      }
+      viewsMap.set(evt.schoolSlug, current);
+    } else if (evt.type === 'search_performed') {
+      searchesPerformedCount++;
+      if (evt.searchQuery) {
+        searchHistory.push({
+          query: evt.searchQuery,
+          locality: evt.locality,
+          timestamp: evt.timestamp,
+        });
+      }
+    } else if (evt.type === 'compare_view') {
+      comparisonsCount++;
+      if (Array.isArray(evt.details?.schools)) {
+        comparisons.push({
+          pair: evt.details.schools as string[],
+          timestamp: evt.timestamp,
+        });
+      }
+    } else if (evt.type === 'rating_submitted') {
+      reviewsSubmittedCount++;
+    }
+  }
+
+  const shortlistedCount = Array.isArray(user?.wishlist) ? user.wishlist.length : 0;
+
+  return {
+    summary: {
+      schoolsViewedCount,
+      searchesPerformedCount,
+      comparisonsCount,
+      shortlistedCount,
+      reviewsSubmittedCount,
+      totalEvents: userEvents.length,
+    },
+    timeline: userEvents.slice(0, 100),
+    uniqueSchoolsViewed: Array.from(viewsMap.values()).sort((a, b) => b.count - a.count),
+    searchHistory: searchHistory.slice(0, 50),
+    comparisons: comparisons.slice(0, 50),
   };
 }
 
@@ -1756,6 +2084,22 @@ export function getSchoolRatings(slug: string): SchoolRating[] {
 }
 
 export async function getSchoolRatingsAsync(slug: string): Promise<SchoolRating[]> {
+  if (isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection(true);
+      if (ratingsCol) {
+        const docs = await ratingsCol
+          .find({ schoolSlug: slug, status: { $ne: 'deleted' } })
+          .sort({ createdAt: -1 })
+          .toArray();
+        return docs;
+      }
+    } catch (err) {
+      console.error('[MONGO_GET_SCHOOL_RATINGS_ERROR]', err);
+      throw err;
+    }
+  }
+
   await ensureMongoSync();
   return getSchoolRatings(slug);
 }
@@ -1766,6 +2110,20 @@ export function getAllRatings(includeDeleted = false): SchoolRating[] {
 }
 
 export async function getAllRatingsAsync(includeDeleted = false): Promise<SchoolRating[]> {
+  if (isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection(true);
+      if (ratingsCol) {
+        const query = includeDeleted ? {} : { status: { $ne: 'deleted' as const } };
+        const docs = await ratingsCol.find(query).sort({ createdAt: -1 }).toArray();
+        return docs;
+      }
+    } catch (err) {
+      console.error('[MONGO_GET_ALL_RATINGS_ERROR]', err);
+      throw err;
+    }
+  }
+
   await ensureMongoSync();
   return getAllRatings(includeDeleted);
 }
@@ -1776,6 +2134,19 @@ export function getUserRatingForSchool(schoolSlug: string, userId: string): Scho
 }
 
 export async function getUserRatingForSchoolAsync(schoolSlug: string, userId: string): Promise<SchoolRating | null> {
+  if (isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection(true);
+      if (ratingsCol) {
+        const doc = await ratingsCol.findOne({ schoolSlug, userId, status: { $ne: 'deleted' } });
+        return doc || null;
+      }
+    } catch (err) {
+      console.error('[MONGO_GET_USER_RATING_FOR_SCHOOL_ERROR]', err);
+      throw err;
+    }
+  }
+
   await ensureMongoSync();
   return getUserRatingForSchool(schoolSlug, userId);
 }
@@ -1785,6 +2156,19 @@ export function getUserRatings(userId: string): SchoolRating[] {
 }
 
 export async function getUserRatingsAsync(userId: string): Promise<SchoolRating[]> {
+  if (isMongoConfigured()) {
+    try {
+      const ratingsCol = await getRatingsCollection(true);
+      if (ratingsCol) {
+        const docs = await ratingsCol.find({ userId, status: { $ne: 'deleted' } }).sort({ createdAt: -1 }).toArray();
+        return docs;
+      }
+    } catch (err) {
+      console.error('[MONGO_GET_USER_RATINGS_ERROR]', err);
+      throw err;
+    }
+  }
+
   await ensureMongoSync();
   return getUserRatings(userId);
 }
@@ -1801,8 +2185,11 @@ export function getSchoolRatingStats(slug: string): {
   };
 } {
   const schoolRats = getSchoolRatings(slug);
-  const totalReviews = schoolRats.length;
+  return calculateStatsFromRatings(schoolRats);
+}
 
+function calculateStatsFromRatings(schoolRats: SchoolRating[]) {
+  const totalReviews = schoolRats.length;
   const distribution: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   if (totalReviews === 0) {
     return {
@@ -1869,8 +2256,8 @@ export async function getSchoolRatingStatsAsync(slug: string): Promise<{
     safety: number;
   };
 }> {
-  await ensureMongoSync();
-  return getSchoolRatingStats(slug);
+  const schoolRats = await getSchoolRatingsAsync(slug);
+  return calculateStatsFromRatings(schoolRats);
 }
 
 export function sanitizePublicRating(r: SchoolRating): Omit<SchoolRating, 'userId' | 'userEmail'> & { userId?: string } {
@@ -1912,8 +2299,8 @@ export function getSanitizedSchoolRatings(slug: string) {
 }
 
 export async function getSanitizedSchoolRatingsAsync(slug: string) {
-  await ensureMongoSync();
-  return getSanitizedSchoolRatings(slug);
+  const schoolRats = await getSchoolRatingsAsync(slug);
+  return schoolRats.map(r => sanitizePublicRating(r));
 }
 
 export function saveSchoolRating(ratingData: {
@@ -2016,19 +2403,94 @@ export async function saveSchoolRatingAsync(ratingData: {
   };
   isAnonymous?: boolean;
 }): Promise<SchoolRating> {
-  await ensureMongoSync();
-  const rating = saveSchoolRating(ratingData);
+  const boundedScore = Math.max(1, Math.min(5, Math.round(ratingData.score)));
+  const now = new Date().toISOString();
+
   if (isMongoConfigured()) {
     try {
-      const ratingsCol = await getRatingsCollection();
+      const ratingsCol = await getRatingsCollection(true);
       if (ratingsCol) {
-        await ratingsCol.updateOne({ id: rating.id }, { $set: rating }, { upsert: true });
+        const existing = await ratingsCol.findOne({
+          schoolSlug: ratingData.schoolSlug,
+          userId: ratingData.userId,
+          status: { $ne: 'deleted' },
+        });
+
+        if (existing) {
+          const updated: SchoolRating = {
+            ...existing,
+            score: boundedScore,
+            title: ratingData.title !== undefined ? (ratingData.title ? ratingData.title.trim() : undefined) : existing.title,
+            comment: ratingData.comment.trim(),
+            categories: ratingData.categories || existing.categories,
+            userChildGrade: ratingData.userChildGrade || existing.userChildGrade,
+            userName: ratingData.userName || existing.userName,
+            isAnonymous: ratingData.isAnonymous !== undefined ? Boolean(ratingData.isAnonymous) : Boolean(existing.isAnonymous),
+            status: 'published',
+            updatedAt: now,
+          };
+
+          await ratingsCol.updateOne({ id: existing.id }, { $set: updated });
+
+          // Update memory copy
+          const idx = ratings.findIndex(r => r.id === existing.id);
+          if (idx >= 0) ratings[idx] = updated;
+          else ratings.push(updated);
+          saveStoreToDisk();
+
+          await recordActivityEventAsync({
+            type: 'rating_edited',
+            schoolSlug: ratingData.schoolSlug,
+            userId: ratingData.userId,
+            targetType: 'review',
+            targetId: existing.id,
+            details: { score: boundedScore, isAnonymous: updated.isAnonymous },
+          });
+
+          return updated;
+        } else {
+          const newRating: SchoolRating = {
+            id: `rev_${crypto.randomBytes(8).toString('hex')}`,
+            schoolSlug: ratingData.schoolSlug,
+            userId: ratingData.userId,
+            userName: ratingData.userName,
+            userChildGrade: ratingData.userChildGrade,
+            score: boundedScore,
+            title: ratingData.title?.trim(),
+            comment: ratingData.comment.trim(),
+            categories: ratingData.categories,
+            verifiedParent: true,
+            isAnonymous: Boolean(ratingData.isAnonymous),
+            status: 'published',
+            createdAt: now,
+            updatedAt: now,
+          };
+
+          await ratingsCol.insertOne(newRating);
+
+          ratings.push(newRating);
+          saveStoreToDisk();
+
+          await recordActivityEventAsync({
+            type: 'rating_submitted',
+            schoolSlug: ratingData.schoolSlug,
+            userId: ratingData.userId,
+            targetType: 'review',
+            targetId: newRating.id,
+            details: { score: boundedScore, isAnonymous: newRating.isAnonymous },
+          });
+
+          return newRating;
+        }
       }
     } catch (err) {
-      console.warn('[MONGO_SAVE_RATING_ERROR]', err);
+      console.error('[MONGO_SAVE_RATING_ERROR]', err);
+      throw err;
     }
   }
-  return rating;
+
+  await ensureMongoSync();
+  return saveSchoolRating(ratingData);
 }
 
 export function deleteSchoolRating(schoolSlug: string, userId: string): boolean {
@@ -2052,22 +2514,39 @@ export function deleteSchoolRating(schoolSlug: string, userId: string): boolean 
 }
 
 export async function deleteSchoolRatingAsync(schoolSlug: string, userId: string): Promise<boolean> {
-  await ensureMongoSync();
-  const res = deleteSchoolRating(schoolSlug, userId);
-  if (res && isMongoConfigured()) {
+  const now = new Date().toISOString();
+  if (isMongoConfigured()) {
     try {
-      const ratingsCol = await getRatingsCollection();
+      const ratingsCol = await getRatingsCollection(true);
       if (ratingsCol) {
+        const target = await ratingsCol.findOne({ schoolSlug, userId, status: { $ne: 'deleted' } });
+        if (!target) return false;
+
         await ratingsCol.updateOne(
-          { schoolSlug, userId },
-          { $set: { status: 'deleted', deletedAt: new Date().toISOString(), deletedBy: userId } }
+          { id: target.id },
+          { $set: { status: 'deleted', deletedAt: now, deletedBy: userId } }
         );
+
+        deleteSchoolRating(schoolSlug, userId);
+
+        await recordActivityEventAsync({
+          type: 'rating_deleted',
+          schoolSlug,
+          userId,
+          targetType: 'review',
+          targetId: target.id,
+        });
+
+        return true;
       }
     } catch (err) {
-      console.warn('[MONGO_DELETE_RATING_ERROR]', err);
+      console.error('[MONGO_DELETE_RATING_ERROR]', err);
+      throw err;
     }
   }
-  return res;
+
+  await ensureMongoSync();
+  return deleteSchoolRating(schoolSlug, userId);
 }
 
 export function adminDeleteRating(
@@ -2112,22 +2591,52 @@ export async function adminDeleteRatingAsync(
   adminUserId?: string,
   reason = 'Violates platform review guidelines'
 ): Promise<boolean> {
-  await ensureMongoSync();
-  const res = adminDeleteRating(ratingId, adminUserId, reason);
-  if (res && isMongoConfigured()) {
+  const now = new Date().toISOString();
+  if (isMongoConfigured()) {
     try {
-      const ratingsCol = await getRatingsCollection();
+      const ratingsCol = await getRatingsCollection(true);
       if (ratingsCol) {
+        const target = await ratingsCol.findOne({ id: ratingId });
+        if (!target) return false;
+
         await ratingsCol.updateOne(
           { id: ratingId },
-          { $set: { status: 'deleted', deletedAt: new Date().toISOString(), deletedBy: adminUserId || 'admin', deletionReason: reason } }
+          { $set: { status: 'deleted', deletedAt: now, deletedBy: adminUserId || 'admin', deletionReason: reason } }
         );
+
+        adminDeleteRating(ratingId, adminUserId, reason);
+
+        await recordActivityEventAsync({
+          type: 'rating_deleted',
+          schoolSlug: target.schoolSlug,
+          targetType: 'review',
+          targetId: ratingId,
+          details: { ratingId, adminAction: true, reason, adminUserId },
+        });
+
+        if (adminUserId) {
+          const adminUser = await getUserByIdAsync(adminUserId);
+          await recordAdminAuditAsync(
+            adminUserId,
+            adminUser?.email || 'admin@admissionpitara.com',
+            'delete_school_review',
+            'review',
+            ratingId,
+            { schoolSlug: target.schoolSlug, authorUserId: target.userId, reason },
+            'success'
+          );
+        }
+
+        return true;
       }
     } catch (err) {
-      console.warn('[MONGO_ADMIN_DELETE_RATING_ERROR]', err);
+      console.error('[MONGO_ADMIN_DELETE_RATING_ERROR]', err);
+      throw err;
     }
   }
-  return res;
+
+  await ensureMongoSync();
+  return adminDeleteRating(ratingId, adminUserId, reason);
 }
 
 export function adminRestoreRating(ratingId: string, adminUserId?: string): boolean {
@@ -2157,22 +2666,44 @@ export function adminRestoreRating(ratingId: string, adminUserId?: string): bool
 }
 
 export async function adminRestoreRatingAsync(ratingId: string, adminUserId?: string): Promise<boolean> {
-  await ensureMongoSync();
-  const res = adminRestoreRating(ratingId, adminUserId);
-  if (res && isMongoConfigured()) {
+  const now = new Date().toISOString();
+  if (isMongoConfigured()) {
     try {
-      const ratingsCol = await getRatingsCollection();
+      const ratingsCol = await getRatingsCollection(true);
       if (ratingsCol) {
+        const target = await ratingsCol.findOne({ id: ratingId });
+        if (!target) return false;
+
         await ratingsCol.updateOne(
           { id: ratingId },
-          { $set: { status: 'published', updatedAt: new Date().toISOString() }, $unset: { deletedAt: '', deletedBy: '', deletionReason: '' } }
+          { $set: { status: 'published', updatedAt: now }, $unset: { deletedAt: '', deletedBy: '', deletionReason: '' } }
         );
+
+        adminRestoreRating(ratingId, adminUserId);
+
+        if (adminUserId) {
+          const adminUser = await getUserByIdAsync(adminUserId);
+          await recordAdminAuditAsync(
+            adminUserId,
+            adminUser?.email || 'admin@admissionpitara.com',
+            'restore_school_review',
+            'review',
+            ratingId,
+            { schoolSlug: target.schoolSlug, authorUserId: target.userId },
+            'success'
+          );
+        }
+
+        return true;
       }
     } catch (err) {
-      console.warn('[MONGO_ADMIN_RESTORE_RATING_ERROR]', err);
+      console.error('[MONGO_ADMIN_RESTORE_RATING_ERROR]', err);
+      throw err;
     }
   }
-  return res;
+
+  await ensureMongoSync();
+  return adminRestoreRating(ratingId, adminUserId);
 }
 
 // ----------------------------------------------------------------------------
@@ -2255,6 +2786,104 @@ export function getAdminSchoolAnalytics(slug: string) {
   };
 }
 
+export async function getAdminSchoolAnalyticsAsync(slug: string) {
+  let views = 0;
+  let saves = 0;
+  if (isMongoConfigured()) {
+    try {
+      const viewsCol = await getSchoolViewsCollection();
+      if (viewsCol) {
+        const doc = await viewsCol.findOne({ slug });
+        if (doc) {
+          views = typeof doc.totalViews === 'number' ? doc.totalViews : (doc.count || 0);
+        }
+      }
+      const savesCol = await getSchoolSavesCollection();
+      if (savesCol) {
+        const doc = await savesCol.findOne({ slug });
+        if (doc) {
+          saves = Math.max(0, doc.count || 0);
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_GET_SCHOOL_ANALYTICS_ERR]', err);
+    }
+  } else {
+    views = schoolViews.get(slug) || 0;
+    saves = schoolSaves.get(slug) || 0;
+  }
+
+  const ratingStats = await getSchoolRatingStatsAsync(slug);
+  const schoolRatings = await getSchoolRatingsAsync(slug);
+
+  const viewers = new Map<string, { count: number; first: string; last: string }>();
+  const shortlisters: { userId: string; userEmail: string; userName: string; addedAt?: string }[] = [];
+  const comparers = new Set<string>();
+
+  const events = await getActivityEventsAsync(5000, { schoolSlug: slug });
+  for (const evt of events) {
+    if (evt.userId) {
+      if (evt.type === 'school_view') {
+        const cur = viewers.get(evt.userId) || { count: 0, first: evt.timestamp, last: evt.timestamp };
+        cur.count += 1;
+        cur.last = evt.timestamp;
+        viewers.set(evt.userId, cur);
+      }
+      if (evt.type === 'compare_view' || evt.type === 'compare_add') {
+        comparers.add(evt.userId);
+      }
+    }
+  }
+
+  const allUsers = await getAllUsersSanitizedAsync();
+  for (const user of allUsers) {
+    if (Array.isArray(user.wishlist) && user.wishlist.includes(slug)) {
+      shortlisters.push({
+        userId: user.id,
+        userEmail: user.email,
+        userName: user.name,
+      });
+    }
+  }
+
+  const uniqueViewersList = await Promise.all(
+    Array.from(viewers.entries()).map(async ([userId, data]) => {
+      const user = await getUserByIdAsync(userId);
+      return {
+        userId,
+        userName: user?.name || 'Parent User',
+        userEmail: user?.email || '',
+        viewCount: data.count,
+        firstViewed: data.first,
+        lastViewed: data.last,
+      };
+    })
+  );
+
+  const repeatViewersCount = uniqueViewersList.filter(v => v.viewCount > 1).length;
+
+  return {
+    slug,
+    traffic: {
+      totalViews: views,
+      uniqueAuthenticatedViewers: uniqueViewersList.length,
+      repeatViewers: repeatViewersCount,
+      uniqueViewers: uniqueViewersList,
+    },
+    engagement: {
+      wishlistSaves: saves,
+      shortlistedByUsers: shortlisters,
+      comparedCount: comparers.size,
+      comparersCount: comparers.size,
+      reviewsCount: ratingStats.totalReviews,
+      averageRating: ratingStats.averageScore,
+      ratingDistribution: ratingStats.distribution,
+      categoryAverages: ratingStats.categoryAverages,
+      reviews: schoolRatings,
+    },
+  };
+}
+
 export function getAllSchoolsAdminOverview() {
   initDb();
   const summaryMap = new Map<
@@ -2273,6 +2902,68 @@ export function getAllSchoolsAdminOverview() {
     const saves = schoolSaves.get(slug) || 0;
     const stats = getSchoolRatingStats(slug);
     const activePromo = promotions.find(p => p.schoolSlug === slug && p.status === 'active');
+    summaryMap.set(slug, {
+      slug,
+      views,
+      saves,
+      reviewsCount: stats.totalReviews,
+      averageRating: stats.averageScore,
+      activePromotion: activePromo,
+    });
+  }
+
+  return Array.from(summaryMap.values());
+}
+
+export async function getAllSchoolsAdminOverviewAsync() {
+  const summaryMap = new Map<
+    string,
+    {
+      slug: string;
+      views: number;
+      saves: number;
+      reviewsCount: number;
+      averageRating: number;
+      activePromotion?: SchoolPromotionCampaign;
+    }
+  >();
+
+  const viewsMap = new Map<string, number>();
+  const savesMap = new Map<string, number>();
+
+  if (isMongoConfigured()) {
+    try {
+      const viewsCol = await getSchoolViewsCollection();
+      if (viewsCol) {
+        const docs = await viewsCol.find({}).toArray();
+        for (const doc of docs) {
+          const v = typeof doc.totalViews === 'number' ? doc.totalViews : (doc.count || 0);
+          viewsMap.set(doc.slug, v);
+        }
+      }
+      const savesCol = await getSchoolSavesCollection();
+      if (savesCol) {
+        const docs = await savesCol.find({}).toArray();
+        for (const doc of docs) {
+          savesMap.set(doc.slug, Math.max(0, doc.count || 0));
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_ALL_SCHOOLS_OVERVIEW_ERR]', err);
+    }
+  } else {
+    for (const [s, count] of schoolViews.entries()) viewsMap.set(s, count);
+    for (const [s, count] of schoolSaves.entries()) savesMap.set(s, count);
+  }
+
+  const allPromos = getAllPromotions();
+  const allSlugs = new Set([...viewsMap.keys(), ...savesMap.keys()]);
+
+  for (const slug of allSlugs) {
+    const views = viewsMap.get(slug) || 0;
+    const saves = savesMap.get(slug) || 0;
+    const stats = await getSchoolRatingStatsAsync(slug);
+    const activePromo = allPromos.find(p => p.schoolSlug === slug && p.status === 'active');
     summaryMap.set(slug, {
       slug,
       views,
@@ -2427,11 +3118,209 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
   };
 }
 
+export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '30d' | '90d' | 'all' = '30d') {
+  let timeThreshold = 0;
+  const now = Date.now();
+
+  if (timeRange === 'today') {
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+    timeThreshold = startOfToday.getTime();
+  } else if (timeRange === '7d') {
+    timeThreshold = now - 7 * 24 * 60 * 60 * 1000;
+  } else if (timeRange === '30d') {
+    timeThreshold = now - 30 * 24 * 60 * 60 * 1000;
+  } else if (timeRange === '90d') {
+    timeThreshold = now - 90 * 24 * 60 * 60 * 1000;
+  }
+
+  const allUsersList = await getAllUsersSanitizedAsync();
+  const totalAccounts = allUsersList.length;
+  const verifiedAccounts = allUsersList.filter(u => u.emailVerified).length;
+  const newAccountsInRange = allUsersList.filter(
+    u => timeThreshold === 0 || new Date(u.createdAt).getTime() >= timeThreshold
+  ).length;
+
+  const activeUsersInRange = allUsersList.filter(u => {
+    const actTime = u.lastActivityAt
+      ? new Date(u.lastActivityAt).getTime()
+      : u.lastLoginAt
+      ? new Date(u.lastLoginAt).getTime()
+      : new Date(u.createdAt).getTime();
+    return timeThreshold === 0 ? actTime >= now - 30 * 24 * 60 * 60 * 1000 : actTime >= timeThreshold;
+  }).length;
+
+  const activeRatings = await getAllRatingsAsync(false);
+  let ratingSum = 0;
+  for (const r of activeRatings) ratingSum += r.score;
+  const averageRating = activeRatings.length > 0 ? Math.round((ratingSum / activeRatings.length) * 10) / 10 : 0;
+
+  const filteredActivity = await getActivityEventsAsync(
+    5000,
+    timeThreshold ? { since: new Date(timeThreshold).toISOString() } : undefined
+  );
+
+  const viewsEventsInRange = filteredActivity.filter(e => e.type === 'school_view');
+  const savesEventsInRange = filteredActivity.filter(e => e.type === 'wishlist_add');
+
+  const viewsCountInRange = viewsEventsInRange.length;
+  const savesCountInRange = savesEventsInRange.length;
+
+  const uniqueParentsViewing = new Set(
+    viewsEventsInRange.map(e => e.userId).filter(Boolean)
+  ).size;
+
+  const viewsMapInRange = new Map<string, number>();
+  for (const ev of viewsEventsInRange) {
+    if (ev.schoolSlug) {
+      viewsMapInRange.set(ev.schoolSlug, (viewsMapInRange.get(ev.schoolSlug) || 0) + 1);
+    }
+  }
+  const topViewedInRange = Array.from(viewsMapInRange.entries())
+    .map(([slug, count]) => ({ slug, views: count }))
+    .sort((a, b) => b.views - a.views)
+    .slice(0, 8);
+
+  const savesMapInRange = new Map<string, number>();
+  for (const ev of savesEventsInRange) {
+    if (ev.schoolSlug) {
+      savesMapInRange.set(ev.schoolSlug, (savesMapInRange.get(ev.schoolSlug) || 0) + 1);
+    }
+  }
+  const topShortlistedInRange = Array.from(savesMapInRange.entries())
+    .map(([slug, count]) => ({ slug, saves: count }))
+    .sort((a, b) => b.saves - a.saves)
+    .slice(0, 8);
+
+  const allTimeViewsMap = new Map<string, number>();
+  const allTimeSavesMap = new Map<string, number>();
+  let allTimeViews = 0;
+  let allTimeSaves = 0;
+
+  if (isMongoConfigured()) {
+    try {
+      const viewsCol = await getSchoolViewsCollection();
+      if (viewsCol) {
+        const docs = await viewsCol.find({}).toArray();
+        for (const d of docs) {
+          const v = typeof d.totalViews === 'number' ? d.totalViews : (d.count || 0);
+          allTimeViewsMap.set(d.slug, v);
+          allTimeViews += v;
+        }
+      }
+      const savesCol = await getSchoolSavesCollection();
+      if (savesCol) {
+        const docs = await savesCol.find({}).toArray();
+        for (const d of docs) {
+          const s = Math.max(0, d.count || 0);
+          allTimeSavesMap.set(d.slug, s);
+          allTimeSaves += s;
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_GET_METRICS_OVERVIEW_ERR]', err);
+    }
+  } else {
+    for (const [s, c] of schoolViews.entries()) {
+      allTimeViewsMap.set(s, c);
+      allTimeViews += c;
+    }
+    for (const [s, c] of schoolSaves.entries()) {
+      allTimeSavesMap.set(s, c);
+      allTimeSaves += c;
+    }
+  }
+
+  const topViewed = timeRange === 'all' || topViewedInRange.length === 0
+    ? Array.from(allTimeViewsMap.entries())
+        .map(([slug, count]) => ({ slug, views: count }))
+        .sort((a, b) => b.views - a.views)
+        .slice(0, 8)
+    : topViewedInRange;
+
+  const topShortlisted = timeRange === 'all' || topShortlistedInRange.length === 0
+    ? Array.from(allTimeSavesMap.entries())
+        .map(([slug, count]) => ({ slug, saves: count }))
+        .sort((a, b) => b.saves - a.saves)
+        .slice(0, 8)
+    : topShortlistedInRange;
+
+  const ratingGroups = new Map<string, { totalScore: number; count: number }>();
+  for (const r of activeRatings) {
+    const cur = ratingGroups.get(r.schoolSlug) || { totalScore: 0, count: 0 };
+    cur.totalScore += r.score;
+    cur.count += 1;
+    ratingGroups.set(r.schoolSlug, cur);
+  }
+
+  const highestRated = Array.from(ratingGroups.entries())
+    .map(([slug, data]) => ({
+      slug,
+      averageScore: Math.round((data.totalScore / data.count) * 10) / 10,
+      totalReviews: data.count,
+    }))
+    .filter(s => s.totalReviews > 0)
+    .sort((a, b) => b.averageScore - a.averageScore || b.totalReviews - a.totalReviews)
+    .slice(0, 8);
+
+  return {
+    timeRange,
+    users: {
+      totalAccounts,
+      verifiedAccounts,
+      newAccountsInRange,
+      activeUsersInRange,
+      disabledAccounts: allUsersList.filter(u => u.status === 'disabled').length,
+    },
+    schools: {
+      topViewed,
+      topShortlisted,
+      highestRated,
+      totalViewsCount: timeRange === 'all' ? allTimeViews : viewsCountInRange,
+      totalSavesCount: timeRange === 'all' ? allTimeSaves : savesCountInRange,
+      allTimeViewsCount: allTimeViews,
+      allTimeSavesCount: allTimeSaves,
+      viewsInRange: viewsCountInRange,
+      savesInRange: savesCountInRange,
+      uniqueViewersInRange: uniqueParentsViewing,
+    },
+    reviews: {
+      totalReviews: activeRatings.length,
+      averageRating,
+      recentReviews: activeRatings.slice(0, 5),
+    },
+    activity: {
+      totalEventsInRange: filteredActivity.length,
+      recentEvents: filteredActivity.slice(0, 25),
+    },
+  };
+}
+
 export function getWishlistAnalytics() {
   initDb();
   const schoolCounts = new Map<string, { count: number; users: { userId: string; email: string; name: string }[] }>();
 
   for (const user of users.values()) {
+    if (Array.isArray(user.wishlist)) {
+      for (const slug of user.wishlist) {
+        const cur = schoolCounts.get(slug) || { count: 0, users: [] };
+        cur.count += 1;
+        cur.users.push({ userId: user.id, email: user.email, name: user.name });
+        schoolCounts.set(slug, cur);
+      }
+    }
+  }
+
+  return Array.from(schoolCounts.entries())
+    .map(([slug, data]) => ({ slug, count: data.count, users: data.users }))
+    .sort((a, b) => b.count - a.count);
+}
+
+export async function getWishlistAnalyticsAsync() {
+  const schoolCounts = new Map<string, { count: number; users: { userId: string; email: string; name: string }[] }>();
+  const allUsers = await getAllUsersSanitizedAsync();
+
+  for (const user of allUsers) {
     if (Array.isArray(user.wishlist)) {
       for (const slug of user.wishlist) {
         const cur = schoolCounts.get(slug) || { count: 0, users: [] };
@@ -2483,12 +3372,73 @@ export function getComparisonAnalytics() {
   };
 }
 
+export async function getComparisonAnalyticsAsync() {
+  const pairCounts = new Map<string, { pair: string[]; count: number }>();
+  const schoolCompareFrequency = new Map<string, number>();
+
+  const events = await getActivityEventsAsync(5000);
+
+  for (const evt of events) {
+    if ((evt.type === 'compare_view' || evt.type === 'compare_add') && evt.details?.schoolSlugs) {
+      const slugs = evt.details.schoolSlugs as string[];
+      if (Array.isArray(slugs) && slugs.length >= 2) {
+        for (const s of slugs) {
+          schoolCompareFrequency.set(s, (schoolCompareFrequency.get(s) || 0) + 1);
+        }
+        for (let i = 0; i < slugs.length; i++) {
+          for (let j = i + 1; j < slugs.length; j++) {
+            const key = [slugs[i], slugs[j]].sort().join(' vs ');
+            const current = pairCounts.get(key) || { pair: [slugs[i], slugs[j]].sort(), count: 0 };
+            current.count += 1;
+            pairCounts.set(key, current);
+          }
+        }
+      }
+    }
+  }
+
+  const commonPairs = Array.from(pairCounts.values()).sort((a, b) => b.count - a.count).slice(0, 10);
+  const mostComparedSchools = Array.from(schoolCompareFrequency.entries())
+    .map(([slug, count]) => ({ slug, count }))
+    .sort((a, b) => b.count - a.count);
+
+  return {
+    commonPairs,
+    mostComparedSchools,
+  };
+}
+
 export function getSearchAnalytics() {
   initDb();
   const queryCounts = new Map<string, { query: string; count: number; lastSearched: string; locality?: string }>();
   const localityCounts = new Map<string, number>();
 
   for (const evt of activityEvents) {
+    if (evt.type === 'search_performed' && evt.searchQuery) {
+      const q = evt.searchQuery.trim().toLowerCase();
+      const current = queryCounts.get(q) || { query: evt.searchQuery, count: 0, lastSearched: evt.timestamp, locality: evt.locality };
+      current.count += 1;
+      current.lastSearched = evt.timestamp;
+      queryCounts.set(q, current);
+    }
+    if (evt.locality) {
+      localityCounts.set(evt.locality, (localityCounts.get(evt.locality) || 0) + 1);
+    }
+  }
+
+  return {
+    topQueries: Array.from(queryCounts.values()).sort((a, b) => b.count - a.count).slice(0, 20),
+    topLocalities: Array.from(localityCounts.entries()).map(([locality, count]) => ({ locality, count })).sort((a, b) => b.count - a.count),
+  };
+}
+
+export async function getSearchAnalyticsAsync() {
+  const queryCounts = new Map<string, { query: string; count: number; lastSearched: string; locality?: string }>();
+  const localityCounts = new Map<string, number>();
+
+  const events = await getActivityEventsAsync(5000, { type: 'search_performed' });
+
+  for (const evt of events) {
     if (evt.type === 'search_performed' && evt.searchQuery) {
       const q = evt.searchQuery.trim().toLowerCase();
       const current = queryCounts.get(q) || { query: evt.searchQuery, count: 0, lastSearched: evt.timestamp, locality: evt.locality };
@@ -2674,6 +3624,61 @@ export function getAdminAuditLogs(limit = 100, filters?: { adminUserId?: string;
   return filtered.slice(0, limit);
 }
 
+export async function recordAdminAuditAsync(
+  adminUserId: string,
+  adminEmail: string,
+  action: string,
+  targetType: string,
+  targetId: string,
+  details?: Record<string, unknown>,
+  result: 'success' | 'failed' = 'success'
+): Promise<AdminAuditLog> {
+  const log = recordAdminAudit(adminUserId, adminEmail, action, targetType, targetId, details, result);
+  if (isMongoConfigured()) {
+    try {
+      const col = await getAuditLogsCollection(true);
+      if (col) {
+        await col.updateOne({ id: log.id }, { $set: log }, { upsert: true });
+      }
+    } catch (err) {
+      console.error('[MONGO_RECORD_AUDIT_LOG_ERROR]', err);
+    }
+  }
+  return log;
+}
+
+export async function getAdminAuditLogsAsync(
+  limit = 100,
+  filters?: { adminUserId?: string; action?: string; targetType?: string }
+): Promise<AdminAuditLog[]> {
+  if (isMongoConfigured()) {
+    try {
+      const col = await getAuditLogsCollection(true);
+      if (col) {
+        const query: Record<string, unknown> = {};
+        if (filters?.adminUserId) query.adminUserId = filters.adminUserId;
+        if (filters?.action) query.action = filters.action;
+        if (filters?.targetType) query.targetType = filters.targetType;
+
+        const docs = await col
+          .find(query)
+          .sort({ timestamp: -1 })
+          .limit(limit)
+          .toArray();
+
+        return docs.map(doc => {
+          const { _id, ...rest } = doc as unknown as AdminAuditLog & { _id?: unknown };
+          return rest as AdminAuditLog;
+        });
+      }
+    } catch (err) {
+      console.error('[MONGO_GET_AUDIT_LOGS_ERROR]', err);
+      throw err;
+    }
+  }
+  return getAdminAuditLogs(limit, filters);
+}
+
 // Backward-compatible export for existing components
 export const getDashboardAnalytics = () => {
   const overview = getAdminOverviewMetrics('30d');
@@ -2703,6 +3708,32 @@ export const getDashboardAnalytics = () => {
     localityDistribution,
   };
 };
+
+export async function getDashboardAnalyticsAsync() {
+  const overview = await getAdminOverviewMetricsAsync('30d');
+  const allUsers = await getAllUsersSanitizedAsync();
+  let verifiedEmails = 0;
+  const localityDistribution: Record<string, number> = {};
+
+  for (const user of allUsers) {
+    if (user.emailVerified) verifiedEmails += 1;
+    const loc = user.preferredSchoolLocality || 'Not Specified';
+    localityDistribution[loc] = (localityDistribution[loc] || 0) + 1;
+  }
+
+  return {
+    totalParents: overview.users.totalAccounts,
+    activeParents: overview.users.activeUsersInRange,
+    verifiedEmails,
+    totalViews: overview.schools.totalViewsCount,
+    totalSaves: overview.schools.totalSavesCount,
+    totalRatings: overview.reviews.totalReviews,
+    averageRating: overview.reviews.averageRating,
+    topViewedSchools: overview.schools.topViewed,
+    topSavedSchools: overview.schools.topShortlisted,
+    localityDistribution,
+  };
+}
 
 export const getActivityAnalytics = () => {
   const analytics = getDashboardAnalytics();

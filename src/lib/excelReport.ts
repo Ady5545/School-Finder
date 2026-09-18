@@ -1,11 +1,17 @@
 import * as XLSX from 'xlsx';
 import {
   getAllUsersSanitized,
+  getAllUsersSanitizedAsync,
   getActivityEvents,
+  getActivityEventsAsync,
   getAllRatings,
+  getAllRatingsAsync,
   getUserById,
+  getUserByIdAsync,
   getSchoolRatingStats,
+  getSchoolRatingStatsAsync,
   getAllSchoolsAdminOverview,
+  getAllSchoolsAdminOverviewAsync,
 } from './authStore';
 import { getCanonicalSchools, getSchoolBySlug } from './schools';
 
@@ -512,6 +518,465 @@ export function generateMonthlyExcelReport(year: number, month: number): Buffer 
   // --------------------------------------------------------------------------
   // WRITE AND RETURN BUFFER
   // --------------------------------------------------------------------------
+  const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+  return Buffer.from(buffer);
+}
+
+/**
+ * MongoDB-authoritative async version of generateMonthlyExcelReport
+ */
+export async function generateMonthlyExcelReportAsync(year: number, month: number): Promise<Buffer> {
+  const { startTime, endTime } = getISTMonthBoundaries(year, month);
+
+  const formattedMonth = month.toString().padStart(2, '0');
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  const monthName = monthNames[month - 1] || `Month ${month}`;
+  const periodLabel = `${monthName} ${year} (IST)`;
+
+  const wb = XLSX.utils.book_new();
+
+  // --------------------------------------------------------------------------
+  // SHEET 1: PARENT ACCOUNTS
+  // --------------------------------------------------------------------------
+  const allUsers = await getAllUsersSanitizedAsync();
+  const usersInMonth = allUsers.filter(u => {
+    const createdTime = new Date(u.createdAt).getTime();
+    return createdTime >= startTime && createdTime <= endTime;
+  });
+
+  const parentAccountHeaders = [
+    'Parent / Guardian Name',
+    'Email Address',
+    'Phone Number (Profile Data)',
+    'Child / Student Name',
+    'Grade / Class',
+    'Residential Society / Complex',
+    "Father's Name",
+    "Mother's Name",
+    'Email Verification Status',
+    'Account Status',
+    'Account Created (IST)',
+    'Last Login Date (IST)',
+  ];
+
+  const parentAccountRows: (string | number)[][] = [];
+
+  if (usersInMonth.length > 0) {
+    for (const u of usersInMonth) {
+      parentAccountRows.push([
+        u.name || 'Not provided',
+        u.email || '',
+        u.phone || 'Not provided',
+        u.childName || 'Not provided',
+        u.childGrade || 'Not provided',
+        u.residentialSociety || 'Not provided',
+        u.fatherName || 'Not provided',
+        u.motherName || 'Not provided',
+        u.emailVerified ? 'Verified' : 'Pending Verification',
+        u.status || 'active',
+        formatISTDateTime(u.createdAt),
+        u.lastLoginAt ? formatISTDateTime(u.lastLoginAt) : 'Never logged in',
+      ]);
+    }
+  } else {
+    parentAccountRows.push([
+      `No parent accounts registered in ${periodLabel}.`,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ]);
+  }
+
+  const ws1Data = [parentAccountHeaders, ...parentAccountRows];
+  const ws1 = XLSX.utils.aoa_to_sheet(ws1Data);
+  ws1['!cols'] = [
+    { wch: 26 },
+    { wch: 30 },
+    { wch: 22 },
+    { wch: 24 },
+    { wch: 18 },
+    { wch: 34 },
+    { wch: 22 },
+    { wch: 22 },
+    { wch: 25 },
+    { wch: 16 },
+    { wch: 24 },
+    { wch: 24 },
+  ];
+  XLSX.utils.book_append_sheet(wb, ws1, 'Parent Accounts');
+
+  // --------------------------------------------------------------------------
+  // SHEET 2: SCHOOL VISITS
+  // --------------------------------------------------------------------------
+  const allEvents = await getActivityEventsAsync(10000);
+  const visitEventsInMonth = allEvents.filter(evt => {
+    if (evt.type !== 'school_view') return false;
+    const evtTime = new Date(evt.timestamp).getTime();
+    return evtTime >= startTime && evtTime <= endTime;
+  });
+
+  const visitHeaders = [
+    'Date & Time (IST)',
+    'Date & Time (UTC ISO)',
+    'School Name',
+    'School Slug',
+    'Locality / Sector',
+    'User / Account Identifier',
+    'User Email (if logged in)',
+    'Visit Duration (if recorded)',
+    'Event ID',
+  ];
+
+  const visitRows: (string | number)[][] = [];
+
+  const userMap = new Map(allUsers.map(u => [u.id, u]));
+
+  if (visitEventsInMonth.length > 0) {
+    for (const evt of visitEventsInMonth) {
+      const school = evt.schoolSlug ? getSchoolBySlug(evt.schoolSlug) : undefined;
+      const schoolName = school?.name || evt.schoolSlug || 'Unknown School';
+      const sector = evt.locality || school?.location?.sector || school?.location?.area || 'Greater Noida West';
+
+      let userDisplay = 'Anonymous Visitor';
+      let userEmail = 'N/A';
+      if (evt.userId) {
+        let user = userMap.get(evt.userId);
+        if (!user) {
+          user = (await getUserByIdAsync(evt.userId)) || undefined;
+          if (user) userMap.set(evt.userId, user);
+        }
+        if (user) {
+          userDisplay = `${user.name} (${user.id})`;
+          userEmail = user.email;
+        } else {
+          userDisplay = `User ID: ${evt.userId}`;
+        }
+      }
+
+      visitRows.push([
+        formatISTDateTime(evt.timestamp),
+        new Date(evt.timestamp).toISOString(),
+        schoolName,
+        evt.schoolSlug || 'N/A',
+        sector,
+        userDisplay,
+        userEmail,
+        evt.approximateTimeSpent || 'Not recorded / Pageview',
+        evt.id,
+      ]);
+    }
+  } else {
+    visitRows.push([
+      `No school visits recorded in ${periodLabel}.`,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ]);
+  }
+
+  const ws2Data = [visitHeaders, ...visitRows];
+  const ws2 = XLSX.utils.aoa_to_sheet(ws2Data);
+  ws2['!cols'] = [
+    { wch: 24 },
+    { wch: 26 },
+    { wch: 36 },
+    { wch: 32 },
+    { wch: 22 },
+    { wch: 30 },
+    { wch: 28 },
+    { wch: 28 },
+    { wch: 24 },
+  ];
+  XLSX.utils.book_append_sheet(wb, ws2, 'School Visits');
+
+  // --------------------------------------------------------------------------
+  // SHEET 3: WISHLISTS
+  // --------------------------------------------------------------------------
+  const wishlistEventsInMonth = allEvents.filter(evt => {
+    if (evt.type !== 'wishlist_add' && evt.type !== 'wishlist_remove') return false;
+    const evtTime = new Date(evt.timestamp).getTime();
+    return evtTime >= startTime && evtTime <= endTime;
+  });
+
+  const wishlistHeaders = [
+    'Date & Time (IST)',
+    'Date & Time (UTC ISO)',
+    'Action Type',
+    'School Name',
+    'School Slug',
+    'Locality / Sector',
+    'User / Account Identifier',
+    'User Email (if logged in)',
+    'Event ID',
+    'Data Model Note',
+  ];
+
+  const wishlistRows: (string | number)[][] = [];
+
+  if (wishlistEventsInMonth.length > 0) {
+    for (const evt of wishlistEventsInMonth) {
+      const school = evt.schoolSlug ? getSchoolBySlug(evt.schoolSlug) : undefined;
+      const schoolName = school?.name || evt.schoolSlug || 'Unknown School';
+      const sector = evt.locality || school?.location?.sector || school?.location?.area || 'Greater Noida West';
+
+      let userDisplay = 'Anonymous / Guest';
+      let userEmail = 'N/A';
+      if (evt.userId) {
+        let user = userMap.get(evt.userId);
+        if (!user) {
+          user = (await getUserByIdAsync(evt.userId)) || undefined;
+          if (user) userMap.set(evt.userId, user);
+        }
+        if (user) {
+          userDisplay = `${user.name} (${user.id})`;
+          userEmail = user.email;
+        } else {
+          userDisplay = `User ID: ${evt.userId}`;
+        }
+      }
+
+      wishlistRows.push([
+        formatISTDateTime(evt.timestamp),
+        new Date(evt.timestamp).toISOString(),
+        evt.type === 'wishlist_add' ? 'Added to Wishlist' : 'Removed from Wishlist',
+        schoolName,
+        evt.schoolSlug || 'N/A',
+        sector,
+        userDisplay,
+        userEmail,
+        evt.id,
+        'Historical event recorded with timestamp',
+      ]);
+    }
+  } else {
+    wishlistRows.push([
+      `No wishlist add/remove activity recorded in ${periodLabel}.`,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      'Historical event telemetry is populated in real-time as parents save or remove schools.',
+    ]);
+  }
+
+  const ws3Data = [wishlistHeaders, ...wishlistRows];
+  const ws3 = XLSX.utils.aoa_to_sheet(ws3Data);
+  ws3['!cols'] = [
+    { wch: 24 },
+    { wch: 26 },
+    { wch: 24 },
+    { wch: 36 },
+    { wch: 32 },
+    { wch: 22 },
+    { wch: 30 },
+    { wch: 28 },
+    { wch: 24 },
+    { wch: 45 },
+  ];
+  XLSX.utils.book_append_sheet(wb, ws3, 'Wishlists');
+
+  // --------------------------------------------------------------------------
+  // SHEET 4: REVIEWS
+  // --------------------------------------------------------------------------
+  const allRatings = await getAllRatingsAsync(true);
+  const reviewsInMonth = allRatings.filter(r => {
+    const createdTime = new Date(r.createdAt).getTime();
+    return createdTime >= startTime && createdTime <= endTime;
+  });
+
+  const reviewHeaders = [
+    'Review Date (IST)',
+    'Review Date (UTC ISO)',
+    'School Name',
+    'School Slug',
+    'Rating Score (1-5)',
+    'Review Title',
+    'Review Content / Feedback',
+    'Public Display Name',
+    'Verified Parent Status',
+    'Moderation Status',
+    'Admin Internal User ID',
+    'Admin Internal User Email',
+    'Deletion / Moderation Reason',
+  ];
+
+  const reviewRows: (string | number)[][] = [];
+
+  if (reviewsInMonth.length > 0) {
+    for (const r of reviewsInMonth) {
+      const school = getSchoolBySlug(r.schoolSlug);
+      const schoolName = school?.name || r.schoolSlug;
+      let authorUser = userMap.get(r.userId);
+      if (!authorUser) {
+        authorUser = (await getUserByIdAsync(r.userId)) || undefined;
+        if (authorUser) userMap.set(r.userId, authorUser);
+      }
+
+      reviewRows.push([
+        formatISTDateTime(r.createdAt),
+        new Date(r.createdAt).toISOString(),
+        schoolName,
+        r.schoolSlug,
+        r.score,
+        r.title || 'Untitled Review',
+        r.comment,
+        r.userName,
+        r.verifiedParent ? 'Verified Parent' : 'Unverified',
+        r.status === 'published' ? 'Published' : 'Deleted / Moderated',
+        r.userId,
+        authorUser?.email || 'N/A',
+        r.deletionReason || (r.status === 'deleted' ? 'Deleted by admin' : 'N/A'),
+      ]);
+    }
+  } else {
+    reviewRows.push([
+      `No parent reviews submitted in ${periodLabel}.`,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+    ]);
+  }
+
+  const ws4Data = [reviewHeaders, ...reviewRows];
+  const ws4 = XLSX.utils.aoa_to_sheet(ws4Data);
+  ws4['!cols'] = [
+    { wch: 24 },
+    { wch: 26 },
+    { wch: 36 },
+    { wch: 32 },
+    { wch: 18 },
+    { wch: 28 },
+    { wch: 45 },
+    { wch: 24 },
+    { wch: 24 },
+    { wch: 24 },
+    { wch: 28 },
+    { wch: 28 },
+    { wch: 32 },
+  ];
+  XLSX.utils.book_append_sheet(wb, ws4, 'Reviews');
+
+  // --------------------------------------------------------------------------
+  // SHEET 5: SCHOOL SUMMARY
+  // --------------------------------------------------------------------------
+  const canonicalSchools = getCanonicalSchools();
+  const allTimeOverview = await getAllSchoolsAdminOverviewAsync();
+  const allTimeMap = new Map(allTimeOverview.map(s => [s.slug, s]));
+
+  const summaryHeaders = [
+    'School Name',
+    'School Slug',
+    'Locality / Sector',
+    'Board / Curriculum',
+    `Monthly Recorded Views (${formattedMonth}/${year} IST)`,
+    `Monthly Wishlist Adds (${formattedMonth}/${year} IST)`,
+    `Monthly Wishlist Removes (${formattedMonth}/${year} IST)`,
+    `Monthly Reviews Submitted (${formattedMonth}/${year} IST)`,
+    `Monthly Avg Review Rating (${formattedMonth}/${year} IST)`,
+    'All-Time Total Views',
+    'All-Time Active Shortlists',
+    'All-Time Published Reviews',
+    'All-Time Overall Rating',
+  ];
+
+  const summaryRows: (string | number)[][] = [];
+
+  for (const school of canonicalSchools) {
+    const monthlyViews = visitEventsInMonth.filter(e => e.schoolSlug === school.slug).length;
+    const monthlyAdds = wishlistEventsInMonth.filter(e => e.schoolSlug === school.slug && e.type === 'wishlist_add').length;
+    const monthlyRemoves = wishlistEventsInMonth.filter(e => e.schoolSlug === school.slug && e.type === 'wishlist_remove').length;
+
+    const monthlyReviews = reviewsInMonth.filter(r => r.schoolSlug === school.slug && r.status !== 'deleted');
+    const monthlyReviewsCount = monthlyReviews.length;
+    let monthlyAvgRating: string | number = 'No reviews in month';
+    if (monthlyReviewsCount > 0) {
+      const sum = monthlyReviews.reduce((acc, curr) => acc + curr.score, 0);
+      monthlyAvgRating = Math.round((sum / monthlyReviewsCount) * 10) / 10;
+    }
+
+    const allTime = allTimeMap.get(school.slug);
+    const ratingStats = await getSchoolRatingStatsAsync(school.slug);
+
+    const allTimeViews = allTime?.views || 0;
+    const allTimeSaves = allTime?.saves || 0;
+    const allTimeReviews = ratingStats.totalReviews || 0;
+    const allTimeRating = ratingStats.totalReviews > 0 ? ratingStats.averageScore : (school.rating?.score || 0);
+
+    const boardDisplay = Array.isArray(school.board) ? school.board.join(', ') : 'CBSE';
+    const sectorDisplay = school.location.sector || school.location.area || 'Greater Noida West';
+
+    summaryRows.push([
+      school.name,
+      school.slug,
+      sectorDisplay,
+      boardDisplay,
+      monthlyViews,
+      monthlyAdds,
+      monthlyRemoves,
+      monthlyReviewsCount,
+      monthlyAvgRating,
+      allTimeViews,
+      allTimeSaves,
+      allTimeReviews,
+      allTimeRating,
+    ]);
+  }
+
+  summaryRows.sort((a, b) => {
+    const viewsA = typeof a[4] === 'number' ? a[4] : 0;
+    const viewsB = typeof b[4] === 'number' ? b[4] : 0;
+    if (viewsB !== viewsA) return viewsB - viewsA;
+    return String(a[0]).localeCompare(String(b[0]));
+  });
+
+  const ws5Data = [summaryHeaders, ...summaryRows];
+  const ws5 = XLSX.utils.aoa_to_sheet(ws5Data);
+  ws5['!cols'] = [
+    { wch: 38 },
+    { wch: 32 },
+    { wch: 24 },
+    { wch: 20 },
+    { wch: 25 },
+    { wch: 25 },
+    { wch: 25 },
+    { wch: 28 },
+    { wch: 28 },
+    { wch: 20 },
+    { wch: 24 },
+    { wch: 24 },
+    { wch: 22 },
+  ];
+  XLSX.utils.book_append_sheet(wb, ws5, 'School Summary');
+
   const buffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
   return Buffer.from(buffer);
 }

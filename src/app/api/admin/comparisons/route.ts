@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getComparisonAnalytics } from '../../../../lib/authStore';
+import { getComparisonAnalyticsAsync } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const rawAnalytics = getComparisonAnalytics();
+  const rawAnalytics = await getComparisonAnalyticsAsync();
 
   const enrichedPairs = rawAnalytics.commonPairs.map(p => ({
     pair: p.pair,

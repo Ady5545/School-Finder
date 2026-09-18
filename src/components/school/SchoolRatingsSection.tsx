@@ -164,7 +164,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
       }
 
       showToast(
-        data.message || 'Thank you! Your verified parent rating has been saved.',
+        data.message || 'Thank you! Your rating has been saved.',
         'success'
       );
       setShowForm(false);
@@ -241,14 +241,14 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
           <div className="flex items-center gap-2 mb-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-bold">
               <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
-              <span>Verified Parent Feedback</span>
+              <span>Email-Verified Feedback</span>
             </span>
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-[var(--color-content)] tracking-tight">
             Parent Ratings & Reviews
           </h2>
           <p className="text-xs text-[var(--color-content-muted)] mt-1">
-            Authentic experiences submitted exclusively by registered, verified families in Greater Noida.
+            Authentic experiences submitted exclusively by registered, email-verified accounts.
           </p>
         </div>
 
@@ -302,7 +302,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
                 ))}
               </div>
               <span className="text-xs font-semibold text-amber-800">
-                Based on {summary.totalReviews} verified parent {summary.totalReviews === 1 ? 'review' : 'reviews'}
+                Based on {summary.totalReviews} verified {summary.totalReviews === 1 ? 'review' : 'reviews'}
               </span>
             </div>
 
@@ -371,12 +371,12 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
             <div>
               <h3 className="text-base font-bold text-slate-900">
-                {userRating ? `Edit Your Review for ${schoolName}` : `Write a Verified Parent Review for ${schoolName}`}
+                {userRating ? `Edit Your Review for ${schoolName}` : `Write an Email-Verified Review for ${schoolName}`}
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
                 {userRating
                   ? 'Updating this form will modify your published review.'
-                  : `Posting as: ${user?.name || 'Verified Parent'} (${user?.preferredSchoolLocality || 'Greater Noida'})`}
+                  : `Posting as: ${user?.name || 'Email-Verified User'} (${user?.preferredSchoolLocality || 'Greater Noida'})`}
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -499,7 +499,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
                     <span>Show my name</span>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-1">
-                    Published as <strong>{user?.name || 'Verified Parent'}</strong>
+                    Published as <strong>{user?.name || 'Email-Verified User'}</strong>
                   </p>
                 </div>
               </label>
@@ -664,7 +664,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
                               }`}
                             />
                             <span>
-                              {item.isAnonymous ? 'Verified Parent · Anonymous' : 'Verified Parent'}
+                              {item.isAnonymous ? 'Email-Verified · Anonymous' : 'Email-Verified Account'}
                             </span>
                           </span>
                         )}

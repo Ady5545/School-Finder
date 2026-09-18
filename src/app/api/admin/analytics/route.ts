@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
 import {
-  getDashboardAnalytics,
-  getAllRatings,
-  getActivityEvents,
-  getAllUsersSanitized,
-  adminDeleteRating,
+  getDashboardAnalyticsAsync,
+  getAllRatingsAsync,
+  getActivityEventsAsync,
+  getAllUsersSanitizedAsync,
+  adminDeleteRatingAsync,
 } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
@@ -16,10 +16,10 @@ export async function GET(req: NextRequest) {
     }
 
     const user = auth.user;
-    const analytics = getDashboardAnalytics();
-    const ratings = getAllRatings();
-    const recentActivity = getActivityEvents(100);
-    const users = getAllUsersSanitized();
+    const analytics = await getDashboardAnalyticsAsync();
+    const ratings = await getAllRatingsAsync();
+    const recentActivity = await getActivityEventsAsync(100);
+    const users = await getAllUsersSanitizedAsync();
 
     return NextResponse.json({
       success: true,
@@ -57,7 +57,7 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Rating ID is required' }, { status: 400 });
     }
 
-    const deleted = adminDeleteRating(ratingId);
+    const deleted = await adminDeleteRatingAsync(ratingId, auth.user.id, 'Deleted via admin dashboard');
     return NextResponse.json({
       success: deleted,
       message: deleted ? 'Rating removed by administrator.' : 'Rating not found.',

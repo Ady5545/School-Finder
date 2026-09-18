@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { generateMonthlyExcelReport } from '../../../../lib/excelReport';
-import { recordAdminAudit } from '../../../../lib/authStore';
+import { generateMonthlyExcelReportAsync } from '../../../../lib/excelReport';
+import { recordAdminAuditAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
   // 1. Strict Server-Side Admin Authorization
@@ -55,13 +55,13 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    // 3. Generate the Excel Workbook Server-Side
-    const reportBuffer = generateMonthlyExcelReport(year, month);
+    // 3. Generate the Excel Workbook Server-Side with MongoDB-authoritative data
+    const reportBuffer = await generateMonthlyExcelReportAsync(year, month);
     const formattedMonth = month.toString().padStart(2, '0');
     const filename = `admission-pitara-report-${year}-${formattedMonth}.xlsx`;
 
     // 4. Record Administrative Audit Log
-    recordAdminAudit(
+    await recordAdminAuditAsync(
       auth.user.id,
       auth.user.email,
       'generate_monthly_report',

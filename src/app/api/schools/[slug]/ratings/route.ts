@@ -151,8 +151,8 @@ export async function POST(
     return NextResponse.json({
       success: true,
       message: rating.isAnonymous
-        ? 'Thank you! Your verified parent rating has been published anonymously.'
-        : 'Thank you! Your verified parent rating has been published.',
+        ? 'Thank you! Your rating has been published anonymously.'
+        : 'Thank you! Your rating has been published.',
       rating: sanitizePublicRating(rating),
       summary: updatedSummary,
     });

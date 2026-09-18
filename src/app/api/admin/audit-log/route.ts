@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getAdminAuditLogs } from '../../../../lib/authStore';
+import { getAdminAuditLogsAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
   const auth = requireAdminAuth(req);
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
   const targetType = searchParams.get('targetType') || undefined;
   const limit = Math.max(1, Math.min(200, parseInt(searchParams.get('limit') || '100', 10)));
 
-  const logs = getAdminAuditLogs(limit, { adminUserId, action, targetType });
+  const logs = await getAdminAuditLogsAsync(limit, { adminUserId, action, targetType });
 
   return NextResponse.json({
     success: true,

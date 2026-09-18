@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getActivityEvents, getUserByIdAsync } from '../../../../lib/authStore';
+import { getActivityEventsAsync, getUserByIdAsync } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
   const since = searchParams.get('since') || undefined;
   const limit = Math.max(1, Math.min(500, parseInt(searchParams.get('limit') || '100', 10)));
 
-  const events = getActivityEvents(limit, {
+  const events = await getActivityEventsAsync(limit, {
     type,
     userId,
     schoolSlug,

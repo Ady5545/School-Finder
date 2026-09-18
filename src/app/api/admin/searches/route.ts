@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getSearchAnalytics } from '../../../../lib/authStore';
+import { getSearchAnalyticsAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
   const auth = requireAdminAuth(req);
@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const searchData = getSearchAnalytics();
+  const searchData = await getSearchAnalyticsAsync();
 
   return NextResponse.json({
     success: true,

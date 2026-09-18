@@ -3,7 +3,7 @@ import { requireAdminAuth } from '../../../../../lib/adminAuth';
 import {
   getUserByIdAsync,
   sanitizeUser,
-  getUserActivityTimeline,
+  getUserActivityTimelineAsync,
   getUserRatingsAsync,
   updateUserStatusAsync,
   updateUserRoleAsync,
@@ -32,7 +32,7 @@ export async function GET(
   }
 
   // Get isolated activity timeline & analytics for this specific user
-  const activityData = getUserActivityTimeline(userId);
+  const activityData = await getUserActivityTimelineAsync(userId);
 
   // Get ratings authored by this user
   const reviews = await getUserRatingsAsync(userId);

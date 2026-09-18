@@ -19,6 +19,23 @@ export interface SchoolViewDoc {
   count?: number;
 }
 
+export interface OtpDoc {
+  email: string;
+  code: string;
+  purpose: 'register' | 'login' | 'reset';
+  expiresAt: number;
+  attempts: number;
+  verified: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface RateLimitDoc {
+  key: string;
+  count: number;
+  resetAt: number;
+}
+
 // Global cache for MongoClient promise in serverless / development
 declare global {
   // eslint-disable-next-line no-var

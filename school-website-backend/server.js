@@ -1,3 +1,12 @@
+/**
+ * ============================================================================
+ * [LEGACY / PROTOTYPE BACKEND]
+ * NOTE: Admission Pitara's production application runs on Next.js 16 App Router
+ * with native TypeScript API routes located under /src/app/api/.
+ * This file is preserved for historical prototype reference only.
+ * ============================================================================
+ */
+
 const path = require("path");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
@@ -11,9 +20,15 @@ const bcrypt = require("bcryptjs");
 
 const app = express();
 
-// ---------------- CONFIG ----------------
-const PORT = 3000;
-const JWT_SECRET = process.env.JWT_SECRET || "school-finder-dev-secret-2026";
+// ---------------- CONFIG & SECURITY ----------------
+const PORT = process.env.PORT || 3000;
+const JWT_SECRET = process.env.JWT_SECRET || process.env.AUTH_SECRET;
+
+if (!JWT_SECRET && process.env.NODE_ENV === "production") {
+  throw new Error("JWT_SECRET (or AUTH_SECRET) is required in production for Express backend.");
+}
+
+const EFFECTIVE_JWT_SECRET = JWT_SECRET || "dev_legacy_backend_secret_not_for_prod";
 
 // ---------------- MONGODB & DATA STORAGE ----------------
 let isMongoConnected = false;
@@ -28,10 +43,10 @@ if (process.env.MONGO_URI) {
   })
   .catch(err => {
     isMongoConnected = false;
-    console.warn("MongoDB connection failed, falling back to memory store:", err.message);
+    console.warn("MongoDB connection failed:", err.message);
   });
 } else {
-  console.log("No MONGO_URI specified; operating with in-memory store.");
+  console.log("No MONGO_URI specified.");
 }
 
 // User schema
@@ -50,16 +65,16 @@ const memoryUsers = new Map();
 const otpStore = new Map(); // email -> { otp, expires, username, password }
 
 // ---------------- NODEMAILER ----------------
-const transporter = nodemailer.createTransport({
+const transporter = (process.env.EMAIL_USER && process.env.EMAIL_PASS) ? nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER || "demo@example.com",
-    pass: process.env.EMAIL_PASS || "demopassword"
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
   }
-});
+}) : null;
 
 async function sendOtpEmail(email, username, otp) {
-  if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+  if (transporter && process.env.EMAIL_USER && process.env.EMAIL_PASS) {
     try {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
@@ -69,12 +84,10 @@ async function sendOtpEmail(email, username, otp) {
       });
       return true;
     } catch (err) {
-      console.warn("Nodemailer failed to send email (falling back to demo mode):", err.message);
+      console.warn("Nodemailer failed to send email:", err.message);
+      return false;
     }
   }
-  console.log(`\n========================================`);
-  console.log(`[AUTH DEMO OTP] For ${email}: ${otp}`);
-  console.log(`========================================\n`);
   return true;
 }
 
@@ -84,8 +97,23 @@ function isValidEmail(email) {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email.trim());
 }
 
-// ---------------- MIDDLEWARE ----------------
-app.use(cors());
+// ---------------- MIDDLEWARE & RESTRICTED CORS ----------------
+const allowedOrigins = [
+  process.env.NEXT_PUBLIC_APP_URL,
+  "http://localhost:3000",
+  "http://127.0.0.1:3000"
+].filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("CORS policy violation: Origin not allowed."));
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/school-website-backend/public", express.static(path.join(__dirname, "public")));
@@ -159,7 +187,7 @@ app.post("/api/auth/verify-otp", async (req, res) => {
   const pending = otpStore.get(cleanEmail);
 
   let isValidOtp = false;
-  if (trimmedOtp === "123456" || (pending && pending.otp === trimmedOtp && pending.expires > Date.now())) {
+  if ((process.env.NODE_ENV !== "production" && trimmedOtp === "123456") || (pending && pending.otp === trimmedOtp && pending.expires > Date.now())) {
     isValidOtp = true;
   }
 
@@ -233,7 +261,7 @@ app.post("/api/auth/verify-otp", async (req, res) => {
 
   otpStore.delete(cleanEmail);
 
-  const token = jwt.sign({ id: userId, email: cleanEmail }, JWT_SECRET, { expiresIn: "7d" });
+  const token = jwt.sign({ id: userId, email: cleanEmail }, EFFECTIVE_JWT_SECRET, { expiresIn: "7d" });
   return res.json({
     success: true,
     token,
@@ -281,7 +309,7 @@ app.post("/api/auth/login", async (req, res) => {
   }
 
   const userId = user._id ? user._id.toString() : user.id;
-  const token = jwt.sign({ id: userId, email: cleanEmail }, JWT_SECRET, { expiresIn: "7d" });
+  const token = jwt.sign({ id: userId, email: cleanEmail }, EFFECTIVE_JWT_SECRET, { expiresIn: "7d" });
 
   return res.json({
     success: true,
@@ -298,7 +326,7 @@ app.post("/api/auth/me", async (req, res) => {
   if (!token) return res.json({ success: false });
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, EFFECTIVE_JWT_SECRET);
     let user = null;
 
     if (isMongoConnected) {
@@ -335,7 +363,7 @@ app.post("/api/auth/update", async (req, res) => {
   if (!token) return res.json({ success: false, message: "No token" });
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, EFFECTIVE_JWT_SECRET);
     let updated = false;
 
     if (isMongoConnected) {

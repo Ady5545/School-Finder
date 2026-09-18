@@ -311,9 +311,37 @@ let promotions = globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__;
 let auditLogs = globalAuthStore.__ADMISSION_PITARA_AUDIT_LOGS__;
 let reminders = globalAuthStore.__ADMISSION_PITARA_REMINDERS__;
 
-const JWT_SECRET = process.env.JWT_SECRET || 'ap_super_secure_jwt_secret_greater_noida_2025';
+/**
+ * Resolves the JWT signing secret.
+ * In production, fails closed if no secret is configured.
+ */
+export function getJwtSecret(): string {
+  const secret = process.env.JWT_SECRET || process.env.AUTH_SECRET || process.env.SESSION_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('JWT_SECRET (or AUTH_SECRET / SESSION_SECRET) environment variable is required in production.');
+    }
+    return 'dev_insecure_local_secret_admission_pitara_only';
+  }
+  return secret;
+}
 
-// Path for persistent atomic storage
+/**
+ * Resolves the initial administrative password.
+ * In production, fails closed if no password is configured.
+ */
+export function getAdminInitialPassword(): string {
+  const pass = process.env.ADMIN_INITIAL_PASSWORD || process.env.ADMIN_PASSWORD;
+  if (!pass) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('ADMIN_INITIAL_PASSWORD (or ADMIN_PASSWORD) environment variable is required in production.');
+    }
+    return 'dev_admin_local_password_only';
+  }
+  return pass;
+}
+
+// Path for persistent atomic storage (development/local only)
 const DB_DIR = path.join(process.cwd(), 'data');
 const DB_FILE = path.join(DB_DIR, 'auth_db.json');
 
@@ -323,9 +351,14 @@ let pendingSave = false;
 
 /**
  * Persist database atomically and asynchronously to disk with debouncing
- * to eliminate event loop blocking and request latency.
+ * (Disabled in production where MongoDB is the single authoritative store).
  */
 export function saveStoreToDisk(immediate = false): void {
+  // In production, file persistence is disabled - MongoDB is the sole source of truth
+  if (process.env.NODE_ENV === 'production') {
+    return; // In production, file persistence is disabled
+  }
+
   if (saveTimeout) {
     clearTimeout(saveTimeout);
     saveTimeout = null;
@@ -393,95 +426,101 @@ export function saveStoreToDisk(immediate = false): void {
 }
 
 /**
- * Initialize and load database from disk
+ * Initialize and load database (local fallback or initial bootstrap)
  */
 function initDb(): void {
   if (globalAuthStore.__ADMISSION_PITARA_DB_LOADED__) return;
   globalAuthStore.__ADMISSION_PITARA_DB_LOADED__ = true;
 
-  try {
-    if (fs.existsSync(DB_FILE)) {
-      const content = fs.readFileSync(DB_FILE, 'utf8');
-      const data = JSON.parse(content) as PersistentDbSchema;
+  // In production, file persistence is disabled; MongoDB is the sole source of truth
+  if (process.env.NODE_ENV !== 'production') {
+    try {
+      if (fs.existsSync(DB_FILE)) {
+        const content = fs.readFileSync(DB_FILE, 'utf8');
+        const data = JSON.parse(content) as PersistentDbSchema;
 
-      if (data.users) {
-        for (const user of Object.values(data.users)) {
-          // ensure default status
-          if (!user.status) user.status = 'active';
-          if (!user.role) user.role = 'parent';
-          users.set(user.email.toLowerCase(), user);
+        if (data.users) {
+          for (const user of Object.values(data.users)) {
+            // ensure default status
+            if (!user.status) user.status = 'active';
+            if (!user.role) user.role = 'parent';
+            users.set(user.email.toLowerCase(), user);
+          }
+        }
+
+        if (Array.isArray(data.ratings)) {
+          ratings.length = 0;
+          ratings.push(...data.ratings.map(r => ({ ...r, status: r.status || 'published' })));
+        }
+
+        if (data.schoolViews) {
+          for (const [slug, count] of Object.entries(data.schoolViews)) {
+            schoolViews.set(slug, count);
+          }
+        }
+
+        if (data.schoolSaves) {
+          for (const [slug, count] of Object.entries(data.schoolSaves)) {
+            schoolSaves.set(slug, count);
+          }
+        }
+
+        if (Array.isArray(data.activityEvents)) {
+          activityEvents.length = 0;
+          activityEvents.push(...data.activityEvents);
+        }
+
+        if (Array.isArray(data.promotions)) {
+          promotions.length = 0;
+          promotions.push(...data.promotions);
+        }
+
+        if (Array.isArray(data.auditLogs)) {
+          auditLogs.length = 0;
+          auditLogs.push(...data.auditLogs);
+        }
+
+        if (Array.isArray(data.reminders)) {
+          reminders.length = 0;
+          reminders.push(...data.reminders);
         }
       }
-
-      if (Array.isArray(data.ratings)) {
-        ratings.length = 0;
-        ratings.push(...data.ratings.map(r => ({ ...r, status: r.status || 'published' })));
-      }
-
-      if (data.schoolViews) {
-        for (const [slug, count] of Object.entries(data.schoolViews)) {
-          schoolViews.set(slug, count);
-        }
-      }
-
-      if (data.schoolSaves) {
-        for (const [slug, count] of Object.entries(data.schoolSaves)) {
-          schoolSaves.set(slug, count);
-        }
-      }
-
-      if (Array.isArray(data.activityEvents)) {
-        activityEvents.length = 0;
-        activityEvents.push(...data.activityEvents);
-      }
-
-      if (Array.isArray(data.promotions)) {
-        promotions.length = 0;
-        promotions.push(...data.promotions);
-      }
-
-      if (Array.isArray(data.auditLogs)) {
-        auditLogs.length = 0;
-        auditLogs.push(...data.auditLogs);
-      }
-
-      if (Array.isArray(data.reminders)) {
-        reminders.length = 0;
-        reminders.push(...data.reminders);
-      }
+    } catch (err) {
+      console.warn('[AUTH_DB_WARN] Failed reading existing DB file, re-initializing:', err);
     }
-  } catch (err) {
-    console.warn('[AUTH_DB_WARN] Failed reading existing DB file, re-initializing:', err);
   }
 
   // Ensure default administrative account exists
   const adminEmail = 'admin@admissionpitara.com';
   let adminUser = users.get(adminEmail);
   if (!adminUser) {
-    const adminInitPass = process.env.ADMIN_INITIAL_PASSWORD || process.env.ADMIN_PASSWORD || 'Admin@Pitara2025';
-    const adminHash = hashPassword(adminInitPass);
+    try {
+      const adminInitPass = getAdminInitialPassword();
+      const adminHash = hashPassword(adminInitPass);
 
-    adminUser = {
-      id: 'usr_admin_portal_lead',
-      name: 'Admissions Lead Administrator',
-      email: adminEmail,
-      status: 'active',
-      preferredSchoolLocality: 'Knowledge Park 5',
-      passwordHash: adminHash,
-      emailVerified: true,
-      analyticsConsent: true,
-      role: 'admin',
-      createdAt: new Date().toISOString(),
-      lastLoginAt: new Date().toISOString(),
-      lastActivityAt: new Date().toISOString(),
-      wishlist: [],
-      compareList: [],
-    };
+      adminUser = {
+        id: 'usr_admin_portal_lead',
+        name: 'Admissions Lead Administrator',
+        email: adminEmail,
+        status: 'active',
+        preferredSchoolLocality: 'Knowledge Park 5',
+        passwordHash: adminHash,
+        emailVerified: true,
+        analyticsConsent: true,
+        role: 'admin',
+        createdAt: new Date().toISOString(),
+        lastLoginAt: new Date().toISOString(),
+        lastActivityAt: new Date().toISOString(),
+        wishlist: [],
+        compareList: [],
+      };
 
-    users.set(adminUser.email.toLowerCase(), adminUser);
-  } else if (adminUser.passwordHash && adminUser.passwordHash.includes('ap_salt_admin_2025')) {
-    const adminInitPass = process.env.ADMIN_INITIAL_PASSWORD || process.env.ADMIN_PASSWORD || 'Admin@Pitara2025';
-    adminUser.passwordHash = hashPassword(adminInitPass);
+      users.set(adminUser.email.toLowerCase(), adminUser);
+    } catch (err) {
+      if (process.env.NODE_ENV === 'production') {
+        console.warn('[AUTH_WARN] Admin user initialization deferred pending ADMIN_INITIAL_PASSWORD env configuration');
+      }
+    }
   }
 
   // Initial Promotion: Delhi World Public School (admin controllable, easily modified/expired)
@@ -690,7 +729,7 @@ export function createSessionToken(user: ParentUser): string {
   const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
   const body = Buffer.from(JSON.stringify(payload)).toString('base64url');
   const signature = crypto
-    .createHmac('sha256', JWT_SECRET)
+    .createHmac('sha256', getJwtSecret())
     .update(`${header}.${body}`)
     .digest('base64url');
 
@@ -715,7 +754,7 @@ export function verifySessionToken(token: string): {
 
     const [header, body, signature] = parts;
     const expectedSignature = crypto
-      .createHmac('sha256', JWT_SECRET)
+      .createHmac('sha256', getJwtSecret())
       .update(`${header}.${body}`)
       .digest('base64url');
 
@@ -763,7 +802,7 @@ export function createStatelessOtpToken(
   const exp = Math.floor(Date.now() / 1000) + expiresInSeconds;
 
   const hmac = crypto
-    .createHmac('sha256', JWT_SECRET)
+    .createHmac('sha256', getJwtSecret())
     .update(`otp:email:${cleanEmail}:${code}:${purpose}:${exp}`)
     .digest('hex');
 
@@ -777,7 +816,7 @@ export function createStatelessOtpToken(
 
   const payloadStr = Buffer.from(JSON.stringify(payload)).toString('base64url');
   const signature = crypto
-    .createHmac('sha256', JWT_SECRET)
+    .createHmac('sha256', getJwtSecret())
     .update(`otp_session:${payloadStr}`)
     .digest('base64url');
 
@@ -796,7 +835,7 @@ export function createSignedVerificationToken(email: string): string {
 
   const payloadStr = Buffer.from(JSON.stringify(payload)).toString('base64url');
   const signature = crypto
-    .createHmac('sha256', JWT_SECRET)
+    .createHmac('sha256', getJwtSecret())
     .update(`verify_tok:${payloadStr}`)
     .digest('base64url');
 
@@ -881,7 +920,7 @@ export function verifyOtpCode(
       if (parts.length === 2) {
         const [payloadStr, signature] = parts;
         const expectedSig = crypto
-          .createHmac('sha256', JWT_SECRET)
+          .createHmac('sha256', getJwtSecret())
           .update(`otp_session:${payloadStr}`)
           .digest('base64url');
 
@@ -889,7 +928,7 @@ export function verifyOtpCode(
           const data = JSON.parse(Buffer.from(payloadStr, 'base64url').toString('utf8'));
           if (data.email === cleanEmail && data.exp > Math.floor(Date.now() / 1000)) {
             const testHmac = crypto
-              .createHmac('sha256', JWT_SECRET)
+              .createHmac('sha256', getJwtSecret())
               .update(`otp:email:${cleanEmail}:${cleanInput}:${data.purpose}:${data.exp}`)
               .digest('hex');
 
@@ -932,7 +971,7 @@ export function checkVerificationToken(token: string): string | null {
     if (parts.length === 2) {
       const [payloadStr, signature] = parts;
       const expectedSig = crypto
-        .createHmac('sha256', JWT_SECRET)
+        .createHmac('sha256', getJwtSecret())
         .update(`verify_tok:${payloadStr}`)
         .digest('base64url');
 

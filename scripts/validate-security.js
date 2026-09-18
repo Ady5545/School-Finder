@@ -97,6 +97,19 @@ const privacyPath = path.join(__dirname, '../src/app/privacy/page.tsx');
 assert(fs.readFileSync(termsPath, 'utf8').includes('enquiry.admissionpitara@gmail.com'), 'Terms page references enquiry.admissionpitara@gmail.com');
 assert(fs.readFileSync(privacyPath, 'utf8').includes('enquiry.admissionpitara@gmail.com'), 'Privacy page references enquiry.admissionpitara@gmail.com');
 
+// 10. Audit for Absence of Hardcoded Secrets & Fail-Closed Enforcement
+assert(!authStoreCode.includes('ap_super_secure_jwt_secret_greater_noida_2025'), 'authStore.ts has NO hardcoded JWT secret fallback');
+assert(!authStoreCode.includes('Admin@Pitara2025'), 'authStore.ts has NO hardcoded admin password fallback');
+assert(authStoreCode.includes("JWT_SECRET (or AUTH_SECRET / SESSION_SECRET) environment variable is required in production"), 'authStore.ts fails closed if JWT secret is missing in production');
+assert(authStoreCode.includes("process.env.NODE_ENV === 'production'") && authStoreCode.includes('In production, file persistence is disabled'), 'authStore.ts disables disk fallback persistence in production');
+
+const legacyBackendPath = path.join(__dirname, '../school-website-backend/server.js');
+if (fs.existsSync(legacyBackendPath)) {
+  const legacyCode = fs.readFileSync(legacyBackendPath, 'utf8');
+  assert(!legacyCode.includes('school-finder-dev-secret-2026'), 'school-website-backend/server.js has NO hardcoded JWT secret fallback');
+  assert(!legacyCode.includes('origin: "*"') && !legacyCode.includes("app.use(cors())"), 'school-website-backend/server.js restricts CORS');
+}
+
 console.log('----------------------------------------------------------------');
 console.log(`Results: ${passed} of ${total} tests passed.`);
 console.log('----------------------------------------------------------------');

@@ -1,6 +1,13 @@
 node_modules/
-.env
-.env.*
-.DS_Store
+.next/
 dist/
 build/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.tsbuildinfo
+*.log
+temp_*
+data/auth_db.json*
+data/*.tmp.*

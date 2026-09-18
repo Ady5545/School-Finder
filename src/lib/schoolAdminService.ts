@@ -94,7 +94,8 @@ export function getAdminSchoolsList(options?: {
     }
 
     if (options?.board && options.board !== 'all') {
-      if (!s.board.includes(options.board)) return false;
+      const sBoards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+      if (!sBoards.includes(options.board)) return false;
     }
 
     if (options?.searchQuery) {
@@ -102,7 +103,8 @@ export function getAdminSchoolsList(options?: {
       const matchName = s.name.toLowerCase().includes(q);
       const matchSlug = s.slug.toLowerCase().includes(q);
       const matchSector = (s.location?.sector || '').toLowerCase().includes(q);
-      const matchBoard = s.board.some(b => b.toLowerCase().includes(q));
+      const sBoards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+      const matchBoard = sBoards.some(b => b.toLowerCase().includes(q));
       if (!matchName && !matchSlug && !matchSector && !matchBoard) return false;
     }
 

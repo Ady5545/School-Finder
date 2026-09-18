@@ -44,6 +44,12 @@ interface SchoolDirectoryProps {
   initialQuery?: string;
   initialBoard?: string;
   initialArea?: string;
+  initialSports?: string[];
+  initialAdmissionStatus?: string;
+  initialGrade?: string;
+  initialSiblingOnly?: boolean;
+  initialFeeTier?: string;
+  initialSortBy?: string;
 }
 
 export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
@@ -53,18 +59,34 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
   initialQuery = '',
   initialBoard = '',
   initialArea = '',
+  initialSports = [],
+  initialAdmissionStatus = 'all',
+  initialGrade = 'all',
+  initialSiblingOnly = false,
+  initialFeeTier = 'all',
+  initialSortBy = 'featured',
 }) => {
   const { compareList, clearCompare, removeCompare } = useSchoolStore();
 
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [selectedBoard, setSelectedBoard] = useState(initialBoard);
   const [selectedArea, setSelectedArea] = useState(initialArea);
-  const [selectedFeeTier, setSelectedFeeTier] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'featured' | 'name' | 'fee-asc' | 'fee-desc' | 'rating' | 'distance'>('featured');
+  const [selectedSports, setSelectedSports] = useState<string[]>(initialSports);
+  const [selectedAdmissionStatus, setSelectedAdmissionStatus] = useState<string>(initialAdmissionStatus);
+  const [selectedGrade, setSelectedGrade] = useState<string>(initialGrade);
+  const [siblingOnly, setSiblingOnly] = useState<boolean>(initialSiblingOnly);
+  const [selectedFeeTier, setSelectedFeeTier] = useState<string>(initialFeeTier);
+  const [sortBy, setSortBy] = useState<'featured' | 'name' | 'fee-asc' | 'fee-desc' | 'rating' | 'distance'>(
+    (initialSortBy as any) || 'featured'
+  );
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   
   // Default map to false initially so mobile users see immediate school cards without any layout shift
   const [showMap, setShowMap] = useState(false);
+
+  // Sports Popover Dropdown state for desktop
+  const [isSportsMenuOpen, setIsSportsMenuOpen] = useState(false);
+  const sportsMenuRef = React.useRef<HTMLDivElement>(null);
 
   // Proximity filter states
   const [selectedProximityArea, setSelectedProximityArea] = useState<string>('');
@@ -79,6 +101,34 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
   const router = useRouter();
   const pathname = usePathname();
+
+  // Dynamically derive available sports from canonical dataset
+  const availableSports = useMemo(() => {
+    const set = new Set<string>();
+    initialSchools.forEach(s => {
+      if (Array.isArray(s.sports)) {
+        s.sports.forEach(sp => {
+          if (sp && sp.trim()) set.add(sp.trim());
+        });
+      }
+    });
+    return Array.from(set).sort();
+  }, [initialSchools]);
+
+  // Close desktop sports dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sportsMenuRef.current && !sportsMenuRef.current.contains(event.target as Node)) {
+        setIsSportsMenuOpen(false);
+      }
+    };
+    if (isSportsMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSportsMenuOpen]);
 
   // On large desktop screens, open map in supporting sidebar by default
   useEffect(() => {
@@ -105,12 +155,119 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     if (searchQuery.trim()) params.set('q', searchQuery.trim());
     if (selectedBoard) params.set('board', selectedBoard);
     if (selectedArea) params.set('area', selectedArea);
+    if (selectedSports.length > 0) params.set('sports', selectedSports.join(','));
+    if (selectedAdmissionStatus !== 'all') params.set('admission', selectedAdmissionStatus);
+    if (selectedGrade !== 'all') params.set('grade', selectedGrade);
+    if (siblingOnly) params.set('sibling', 'true');
     if (selectedFeeTier !== 'all') params.set('fee', selectedFeeTier);
     if (sortBy !== 'featured') params.set('sort', sortBy);
     
     const newUrl = `${pathname}${params.toString() ? '?' + params.toString() : ''}`;
     window.history.replaceState({}, '', newUrl);
-  }, [searchQuery, selectedBoard, selectedArea, selectedFeeTier, sortBy, pathname]);
+  }, [
+    searchQuery,
+    selectedBoard,
+    selectedArea,
+    selectedSports,
+    selectedAdmissionStatus,
+    selectedGrade,
+    siblingOnly,
+    selectedFeeTier,
+    sortBy,
+    pathname,
+  ]);
+
+  // Toggle sport selection
+  const toggleSport = (sport: string) => {
+    setSelectedSports(prev =>
+      prev.includes(sport) ? prev.filter(s => s !== sport) : [...prev, sport]
+    );
+  };
+
+  // Helper to match admission status
+  const matchesAdmissionStatus = (school: School, status: string): boolean => {
+    if (!status || status === 'all') return true;
+    const admStatus = (school.admissions?.status || '').toLowerCase();
+    if (status === 'open') {
+      return admStatus.includes('open');
+    }
+    if (status === 'pre_registration') {
+      return admStatus.includes('pre_registration') || admStatus.includes('pre-registration');
+    }
+    if (status === 'upcoming') {
+      return admStatus.includes('opening_soon') || admStatus.includes('pending') || admStatus.includes('upcoming');
+    }
+    if (status === 'inquire') {
+      return admStatus.includes('inquire');
+    }
+    return true;
+  };
+
+  // Helper to match grade coverage
+  const coversGrade = (school: School, grade: string): boolean => {
+    if (!grade || grade === 'all') return true;
+    const raw = (school.gradeRange?.raw || '').toLowerCase();
+    const to = (school.gradeRange?.to || '').toLowerCase();
+    const from = (school.gradeRange?.from || '').toLowerCase();
+
+    let maxGrade = 12;
+    if (to.includes('8') || raw.includes('8')) maxGrade = 8;
+    else if (to.includes('10') || raw.includes('10')) maxGrade = 10;
+    else if (to.includes('12') || raw.includes('12') || to.includes('xii') || raw.includes('xii')) maxGrade = 12;
+
+    let minGrade = 0;
+    if (from.includes('1') && !from.includes('10') && !from.includes('11') && !from.includes('12')) minGrade = 1;
+
+    if (grade === 'pre-primary' || grade === 'nursery') {
+      return from.includes('nursery') || from.includes('play') || from.includes('montessori') || raw.includes('nursery') || raw.includes('pre');
+    }
+    if (grade === 'primary') return minGrade <= 1 && maxGrade >= 5;
+    if (grade === 'middle') return maxGrade >= 8;
+    if (grade === 'secondary') return maxGrade >= 10;
+    if (grade === 'senior-secondary') return maxGrade >= 12;
+    return true;
+  };
+
+  // Helper to match sibling concession
+  const hasSiblingConcession = (school: School): boolean => {
+    if (!school.fees || !Array.isArray(school.fees.concessions)) return false;
+    return school.fees.concessions.some(c => {
+      const cat = c.category || '';
+      const title = c.title || '';
+      const desc = c.discountDescription || '';
+      const elig = c.eligibilityCriteria || '';
+      const text = `${cat} ${title} ${desc} ${elig}`.toLowerCase();
+      return (
+        cat === 'sibling' ||
+        text.includes('sibling') ||
+        text.includes('second child') ||
+        text.includes('real brother') ||
+        text.includes('sister')
+      );
+    });
+  };
+
+  // Helper to match search query across name, alternateNames, location, board, tagline, summary, sports
+  const matchesSearch = (school: School, query: string): boolean => {
+    const q = query.toLowerCase().trim();
+    if (!q) return true;
+
+    const boards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
+    const altNames = Array.isArray(school.alternateNames) ? school.alternateNames : [];
+    const sports = Array.isArray(school.sports) ? school.sports : [];
+
+    return (
+      school.name.toLowerCase().includes(q) ||
+      altNames.some(an => an.toLowerCase().includes(q)) ||
+      (school.location?.area || '').toLowerCase().includes(q) ||
+      (school.location?.sector || '').toLowerCase().includes(q) ||
+      (school.location?.city || '').toLowerCase().includes(q) ||
+      boards.some(b => b.toLowerCase().includes(q)) ||
+      (school.tagline || '').toLowerCase().includes(q) ||
+      (school.summary || '').toLowerCase().includes(q) ||
+      sports.some(sp => sp.toLowerCase().includes(q))
+    );
+  };
 
   // Handle proximity change from the map or filter controls
   const handleProximityChange = (
@@ -186,28 +343,20 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
   const filteredSchools = useMemo(() => {
     let result = [...initialSchools];
 
-    // Search query filter
+    // 1. Search Query Filter (name, altNames, location, board, tagline, summary, sports)
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase().trim();
-      result = result.filter(
-        s =>
-          s.name.toLowerCase().includes(q) ||
-          s.location.area.toLowerCase().includes(q) ||
-          s.location.sector.toLowerCase().includes(q) ||
-          s.board.some(b => b.toLowerCase().includes(q)) ||
-          s.tagline?.toLowerCase().includes(q) ||
-          s.summary?.toLowerCase().includes(q)
-      );
+      result = result.filter(s => matchesSearch(s, searchQuery));
     }
 
-    // Board filter
+    // 2. Board Filter
     if (selectedBoard) {
-      result = result.filter(s =>
-        s.board.some(b => b.toLowerCase() === selectedBoard.toLowerCase())
-      );
+      result = result.filter(s => {
+        const boards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+        return boards.some(b => b.toLowerCase() === selectedBoard.toLowerCase());
+      });
     }
 
-    // Area filter
+    // 3. Area / Sector Filter
     if (selectedArea) {
       result = result.filter(
         s =>
@@ -216,7 +365,31 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
       );
     }
 
-    // Fee Tier filter
+    // 4. Sports & Athletics Filter (Multi-select: schools matching all selected sports)
+    if (selectedSports.length > 0) {
+      result = result.filter(s => {
+        const sports = Array.isArray(s.sports) ? s.sports : [];
+        if (sports.length === 0) return false;
+        return selectedSports.every(sp => sports.includes(sp));
+      });
+    }
+
+    // 5. Admissions Status Filter
+    if (selectedAdmissionStatus !== 'all') {
+      result = result.filter(s => matchesAdmissionStatus(s, selectedAdmissionStatus));
+    }
+
+    // 6. Grade / Class Level Filter
+    if (selectedGrade !== 'all') {
+      result = result.filter(s => coversGrade(s, selectedGrade));
+    }
+
+    // 7. Sibling Concession Filter
+    if (siblingOnly) {
+      result = result.filter(s => hasSiblingConcession(s));
+    }
+
+    // 8. Fee Tier Filter
     if (selectedFeeTier !== 'all') {
       result = result.filter(s => {
         if (!s.fees.cardFee || s.fees.comparableAnnualAvailable === false || s.fees.verificationStatus !== 'verified_from_source') {
@@ -231,7 +404,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
       });
     }
 
-    // Proximity radius filter
+    // 9. Proximity Radius Filter
     if (selectedRadiusKm !== null && proximityCoords) {
       result = result.filter(s => {
         const dist = schoolDistances.get(s.id);
@@ -270,11 +443,29 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     };
 
     return [...sortSection(verifiedSchools), ...sortSection(pendingSchools)];
-  }, [initialSchools, searchQuery, selectedBoard, selectedArea, selectedFeeTier, selectedRadiusKm, proximityCoords, schoolDistances, sortBy]);
+  }, [
+    initialSchools,
+    searchQuery,
+    selectedBoard,
+    selectedArea,
+    selectedSports,
+    selectedAdmissionStatus,
+    selectedGrade,
+    siblingOnly,
+    selectedFeeTier,
+    selectedRadiusKm,
+    proximityCoords,
+    schoolDistances,
+    sortBy,
+  ]);
 
   const activeFiltersCount =
     (selectedBoard ? 1 : 0) +
     (selectedArea ? 1 : 0) +
+    (selectedSports.length > 0 ? selectedSports.length : 0) +
+    (selectedAdmissionStatus !== 'all' ? 1 : 0) +
+    (selectedGrade !== 'all' ? 1 : 0) +
+    (siblingOnly ? 1 : 0) +
     (selectedFeeTier !== 'all' ? 1 : 0) +
     (selectedProximityArea ? 1 : 0) +
     (selectedRadiusKm ? 1 : 0) +
@@ -284,6 +475,10 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     setSearchQuery('');
     setSelectedBoard('');
     setSelectedArea('');
+    setSelectedSports([]);
+    setSelectedAdmissionStatus('all');
+    setSelectedGrade('all');
+    setSiblingOnly(false);
     setSelectedFeeTier('all');
     setSelectedProximityArea('');
     setSelectedRadiusKm(null);
@@ -309,7 +504,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         {/* Row 1: Prominent Primary School Search Field */}
         <div className="relative w-full">
           <label htmlFor="main-school-search" className="sr-only">
-            Search schools, sectors, boards
+            Search schools, sectors, boards, sports
           </label>
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-primary)] pointer-events-none" />
           <input
@@ -317,7 +512,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search school name, sector, board (e.g., DPS, Techzone 4, CBSE, Ryan)..."
+            placeholder="Search school name, alternate name, sector, board, sports (e.g., DPS, Swimming, CBSE, Techzone 4)..."
             className="w-full pl-10 pr-24 py-2.5 sm:py-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs sm:text-sm text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/75 focus:border-[var(--color-primary)] focus:ring-3 focus:ring-[var(--color-primary-light)] outline-none transition-all shadow-warm-2xs"
           />
           <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
@@ -338,8 +533,8 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         </div>
 
         {/* Row 2: Desktop Compact Filters Ribbon (>= md) */}
-        <div className="hidden md:flex flex-wrap items-center justify-between gap-3 mt-3 pt-3 border-t border-[var(--color-border-subtle)] text-xs">
-          {/* Left: Filter Controls (Board, Location, Fees) */}
+        <div className="hidden md:flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-3 border-t border-[var(--color-border-subtle)] text-xs">
+          {/* Left Controls: Board, Sector, Grade, Admissions, Fees, Sports, Sibling */}
           <div className="flex flex-wrap items-center gap-2">
             {/* Board Selector */}
             <div className="flex items-center gap-1">
@@ -351,7 +546,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                 type="button"
                 onClick={() => setSelectedBoard('')}
                 className={cn(
-                  'px-2.5 py-1 rounded-lg border font-semibold transition-all cursor-pointer',
+                  'px-2 py-1 rounded-lg border font-semibold transition-all cursor-pointer text-xs',
                   !selectedBoard
                     ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-2xs'
                     : 'bg-white text-[var(--color-content-muted)] border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-content)]'
@@ -365,7 +560,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                   type="button"
                   onClick={() => setSelectedBoard(selectedBoard === board ? '' : board)}
                   className={cn(
-                    'px-2.5 py-1 rounded-lg border font-semibold transition-all cursor-pointer',
+                    'px-2 py-1 rounded-lg border font-semibold transition-all cursor-pointer text-xs',
                     selectedBoard === board
                       ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-2xs'
                       : 'bg-white text-[var(--color-content-muted)] border-[var(--color-border)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-content)]'
@@ -376,20 +571,20 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               ))}
             </div>
 
-            <div className="h-4 w-px bg-slate-200 mx-1" />
+            <div className="h-4 w-px bg-slate-200 mx-0.5" />
 
             {/* Explore by Location: Sector Dropdown & Near Me */}
             <div className="flex items-center gap-1.5">
               <span className="font-bold text-[var(--color-content)] flex items-center gap-1">
                 <MapPin className="w-3.5 h-3.5 text-amber-600" />
-                <span>Location:</span>
+                <span>Sector:</span>
               </span>
 
               {/* Sector selector */}
               <select
                 value={selectedArea}
                 onChange={e => setSelectedArea(e.target.value)}
-                className="px-2.5 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)] shadow-2xs max-w-[150px]"
+                className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)] shadow-2xs max-w-[130px]"
               >
                 <option value="">All Sectors</option>
                 {distinctAreas.map(area => (
@@ -405,7 +600,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                 onClick={handleNearMe}
                 disabled={isLocating}
                 className={cn(
-                  'flex items-center gap-1 px-2.5 py-1 rounded-lg border text-xs font-semibold transition-all cursor-pointer shadow-2xs',
+                  'flex items-center gap-1 px-2 py-1 rounded-lg border text-xs font-semibold transition-all cursor-pointer shadow-2xs',
                   selectedProximityArea === 'my-location'
                     ? 'bg-amber-500 text-white border-amber-500'
                     : 'bg-white text-slate-700 border-[var(--color-border-strong)] hover:border-amber-400'
@@ -446,15 +641,48 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               )}
             </div>
 
-            <div className="h-4 w-px bg-slate-200 mx-1" />
+            <div className="h-4 w-px bg-slate-200 mx-0.5" />
 
-            {/* Fee Range Selector */}
+            {/* Grade / Class Filter */}
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-[var(--color-content)]">Grade:</span>
+              <select
+                value={selectedGrade}
+                onChange={e => setSelectedGrade(e.target.value)}
+                className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)] shadow-2xs"
+              >
+                <option value="all">All Grades</option>
+                <option value="pre-primary">Pre-Primary / Nursery</option>
+                <option value="primary">Primary (Class 1–5)</option>
+                <option value="middle">Middle (Class 6–8)</option>
+                <option value="secondary">Secondary (Class 9–10)</option>
+                <option value="senior-secondary">Senior Secondary (11–12)</option>
+              </select>
+            </div>
+
+            {/* Admissions Status Filter */}
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-[var(--color-content)]">Admissions:</span>
+              <select
+                value={selectedAdmissionStatus}
+                onChange={e => setSelectedAdmissionStatus(e.target.value)}
+                className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)] shadow-2xs"
+              >
+                <option value="all">All Statuses</option>
+                <option value="open">Admissions Open</option>
+                <option value="pre_registration">Pre-Registration</option>
+                <option value="upcoming">Upcoming / Pending</option>
+                <option value="inquire">Inquire with School</option>
+              </select>
+            </div>
+
+            {/* Fee Tier Selector */}
             <div className="flex items-center gap-1">
               <span className="font-bold text-[var(--color-content)]">Fees:</span>
               <select
                 value={selectedFeeTier}
                 onChange={e => setSelectedFeeTier(e.target.value)}
-                className="px-2.5 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)] shadow-2xs"
+                className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] cursor-pointer outline-none focus:border-[var(--color-primary)] shadow-2xs"
               >
                 <option value="all">Any Fee</option>
                 <option value="under-100k">Under ₹1L</option>
@@ -463,9 +691,90 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                 <option value="above-200k">Above ₹2L</option>
               </select>
             </div>
+
+            {/* Sports Filter Popover Dropdown */}
+            <div className="relative" ref={sportsMenuRef}>
+              <button
+                type="button"
+                onClick={() => setIsSportsMenuOpen(!isSportsMenuOpen)}
+                className={cn(
+                  'flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-semibold transition-all cursor-pointer shadow-2xs',
+                  selectedSports.length > 0
+                    ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
+                    : 'bg-white text-slate-700 border-[var(--color-border-strong)] hover:border-[var(--color-primary)]'
+                )}
+                aria-expanded={isSportsMenuOpen}
+              >
+                <span>Sports {selectedSports.length > 0 ? `(${selectedSports.length})` : ''}</span>
+                <ChevronDown className={cn('w-3 h-3 transition-transform', isSportsMenuOpen && 'rotate-180')} />
+              </button>
+
+              {isSportsMenuOpen && (
+                <div className="absolute left-0 mt-1.5 w-64 bg-white rounded-xl shadow-warm-lg border border-[var(--color-border)] p-3 z-30 animate-in fade-in zoom-in-95 duration-100">
+                  <div className="flex items-center justify-between pb-2 mb-2 border-b border-[var(--color-border-subtle)]">
+                    <span className="text-xs font-bold text-[var(--color-content)]">Sports & Athletics</span>
+                    {selectedSports.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedSports([])}
+                        className="text-[11px] font-bold text-rose-600 hover:text-rose-700"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                  <div className="grid grid-cols-2 gap-1.5 max-h-48 overflow-y-auto no-scrollbar py-1">
+                    {availableSports.map(sport => {
+                      const isSelected = selectedSports.includes(sport);
+                      return (
+                        <button
+                          key={sport}
+                          type="button"
+                          onClick={() => toggleSport(sport)}
+                          className={cn(
+                            'flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium text-left transition-colors cursor-pointer',
+                            isSelected
+                              ? 'bg-[var(--color-primary-light)] text-[var(--color-primary)] font-bold'
+                              : 'hover:bg-slate-50 text-slate-700'
+                          )}
+                        >
+                          <div
+                            className={cn(
+                              'w-3.5 h-3.5 rounded flex items-center justify-center border shrink-0',
+                              isSelected
+                                ? 'bg-[var(--color-primary)] border-[var(--color-primary)] text-white'
+                                : 'border-slate-300 bg-white'
+                            )}
+                          >
+                            {isSelected && <Check className="w-2.5 h-2.5" />}
+                          </div>
+                          <span className="truncate">{sport}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Sibling Concession 1-click Filter Toggle */}
+            <button
+              type="button"
+              onClick={() => setSiblingOnly(!siblingOnly)}
+              className={cn(
+                'flex items-center gap-1 px-2.5 py-1 rounded-lg border text-xs font-semibold transition-all cursor-pointer shadow-2xs select-none',
+                siblingOnly
+                  ? 'bg-emerald-600 text-white border-emerald-600 shadow-2xs'
+                  : 'bg-white text-slate-700 border-[var(--color-border-strong)] hover:border-emerald-500 hover:text-emerald-900'
+              )}
+              title="Filter schools providing verified sibling fee concessions"
+            >
+              <Check className={cn('w-3 h-3', siblingOnly ? 'text-white' : 'text-slate-400')} />
+              <span>Sibling Concession</span>
+            </button>
           </div>
 
-          {/* Right: Sort, Map Toggle, View Mode, Reset */}
+          {/* Right Controls: Sort, Top Rated, Map Toggle, View Mode, Reset */}
           <div className="flex items-center gap-2">
             {/* Top Rated 1-click toggle */}
             <button
@@ -630,9 +939,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </button>
         </div>
 
-        {/* Active Filter Chips Ribbon (Mobile) */}
+        {/* Active Filter Chips Ribbon (Desktop & Mobile) */}
         {activeFiltersCount > 0 && (
-          <div className="flex md:hidden items-center gap-1.5 mt-2.5 pt-2 border-t border-[var(--color-border-subtle)] overflow-x-auto no-scrollbar text-[11px]">
+          <div className="flex items-center gap-1.5 mt-2.5 pt-2 border-t border-[var(--color-border-subtle)] overflow-x-auto no-scrollbar text-[11px]">
             <span className="font-bold text-[var(--color-content-muted)] shrink-0 mr-1">Active:</span>
             
             {selectedBoard && (
@@ -648,6 +957,42 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-50 text-amber-900 font-bold border border-amber-200 shrink-0">
                 Sector: {selectedArea}
                 <button type="button" onClick={() => setSelectedArea('')} className="p-0.5 hover:text-rose-600">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+
+            {selectedGrade !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 font-bold border border-blue-200 shrink-0">
+                Grade: {selectedGrade === 'pre-primary' ? 'Pre-Primary' : selectedGrade === 'senior-secondary' ? 'Senior Sec (11-12)' : selectedGrade.charAt(0).toUpperCase() + selectedGrade.slice(1)}
+                <button type="button" onClick={() => setSelectedGrade('all')} className="p-0.5 hover:text-rose-600">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+
+            {selectedAdmissionStatus !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-purple-50 text-purple-900 font-bold border border-purple-200 shrink-0">
+                Admissions: {selectedAdmissionStatus === 'open' ? 'Open' : selectedAdmissionStatus === 'pre_registration' ? 'Pre-Reg' : selectedAdmissionStatus === 'upcoming' ? 'Upcoming' : 'Inquire'}
+                <button type="button" onClick={() => setSelectedAdmissionStatus('all')} className="p-0.5 hover:text-rose-600">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            )}
+
+            {selectedSports.map(sport => (
+              <span key={sport} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-900 font-bold border border-indigo-200 shrink-0">
+                Sport: {sport}
+                <button type="button" onClick={() => toggleSport(sport)} className="p-0.5 hover:text-rose-600">
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            ))}
+
+            {siblingOnly && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 font-bold border border-emerald-200 shrink-0">
+                Sibling Concession
+                <button type="button" onClick={() => setSiblingOnly(false)} className="p-0.5 hover:text-rose-600">
                   <X className="w-3 h-3" />
                 </button>
               </span>
@@ -683,7 +1028,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             <button
               type="button"
               onClick={resetAllFilters}
-              className="text-rose-600 font-bold underline shrink-0 ml-1 py-0.5 px-1"
+              className="text-rose-600 font-bold underline shrink-0 ml-1 py-0.5 px-1 cursor-pointer hover:text-rose-800"
             >
               Clear All
             </button>
@@ -698,18 +1043,18 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         title="Filter Schools"
         side="bottom"
       >
-        <div className="flex flex-col gap-5 pb-4">
+        <div className="flex flex-col gap-4 pb-4">
           {/* Curriculum / Board */}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
               Curriculum / Board
             </label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               <button
                 type="button"
                 onClick={() => setSelectedBoard('')}
                 className={cn(
-                  'px-3.5 py-2 rounded-xl border text-xs font-bold transition-all min-h-[40px]',
+                  'px-3 py-1.5 rounded-xl border text-xs font-bold transition-all min-h-[38px]',
                   !selectedBoard
                     ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
                     : 'bg-white text-slate-700 border-[var(--color-border-strong)]'
@@ -723,7 +1068,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                   type="button"
                   onClick={() => setSelectedBoard(selectedBoard === board ? '' : board)}
                   className={cn(
-                    'px-3.5 py-2 rounded-xl border text-xs font-bold transition-all min-h-[40px]',
+                    'px-3 py-1.5 rounded-xl border text-xs font-bold transition-all min-h-[38px]',
                     selectedBoard === board
                       ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
                       : 'bg-white text-slate-700 border-[var(--color-border-strong)]'
@@ -735,16 +1080,119 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             </div>
           </div>
 
-          {/* Explore by Location: Sector & Near Me */}
-          <div className="space-y-2">
+          {/* Grade / Class Level */}
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
-              Explore by Location (Greater Noida West)
+              Grade / Class Level
+            </label>
+            <select
+              value={selectedGrade}
+              onChange={e => setSelectedGrade(e.target.value)}
+              className="w-full p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[42px]"
+            >
+              <option value="all">All Grades</option>
+              <option value="pre-primary">Pre-Primary / Nursery</option>
+              <option value="primary">Primary (Class 1–5)</option>
+              <option value="middle">Middle (Class 6–8)</option>
+              <option value="secondary">Secondary (Class 9–10)</option>
+              <option value="senior-secondary">Senior Secondary (Class 11–12)</option>
+            </select>
+          </div>
+
+          {/* Admissions Status */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
+              Admissions Status
+            </label>
+            <select
+              value={selectedAdmissionStatus}
+              onChange={e => setSelectedAdmissionStatus(e.target.value)}
+              className="w-full p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[42px]"
+            >
+              <option value="all">All Admissions Statuses</option>
+              <option value="open">Admissions Open</option>
+              <option value="pre_registration">Pre-Registration</option>
+              <option value="upcoming">Upcoming / Schedule Pending</option>
+              <option value="inquire">Inquire with School</option>
+            </select>
+          </div>
+
+          {/* Sports & Athletics Multi-Select */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
+                Sports & Athletics
+              </label>
+              {selectedSports.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedSports([])}
+                  className="text-[11px] font-bold text-rose-600"
+                >
+                  Clear ({selectedSports.length})
+                </button>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-1.5 max-h-36 overflow-y-auto p-1 bg-slate-50 rounded-xl border border-slate-200">
+              {availableSports.map(sport => {
+                const isSelected = selectedSports.includes(sport);
+                return (
+                  <button
+                    key={sport}
+                    type="button"
+                    onClick={() => toggleSport(sport)}
+                    className={cn(
+                      'px-2.5 py-1 rounded-lg border text-xs font-semibold flex items-center gap-1 transition-all',
+                      isSelected
+                        ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
+                        : 'bg-white text-slate-700 border-slate-300'
+                    )}
+                  >
+                    {isSelected && <Check className="w-3 h-3" />}
+                    <span>{sport}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Sibling Concession Toggle */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
+              Fee Concessions
+            </label>
+            <button
+              type="button"
+              onClick={() => setSiblingOnly(!siblingOnly)}
+              className={cn(
+                'w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border text-xs font-bold transition-all min-h-[42px]',
+                siblingOnly
+                  ? 'bg-emerald-50 text-emerald-900 border-emerald-500'
+                  : 'bg-white text-slate-700 border-[var(--color-border-strong)]'
+              )}
+            >
+              <span>Sibling Concession Available</span>
+              <div
+                className={cn(
+                  'w-5 h-5 rounded-md flex items-center justify-center border transition-colors',
+                  siblingOnly ? 'bg-emerald-600 border-emerald-600 text-white' : 'border-slate-300 bg-white'
+                )}
+              >
+                {siblingOnly && <Check className="w-3.5 h-3.5" />}
+              </div>
+            </button>
+          </div>
+
+          {/* Explore by Location: Sector & Near Me */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
+              Location (Greater Noida West)
             </label>
             <div className="flex items-center gap-2">
               <select
                 value={selectedArea}
                 onChange={e => setSelectedArea(e.target.value)}
-                className="flex-1 p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[44px]"
+                className="flex-1 p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[42px]"
               >
                 <option value="">All Sectors</option>
                 {distinctAreas.map(area => (
@@ -759,7 +1207,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                 onClick={handleNearMe}
                 disabled={isLocating}
                 className={cn(
-                  'flex items-center gap-1.5 px-3 py-2.5 rounded-xl border text-xs font-bold min-h-[44px] transition-all shrink-0',
+                  'flex items-center gap-1.5 px-3 py-2 rounded-xl border text-xs font-bold min-h-[42px] transition-all shrink-0',
                   selectedProximityArea === 'my-location'
                     ? 'bg-amber-500 text-white border-amber-500'
                     : 'bg-white text-slate-700 border-[var(--color-border-strong)]'
@@ -772,7 +1220,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
             {/* Radius options if Near Me is selected */}
             {selectedProximityArea && (
-              <div className="flex items-center gap-2 pt-1">
+              <div className="flex items-center gap-1.5 pt-1">
                 <span className="text-[11px] font-bold text-slate-500">Radius:</span>
                 {RADIUS_OPTIONS.map(opt => (
                   <button
@@ -780,7 +1228,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                     type="button"
                     onClick={() => handleProximityChange(selectedProximityArea, opt.value, proximityCoords)}
                     className={cn(
-                      'px-2.5 py-1 rounded-lg text-xs font-bold border transition-all',
+                      'px-2 py-0.5 rounded-lg text-xs font-bold border transition-all',
                       selectedRadiusKm === opt.value
                         ? 'bg-amber-600 text-white border-amber-600'
                         : 'bg-white text-slate-700 border-slate-300'
@@ -794,14 +1242,14 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </div>
 
           {/* Fee Range Selector */}
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
               Audited Annual Fee Range
             </label>
             <select
               value={selectedFeeTier}
               onChange={e => setSelectedFeeTier(e.target.value)}
-              className="w-full p-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[44px]"
+              className="w-full p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold text-[var(--color-content)] outline-none min-h-[42px]"
             >
               <option value="all">Any Annual Fee Range</option>
               <option value="under-100k">Under ₹1,00,000 / year</option>
@@ -812,18 +1260,18 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </div>
 
           {/* Action Footer in Filter Drawer */}
-          <div className="pt-4 border-t border-[var(--color-border-subtle)] flex items-center gap-3 mt-2">
+          <div className="pt-3 border-t border-[var(--color-border-subtle)] flex items-center gap-3 mt-1">
             <button
               type="button"
               onClick={resetAllFilters}
-              className="flex-1 py-3 px-4 rounded-xl border border-rose-200 text-rose-700 bg-rose-50 font-bold text-xs hover:bg-rose-100 transition-colors text-center min-h-[44px]"
+              className="flex-1 py-2.5 px-3 rounded-xl border border-rose-200 text-rose-700 bg-rose-50 font-bold text-xs hover:bg-rose-100 transition-colors text-center min-h-[42px]"
             >
               Reset Filters
             </button>
             <button
               type="button"
               onClick={() => setIsMobileFilterOpen(false)}
-              className="flex-2 py-3 px-4 rounded-xl bg-[var(--color-primary)] text-white font-bold text-xs shadow-warm-xs text-center min-h-[44px]"
+              className="flex-2 py-2.5 px-3 rounded-xl bg-[var(--color-primary)] text-white font-bold text-xs shadow-warm-xs text-center min-h-[42px]"
             >
               Show {filteredSchools.length} {filteredSchools.length === 1 ? 'School' : 'Schools'}
             </button>
@@ -922,7 +1370,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           ) : (
             <EmptyState
               title="No schools match your filters"
-              description="Try broadening your sector selection, changing fee ranges, expanding proximity radius, or clearing search criteria to view all available institutions."
+              description="No schools match all your active search and filter criteria. Try clearing some filters or broadening your search parameters."
               actionLabel="Clear All Filters"
               onAction={resetAllFilters}
             />

@@ -15,6 +15,7 @@ export type {
   UniformItem,
   SchoolUniforms,
   SchoolAdmissions,
+  AdmissionMilestone,
   SchoolContact,
   SchoolRating,
   SchoolAssets,

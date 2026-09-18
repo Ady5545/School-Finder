@@ -80,7 +80,8 @@ export function getDistinctAreas(): string[] {
 export function getDistinctBoards(): string[] {
   const boards = new Set<string>();
   getCanonicalSchools().forEach(s => {
-    s.board.forEach(b => boards.add(b));
+    const sBoards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+    sBoards.forEach(b => boards.add(b));
   });
   return Array.from(boards).sort();
 }
@@ -88,21 +89,23 @@ export function getDistinctBoards(): string[] {
 export function filterSchools(options: SchoolFilterOptions): School[] {
   const baseSchools = getCanonicalSchools();
   return baseSchools.filter(school => {
+    const schoolBoards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
+
     if (options.searchQuery) {
       const q = options.searchQuery.toLowerCase().trim();
       const matchName = school.name.toLowerCase().includes(q);
-      const matchShort = school.shortName.toLowerCase().includes(q);
-      const matchAlt = school.alternateNames.some(alt => alt.toLowerCase().includes(q));
-      const matchArea = school.location.area.toLowerCase().includes(q);
-      const matchSector = school.location.sector.toLowerCase().includes(q);
-      const matchBoard = school.board.some(b => b.toLowerCase().includes(q));
+      const matchShort = school.shortName?.toLowerCase().includes(q);
+      const matchAlt = school.alternateNames?.some(alt => alt.toLowerCase().includes(q));
+      const matchArea = (school.location?.area || '').toLowerCase().includes(q);
+      const matchSector = (school.location?.sector || '').toLowerCase().includes(q);
+      const matchBoard = schoolBoards.some(b => b.toLowerCase().includes(q));
       if (!matchName && !matchShort && !matchAlt && !matchArea && !matchSector && !matchBoard) {
         return false;
       }
     }
 
     if (options.board && options.board.length > 0) {
-      const hasBoard = school.board.some(b => options.board!.includes(b));
+      const hasBoard = schoolBoards.some(b => options.board!.includes(b));
       if (!hasBoard) return false;
     }
 

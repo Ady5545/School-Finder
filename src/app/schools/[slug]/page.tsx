@@ -19,6 +19,7 @@ import { SchoolRatingsSection } from '../../../components/school/SchoolRatingsSe
 import { SchoolAdmissionsSection } from '../../../components/school/SchoolAdmissionsSection';
 import { SchoolViewTracker } from '../../../components/school/SchoolViewTracker';
 import { Button } from '../../../components/ui/Button';
+import { cn } from '../../../lib/utils';
 import {
   MapPin,
   Globe,
@@ -33,6 +34,13 @@ import {
   ShieldCheck,
   AlertCircle,
   Compass,
+  Trophy,
+  Activity,
+  Waves,
+  Timer,
+  Shield,
+  CircleDot,
+  Landmark,
 } from 'lucide-react';
 
 interface SchoolDetailPageProps {
@@ -42,6 +50,25 @@ interface SchoolDetailPageProps {
 }
 
 export const dynamic = 'force-dynamic';
+
+function getSportIcon(sport: string) {
+  const s = sport.toLowerCase();
+  if (s.includes('swimming')) return <Waves className="w-4 h-4 text-[var(--color-primary)] shrink-0" />;
+  if (s.includes('athletic')) return <Timer className="w-4 h-4 text-[var(--color-primary)] shrink-0" />;
+  if (s.includes('taekwondo') || s.includes('martial')) return <Shield className="w-4 h-4 text-[var(--color-primary)] shrink-0" />;
+  if (s.includes('cricket')) return <Trophy className="w-4 h-4 text-[var(--color-primary)] shrink-0" />;
+  if (
+    s.includes('tennis') ||
+    s.includes('badminton') ||
+    s.includes('basketball') ||
+    s.includes('football') ||
+    s.includes('volleyball') ||
+    s.includes('skating')
+  ) {
+    return <CircleDot className="w-4 h-4 text-[var(--color-primary)] shrink-0" />;
+  }
+  return <Activity className="w-4 h-4 text-[var(--color-primary)] shrink-0" />;
+}
 
 export async function generateStaticParams() {
   const slugs = getAllSchoolSlugs();
@@ -65,15 +92,21 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
   const jsonLd = generateSchoolJsonLd(school);
   const allSchools = getAllSchools();
+  const schoolBoards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
+  const affiliationNumber = school.affiliationNumber || school.verification?.cbseAffiliationNumber;
 
   // Find 3 similar / nearby schools
   const similarSchools = allSchools
     .filter(
-      s =>
-        s.slug !== school.slug &&
-        (s.location.area === school.location.area ||
-          s.location.sector === school.location.sector ||
-          s.board.some(b => school.board.includes(b)))
+      s => {
+        const sBoards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+        return (
+          s.slug !== school.slug &&
+          (s.location.area === school.location.area ||
+            s.location.sector === school.location.sector ||
+            sBoards.some(b => schoolBoards.includes(b)))
+        );
+      }
     )
     .slice(0, 3);
 
@@ -120,7 +153,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-[var(--color-border)]">
         <div className="space-y-3 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            {school.board.map(b => (
+            {schoolBoards.map(b => (
               <SchoolBadge key={b} type="board" value={b} />
             ))}
             <SchoolBadge type="schoolType" value={school.schoolType} />
@@ -161,13 +194,20 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
       {/* Main Grid: Visuals & Facts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-        {/* Left 2 Cols: Imagery, Overview, Facilities */}
+        {/* Left 2 Cols: Imagery, Overview, Facilities, Sports */}
         <div className="lg:col-span-2 space-y-8">
           {/* Featured / Hero Visual */}
           <SchoolHeroVisual school={school} />
 
           {/* Quick Specifications Matrix */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs">
+          <div
+            className={cn(
+              'grid gap-4 p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs',
+              school.establishedYear
+                ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'
+                : 'grid-cols-2 sm:grid-cols-4'
+            )}
+          >
             <div className="space-y-1">
               <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
                 <GraduationCap className="w-3.5 h-3.5 text-[var(--color-primary)]" /> Grades
@@ -192,6 +232,14 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               </span>
               <p className="text-sm font-bold text-[var(--color-content)]">{school.admissionAge || '3+ for Nursery'}</p>
             </div>
+            {school.establishedYear && (
+              <div className="space-y-1">
+                <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
+                  <Landmark className="w-3.5 h-3.5 text-[var(--color-primary)]" /> Established
+                </span>
+                <p className="text-sm font-bold text-[var(--color-content)]">{school.establishedYear}</p>
+              </div>
+            )}
           </div>
 
           {/* About Section */}
@@ -243,21 +291,53 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
             </section>
           )}
 
+          {/* Sports & Athletics Section */}
+          {school.sports && school.sports.length > 0 && (
+            <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+              <div>
+                <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">
+                  Sports & Athletics
+                </h2>
+                <p className="text-xs text-[var(--color-content-muted)] mt-1">
+                  Athletic disciplines and sports coaching programs offered at {school.name}.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {school.sports.map((sport, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 rounded-xl bg-[#faf8f5] border border-[var(--color-border)] flex items-center gap-2.5 hover:border-[var(--color-primary)] transition-colors"
+                  >
+                    {getSportIcon(sport)}
+                    <span className="text-xs font-semibold text-[var(--color-content)] truncate">
+                      {sport}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Real Campus Photo Gallery */}
           <SchoolGallery school={school} />
         </div>
 
-
-        {/* Right Col: Fees & Contact */}
+        {/* Right Col: Institutional Credentials, Fees & Contact */}
         <div className="space-y-6">
-          {/* Institutional Verification Card */}
+          {/* Institutional Credentials & Verification Card */}
           {school.verification && (
-            <section className={school.verification.isVerified ? "bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-2.5" : "bg-amber-50/60 p-5 rounded-2xl border border-amber-200 shadow-warm-xs space-y-2.5"}>
+            <section
+              className={
+                school.verification.isVerified
+                  ? 'bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-3'
+                  : 'bg-amber-50/60 p-5 rounded-2xl border border-amber-200 shadow-warm-xs space-y-3'
+              }
+            >
               <div className="flex items-center gap-2 font-bold text-xs">
                 {school.verification.isVerified ? (
                   <>
                     <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="text-emerald-900">Source-Verified Institutional Profile</span>
+                    <span className="text-emerald-900">Institutional Credentials & Audit</span>
                   </>
                 ) : (
                   <>
@@ -266,18 +346,49 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                   </>
                 )}
               </div>
-              <p className={school.verification.isVerified ? "text-[11px] text-emerald-800 leading-relaxed" : "text-[11px] text-amber-800 leading-relaxed"}>
+
+              <div className="space-y-2 pt-1 text-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-semibold text-slate-600">Affiliated Board:</span>
+                  <span className="font-bold text-[var(--color-primary)] bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
+                    {schoolBoards.join(', ')}
+                  </span>
+                </div>
+
+                {affiliationNumber && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-semibold text-slate-600">Affiliation Number:</span>
+                    <span className="font-mono font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
+                      {affiliationNumber}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {school.boardNote && (
+                <div className="p-2.5 rounded-lg bg-white/80 border border-emerald-200/80 text-[11px] text-slate-700 leading-relaxed">
+                  <span className="font-bold text-slate-900 block mb-0.5">Board Note:</span>
+                  {school.boardNote}
+                </div>
+              )}
+
+              <p
+                className={
+                  school.verification.isVerified
+                    ? 'text-[11px] text-emerald-800 leading-relaxed pt-1 border-t border-emerald-200/60'
+                    : 'text-[11px] text-amber-800 leading-relaxed pt-1 border-t border-amber-200/60'
+                }
+              >
                 {school.verification.isVerified
                   ? `Information, address, and affiliation audited from ${school.verification.sourceName}.`
                   : 'This school directory entry is awaiting direct institutional disclosure. Synthetic attributes have been removed in accordance with Admission Pitara data accuracy standards.'}
               </p>
-              {school.verification.cbseAffiliationNumber && (
-                <div className="pt-2 border-t border-emerald-200/60 flex items-center justify-between text-[11px] font-mono text-emerald-900">
-                  <span>CBSE Affiliation:</span>
-                  <span className="font-bold">{school.verification.cbseAffiliationNumber}</span>
-                </div>
-              )}
-              <div className={school.verification.isVerified ? "text-[10px] text-emerald-700/80" : "text-[10px] text-amber-700/80"}>
+
+              <div
+                className={
+                  school.verification.isVerified ? 'text-[10px] text-emerald-700/80' : 'text-[10px] text-amber-700/80'
+                }
+              >
                 Audited: {school.verification.lastVerified}
               </div>
             </section>
@@ -394,4 +505,5 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
     </div>
   );
 }
+
 

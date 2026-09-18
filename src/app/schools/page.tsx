@@ -17,6 +17,12 @@ interface SchoolsPageProps {
     q?: string;
     board?: string;
     area?: string;
+    sports?: string;
+    admission?: string;
+    grade?: string;
+    sibling?: string;
+    fee?: string;
+    sort?: string;
   }>;
 }
 
@@ -25,6 +31,12 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const q = params.q || '';
   const selectedBoard = params.board || '';
   const selectedArea = params.area || '';
+  const selectedSports = params.sports ? params.sports.split(',').map(s => s.trim()).filter(Boolean) : [];
+  const selectedAdmission = params.admission || 'all';
+  const selectedGrade = params.grade || 'all';
+  const initialSibling = params.sibling === 'true';
+  const selectedFee = params.fee || 'all';
+  const initialSort = params.sort || 'featured';
 
   const allSchools = getAllSchools();
   const boards = getDistinctBoards();
@@ -53,6 +65,12 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
         initialQuery={q}
         initialBoard={selectedBoard}
         initialArea={selectedArea}
+        initialSports={selectedSports}
+        initialAdmissionStatus={selectedAdmission}
+        initialGrade={selectedGrade}
+        initialSiblingOnly={initialSibling}
+        initialFeeTier={selectedFee}
+        initialSortBy={initialSort}
       />
     </div>
   );

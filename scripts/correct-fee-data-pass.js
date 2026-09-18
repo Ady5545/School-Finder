@@ -1,23 +1,17 @@
-/**
- * Admission Pitara - Batch 2 Fee Enhancement Script
- * Enriches school fee data with structured components, grade tiers, circulars,
- * concessions, calculation notes, and accurate verification statuses.
- */
 const fs = require('fs');
 const path = require('path');
 
 const schoolsPath = path.join(__dirname, '..', 'data', 'schools.json');
 const schools = JSON.parse(fs.readFileSync(schoolsPath, 'utf8'));
 
-// Helper to format currency
+// Format currency helper
 function formatINR(val) {
   if (val === null || val === undefined) return 'N/A';
   if (typeof val === 'string') return val;
   return '₹' + val.toLocaleString('en-IN');
 }
 
-const updatedSchools = schools.map(school => {
-  const currentFees = school.fees || {};
+const correctedSchools = schools.map(school => {
   const slug = school.slug;
 
   // =========================================================================
@@ -556,134 +550,9 @@ const updatedSchools = schools.map(school => {
   }
 
   // =========================================================================
-  // 3. THE INFINITY SCHOOL
+  // 3. PACIFIC WORLD SCHOOL
   // =========================================================================
-  else if (slug === 'the-infinity-school') {
-    return {
-      ...school,
-      fees: {
-        ...currentFees,
-        cardFee: 120000,
-        estimatedFirstYear: 171500,
-        currency: 'INR',
-        rangeText: '₹1,20,000 – ₹1,32,000 / year (Historical Reference)',
-        academicSession: '2023–24 (Historical / Inferred)',
-        lastVerifiedDate: 'September 2026',
-        verificationStatus: 'estimated_historical',
-        isVerified: false,
-        disclosed: true,
-        comparableAnnualAvailable: true,
-        billingFrequency: 'monthly',
-        feeCategory: 'Monthly Tuition Fee (Historical Schedule)',
-        sourceUrl: 'https://theinfinityschool.org',
-        calculatedAnnualNote: 'Calculated from historical 2023–24 published monthly tuition of ₹10,000 – ₹11,000 / month × 12 = ₹1,20,000 – ₹1,32,000 / year.',
-        disclaimer: 'Estimated / inferred — not an official current fee for 2027–28. Data reflects historical 2023–24 institutional publications and is provided strictly for indicative reference. Parents should verify current 2027–28 pricing directly with the school admission desk.',
-        footnotes: [
-          'Notice: This fee breakdown is based on historical 2023–24 documents.',
-          'It has NOT been certified by the institution as current 2027–28 pricing.',
-          'Please consult the school admissions office directly for certified current rates.'
-        ],
-        components: [
-          {
-            id: 'inf-reg',
-            name: 'Registration Fee',
-            category: 'one_time',
-            amount: 1500,
-            formattedAmount: '₹1,500',
-            frequency: 'one_time',
-            gradesApplicable: 'All Entry Grades',
-            mandatory: true,
-            refundable: false,
-            isOfficial: false,
-            notes: 'Historical 2023–24 registration figure.'
-          },
-          {
-            id: 'inf-adm',
-            name: 'Admission Fee',
-            category: 'one_time',
-            amount: 50000,
-            formattedAmount: '₹50,000',
-            frequency: 'one_time',
-            gradesApplicable: 'All Entry Grades',
-            mandatory: true,
-            refundable: false,
-            isOfficial: false,
-            notes: 'Historical one-time admission charge.'
-          },
-          {
-            id: 'inf-tuition-monthly',
-            name: 'Monthly Tuition Fee (Historical)',
-            category: 'recurring',
-            amount: null,
-            formattedAmount: '₹10,000 – ₹11,000 / month',
-            frequency: 'monthly',
-            gradesApplicable: 'Nursery to Middle School',
-            mandatory: true,
-            refundable: false,
-            isOfficial: false,
-            notes: 'Historical monthly tuition range.'
-          },
-          {
-            id: 'inf-tuition-annual-calc',
-            name: 'Annual Tuition (Calculated from Historical Monthly)',
-            category: 'recurring',
-            amount: 120000,
-            formattedAmount: '₹1,20,000 – ₹1,32,000 / year',
-            frequency: 'annual',
-            gradesApplicable: 'Nursery to Middle School',
-            mandatory: true,
-            refundable: false,
-            isCalculated: true,
-            calculationNotes: 'Calculated as ₹10,000 – ₹11,000/mo × 12 months = ₹1,20,000 – ₹1,32,000/yr.',
-            isOfficial: false,
-            notes: 'Inferred annual equivalent based on 2023–24 records.'
-          },
-          {
-            id: 'inf-transport',
-            name: 'Transport Charges (Historical)',
-            category: 'transport',
-            amount: null,
-            formattedAmount: '₹3,500 – ₹4,500 / month',
-            frequency: 'monthly',
-            gradesApplicable: 'Optional',
-            mandatory: false,
-            refundable: false,
-            isOfficial: false,
-            notes: 'Indicative historical transport slab.'
-          }
-        ],
-        gradeWiseTiers: [
-          {
-            gradeGroup: 'Early Years & Primary (Historical 2023–24)',
-            grades: ['Pre-Nursery', 'Nursery', 'KG', 'Grades I–V'],
-            tuitionFee: '₹10,000 – ₹11,000 / month',
-            tuitionFrequency: 'monthly',
-            calculatedAnnualEquivalent: '₹1,20,000 – ₹1,32,000 / year',
-            totalAnnualPayable: '~₹1,20,000 – ₹1,32,000',
-            isCalculated: true,
-            curriculum: 'CBSE',
-            notes: 'Historical reference only.'
-          }
-        ],
-        circular: {
-          title: 'The Infinity School Historical Fee Record (2023–24 Archive)',
-          academicSession: '2023–24 (Historical / Inferred)',
-          circularType: 'web_schedule',
-          sourceUrl: 'https://theinfinityschool.org',
-          summary: 'Historical public fee indicators. Official 2027–28 session circular is awaiting direct institutional disclosure.',
-          officialNotes: [
-            'Admission Pitara does NOT present historical 2023–24 figures as current 2027–28 certified fees.',
-            'Always verify directly with school admissions prior to registration.'
-          ]
-        }
-      }
-    };
-  }
-
-  // =========================================================================
-  // 4. PACIFIC WORLD SCHOOL
-  // =========================================================================
-  else if (slug === 'pacific-world-school-techzone-4') {
+  if (slug === 'pacific-world-school-techzone-4') {
     return {
       ...school,
       fees: {
@@ -969,9 +838,9 @@ const updatedSchools = schools.map(school => {
   }
 
   // =========================================================================
-  // 5. SKS WORLD SCHOOL — GREATER NOIDA WEST
+  // 4. SKS WORLD SCHOOL — GREATER NOIDA WEST
   // =========================================================================
-  else if (slug === 'sks-world-school-greater-noida-west') {
+  if (slug === 'sks-world-school-greater-noida-west') {
     return {
       ...school,
       fees: {
@@ -1222,9 +1091,9 @@ const updatedSchools = schools.map(school => {
   }
 
   // =========================================================================
-  // 6. INDUS VALLEY PUBLIC SCHOOL — SECTOR 62, NOIDA
+  // 5. INDUS VALLEY PUBLIC SCHOOL — SECTOR 62, NOIDA
   // =========================================================================
-  else if (slug === 'indus-valley-school-noida-ext') {
+  if (slug === 'indus-valley-school-noida-ext') {
     return {
       ...school,
       summary: 'Indus Valley Public School in Sector 62, Noida, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.',
@@ -1547,254 +1416,8 @@ const updatedSchools = schools.map(school => {
     };
   }
 
-  // =========================================================================
-  // 7. UNVERIFIED / UNDISCLOSED / ZERO CARD FEE SCHOOLS
-  // =========================================================================
-  else if (
-    currentFees.verificationStatus === 'not_publicly_verified' ||
-    currentFees.verificationStatus === 'unverified_copied_from_wisdom_tree' ||
-    slug === 'ramagya-school-noida-extension' ||
-    !currentFees.cardFee ||
-    currentFees.cardFee === 0
-  ) {
-    const isWisdomTreeCopy =
-      currentFees.verificationStatus === 'unverified_copied_from_wisdom_tree' ||
-      slug === 'ramagya-school-noida-extension';
-    return {
-      ...school,
-      fees: {
-        ...currentFees,
-        cardFee: null,
-        estimatedFirstYear: null,
-        currency: 'INR',
-        rangeText: 'Not publicly disclosed',
-        registrationFee: null,
-        admissionFee: null,
-        tuitionMonthly: null,
-        tuitionQuarterly: null,
-        tuitionAnnual: null,
-        transportMonthly: null,
-        transportAnnual: null,
-        verificationStatus: isWisdomTreeCopy ? 'unverified_copied_from_wisdom_tree' : 'not_publicly_verified',
-        isVerified: false,
-        disclosed: false,
-        comparableAnnualAvailable: false,
-        feeCategory: 'Prospectus / Institutional Disclosure Required',
-        table: [],
-        components: [],
-        gradeWiseTiers: [],
-        concessions: [],
-        disclaimer: 'This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.',
-        footnotes: [
-          'Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.',
-          'Please contact the school office directly for current academic session fee schedules.'
-        ]
-      }
-    };
-  }
-
-  // =========================================================================
-  // 8. ALL OTHER VERIFIED SCHOOLS (Generic Fallback)
-  // =========================================================================
-  else {
-    const baseCardFee = currentFees.cardFee || 100000;
-    const regFee = currentFees.registrationFee || 1000;
-    const admFee = currentFees.admissionFee || 40000;
-    const session = currentFees.academicSession || '2026–27';
-    const sourceUrl = currentFees.sourceUrl || school.contact?.website || null;
-
-    const comps = [];
-
-    // One-time registration
-    comps.push({
-      id: `${slug}-reg`,
-      name: 'Registration Fee',
-      category: 'one_time',
-      amount: regFee,
-      formattedAmount: formatINR(regFee),
-      frequency: 'one_time',
-      gradesApplicable: 'All Entry Grades',
-      mandatory: true,
-      refundable: false,
-      isOfficial: true,
-      notes: 'One-time registration and application processing charge.'
-    });
-
-    // One-time admission
-    if (admFee > 0) {
-      comps.push({
-        id: `${slug}-adm`,
-        name: 'Admission Fee',
-        category: 'one_time',
-        amount: admFee,
-        formattedAmount: formatINR(admFee),
-        frequency: 'one_time',
-        gradesApplicable: 'All Entry Grades',
-        mandatory: true,
-        refundable: false,
-        isOfficial: true,
-        notes: 'One-time non-refundable admission charge payable upon admission confirmation.'
-      });
-    }
-
-    // Tuition / Composite Fee
-    if (currentFees.billingFrequency === 'quarterly' && currentFees.tuitionQuarterly) {
-      const qVal = Math.round(baseCardFee / 4);
-      comps.push({
-        id: `${slug}-tuition-quarterly`,
-        name: 'Composite Tuition Fee (Quarterly)',
-        category: 'recurring',
-        amount: qVal,
-        formattedAmount: formatINR(qVal) + ' / quarter',
-        frequency: 'quarterly',
-        gradesApplicable: school.gradeRange?.raw || 'All Grades',
-        mandatory: true,
-        refundable: false,
-        isOfficial: true,
-        notes: 'Payable quarterly in advance.'
-      });
-      comps.push({
-        id: `${slug}-tuition-annual`,
-        name: 'Annual Composite Tuition (Calculated)',
-        category: 'recurring',
-        amount: baseCardFee,
-        formattedAmount: formatINR(baseCardFee) + ' / year',
-        frequency: 'annual',
-        gradesApplicable: school.gradeRange?.raw || 'All Grades',
-        mandatory: true,
-        refundable: false,
-        isCalculated: true,
-        calculationNotes: `Calculated from published quarterly fee: ${formatINR(qVal)} × 4 quarters = ${formatINR(baseCardFee)}/year.`,
-        isOfficial: false,
-        notes: 'Derived annual composite equivalent.'
-      });
-    } else if (currentFees.tuitionMonthly) {
-      const mVal = Math.round(baseCardFee / 12);
-      comps.push({
-        id: `${slug}-tuition-monthly`,
-        name: 'Tuition Fee (Monthly)',
-        category: 'recurring',
-        amount: mVal,
-        formattedAmount: formatINR(mVal) + ' / month',
-        frequency: 'monthly',
-        gradesApplicable: school.gradeRange?.raw || 'All Grades',
-        mandatory: true,
-        refundable: false,
-        isOfficial: true,
-        notes: 'Payable on a monthly/quarterly schedule.'
-      });
-      comps.push({
-        id: `${slug}-tuition-annual`,
-        name: 'Annual Tuition (Calculated)',
-        category: 'recurring',
-        amount: baseCardFee,
-        formattedAmount: formatINR(baseCardFee) + ' / year',
-        frequency: 'annual',
-        gradesApplicable: school.gradeRange?.raw || 'All Grades',
-        mandatory: true,
-        refundable: false,
-        isCalculated: true,
-        calculationNotes: `Calculated from published monthly fee of ${formatINR(mVal)} × 12 = ${formatINR(baseCardFee)}/year.`,
-        isOfficial: false,
-        notes: 'Derived annual composite equivalent.'
-      });
-    } else {
-      comps.push({
-        id: `${slug}-composite-annual`,
-        name: 'Composite Annual Fee',
-        category: 'recurring',
-        amount: baseCardFee,
-        formattedAmount: formatINR(baseCardFee) + ' / year',
-        frequency: 'annual',
-        gradesApplicable: school.gradeRange?.raw || 'All Grades',
-        mandatory: true,
-        refundable: false,
-        isOfficial: true,
-        notes: 'Published annual composite tuition fee schedule.'
-      });
-    }
-
-    // Transport if available
-    if (currentFees.transportMonthly || currentFees.transportAnnual) {
-      comps.push({
-        id: `${slug}-transport`,
-        name: 'Transport Service (Optional)',
-        category: 'transport',
-        amount: null,
-        formattedAmount: currentFees.transportMonthly
-          ? `₹${currentFees.transportMonthly} / month`
-          : formatINR(currentFees.transportAnnual) + ' / year',
-        frequency: currentFees.transportMonthly ? 'monthly' : 'annual',
-        gradesApplicable: 'Optional for all grades',
-        mandatory: false,
-        refundable: false,
-        isOfficial: true,
-        notes: 'GPS-enabled school bus transportation covering major sectors in Greater Noida West.'
-      });
-    }
-
-    // Grade-wise tier
-    const gradeTiers = [
-      {
-        gradeGroup: school.gradeRange?.raw || 'Pre-Nursery to Grade XII',
-        grades: [school.gradeRange?.from || 'Nursery', school.gradeRange?.to || 'Grade XII'],
-        tuitionFee: currentFees.tuitionQuarterly
-          ? `₹${currentFees.tuitionQuarterly} / quarter`
-          : currentFees.tuitionMonthly
-          ? `₹${currentFees.tuitionMonthly} / month`
-          : formatINR(baseCardFee) + ' / year',
-        tuitionFrequency: currentFees.billingFrequency === 'quarterly' ? 'quarterly' : currentFees.billingFrequency === 'monthly' ? 'monthly' : 'annual',
-        calculatedAnnualEquivalent: formatINR(baseCardFee) + ' / year',
-        totalAnnualPayable: formatINR(baseCardFee),
-        isCalculated: Boolean(currentFees.tuitionMonthly || currentFees.tuitionQuarterly),
-        curriculum: school.curriculum || (school.board && school.board[0]) || 'CBSE',
-        notes: 'Standard published fee tier.'
-      }
-    ];
-
-    return {
-      ...school,
-      fees: {
-        ...currentFees,
-        disclosed: true,
-        isVerified: true,
-        academicSession: session,
-        lastVerifiedDate: currentFees.lastVerifiedDate || 'September 2026',
-        verificationStatus: 'verified_from_source',
-        components: comps,
-        gradeWiseTiers: gradeTiers,
-        concessions: [
-          {
-            title: 'Sibling Concession',
-            category: 'sibling',
-            discountDescription: 'Institutional sibling fee concession',
-            eligibilityCriteria: 'Available for younger siblings studying concurrently.',
-            isOfficial: true
-          }
-        ],
-        circular: {
-          title: `${school.name} Official Fee Schedule`,
-          academicSession: session,
-          circularType: 'web_schedule',
-          sourceUrl: sourceUrl || undefined,
-          summary: `Official fee structure for ${school.name} covering composite tuition, one-time charges, and optional services.`,
-          keyTerms: [
-            'Payment due as per institutional quarterly/monthly cycles',
-            'Online payment gateway via school portal'
-          ],
-          officialNotes: [
-            'Fee is subject to periodic institutional revision under state educational guidelines.'
-          ]
-        },
-        disclaimer: 'Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.',
-        footnotes: [
-          'One-time registration and admission fees are non-refundable.',
-          'Transport fee is optional and calculated on the basis of distance from pickup point.'
-        ]
-      }
-    };
-  }
+  return school;
 });
 
-fs.writeFileSync(schoolsPath, JSON.stringify(updatedSchools, null, 2), 'utf8');
-console.log('Successfully enhanced fee data for', updatedSchools.length, 'schools in data/schools.json');
+fs.writeFileSync(schoolsPath, JSON.stringify(correctedSchools, null, 2), 'utf8');
+console.log('Successfully updated 5 schools with exact authoritative fee data in schools.json!');

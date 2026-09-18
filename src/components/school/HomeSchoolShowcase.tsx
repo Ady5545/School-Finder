@@ -22,8 +22,14 @@ export const HomeSchoolShowcase: React.FC<HomeSchoolShowcaseProps> = ({ schools 
       techzone: schools.filter(s => (s.location.sector || s.location.area || '').toLowerCase().includes('techzone')).length,
       kp5: schools.filter(s => (s.location.sector || s.location.area || '').toLowerCase().includes('knowledge park')).length,
       sec16b: schools.filter(s => (s.location.sector || s.location.area || '').toLowerCase().includes('16b')).length,
-      cbse: schools.filter(s => s.board.some(b => b.toUpperCase().includes('CBSE'))).length,
-      international: schools.filter(s => s.board.some(b => b.toUpperCase().includes('IB') || b.toUpperCase().includes('IGSC') || b.toUpperCase().includes('CAMBRIDGE'))).length,
+      cbse: schools.filter(s => {
+        const boards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+        return boards.some(b => b.toUpperCase().includes('CBSE'));
+      }).length,
+      international: schools.filter(s => {
+        const boards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+        return boards.some(b => b.toUpperCase().includes('IB') || b.toUpperCase().includes('IGSC') || b.toUpperCase().includes('CAMBRIDGE'));
+      }).length,
     };
   }, [schools]);
 
@@ -36,9 +42,15 @@ export const HomeSchoolShowcase: React.FC<HomeSchoolShowcaseProps> = ({ schools 
       case 'sec16b':
         return schools.filter(s => (s.location.sector || s.location.area || '').toLowerCase().includes('16b'));
       case 'international':
-        return schools.filter(s => s.board.some(b => b.toUpperCase().includes('IB') || b.toUpperCase().includes('IGSC') || b.toUpperCase().includes('CAMBRIDGE')));
+        return schools.filter(s => {
+          const boards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+          return boards.some(b => b.toUpperCase().includes('IB') || b.toUpperCase().includes('IGSC') || b.toUpperCase().includes('CAMBRIDGE'));
+        });
       case 'cbse':
-        return schools.filter(s => s.board.some(b => b.toUpperCase().includes('CBSE'))).slice(0, 6);
+        return schools.filter(s => {
+          const boards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+          return boards.some(b => b.toUpperCase().includes('CBSE'));
+        }).slice(0, 6);
       case 'all':
       default:
         return schools.slice(0, 6);

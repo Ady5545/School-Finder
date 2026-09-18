@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       slug: s.slug,
       name: s.name,
       sector: s.location?.sector || s.location?.area,
-      board: s.board.join(', '),
+      board: Array.isArray(s.board) ? s.board.join(', ') : s.board || 'CBSE',
       completeness: s.completeness,
       isArchived: Boolean(s.isArchived),
       status: s.status,

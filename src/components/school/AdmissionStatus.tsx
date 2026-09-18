@@ -10,12 +10,14 @@ export interface AdmissionStatusProps {
   showDate?: boolean;
 }
 
-export function formatAdmissionStatus(rawStatus?: string): string {
+export function formatAdmissionStatus(rawStatus?: string, session?: string): string {
   if (!rawStatus) return 'Enquire for Dates';
   const lower = rawStatus.toLowerCase().trim();
-  if (lower === 'open' || lower === 'admissions open') return 'Admissions Open (2027–28)';
-  if (lower === 'pre_registration' || lower === 'pre-registration') return 'Pre-Registration Open (2027–28)';
-  if (lower === 'not_open' || lower === 'not open') return 'Admissions Not Yet Open (2027–28)';
+  const sessionLabel = session ? ` (${session})` : '';
+
+  if (lower === 'open' || lower === 'admissions open') return `Admissions Open${sessionLabel || ' (2027–28)'}`;
+  if (lower === 'pre_registration' || lower === 'pre-registration') return `Pre-Registration Open${sessionLabel || ' (2027–28)'}`;
+  if (lower === 'not_open' || lower === 'not open') return `Admissions Not Yet Open${sessionLabel}`;
   if (lower === 'expected') return 'Admissions Expected Soon';
   if (lower === 'not_publicly_confirmed' || lower === 'pending') return 'Schedule Pending Confirmation';
   if (lower === 'closed') return 'Admissions Closed';
@@ -31,12 +33,13 @@ export const AdmissionStatus: React.FC<AdmissionStatusProps> = ({
 }) => {
   const rawStatus = admissions?.status || '';
   const statusLower = rawStatus.toLowerCase();
+  const canonicalSession = admissions?.session || admissions?.academicYear;
   
   const isOpen = statusLower.includes('open') || statusLower.includes('ongoing') || statusLower.includes('active');
   const isClosingSoon = statusLower.includes('closing') || statusLower.includes('last chance');
   const isPending = statusLower.includes('pending') || statusLower.includes('inquire') || statusLower.includes('contact') || statusLower.includes('release');
 
-  const displayStatus = formatAdmissionStatus(rawStatus);
+  const displayStatus = formatAdmissionStatus(rawStatus, canonicalSession);
 
   const badgeVariant = isOpen ? 'success' : isClosingSoon ? 'warning' : 'default';
 

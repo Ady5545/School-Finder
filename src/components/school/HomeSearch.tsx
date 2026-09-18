@@ -84,9 +84,10 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
         const nameMatch = s.name.toLowerCase().includes(cleanQuery);
         const shortMatch = s.shortName?.toLowerCase().includes(cleanQuery);
         const altMatch = s.alternateNames?.some(alt => alt.toLowerCase().includes(cleanQuery));
-        const sectorMatch = s.location.sector.toLowerCase().includes(cleanQuery);
-        const areaMatch = s.location.area.toLowerCase().includes(cleanQuery);
-        const boardMatch = s.board.some(b => b.toLowerCase().includes(cleanQuery));
+        const sectorMatch = (s.location?.sector || '').toLowerCase().includes(cleanQuery);
+        const areaMatch = (s.location?.area || '').toLowerCase().includes(cleanQuery);
+        const boards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+        const boardMatch = boards.some(b => b.toLowerCase().includes(cleanQuery));
         return nameMatch || shortMatch || altMatch || sectorMatch || areaMatch || boardMatch;
       })
       .slice(0, 5);
@@ -313,7 +314,7 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
                           </span>
                           <span className="text-slate-300">•</span>
                           <span className="font-semibold text-[var(--color-content)] bg-[var(--color-surface-subtle)] px-1.5 py-0.2 rounded text-[11px]">
-                            {school.board.join(', ')}
+                            {Array.isArray(school.board) ? school.board.join(', ') : school.board || 'CBSE'}
                           </span>
                           <span className="text-slate-300">•</span>
                           <span className="text-emerald-700 font-semibold text-[11px]">

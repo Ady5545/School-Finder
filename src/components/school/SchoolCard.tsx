@@ -113,7 +113,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
         {/* Board & Rating Pill on image */}
         <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-10 pointer-events-none">
           <div className="flex flex-wrap gap-1.5">
-            {school.board.slice(0, 2).map(b => (
+            {(Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[]).slice(0, 2).map(b => (
               <span
                 key={b}
                 className="text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-[#0a1e33] text-white border border-white/20 shadow-warm-2xs tracking-wide"

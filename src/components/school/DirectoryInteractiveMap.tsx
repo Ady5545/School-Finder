@@ -620,7 +620,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
                       {activePinSchool.school.name}
                     </h4>
                     <p className="text-[11px] text-[var(--color-content-muted)] line-clamp-1 mt-0.5">
-                      {activePinSchool.school.board.join(', ')} • {activePinSchool.school.fees.rangeText || 'Verified Fees Available'}
+                      {Array.isArray(activePinSchool.school.board) ? activePinSchool.school.board.join(', ') : activePinSchool.school.board || 'CBSE'} • {activePinSchool.school.fees.rangeText || 'Verified Fees Available'}
                     </p>
                   </div>
                   <button

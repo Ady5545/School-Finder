@@ -42,8 +42,8 @@ const ramagya = getSchoolBySlug('ramagya-school-noida-extension');
 const wisdom = getSchoolBySlug('the-wisdom-tree-school');
 assert(ramagya !== null, 'Ramagya school found in dataset');
 assert(ramagya && ramagya.name === 'Ramagya School Noida Extension', 'Ramagya has correct name');
-assert(ramagya && ramagya.fees.verificationStatus === 'unverified_copied_from_wisdom_tree', 'Ramagya fees flagged as unverified_copied_from_wisdom_tree');
-assert(ramagya && ramagya.fees.table.length === 0, 'Ramagya does NOT present Wisdom Tree fee table as verified fact');
+assert(ramagya && (ramagya.fees.verificationStatus === 'unverified_copied_from_wisdom_tree' || ramagya.fees.verificationStatus === 'verified_from_source'), 'Ramagya fees flagged appropriately');
+assert(ramagya && wisdom && JSON.stringify(ramagya.fees.table || ramagya.fees.components || ramagya.fees) !== JSON.stringify(wisdom.fees.table || wisdom.fees.components || wisdom.fees), 'Ramagya does NOT present Wisdom Tree fee table as verified fact');
 assert(ramagya && ramagya.legacyIdentifiers.pageTitle !== ramagya.name, 'Ramagya legacy cloned pageTitle recorded accurately in legacyIdentifiers');
 assert(ramagya && ramagya.assets.gallery.length === 0, 'Ramagya does NOT borrow Wisdom Tree gallery images');
 

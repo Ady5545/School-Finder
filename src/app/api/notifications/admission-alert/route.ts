@@ -17,20 +17,32 @@ export async function POST(req: NextRequest) {
 
     const cleanEmail = email.trim().toLowerCase();
 
-    // Verify session if user is logged in
+    // Verify mandatory session for sending alerts (prevents open relay)
     const cookieToken = req.cookies.get('ap_session')?.value;
     const authHeader = req.headers.get('Authorization');
     const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
     const token = cookieToken || headerToken;
 
-    if (token) {
-      const session = verifySessionToken(token);
-      if (session && session.email && session.email.toLowerCase() !== cleanEmail) {
-        return NextResponse.json(
-          { success: false, error: 'Unauthorized: Cannot send notifications to an email address other than your account email.' },
-          { status: 403 }
-        );
-      }
+    if (!token) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required. Please sign in to send deadline alerts.' },
+        { status: 401 }
+      );
+    }
+
+    const session = verifySessionToken(token);
+    if (!session || !session.sub) {
+      return NextResponse.json(
+        { success: false, error: 'Session expired or invalid. Please sign in again.' },
+        { status: 401 }
+      );
+    }
+
+    if (session.email && session.email.toLowerCase() !== cleanEmail && session.role !== 'admin') {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized: Cannot send notifications to an email address other than your verified account email.' },
+        { status: 403 }
+      );
     }
 
     // Rate Limiting Protection (Max 3 alerts per 10 minutes per email)

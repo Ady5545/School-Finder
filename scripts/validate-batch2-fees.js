@@ -179,6 +179,22 @@ runTest('The Infinity School has historical estimated flag and clear disclaimer'
   assert(infinity.fees.rangeText.includes('Historical Reference'), 'Range text reflects historical reference');
 });
 
+// 7.5. GD Goenka International School Greater Noida West
+const gdGoenka = schools.find(s => s.slug === 'gd-goenka-international-school');
+runTest('GD Goenka International School GNW has verified fee structure and exact grade-wise tiers', () => {
+  assert(gdGoenka !== undefined, 'GD Goenka found');
+  assert.strictEqual(gdGoenka.fees.verificationStatus, 'verified_from_source');
+  assert.strictEqual(gdGoenka.fees.cardFee, 8855);
+  assert.strictEqual(gdGoenka.fees.registrationFee, 1000);
+  assert.strictEqual(gdGoenka.fees.admissionFee, 25000);
+  assert.strictEqual(gdGoenka.fees.cautionDeposit, 20000);
+  assert.strictEqual(gdGoenka.fees.gradeWiseTiers.length, 5);
+  const nurTier = gdGoenka.fees.gradeWiseTiers.find(t => t.gradeGroup === 'Nursery–KG');
+  assert(nurTier !== undefined && nurTier.tuitionFee === '₹8,855 / month', 'Nursery-KG tier fee verified');
+  const srTier = gdGoenka.fees.gradeWiseTiers.find(t => t.gradeGroup === 'Classes XI–XII');
+  assert(srTier !== undefined && srTier.tuitionFee === '₹12,925 / month', 'Senior XI-XII tier fee verified');
+});
+
 // 8. Undisclosed Schools
 const undisclosed = schools.filter(s => s.fees.disclosed === false);
 runTest('Undisclosed schools have null cardFee and honest disclosure copy without fake zeroes', () => {

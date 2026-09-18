@@ -3,7 +3,7 @@ import { requireAdminAuth } from '@/lib/adminAuth';
 import { updateAdminSchool, getAdminSchoolBySlug } from '@/lib/schoolAdminService';
 
 export async function POST(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

@@ -6,6 +6,7 @@ import type {
   ActivityEvent,
   AdminAuditLog,
   SchoolPromotionCampaign,
+  SchoolSubmission,
 } from './authStore';
 
 export interface SchoolViewDoc {
@@ -70,6 +71,12 @@ async function ensureMongoIndexes(client: MongoClient): Promise<void> {
       db.collection('activity_events').createIndex({ userId: 1 }),
       db.collection('audit_logs').createIndex({ timestamp: -1 }),
       db.collection('school_views').createIndex({ slug: 1 }, { unique: true }),
+      db.collection('otps').createIndex({ email: 1 }, { unique: true }),
+      db.collection('otps').createIndex({ expiresAt: 1 }),
+      db.collection('rate_limits').createIndex({ key: 1 }, { unique: true }),
+      db.collection('rate_limits').createIndex({ resetAt: 1 }),
+      db.collection('school_submissions').createIndex({ id: 1 }, { unique: true }),
+      db.collection('school_submissions').createIndex({ createdAt: -1 }),
     ]);
     indexesEnsured = true;
   } catch (idxErr) {
@@ -175,4 +182,19 @@ export async function getSchoolViewsCollection(required = false): Promise<Collec
 export async function getSchoolSavesCollection(required = false): Promise<Collection<{ slug: string; count: number; lastSavedAt: string }> | null> {
   const db = await getMongoDb(required);
   return db ? db.collection<{ slug: string; count: number; lastSavedAt: string }>('school_saves') : null;
+}
+
+export async function getOtpsCollection(required = false): Promise<Collection<OtpDoc> | null> {
+  const db = await getMongoDb(required);
+  return db ? db.collection<OtpDoc>('otps') : null;
+}
+
+export async function getRateLimitsCollection(required = false): Promise<Collection<RateLimitDoc> | null> {
+  const db = await getMongoDb(required);
+  return db ? db.collection<RateLimitDoc>('rate_limits') : null;
+}
+
+export async function getSubmissionsCollection(required = false): Promise<Collection<SchoolSubmission> | null> {
+  const db = await getMongoDb(required);
+  return db ? db.collection<SchoolSubmission>('school_submissions') : null;
 }

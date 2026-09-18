@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import type { NextRequest } from 'next/server';
 import {
   getUsersCollection,
   getRatingsCollection,
@@ -10,6 +11,9 @@ import {
   getPromotionsCollection,
   getSchoolViewsCollection,
   getSchoolSavesCollection,
+  getOtpsCollection,
+  getRateLimitsCollection,
+  getSubmissionsCollection,
   isMongoConfigured,
 } from './mongodb';
 
@@ -776,6 +780,19 @@ export function verifySessionToken(token: string): {
 }
 
 // Rate Limiting (Max 5 requests per 10 minutes)
+export function getClientIp(req: NextRequest): string {
+  const realIp = req.headers.get('x-real-ip');
+  if (realIp && realIp.trim()) return realIp.trim();
+  const reqWithIp = req as { ip?: string };
+  if (reqWithIp.ip && typeof reqWithIp.ip === 'string') return reqWithIp.ip;
+  const xForwardedFor = req.headers.get('x-forwarded-for');
+  if (xForwardedFor) {
+    const parts = xForwardedFor.split(',').map(p => p.trim()).filter(Boolean);
+    if (parts.length > 0) return parts[parts.length - 1];
+  }
+  return '127.0.0.1';
+}
+
 export function checkRateLimit(key: string, maxRequests: number = 5, windowMs: number = 10 * 60 * 1000): boolean {
   const now = Date.now();
   const current = rateLimits.get(key);
@@ -791,6 +808,37 @@ export function checkRateLimit(key: string, maxRequests: number = 5, windowMs: n
 
   current.count += 1;
   return true;
+}
+
+export async function checkRateLimitAsync(key: string, maxRequests: number = 5, windowMs: number = 10 * 60 * 1000): Promise<boolean> {
+  const allowedInMemory = checkRateLimit(key, maxRequests, windowMs);
+  if (!allowedInMemory) return false;
+
+  if (isMongoConfigured()) {
+    try {
+      const rlCol = await getRateLimitsCollection();
+      if (rlCol) {
+        const now = Date.now();
+        const existing = await rlCol.findOne({ key });
+        if (!existing || now > existing.resetAt) {
+          await rlCol.updateOne(
+            { key },
+            { $set: { key, count: 1, resetAt: now + windowMs } },
+            { upsert: true }
+          );
+          return true;
+        }
+        if (existing.count >= maxRequests) {
+          return false;
+        }
+        await rlCol.updateOne({ key }, { $inc: { count: 1 } });
+        return true;
+      }
+    } catch (err) {
+      console.warn('[MONGO_RATE_LIMIT_WARN]', err);
+    }
+  }
+  return allowedInMemory;
 }
 
 // Stateless HMAC OTP token generation for email verification
@@ -954,6 +1002,92 @@ export function verifyOtpCode(
   }
 
   return { success: false, error: 'No active OTP found. Please request a new verification code.' };
+}
+
+export async function generateAndStoreOtpAsync(
+  email: string,
+  purpose: 'register' | 'login'
+): Promise<{ code: string; expiresInSeconds: number; otpSessionToken: string }> {
+  const syncRes = generateAndStoreOtp(email, purpose);
+  if (isMongoConfigured()) {
+    try {
+      const otpsCol = await getOtpsCollection();
+      if (otpsCol) {
+        const cleanEmail = email.trim().toLowerCase();
+        const nowIso = new Date().toISOString();
+        await otpsCol.updateOne(
+          { email: cleanEmail },
+          {
+            $set: {
+              email: cleanEmail,
+              code: syncRes.code,
+              purpose,
+              expiresAt: Date.now() + syncRes.expiresInSeconds * 1000,
+              attempts: 0,
+              verified: false,
+              createdAt: nowIso,
+              updatedAt: nowIso,
+            },
+          },
+          { upsert: true }
+        );
+      }
+    } catch (err) {
+      console.warn('[MONGO_STORE_OTP_WARN]', err);
+    }
+  }
+  return syncRes;
+}
+
+export async function verifyOtpCodeAsync(
+  email: string,
+  inputCode: string,
+  statelessSessionToken?: string
+): Promise<{ success: boolean; error?: string; verificationToken?: string }> {
+  const cleanEmail = email.trim().toLowerCase();
+  const cleanInput = inputCode.trim();
+
+  if (isMongoConfigured()) {
+    try {
+      const otpsCol = await getOtpsCollection();
+      if (otpsCol) {
+        const doc = await otpsCol.findOne({ email: cleanEmail });
+        if (doc) {
+          if (Date.now() > doc.expiresAt) {
+            await otpsCol.deleteOne({ email: cleanEmail });
+            otps.delete(cleanEmail);
+            return { success: false, error: 'Verification code has expired. Please request a new code.' };
+          }
+          if (doc.attempts >= 5) {
+            await otpsCol.deleteOne({ email: cleanEmail });
+            otps.delete(cleanEmail);
+            return { success: false, error: 'Too many incorrect attempts. Please request a new code.' };
+          }
+
+          const newAttempts = doc.attempts + 1;
+          await otpsCol.updateOne({ email: cleanEmail }, { $inc: { attempts: 1 } });
+
+          if (doc.code !== cleanInput) {
+            if (newAttempts >= 5) {
+              await otpsCol.deleteOne({ email: cleanEmail });
+              otps.delete(cleanEmail);
+              return { success: false, error: 'Too many incorrect attempts. Please request a new code.' };
+            }
+            return { success: false, error: `Invalid verification code. ${5 - newAttempts} attempts remaining.` };
+          }
+
+          await otpsCol.deleteOne({ email: cleanEmail });
+          otps.delete(cleanEmail);
+          const verificationToken = createSignedVerificationToken(cleanEmail);
+          return { success: true, verificationToken };
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_VERIFY_OTP_WARN]', err);
+    }
+  }
+
+  return verifyOtpCode(cleanEmail, cleanInput, statelessSessionToken);
 }
 
 export function checkVerificationToken(token: string): string | null {
@@ -4201,6 +4335,26 @@ export function getAllSubmissions(): SchoolSubmission[] {
   return [...submissions];
 }
 
+export async function getAllSubmissionsAsync(): Promise<SchoolSubmission[]> {
+  if (isMongoConfigured()) {
+    try {
+      const subCol = await getSubmissionsCollection();
+      if (subCol) {
+        const items = await subCol.find({}).sort({ createdAt: -1 }).toArray();
+        if (items && items.length > 0) {
+          return items.map((doc) => {
+            const { _id, ...rest } = doc;
+            return rest as SchoolSubmission;
+          });
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_GET_SUBMISSIONS_WARN]', err);
+    }
+  }
+  return getAllSubmissions();
+}
+
 export function createSchoolSubmission(data: Omit<SchoolSubmission, 'id' | 'createdAt' | 'updatedAt' | 'status'>): SchoolSubmission {
   const newSub: SchoolSubmission = {
     ...data,
@@ -4210,6 +4364,21 @@ export function createSchoolSubmission(data: Omit<SchoolSubmission, 'id' | 'crea
     updatedAt: new Date().toISOString(),
   };
   submissions.unshift(newSub);
+  return newSub;
+}
+
+export async function createSchoolSubmissionAsync(data: Omit<SchoolSubmission, 'id' | 'createdAt' | 'updatedAt' | 'status'>): Promise<SchoolSubmission> {
+  const newSub = createSchoolSubmission(data);
+  if (isMongoConfigured()) {
+    try {
+      const subCol = await getSubmissionsCollection();
+      if (subCol) {
+        await subCol.insertOne({ ...newSub });
+      }
+    } catch (err) {
+      console.warn('[MONGO_CREATE_SUBMISSION_WARN]', err);
+    }
+  }
   return newSub;
 }
 
@@ -4226,6 +4395,42 @@ export function updateSubmissionStatus(
   if (assignedAdmin !== undefined) item.assignedAdmin = assignedAdmin;
   item.updatedAt = new Date().toISOString();
   return item;
+}
+
+export async function updateSubmissionStatusAsync(
+  id: string,
+  status: SchoolSubmission['status'],
+  adminNotes?: string,
+  assignedAdmin?: string
+): Promise<SchoolSubmission | null> {
+  const updatedInMemory = updateSubmissionStatus(id, status, adminNotes, assignedAdmin);
+  if (isMongoConfigured()) {
+    try {
+      const subCol = await getSubmissionsCollection();
+      if (subCol) {
+        const nowIso = new Date().toISOString();
+        const updateFields: Partial<SchoolSubmission> = {
+          status,
+          updatedAt: nowIso,
+        };
+        if (adminNotes !== undefined) updateFields.adminNotes = adminNotes;
+        if (assignedAdmin !== undefined) updateFields.assignedAdmin = assignedAdmin;
+
+        const res = await subCol.findOneAndUpdate(
+          { id },
+          { $set: updateFields },
+          { returnDocument: 'after' }
+        );
+        if (res) {
+          const { _id, ...rest } = res;
+          return rest as SchoolSubmission;
+        }
+      }
+    } catch (err) {
+      console.warn('[MONGO_UPDATE_SUBMISSION_WARN]', err);
+    }
+  }
+  return updatedInMemory;
 }
 
 // ----------------------------------------------------------------------------

@@ -4,7 +4,7 @@ import {
   verifyPassword,
   createSessionToken,
   sanitizeUser,
-  verifyOtpCode,
+  verifyOtpCodeAsync,
   recordActivityEvent,
   isUserSuspendedOrBanned,
   updateUserProfileAsync,
@@ -56,7 +56,8 @@ export async function POST(req: NextRequest) {
         );
       }
 
-      const verifyResult = verifyOtpCode(emailToUse, otp);
+      const statelessSessionToken = req.cookies.get('ap_otp_session')?.value;
+      const verifyResult = await verifyOtpCodeAsync(emailToUse, otp, statelessSessionToken);
       if (!verifyResult.success) {
         return NextResponse.json(
           { success: false, message: verifyResult.error || 'Invalid verification code.' },

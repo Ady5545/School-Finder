@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyOtpCode } from '../../../../lib/authStore';
+import { verifyOtpCodeAsync } from '../../../../lib/authStore';
 
 export async function POST(req: NextRequest) {
   try {
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const cleanOtp = String(otp).trim();
 
     const cookieOtpSession = req.cookies.get('ap_otp_session')?.value;
-    const result = verifyOtpCode(cleanEmail, cleanOtp, cookieOtpSession);
+    const result = await verifyOtpCodeAsync(cleanEmail, cleanOtp, cookieOtpSession);
 
     if (!result.success) {
       return NextResponse.json(

@@ -10,7 +10,7 @@ import {
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = requireAdminAuth(req);
+    const auth = await requireAdminAuth(req);
     if (!auth.authorized || !auth.user) {
       return auth.errorResponse || NextResponse.json({ success: false, message: 'Admin authorization required.' }, { status: 401 });
     }

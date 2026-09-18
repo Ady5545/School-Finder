@@ -9,7 +9,7 @@ import {
 import { getSchoolBySlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -65,7 +65,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -90,7 +90,7 @@ export async function DELETE(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const auth = requireAdminAuth(req, 'reviews:moderate');
+  const auth = await requireAdminAuth(req, 'reviews:moderate');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

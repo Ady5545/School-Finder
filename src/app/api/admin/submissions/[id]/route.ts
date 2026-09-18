@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { updateSubmissionStatus, recordAdminAudit } from '@/lib/authStore';
+import { updateSubmissionStatusAsync, recordAdminAudit } from '@/lib/authStore';
 
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -23,7 +23,7 @@ export async function PATCH(
     const body = await req.json();
     const { status, adminNotes, assignedAdmin } = body;
 
-    const updated = updateSubmissionStatus(id, status, adminNotes, assignedAdmin || auth.user.email);
+    const updated = await updateSubmissionStatusAsync(id, status, adminNotes, assignedAdmin || auth.user.email);
     if (!updated) {
       return NextResponse.json({ success: false, message: 'Submission not found' }, { status: 404 });
     }

@@ -74,20 +74,35 @@ export async function POST(req: NextRequest) {
     });
 
     if (!emailResult.success) {
-      console.error('[OTP_DIAGNOSTICS] Email sending failed:', {
+      console.error('[OTP_DIAGNOSTICS] Email dispatch failed:', {
         category: emailResult.category,
         error: emailResult.error,
       });
+
+      let status = 500;
+      let userMsg = emailResult.error || "We couldn't send the verification email right now. Please try again in a moment.";
+
+      if (emailResult.category === 'EMAIL_CONFIG_MISSING') {
+        status = 530; // Custom / Service unconfigured
+        userMsg = "Email verification dispatch is temporarily unavailable due to missing server SMTP credentials (EMAIL_USER / EMAIL_PASS). Please contact support.";
+      } else if (emailResult.category === 'SMTP_AUTH_ERROR') {
+        status = 502; // Bad Gateway
+        userMsg = "Email verification dispatch failed due to an SMTP authentication error on the server. Please verify EMAIL_PASS is a valid 16-character App Password.";
+      } else if (emailResult.category === 'SMTP_CONNECTION_ERROR') {
+        status = 504; // Gateway Timeout / connection issue
+        userMsg = "Email server connection timed out. Please try requesting a new verification code in a moment.";
+      } else if (emailResult.category === 'INVALID_RECIPIENT') {
+        status = 400;
+        userMsg = "The email address provided was rejected as invalid by the mail server. Please check for typos.";
+      }
       
       return NextResponse.json(
         {
           success: false,
           category: emailResult.category,
-          message:
-            emailResult.error ||
-            "We couldn't send the verification email right now. Please try again in a moment.",
+          message: userMsg,
         },
-        { status: emailResult.category === 'INVALID_RECIPIENT' ? 400 : 500 }
+        { status }
       );
     }
 

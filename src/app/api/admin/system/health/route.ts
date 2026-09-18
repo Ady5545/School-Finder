@@ -5,7 +5,7 @@ import { getAllParentUsersAsync, getAllRatingsAsync, getAdminAuditLogs } from '@
 import { getEmailCredentials } from '@/lib/emailService';
 
 export async function GET(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

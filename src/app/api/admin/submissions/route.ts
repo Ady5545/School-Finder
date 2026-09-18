@@ -1,24 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { getAllSubmissions, createSchoolSubmission } from '@/lib/authStore';
+import { getAllSubmissionsAsync, createSchoolSubmissionAsync } from '@/lib/authStore';
 
 export async function GET(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const submissions = getAllSubmissions();
+  const submissions = await getAllSubmissionsAsync();
   return NextResponse.json({
     success: true,
     submissions,
     total: submissions.length,
-    newCount: submissions.filter(s => s.status === 'new').length,
+    newCount: submissions.filter((s) => s.status === 'new').length,
   });
 }
 
 export async function POST(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const submission = createSchoolSubmission(body);
+    const submission = await createSchoolSubmissionAsync(body);
     return NextResponse.json({
       success: true,
       submission,

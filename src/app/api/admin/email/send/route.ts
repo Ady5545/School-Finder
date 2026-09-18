@@ -5,7 +5,7 @@ import { getAllParentUsers, recordAdminAudit, recordEmailCampaign } from '@/lib/
 import nodemailer from 'nodemailer';
 
 export async function POST(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

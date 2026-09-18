@@ -3,7 +3,7 @@ import { requireAdminAuth } from '../../../../../lib/adminAuth';
 import { sanitizeUser } from '../../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
-  const auth = requireAdminAuth(req);
+  const auth = await requireAdminAuth(req);
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ authorized: false }, { status: 401 });
   }

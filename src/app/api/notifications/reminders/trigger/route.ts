@@ -5,7 +5,7 @@ import { sendAdmissionDeadlineAlertEmail } from '@/lib/emailService';
 
 export async function POST(req: NextRequest) {
   try {
-    const adminCheck = requireAdminAuth(req);
+    const adminCheck = await requireAdminAuth(req);
     if (!adminCheck.authorized) {
       return NextResponse.json({ success: false, message: 'Admin authorization required.' }, { status: 403 });
     }

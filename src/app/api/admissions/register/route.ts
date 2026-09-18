@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkRateLimit, verifySessionToken, createSchoolSubmission, recordActivityEvent } from '@/lib/authStore';
+import { checkRateLimitAsync, getClientIp, verifySessionToken, createSchoolSubmissionAsync, recordActivityEvent } from '@/lib/authStore';
 
 export async function POST(req: NextRequest) {
   try {
@@ -51,9 +51,9 @@ export async function POST(req: NextRequest) {
     const cleanType = isPreReg ? 'admission_preregistration' : 'admission_registration';
 
     // Rate Limiting Protection (Max 5 submissions per 10 minutes per IP/Email)
-    const ip = req.headers.get('x-forwarded-for') || 'local';
+    const ip = getClientIp(req);
     const rateKey = `adm_reg_${cleanEmail}_${ip}`;
-    if (!checkRateLimit(rateKey, 5, 10 * 60 * 1000)) {
+    if (!(await checkRateLimitAsync(rateKey, 5, 10 * 60 * 1000))) {
       return NextResponse.json(
         { success: false, message: 'Too many submissions received. Please wait a few minutes before trying again.' },
         { status: 429 }
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
 
     const description = `Parent: ${cleanParentName} | Email: ${cleanEmail} | Phone: ${cleanPhone} | Target Grade: ${childGrade} | Society: ${residentialSociety || 'Not specified'} | Session: ${academicSession}`;
 
-    const submission = createSchoolSubmission({
+    const submission = await createSchoolSubmissionAsync({
       type: cleanType,
       schoolName: cleanSchoolName,
       schoolSlug: cleanSchoolSlug,

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifySessionToken, getUserById, ParentUser } from './authStore';
+import { verifySessionToken, getUserById, getUserByIdAsync, getUserByEmailAsync, updateUserProfileAsync, ParentUser } from './authStore';
 
 export type AdminRole =
   | 'super_admin'
@@ -122,7 +122,7 @@ export interface AdminAuthResult {
  * Can optionally enforce a specific AdminPermission.
  * Never exposes secrets.
  */
-export function requireAdminAuth(req: NextRequest, requiredPermission?: AdminPermission): AdminAuthResult {
+export async function requireAdminAuth(req: NextRequest, requiredPermission?: AdminPermission): Promise<AdminAuthResult> {
   try {
     const cookieToken = req.cookies.get('ap_session')?.value;
     const authHeader = req.headers.get('Authorization') || req.headers.get('authorization');
@@ -158,7 +158,14 @@ export function requireAdminAuth(req: NextRequest, requiredPermission?: AdminPer
       };
     }
 
-    const user = getUserById(session.sub);
+    let user = getUserById(session.sub);
+    if (!user) {
+      user = await getUserByIdAsync(session.sub);
+    }
+    if (!user && session.email) {
+      user = await getUserByEmailAsync(session.email);
+    }
+
     if (!user) {
       return {
         authorized: false,
@@ -197,6 +204,11 @@ export function requireAdminAuth(req: NextRequest, requiredPermission?: AdminPer
     const userEmailLower = user.email.toLowerCase();
     const isAdminEmail = adminEmails.includes(userEmailLower);
     const isAdminRole = user.role === 'admin';
+
+    if (isAdminEmail && user.role !== 'admin') {
+      user.role = 'admin';
+      await updateUserProfileAsync(user.id, { role: 'admin' });
+    }
 
     if (!isAdminEmail && !isAdminRole) {
       return {

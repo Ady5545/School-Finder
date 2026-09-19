@@ -12,11 +12,17 @@ export interface FeeDisplayProps {
 }
 
 export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact', className }) => {
+  const annualDisplay = fees.annualDisplay || fees.tuitionAnnual || (
+    fees.billingFrequency === 'annual' && fees.cardFee
+      ? formatCurrency(fees.cardFee)
+      : ''
+  );
+
+  // User-supplied/calculated fees are still disclosed data when an annual figure exists.
   const isComparable =
-    fees.cardFee !== null &&
-    fees.cardFee !== undefined &&
+    fees.disclosed !== false &&
     fees.comparableAnnualAvailable !== false &&
-    fees.verificationStatus === 'verified_from_source';
+    Boolean(annualDisplay);
 
   const isHistorical =
     fees.verificationStatus === 'estimated_historical' ||
@@ -106,13 +112,12 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
           {isComparable ? (
             <>
               <span className="text-base font-bold text-[var(--color-primary)] tracking-tight">
-                {fees.annualDisplay || formatCurrency(fees.cardFee!)}
+                {annualDisplay}
               </span>
-              <span className="text-xs text-[var(--color-content-muted)] font-medium">/ year</span>
             </>
           ) : isHistorical ? (
             <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              {fees.annualDisplay || fees.rangeText || 'Historical Reference'}
+              {annualDisplay || fees.rangeText || 'Historical Reference'}
             </span>
           ) : (
             <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
@@ -184,7 +189,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
             )}
           >
             {isComparable
-              ? formatCurrency(fees.cardFee!)
+              ? annualDisplay
               : isHistorical
               ? fees.rangeText || 'Historical Reference'
               : 'Not publicly disclosed'}

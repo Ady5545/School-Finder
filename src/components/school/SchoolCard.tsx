@@ -43,9 +43,6 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
   const isSaved = propIsSaved !== undefined ? propIsSaved : store.isInShortlist(school.slug);
   const isCompared = propIsCompared !== undefined ? propIsCompared : store.isInCompare(school.slug);
-  const statusStr = (school.verification?.status as string) || '';
-  const isAuditVerified = statusStr === 'verified_official' || statusStr === 'VERIFIED' || (school.verification?.isVerified === true && statusStr !== 'pending_audit');
-
   const handleSave = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -149,30 +146,14 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             {school.tagline || school.summary}
           </p>
 
-          {/* Key Quick Badges */}
+          {/* Key Quick Facts — public-facing only */}
           <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[var(--color-border-subtle)]">
-            {isAuditVerified && (
-              <SchoolBadge type="verified" value="Verified" />
-            )}
-            <SchoolBadge type="verification" value={school.fees.verificationStatus || 'not_publicly_verified'} />
-            {school.geographicClassification === 'geographic_outlier' && (
-              <span className="text-[11px] text-purple-800 bg-purple-50 px-2 py-0.5 rounded-md font-semibold border border-purple-200">
-                Regional Outlier
-              </span>
-            )}
-            {school.geographicClassification === 'nearby_surrounding' && (
-              <span className="text-[11px] text-blue-800 bg-blue-50 px-2 py-0.5 rounded-md font-semibold border border-blue-200">
-                Surrounding Feeder
-              </span>
-            )}
-            {school.isDuplicate && (
-              <span className="text-[11px] text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md font-semibold border border-slate-200">
-                Duplicate Listing
-              </span>
-            )}
-            <span className="text-[11px] text-[var(--color-content-muted)] bg-[var(--color-surface-subtle)] px-2 py-0.5 rounded-md font-semibold border border-[var(--color-border)]">
-              Ratio: {school.studentTeacherRatio}
-            </span>
+            {school.studentTeacherRatio &&
+              !/not publicly verified|not yet available|conflicting|requires verification/i.test(school.studentTeacherRatio) && (
+                <span className="text-[11px] text-[var(--color-content-muted)] bg-[var(--color-surface-subtle)] px-2 py-0.5 rounded-md font-semibold border border-[var(--color-border)]">
+                  Ratio: {school.studentTeacherRatio}
+                </span>
+              )}
             {distanceKm !== undefined && (
               <span className="text-[11px] text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md font-bold border border-amber-200 flex items-center gap-1 shadow-2xs">
                 <MapPin className="w-3 h-3 text-amber-600" />
@@ -184,7 +165,9 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
         {/* Card Footer: Fees & Detail Link */}
         <div className="mt-4 -mx-4.5 -mb-4.5 sm:-mx-5 sm:-mb-5 p-3.5 sm:p-4.5 bg-[#fbf9f5] rounded-b-2xl border-t border-[var(--color-border)] flex items-center justify-between gap-2">
-          <FeeDisplay fees={school.fees} variant="compact" />
+          {school.fees.cardFee !== null && school.fees.cardFee !== undefined && (
+            <FeeDisplay fees={school.fees} variant="compact" />
+          )}
 
           <div className="flex items-center gap-1.5 shrink-0">
             <button

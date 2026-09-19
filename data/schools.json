@@ -1498,16 +1498,16 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 164400,
+      "cardFee": 158400,
       "currency": "INR",
-      "rangeText": "₹41,100 / quarter",
+      "rangeText": "₹12,700/month (Nursery–I); ₹13,200/month (II–VIII); ₹13,500/month (IX)",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": null,
       "tuitionQuarterly": "₹41,100 (Classes IX–XII)",
-      "tuitionAnnual": "₹1,64,400 / year (₹41,100 quarterly × 4)",
+      "tuitionAnnual": "₹1,52,400/year (Nursery–I); ₹1,58,400/year (II–VIII); ₹1,62,000/year (IX)",
       "transportMonthly": null,
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -1538,8 +1538,8 @@
       ],
       "concessions": [],
       "disclaimer": "Books and uniform removed. Transport retained. Estimated annual tuition for Nursery and Classes I–VII removed. Classes IX–XII fee shown as ₹41,100 per quarter. Annual equivalent is calculated as ₹41,100 × 4.",
-      "annualDisplay": "₹1,64,400 / year",
-      "billingFrequency": "quarterly"
+      "annualDisplay": "₹1,52,400–₹1,62,000 / year",
+      "billingFrequency": "monthly"
     },
     "facilities": [
       {

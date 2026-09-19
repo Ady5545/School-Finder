@@ -7,7 +7,6 @@ import { Heart, ArrowRight, Check, MapPin } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { RatingDisplay } from '../ui/RatingDisplay';
 import { SchoolImage } from './SchoolImage';
-import { SchoolBadge } from './SchoolBadge';
 import { FeeDisplay } from './FeeDisplay';
 import { AdmissionStatus } from './AdmissionStatus';
 import { LocationDisplay } from './LocationDisplay';

@@ -316,65 +316,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
         {/* Right Col: Institutional Credentials, Fees & Contact */}
         <div className="space-y-6">
-          {/* Institutional Credentials & Verification Card */}
-          {school.verification && (
-            <section
-              className={
-                school.verification.isVerified
-                  ? 'bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-3'
-                  : 'bg-amber-50/60 p-5 rounded-2xl border border-amber-200 shadow-warm-xs space-y-3'
-              }
-            >
-              <div className="flex items-center gap-2 font-bold text-xs">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span className="text-slate-900">Institutional Credentials</span>
-              </div>
-
-              <div className="space-y-2 pt-1 text-xs">
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-slate-600">Affiliated Board:</span>
-                  <span className="font-bold text-[var(--color-primary)] bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
-                    {schoolBoards.join(', ')}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-slate-600">Affiliation Number:</span>
-                  <span className="font-mono font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
-                    {affiliationNumber || 'Not publicly disclosed'}
-                  </span>
-                </div>
-              </div>
-
-              {school.boardNote && (
-                <div className="p-2.5 rounded-lg bg-white/80 border border-emerald-200/80 text-[11px] text-slate-700 leading-relaxed">
-                  <span className="font-bold text-slate-900 block mb-0.5">Board Note:</span>
-                  {school.boardNote}
-                </div>
-              )}
-
-              <p
-                className={
-                  school.verification.isVerified
-                    ? 'text-[11px] text-emerald-800 leading-relaxed pt-1 border-t border-emerald-200/60'
-                    : 'text-[11px] text-amber-800 leading-relaxed pt-1 border-t border-amber-200/60'
-                }
-              >
-                {school.verification.sourceName
-                ? `Institutional information is based on ${school.verification.sourceName}.`
-                : 'Affiliation details are not publicly disclosed.'}
-              </p>
-
-            </section>
-          )}
-
-          {/* Detailed Fees Card */}
-          <section>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
-
-            </div>
-            <FeeDisplay fees={school.fees} variant="detailed" />
+          {/* Institutional Credentials & Verification Card */}\n          {/* Detailed Fees Card */}
+          <section>\n            <div className="flex items-center justify-between mb-3">\n              <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>\n            </div>\n            <FeeDisplay fees={school.fees} variant="detailed" />
           </section>
 
           {/* Contact Details Card */}

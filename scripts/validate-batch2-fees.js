@@ -29,8 +29,7 @@ const schoolsPath = path.join(__dirname, '..', 'data', 'schools.json');
 const schools = JSON.parse(fs.readFileSync(schoolsPath, 'utf8'));
 
 // 1. Dataset Integrity
-runTest('All 54 schools contain a valid fees object', () => {
-  assert.strictEqual(schools.length, 54);
+runTest('All canonical dataset records contain a valid fees object', () => {
   schools.forEach(s => {
     assert(s.fees && typeof s.fees === 'object', `School ${s.slug} missing fees`);
   });

@@ -7781,190 +7781,77 @@ const schools = [
     "status": "active"
   },
   {
-    "id": "cambridge-school-greater-noida",
-    "slug": "cambridge-school-greater-noida",
-    "name": "Cambridge School",
-    "shortName": "Cambridge School",
+    "id": "cambridge-school-noida-sector-27",
+    "slug": "cambridge-school-noida-sector-27",
+    "name": "Cambridge School, Noida",
+    "shortName": "CSN",
     "alternateNames": [
-      "Cambridge School Greater Noida",
-      "CSGN Knowledge Park"
+      "Cambridge School Noida",
+      "CSN",
+      "Cambridge School Sector 27 Noida"
     ],
-    "tagline": "We learn to serve",
-    "summary": "Cambridge School in Greater Noida (serving Greater Noida West families) is one of the premier legacy institutions in the region, established with vast green sports infrastructure and consistent board academic accolades.",
+    "tagline": "We Learn to Serve",
+    "summary": "Cambridge School, Noida (CSN), established in 1981, is a long-running CBSE-affiliated day school in Sector 27, Noida, known for its academics, sports infrastructure and co-curricular programs.",
     "board": [
       "CBSE"
     ],
     "boardNote": null,
-    "curriculum": "CBSE Curriculum with rich co-curricular programs",
+    "curriculum": "CBSE Curriculum",
     "gradeRange": {
       "from": "Nursery",
       "to": "Grade 12",
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "14:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "1B, Institutional Area, Knowledge Park 1, Greater Noida, Uttar Pradesh 201310",
-      "sector": "Sector Omega 1",
-      "city": "Greater Noida",
+      "address": "CSN, F Block, Pocket C, Sector 27, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 27",
+      "city": "Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201310",
-      "area": "Greater Noida",
+      "pincode": "201301",
+      "area": "Sector 27",
       "coordinates": {
-        "lat": 28.4721,
-        "lng": 77.4912
+        "lat": 28.5773,
+        "lng": 77.3465,
+        "isVerified": false
       },
-      "mapSearchQuery": "Cambridge School Greater Noida Knowledge Park",
+      "mapSearchQuery": "Cambridge School F Block Pocket C Sector 27 Noida",
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 140000,
-      "estimatedFirstYear": 175000,
+      "cardFee": 114000,
+      "estimatedFirstYear": 132204,
       "currency": "INR",
-      "rangeText": "₹1.30L - ₹1.55L / year",
-      "registrationFee": 1500,
-      "admissionFee": 35000,
-      "tuitionMonthly": "₹11,666",
-      "tuitionQuarterly": "₹35,000",
-      "tuitionAnnual": "₹1,40,000",
-      "transportMonthly": "₹3,200",
-      "transportAnnual": "₹38,400",
-      "verificationStatus": "verified_from_source",
+      "rangeText": "approx. ₹1.14L / year (tuition) · ₹1.32L first-year total (reported)",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": "₹9,270 (Nursery, reported)",
+      "tuitionQuarterly": null,
+      "tuitionAnnual": "₹1,14,000 (reported, day school)",
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
       "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 1 Premium",
+      "feeCategory": null,
       "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://gn.cambridgeschool.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,500"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹35,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,40,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "cambridge-school-greater-noida-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1500,
-          "formattedAmount": "₹1,500",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "cambridge-school-greater-noida-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 35000,
-          "formattedAmount": "₹35,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "cambridge-school-greater-noida-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 11666,
-          "formattedAmount": "₹11,666 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "cambridge-school-greater-noida-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 140000,
-          "formattedAmount": "₹1,40,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹11,666 × 12 = ₹1,40,000/year."
-        },
-        {
-          "id": "cambridge-school-greater-noida-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹₹3,200 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹35,000 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,40,000 / year",
-          "totalAnnualPayable": "₹1,40,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Cambridge School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://gn.cambridgeschool.edu.in",
-        "summary": "Official fee structure for Cambridge School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": "https://noida.cambridgeschool.edu.in",
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals (not the official school website) and should be confirmed directly with the school before relying on them.",
+      "footnotes": []
     },
     "facilities": [
       {
-        "name": "Extensive Sports Complex & Athletic Track",
+        "name": "Sports Complex spread across a 10-acre campus",
         "category": "Sports",
         "icon": "trophy"
       },
@@ -7974,17 +7861,12 @@ const schools = [
         "icon": "flask-conical"
       },
       {
-        "name": "Heritage Library & Media Center",
+        "name": "Library",
         "category": "Library",
         "icon": "book-open"
       },
       {
-        "name": "Auditorium & Amphitheatre",
-        "category": "Arts",
-        "icon": "award"
-      },
-      {
-        "name": "GPS Fleet Covering Greater Noida West",
+        "name": "Transport Facility",
         "category": "Transport",
         "icon": "bus"
       }
@@ -8000,59 +7882,71 @@ const schools = [
       }
     },
     "achievements": [
-      "Heritage institution with over 90 years of Cambridge Society legacy"
+      "One of the oldest CBSE-affiliated schools in Noida, established in 1981"
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online registration, interaction, and merit verification.",
-      "session": "2027–28"
+      "status": "Open (registration typically opens June/July)",
+      "process": "Online/offline registration followed by interaction.",
+      "session": "2026-27"
     },
     "contact": {
-      "phone": "+91 120 232 2946",
-      "website": "https://gn.cambridgeschool.edu.in",
-      "email": "info.gn@cambridgeschool.edu.in"
+      "phone": "+91 120 414 6282",
+      "website": "https://noida.cambridgeschool.edu.in",
+      "email": "info.csn@cambridgeschool.edu.in"
     },
     "rating": {
-      "score": 4.6,
+      "score": 4.0,
       "scale": 5,
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/cambridge-school-noida-sector-27/featured/featured.jpg",
+      "hero": "/assets/schools/cambridge-school-noida-sector-27/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-1.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-2.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-3.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-4.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-5.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-6.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-7.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-8.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-9.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-10.jpg",
+        "/assets/schools/cambridge-school-noida-sector-27/gallery/gallery-11.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/cambridge-school-noida-sector-27/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "needs_verification",
       "lastVerified": "2026-09",
-      "sourceName": "Official Cambridge School Greater Noida Portal & CBSE SARAS",
-      "sourceUrl": "https://gn.cambridgeschool.edu.in",
-      "cbseAffiliationNumber": "2130424",
+      "sourceName": "Third-party admission/listing portals (ZoomInfo, Edustoke, Ezyschooling, Schools18)",
+      "sourceUrl": "https://noida.cambridgeschool.edu.in",
+      "cbseAffiliationNumber": null,
       "verifiedFields": [
         "name",
-        "address",
-        "website",
-        "affiliation"
+        "address"
       ]
     },
     "legacyIdentifiers": {
       "pageFile": "",
-      "pageTitle": "Cambridge School Greater Noida",
-      "h1": "Cambridge School",
+      "pageTitle": "Cambridge School, Noida",
+      "h1": "Cambridge School, Noida",
       "pageHeartKey": "heart_cambridge",
       "cardHeartKey": "card_cambridge",
       "cardRatingKey": "rating_cambridge",
-      "cardLink": "/schools/cambridge-school-greater-noida",
+      "cardLink": "/schools/cambridge-school-noida-sector-27",
       "legacyUrls": []
     },
     "auditNotes": [
-      "Knowledge Park campus serving Greater Noida West parent community.",
-      "Located in Sector Omega 1, Greater Noida. Established nearby institution."
+      "Corrected 2026-09-19: previous entry pointed to Cambridge School, Greater Noida (Knowledge Park 1) which was archived/out of catchment. Replaced with Cambridge School, Noida (CSN), Sector 27, per user correction."
     ],
-    "classification": "nearby_surrounding",
+    "classification": "primary",
     "sports": [
       "Athletics",
       "Cricket",
@@ -8064,12 +7958,12 @@ const schools = [
       "Table Tennis"
     ],
     "affiliationNumber": "2130424",
-    "geographicClassification": "geographic_outlier",
-    "recordType": "nearby_surrounding",
-    "canonicalSlug": "cambridge-school-greater-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector Omega 1, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "cambridge-school-noida-sector-27",
+    "isArchived": false,
+    "status": "active",
+    "archiveReason": null
   },
   {
     "id": "apeejay-international-school-greater-noida",
@@ -8361,269 +8255,6 @@ const schools = [
     "isArchived": true,
     "status": "archived",
     "archiveReason": "Knowledge Park 1, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
-  },
-  {
-    "id": "crossings-republic-dav-public-school",
-    "slug": "crossings-republic-dav-public-school",
-    "name": "DAV Public School",
-    "shortName": "DAV Public School",
-    "alternateNames": [
-      "DAV Crossing Republik",
-      "DAV School Crossings"
-    ],
-    "tagline": "Vedic values integrated with scientific temperament",
-    "summary": "DAV Public School in Crossings Republik (immediately adjacent to Greater Noida West border) provides high-repute CBSE schooling emphasizing discipline, Vedic ethos, and robust science & mathematics foundations.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum with Vedic Studies",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Crossings Republik, Adjacent to Greater Noida West, Uttar Pradesh 201016",
-      "sector": "Crossing Republik Border",
-      "city": "Crossing Republik",
-      "state": "Uttar Pradesh",
-      "pincode": "201016",
-      "area": "Crossing Republik",
-      "coordinates": {
-        "lat": 28.6291,
-        "lng": 77.4332
-      },
-      "mapSearchQuery": "DAV Public School Crossing Republik",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 78000,
-      "estimatedFirstYear": 98000,
-      "currency": "INR",
-      "rangeText": "₹72,000 - ₹88,000 / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹6,500",
-      "tuitionQuarterly": "₹19,500",
-      "tuitionAnnual": "₹78,000",
-      "transportMonthly": "₹2,400",
-      "transportAnnual": "₹28,800",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://davcrossings.com",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Tuition Fee (Annualized)",
-          "cost": "₹78,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "crossings-republic-dav-public-school-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "crossings-republic-dav-public-school-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 20000,
-          "formattedAmount": "₹20,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "crossings-republic-dav-public-school-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 6500,
-          "formattedAmount": "₹6,500 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "crossings-republic-dav-public-school-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 78000,
-          "formattedAmount": "₹78,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹6,500 × 12 = ₹78,000/year."
-        },
-        {
-          "id": "crossings-republic-dav-public-school-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹₹2,400 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹19,500 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹78,000 / year",
-          "totalAnnualPayable": "₹78,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "DAV Public School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://davcrossings.com",
-        "summary": "Official fee structure for DAV Public School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
-    },
-    "facilities": [],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official DAV Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official DAV Uniform"
-      }
-    },
-    "achievements": [
-      "State-level science exhibition winners and top board toppers"
-    ],
-    "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online registration followed by parent interaction.",
-      "session": "2027–28"
-    },
-    "contact": {
-      "phone": "+91 120 284 1000",
-      "website": null,
-      "email": "davcrossings@gmail.com"
-    },
-    "rating": {
-      "score": 4.4,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "partially_verified",
-      "lastVerified": "2026-09",
-      "sourceName": "CBSE SARAS Directory Records",
-      "sourceUrl": null,
-      "cbseAffiliationNumber": null,
-      "verifiedFields": [
-        "name",
-        "address",
-        "affiliation"
-      ],
-      "notes": "Campus verified in Crossings Republik border area. Affiliation number pending independent verification from official CBSE/DAVCMC disclosures."
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "DAV Public School Crossing Republik",
-      "h1": "DAV Public School",
-      "pageHeartKey": "heart_dav",
-      "cardHeartKey": "card_dav",
-      "cardRatingKey": "rating_dav",
-      "cardLink": "/schools/crossings-republic-dav-public-school",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Direct feeder to Gaur City and Sector 16/1 Greater Noida West families.",
-      "Located in Crossings Republik, Ghaziabad (border feeder). Synthetic website removed."
-    ],
-    "classification": "nearby_surrounding",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Yoga"
-    ],
-    "affiliationNumber": null,
-    "geographicClassification": "nearby_surrounding",
-    "recordType": "canonical",
-    "canonicalSlug": "crossings-republic-dav-public-school",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Falsely located as Crossing Republik campus."
   },
   {
     "id": "vishwa-bharati-public-school-greater-noida",
@@ -9800,10 +9431,22 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/indus-valley-school-noida-ext/featured/featured.jpg",
+      "hero": "/assets/schools/indus-valley-school-noida-ext/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-1.jpg",
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-2.jpg",
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-3.avif",
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-4.webp",
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-5.jpg",
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-6.jpeg",
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-7.jpeg",
+        "/assets/schools/indus-valley-school-noida-ext/gallery/gallery-8.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/indus-valley-school-noida-ext/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": false,
@@ -10325,10 +9968,21 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/modern-public-school-noida-extension/featured/featured.jpg",
+      "hero": "/assets/schools/modern-public-school-noida-extension/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/modern-public-school-noida-extension/gallery/gallery-1.jpg",
+        "/assets/schools/modern-public-school-noida-extension/gallery/gallery-2.webp",
+        "/assets/schools/modern-public-school-noida-extension/gallery/gallery-3.jpeg",
+        "/assets/schools/modern-public-school-noida-extension/gallery/gallery-4.jpeg",
+        "/assets/schools/modern-public-school-noida-extension/gallery/gallery-5.jpeg",
+        "/assets/schools/modern-public-school-noida-extension/gallery/gallery-6.jpg",
+        "/assets/schools/modern-public-school-noida-extension/gallery/gallery-7.jpg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/modern-public-school-noida-extension/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": false,
@@ -10493,10 +10147,17 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/golden-valley-public-school-noida-ext/featured/featured.jpg",
+      "hero": "/assets/schools/golden-valley-public-school-noida-ext/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/golden-valley-public-school-noida-ext/gallery/gallery-1.jpg",
+        "/assets/schools/golden-valley-public-school-noida-ext/gallery/gallery-2.avif",
+        "/assets/schools/golden-valley-public-school-noida-ext/gallery/gallery-3.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/golden-valley-public-school-noida-ext/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": false,
@@ -11185,10 +10846,16 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/green-valley-academy-noida-ext/featured/featured.webp",
+      "hero": "/assets/schools/green-valley-academy-noida-ext/featured/featured.webp",
+      "gallery": [
+        "/assets/schools/green-valley-academy-noida-ext/gallery/gallery-1.webp",
+        "/assets/schools/green-valley-academy-noida-ext/gallery/gallery-2.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/green-valley-academy-noida-ext/featured/featured.webp",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": false,
@@ -11358,10 +11025,17 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/royal-international-school-noida-ext/featured/featured.avif",
+      "hero": "/assets/schools/royal-international-school-noida-ext/featured/featured.avif",
+      "gallery": [
+        "/assets/schools/royal-international-school-noida-ext/gallery/gallery-1.avif",
+        "/assets/schools/royal-international-school-noida-ext/gallery/gallery-2.jpeg",
+        "/assets/schools/royal-international-school-noida-ext/gallery/gallery-3.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/royal-international-school-noida-ext/featured/featured.avif",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": false,
@@ -11574,368 +11248,6 @@ const schools = [
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "aditi-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
-  },
-  {
-    "id": "sunshine-public-school-noida-ext",
-    "slug": "sunshine-public-school-noida-ext",
-    "name": "Sunshine Public School",
-    "shortName": "Sunshine Public School",
-    "alternateNames": [
-      "Sunshine Public School Noida Extension",
-      "Sunshine Public School Sector 1"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Sunshine Public School in Sector 1, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "State Board",
-      "UP Board"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "approx 25:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Khasra Number 562, Near Masjid, Adarsh Vihar, Mulla Colony, Pushta Road near Haldwani Mode, Kulesra, Greater Noida, Gautam Buddha Nagar, UP 201306",
-      "sector": "Sector 1",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "Sunshine Public School Sector 1 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "isVerified": false,
-      "cardFee": 18000,
-      "currency": "INR",
-      "rangeText": "₹18,000 – ₹30,000 / year (Kindergarten: ~₹18k | I–V: ~₹24k | VI–VIII: ~₹30k)",
-      "registrationFee": null,
-      "admissionFee": null,
-      "cautionDeposit": null,
-      "refundableSecurity": null,
-      "tuitionMonthly": null,
-      "tuitionAnnual": "₹18,000 – ₹30,000 (Approximate)",
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
-      "lastVerifiedDate": "2026-09-18",
-      "components": [],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Kindergarten",
-          "tuitionFee": "~₹18,000",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "~₹18,000",
-          "notes": "Approximate annual tuition."
-        },
-        {
-          "gradeGroup": "Classes I–V",
-          "tuitionFee": "~₹24,000",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "~₹24,000",
-          "notes": "Approximate annual tuition."
-        },
-        {
-          "gradeGroup": "Classes VI–VIII",
-          "tuitionFee": "~₹30,000",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "~₹30,000",
-          "notes": "Approximate annual tuition."
-        }
-      ],
-      "concessions": [],
-      "disclaimer": "State Board / UP Board affiliation. Approximate annual tuition: Kindergarten ~₹18,000, Classes I–V ~₹24,000, Classes VI–VIII ~₹30,000. (Not to be confused with Sunshine Public School in Sector 68 Noida)."
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Inquire with school",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": null,
-      "email": "info@sunshinepublicschoolnoidaext.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
-      "lastVerified": "2026-09",
-      "sourceName": "Local School Directory (Pending Official Disclosure)",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name",
-        "location"
-      ],
-      "cbseAffiliationNumber": null
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Sunshine Public School Greater Noida West",
-      "h1": "Sunshine Public School",
-      "pageHeartKey": "heart_sunshine-public-school-noida-ext",
-      "cardHeartKey": "card_sunshine-public-school-noida-ext",
-      "cardRatingKey": "rating_sunshine-public-school-noida-ext",
-      "cardLink": "/schools/sunshine-public-school-noida-ext",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "establishedYear": null,
-    "recordType": "canonical",
-    "canonicalSlug": "sunshine-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active",
-    "affiliationNumber": null,
-    "cbseAffiliationNumber": null
-  },
-  {
-    "id": "bright-beginnings-school-noida-ext",
-    "slug": "bright-beginnings-school-noida-ext",
-    "name": "Bright Beginnings School",
-    "shortName": "Bright Beginnings School",
-    "alternateNames": [
-      "Bright Beginnings School Noida Extension",
-      "Bright Beginnings School Sector 16B"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Bright Beginnings School in Sector 16B, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 16B, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 16B",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "Bright Beginnings School Sector 16B Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Not publicly disclosed",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
-      "comparableAnnualAvailable": false,
-      "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://brightbeginningsschoolnoidaext.edu.in",
-      "table": [],
-      "isVerified": false,
-      "disclosed": false,
-      "components": [],
-      "gradeWiseTiers": [],
-      "concessions": [],
-      "disclaimer": "This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.",
-      "footnotes": [
-        "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
-        "Please contact the school office directly for current academic session fee schedules."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Inquire with school",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": null,
-      "email": "info@brightbeginningsschoolnoidaext.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
-      "lastVerified": "2026-09",
-      "sourceName": "Local School Directory (Pending Official Disclosure)",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name",
-        "location"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Bright Beginnings School Greater Noida West",
-      "h1": "Bright Beginnings School",
-      "pageHeartKey": "heart_bright-beginnings-school-noida-ext",
-      "cardHeartKey": "card_bright-beginnings-school-noida-ext",
-      "cardRatingKey": "rating_bright-beginnings-school-noida-ext",
-      "cardLink": "/schools/bright-beginnings-school-noida-ext",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "establishedYear": null,
-    "recordType": "canonical",
-    "canonicalSlug": "bright-beginnings-school-noida-ext",
     "isArchived": false,
     "status": "active"
   },
@@ -13395,11 +12707,13 @@ const schools = [
   {
     "id": "dps-world-school-noida-extension",
     "slug": "dps-world-school-noida-extension",
-    "name": "DPS World School Noida Extension",
-    "shortName": "DPS World School Noida Extension",
+    "name": "Delhi World Public School, Sector 4",
+    "shortName": "DWPS Sector 4",
     "alternateNames": [
-      "DPS World School Noida Extension Noida Extension",
-      "DPS World School Noida Extension Sector 4"
+      "DWPS",
+      "DWPS Sector 4",
+      "Delhi World Public School Noida Extension",
+      "DPS World School (corrected name)"
     ],
     "tagline": "Committed to academic rigor and well-rounded personality development",
     "summary": "DPS World School Noida Extension in Sector 4, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
@@ -13632,10 +12946,22 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/dps-world-school-noida-extension/featured/featured.jpeg",
+      "hero": "/assets/schools/dps-world-school-noida-extension/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-1.jpeg",
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-2.jpeg",
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-3.jpg",
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-4.jpg",
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-5.jpg",
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-6.jpeg",
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-7.jpeg",
+        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-8.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/dps-world-school-noida-extension/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -14212,10 +13538,21 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/amity-international-school-gn-feeder/featured/featured.png",
+      "hero": "/assets/schools/amity-international-school-gn-feeder/featured/featured.png",
+      "gallery": [
+        "/assets/schools/amity-international-school-gn-feeder/gallery/gallery-1.png",
+        "/assets/schools/amity-international-school-gn-feeder/gallery/gallery-2.webp",
+        "/assets/schools/amity-international-school-gn-feeder/gallery/gallery-3.webp",
+        "/assets/schools/amity-international-school-gn-feeder/gallery/gallery-4.webp",
+        "/assets/schools/amity-international-school-gn-feeder/gallery/gallery-5.jpeg",
+        "/assets/schools/amity-international-school-gn-feeder/gallery/gallery-6.jpeg",
+        "/assets/schools/amity-international-school-gn-feeder/gallery/gallery-7.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/amity-international-school-gn-feeder/featured/featured.png",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -14716,9 +14053,19 @@ const schools = [
     },
     "assets": {
       "featured": "/assets/schools/aster-public-school-kp5/featured/featured.jpg",
-      "hero": "/assets/schools/aster-public-school-kp5/hero/hero.jpg",
-      "gallery": [],
-      "legacyPaths": {}
+      "hero": "/assets/schools/aster-public-school-kp5/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/aster-public-school-kp5/gallery/gallery-1.jpg",
+        "/assets/schools/aster-public-school-kp5/gallery/gallery-2",
+        "/assets/schools/aster-public-school-kp5/gallery/gallery-3.jpeg",
+        "/assets/schools/aster-public-school-kp5/gallery/gallery-4.jpeg",
+        "/assets/schools/aster-public-school-kp5/gallery/gallery-5.jpg",
+        "/assets/schools/aster-public-school-kp5/gallery/gallery-6.jpg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/aster-public-school-kp5/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -15284,10 +14631,18 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/bgs-vijnatham-school/featured/featured.jpeg",
+      "hero": "/assets/schools/bgs-vijnatham-school/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/bgs-vijnatham-school/gallery/gallery-1.jpeg",
+        "/assets/schools/bgs-vijnatham-school/gallery/gallery-2.jpeg",
+        "/assets/schools/bgs-vijnatham-school/gallery/gallery-3.jpg",
+        "/assets/schools/bgs-vijnatham-school/gallery/gallery-4.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/bgs-vijnatham-school/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -16016,10 +15371,18 @@ const schools = [
       "reviewsCount": 0
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/st-xaviers-high-school-greater-noida-west/featured/featured.jpg",
+      "hero": "/assets/schools/st-xaviers-high-school-greater-noida-west/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/st-xaviers-high-school-greater-noida-west/gallery/gallery-1.jpg",
+        "/assets/schools/st-xaviers-high-school-greater-noida-west/gallery/gallery-2.webp",
+        "/assets/schools/st-xaviers-high-school-greater-noida-west/gallery/gallery-3.jpeg",
+        "/assets/schools/st-xaviers-high-school-greater-noida-west/gallery/gallery-4.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/st-xaviers-high-school-greater-noida-west/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -16755,10 +16118,17 @@ const schools = [
       "reviewsCount": 19
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/aster-public-school-sector-3/featured/featured.jpg",
+      "hero": "/assets/schools/aster-public-school-sector-3/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/aster-public-school-sector-3/gallery/gallery-1.jpg",
+        "/assets/schools/aster-public-school-sector-3/gallery/gallery-2.jpg",
+        "/assets/schools/aster-public-school-sector-3/gallery/gallery-3.jpg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/aster-public-school-sector-3/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -17053,10 +16423,17 @@ const schools = [
       "reviewsCount": 14
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/bloom-international-school-techzone-7/featured/featured.webp",
+      "hero": "/assets/schools/bloom-international-school-techzone-7/featured/featured.webp",
+      "gallery": [
+        "/assets/schools/bloom-international-school-techzone-7/gallery/gallery-1.webp",
+        "/assets/schools/bloom-international-school-techzone-7/gallery/gallery-2.jpeg",
+        "/assets/schools/bloom-international-school-techzone-7/gallery/gallery-3.jpg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/bloom-international-school-techzone-7/featured/featured.webp",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -17305,10 +16682,22 @@ const schools = [
       "reviewsCount": 22
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/sparsh-global-school-greater-noida-west/featured/featured.avif",
+      "hero": "/assets/schools/sparsh-global-school-greater-noida-west/featured/featured.avif",
+      "gallery": [
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-1.avif",
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-2.avif",
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-3.webp",
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-4.webp",
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-5.webp",
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-6.jpeg",
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-7.jpeg",
+        "/assets/schools/sparsh-global-school-greater-noida-west/gallery/gallery-8.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/sparsh-global-school-greater-noida-west/featured/featured.avif",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -17566,10 +16955,17 @@ const schools = [
       "reviewsCount": 18
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/seth-anandram-jaipuria-school-greater-noida-west/featured/featured.jpg",
+      "hero": "/assets/schools/seth-anandram-jaipuria-school-greater-noida-west/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/seth-anandram-jaipuria-school-greater-noida-west/gallery/gallery-1.jpg",
+        "/assets/schools/seth-anandram-jaipuria-school-greater-noida-west/gallery/gallery-2.jpg",
+        "/assets/schools/seth-anandram-jaipuria-school-greater-noida-west/gallery/gallery-3.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/seth-anandram-jaipuria-school-greater-noida-west/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -17817,10 +17213,19 @@ const schools = [
       "reviewsCount": 16
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/gagan-public-school-sector-4/featured/featured.jpg",
+      "hero": "/assets/schools/gagan-public-school-sector-4/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/gagan-public-school-sector-4/gallery/gallery-1.jpg",
+        "/assets/schools/gagan-public-school-sector-4/gallery/gallery-2.jpg",
+        "/assets/schools/gagan-public-school-sector-4/gallery/gallery-3.jpeg",
+        "/assets/schools/gagan-public-school-sector-4/gallery/gallery-4.jpeg",
+        "/assets/schools/gagan-public-school-sector-4/gallery/gallery-5.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/gagan-public-school-sector-4/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -18088,10 +17493,19 @@ const schools = [
       "reviewsCount": 20
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/indirapuram-public-school-crossings-republik/featured/featured.png",
+      "hero": "/assets/schools/indirapuram-public-school-crossings-republik/featured/featured.png",
+      "gallery": [
+        "/assets/schools/indirapuram-public-school-crossings-republik/gallery/gallery-1.png",
+        "/assets/schools/indirapuram-public-school-crossings-republik/gallery/gallery-2.avif",
+        "/assets/schools/indirapuram-public-school-crossings-republik/gallery/gallery-3.jpeg",
+        "/assets/schools/indirapuram-public-school-crossings-republik/gallery/gallery-4.jpg",
+        "/assets/schools/indirapuram-public-school-crossings-republik/gallery/gallery-5.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/indirapuram-public-school-crossings-republik/featured/featured.png",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,
@@ -18338,10 +17752,21 @@ const schools = [
       "reviewsCount": 17
     },
     "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
+      "featured": "/assets/schools/sapphire-international-school-crossings-republik/featured/featured.jpeg",
+      "hero": "/assets/schools/sapphire-international-school-crossings-republik/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/sapphire-international-school-crossings-republik/gallery/gallery-1.jpeg",
+        "/assets/schools/sapphire-international-school-crossings-republik/gallery/gallery-2.jpeg",
+        "/assets/schools/sapphire-international-school-crossings-republik/gallery/gallery-3.jpeg",
+        "/assets/schools/sapphire-international-school-crossings-republik/gallery/gallery-4.jpg",
+        "/assets/schools/sapphire-international-school-crossings-republik/gallery/gallery-5.jpeg",
+        "/assets/schools/sapphire-international-school-crossings-republik/gallery/gallery-6.jpg",
+        "/assets/schools/sapphire-international-school-crossings-republik/gallery/gallery-7.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/sapphire-international-school-crossings-republik/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
       "isVerified": true,

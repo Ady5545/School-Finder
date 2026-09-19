@@ -80,6 +80,11 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
   const transportSchedules = fees.transportSchedule || [];
   const concessions = fees.concessions || [];
   const circular = fees.circular;
+  const cambridgeComponent = components.find((c) => c.id === 'dps-cambridge-fee');
+  const siblingConcession = concessions.find((c) => c.category === 'sibling');
+  const siblingDiscountRate = siblingConcession?.discountValue
+    ? Number(String(siblingConcession.discountValue).match(/(\d+(?:\.\d+)?)\s*%/)?.[1] || 0)
+    : 0;
 
   // Selected grade tier for calculator
   const currentGradeTier = gradeTiers[selectedGradeIndex] || null;
@@ -110,11 +115,8 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
 
     // Cambridge add-on if toggled
     let cambridgeFee = 0;
-    if (includeCambridge) {
-      const cambridgeComp = components.find((c) => c.id === 'dps-cambridge-fee');
-      if (cambridgeComp && cambridgeComp.amount) {
-        cambridgeFee = cambridgeComp.amount;
-      }
+    if (includeCambridge && cambridgeComponent?.amount) {
+      cambridgeFee = cambridgeComponent.amount;
     }
 
     // Transport cost
@@ -134,8 +136,8 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
 
     // Sibling discount (typically 10% on tuition)
     let siblingDiscountAmount = 0;
-    if (includeSiblingDiscount && concessions.length > 0) {
-      siblingDiscountAmount = Math.round(baseAnnualTuition * 0.1);
+    if (includeSiblingDiscount && siblingDiscountRate > 0) {
+      siblingDiscountAmount = Math.round(baseAnnualTuition * (siblingDiscountRate / 100));
     }
 
     const netAnnualRecurring = baseAnnualTuition + cambridgeFee + annualTransport - siblingDiscountAmount;
@@ -164,6 +166,8 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
     concessions,
     oneTimeComponents,
     components,
+    cambridgeComponent,
+    siblingDiscountRate,
   ]);
 
   // If school fees are undisclosed, render a transparent disclosure notice
@@ -766,7 +770,7 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
               )}
 
               {/* Cambridge Curriculum Toggle (for DPS) */}
-              {components.some((c) => c.id === 'dps-cambridge-fee') && (
+              {cambridgeComponent?.amount != null && (
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider">
                     Curriculum Track:
@@ -780,7 +784,7 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
                       className="rounded text-[var(--color-primary)] focus:ring-0 w-4 h-4"
                     />
                     <label htmlFor="cambridge-toggle" className="text-xs font-semibold text-[var(--color-content)]">
-                      Include Cambridge Curriculum Stream (+₹35,000/yr)
+                      Include Cambridge Curriculum Stream (+{formatCurrency(cambridgeComponent.amount)}/yr)
                     </label>
                   </div>
                 </div>
@@ -821,8 +825,8 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
                 </div>
               </div>
 
-              {/* Sibling Concession Toggle */}
-              {concessions.length > 0 && (
+              {/* Sibling Concession Toggle: only show when the concession states an explicit percentage */}
+              {siblingDiscountRate > 0 && (
                 <div className="space-y-1.5 sm:col-span-2">
                   <div className="flex items-center gap-2">
                     <input
@@ -833,7 +837,7 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
                       className="rounded text-[var(--color-primary)] focus:ring-0 w-4 h-4"
                     />
                     <label htmlFor="sibling-toggle" className="text-xs font-semibold text-[var(--color-content)]">
-                      Apply Sibling Concession (10% rebate on composite tuition)
+                      Apply Sibling Concession (${siblingDiscountRate}% rebate on composite tuition)
                     </label>
                   </div>
                 </div>

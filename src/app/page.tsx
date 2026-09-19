@@ -56,7 +56,7 @@ export default function HomePage() {
 
             {/* Supporting Subtitle matching Image 1 */}
             <p className="text-base sm:text-lg text-slate-600 mt-5 sm:mt-6 leading-relaxed max-w-2xl sm:max-w-3xl text-center mx-auto">
-              Transparent fee breakdowns, authentic facilities, verified boards (CBSE, ICSE, IB),<br className="hidden sm:inline" />
+              Transparent fee breakdowns, authentic facilities, board details (CBSE, ICSE, IB),<br className="hidden sm:inline" />
               and side-by-side comparisons for {allSchools.length} institutions across Noida Extension.
             </p>
 
@@ -201,7 +201,7 @@ export default function HomePage() {
                   <h3 className="text-base font-bold text-[#0f172a]">Discover</h3>
                 </div>
                 <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
-                  Filter by sector, board (CBSE, ICSE, IB), grade span, and verified fees.
+                  Filter by sector, board (CBSE, ICSE, IB), grade span, and fee verification status.
                 </p>
               </div>
               <Link

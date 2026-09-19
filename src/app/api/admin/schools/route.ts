@@ -3,7 +3,7 @@ import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
 import { getAdminSchoolsList, createAdminSchool } from '@/lib/schoolAdminService';
 import { getRawSchools } from '@/lib/schools';
 import {
-  getAdminSchoolAnalytics,
+  getAllSchoolsAdminOverviewAsync,
   getAllPromotions,
 } from '@/lib/authStore';
 
@@ -30,9 +30,11 @@ export async function GET(req: NextRequest) {
   });
 
   const allPromotions = getAllPromotions();
+  const analyticsOverview = await getAllSchoolsAdminOverviewAsync();
+  const analyticsBySlug = new Map(analyticsOverview.map(item => [item.slug, item]));
 
   const schoolMetrics = schools.map(school => {
-    const analytics = getAdminSchoolAnalytics(school.slug);
+    const summary = analyticsBySlug.get(school.slug);
     const activePromo = allPromotions.find(p => p.schoolSlug === school.slug && p.status === 'active');
 
     return {
@@ -46,7 +48,7 @@ export async function GET(req: NextRequest) {
       boardsList: Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[],
       schoolType: school.schoolType,
       establishedYear: school.establishedYear || 2015,
-      verifiedFee: school.fees?.rangeText || school.fees?.tuitionAnnual || `₹${school.fees?.cardFee?.toLocaleString('en-IN') || '1,20,000'}/yr`,
+      verifiedFee: school.fees?.annualDisplay || school.fees?.rangeText || school.fees?.tuitionAnnual || `₹${school.fees?.cardFee?.toLocaleString('en-IN') || '1,20,000'}/yr`,
       tuitionAnnual: school.fees?.tuitionAnnual,
       cardFee: school.fees?.cardFee,
       isArchived: Boolean(school.isArchived),
@@ -58,13 +60,13 @@ export async function GET(req: NextRequest) {
       affiliationNumber: school.affiliationNumber || school.verification?.cbseAffiliationNumber,
       verificationStatus: school.verification?.status || 'pending_audit',
       completeness: school.completeness,
-      views: analytics.traffic.totalViews,
-      uniqueViewersCount: analytics.traffic.uniqueAuthenticatedViewers,
-      saves: analytics.engagement.wishlistSaves,
-      shortlistedCount: analytics.engagement.shortlistedByUsers.length,
-      comparedCount: analytics.engagement.comparedCount,
-      reviewsCount: analytics.engagement.reviewsCount,
-      averageRating: analytics.engagement.averageRating,
+      views: summary?.views || 0,
+      uniqueViewersCount: 0,
+      saves: summary?.saves || 0,
+      shortlistedCount: summary?.saves || 0,
+      comparedCount: 0,
+      reviewsCount: summary?.reviewsCount || 0,
+      averageRating: summary?.averageRating || 0,
       contact: school.contact,
       admissions: school.admissions,
       assets: school.assets,

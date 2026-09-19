@@ -182,6 +182,8 @@ export type ActivityEventType =
 
 export interface ActivityEvent {
   id: string;
+  /** Stable pseudonymous browser visitor ID for anonymous analytics when available. */
+  visitorId?: string;
   type: ActivityEventType;
   userId?: string;
   targetType?: 'school' | 'user' | 'review' | 'search' | 'promotion' | 'system';
@@ -1717,6 +1719,24 @@ export async function deleteParentUserAsync(userId: string, adminUserId?: string
         await ratingsCol.deleteMany({ userId });
       }
 
+      // Keep the school-save aggregate consistent with the user's current shortlist.
+      if (user && Array.isArray(user.wishlist) && user.wishlist.length > 0) {
+        const savesCol = await getSchoolSavesCollection(true);
+        if (savesCol) {
+          const decrement = new Map<string, number>();
+          for (const slug of user.wishlist) {
+            decrement.set(slug, (decrement.get(slug) || 0) + 1);
+          }
+          for (const [slug, amount] of decrement) {
+            await savesCol.updateOne(
+              { slug },
+              { $inc: { count: -amount }, $set: { lastSavedAt: new Date().toISOString() } },
+              { upsert: true }
+            );
+          }
+        }
+      }
+
       if (adminUserId) {
         const adminUser = await getUserByIdAsync(adminUserId);
         await recordAdminAuditAsync(
@@ -1799,6 +1819,7 @@ export async function getAllParentUsersAsync() {
 export function recordActivityEvent(params: {
   type: ActivityEventType;
   userId?: string;
+  visitorId?: string;
   targetType?: 'school' | 'user' | 'review' | 'search' | 'promotion' | 'system';
   targetId?: string;
   schoolSlug?: string;
@@ -1806,8 +1827,9 @@ export function recordActivityEvent(params: {
   searchQuery?: string;
   approximateTimeSpent?: string;
   details?: Record<string, unknown>;
+  persistMongo?: boolean;
 }): ActivityEvent {
-  const { type, userId, targetType, targetId, schoolSlug, locality, searchQuery, approximateTimeSpent, details } = params;
+  const { type, userId, visitorId, targetType, targetId, schoolSlug, locality, searchQuery, approximateTimeSpent, details, persistMongo = true } = params;
 
   // Update user's lastActivityAt if userId is provided
   if (userId) {
@@ -1835,6 +1857,7 @@ export function recordActivityEvent(params: {
     id: `evt_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`,
     type,
     userId,
+    visitorId,
     targetType: targetType || (schoolSlug ? 'school' : undefined),
     targetId: targetId || schoolSlug,
     schoolSlug,
@@ -1846,14 +1869,14 @@ export function recordActivityEvent(params: {
   };
 
   activityEvents.unshift(evt);
-  if (activityEvents.length > 5000) {
-    activityEvents.length = 5000;
+  if (activityEvents.length > 100000) {
+    activityEvents.length = 100000;
   }
 
   saveStoreToDisk();
 
   // Async persist to MongoDB without blocking synchronous callers
-  if (isMongoConfigured()) {
+  if (persistMongo && isMongoConfigured()) {
     getActivityCollection().then(async col => {
       if (col) {
         await col.insertOne(evt);
@@ -1902,6 +1925,7 @@ export function recordActivityEvent(params: {
 export async function recordActivityEventAsync(params: {
   type: ActivityEventType;
   userId?: string;
+  visitorId?: string;
   targetType?: 'school' | 'user' | 'review' | 'search' | 'promotion' | 'system';
   targetId?: string;
   schoolSlug?: string;
@@ -1910,7 +1934,7 @@ export async function recordActivityEventAsync(params: {
   approximateTimeSpent?: string;
   details?: Record<string, unknown>;
 }): Promise<ActivityEvent> {
-  const evt = recordActivityEvent(params);
+  const evt = recordActivityEvent({ ...params, persistMongo: false });
 
   if (isMongoConfigured()) {
     try {
@@ -2071,7 +2095,7 @@ export async function recordCompareEventAsync(params: {
 
 export function getActivityEvents(
   limit = 100,
-  filters?: { type?: string; userId?: string; schoolSlug?: string; since?: string }
+  filters?: { type?: string; userId?: string; schoolSlug?: string; since?: string; until?: string }
 ): ActivityEvent[] {
   initDb();
   let events = [...activityEvents];
@@ -2097,7 +2121,7 @@ export function getActivityEvents(
 
 export async function getActivityEventsAsync(
   limit = 100,
-  filters?: { type?: string; userId?: string; schoolSlug?: string; since?: string }
+  filters?: { type?: string; userId?: string; schoolSlug?: string; since?: string; until?: string }
 ): Promise<ActivityEvent[]> {
   if (isMongoConfigured()) {
     try {
@@ -2112,8 +2136,11 @@ export async function getActivityEventsAsync(
             { 'details.schools': filters.schoolSlug },
           ];
         }
-        if (filters?.since) {
-          query.timestamp = { $gte: filters.since };
+        if (filters?.since || filters?.until) {
+          query.timestamp = {
+            ...(filters.since ? { $gte: filters.since } : {}),
+            ...(filters.until ? { $lte: filters.until } : {}),
+          };
         }
 
         const docs = await col
@@ -2955,8 +2982,10 @@ export function getAdminSchoolAnalytics(slug: string) {
   return {
     slug,
     traffic: {
-      totalViews: views,
+      totalViews: eventViewCount || views,
       uniqueAuthenticatedViewers: uniqueViewersList.length,
+      uniqueAnonymousViewers: anonymousViewerIds.size,
+      uniqueViewers: uniqueViewersList.length + anonymousViewerIds.size,
       repeatViewers: repeatViewersCount,
       uniqueViewers: uniqueViewersList,
     },
@@ -3008,8 +3037,16 @@ export async function getAdminSchoolAnalyticsAsync(slug: string) {
   const shortlisters: { userId: string; userEmail: string; userName: string; addedAt?: string }[] = [];
   const comparers = new Set<string>();
 
-  const events = await getActivityEventsAsync(5000, { schoolSlug: slug });
+  // The event ledger is authoritative for profile activity. A hard 5,000-event cap can
+  // silently undercount busy schools, so analytics reads a high ceiling from MongoDB.
+  const events = await getActivityEventsAsync(1000000, { schoolSlug: slug });
+  let eventViewCount = 0;
+  const anonymousViewerIds = new Set<string>();
   for (const evt of events) {
+    if (evt.type === 'school_view') {
+      eventViewCount += 1;
+      if (evt.visitorId) anonymousViewerIds.add(evt.visitorId);
+    }
     if (evt.userId) {
       if (evt.type === 'school_view') {
         const cur = viewers.get(evt.userId) || { count: 0, first: evt.timestamp, last: evt.timestamp };
@@ -4604,4 +4641,3 @@ export function addAdminNotification(data: Omit<AdminNotification, 'id' | 'read'
   adminNotifs.unshift(n);
   return n;
 }
-

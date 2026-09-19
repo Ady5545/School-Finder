@@ -1,0 +1,1 @@
+import React from 'react'; export function Select({label,options=[],...p}:{label?:string;options?:{label:string;value:string}[]}&React.SelectHTMLAttributes<HTMLSelectElement>){return <div>{label&&<label htmlFor={p.id}>{label}</label>}<select {...p} className="rounded-xl border px-3 py-2">{options.map(o=><option key={o.value} value={o.value}>{o.label}</option>)}</select></div>}

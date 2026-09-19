@@ -318,7 +318,7 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
                           </span>
                           <span className="text-slate-300">•</span>
                           <span className="text-emerald-700 font-semibold text-[11px]">
-                            {school.fees.cardFee ? `₹${school.fees.cardFee.toLocaleString('en-IN')}/yr` : 'Disclosed on request'}
+                            {school.fees.annualDisplay || (school.fees.cardFee ? `₹${school.fees.cardFee.toLocaleString('en-IN')}/yr` : 'Disclosed on request')}
                           </span>
                         </div>
                       </div>

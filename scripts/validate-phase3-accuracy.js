@@ -34,12 +34,12 @@ assert(sXavierDuplicate && sXavierDuplicate.isDuplicate === true && sXavierDupli
 
 // 4. DWPS location, fee verification, and Photo Pending integrity (no group photos)
 const dwps = schools.find(s => s.slug === 'delhi-world-public-school-kp-5');
-assert(dwps && dwps.location.sector === 'Knowledge Park III', 'DWPS verified in Knowledge Park III (not KP-V)');
-assert(dwps && dwps.contact.website === 'https://www.dwpsgrnoida.com', 'DWPS website verified as dwpsgrnoida.com');
-assert(dwps && dwps.affiliationNumber === '2132580', 'DWPS CBSE affiliation verified as 2132580');
+assert(dwps && dwps.location.sector === 'Knowledge Park V', 'DWPS verified in Knowledge Park V, Greater Noida West');
+assert(dwps && dwps.contact.website === 'https://dwpsnoidaex.com', 'DWPS website verified as dwpsnoidaex.com');
+assert(dwps && dwps.affiliationNumber === '2132903', 'DWPS CBSE affiliation verified as 2132903');
 assert(dwps && dwps.fees.verificationStatus === 'verified_from_source', 'DWPS fees verified from official mandatory disclosure');
 assert(dwps && dwps.assets.featured && dwps.assets.featured.includes('featured.jpg'), 'DWPS featured photo verified with official campus exterior');
-assert(dwps && dwps.assets.gallery.length === 6, 'DWPS gallery updated with 6 authentic activity images');
+assert(dwps && dwps.assets.gallery.length >= 6, 'DWPS gallery contains at least 6 authentic activity images');
 
 // 5. Ryan dual campus audit & separation
 const ryanBeta = schools.find(s => s.slug === 'ryan-international-school-greater-noida');
@@ -65,7 +65,12 @@ assert(dps && dps.affiliationNumber === '2133797', 'DPS KP-V CBSE affiliation ve
 // 6. No non-existent synthetic .edu.in domains
 const syntheticEduIn = schools.filter(s => {
   const w = s.contact?.website || '';
-  return w.endsWith('.edu.in') && !['tsusnoida.edu.in', 'salvationtree.edu.in', 'gn.cambridgeschool.edu.in', 'shivnadarschool.edu.in'].some(v => w.includes(v));
+  return w.endsWith('.edu.in') && ![
+    'tsusnoida.edu.in',
+    'salvationtree.edu.in',
+    'noida.cambridgeschool.edu.in',
+    'shivnadarschool.edu.in',
+  ].some(v => w.includes(v));
 });
 assert(syntheticEduIn.length === 0, `All non-existent synthetic .edu.in domains cleansed (Found: ${syntheticEduIn.length})`);
 

@@ -8181,7 +8181,8 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official monthly tuition schedule: Pre-Nur ₹5,600, Nur ₹6,000, LKG ₹6,100, UKG ₹6,400, I ₹6,600, II ₹7,150, III ₹7,750, IV–V ₹8,300, VI–VIII ₹8,600, IX–X ₹8,700, XI–XII ₹8,800. Registration ₹1,000, Admission ₹10,000 (Pre-Nur) / ₹24,000 (Nur–XII), Caution ₹6,000/₹10,000 refundable, Dev ₹6,000, Orientation ₹1,000."
+      "disclaimer": "Official monthly tuition schedule: Pre-Nur ₹5,600, Nur ₹6,000, LKG ₹6,100, UKG ₹6,400, I ₹6,600, II ₹7,150, III ₹7,750, IV–V ₹8,300, VI–VIII ₹8,600, IX–X ₹8,700, XI–XII ₹8,800. Registration ₹1,000, Admission ₹10,000 (Pre-Nur) / ₹24,000 (Nur–XII), Caution ₹6,000/₹10,000 refundable, Dev ₹6,000, Orientation ₹1,000.",
+      "annualDisplay": "₹87,273 / year (avg.)"
     },
     "facilities": [
       {
@@ -9878,7 +9879,8 @@
           "type": "Miscellaneous activities",
           "cost": "Additional charges may apply for external board examinations, specialised excursions and events with management intimation"
         }
-      ]
+      ],
+      "annualDisplay": "₹90,000 / year (avg.)"
     },
     "facilities": [
       {
@@ -10416,7 +10418,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,18,800 / year (avg.)"
     },
     "facilities": [
       {
@@ -12354,7 +12357,8 @@
     "location": {
       "address": "HS-01, Sector 20, Buddha, Greater Noida, Uttar Pradesh 201311",
       "sector": "Knowledge Park V",
-      "area": "Knowledge Park V"
+      "area": "Knowledge Park V",
+      "city": "Greater Noida West"
     },
     "fees": {
       "rangeText": "₹21,000 – ₹29,250 / quarter",
@@ -12523,7 +12527,10 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No 2A & 2B, Chauganpur, Knowledge Park V, Greater Noida, Uttar Pradesh 201306"
+      "address": "Plot No 2A & 2B, Chauganpur, Knowledge Park V, Greater Noida, Uttar Pradesh 201306",
+      "city": "Greater Noida West",
+      "sector": "Knowledge Park V",
+      "area": "Knowledge Park V"
     },
     "fees": {
       "rangeText": "₹1,02,800 – ₹1,27,050 / year (grade-wise estimated totals)",
@@ -12704,7 +12711,10 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "HS 1, Sector 4, Near Gaur City 1, Greater Noida West, Uttar Pradesh 201308"
+      "address": "HS 1, Sector 4, Near Gaur City 1, Greater Noida West, Uttar Pradesh 201308",
+      "city": "Greater Noida West",
+      "sector": "Sector 4",
+      "area": "Sector 4"
     },
     "fees": {
       "rangeText": "₹5,450 – ₹6,800 / month",

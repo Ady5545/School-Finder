@@ -243,7 +243,7 @@ export default function AdminPage() {
   // Fast admin boot: authenticate first, then load only the section the admin opens.
   // The old panel requested every heavy dataset on first paint, which made the
   // control center feel frozen. This keeps the shell instant and data progressive.
-  const [loadedTabs, setLoadedTabs] = useState<Set<AdminTab>>(new Set());
+  const [loadedTabs, setLoadedTabs] = useState<Set<AdminTab>>(new Set(['overview']));
   const [loadingTab, setLoadingTab] = useState<AdminTab | null>(null);
 
   const fetchTabData = async (tab: AdminTab, force = false) => {
@@ -854,7 +854,7 @@ export default function AdminPage() {
                               {school?.name || item.slug}
                             </p>
                             <p className="text-[10px] text-slate-400">
-                              {school?.sector || 'Greater Noida West'}
+                              {school?.sector || school?.address || 'Location unavailable'}
                             </p>
                           </div>
                         </div>
@@ -884,7 +884,10 @@ export default function AdminPage() {
                 </div>
 
                 <div className="space-y-2.5">
-                  {(overviewData?.schools.topViewed || []).map((item: any, idx: number) => {
+                  {(overviewData?.schools.topViewed || []).filter((item: any) => {
+                    const school = schoolsList.find(s => s.slug === item.slug);
+                    return Boolean(school) && !school.isArchived && !school.isDuplicate;
+                  }).map((item: any, idx: number) => {
                     const school = schoolsList.find(s => s.slug === item.slug);
                     return (
                       <div

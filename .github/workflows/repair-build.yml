@@ -29,3 +29,6 @@ jobs:
 
       - name: Production build
         run: bun run build
+
+      - name: Repository validation suite
+        run: bun run lint

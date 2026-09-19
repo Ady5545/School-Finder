@@ -16,7 +16,7 @@ export const LocationDisplay: React.FC<LocationDisplayProps> = ({
 }) => {
   const displayText =
     variant === 'compact'
-      ? `${location.sector || location.area || 'Greater Noida West'}, ${location.city}`
+      ? (location.sector || location.area || location.city || 'Location unavailable')
       : location.address;
 
   return (

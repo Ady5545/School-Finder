@@ -233,7 +233,7 @@ export interface SchoolAssets {
 
 export interface SchoolVerification {
   isVerified: boolean;
-  status: 'verified_official' | 'pending_audit' | 'partially_verified';
+  status: 'verified_official' | 'pending_audit' | 'partially_verified' | string;
   lastVerified: string;
   sourceName: string;
   sourceUrl?: string | null;
@@ -282,9 +282,9 @@ export interface School {
   verification?: SchoolVerification;
   legacyIdentifiers: LegacyIdentifiers;
   auditNotes: string[];
-  classification?: 'core_greater_noida_west' | 'nearby_surrounding';
+  classification?: 'core_greater_noida_west' | 'nearby_surrounding' | 'primary' | 'upcoming' | string;
   geographicClassification?: 'core_greater_noida_west' | 'nearby_surrounding' | 'geographic_outlier';
-  recordType?: 'canonical' | 'alias' | 'nearby_surrounding' | 'geographic_outlier';
+  recordType?: 'canonical' | 'alias' | 'nearby_surrounding' | 'geographic_outlier' | 'primary' | 'upcoming' | string;
   canonicalSlug?: string;
   isDuplicate?: boolean;
   duplicateOf?: string | null;
@@ -300,7 +300,7 @@ export const schools: School[] = schoolsJson as unknown as School[];
 export const legacyUrlMap: Record<string, string> = legacyUrlMapJson as Record<string, string>;
 
 /**
- * Returns raw all schools including aliases, duplicates, and archived records (total 70).
+ * Returns all raw school records including aliases, duplicates, and archived records.
  */
 export function getRawSchools(): School[] {
   return schools;

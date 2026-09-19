@@ -251,7 +251,7 @@ export default function AdminPage() {
     setLoadingTab(tab);
     try {
       const requests: Partial<Record<AdminTab, string>> = {
-        overview: \`/api/admin/overview?range=\${timeRange}\`,
+        overview: `/api/admin/overview?range=${timeRange}`,
         users: '/api/admin/users?limit=100',
         activity: '/api/admin/activity?limit=150',
         reviews: '/api/admin/reviews?includeDeleted=true',
@@ -266,7 +266,7 @@ export default function AdminPage() {
       if (!url) return;
       const res = await fetch(url, { cache: 'no-store' });
       const data = await res.json();
-      if (!data.success) throw new Error(data.message || \`Failed to load \${tab}\`);
+      if (!data.success) throw new Error(data.message || `Failed to load ${tab}`);
 
       if (tab === 'overview') setOverviewData(data.metrics);
       if (tab === 'users') setUsersList(data.users);
@@ -280,7 +280,7 @@ export default function AdminPage() {
       if (tab === 'audit') setAuditLogsList(data.logs);
       setLoadedTabs(prev => new Set(prev).add(tab));
     } catch (err) {
-      console.error(\`Failed to load admin \${tab} data:\`, err);
+      console.error(`Failed to load admin ${tab} data:`, err);
     } finally {
       setLoadingTab(null);
     }

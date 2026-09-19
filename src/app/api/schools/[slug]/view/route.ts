@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { randomUUID } from 'crypto';
 import {
-  recordSchoolView,
+  recordActivityEvent,
   verifySessionToken,
 } from '../../../../../lib/authStore';
 import { getCanonicalSlug } from '../../../../../lib/schools';
@@ -50,16 +51,35 @@ export async function POST(
       }
     }
 
-    // Deduplicate rapid successive views from the same user/client IP
-    const clientIp = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'client';
-    const dedupKey = `${userId || clientIp}:${canonicalSlug}`;
+    // Use a stable pseudonymous visitor cookie for anonymous analytics. Falling back to
+    // the client IP alone can incorrectly merge different visitors behind the same network.
+    const existingVisitorId = req.cookies.get('ap_visitor_id')?.value;
+    const visitorId = existingVisitorId || randomUUID();
+    const dedupKey = (userId || visitorId) + ':' + canonicalSlug;
     if (isDuplicateView(dedupKey)) {
       return NextResponse.json({ success: true, duplicate: true });
     }
 
-    recordSchoolView(canonicalSlug, undefined, userId);
+    recordActivityEvent({
+      type: 'school_view',
+      schoolSlug: canonicalSlug,
+      targetType: 'school',
+      targetId: canonicalSlug,
+      userId,
+      visitorId: userId ? undefined : visitorId,
+    });
 
-    return NextResponse.json({ success: true, duplicate: false });
+    const response = NextResponse.json({ success: true, duplicate: false });
+    if (!existingVisitorId) {
+      response.cookies.set('ap_visitor_id', visitorId, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 60 * 24 * 365,
+        path: '/',
+      });
+    }
+    return response;
   } catch (error) {
     console.error('Error logging school view:', error);
     return NextResponse.json({ success: false }, { status: 500 });

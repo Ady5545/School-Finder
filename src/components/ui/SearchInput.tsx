@@ -1,0 +1,3 @@
+'use client';
+import React from 'react'; import {Search} from 'lucide-react';
+export function SearchInput({value,onChange,placeholder='Search...',className=''}:{value?:string;onChange?:React.ChangeEventHandler<HTMLInputElement>;placeholder?:string;className?:string}){return <div className={'relative '+className}><Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4"/><input value={value} onChange={onChange} placeholder={placeholder} className="w-full rounded-xl border py-3 pl-10 pr-3"/></div>}

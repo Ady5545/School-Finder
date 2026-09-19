@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
 import { getAdminSchoolBySlug, updateAdminSchool } from '@/lib/schoolAdminService';
 import {
-  getAdminSchoolAnalytics,
+  getAdminSchoolAnalyticsAsync,
   getAllPromotions,
 } from '@/lib/authStore';
 
@@ -25,7 +25,7 @@ export async function GET(
     return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
   }
 
-  const analytics = getAdminSchoolAnalytics(slug);
+  const analytics = await getAdminSchoolAnalyticsAsync(slug);
   const promotions = getAllPromotions().filter(p => p.schoolSlug === slug);
   return NextResponse.json({
     success: true,

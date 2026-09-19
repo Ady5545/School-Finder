@@ -157,7 +157,6 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               <SchoolBadge key={b} type="board" value={b} />
             ))}
             <SchoolBadge type="schoolType" value={school.schoolType} />
-            <SchoolBadge type="verification" value={school.fees.verificationStatus || 'not_publicly_verified'} />
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-extrabold text-[var(--color-content)] tracking-tight">
@@ -396,17 +395,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
           {/* Detailed Fees Card */}
           <section>
-            <div className="flex items-center justify-between mb-3">
+            <div className="mb-3">
               <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
-              {school.fees.verificationStatus === 'verified_from_source' ? (
-                <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
-                  Audited &amp; Verified
-                </span>
-              ) : (
-                <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
-                  Audit Pending
-                </span>
-              )}
             </div>
             <FeeDisplay fees={school.fees} variant="detailed" />
           </section>

@@ -7,7 +7,6 @@ import { Heart, ArrowRight, Check, MapPin } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { RatingDisplay } from '../ui/RatingDisplay';
 import { SchoolImage } from './SchoolImage';
-import { SchoolBadge } from './SchoolBadge';
 import { FeeDisplay } from './FeeDisplay';
 import { AdmissionStatus } from './AdmissionStatus';
 import { LocationDisplay } from './LocationDisplay';
@@ -43,9 +42,6 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
   const isSaved = propIsSaved !== undefined ? propIsSaved : store.isInShortlist(school.slug);
   const isCompared = propIsCompared !== undefined ? propIsCompared : store.isInCompare(school.slug);
-  const statusStr = (school.verification?.status as string) || '';
-  const isAuditVerified = statusStr === 'verified_official' || statusStr === 'VERIFIED' || (school.verification?.isVerified === true && statusStr !== 'pending_audit');
-
   const handleSave = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -149,27 +145,8 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             {school.tagline || school.summary}
           </p>
 
-          {/* Key Quick Badges */}
+          {/* Key Quick Detail */}
           <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[var(--color-border-subtle)]">
-            {isAuditVerified && (
-              <SchoolBadge type="verified" value="Verified" />
-            )}
-            <SchoolBadge type="verification" value={school.fees.verificationStatus || 'not_publicly_verified'} />
-            {school.geographicClassification === 'geographic_outlier' && (
-              <span className="text-[11px] text-purple-800 bg-purple-50 px-2 py-0.5 rounded-md font-semibold border border-purple-200">
-                Regional Outlier
-              </span>
-            )}
-            {school.geographicClassification === 'nearby_surrounding' && (
-              <span className="text-[11px] text-blue-800 bg-blue-50 px-2 py-0.5 rounded-md font-semibold border border-blue-200">
-                Surrounding Feeder
-              </span>
-            )}
-            {school.isDuplicate && (
-              <span className="text-[11px] text-slate-700 bg-slate-100 px-2 py-0.5 rounded-md font-semibold border border-slate-200">
-                Duplicate Listing
-              </span>
-            )}
             <span className="text-[11px] text-[var(--color-content-muted)] bg-[var(--color-surface-subtle)] px-2 py-0.5 rounded-md font-semibold border border-[var(--color-border)]">
               Ratio: {school.studentTeacherRatio}
             </span>

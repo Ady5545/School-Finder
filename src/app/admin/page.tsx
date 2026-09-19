@@ -624,8 +624,11 @@ export default function AdminPage() {
           </div>
 
           <button
-            onClick={loadAdminData}
-            title="Refresh analytics and telemetry"
+            onClick={() => {
+              loadAdminData(true);
+              if (activeTab !== 'overview') fetchTabData(activeTab, true);
+            }}
+            title="Refresh the current admin section"
             className="p-2 rounded-xl bg-[#0d2646] border border-[#1d4b7c] text-slate-300 hover:text-white hover:bg-[#133763] transition-colors cursor-pointer"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin text-amber-400' : ''}`} />

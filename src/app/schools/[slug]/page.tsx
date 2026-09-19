@@ -157,7 +157,6 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               <SchoolBadge key={b} type="board" value={b} />
             ))}
             <SchoolBadge type="schoolType" value={school.schoolType} />
-            <SchoolBadge type="verification" value={school.fees.verificationStatus || 'not_publicly_verified'} />
           </div>
 
           <h1 className="text-2xl sm:text-4xl font-extrabold text-[var(--color-content)] tracking-tight">
@@ -334,17 +333,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               }
             >
               <div className="flex items-center gap-2 font-bold text-xs">
-                {school.verification.isVerified ? (
-                  <>
-                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="text-emerald-900">Institutional Credentials & Audit</span>
-                  </>
-                ) : (
-                  <>
-                    <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span className="text-amber-900">Institutional Audit Pending</span>
-                  </>
-                )}
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-slate-900">Institutional Credentials</span>
               </div>
 
               <div className="space-y-2 pt-1 text-xs">
@@ -355,14 +345,12 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                   </span>
                 </div>
 
-                {affiliationNumber && (
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-semibold text-slate-600">Affiliation Number:</span>
-                    <span className="font-mono font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
-                      {affiliationNumber}
-                    </span>
-                  </div>
-                )}
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-semibold text-slate-600">Affiliation Number:</span>
+                  <span className="font-mono font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
+                    {affiliationNumber || 'Not publicly disclosed'}
+                  </span>
+                </div>
               </div>
 
               {school.boardNote && (
@@ -379,18 +367,11 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                     : 'text-[11px] text-amber-800 leading-relaxed pt-1 border-t border-amber-200/60'
                 }
               >
-                {school.verification.isVerified
-                  ? `Information, address, and affiliation audited from ${school.verification.sourceName}.`
-                  : 'This school directory entry is awaiting direct institutional disclosure. Synthetic attributes have been removed in accordance with Admission Pitara data accuracy standards.'}
+                {school.verification.sourceName
+                ? `Institutional information is based on ${school.verification.sourceName}.`
+                : 'Affiliation details are not publicly disclosed.'}
               </p>
 
-              <div
-                className={
-                  school.verification.isVerified ? 'text-[10px] text-emerald-700/80' : 'text-[10px] text-amber-700/80'
-                }
-              >
-                Audited: {school.verification.lastVerified}
-              </div>
             </section>
           )}
 
@@ -398,15 +379,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <section>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
-              {school.fees.verificationStatus === 'verified_from_source' ? (
-                <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
-                  Audited &amp; Verified
-                </span>
-              ) : (
-                <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
-                  Audit Pending
-                </span>
-              )}
+
             </div>
             <FeeDisplay fees={school.fees} variant="detailed" />
           </section>

@@ -22,12 +22,18 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
     fees.verificationStatus === 'estimated_historical' ||
     fees.verificationStatus === 'estimated';
 
+  const hasDetailedFeeData =
+    Boolean(fees.table?.length) ||
+    Boolean(fees.components?.length) ||
+    Boolean(fees.gradeWiseTiers?.length) ||
+    Boolean(fees.rangeText && !/^(not publicly disclosed|not yet available)$/i.test(fees.rangeText));
+
   const isUndisclosed =
     fees.disclosed === false ||
     fees.verificationStatus === 'not_publicly_verified' ||
     fees.verificationStatus === 'unverified_undisclosed' ||
     fees.verificationStatus === 'unverified_copied_from_wisdom_tree' ||
-    !fees.cardFee;
+    (!fees.cardFee && !hasDetailedFeeData);
 
   const [showTooltip, setShowTooltip] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);

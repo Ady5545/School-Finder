@@ -889,7 +889,7 @@ export default function AdminPage() {
                 <div className="space-y-2.5">
                   {(overviewData?.schools.topViewed || []).filter((item: any) => {
                     const school = schoolsList.find(s => s.slug === item.slug);
-                    return Boolean(school) && !school.isArchived && !school.isDuplicate;
+                    return school ? !school.isArchived && !school.isDuplicate : false;
                   }).map((item: any, idx: number) => {
                     const school = schoolsList.find(s => s.slug === item.slug);
                     return (
@@ -1401,3 +1401,994 @@ export default function AdminPage() {
         {/* TAB 6: WISHLISTS & SHORTLISTS                                       */}
         {/* =================================================================== */}
         {activeTab === 'wishlists' && (
+          <div className="space-y-6">
+            <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg">
+              <h3 className="text-base font-bold text-white font-serif mb-4 flex items-center gap-2">
+                <Heart className="w-4 h-4 text-rose-400" />
+                <span>Aggregate Shortlist Popularity &amp; User Breakdown</span>
+              </h3>
+
+              <div className="space-y-4">
+                {wishlistsData.map((item, idx) => (
+                  <div
+                    key={item.slug}
+                    className="p-4 rounded-xl bg-[#0a1e38] border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-md bg-amber-400 text-slate-950 font-bold text-xs flex items-center justify-center">
+                          #{idx + 1}
+                        </span>
+                        <h4 className="font-bold text-sm text-white">{item.schoolName}</h4>
+                        <span className="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 font-extrabold text-xs">
+                          {item.count} Saved Shortlists
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-1">
+                        Sector: {item.sector} • Board: {item.board}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 max-w-md">
+                      <span className="text-[11px] text-slate-400 mr-1 self-center">Saved by:</span>
+                      {item.users.map((u: any) => (
+                        <Link
+                          key={u.userId}
+                          href={`/admin/users/${u.userId}`}
+                          className="px-2 py-0.5 rounded-md bg-[#163a63] hover:bg-[#1d4d82] text-amber-200 text-[10px] font-semibold transition-colors"
+                        >
+                          {u.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 7: COMPARISONS ANALYTICS                                        */}
+        {/* =================================================================== */}
+        {activeTab === 'comparisons' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-4">
+              <h3 className="text-base font-bold text-white font-serif flex items-center gap-2">
+                <Scale className="w-4 h-4 text-emerald-400" />
+                <span>Most Compared School Pairings</span>
+              </h3>
+
+              <div className="space-y-2.5">
+                {comparisonsData.commonPairs.length > 0 ? (
+                  comparisonsData.commonPairs.map((pair, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3.5 rounded-xl bg-[#0a1e38] border border-white/5 flex items-center justify-between text-xs"
+                    >
+                      <span className="font-bold text-slate-200">
+                        {pair.schoolNames.join(' vs ')}
+                      </span>
+                      <span className="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">
+                        {pair.count} Comparisons
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-slate-400 py-6 text-center">
+                    No comparison pairs recorded yet in telemetry.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-4">
+              <h3 className="text-base font-bold text-white font-serif flex items-center gap-2">
+                <Building className="w-4 h-4 text-blue-400" />
+                <span>Comparison Frequency by School</span>
+              </h3>
+
+              <div className="space-y-2.5">
+                {comparisonsData.mostComparedSchools.length > 0 ? (
+                  comparisonsData.mostComparedSchools.map(item => (
+                    <div
+                      key={item.slug}
+                      className="p-3.5 rounded-xl bg-[#0a1e38] border border-white/5 flex items-center justify-between text-xs"
+                    >
+                      <span className="font-bold text-slate-200">{item.schoolName}</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold">
+                        {item.count} Times Added
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-slate-400 py-6 text-center">
+                    No individual comparison data available.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 8: SEARCHES & KEYWORDS                                          */}
+        {/* =================================================================== */}
+        {activeTab === 'searches' && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-4">
+              <h3 className="text-base font-bold text-white font-serif flex items-center gap-2">
+                <Search className="w-4 h-4 text-purple-400" />
+                <span>Top Search Queries</span>
+              </h3>
+
+              <div className="space-y-2.5">
+                {searchesData.topQueries.length > 0 ? (
+                  searchesData.topQueries.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 rounded-xl bg-[#0a1e38] border border-white/5 flex items-center justify-between text-xs"
+                    >
+                      <div>
+                        <p className="font-bold text-purple-300">&ldquo;{item.query}&rdquo;</p>
+                        {item.locality && (
+                          <p className="text-[10px] text-slate-400">Locality: {item.locality}</p>
+                        )}
+                      </div>
+                      <span className="px-2.5 py-1 rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/20 font-bold">
+                        {item.count} Searches
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-slate-400 py-6 text-center">
+                    No search queries recorded yet.
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-4">
+              <h3 className="text-base font-bold text-white font-serif flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-amber-400" />
+                <span>Most Searched Localities / Sectors</span>
+              </h3>
+
+              <div className="space-y-2.5">
+                {searchesData.topLocalities.length > 0 ? (
+                  searchesData.topLocalities.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-3 rounded-xl bg-[#0a1e38] border border-white/5 flex items-center justify-between text-xs"
+                    >
+                      <span className="font-bold text-amber-300">{item.locality}</span>
+                      <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-300 border border-amber-500/20 font-bold">
+                        {item.count} Queries
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-xs text-slate-400 py-6 text-center">
+                    No locality query telemetry available.
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 9: PAID SCHOOL PROMOTIONS                                       */}
+        {/* =================================================================== */}
+        {activeTab === 'promotions' && (
+          <div className="space-y-6">
+            <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div>
+                <h3 className="text-base font-bold text-white font-serif flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400" />
+                  <span>Paid Partner Campaigns &amp; Placements</span>
+                </h3>
+                <p className="text-xs text-slate-400 mt-1">
+                  Manage sponsored banners and partner cards. Placements are transparently labeled and never modify organic ratings.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setShowPromoModal(true)}
+                className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-colors shadow-md cursor-pointer"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Create New Campaign</span>
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              {promotionsList.map(campaign => (
+                <div
+                  key={campaign.id}
+                  className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-4"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/5 pb-3">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-base text-white">{campaign.campaignName}</span>
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                            campaign.status === 'active'
+                              ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                              : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                          }`}
+                        >
+                          {campaign.status}
+                        </span>
+                        <span className="px-2 py-0.5 rounded-md bg-amber-400 text-slate-950 text-[10px] font-black">
+                          {campaign.badgeLabel}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-400 mt-0.5">
+                        School: <strong className="text-slate-200">{campaign.schoolName}</strong> • Placement: {campaign.placementType}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleTogglePromoStatus(campaign.id, campaign.status)}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
+                          campaign.status === 'active'
+                            ? 'bg-amber-500/10 text-amber-300 border-amber-500/30 hover:bg-amber-500/20'
+                            : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/20'
+                        }`}
+                      >
+                        {campaign.status === 'active' ? 'Pause Campaign' : 'Activate Campaign'}
+                      </button>
+                      <button
+                        onClick={() => handleDeletePromo(campaign.id)}
+                        className="p-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 transition-colors cursor-pointer"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-3 bg-[#0a1e38] rounded-xl border border-white/5 text-xs text-center">
+                    <div>
+                      <p className="text-[10px] text-slate-400">IMPRESSIONS</p>
+                      <p className="font-bold text-white text-sm">{campaign.impressions || 0}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-slate-400">CLICKS</p>
+                      <p className="font-bold text-amber-300 text-sm">{campaign.clicks || 0}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-slate-400">CLICK-THROUGH RATE</p>
+                      <p className="font-bold text-emerald-400 text-sm">{campaign.ctr || 0}%</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-slate-400">EXPIRES</p>
+                      <p className="font-bold text-slate-300 text-xs">
+                        {new Date(campaign.endDate).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-xs text-slate-300 bg-[#07172b] p-3 rounded-xl border border-white/5">
+                    <p className="font-bold text-amber-200">{campaign.title}</p>
+                    <p className="text-slate-400 text-[11px] mt-0.5">{campaign.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 10: MONTHLY EXCEL REPORTING SYSTEM                             */}
+        {/* =================================================================== */}
+        {activeTab === 'reports' && (
+          <div className="space-y-6">
+            {/* Header / Intro Card */}
+            <div className="p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2.5">
+                    <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                      <FileSpreadsheet className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold text-white font-serif">
+                        Monthly Excel Reporting System (.xlsx)
+                      </h3>
+                      <p className="text-xs text-slate-400">
+                        Secure, server-compiled multi-sheet spreadsheets with strict monthly date filtering (UTC).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Live Telemetry Engine Ready
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Generator Controls Card */}
+            <div className="p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-6">
+              <div className="flex items-center justify-between border-b border-white/5 pb-4">
+                <div>
+                  <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                    1. Select Reporting Period
+                  </h4>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Choose the calendar month and year to compile telemetry and account activity.
+                  </p>
+                </div>
+
+                {/* Quick Shortcuts */}
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      const now = new Date();
+                      setReportMonth(now.getUTCMonth() + 1);
+                      setReportYear(now.getUTCFullYear());
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#0a1e38] hover:bg-[#14365f] text-slate-300 border border-[#1d4b7c] transition-colors cursor-pointer"
+                  >
+                    Current Month
+                  </button>
+                  <button
+                    onClick={() => {
+                      const now = new Date();
+                      let m = now.getUTCMonth(); // previous month (0-indexed)
+                      let y = now.getUTCFullYear();
+                      if (m === 0) {
+                        m = 12;
+                        y -= 1;
+                      }
+                      setReportMonth(m);
+                      setReportYear(y);
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#0a1e38] hover:bg-[#14365f] text-slate-300 border border-[#1d4b7c] transition-colors cursor-pointer"
+                  >
+                    Previous Month
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-2">Month</label>
+                  <select
+                    value={reportMonth}
+                    onChange={e => setReportMonth(parseInt(e.target.value, 10))}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 text-sm font-semibold outline-none focus:border-amber-400 transition-colors"
+                  >
+                    <option value={1}>01 - January</option>
+                    <option value={2}>02 - February</option>
+                    <option value={3}>03 - March</option>
+                    <option value={4}>04 - April</option>
+                    <option value={5}>05 - May</option>
+                    <option value={6}>06 - June</option>
+                    <option value={7}>07 - July</option>
+                    <option value={8}>08 - August</option>
+                    <option value={9}>09 - September</option>
+                    <option value={10}>10 - October</option>
+                    <option value={11}>11 - November</option>
+                    <option value={12}>12 - December</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-300 mb-2">Year</label>
+                  <select
+                    value={reportYear}
+                    onChange={e => setReportYear(parseInt(e.target.value, 10))}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 text-sm font-semibold outline-none focus:border-amber-400 transition-colors"
+                  >
+                    <option value={2024}>2024</option>
+                    <option value={2025}>2025</option>
+                    <option value={2026}>2026 (Current Academic Cycle)</option>
+                    <option value={2027}>2027</option>
+                    <option value={2028}>2028</option>
+                    <option value={2029}>2029</option>
+                    <option value={2030}>2030</option>
+                  </select>
+                </div>
+
+                <div>
+                  <button
+                    onClick={() => handleDownloadReport()}
+                    disabled={isGeneratingReport}
+                    className="w-full flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-950/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isGeneratingReport ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+                        <span>Compiling XLSX...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-4 h-4" />
+                        <span>Download Report (.xlsx)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-xl bg-[#07172b] border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-slate-400">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>
+                    Output File:{' '}
+                    <strong className="text-slate-200 font-mono">
+                      admission-pitara-report-{reportYear}-{reportMonth.toString().padStart(2, '0')}.xlsx
+                    </strong>
+                  </span>
+                </div>
+                <span className="text-[11px] text-slate-500">
+                  Strict UTC Time Boundaries • 5 Structured Sheets
+                </span>
+              </div>
+            </div>
+
+            {/* Workbook Architecture Breakdown */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">
+                2. Report Worksheets &amp; Data Structure
+              </h4>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {/* Sheet 1 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                      SHEET 1
+                    </span>
+                    <span className="text-[10px] text-slate-400">Accounts</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Parent Accounts</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    New parent registrations during the month with parent/guardian names, email, contact phone, child name, grade/class, and residential society name.
+                  </p>
+                  <div className="text-[11px] text-emerald-400/90 font-mono pt-1">
+                    ✓ Privacy-safe (no OTPs or passwords)
+                  </div>
+                </div>
+
+                {/* Sheet 2 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-400/10 text-blue-300 border border-blue-400/20">
+                      SHEET 2
+                    </span>
+                    <span className="text-[10px] text-slate-400">Traffic</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">School Visits</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Every timestamped school view event with target school name, slug, sector locality, user identifier (if authenticated), and estimated visit duration.
+                  </p>
+                  <div className="text-[11px] text-blue-400/90 font-mono pt-1">
+                    ✓ Real activity event telemetry
+                  </div>
+                </div>
+
+                {/* Sheet 3 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-400/10 text-rose-300 border border-rose-400/20">
+                      SHEET 3
+                    </span>
+                    <span className="text-[10px] text-slate-400">Intent</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Wishlists &amp; Shortlists</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Granular log of wishlist additions and removals during the period, providing clear insights into parental interest trends and school bookmarks.
+                  </p>
+                  <div className="text-[11px] text-rose-400/90 font-mono pt-1">
+                    ✓ Full addition / removal audit trail
+                  </div>
+                </div>
+
+                {/* Sheet 4 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                      SHEET 4
+                    </span>
+                    <span className="text-[10px] text-slate-400">Feedback</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Parent Reviews &amp; Ratings</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Complete ratings and text reviews created in the month with scores (1-5), verified parent badge status, published/moderated state, and admin notes.
+                  </p>
+                  <div className="text-[11px] text-amber-400/90 font-mono pt-1">
+                    ✓ Moderation &amp; anonymous integrity
+                  </div>
+                </div>
+
+                {/* Sheet 5 Card */}
+                <div className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] space-y-2 md:col-span-2 lg:col-span-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-400/10 text-purple-300 border border-purple-400/20">
+                      SHEET 5
+                    </span>
+                    <span className="text-[10px] text-slate-400">Benchmark</span>
+                  </div>
+                  <h5 className="font-bold text-white text-sm">Canonical School Summary (63 Schools)</h5>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    Side-by-side performance matrix for all 63 Greater Noida West schools: monthly recorded views, monthly wishlist adds, monthly reviews &amp; monthly average rating, juxtaposed against all-time views, active shortlists, and overall rating.
+                  </p>
+                  <div className="text-[11px] text-purple-400/90 font-mono pt-1">
+                    ✓ Comprehensive canonical school coverage
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Security & Access Notice */}
+            <div className="p-4 rounded-xl bg-[#081b33] border border-[#19426f] flex items-start gap-3 text-xs text-slate-400">
+              <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+              <div className="space-y-1">
+                <p className="font-bold text-slate-200">
+                  Data Privacy &amp; Administrative Compliance Guarantees
+                </p>
+                <p className="leading-relaxed">
+                  Excel reports are strictly restricted to authenticated administrators. Generation operations are audited and stored in the security log. Passwords, verification OTP tokens, rate-limiters, and detailed apartment/flat numbers are strictly excluded to maintain complete parental privacy and zero-trust security.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 11: ADMINISTRATIVE AUDIT LOG                                   */}
+        {/* =================================================================== */}
+        {activeTab === 'audit' && (
+          <div className="space-y-6">
+            <div className="p-4 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg flex items-center justify-between">
+              <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                <FileText className="w-4 h-4 text-amber-400" />
+                <span>Administrative Actions &amp; Security Audit Log</span>
+              </h3>
+              <span className="text-xs text-slate-400">
+                Immutable records of review deletions, user status changes &amp; campaigns
+              </span>
+            </div>
+
+            <div className="space-y-2.5">
+              {auditLogsList.map(log => (
+                <div
+                  key={log.id}
+                  className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
+                >
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold uppercase bg-amber-400/10 text-amber-300 border border-amber-400/20">
+                        {log.action.replace('_', ' ')}
+                      </span>
+                      <span className="font-bold text-white">Target: {log.targetType} ({log.targetId})</span>
+                    </div>
+                    <p className="text-[11px] text-slate-400 mt-1">
+                      Admin: <strong className="text-slate-200">{log.adminEmail}</strong>
+                    </p>
+                  </div>
+
+                  <span className="text-[11px] text-slate-400 shrink-0 font-mono">
+                    {new Date(log.timestamp).toLocaleString()}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* =================================================================== */}
+        {/* TAB 12: SYSTEM SETTINGS & CHANGE PASSWORD                          */}
+        {/* =================================================================== */}
+        {activeTab === 'settings' && <AdminSettingsSection />}
+      </main>
+
+      {/* --------------------------------------------------------------------- */}
+      {/* 4. MODAL: CREATE NEW PROMOTION CAMPAIGN                               */}
+      {/* --------------------------------------------------------------------- */}
+      {showPromoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+          <div className="max-w-lg w-full bg-[#0f284a] border border-[#1e4878] rounded-2xl p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 className="text-base font-bold text-white font-serif">
+                Launch School Promotion Campaign
+              </h3>
+              <button
+                onClick={() => setShowPromoModal(false)}
+                className="text-slate-400 hover:text-white p-1"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleCreatePromoSubmit} className="space-y-3.5 text-xs">
+              <div>
+                <label className="block text-slate-300 font-bold mb-1">Target School</label>
+                <select
+                  value={promoForm.schoolSlug}
+                  onChange={e => setPromoForm({ ...promoForm, schoolSlug: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-200 outline-none"
+                >
+                  {schoolsList.map(s => (
+                    <option key={s.slug} value={s.slug}>
+                      {s.name} ({s.sector})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-slate-300 font-bold mb-1">Campaign Internal Name</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. DWPS Admissions 2026-27 Inaugural"
+                  value={promoForm.campaignName}
+                  onChange={e => setPromoForm({ ...promoForm, campaignName: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-white outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-slate-300 font-bold mb-1">Placement Type</label>
+                  <select
+                    value={promoForm.placementType}
+                    onChange={e => setPromoForm({ ...promoForm, placementType: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-200 outline-none"
+                  >
+                    <option value="homepage_hero">Homepage Hero Banner</option>
+                    <option value="featured_card">Directory Featured Card</option>
+                    <option value="sponsored_search">Search Header</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-slate-300 font-bold mb-1">Badge Label</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Sponsored / Promoted"
+                    value={promoForm.badgeLabel}
+                    onChange={e => setPromoForm({ ...promoForm, badgeLabel: e.target.value })}
+                    className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-white outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-300 font-bold mb-1">Public Display Title</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Delhi World Public School, Knowledge Park 5"
+                  value={promoForm.title}
+                  onChange={e => setPromoForm({ ...promoForm, title: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-white outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-300 font-bold mb-1">Description / Value Proposition</label>
+                <textarea
+                  rows={2}
+                  required
+                  placeholder="Highlight key admissions criteria, smart facilities, transparent fees..."
+                  value={promoForm.description}
+                  onChange={e => setPromoForm({ ...promoForm, description: e.target.value })}
+                  className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-white outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div className="pt-2 flex items-center justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowPromoModal(false)}
+                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 font-semibold"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold transition-colors shadow-md"
+                >
+                  Create &amp; Launch
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function AdminSettingsSection() {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  // Criteria calculations
+  const hasMinLength = newPassword.length >= 8;
+  const hasUpper = /[A-Z]/.test(newPassword);
+  const hasLower = /[a-z]/.test(newPassword);
+  const hasNumberOrSpecial = /[0-9]|[^A-Za-z0-9]/.test(newPassword);
+  const isMatching = newPassword.length > 0 && newPassword === confirmPassword;
+  const isValid = hasMinLength && hasUpper && hasLower && hasNumberOrSpecial && isMatching;
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatusMsg(null);
+
+    if (!currentPassword) {
+      setStatusMsg({ type: 'error', text: 'Current password is required.' });
+      return;
+    }
+
+    if (!isValid) {
+      setStatusMsg({
+        type: 'error',
+        text: 'Please ensure all password policy requirements and matching criteria are satisfied.',
+      });
+      return;
+    }
+
+    setIsUpdating(true);
+    try {
+      const res = await fetch('/api/admin/change-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+          confirmPassword,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setStatusMsg({ type: 'success', text: data.message || 'Administrator password successfully updated.' });
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      } else {
+        setStatusMsg({ type: 'error', text: data.message || 'Failed to update administrator password.' });
+      }
+    } catch (err: any) {
+      setStatusMsg({ type: 'error', text: 'Network or server error occurred while updating password.' });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header banner */}
+      <div className="p-4 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg flex items-center justify-between">
+        <h3 className="text-sm font-bold text-white flex items-center gap-2">
+          <Lock className="w-4 h-4 text-amber-400" />
+          <span>System Security &amp; Administrative Credentials</span>
+        </h3>
+        <span className="text-xs text-slate-400">
+          Enforce authentication integrity, rotate master credentials, and review security policies
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main Password Change Form */}
+        <div className="lg:col-span-2 p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-5">
+          <div>
+            <h4 className="text-base font-bold text-white flex items-center gap-2 font-serif">
+              <ShieldCheck className="w-5 h-5 text-emerald-400" />
+              <span>Change Administrator Password</span>
+            </h4>
+            <p className="text-xs text-slate-300 mt-1">
+              Update your administrative master account password. Password updates take effect immediately and are logged to the security audit trail.
+            </p>
+          </div>
+
+          {statusMsg && (
+            <div
+              className={`p-3.5 rounded-xl text-xs font-bold flex items-start gap-2.5 ${
+                statusMsg.type === 'success'
+                  ? 'bg-emerald-950/70 border border-emerald-500/40 text-emerald-200'
+                  : 'bg-rose-950/70 border border-rose-500/40 text-rose-200'
+              }`}
+            >
+              {statusMsg.type === 'success' ? (
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+              ) : (
+                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+              )}
+              <span>{statusMsg.text}</span>
+            </div>
+          )}
+
+          <form onSubmit={handlePasswordSubmit} className="space-y-4 text-xs">
+            {/* Current Password */}
+            <div>
+              <label className="block text-slate-200 font-bold mb-1.5 uppercase tracking-wider text-[11px]">
+                Current Administrator Password <span className="text-amber-400">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showCurrent ? 'text' : 'password'}
+                  value={currentPassword}
+                  onChange={e => setCurrentPassword(e.target.value)}
+                  placeholder="Enter current password..."
+                  required
+                  disabled={isUpdating}
+                  className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 placeholder:text-slate-500 focus:border-amber-400 outline-none text-xs font-mono"
+                />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowCurrent(!showCurrent)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                >
+                  {showCurrent ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* New Password */}
+            <div>
+              <label className="block text-slate-200 font-bold mb-1.5 uppercase tracking-wider text-[11px]">
+                New Password <span className="text-amber-400">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showNew ? 'text' : 'password'}
+                  value={newPassword}
+                  onChange={e => setNewPassword(e.target.value)}
+                  placeholder="Enter new strong password..."
+                  required
+                  disabled={isUpdating}
+                  className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 placeholder:text-slate-500 focus:border-amber-400 outline-none text-xs font-mono"
+                />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowNew(!showNew)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                >
+                  {showNew ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Confirm New Password */}
+            <div>
+              <label className="block text-slate-200 font-bold mb-1.5 uppercase tracking-wider text-[11px]">
+                Confirm New Password <span className="text-amber-400">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showConfirm ? 'text' : 'password'}
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  placeholder="Re-enter new password..."
+                  required
+                  disabled={isUpdating}
+                  className="w-full pl-9 pr-10 py-2.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-100 placeholder:text-slate-500 focus:border-amber-400 outline-none text-xs font-mono"
+                />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirm(!showConfirm)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                >
+                  {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Live Criteria Indicators */}
+            <div className="p-3.5 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] space-y-2">
+              <span className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+                Security Policy Criteria:
+              </span>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <div className={`flex items-center gap-1.5 ${hasMinLength ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasMinLength ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>At least 8 characters long</span>
+                </div>
+                <div className={`flex items-center gap-1.5 ${hasUpper ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasUpper ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>Uppercase letter (A-Z)</span>
+                </div>
+                <div className={`flex items-center gap-1.5 ${hasLower ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasLower ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>Lowercase letter (a-z)</span>
+                </div>
+                <div className={`flex items-center gap-1.5 ${hasNumberOrSpecial ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {hasNumberOrSpecial ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>Number or special character</span>
+                </div>
+                <div className={`col-span-2 flex items-center gap-1.5 ${isMatching ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  {isMatching ? <Check className="w-3.5 h-3.5 shrink-0" /> : <span className="w-3.5 h-3.5 text-center">○</span>}
+                  <span>New password and confirmation match</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isUpdating || !currentPassword || !isValid}
+              className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                isUpdating || !currentPassword || !isValid
+                  ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed'
+                  : 'bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold shadow-lg shadow-amber-500/20'
+              }`}
+            >
+              {isUpdating ? (
+                <>
+                  <RefreshCw className="w-4 h-4 animate-spin" />
+                  <span>Updating Password...</span>
+                </>
+              ) : (
+                <>
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Update Administrator Password</span>
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+
+        {/* Security Overview Sidebar */}
+        <div className="p-6 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-4 text-xs">
+          <h4 className="text-sm font-bold text-white flex items-center gap-2 font-serif">
+            <Sliders className="w-4 h-4 text-amber-400" />
+            <span>Active Security Posture</span>
+          </h4>
+
+          <div className="space-y-3 divide-y divide-white/10">
+            <div className="pt-2">
+              <span className="text-[11px] text-slate-400 block font-medium">Password Hash Algorithm</span>
+              <span className="text-slate-200 font-mono font-bold">PBKDF2-SHA512 (10,000 iter)</span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Salt Generation</span>
+              <span className="text-slate-200 font-mono font-bold">128-bit Cryptographic Random</span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Session Verification</span>
+              <span className="text-slate-200 font-mono font-bold">Server-Signed JWT Cookies</span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Admin Authorization Boundary</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1 mt-0.5">
+                <ShieldCheck className="w-3.5 h-3.5" /> Enforced Server-Side
+              </span>
+            </div>
+
+            <div className="pt-3">
+              <span className="text-[11px] text-slate-400 block font-medium">Audit Trail Logging</span>
+              <span className="text-emerald-400 font-bold flex items-center gap-1 mt-0.5">
+                <CheckCircle2 className="w-3.5 h-3.5" /> Active &amp; Immutable
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -55,12 +55,11 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
   }, [showTooltip]);
 
   const tooltipExplanation = isComparable
-    ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Includes annual tuition, composite recurring charges & lab access. Excludes optional transport (bus), uniform, and meal charges.`
-    : isEstimated
-    ? 'Estimated annual fee based on the available fee structure.'
-    : 'Fee structure is not published publicly. Direct inquiry with the school admission office is required.';
+    ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Includes recurring charges shown in the fee breakdown. Optional transport and other charges may be separate.`
+    : 'Fee details are shown where the school has publicly disclosed them.';
 
   if (variant === 'compact') {
+    if (isUndisclosed) return null;
     return (
       <div className={cn('flex flex-col relative', className)}>
         <div className="flex items-center gap-1">
@@ -251,12 +250,6 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
           </a>
         )}
       </div>
-
-      {isUndisclosed && (
-        <p className="text-[11px] text-slate-700 bg-slate-50 border border-slate-200 p-2.5 rounded-xl leading-relaxed">
-          This institution has not released a public fee schedule. Consult admissions for official prospectus.
-        </p>
-      )}
     </div>
   );
 };

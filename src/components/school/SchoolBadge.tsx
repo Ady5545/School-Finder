@@ -52,6 +52,14 @@ export const SchoolBadge: React.FC<SchoolBadgeProps> = ({ type, value, className
         </Badge>
       );
     }
+    if (value === 'unverified_third_party') {
+      return (
+        <Badge variant="warning" size="sm" className={cn('bg-amber-50 text-amber-800 border-amber-200 gap-1', className)}>
+          <AlertCircle className="w-3 h-3 text-amber-600" aria-hidden="true" />
+          <span>Third-Party Fee Reference</span>
+        </Badge>
+      );
+    }
     return (
       <Badge variant="warning" size="sm" className={cn('bg-slate-100 text-slate-700 border-slate-200 gap-1', className)}>
         <AlertCircle className="w-3 h-3 text-slate-500" aria-hidden="true" />

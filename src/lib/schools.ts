@@ -36,7 +36,7 @@ export function getAllSchools(options?: { includeAliases?: boolean; includeArchi
 }
 
 /**
- * All 62 slugs so static routes and legacy URLs continue resolving without 404s.
+ * Returns every school slug so static routes and legacy URLs continue resolving without 404s.
  */
 export function getAllSchoolSlugs(): string[] {
   return schools.map(s => s.slug);

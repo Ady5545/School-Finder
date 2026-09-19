@@ -6,7 +6,7 @@ import { buildPageMetadata } from '../../lib/seo';
 
 export const metadata = buildPageMetadata(
   'Schools in Greater Noida West',
-  'Browse and discover verified top schools in Greater Noida West and Noida Extension with audited fees, boards, and facilities.',
+  'Browse and discover schools in Greater Noida West and Noida Extension with audited fees, boards, facilities, and admission information.',
   '/schools'
 );
 
@@ -53,7 +53,7 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
           Schools in Greater Noida West & Noida Extension
         </h1>
         <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1">
-          Explore verified profiles, fee breakdowns, curriculum details, and admissions status for all {allSchools.length} institutions.
+          Explore school profiles, fee breakdowns, curriculum details, and admissions status for all {allSchools.length} listed institutions.
         </p>
       </div>
 

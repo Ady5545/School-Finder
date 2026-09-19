@@ -201,7 +201,18 @@ runTest('Undisclosed schools have null cardFee and honest disclosure copy withou
   assert(undisclosed.length > 0, 'Found undisclosed schools');
   undisclosed.forEach(s => {
     assert.strictEqual(s.fees.cardFee, null, `${s.slug} cardFee must be null`);
-    assert.strictEqual(s.fees.rangeText, 'Not publicly disclosed', `${s.slug} rangeText must state Not publicly disclosed`);
+    if (s.fees.verificationStatus === 'unverified_third_party') {
+      assert(
+        typeof s.fees.rangeText === 'string' && s.fees.rangeText.trim().length > 0,
+        `${s.slug} third-party fee reference must have a non-empty rangeText`
+      );
+      assert(
+        /third-party|reported|not publicly disclosed|pending|not yet available/i.test(`${s.fees.rangeText} ${s.fees.disclaimer || ''}`),
+        `${s.slug} third-party fee reference must be explicitly qualified`
+      );
+    } else {
+      assert.strictEqual(s.fees.rangeText, 'Not publicly disclosed', `${s.slug} rangeText must state Not publicly disclosed`);
+    }
     assert(s.fees.disclaimer, `${s.slug} must have a disclaimer`);
     assert.strictEqual(s.fees.table.length, 0, `${s.slug} table must be empty`);
   });

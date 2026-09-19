@@ -142,13 +142,6 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         </div>
       )}
 
-      {/* Regional Outlier Notice */}
-      {school.geographicClassification === 'geographic_outlier' && (
-        <div className="mb-6 p-4 rounded-xl bg-purple-50 border border-purple-200 text-purple-900 text-xs">
-          <strong>Regional Location Notice:</strong> This institution is situated in {school.location.sector} outside core Greater Noida West. It is listed as an expanded regional reference for parents considering broader NCR options.
-        </div>
-      )}
-
       {/* Header Banner */}
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-[var(--color-border)]">
         <div className="space-y-3 flex-1">

@@ -1,0 +1,1 @@
+export function SchoolImage({src,alt,className=''}:{src?:string;alt:string;className?:string}){return <img src={src||'/assets/images/placeholder-school.svg'} alt={alt} className={className}/>} 

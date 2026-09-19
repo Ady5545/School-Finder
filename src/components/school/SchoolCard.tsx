@@ -89,6 +89,12 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
         {/* Gradient shadow overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1e33]/70 via-transparent to-black/25 pointer-events-none opacity-85 group-hover:opacity-95 transition-opacity" />
 
+        {school.recordType === 'upcoming' && (
+          <div className="absolute top-3 left-3 z-10 px-3 py-1.5 rounded-lg bg-white/95 text-[var(--color-primary)] border border-white/70 shadow-warm-sm text-[11px] font-extrabold uppercase tracking-wider">
+            Upcoming School
+          </div>
+        )}
+
         {/* Shortlist Heart Action Button */}
         <div className="absolute top-3 right-3 flex items-center gap-1.5 z-10">
           <button

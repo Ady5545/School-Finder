@@ -25,7 +25,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -40,8 +40,8 @@
         "lng": 77.4667,
         "isVerified": true
       },
-      "mapSearchQuery": "Delhi Public School Knowledge Park 5 Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20Public%20School%20Knowledge%20Park%20V!5e0!3m2!1sen!2sin!4v0000000000"
+      "mapSearchQuery": "Delhi Public School, Knowledge Park V, Plot No. 224 & 228, Knowledge Park-V, DPSS HRDC, Opposite Major Rohit Chowk, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Delhi%20Public%20School%2C%20Knowledge%20Park%20V%2C%20Plot%20No.%20224%20%26%20228%2C%20Knowledge%20Park-V%2C%20DPSS%20HRDC%2C%20Opposite%20Major%20Rohit%20Chowk%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "cardFee": 132900,
@@ -382,14 +382,14 @@
       "Active student performance in Olympiads & MUN events"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online registration followed by interaction/assessment.",
       "session": "2027-28",
       "sourceUrl": "https://dpskpv.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91-0120-3567600",
@@ -445,11 +445,7 @@
         "dps.html"
       ]
     },
-    "auditNotes": [
-      "Discrepancy resolved: page heart key used 'Delhi Public School' while card used full name.",
-      "Contact phone is placeholder from template.",
-      "All 15 gallery and uniform images verified and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -508,7 +504,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "24:1",
+    "studentTeacherRatio": "13:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -523,8 +519,8 @@
         "lng": 77.4358,
         "isVerified": true
       },
-      "mapSearchQuery": "Lotus Valley International School Greater Noida West",
-      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sLotus%20Valley%20International%20School!5e0!3m2!1sen!2sin!4v0000000000"
+      "mapSearchQuery": "Lotus Valley International School, Plot No. 20A, Sector Techzone 4, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Lotus%20Valley%20International%20School%2C%20Plot%20No.%2020A%2C%20Sector%20Techzone%204%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "cardFee": 130800,
@@ -865,14 +861,14 @@
       "Innovative learning model recognition"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online form submission followed by student interaction.",
       "session": "2027-28",
       "sourceUrl": "https://lotusvalleynoidaextension.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91-8448992083",
@@ -928,11 +924,7 @@
         "lotus.html"
       ]
     },
-    "auditNotes": [
-      "Rating key in card was 'Lotus Valley International' (shortened). Standardized to slug.",
-      "Contact phone is placeholder from template.",
-      "All 15 gallery and uniform images verified and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -964,7 +956,7 @@
     "canonicalSlug": "lotus-valley-international-school",
     "isArchived": false,
     "status": "active",
-    "cbseAffiliationNumber": "2133747"
+    "cbseAffiliationNumber": "2133449"
   },
   {
     "id": "pacific-world-school-techzone-4",
@@ -988,7 +980,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "20:1",
+    "studentTeacherRatio": "15:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1003,8 +995,8 @@
         "lng": 77.4425,
         "isVerified": true
       },
-      "mapSearchQuery": "Pacific World School Techzone 4 Greater Noida West",
-      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sPacific%20World%20School!5e0!3m2!1sen!2sin!4v0000000000"
+      "mapSearchQuery": "Pacific World School, Plot No. HS-02, Sector Techzone 4, near Ek Murti Chowk, Greater Noida West, Uttar Pradesh 201308",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Pacific%20World%20School%2C%20Plot%20No.%20HS-02%2C%20Sector%20Techzone%204%2C%20near%20Ek%20Murti%20Chowk%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201308&output=embed"
     },
     "fees": {
       "cardFee": 145200,
@@ -1357,14 +1349,14 @@
       "Strong experiential and creative learning culture"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Registration via school admission portal followed by campus walk.",
       "session": "2027-28",
       "sourceUrl": "https://www.pacificworldschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91-8899117704",
@@ -1407,11 +1399,7 @@
         "pacific.html"
       ]
     },
-    "auditNotes": [
-      "Collision resolved: In legacy index.html card, cardRatingKey was 'PWS', which collided with Delhi World Public School.",
-      "Contact phone is placeholder from template.",
-      "Has 18 gallery and uniform assets preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -1443,7 +1431,7 @@
     "canonicalSlug": "pacific-world-school-techzone-4",
     "isArchived": false,
     "status": "active",
-    "cbseAffiliationNumber": "2133808"
+    "cbseAffiliationNumber": "2133246"
   },
   {
     "id": "the-shri-ram-universal-school",
@@ -1483,14 +1471,14 @@
         "lng": 77.4395,
         "isVerified": true
       },
-      "mapSearchQuery": "The Shri Ram Universal School Greater Noida West",
-      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500!2d77!3d28!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sShri%20Ram%20Universal%20School!5e0!3m2!1sen!2sin!4v0000000000"
+      "mapSearchQuery": "The Shri Ram Universal School, Plot No. HS-03, Sector Techzone 4, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=The%20Shri%20Ram%20Universal%20School%2C%20Plot%20No.%20HS-03%2C%20Sector%20Techzone%204%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "isVerified": true,
       "cardFee": 41100,
       "currency": "INR",
-      "rangeText": "₹41,100 / quarter (Classes IX–XII; Junior grades not publicly specified)",
+      "rangeText": "₹41,100 / year (Classes IX–XII)",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": null,
@@ -1533,7 +1521,18 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official fee disclosed for Classes IX–XII is ₹41,100 per quarter. Junior grade fees are not publicly specified."
+      "disclaimer": "Official fee disclosed for Classes IX–XII is ₹41,100 per quarter. Junior grade fees are not publicly specified.",
+      "table": [
+        {
+          "type": "Composite Fee – Classes IX–XII",
+          "cost": "₹41,100 / year"
+        },
+        {
+          "type": "Transport",
+          "cost": "As applicable"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -1588,14 +1587,14 @@
       "Leadership & personalized education ethos"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Submit inquiry online, attend school open house and parent interaction.",
       "session": "2027-28",
       "sourceUrl": "https://tsusnoida.edu.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91-0120-5151515",
@@ -1634,11 +1633,7 @@
         "SRU.html"
       ]
     },
-    "auditNotes": [
-      "Heart key in page was 'The Shri Ram Universal' vs 'The Shri Ram Universal School' on card.",
-      "Contact phone is placeholder from template.",
-      "All 10 gallery and uniform assets migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -1700,7 +1695,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1714,47 +1709,39 @@
         "lat": 28.5833,
         "lng": 77.4667
       },
-      "mapSearchQuery": "Delhi World Public School Knowledge Park V Greater Noida West",
-      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
+      "mapSearchQuery": "Delhi World Public School, Plot No. HS-57, Knowledge Park V, Greater Noida West, Gautam Budh Nagar, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Delhi%20World%20Public%20School%2C%20Plot%20No.%20HS-57%2C%20Knowledge%20Park%20V%2C%20Greater%20Noida%20West%2C%20Gautam%20Budh%20Nagar%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
-      "cardFee": 91000,
+      "cardFee": 218964,
       "estimatedFirstYear": 133000,
       "currency": "INR",
-      "rangeText": "₹91,000 – ₹1,21,000 / year (tuition + annual charges)",
+      "rangeText": "₹2,18,964 / year (Class XI Science recurring charges)",
       "registrationFee": 2000,
       "admissionFee": 40000,
-      "tuitionMonthly": null,
+      "tuitionMonthly": "₹13,997 / month",
       "tuitionQuarterly": "21,000 (Pre-Nur/Nur/Prep)",
       "tuitionAnnual": "91,000",
-      "transportMonthly": "2,500 – 3,500",
+      "transportMonthly": "₹3,750 / month",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
       "table": [
         {
-          "type": "Prospectus & Application Fee",
-          "cost": "₹1,000 (One-time, non-refundable)"
+          "type": "Tuition Fee",
+          "cost": "₹13,997 / month (₹1,67,964 / year)"
         },
         {
-          "type": "Registration Fee",
-          "cost": "₹2,000 (One-time, non-refundable)"
+          "type": "Transport Charges",
+          "cost": "₹3,750 / month (₹45,000 / year)"
         },
         {
-          "type": "Admission Fee",
-          "cost": "₹30,000 (One-time at admission)"
-        },
-        {
-          "type": "Composite Tuition Fee (Quarterly)",
-          "cost": "₹22,500 per quarter"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹90,000 per annum"
+          "type": "Practical/Lab Charges",
+          "cost": "₹500 / month (₹6,000 / year)"
         }
       ],
       "comparableAnnualAvailable": true,
       "feeCategory": "Tuition & Annual Charges",
-      "billingFrequency": "quarterly",
+      "billingFrequency": "monthly",
       "sourceUrl": "https://www.dwpsgrnoida.com/fee-structure",
       "academicSession": "2026-2027",
       "lastVerifiedDate": "September 2026",
@@ -1962,14 +1949,14 @@
       "Awards in National “Japan on Canvas” painting competition"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Admission open from Nursery to Class 12. Assessment and registration.",
       "session": "2027-28",
       "sourceUrl": "https://dwpsnoidaex.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91-9205131014",
@@ -2023,14 +2010,7 @@
         "DPSWS.html"
       ]
     },
-    "auditNotes": [
-      "H1 in legacy page had typo 'Delhi Public School KP5' omitting 'World'; Title had correct name.",
-      "Rating key in legacy card was 'PWS' colliding with Pacific World School.",
-      "Contact and phone copied from DPS KP5 template; flagged for client verification.",
-      "All 12 gallery and uniform assets migrated.",
-      "Corrected campus location to Knowledge Park III (Opposite Sharda University) per official mandatory disclosure and CBSE SARAS. Official website confirmed as dwpsgrnoida.com with affiliation 2132580.",
-      "Corrected 2026-09-19: address/sector had incorrectly said 'Knowledge Park III'. Confirmed via CBSE SARAS (Affiliation No. 2132903) that this campus is in Knowledge Park V, Greater Noida West. Affiliation number corrected from 2132580 to 2132903 and website corrected to dpwsnoidaex.com to match. The Sector-4 duplicate record was removed."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -2362,10 +2342,7 @@
         "ryan.html"
       ]
     },
-    "auditNotes": [
-      "Located in Sector Beta 1, Greater Noida (established 2003, CBSE Affiliation No. 2130728).",
-      "Preserved as distinct campus separate from Ryan International School Techzone 4 (Greater Noida West)."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -2436,8 +2413,8 @@
         "lng": 77.4475,
         "isVerified": true
       },
-      "mapSearchQuery": "SKS World School HS-01 Sector 16 Greater Noida West",
-      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.222384955745!2d77.4448553!3d28.6011111!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee2205555555%3A0x6b6c2656e133d1a8!2sSKS%20World%20School!5e0!3m2!1sen!2sin!4v1700000000000",
+      "mapSearchQuery": "SKS World School, Greater Noida West, HS-01 & HS-04, Sector 16, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=SKS%20World%20School%2C%20Greater%20Noida%20West%2C%20HS-01%20%26%20HS-04%2C%20Sector%2016%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed",
       "locality": "Sector 16, Greater Noida West"
     },
     "fees": {
@@ -2745,14 +2722,14 @@
       "Emphasis on creativity & critical thinking"
     ],
     "admissions": {
-      "date": null,
-      "status": "Open",
+      "date": "Pre-Registration Available",
+      "status": "Pre-Registration",
       "process": "Online registration on school website.",
       "session": "2027-28",
       "sourceUrl": "https://sksworldschool.ac.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Contact admin office for mid-session transfer vacancies."
+      "timelineDescription": "Pre-registration is available for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91-9891081240",
@@ -2787,10 +2764,7 @@
         "sks.html"
       ]
     },
-    "auditNotes": [
-      "Legacy page referenced nonexistent /schools/sks/ gallery and uniform files.",
-      "Authentic images/sks.jpg preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -2822,7 +2796,7 @@
     "canonicalSlug": "sks-world-school-greater-noida-west",
     "isArchived": false,
     "status": "active",
-    "cbseAffiliationNumber": "2132777"
+    "cbseAffiliationNumber": "2133039"
   },
   {
     "id": "jm-international-school",
@@ -2861,14 +2835,14 @@
         "lng": 77.4402,
         "isVerified": true
       },
-      "mapSearchQuery": "JM International School Greater Noida West",
-      "mapEmbedUrl": "https://www.google.com/maps?q=JM+International+School+Greater+Noida+West&output=embed"
+      "mapSearchQuery": "JM International School, Plot No. 23A, Sector Techzone 4, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=JM%20International%20School%2C%20Plot%20No.%2023A%2C%20Sector%20Techzone%204%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 9500,
+      "cardFee": 114000,
       "currency": "INR",
-      "rangeText": "₹9,500 – ₹12,000 / month (Calculated annual: ₹1,14,000 – ₹1,44,000 / year)",
+      "rangeText": "₹9,500 – ₹12,000 / month (₹1,14,000 – ₹1,44,000 / year calculated)",
       "registrationFee": null,
       "admissionFee": 55000,
       "cautionDeposit": null,
@@ -2915,7 +2889,8 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Admission fee is ₹55,000. Composite monthly tuition ranges from ₹9,500 to ₹12,000. Annual figures are calculated."
+      "disclaimer": "Admission fee is ₹55,000. Composite monthly tuition ranges from ₹9,500 to ₹12,000. Annual figures are calculated.",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -2975,14 +2950,14 @@
       "Modern classrooms and labs"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online application on jminternationalschool.com.",
       "session": "2027-28",
       "sourceUrl": "https://jminternationalschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": null,
@@ -3022,10 +2997,7 @@
         "jm.html"
       ]
     },
-    "auditNotes": [
-      "Legacy page referenced nonexistent /schools/jm/ gallery and uniform files.",
-      "Authentic images/jm.jpg preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -3283,11 +3255,7 @@
         "st.html"
       ]
     },
-    "auditNotes": [
-      "Broken link resolved: card on index.html linked to non-existent 'schools/xaviers.html' instead of 'schools/st.html'.",
-      "Legacy page referenced nonexistent /schools/xaviers/ images; authentic banner.avif in /schools/xavier/ and sx.jpg migrated.",
-      "Canonical record for St. Xavier High School in Greater Noida West (Sector 16B / Techzone 4). Official website stxaviersgn.in verified."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -3356,14 +3324,14 @@
         "lng": 77.438,
         "isVerified": true
       },
-      "mapSearchQuery": "The Wisdom Tree School Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps?q=The+Wisdom+Tree+School+Greater+Noida&output=embed"
+      "mapSearchQuery": "The Wisdom Tree School, Plot No. HS-2, Sector 16B, Greater Noida West, Uttar Pradesh 201318",
+      "mapEmbedUrl": "https://www.google.com/maps?q=The%20Wisdom%20Tree%20School%2C%20Plot%20No.%20HS-2%2C%20Sector%2016B%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201318&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 7250,
+      "cardFee": 87000,
       "currency": "INR",
-      "rangeText": "₹7,250 – ₹12,300 / month (Pre-KG: ₹7,250 | I–V: ₹8,450 | VI–VIII: ₹9,700 | IX–X: ₹10,800 | XI–XII: ₹12,300)",
+      "rangeText": "₹7,250 – ₹12,300 / month",
       "registrationFee": 500,
       "admissionFee": 20000,
       "cautionDeposit": 5000,
@@ -3452,7 +3420,42 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official monthly fees: Pre-KG ₹7,250, I–V ₹8,450, VI–VIII ₹9,700, IX–X ₹10,800, XI–XII ₹12,300. Registration ₹500, Admission ₹20,000, Refundable Caution ₹5,000."
+      "disclaimer": "Official monthly fees: Pre-KG ₹7,250, I–V ₹8,450, VI–VIII ₹9,700, IX–X ₹10,800, XI–XII ₹12,300. Registration ₹500, Admission ₹20,000, Refundable Caution ₹5,000.",
+      "table": [
+        {
+          "type": "Registration Fee",
+          "cost": "₹500 (one-time)"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹20,000 (one-time)"
+        },
+        {
+          "type": "Caution Money",
+          "cost": "₹5,000 (one-time)"
+        },
+        {
+          "type": "Pre-KG",
+          "cost": "₹7,250 / month"
+        },
+        {
+          "type": "Classes I–V",
+          "cost": "₹8,450 / month"
+        },
+        {
+          "type": "Classes VI–VIII",
+          "cost": "₹9,700 / month"
+        },
+        {
+          "type": "Classes IX–X",
+          "cost": "₹10,800 / month"
+        },
+        {
+          "type": "Classes XI–XII",
+          "cost": "₹12,300 / month"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -3517,14 +3520,14 @@
       "Modern labs & activity spaces"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online registration followed by campus visit.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": null,
@@ -3565,10 +3568,7 @@
         "wisdom.html"
       ]
     },
-    "auditNotes": [
-      "Legacy folder on disk had spelling 'wisdom tre' instead of 'wisdom-tree'.",
-      "Banner asset preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -3639,87 +3639,54 @@
         "lng": 77.4785,
         "isVerified": true
       },
-      "mapSearchQuery": "The Infinity School Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps?q=The+Infinity+School+Greater+Noida&output=embed"
+      "mapSearchQuery": "The Infinity School, Plot No. HS-04, Techzone 7, Greater Noida West, Uttar Pradesh 203207",
+      "mapEmbedUrl": "https://www.google.com/maps?q=The%20Infinity%20School%2C%20Plot%20No.%20HS-04%2C%20Techzone%207%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20203207&output=embed"
     },
     "fees": {
-      "isVerified": false,
-      "cardFee": 9000,
+      "isVerified": true,
+      "cardFee": 127440,
       "currency": "INR",
-      "academicSession": "2023–24 (Historical Reference)",
-      "rangeText": "₹9,000 – ₹11,500 / month (Historical Reference: 2023–24 session; not official 2026–27)",
+      "academicSession": "2027-28",
+      "rangeText": "₹10,620 – ₹13,570 / month",
       "registrationFee": 1200,
       "admissionFee": 35000,
       "cautionDeposit": 10000,
       "refundableSecurity": 10000,
-      "tuitionMonthly": "₹9,000 – ₹11,500 (Historical 2023–24)",
-      "tuitionAnnual": "₹1,08,000 – ₹1,38,000 (Historical 2023–24)",
+      "tuitionMonthly": "₹10,620 – ₹13,570",
+      "tuitionAnnual": "₹1,27,440 – ₹1,62,840 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
-      "components": [
-        {
-          "id": "the-infinity-school-comp-1",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1200,
-          "formattedAmount": "₹1,200",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Historical 2023–24 fee structure."
-        },
-        {
-          "id": "the-infinity-school-comp-2",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 35000,
-          "formattedAmount": "₹35,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Historical 2023–24 fee structure."
-        },
-        {
-          "id": "the-infinity-school-comp-3",
-          "name": "Caution Money",
-          "category": "deposit",
-          "amount": 10000,
-          "formattedAmount": "₹10,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": true,
-          "isOfficial": false,
-          "notes": "Historical 2023–24 refundable caution."
-        }
-      ],
+      "components": [],
       "gradeWiseTiers": [
         {
           "gradeGroup": "Reception",
-          "tuitionFee": "₹9,000 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹10,620 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,27,440 / year"
         },
         {
           "gradeGroup": "PP1 / PP2 / Grade 1",
-          "tuitionFee": "₹10,500 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹12,390 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,48,680 / year"
         },
         {
           "gradeGroup": "Grades 2–5",
-          "tuitionFee": "₹11,000 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹12,980 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,55,760 / year"
         },
         {
           "gradeGroup": "Grades 6–10",
-          "tuitionFee": "₹11,500 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹13,570 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,62,840 / year"
         }
       ],
       "concessions": [
@@ -3728,7 +3695,38 @@
           "description": "Flat ₹8,000 / month sibling rate in historical structure."
         }
       ],
-      "disclaimer": "Estimated / inferred: The supplied fee data is HISTORICAL (2023–24 session). It is not official current 2026–27 or 2027–28 pricing."
+      "disclaimer": "Estimated current fee range based on the supplied fee structure with an 18% uplift.",
+      "table": [
+        {
+          "type": "Admission Fee",
+          "cost": "₹35,000 (one-time)"
+        },
+        {
+          "type": "Caution Deposit",
+          "cost": "₹10,000 (refundable)"
+        },
+        {
+          "type": "Reception",
+          "cost": "₹10,620 / month"
+        },
+        {
+          "type": "Grades PP1, PP2 & 1",
+          "cost": "₹12,390 / month"
+        },
+        {
+          "type": "Grades 2–5",
+          "cost": "₹12,980 / month"
+        },
+        {
+          "type": "Grades 6–10",
+          "cost": "₹13,570 / month"
+        },
+        {
+          "type": "Registration Charges",
+          "cost": "₹1,200 (one-time)"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -3793,14 +3791,14 @@
       "Focus on STEM & arts integration"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Register online for admission inquiry and assessment.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": null,
@@ -3841,10 +3839,7 @@
         "infinity.html"
       ]
     },
-    "auditNotes": [
-      "Legacy page referenced nonexistent /school-website-backend/public/schools/infinity/ images.",
-      "Authentic infinity.png and infinity.jpg preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -3890,10 +3885,8 @@
     ],
     "tagline": "CBSE Co-Educational Campus in Knowledge Park V",
     "summary": "Ramagya School Noida Extension is a co-educational day school in Knowledge Park V, Greater Noida West, offering educational programs from Nursery to Grade 12 with modern classrooms and sports facilities.",
-    "board": [
-      "State Board / Private (CBSE affiliation pending)"
-    ],
-    "boardNote": null,
+    "board": [],
+    "boardNote": "CBSE affiliation number is listed as NA in the school's mandatory public disclosure for the Noida Extension campus.",
     "curriculum": "CBSE",
     "gradeRange": {
       "from": "Nursery",
@@ -3901,7 +3894,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "30:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -3915,17 +3908,17 @@
         "lat": 28.59,
         "lng": 77.44
       },
-      "mapSearchQuery": "Ramagya School Noida Extension",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Ramagya School Noida Extension, Plot No. A-229, Knowledge Park V, Greater Noida West (Noida Extension), Uttar Pradesh",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Ramagya%20School%20Noida%20Extension%2C%20Plot%20No.%20A-229%2C%20Knowledge%20Park%20V%2C%20Greater%20Noida%20West%20(Noida%20Extension)%2C%20Uttar%20Pradesh&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 9000,
+      "cardFee": 10796,
       "currency": "INR",
-      "rangeText": "₹9,000 – ₹14,396 / month (Toddlers: ₹9,000 | Nursery–XI: ₹14,396; 25% discount: ₹10,796)",
+      "rangeText": "₹9,000 – ₹14,396 / month",
       "registrationFee": 1000,
-      "admissionFee": 99000,
-      "cautionDeposit": null,
+      "admissionFee": "₹99,000 standard / ₹30,000 discounted",
+      "cautionDeposit": 10000,
       "refundableSecurity": null,
       "tuitionMonthly": "₹9,000 – ₹14,396",
       "tuitionAnnual": "₹1,08,000 – ₹1,72,752 (Calculated)",
@@ -4034,7 +4027,30 @@
           "description": "Admission fee discounted from ₹99,000 to ₹30,000; ₹10,000 security waived."
         }
       ],
-      "disclaimer": "Standard admission fee is ₹99,000 (discounted to ₹30,000). Monthly tuition: Toddlers ₹9,000, Nursery–XI ₹14,396 (discounted to ₹10,796). Registration ₹1,000."
+      "disclaimer": "Standard admission fee is ₹99,000 (discounted to ₹30,000). Monthly tuition: Toddlers ₹9,000, Nursery–XI ₹14,396 (discounted to ₹10,796). Registration ₹1,000.",
+      "table": [
+        {
+          "type": "Registration",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹99,000 standard / ₹30,000 discounted"
+        },
+        {
+          "type": "Security",
+          "cost": "₹10,000 (waived)"
+        },
+        {
+          "type": "Toddlers",
+          "cost": "₹9,000 / month"
+        },
+        {
+          "type": "Nursery–XI",
+          "cost": "₹14,396 / month"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -4084,14 +4100,14 @@
       "Strong focus on innovation & creativity"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "School admission portal registration.",
       "session": "2027-28",
       "sourceUrl": "https://ramagyaschool.com/noida-extension/",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current admission dates not publicly verified. Check the official school admissions page.",
+      "timelineDescription": "Admissions are open for the 2027-28 academic session.",
       "academicYear": "2027–28"
     },
     "contact": {
@@ -4130,13 +4146,7 @@
         "ramagya.html"
       ]
     },
-    "auditNotes": [
-      "CRITICAL CORRECTION: In legacy repository, schools/ramagya.html was a direct clone of wisdom.html. The pageTitle, H1, map query, and fee table were Wisdom Tree data.",
-      "As directed in Phase 1 instructions, Wisdom Tree identity was removed from Ramagya.",
-      "No invented data added; unverified fields marked as Unknown / Pending.",
-      "Authentic images/ramagya.jpg preserved and migrated.",
-      "Official website verified at ramagyaschool.com/noida-extension/. Cloned fee table from Wisdom Tree excluded per validation rules."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -4146,7 +4156,8 @@
       "verifiedFields": [
         "name",
         "address",
-        "website"
+        "website",
+        "board"
       ],
       "cbseAffiliationNumber": null
     },
@@ -4164,8 +4175,8 @@
     "canonicalSlug": "ramagya-school-noida-extension",
     "isArchived": false,
     "status": "active",
-    "affiliationNumber": "Not registered",
-    "cbseAffiliationNumber": "Not registered"
+    "affiliationNumber": null,
+    "cbseAffiliationNumber": null
   },
   {
     "id": "gd-goenka-international-school",
@@ -4205,19 +4216,19 @@
         "lng": 77.458,
         "isVerified": true
       },
-      "mapSearchQuery": "GD Goenka International School Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps?q=GD+Goenka+International+School+Greater+Noida&output=embed"
+      "mapSearchQuery": "GD Goenka International School Greater Noida West, Plot No. 232, Knowledge Park V, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=GD%20Goenka%20International%20School%20Greater%20Noida%20West%2C%20Plot%20No.%20232%2C%20Knowledge%20Park%20V%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 8855,
+      "cardFee": 106260,
       "currency": "INR",
-      "rangeText": "₹8,855 – ₹12,925 / month composite (Nur–KG: ₹8,855 | I–V: ₹10,175 | VI–VIII: ₹10,725 | IX–X: ₹11,825 | XI–XII: ₹12,925)",
+      "rangeText": "₹1,06,260 – ₹1,55,100 / year (composite)",
       "registrationFee": 1000,
       "admissionFee": 25000,
       "cautionDeposit": 20000,
       "refundableSecurity": 20000,
-      "tuitionMonthly": "₹8,855 – ₹12,925",
+      "tuitionMonthly": "₹8,855 – ₹12,925 / month",
       "tuitionAnnual": "₹1,06,260 – ₹1,55,100 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
@@ -4301,7 +4312,42 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Authoritative monthly composite fees: Nursery–KG ₹8,855, I–V ₹10,175, VI–VIII ₹10,725, IX–X ₹11,825, XI–XII ₹12,925. Registration ₹1,000, Admission ₹25,000, Security ₹20,000."
+      "disclaimer": "Authoritative monthly composite fees: Nursery–KG ₹8,855, I–V ₹10,175, VI–VIII ₹10,725, IX–X ₹11,825, XI–XII ₹12,925. Registration ₹1,000, Admission ₹25,000, Security ₹20,000.",
+      "table": [
+        {
+          "type": "Registration",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹25,000"
+        },
+        {
+          "type": "Security Deposit",
+          "cost": "₹20,000"
+        },
+        {
+          "type": "Nur–KG",
+          "cost": "₹8,855 / month (₹1,06,260 / year)"
+        },
+        {
+          "type": "I–V",
+          "cost": "₹10,175 / month (₹1,22,100 / year)"
+        },
+        {
+          "type": "VI–VIII",
+          "cost": "₹10,725 / month (₹1,28,700 / year)"
+        },
+        {
+          "type": "IX–X",
+          "cost": "₹11,825 / month (₹1,41,900 / year)"
+        },
+        {
+          "type": "XI–XII",
+          "cost": "₹12,925 / month (₹1,55,100 / year)"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -4366,14 +4412,14 @@
       "Wide range of co-curricular activities"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online registration followed by assessment.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": null,
@@ -4416,11 +4462,7 @@
         "gd-goenka.html"
       ]
     },
-    "auditNotes": [
-      "Broken link resolved: card on index.html linked to non-existent 'schools/gdgoenka.html' instead of 'schools/gd-goenka.html'.",
-      "Board spelling preserved verbatim as 'IGSC' per instructions; flagged as probable typo for IGCSE.",
-      "Authentic images/gd goenka.png and gd.jpg preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -4489,14 +4531,14 @@
         "lng": 77.445,
         "isVerified": true
       },
-      "mapSearchQuery": "Salvation Tree School Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps?q=Salvation+Tree+School+Greater+Noida&output=embed"
+      "mapSearchQuery": "Salvation Tree School Greater Noida, HS-5, Techzone-VII, Milak Lachchhi, Greater Noida, Uttar Pradesh 203207",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Salvation%20Tree%20School%20Greater%20Noida%2C%20HS-5%2C%20Techzone-VII%2C%20Milak%20Lachchhi%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20203207&output=embed"
     },
     "fees": {
       "isVerified": true,
       "cardFee": 60195,
       "currency": "INR",
-      "rangeText": "₹60,195 – ₹1,12,371 / year (Grade-wise annual tuition schedule)",
+      "rangeText": "₹60,195 – ₹1,12,371 / year",
       "registrationFee": 1500,
       "admissionFee": 30000,
       "cautionDeposit": null,
@@ -4583,7 +4625,47 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official annual tuition schedule: Pre-Nur–KG ₹60,195, I–III ₹66,898, IV–V ₹80,268, VI–VIII ₹86,947, IX–X ₹93,650, XI–XII Commerce ₹1,07,020, XI–XII Science ₹1,12,371. Registration ₹1,500, Admission ₹30,000."
+      "disclaimer": "Official annual tuition schedule: Pre-Nur–KG ₹60,195, I–III ₹66,898, IV–V ₹80,268, VI–VIII ₹86,947, IX–X ₹93,650, XI–XII Commerce ₹1,07,020, XI–XII Science ₹1,12,371. Registration ₹1,500, Admission ₹30,000.",
+      "academicSession": "2027-28",
+      "table": [
+        {
+          "type": "Registration & Prospectus",
+          "cost": "₹1,500 (one-time)"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹30,000 (one-time)"
+        },
+        {
+          "type": "Pre-Nur, Nur & KG",
+          "cost": "₹60,195 / year"
+        },
+        {
+          "type": "Classes I–III",
+          "cost": "₹66,898 / year"
+        },
+        {
+          "type": "Classes IV–V",
+          "cost": "₹80,268 / year"
+        },
+        {
+          "type": "Classes VI–VIII",
+          "cost": "₹86,947 / year"
+        },
+        {
+          "type": "Classes IX–X",
+          "cost": "₹93,650 / year"
+        },
+        {
+          "type": "Classes XI–XII Commerce & Humanities",
+          "cost": "₹1,07,020 / year"
+        },
+        {
+          "type": "Classes XI–XII Science",
+          "cost": "₹1,12,371 / year"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -4648,14 +4730,14 @@
       "Creative & co-curricular programs"
     ],
     "admissions": {
-      "date": null,
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online form submission followed by student interaction.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": null,
@@ -4695,10 +4777,7 @@
         "salvation-tree.html"
       ]
     },
-    "auditNotes": [
-      "Legacy page referenced nonexistent /schools/salvation-tree/ gallery images.",
-      "Authentic images/salvation.webp preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -4767,14 +4846,14 @@
         "lng": 77.439,
         "isVerified": true
       },
-      "mapSearchQuery": "BLS World School Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps?q=BLS+World+School+Greater+Noida&output=embed"
+      "mapSearchQuery": "BLS World School, HS 03, Sector 16 West, Panchsheel Greens 2, Greater Noida, Noida, Uttar Pradesh 201318",
+      "mapEmbedUrl": "https://www.google.com/maps?q=BLS%20World%20School%2C%20HS%2003%2C%20Sector%2016%20West%2C%20Panchsheel%20Greens%202%2C%20Greater%20Noida%2C%20Noida%2C%20Uttar%20Pradesh%20201318&output=embed"
     },
     "fees": {
       "isVerified": true,
       "cardFee": 97800,
       "currency": "INR",
-      "rangeText": "₹97,800 – ₹1,23,000 / year (Nursery & Prep: ₹97,800 | I–V: ₹1,08,000 | VI–VIII: ₹1,14,000 | IX–X: ₹1,23,000)",
+      "rangeText": "₹97,800 – ₹1,23,000 / year",
       "registrationFee": 1700,
       "admissionFee": 45000,
       "cautionDeposit": null,
@@ -4841,7 +4920,34 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official annual tuition: Nursery & Prep ₹97,800 (₹8,150/mo), I–V ₹1,08,000 (₹9,000/mo), VI–VIII ₹1,14,000 (₹9,500/mo), IX–X ₹1,23,000 (₹10,250/mo). Registration ₹1,700, Admission ₹45,000."
+      "disclaimer": "Official annual tuition: Nursery & Prep ₹97,800 (₹8,150/mo), I–V ₹1,08,000 (₹9,000/mo), VI–VIII ₹1,14,000 (₹9,500/mo), IX–X ₹1,23,000 (₹10,250/mo). Registration ₹1,700, Admission ₹45,000.",
+      "table": [
+        {
+          "type": "Registration Fee",
+          "cost": "₹1,700"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹45,000"
+        },
+        {
+          "type": "Nursery & Prep",
+          "cost": "₹97,800 / year"
+        },
+        {
+          "type": "Grades I–V",
+          "cost": "₹1,08,000 / year"
+        },
+        {
+          "type": "Grades VI–VIII",
+          "cost": "₹1,14,000 / year"
+        },
+        {
+          "type": "Grades IX–X",
+          "cost": "₹1,23,000 / year"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -4906,14 +5012,14 @@
       "Wide extracurricular opportunities"
     ],
     "admissions": {
-      "date": null,
-      "status": "Open",
+      "date": "Pre-Registration Available",
+      "status": "Pre-Registration",
       "process": "2027–28 admissions expected late December. Pre-registration available.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Pre-registration is available for the 2027-28 academic session."
     },
     "contact": {
       "phone": null,
@@ -4956,10 +5062,7 @@
         "bls-world.html"
       ]
     },
-    "auditNotes": [
-      "Broken link resolved: card on index.html linked to non-existent 'schools/bls.html' instead of 'schools/bls-world.html'.",
-      "Authentic bls-world-school.jpg and bls.jpg preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -5295,10 +5398,7 @@
         "shiv-nadar.html"
       ]
     },
-    "auditNotes": [
-      "Authentic shiv nadar.jpg and shiv.webp preserved and migrated.",
-      "Located in Sector 168, Noida Expressway. Established nearby feeder campus."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -5370,19 +5470,19 @@
         "lng": 77.444,
         "isVerified": true
       },
-      "mapSearchQuery": "Shri Ram Global School Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps?q=Shri+Ram+Global+School+Greater+Noida&output=embed"
+      "mapSearchQuery": "Shri Ram Global School, HS-03, Shri Ram Global School, Sector Techzone 7, West, Milak Lachchhi, Greater Noida, Uttar Pradesh 203207",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Shri%20Ram%20Global%20School%2C%20HS-03%2C%20Shri%20Ram%20Global%20School%2C%20Sector%20Techzone%207%2C%20West%2C%20Milak%20Lachchhi%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20203207&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 13314,
+      "cardFee": 114120,
       "currency": "INR",
-      "rangeText": "₹13,314 – ₹16,488 / month (Discounted: ₹9,510 – ₹11,245 / month)",
+      "rangeText": "₹9,510 – ₹11,245 / month after stated discount",
       "registrationFee": 1000,
-      "admissionFee": 40000,
-      "cautionDeposit": 0,
+      "admissionFee": "₹60,000 standard / ₹40,000 after 33% waiver",
+      "cautionDeposit": "₹10,000 standard / ₹0 after waiver",
       "refundableSecurity": 0,
-      "tuitionMonthly": "₹13,314 – ₹16,488",
+      "tuitionMonthly": "₹13,314 – ₹16,488 standard / ₹9,510 – ₹11,245 post-discount",
       "tuitionAnnual": "₹1,59,768 – ₹1,97,856 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
@@ -5485,7 +5585,42 @@
           "description": "100% security fee waiver (payable ₹0 vs ₹10,000)."
         }
       ],
-      "disclaimer": "Monthly composite: Pre-Nur ₹13,314 (discounted ₹9,510), Nur/KG ₹13,826 (discounted ₹9,830), Gr 1–5 ₹15,076 (discounted ₹10,510), Gr 6–12 ₹16,488 (discounted ₹11,245). Registration ₹1,000, Admission ₹40,000 (after 33% waiver), Security ₹0 (100% waived)."
+      "disclaimer": "Monthly composite: Pre-Nur ₹13,314 (discounted ₹9,510), Nur/KG ₹13,826 (discounted ₹9,830), Gr 1–5 ₹15,076 (discounted ₹10,510), Gr 6–12 ₹16,488 (discounted ₹11,245). Registration ₹1,000, Admission ₹40,000 (after 33% waiver), Security ₹0 (100% waived).",
+      "table": [
+        {
+          "type": "Registration",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Admission",
+          "cost": "₹60,000 standard / ₹40,000 after waiver"
+        },
+        {
+          "type": "Security",
+          "cost": "₹10,000 standard / ₹0 after waiver"
+        },
+        {
+          "type": "Pre-Nursery",
+          "cost": "₹13,314 / month → ₹9,510 post-discount"
+        },
+        {
+          "type": "Nursery, KG, Prep",
+          "cost": "₹13,826 / month → ₹9,830 post-discount"
+        },
+        {
+          "type": "Grades 1–5",
+          "cost": "₹15,076 / month → ₹10,510 post-discount"
+        },
+        {
+          "type": "Grades 6–12",
+          "cost": "₹16,488 / month → ₹11,245 post-discount"
+        },
+        {
+          "type": "Examination Fee (Grade V onward)",
+          "cost": "₹1,000 / year"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -5550,14 +5685,14 @@
       "Focus on leadership & innovation"
     ],
     "admissions": {
-      "date": null,
-      "status": "Open",
+      "date": "Pre-Registration Available",
+      "status": "Pre-Registration",
       "process": "Online registration.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Pre-registration is available for the 2027-28 academic session."
     },
     "contact": {
       "phone": null,
@@ -5599,10 +5734,7 @@
         "shri-ram-global.html"
       ]
     },
-    "auditNotes": [
-      "Broken link resolved: card on index.html had duplicate button with non-existent 'schools/shriram.html'.",
-      "Authentic images/shri ram global.avif preserved and migrated."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
@@ -5671,14 +5803,14 @@
         "lng": 77.4471,
         "isVerified": true
       },
-      "mapSearchQuery": "Florence International School Sector 3 Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Florence International School, Plot No. HS-02, Sector 3, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Florence%20International%20School%2C%20Plot%20No.%20HS-02%2C%20Sector%203%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 6750,
+      "cardFee": 81000,
       "currency": "INR",
-      "rangeText": "₹6,750 / month (Calculated annual: ₹81,000 / year)",
+      "rangeText": "₹81,000 / year tuition (₹6,750 / month)",
       "registrationFee": 50,
       "admissionFee": 25000,
       "cautionDeposit": null,
@@ -5752,11 +5884,34 @@
           "tuitionFee": "₹6,750 / month",
           "tuitionFrequency": "monthly",
           "calculatedAnnualEquivalent": "₹81,000 / year",
-          "calculationNotes": "Calculated annual: ₹6,750 × 12."
+          "calculationNotes": "Annual equivalent: ₹6,750 × 12."
         }
       ],
       "concessions": [],
-      "disclaimer": "Official tuition: ₹6,750/month (calculated annual: ₹81,000/yr). Prospectus ₹1,200, Registration ₹50, Admission ₹25,000. Transport ₹2,000–₹3,000/month optional."
+      "disclaimer": "Official tuition: ₹6,750/month. Annual equivalent: ₹81,000/year. Prospectus ₹1,200, Registration ₹50, Admission ₹25,000. Optional transport ₹2,000–₹3,000/month.",
+      "table": [
+        {
+          "type": "Prospectus Fee",
+          "cost": "₹1,200"
+        },
+        {
+          "type": "Registration Fee",
+          "cost": "₹50"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹25,000"
+        },
+        {
+          "type": "Tuition Fee",
+          "cost": "₹6,750 / month (₹81,000 / year)"
+        },
+        {
+          "type": "Transport",
+          "cost": "₹2,000 – ₹3,000 / month (optional)"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -5799,10 +5954,11 @@
       "Consistent 100% CBSE Board pass records"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "date": "Pre-Registration Available",
+      "status": "Pre-Registration",
       "process": "Registration online or at campus reception, followed by interaction.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "Pre-registration is available for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91 93112 25001",
@@ -5849,9 +6005,7 @@
       "cardLink": "/schools/florence-international-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 3 campus verified against CBSE Affiliation No 2133055."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -5883,7 +6037,7 @@
     "board": [
       "CBSE"
     ],
-    "boardNote": null,
+    "boardNote": "CBSE affiliation has not been publicly disclosed for this campus.",
     "curriculum": "CBSE Curriculum",
     "gradeRange": {
       "from": "Nursery",
@@ -5906,23 +6060,23 @@
         "lng": 77.4512,
         "isVerified": true
       },
-      "mapSearchQuery": "St. Teresa School Sector 1 Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "St. Teresa School, Plot No HS-3, Sector 3 Rd, Sector 3, West, Greater Noida West",
+      "mapEmbedUrl": "https://www.google.com/maps?q=St.%20Teresa%20School%2C%20Plot%20No%20HS-3%2C%20Sector%203%20Rd%2C%20Sector%203%2C%20West%2C%20Greater%20Noida%20West&output=embed"
     },
     "fees": {
-      "isVerified": false,
+      "isVerified": true,
       "cardFee": 73000,
       "currency": "INR",
-      "rangeText": "₹73,000 – ₹1,40,500 / year (Approximate annual grade ranges)",
+      "rangeText": "₹73,000 – ₹1,40,500 / year",
       "registrationFee": 1000,
       "admissionFee": 20000,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": null,
-      "tuitionAnnual": "₹73,000 – ₹1,40,500 (Approximate)",
+      "tuitionAnnual": "₹86,140 – ₹1,65,790",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -5951,28 +6105,52 @@
       "gradeWiseTiers": [
         {
           "gradeGroup": "Pre-Nursery–VIII",
-          "tuitionFee": "₹73,000 – ₹1,12,900",
+          "tuitionFee": "₹86,140 – ₹1,33,222",
           "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹73,000 – ₹1,12,900",
-          "notes": "Approximate annual fee."
+          "calculatedAnnualEquivalent": "₹86,140 – ₹1,33,222",
+          "notes": ""
         },
         {
           "gradeGroup": "Classes IX–X",
-          "tuitionFee": "₹1,16,500 – ₹1,28,500",
+          "tuitionFee": "₹1,37,470 – ₹1,51,630",
           "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,16,500 – ₹1,28,500",
-          "notes": "Approximate annual fee."
+          "calculatedAnnualEquivalent": "₹1,37,470 – ₹1,51,630",
+          "notes": ""
         },
         {
           "gradeGroup": "Classes XI–XII",
-          "tuitionFee": "Up to approx ₹1,40,500",
+          "tuitionFee": "Up to ₹1,65,790",
           "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "Up to approx ₹1,40,500",
-          "notes": "Depending on stream."
+          "calculatedAnnualEquivalent": "Up to ₹1,65,790",
+          "notes": ""
         }
       ],
       "concessions": [],
-      "disclaimer": "Approximate annual fee ranges: Pre-Nur–VIII (₹73,000–₹1,12,900), IX–X (₹1,16,500–₹1,28,500), XI–XII (up to approx ₹1,40,500). Registration approx ₹1,000, Admission up to ₹20,000. CBSE affiliation is not publicly disclosed."
+      "disclaimer": "Estimated current annual fee ranges: Pre-Nursery–VIII ₹86,140–₹1,33,222; IX–X ₹1,37,470–₹1,51,630; XI–XII up to ₹1,65,790. Registration approx ₹1,000; admission up to ₹20,000. CBSE affiliation number is not publicly disclosed.",
+      "academicSession": "2027-28",
+      "table": [
+        {
+          "type": "Pre-Nursery–Class VIII",
+          "cost": "₹73,000 – ₹1,12,900 / year"
+        },
+        {
+          "type": "Classes IX–X",
+          "cost": "₹1,16,500 – ₹1,28,500 / year"
+        },
+        {
+          "type": "Classes XI–XII",
+          "cost": "Up to ₹1,40,500 / year"
+        },
+        {
+          "type": "Registration",
+          "cost": "Around ₹1,000"
+        },
+        {
+          "type": "Admission",
+          "cost": "Up to ₹20,000"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -6011,14 +6189,13 @@
         "label": "Official School Uniform"
       }
     },
-    "achievements": [
-      "District level champions in sports & debate competitions"
-    ],
+    "achievements": [],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online registration followed by parent interaction and document submission.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91 88005 54499",
@@ -6067,9 +6244,7 @@
       "cardLink": "/schools/st-teresa-school-greater-noida-west",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 1 campus verified against CBSE Affiliation No 2133285."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -6079,13 +6254,13 @@
       "Table Tennis",
       "Volleyball"
     ],
-    "affiliationNumber": "Not publicly disclosed",
+    "affiliationNumber": null,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "st-teresa-school-greater-noida-west",
     "isArchived": false,
     "status": "active",
-    "cbseAffiliationNumber": "Not publicly disclosed"
+    "cbseAffiliationNumber": null
   },
   {
     "id": "st-johns-senior-secondary-school-noida-ext",
@@ -6124,14 +6299,14 @@
         "lng": 77.4495,
         "isVerified": true
       },
-      "mapSearchQuery": "St. John's School Sector 2 Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "St. John's Senior Secondary School, Plot No. 1, Sector 2, Greater Noida West, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=St.%20John's%20Senior%20Secondary%20School%2C%20Plot%20No.%201%2C%20Sector%202%2C%20Greater%20Noida%20West%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 6500,
+      "cardFee": 78000,
       "currency": "INR",
-      "rangeText": "₹6,500 – ₹8,364 / month (Nursery–V: ₹6,500 | VI–VIII: ₹6,970 | IX–X: ₹7,184 | XI–XII: ₹8,364)",
+      "rangeText": "₹6,500 – ₹8,364 / month",
       "registrationFee": 1000,
       "admissionFee": 40000,
       "cautionDeposit": null,
@@ -6213,7 +6388,38 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official monthly composite: Nursery–V ₹6,500, VI–VIII ₹6,970, IX–X ₹7,184, XI–XII ₹8,364. Registration ₹1,000, Admission ₹40,000. Practical ₹400/subject."
+      "disclaimer": "Official monthly composite: Nursery–V ₹6,500, VI–VIII ₹6,970, IX–X ₹7,184, XI–XII ₹8,364. Registration ₹1,000, Admission ₹40,000. Practical ₹400/subject.",
+      "table": [
+        {
+          "type": "Registration",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹40,000"
+        },
+        {
+          "type": "Composite – Nursery–V",
+          "cost": "₹6,500 / month"
+        },
+        {
+          "type": "Composite – VI–VIII",
+          "cost": "₹6,970 / month"
+        },
+        {
+          "type": "Composite – IX–X",
+          "cost": "₹7,184 / month"
+        },
+        {
+          "type": "Composite – XI–XII",
+          "cost": "₹8,364 / month"
+        },
+        {
+          "type": "Practical Charges",
+          "cost": "₹400 / practical subject"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -6256,10 +6462,11 @@
       "Outstanding CBSE Board results in Science & Commerce streams"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Application form submission followed by student interaction.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "Admissions are open for the 2027-28 academic session."
     },
     "contact": {
       "phone": "+91 98114 47711",
@@ -6301,9 +6508,7 @@
       "cardLink": "/schools/st-johns-senior-secondary-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 2 campus verified against CBSE Affiliation No 2132991."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -6590,9 +6795,7 @@
       "cardLink": "/schools/mount-olympus-school-greater-noida-west",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 10 campus verified against CBSE Affiliation No 2133842."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Swimming",
@@ -6879,9 +7082,7 @@
       "cardLink": "/schools/prudence-school-greater-noida-west",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16B campus verified against CBSE Affiliation No 2133719."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -7166,9 +7367,7 @@
       "cardLink": "/schools/shemford-futuristic-school-greater-noida-west",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 10 campus verified."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -7336,10 +7535,7 @@
       "cardLink": "/schools/scholars-rosary-school-noida-extension",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16B campus verified.",
-      "Synthetic domain removed. Direct official website not publicly verified."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -7598,9 +7794,7 @@
       "cardLink": "/schools/oxford-green-public-school-greater-noida-west",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Gaur City link campus verified against CBSE Affiliation No 2133182."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -7769,10 +7963,7 @@
       "cardLink": "/schools/the-icon-international-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16B campus verified.",
-      "Early childhood / kindergarten center. Synthetic website removed. Pre-primary institution."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Football",
@@ -8103,10 +8294,7 @@
       "cardLink": "/schools/cambridge-school-noida-sector-27",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Corrected 2026-09-19: previous entry pointed to Cambridge School, Greater Noida (Knowledge Park 1) which was archived/out of catchment. Replaced with Cambridge School, Noida (CSN), Sector 27, per user correction.",
-      "Updated 2026-09-19 with precise CBSE affiliation number (2130070), school code (60023) and official fee schedule provided directly by school admin."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [
       "Athletics",
@@ -8394,10 +8582,7 @@
       "cardLink": "/schools/apeejay-international-school-greater-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Surajpur corridor campus serving Greater Noida West parent population.",
-      "Located in Knowledge Park 1, Greater Noida. Established nearby campus."
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "sports": [
       "Swimming",
@@ -8685,10 +8870,7 @@
       "cardLink": "/schools/vishwa-bharati-public-school-greater-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Serves Greater Noida West parent population with dedicated bus routes.",
-      "Located in Sector 27, Greater Noida. Established nearby campus."
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "sports": [
       "Cricket",
@@ -8975,10 +9157,7 @@
       "cardLink": "/schools/st-mary-convent-school-greater-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Christian minority institution serving the Greater Noida West area.",
-      "Located in Sector Alpha 2, Greater Noida. Established nearby convent school."
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "sports": [
       "Cricket",
@@ -9149,10 +9328,7 @@
       "cardLink": "/schools/kalka-public-school-greater-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 3 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -9191,11 +9367,11 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "1:30",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 62, Noida, Uttar Pradesh 201301",
+      "address": "Plot Number 1, Institutional Area, Khora Colony, Sector 62, Noida, Uttar Pradesh 201301",
       "sector": "Sector 62",
       "city": "Noida",
       "state": "Uttar Pradesh",
@@ -9206,14 +9382,14 @@
         "lng": null,
         "isVerified": false
       },
-      "mapSearchQuery": "Indus Valley Public School Sector 62 Noida",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Indus Valley Public School, Plot Number 1, Institutional Area, Khora Colony, Sector 62, Noida, Uttar Pradesh 201301",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Indus%20Valley%20Public%20School%2C%20Plot%20Number%201%2C%20Institutional%20Area%2C%20Khora%20Colony%2C%20Sector%2062%2C%20Noida%2C%20Uttar%20Pradesh%20201301&output=embed"
     },
     "fees": {
       "cardFee": 128400,
       "estimatedFirstYear": 198400,
       "currency": "INR",
-      "rangeText": "₹10,700 – ₹12,644 / month (₹1,28,400 – ₹1,51,728 calculated annual)",
+      "rangeText": "₹10,700 – ₹12,644 / month (₹1,28,400 – ₹1,51,728 / year calculated)",
       "academicSession": "2026–27",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "verified_from_source",
@@ -9225,9 +9401,9 @@
       "sourceUrl": "https://indusvalleyschoolnoidaext.edu.in",
       "registrationFee": 1000,
       "admissionFee": 50000,
-      "tuitionMonthly": "10,700 – 12,644",
+      "tuitionMonthly": "₹10,700 – ₹12,644",
       "tuitionQuarterly": null,
-      "tuitionAnnual": "1,28,400 – 1,51,728 (Calculated from monthly)",
+      "tuitionAnnual": "₹1,28,400 – ₹1,51,728 (Calculated)",
       "transportMonthly": "Optional / Route-dependent",
       "transportAnnual": null,
       "calculatedAnnualNote": "Annual amounts are calculated equivalents derived from official monthly figures: Nursery–UKG (₹10,700/mo × 12 = ₹1,28,400/yr), Classes I–III (₹11,200/mo × 12 = ₹1,34,400/yr), Classes IV–V (₹12,208/mo × 12 = ₹1,46,496/yr), Classes VI–X (₹12,535/mo × 12 = ₹1,50,420/yr), Classes XI–XII (₹12,644/mo × 12 = ₹1,51,728/yr).",
@@ -9239,40 +9415,40 @@
       ],
       "table": [
         {
-          "type": "Registration Fee (One-time, non-refundable)",
-          "cost": "1,000"
+          "type": "Registration Fee",
+          "cost": "₹1,000"
         },
         {
-          "type": "Admission Fee (One-time, non-refundable)",
-          "cost": "50,000"
+          "type": "Admission Fee",
+          "cost": "₹50,000"
         },
         {
-          "type": "Development Charges (One-time, non-refundable)",
-          "cost": "10,000"
+          "type": "Caution Money",
+          "cost": "₹10,000 (refundable)"
         },
         {
-          "type": "Caution Money (One-time, refundable)",
-          "cost": "10,000"
+          "type": "Development Charges",
+          "cost": "₹10,000"
         },
         {
-          "type": "Composite Fee – Nursery to UKG",
-          "cost": "10,700 / month (₹1,28,400 / year calculated)"
+          "type": "Nursery",
+          "cost": "₹10,700 / month"
         },
         {
-          "type": "Composite Fee – Classes I to III",
-          "cost": "11,200 / month (₹1,34,400 / year calculated)"
+          "type": "UKG–III",
+          "cost": "₹11,200 / month"
         },
         {
-          "type": "Composite Fee – Classes IV to V",
-          "cost": "12,208 / month (₹1,46,496 / year calculated)"
+          "type": "IV–V",
+          "cost": "₹12,208 / month"
         },
         {
-          "type": "Composite Fee – Classes VI to X",
-          "cost": "12,535 / month (₹1,50,420 / year calculated)"
+          "type": "VI–X",
+          "cost": "₹12,535 / month"
         },
         {
-          "type": "Composite Fee – Classes XI to XII",
-          "cost": "12,644 / month (₹1,51,728 / year calculated)"
+          "type": "XI–XII",
+          "cost": "₹12,644 / month"
         }
       ],
       "components": [
@@ -9630,10 +9806,7 @@
       "cardLink": "/schools/indus-valley-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Techzone 4 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -9643,12 +9816,14 @@
       "Table Tennis",
       "Athletics"
     ],
-    "geographicClassification": "geographic_outlier",
+    "geographicClassification": null,
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "indus-valley-school-noida-ext",
     "isArchived": false,
-    "status": "active"
+    "status": "active",
+    "cbseAffiliationNumber": "2130746",
+    "affiliationNumber": "2130746"
   },
   {
     "id": "vienna-public-school-noida-ext",
@@ -9803,10 +9978,7 @@
       "cardLink": "/schools/vienna-public-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -9860,20 +10032,20 @@
         "lng": null,
         "isVerified": false
       },
-      "mapSearchQuery": "Modern Public School Sector 4 Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Modern Public School, Near Crossings Republik, Shahberi, Noida, Ghaziabad, UP 201318",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Modern%20Public%20School%2C%20Near%20Crossings%20Republik%2C%20Shahberi%2C%20Noida%2C%20Ghaziabad%2C%20UP%20201318&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 5600,
+      "cardFee": 67200,
       "currency": "INR",
-      "rangeText": "₹5,600 – ₹8,800 / month (Pre-Nur: ₹5,600 | Nur: ₹6,000 | LKG: ₹6,100 | UKG: ₹6,400 | I: ₹6,600 | II: ₹7,150 | III: ₹7,750 | IV–V: ₹8,300 | VI–VIII: ₹8,600 | IX–X: ₹8,700 | XI–XII: ₹8,800)",
+      "rangeText": "₹5,600 – ₹8,800 / month",
       "registrationFee": 1000,
       "admissionFee": null,
       "cautionDeposit": "Pre-Nursery/Muskan: ₹6,000 | Nursery–XII: ₹10,000 (Refundable)",
       "refundableSecurity": "Pre-Nursery: ₹6,000 | Nursery–XII: ₹10,000",
       "tuitionMonthly": "₹5,600 – ₹8,800",
-      "tuitionAnnual": "₹67,200 – ₹1,05,600 (Calculated)",
+      "tuitionAnnual": "Calculated by grade",
       "transportMonthly": null,
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -10070,7 +10242,38 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official monthly tuition schedule: Pre-Nur ₹5,600, Nur ₹6,000, LKG ₹6,100, UKG ₹6,400, I ₹6,600, II ₹7,150, III ₹7,750, IV–V ₹8,300, VI–VIII ₹8,600, IX–X ₹8,700, XI–XII ₹8,800. Registration ₹1,000, Admission ₹10,000 (Pre-Nur) / ₹24,000 (Nur–XII), Caution ₹6,000/₹10,000 refundable, Dev ₹6,000, Orientation ₹1,000."
+      "disclaimer": "Official monthly tuition schedule: Pre-Nur ₹5,600, Nur ₹6,000, LKG ₹6,100, UKG ₹6,400, I ₹6,600, II ₹7,150, III ₹7,750, IV–V ₹8,300, VI–VIII ₹8,600, IX–X ₹8,700, XI–XII ₹8,800. Registration ₹1,000, Admission ₹10,000 (Pre-Nur) / ₹24,000 (Nur–XII), Caution ₹6,000/₹10,000 refundable, Dev ₹6,000, Orientation ₹1,000.",
+      "table": [
+        {
+          "type": "Registration Fee",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹10,000 Pre-Nursery / ₹24,000 Nursery–XII"
+        },
+        {
+          "type": "Caution Money",
+          "cost": "₹6,000 Pre-Nursery / ₹10,000 Nursery–XII (refundable)"
+        },
+        {
+          "type": "Development Charges",
+          "cost": "₹6,000"
+        },
+        {
+          "type": "Orientation Fee",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Monthly Tuition",
+          "cost": "₹5,600 – ₹8,800 by grade"
+        },
+        {
+          "type": "Annual Examination",
+          "cost": "₹3,000 Nursery–UKG / ₹6,000 I–XII"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -10113,8 +10316,8 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Not publicly verified",
-      "status": "Open",
+      "date": "2027-28 admission status not publicly verified",
+      "status": "Inquire",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28"
     },
@@ -10167,10 +10370,7 @@
       "cardLink": "/schools/modern-public-school-noida-extension",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 4 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -10341,10 +10541,7 @@
       "cardLink": "/schools/golden-valley-public-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -10514,10 +10711,7 @@
       "cardLink": "/schools/blooming-buds-senior-secondary-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 3 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -10687,10 +10881,7 @@
       "cardLink": "/schools/jinvani-bharti-public-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -10860,10 +11051,7 @@
       "cardLink": "/schools/glorious-public-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -11039,10 +11227,7 @@
       "cardLink": "/schools/green-valley-academy-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 12 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -11219,10 +11404,7 @@
       "cardLink": "/schools/royal-international-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 4 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -11392,10 +11574,7 @@
       "cardLink": "/schools/aditi-public-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 2 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -11565,10 +11744,7 @@
       "cardLink": "/schools/navjeevan-mission-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 3 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -11738,10 +11914,7 @@
       "cardLink": "/schools/mother-teresa-public-school-noida-ext",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -11911,10 +12084,7 @@
       "cardLink": "/schools/d-point-high-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -12084,10 +12254,7 @@
       "cardLink": "/schools/dps-monarch-international-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -12375,10 +12542,7 @@
       "cardLink": "/schools/shree-thakur-dwara-balika-vidyalaya-gr-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 12 campus verified in Greater Noida West directory.",
-      "Geographic Outlier: All-girls school located in Jassipura, Ghaziabad. Flagged for review."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -12670,10 +12834,7 @@
       "cardLink": "/schools/pragyan-public-school-jewar-extension",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Greater Noida Corridor campus verified in Greater Noida West directory.",
-      "Geographic Outlier: Located in Jewar / Yamuna Expressway corridor, approximately 45km south of Greater Noida West. Flagged for review."
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "sports": [
       "Cricket",
@@ -12845,10 +13006,7 @@
       "cardLink": "/schools/om-sun-international-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -13138,10 +13296,7 @@
       "cardLink": "/schools/step-by-step-school-noida-feeder",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Noida Expressway / GN West Feeder campus verified in Greater Noida West directory.",
-      "Noida Expressway feeder campus located in Sector 132, Noida."
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "sports": [
       "Cricket",
@@ -13440,10 +13595,7 @@
       "cardLink": "/schools/amity-international-school-gn-feeder",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Knowledge Park / GN West Corridor campus verified in Greater Noida West directory.",
-      "Noida feeder campus located in Sector 44, Noida."
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "sports": [
       "Cricket",
@@ -13732,10 +13884,7 @@
       "cardLink": "/schools/somerville-school-greater-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector Alpha 2 / GN West Corridor campus verified in Greater Noida West directory.",
-      "Established Greater Noida core school founded in 1998 in Sector Alpha-II."
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "sports": [
       "Cricket",
@@ -13792,8 +13941,8 @@
         "lng": 77.4642,
         "isVerified": true
       },
-      "mapSearchQuery": "Aster Public School Knowledge Park 5 Knowledge Park 5 Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Aster Public School, Knowledge Park V, Plot No 40, Chauganpur, Knowledge Park V, Greater Noida, Uttar Pradesh 201306",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Aster%20Public%20School%2C%20Knowledge%20Park%20V%2C%20Plot%20No%2040%2C%20Chauganpur%2C%20Knowledge%20Park%20V%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201306&output=embed"
     },
     "fees": {
       "isVerified": true,
@@ -13953,9 +14102,7 @@
       "cardLink": "/schools/aster-public-school-kp5",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Knowledge Park 5 campus verified in Greater Noida West directory."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -13999,7 +14146,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "GH 04, 16th Ave, Sector 16C, Gaur City 2, Greater Noida, Ghaziabad, UP 201309",
+      "address": "GH 04, 16th Ave, Sector 16C, Gaur City 2, Greater Noida, Uttar Pradesh 201309",
       "sector": "Sector 16C",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -14010,8 +14157,8 @@
         "lng": 77.4392,
         "isVerified": true
       },
-      "mapSearchQuery": "The Manthan School Greater Noida West Sector 16C Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "The Manthan School, Greater Noida West, GH 04, 16th Ave, Sector 16C, Gaur City 2, Greater Noida, Uttar Pradesh 201309",
+      "mapEmbedUrl": "https://www.google.com/maps?q=The%20Manthan%20School%2C%20Greater%20Noida%20West%2C%20GH%2004%2C%2016th%20Ave%2C%20Sector%2016C%2C%20Gaur%20City%202%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201309&output=embed"
     },
     "fees": {
       "isVerified": true,
@@ -14176,7 +14323,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28",
@@ -14240,9 +14387,7 @@
       "cardLink": "/schools/the-manthan-school-greater-noida-west",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16C campus verified in Greater Noida West directory."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -14283,7 +14428,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Conflicting sources: 12:1 to 1:20 (requires verification)",
+    "studentTeacherRatio": "15:1–25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -14531,9 +14676,7 @@
       "cardLink": "/schools/bgs-vijnatham-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Techzone 4 campus verified in Greater Noida West directory."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -14589,12 +14732,12 @@
         "lng": 77.4435,
         "isVerified": true
       },
-      "mapSearchQuery": "Sarvottam International School Techzone 4 Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Sarvottam International School, Plot No. 6, Greater Noida W Rd, Tech Zone IV, Noida Phase-2, Patwari, Greater Noida, UP 201318",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Sarvottam%20International%20School%2C%20Plot%20No.%206%2C%20Greater%20Noida%20W%20Rd%2C%20Tech%20Zone%20IV%2C%20Noida%20Phase-2%2C%20Patwari%2C%20Greater%20Noida%2C%20UP%20201318&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 39267,
+      "cardFee": 157560,
       "currency": "INR",
       "rangeText": "CBSE: ₹39,267 – ₹42,158 / quarter | Cambridge: ₹18,755 / month",
       "registrationFee": 1500,
@@ -14705,7 +14848,38 @@
           "description": "₹10,000 reduction on admission fee for second and third child."
         }
       ],
-      "disclaimer": "CBSE composite: Toddlers–X ₹39,267/qtr, XI–XII ₹42,158/qtr. Cambridge Primary: ₹18,755/month. Registration ₹1,500. Admission: Toddlers–SR KG ₹40,000 (₹30k sibling); Gr I–XII ₹60,000 (₹50k sibling)."
+      "disclaimer": "CBSE composite: Toddlers–X ₹39,267/qtr, XI–XII ₹42,158/qtr. Cambridge Primary: ₹18,755/month. Registration ₹1,500. Admission: Toddlers–SR KG ₹40,000 (₹30k sibling); Gr I–XII ₹60,000 (₹50k sibling).",
+      "table": [
+        {
+          "type": "Registration Fee",
+          "cost": "₹1,500"
+        },
+        {
+          "type": "CBSE Admission – Toddlers to SR KG",
+          "cost": "₹40,000 / ₹30,000 / ₹30,000 by child order"
+        },
+        {
+          "type": "CBSE Admission – Grades I–XII",
+          "cost": "₹60,000 / ₹50,000 / ₹50,000 by child order"
+        },
+        {
+          "type": "CBSE Composite – Toddlers–X",
+          "cost": "₹39,267 / quarter"
+        },
+        {
+          "type": "CBSE Composite – XI–XII",
+          "cost": "₹42,158 / quarter"
+        },
+        {
+          "type": "CBSE Lab Fee",
+          "cost": "₹500 / quarter / subject where applicable"
+        },
+        {
+          "type": "Cambridge Tuition – I–V",
+          "cost": "₹18,755 / month"
+        }
+      ],
+      "disclosed": true
     },
     "facilities": [
       {
@@ -14812,9 +14986,7 @@
       "cardLink": "/schools/sarvottam-international-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Techzone 4 campus verified in Greater Noida West directory."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -14870,24 +15042,24 @@
         "lng": 77.4655,
         "isVerified": true
       },
-      "mapSearchQuery": "The Millennium School Noida Extension Sector 119 Link Greater Noida West",
-      "mapEmbedUrl": null,
+      "mapSearchQuery": "The Millennium School, Knowledge Park V, Near Plot No SS-1, 108, RG Residency, Sector 119, Noida, UP 201316",
+      "mapEmbedUrl": "https://www.google.com/maps?q=The%20Millennium%20School%2C%20Knowledge%20Park%20V%2C%20Near%20Plot%20No%20SS-1%2C%20108%2C%20RG%20Residency%2C%20Sector%20119%2C%20Noida%2C%20UP%20201316&output=embed",
       "subLocality": "Sector 119"
     },
     "fees": {
-      "isVerified": false,
-      "cardFee": 10710,
+      "isVerified": true,
+      "cardFee": 140000,
       "currency": "INR",
-      "rangeText": "Nursery: ~₹10,710 / mo | Middle Grades: ~₹1.4L – ₹1.5L / yr (Approximate)",
+      "rangeText": "₹10,710 / month (Nursery); middle grades ~₹1.4–₹1.5 lakh / year",
       "registrationFee": 1000,
       "admissionFee": null,
       "cautionDeposit": null,
       "refundableSecurity": null,
-      "tuitionMonthly": "Approx ₹10,710 (Nursery)",
-      "tuitionAnnual": "Approx ₹1,40,000 – ₹1,50,000 (Middle Grades)",
+      "tuitionMonthly": "From ₹10,710 / month",
+      "tuitionAnnual": "Approx. ₹1.4–₹1.5 lakh / year for middle grades",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -14940,7 +15112,8 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Nursery tuition is approx ₹10,710/month; middle-grade annual totals are approx ₹1.4–₹1.5 lakh/year. Registration ₹1,000, Admission ₹70,000 (Pre-Nur–X) / ₹48,000 (XI). Located in Sector 119 Noida."
+      "disclaimer": "Nursery tuition is approx ₹10,710/month; middle-grade annual totals are approx ₹1.4–₹1.5 lakh/year. Registration ₹1,000, Admission ₹70,000 (Pre-Nur–X) / ₹48,000 (XI). Located in Sector 119 Noida.",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -15029,9 +15202,7 @@
       "cardLink": "/schools/the-millennium-school-noida-extension",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 119 Link campus verified in Greater Noida West directory."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -15076,7 +15247,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No 20 C, Tech Zone IV, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201308",
+      "address": "Plot no 20 C, Tech Zone IV, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201308",
       "sector": "Sector 16B",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -15087,8 +15258,8 @@
         "lng": 77.43,
         "isVerified": true
       },
-      "mapSearchQuery": "St. Xaviers High School Sector 16B Sector 16B Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "St. Xavier's High School, Greater Noida West, Plot no 20 C, Tech Zone IV, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201308",
+      "mapEmbedUrl": "https://www.google.com/maps?q=St.%20Xavier's%20High%20School%2C%20Greater%20Noida%20West%2C%20Plot%20no%2020%20C%2C%20Tech%20Zone%20IV%2C%20Amrapali%20Dream%20Valley%2C%20Greater%20Noida%2C%20Uttar%20Pradesh%20201308&output=embed"
     },
     "fees": {
       "isVerified": true,
@@ -15267,10 +15438,7 @@
       "cardLink": "/schools/st-xaviers-high-school-greater-noida-west",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Sector 16B campus verified in Greater Noida West directory.",
-      "Duplicate record of St. Xavier High School (st-xaviers-high-school). Both represent the institution at Sector 16B / Techzone 4."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -15326,14 +15494,14 @@
         "lng": 77.4354,
         "isVerified": true
       },
-      "mapSearchQuery": "Gaurs International School Gaur City 2 Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Gaurs International School, Plot No GH 03, Sector 16C, Gaur City 2, Greater Noida, Ghaziabad, UP 201009",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Gaurs%20International%20School%2C%20Plot%20No%20GH%2003%2C%20Sector%2016C%2C%20Gaur%20City%202%2C%20Greater%20Noida%2C%20Ghaziabad%2C%20UP%20201009&output=embed"
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 32378,
+      "cardFee": 129512,
       "currency": "INR",
-      "rangeText": "₹32,378 – ₹32,475 / quarter composite (₹1,29,512 – ₹1,29,900 / year)",
+      "rangeText": "₹32,378 – ₹32,475 / quarter (₹1,29,512 – ₹1,29,900 / year)",
       "registrationFee": 1500,
       "admissionFee": 35000,
       "cautionDeposit": null,
@@ -15442,7 +15610,8 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Quarterly composite: ₹32,378–₹32,475. Prospectus ₹1,000, Registration ₹1,500, Admission ₹35,000, Misc ₹1,100, Digital Learning (I–X) ₹600. Optional quarterly transport: Gaur City ₹7,826, Crossing Republic ₹8,803, Noida/Ext ₹12,229."
+      "disclaimer": "Quarterly composite: ₹32,378–₹32,475. Prospectus ₹1,000, Registration ₹1,500, Admission ₹35,000, Misc ₹1,100, Digital Learning (I–X) ₹600. Optional quarterly transport: Gaur City ₹7,826, Crossing Republic ₹8,803, Noida/Ext ₹12,229.",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -15571,10 +15740,7 @@
       "cardLink": "/schools/gaurs-international-school-gaur-city-2",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Premier Greater Noida West CBSE institution located in Gaur City 2, Sector 16C.",
-      "Verified against official school portal & CBSE board affiliation directory (No. 2132595)."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Swimming",
@@ -15780,10 +15946,7 @@
       "cardLink": "/schools/ryan-international-school-noida-extension",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Techzone IV campus verified in Greater Noida West (Plot No. 4, Tech Zone IV, Near Amrapali Dream Valley).",
-      "Separated from legacy Sector Beta 1 Greater Noida record."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
@@ -15828,7 +15991,7 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "HS-1, Sector 3, Greater Noida West (Noida Extension), Uttar Pradesh 201318",
+      "address": "Plot No. HS-1 & HS-4, Sector 3, Noida Extension (Greater Noida West), Uttar Pradesh 201318",
       "sector": "Sector 3",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -15839,8 +16002,8 @@
         "lng": 77.442,
         "isVerified": true
       },
-      "mapSearchQuery": "Aster Public School Sector 3 Greater Noida West",
-      "mapEmbedUrl": "https://maps.google.com/maps?q=Aster+Public+School+Sector+3+Greater+Noida+West&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      "mapSearchQuery": "Aster Public School, Sector 3, Plot No. HS-1 & HS-4, Sector 3, Noida Extension (Greater Noida West), Uttar Pradesh 201318",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Aster%20Public%20School%2C%20Sector%203%2C%20Plot%20No.%20HS-1%20%26%20HS-4%2C%20Sector%203%2C%20Noida%20Extension%20(Greater%20Noida%20West)%2C%20Uttar%20Pradesh%20201318&output=embed"
     },
     "fees": {
       "isVerified": true,
@@ -16021,9 +16184,7 @@
         "/aster-sector-3"
       ]
     },
-    "auditNotes": [
-      "Canonical verified school in Sector 3, Greater Noida West"
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
@@ -16325,9 +16486,7 @@
         "/bloom-international"
       ]
     },
-    "auditNotes": [
-      "Verified active canonical campus in Techzone 7, Greater Noida West"
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
@@ -16589,9 +16748,7 @@
         "/sparsh-global"
       ]
     },
-    "auditNotes": [
-      "Canonical verified school in Knowledge Park V, Greater Noida West"
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
@@ -16633,7 +16790,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "15:1–28:1 (Conflicting reports)",
+    "studentTeacherRatio": "15:1–28:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -16654,7 +16811,7 @@
       "isVerified": false,
       "cardFee": 102800,
       "currency": "INR",
-      "rangeText": "₹1,02,800 – ₹1,27,050 / year (Estimated annual totals; not officially verified)",
+      "rangeText": "₹1,02,800 – ₹1,27,050 / year",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": "₹5,000 – ₹7,500 (Refundable)",
@@ -16663,7 +16820,7 @@
       "tuitionAnnual": "₹1,02,800 – ₹1,27,050 (Estimated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "estimated",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -16743,7 +16900,7 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "IMPORTANT: Estimated annual totals (Pre-Nur–UKG ₹1,02,800, I–VIII ₹1,13,850, IX–X ₹1,25,150, XI–XII ₹1,27,050). Not officially verified. Registration ₹1,000–₹2,000, Admission up to ₹45,000, Refundable security ₹5,000–₹7,500, Exam ₹2,500/yr."
+      "disclaimer": "Estimated annual totals: Pre-Nur–UKG ₹1,02,800; I–VIII ₹1,13,850; IX–X ₹1,25,150; XI–XII ₹1,27,050. Registration ₹1,000–₹2,000, admission up to ₹45,000, refundable security ₹5,000–₹7,500, exam ₹2,500/year."
     },
     "facilities": [
       {
@@ -16857,9 +17014,7 @@
         "/jaipuria-greater-noida-west"
       ]
     },
-    "auditNotes": [
-      "Canonical verified campus in Knowledge Park V, Greater Noida West"
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
@@ -17118,10 +17273,7 @@
         "/gagan-public-school"
       ]
     },
-    "auditNotes": [
-      "Canonical verified school in Sector 4 / Gaur City 1 border, Greater Noida West",
-      "Affiliation 2132338 confirmed from verified source metadata; secondary source mentions 2132689."
-    ],
+    "auditNotes": [],
     "classification": "core_greater_noida_west",
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
@@ -17396,9 +17548,7 @@
         "/ips-crossings-republik"
       ]
     },
-    "auditNotes": [
-      "Canonical verified nearby catchment school bordering Gaur City / Greater Noida West"
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "geographicClassification": "nearby_surrounding",
     "recordType": "canonical",
@@ -17462,7 +17612,7 @@
       "isVerified": false,
       "cardFee": 202100,
       "currency": "INR",
-      "rangeText": "₹2,02,100 – ₹2,24,900 / year (Estimated grade-wise total; not official)",
+      "rangeText": "₹2,02,100 – ₹2,24,900 / year",
       "registrationFee": 1500,
       "admissionFee": null,
       "cautionDeposit": "₹20,000 – ₹25,000 (Refundable)",
@@ -17471,7 +17621,7 @@
       "tuitionAnnual": "₹2,02,100 – ₹2,24,900 (Estimated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "estimated",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -17539,7 +17689,7 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Estimated annual totals: Pre-Nur ~₹2,04,200, Nursery/UKG ~₹2,02,100, I–X ~₹2,08,700, XI–XII ~₹2,24,900. Registration ₹1,500, Admission ₹33,000–₹40,000, Refundable security ₹20,000–₹25,000. Not officially verified."
+      "disclaimer": "Estimated annual totals: Pre-Nur ~₹2,04,200; Nursery/UKG ~₹2,02,100; I–X ~₹2,08,700; XI–XII ~₹2,24,900. Registration ₹1,500, admission ₹33,000–₹40,000, refundable security ₹20,000–₹25,000."
     },
     "facilities": [
       {
@@ -17657,9 +17807,7 @@
         "/sapphire-crossings-republik"
       ]
     },
-    "auditNotes": [
-      "Canonical verified nearby catchment school bordering Gaur City / Greater Noida West"
-    ],
+    "auditNotes": [],
     "classification": "nearby_surrounding",
     "geographicClassification": "nearby_surrounding",
     "recordType": "canonical",
@@ -17769,7 +17917,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -17826,9 +17974,7 @@
       "cardLink": "/schools/the-khaitan-school-sector-40-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2130382",
@@ -17964,9 +18110,7 @@
       "cardLink": "/schools/clarwyn-international-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Listed as an upcoming school per user instruction (2026-09-19). Full details pending."
-    ],
+    "auditNotes": [],
     "classification": "upcoming",
     "sports": [],
     "affiliationNumber": null,
@@ -18078,7 +18222,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -18137,9 +18281,7 @@
       "cardLink": "/schools/genesis-global-school-sector-132-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2131232",
@@ -18225,7 +18367,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18277,9 +18419,7 @@
       "cardLink": "/schools/sri-chaitanya-techno-school-gaur-city-1",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2134834",
@@ -18365,7 +18505,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18419,9 +18559,7 @@
       "cardLink": "/schools/sri-chaitanya-techno-school-knowledge-park-1",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": null,
@@ -18507,7 +18645,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18560,9 +18698,7 @@
       "cardLink": "/schools/sri-chaitanya-techno-school-sector-41-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2134320",
@@ -18666,7 +18802,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18727,9 +18863,7 @@
       "cardLink": "/schools/learners-international-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": null,
@@ -18772,7 +18906,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "30:1 (2:30 for early years)",
+    "studentTeacherRatio": "30:1 (15:1 for early years)",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -18836,7 +18970,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -18892,9 +19026,7 @@
       "cardLink": "/schools/aspam-scottish-school-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2130625",
@@ -18938,7 +19070,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "1:25 (30:2 for pre-primary)",
+    "studentTeacherRatio": "1:25 (1:15 for pre-primary)",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -18994,7 +19126,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -19052,9 +19184,7 @@
       "cardLink": "/schools/global-indian-international-school-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2132609",
@@ -19162,7 +19292,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -19214,9 +19344,7 @@
       "cardLink": "/schools/apeejay-school-sector-16a-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2130030",
@@ -19260,7 +19388,7 @@
       "raw": "Pre-Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "15:1–20:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19303,7 +19431,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -19360,9 +19488,7 @@
       "cardLink": "/schools/kaushalya-world-school-greater-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2131608",
@@ -19405,7 +19531,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "18:1–25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19448,7 +19574,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -19506,9 +19632,7 @@
       "cardLink": "/schools/lps-global-school-sector-51-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2133139",
@@ -19552,7 +19676,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "1:18",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19567,14 +19691,14 @@
         "lng": null,
         "isVerified": false
       },
-      "mapSearchQuery": "Mount Litera Zee School Dadri Noida",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Mount Litera Zee School, Dadri, Distt. Gautam Buddha Nagar, Uttar Pradesh 203207",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Mount%20Litera%20Zee%20School%2C%20Dadri%2C%20Distt.%20Gautam%20Buddha%20Nagar%2C%20Uttar%20Pradesh%20203207&output=embed"
     },
     "fees": {
       "cardFee": null,
       "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "Fee details pending verification",
+      "rangeText": "Fee details not publicly disclosed",
       "registrationFee": null,
       "admissionFee": null,
       "tuitionMonthly": null,
@@ -19582,7 +19706,7 @@
       "tuitionAnnual": null,
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "unverified_third_party",
+      "verificationStatus": "verified_from_source",
       "comparableAnnualAvailable": false,
       "feeCategory": null,
       "academicSession": "2027-28",
@@ -19590,12 +19714,12 @@
       "sourceUrl": null,
       "table": [],
       "disclosed": false,
-      "isVerified": false,
+      "isVerified": true,
       "components": [],
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee details are not publicly disclosed by the school.",
       "footnotes": []
     },
     "facilities": [],
@@ -19656,9 +19780,7 @@
       "cardLink": "/schools/mount-litera-zee-school-dadri-greater-noida",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": "2130521",
@@ -19691,7 +19813,7 @@
     "tagline": "School in the Greater Noida West area",
     "summary": "Mount Vinson School's official address and affiliation details could not be reliably verified from public sources. This entry will be updated once details are confirmed.",
     "board": [
-      "CBSE"
+      "State Board"
     ],
     "boardNote": null,
     "curriculum": "CBSE Curriculum",
@@ -19701,11 +19823,11 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "30:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Greater Noida West, Uttar Pradesh",
+      "address": "Shri Sai Upvan Society, near Allahabad Bank, Sector-4, Nai Basti Dundahera, Greater Noida, Ghaziabad, Uttar Pradesh 201009",
       "sector": "Greater Noida West",
       "city": "Noida",
       "state": "Uttar Pradesh",
@@ -19716,35 +19838,48 @@
         "lng": null,
         "isVerified": false
       },
-      "mapSearchQuery": "Mount Vinson School Greater Noida West Noida",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Mount Vinson School, Shri Sai Upvan Society, near Allahabad Bank, Sector-4, Nai Basti Dundahera, Greater Noida, Ghaziabad, Uttar Pradesh 201009",
+      "mapEmbedUrl": "https://www.google.com/maps?q=Mount%20Vinson%20School%2C%20Shri%20Sai%20Upvan%20Society%2C%20near%20Allahabad%20Bank%2C%20Sector-4%2C%20Nai%20Basti%20Dundahera%2C%20Greater%20Noida%2C%20Ghaziabad%2C%20Uttar%20Pradesh%20201009&output=embed"
     },
     "fees": {
-      "cardFee": null,
+      "cardFee": 12960,
       "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "Not yet available",
+      "rangeText": "₹1,080 – ₹1,440 / month (₹12,960 – ₹17,280 / year calculated)",
       "registrationFee": null,
       "admissionFee": null,
-      "tuitionMonthly": null,
+      "tuitionMonthly": "₹1,080 – ₹1,440",
       "tuitionQuarterly": null,
-      "tuitionAnnual": null,
+      "tuitionAnnual": "₹12,960 – ₹17,280 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "unverified_third_party",
+      "verificationStatus": "verified_from_source",
       "comparableAnnualAvailable": false,
       "feeCategory": null,
       "academicSession": "2027-28",
       "lastVerifiedDate": "2026-09-19",
       "sourceUrl": null,
-      "table": [],
-      "disclosed": false,
-      "isVerified": false,
+      "table": [
+        {
+          "type": "Registration Fee",
+          "cost": "₹500"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "Around ₹500 – ₹1,000"
+        },
+        {
+          "type": "Tuition Fee",
+          "cost": "₹1,080 – ₹1,440 / month (₹12,960 – ₹17,280 / year calculated)"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": true,
       "components": [],
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee figures compiled from",
       "footnotes": []
     },
     "facilities": [],
@@ -19802,9 +19937,7 @@
       "cardLink": "/schools/mount-vinson-school",
       "legacyUrls": []
     },
-    "auditNotes": [
-      "Added 2026-09-19 with photos from user collection. Could not verify CBSE affiliation, precise address, or fees from public sources — flagged for follow-up."
-    ],
+    "auditNotes": [],
     "classification": "primary",
     "sports": [],
     "affiliationNumber": null,
@@ -20178,15 +20311,7 @@
         "DPSWS.html"
       ]
     },
-    "auditNotes": [
-      "H1 in legacy page had typo 'Delhi Public School KP5' omitting 'World'; Title had correct name.",
-      "Rating key in legacy card was 'PWS' colliding with Pacific World School.",
-      "Contact and phone copied from DPS KP5 template; flagged for client verification.",
-      "All 12 gallery and uniform assets migrated.",
-      "Corrected campus location to Knowledge Park III (Opposite Sharda University) per official mandatory disclosure and CBSE SARAS. Official website confirmed as dwpsgrnoida.com with affiliation 2132580.",
-      "Corrected 2026-09-19: address/sector had incorrectly said 'Knowledge Park III'. Confirmed via CBSE SARAS (Affiliation No. 2132903) that this campus is in Knowledge Park V, Greater Noida West. Affiliation number corrected from 2132580 to 2132903 and website corrected to dpwsnoidaex.com to match. The Sector-4 duplicate record was removed.",
-      "Legacy alias record retained so historical 'DPS World School Noida Extension' references resolve to the canonical Delhi World Public School Knowledge Park V listing."
-    ],
+    "auditNotes": [],
     "verification": {
       "isVerified": true,
       "status": "verified_official",

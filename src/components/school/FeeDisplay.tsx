@@ -18,16 +18,22 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
     fees.comparableAnnualAvailable !== false &&
     fees.verificationStatus === 'verified_from_source';
 
-  const isHistorical =
+  const isEstimated =
     fees.verificationStatus === 'estimated_historical' ||
     fees.verificationStatus === 'estimated';
+
+  const hasDetailedFeeData =
+    Boolean(fees.table?.length) ||
+    Boolean(fees.components?.length) ||
+    Boolean(fees.gradeWiseTiers?.length) ||
+    Boolean(fees.rangeText && !/^(not publicly disclosed|not yet available)$/i.test(fees.rangeText));
 
   const isUndisclosed =
     fees.disclosed === false ||
     fees.verificationStatus === 'not_publicly_verified' ||
     fees.verificationStatus === 'unverified_undisclosed' ||
     fees.verificationStatus === 'unverified_copied_from_wisdom_tree' ||
-    !fees.cardFee;
+    (!fees.cardFee && !hasDetailedFeeData);
 
   const [showTooltip, setShowTooltip] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -49,12 +55,11 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
   }, [showTooltip]);
 
   const tooltipExplanation = isComparable
-    ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Includes annual tuition, composite recurring charges & lab access. Excludes optional transport (bus), uniform, and meal charges.`
-    : isHistorical
-    ? 'Fee figures reflect historical 2023–24 institutional data and are provided for indicative reference only. Not certified for 2027–28.'
-    : 'Fee structure is not published publicly. Direct inquiry with the school admission office is required.';
+    ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Includes recurring charges shown in the fee breakdown. Optional transport and other charges may be separate.`
+    : 'Fee details are shown where the school has publicly disclosed them.';
 
   if (variant === 'compact') {
+    if (isUndisclosed) return null;
     return (
       <div className={cn('flex flex-col relative', className)}>
         <div className="flex items-center gap-1">
@@ -110,9 +115,9 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
               </span>
               <span className="text-xs text-[var(--color-content-muted)] font-medium">/ year</span>
             </>
-          ) : isHistorical ? (
-            <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              {fees.rangeText || 'Historical Reference'}
+          ) : isEstimated ? (
+            <span className="text-[11px] font-semibold text-[var(--color-primary)] bg-[var(--color-surface-subtle)] px-2 py-0.5 rounded border border-[var(--color-border)]">
+              {fees.rangeText || 'Estimated annual fee'}
             </span>
           ) : (
             <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
@@ -133,7 +138,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
         <div>
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-[var(--color-content-muted)]">
-              {isHistorical ? 'Historical Fee Reference' : 'Annual Fee Estimate'}
+              {'Annual Fee Estimate'}
             </span>
             <div className="relative inline-flex items-center" ref={tooltipRef}>
               <button
@@ -178,15 +183,15 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
               'font-black mt-0.5',
               isComparable
                 ? 'text-2xl text-[var(--color-primary)]'
-                : isHistorical
-                ? 'text-lg text-amber-900'
+                : isEstimated
+                ? 'text-lg text-[var(--color-primary)]'
                 : 'text-base text-slate-700'
             )}
           >
             {isComparable
               ? formatCurrency(fees.cardFee!)
-              : isHistorical
-              ? fees.rangeText || 'Historical Reference'
+              : isEstimated
+              ? fees.rangeText || 'Estimated annual fee'
               : 'Not publicly disclosed'}
           </div>
 
@@ -245,18 +250,6 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
           </a>
         )}
       </div>
-
-      {isHistorical && (
-        <p className="text-[11px] text-amber-800 bg-amber-50/90 border border-amber-200 p-2.5 rounded-xl leading-relaxed">
-          <strong>Note:</strong> Historical reference only. Certified current pricing must be verified directly with school administration.
-        </p>
-      )}
-
-      {isUndisclosed && (
-        <p className="text-[11px] text-slate-700 bg-slate-50 border border-slate-200 p-2.5 rounded-xl leading-relaxed">
-          This institution has not released a public fee schedule. Consult admissions for official prospectus.
-        </p>
-      )}
     </div>
   );
 };

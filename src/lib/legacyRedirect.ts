@@ -1,0 +1,1 @@
+import {resolveLegacyUrl as resolve} from './schools'; export function resolveLegacyUrl(url:string){return resolve(url)}

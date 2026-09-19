@@ -1,0 +1,1 @@
+import React from 'react'; export function ErrorState({title='Something went wrong',description,children}:{title?:string;description?:string;children?:React.ReactNode}){return <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-6"><h3 className="font-bold">{title}</h3><p>{description}</p>{children}</div>}

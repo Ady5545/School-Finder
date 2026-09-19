@@ -722,6 +722,20 @@ export default function AdminPage() {
       {/* 3. MAIN DASHBOARD CONTENT AREA                                        */}
       {/* --------------------------------------------------------------------- */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {loadingTab && (
+          <div className="sticky top-[76px] z-30 mb-5 overflow-hidden rounded-2xl border border-amber-400/20 bg-[#0b2039]/95 backdrop-blur-md shadow-lg">
+            <div className="h-0.5 w-full bg-amber-400/10">
+              <div className="h-full w-1/3 animate-[pulse_1.2s_ease-in-out_infinite] bg-amber-400" />
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3 text-xs">
+              <RefreshCw className="w-4 h-4 animate-spin text-amber-400 shrink-0" />
+              <div className="min-w-0">
+                <p className="font-bold text-white">Loading {activeTab === 'overview' ? 'dashboard' : activeTab} data…</p>
+                <p className="text-[11px] text-slate-400">The panel is ready — only this section is being fetched.</p>
+              </div>
+            </div>
+          </div>
+        )}
         {/* =================================================================== */}
         {/* TAB 1: EXECUTIVE OVERVIEW                                           */}
         {/* =================================================================== */}

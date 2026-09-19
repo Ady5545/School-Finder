@@ -422,7 +422,7 @@
         "/assets/schools/delhi-public-school-knowledge-park-5/gallery/outdoor2.jpeg"
       ],
       "legacyPaths": {
-        "cardImage": "/images/dps.png",
+        "cardImage": "/assets/schools/delhi-public-school-knowledge-park-5/featured/featured.jpg",
         "pageHeroImage": "/schools/dps/dps1.jpg",
         "sourceDirectory": "/schools/dps/"
       },
@@ -1973,7 +1973,7 @@
     },
     "contact": {
       "phone": "+91-9205131014",
-      "website": "https://dpwsnoidaex.com",
+      "website": "https://dwpsnoidaex.com",
       "email": "info@dwpsnoidaex.com"
     },
     "rating": {
@@ -2001,7 +2001,7 @@
         "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-8.jpeg"
       ],
       "legacyPaths": {
-        "cardImage": "/images/DPWS.jpeg",
+        "cardImage": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
         "sourceDirectory": "/schools/DPSWS/"
       },
       "coverImage": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
@@ -2343,7 +2343,7 @@
         "cardImage": "/schools/ryan/main.webp",
         "sourceDirectory": "/schools/ryan/"
       },
-      "coverImage": "/assets/schools/ryan-international-school-greater-noida/featured/featured.webp",
+      "coverImage": null,
       "imageSource": "Photo Pending - Awaiting Verified Sector Beta 1 Campus Exterior",
       "imageSourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-beta-1",
       "imageVerifiedAt": "September 2026"
@@ -2896,7 +2896,7 @@
           "id": "jm-international-school-comp-2",
           "name": "Composite Tuition",
           "category": "recurring",
-          "amount": 950012000,
+          "amount": null,
           "formattedAmount": "₹9,500 – ₹12,000",
           "frequency": "monthly",
           "mandatory": true,
@@ -3120,7 +3120,7 @@
           "id": "st-xaviers-high-school-comp-1",
           "name": "Caution / Security Deposit",
           "category": "deposit",
-          "amount": 750010000,
+          "amount": null,
           "formattedAmount": "₹7,500 – ₹10,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -3132,7 +3132,7 @@
           "id": "st-xaviers-high-school-comp-2",
           "name": "Quarterly Tuition (Nursery–V)",
           "category": "recurring",
-          "amount": 2250029700,
+          "amount": null,
           "formattedAmount": "₹22,500 – ₹29,700",
           "frequency": "quarterly",
           "mandatory": true,
@@ -3143,7 +3143,7 @@
           "id": "st-xaviers-high-school-comp-3",
           "name": "Quarterly Tuition (VI–VIII)",
           "category": "recurring",
-          "amount": 2340030000,
+          "amount": null,
           "formattedAmount": "₹23,400 – ₹30,000+",
           "frequency": "quarterly",
           "mandatory": true,
@@ -5738,7 +5738,7 @@
           "id": "florence-international-school-comp-5",
           "name": "Transport (Optional)",
           "category": "optional",
-          "amount": 20003000,
+          "amount": null,
           "formattedAmount": "₹2,000 – ₹3,000",
           "frequency": "monthly",
           "mandatory": false,
@@ -6455,7 +6455,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹3,000 / month",
+          "formattedAmount": "₹3,000 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -6607,8 +6607,8 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "mount-olympus-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active",
+    "isArchived": true,
+    "status": "archived",
     "cbseAffiliationNumber": "2133842"
   },
   {
@@ -6744,7 +6744,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,900 / month",
+          "formattedAmount": "₹2,900 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -6895,8 +6895,8 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "prudence-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "shemford-futuristic-school-greater-noida-west",
@@ -7031,7 +7031,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,600 / month",
+          "formattedAmount": "₹2,600 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -7182,8 +7182,8 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "shemford-futuristic-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "scholars-rosary-school-noida-extension",
@@ -7351,8 +7351,8 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "scholars-rosary-school-noida-extension",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "oxford-green-public-school-greater-noida-west",
@@ -7487,7 +7487,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,300 / month",
+          "formattedAmount": "₹2,300 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -7614,8 +7614,8 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "oxford-green-public-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "the-icon-international-school",
@@ -7785,8 +7785,8 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "the-icon-international-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "cambridge-school-noida-sector-27",
@@ -8056,7 +8056,7 @@
       "email": "info.csn@cambridgeschool.edu.in"
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -8259,7 +8259,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹3,300 / month",
+          "formattedAmount": "₹3,300 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -8550,7 +8550,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,800 / month",
+          "formattedAmount": "₹2,800 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -8840,7 +8840,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,600 / month",
+          "formattedAmount": "₹2,600 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -9166,8 +9166,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "kalka-public-school-greater-noida",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "indus-valley-school-noida-ext",
@@ -9820,8 +9820,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "vienna-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "modern-public-school-noida-extension",
@@ -10531,8 +10531,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "blooming-buds-senior-secondary-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "jinvani-bharti-public-school-noida-ext",
@@ -10704,8 +10704,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "jinvani-bharti-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "glorious-public-school",
@@ -10877,8 +10877,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "glorious-public-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "green-valley-academy-noida-ext",
@@ -11409,8 +11409,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "aditi-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "navjeevan-mission-school-noida-ext",
@@ -11582,8 +11582,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "navjeevan-mission-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "mother-teresa-public-school-noida-ext",
@@ -11755,8 +11755,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "mother-teresa-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "d-point-high-school",
@@ -11928,8 +11928,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "d-point-high-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "dps-monarch-international-school",
@@ -12240,7 +12240,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,500 / month",
+          "formattedAmount": "₹2,500 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -12530,7 +12530,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,500 / month",
+          "formattedAmount": "₹2,500 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -12862,8 +12862,8 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "om-sun-international-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived"
   },
   {
     "id": "step-by-step-school-noida-feeder",
@@ -13000,7 +13000,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,500 / month",
+          "formattedAmount": "₹2,500 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -13294,7 +13294,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,500 / month",
+          "formattedAmount": "₹2,500 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -13596,7 +13596,7 @@
           "name": "Transport Service (Optional)",
           "category": "transport",
           "amount": null,
-          "formattedAmount": "₹₹2,500 / month",
+          "formattedAmount": "₹2,500 / month",
           "frequency": "monthly",
           "mandatory": false,
           "refundable": false,
@@ -13816,7 +13816,7 @@
           "id": "aster-public-school-kp5-comp-1",
           "name": "Registration Fee",
           "category": "one_time",
-          "amount": 5001000,
+          "amount": null,
           "formattedAmount": "₹500 – ₹1,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -13827,7 +13827,7 @@
           "id": "aster-public-school-kp5-comp-2",
           "name": "Admission Fee",
           "category": "one_time",
-          "amount": 3000040000,
+          "amount": null,
           "formattedAmount": "₹30,000 – ₹40,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -13838,7 +13838,7 @@
           "id": "aster-public-school-kp5-comp-3",
           "name": "Quarterly Composite Tuition",
           "category": "recurring",
-          "amount": 1950024000,
+          "amount": null,
           "formattedAmount": "₹19,500 – ₹24,000",
           "frequency": "quarterly",
           "mandatory": true,
@@ -14367,7 +14367,7 @@
           "id": "bgs-vijnatham-school-comp-5",
           "name": "Transport (Optional)",
           "category": "optional",
-          "amount": 15003000,
+          "amount": null,
           "formattedAmount": "₹1,500 – ₹3,000",
           "frequency": "monthly",
           "mandatory": false,
@@ -15111,7 +15111,7 @@
           "id": "st-xaviers-high-school-greater-noida-west-comp-1",
           "name": "Caution / Security Deposit",
           "category": "deposit",
-          "amount": 750010000,
+          "amount": null,
           "formattedAmount": "₹7,500 – ₹10,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -15123,7 +15123,7 @@
           "id": "st-xaviers-high-school-greater-noida-west-comp-2",
           "name": "Quarterly Tuition (Nursery–V)",
           "category": "recurring",
-          "amount": 2250029700,
+          "amount": null,
           "formattedAmount": "₹22,500 – ₹29,700",
           "frequency": "quarterly",
           "mandatory": true,
@@ -15134,7 +15134,7 @@
           "id": "st-xaviers-high-school-greater-noida-west-comp-3",
           "name": "Quarterly Tuition (VI–VIII)",
           "category": "recurring",
-          "amount": 2340030000,
+          "amount": null,
           "formattedAmount": "₹23,400 – ₹30,000+",
           "frequency": "quarterly",
           "mandatory": true,
@@ -15406,7 +15406,7 @@
           "id": "gaurs-international-school-gaur-city-2-comp-6",
           "name": "Quarterly Composite Tuition",
           "category": "recurring",
-          "amount": 3237832475,
+          "amount": null,
           "formattedAmount": "₹32,378 – ₹32,475",
           "frequency": "quarterly",
           "mandatory": true,
@@ -15417,7 +15417,7 @@
           "id": "gaurs-international-school-gaur-city-2-comp-7",
           "name": "Transport Quarterly (Optional)",
           "category": "optional",
-          "amount": 7826880312229,
+          "amount": null,
           "formattedAmount": "Gaur City: ₹7,826 | Crossing Republic: ₹8,803 | Noida/Ext: ₹12,229",
           "frequency": "quarterly",
           "mandatory": false,
@@ -15863,7 +15863,7 @@
           "id": "aster-public-school-sector-3-comp-1",
           "name": "Registration Fee",
           "category": "one_time",
-          "amount": 5001000,
+          "amount": null,
           "formattedAmount": "₹500 – ₹1,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -15874,7 +15874,7 @@
           "id": "aster-public-school-sector-3-comp-2",
           "name": "Admission Fee",
           "category": "one_time",
-          "amount": 3000040000,
+          "amount": null,
           "formattedAmount": "₹30,000 – ₹40,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -15885,7 +15885,7 @@
           "id": "aster-public-school-sector-3-comp-3",
           "name": "Quarterly Composite Tuition",
           "category": "recurring",
-          "amount": 1950024000,
+          "amount": null,
           "formattedAmount": "₹19,500 – ₹24,000",
           "frequency": "quarterly",
           "mandatory": true,
@@ -16124,7 +16124,7 @@
           "id": "bloom-international-school-techzone-7-comp-3",
           "name": "Transport",
           "category": "optional",
-          "amount": 17502150,
+          "amount": null,
           "formattedAmount": "₹1,750 – ₹2,150",
           "frequency": "monthly",
           "mandatory": false,
@@ -16419,7 +16419,7 @@
           "id": "sparsh-global-school-greater-noida-west-comp-2",
           "name": "Admission Fee",
           "category": "one_time",
-          "amount": 2500045000,
+          "amount": null,
           "formattedAmount": "₹25,000 – ₹45,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -16430,7 +16430,7 @@
           "id": "sparsh-global-school-greater-noida-west-comp-3",
           "name": "Caution Deposit",
           "category": "deposit",
-          "amount": 800010000,
+          "amount": null,
           "formattedAmount": "₹8,000 – ₹10,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -16441,7 +16441,7 @@
           "id": "sparsh-global-school-greater-noida-west-comp-4",
           "name": "Quarterly Composite Tuition",
           "category": "recurring",
-          "amount": 2100029250,
+          "amount": null,
           "formattedAmount": "₹21,000 – ₹29,250",
           "frequency": "quarterly",
           "mandatory": true,
@@ -16452,7 +16452,7 @@
           "id": "sparsh-global-school-greater-noida-west-comp-5",
           "name": "Quarterly Transport (Optional)",
           "category": "optional",
-          "amount": 990015000,
+          "amount": null,
           "formattedAmount": "₹9,900 – ₹15,000",
           "frequency": "quarterly",
           "mandatory": false,
@@ -16670,7 +16670,7 @@
           "id": "seth-anandram-jaipuria-school-greater-noida-west-comp-1",
           "name": "Registration Fee",
           "category": "one_time",
-          "amount": 10002000,
+          "amount": null,
           "formattedAmount": "₹1,000 – ₹2,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -16692,7 +16692,7 @@
           "id": "seth-anandram-jaipuria-school-greater-noida-west-comp-3",
           "name": "Security Deposit",
           "category": "deposit",
-          "amount": 50007500,
+          "amount": null,
           "formattedAmount": "₹5,000 – ₹7,500",
           "frequency": "one_time",
           "mandatory": true,
@@ -16932,7 +16932,7 @@
       "tuitionAnnual": "₹65,400 – ₹81,600 (Calculated)",
       "transportMonthly": "₹1,300 – ₹2,900",
       "transportAnnual": null,
-      "estimatedFirstYear": "₹48,800 – ₹89,400 (Estimated / Calculated)",
+      "estimatedFirstYear": null,
       "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
@@ -16962,7 +16962,7 @@
           "id": "gagan-public-school-sector-4-comp-3",
           "name": "Admission Fee",
           "category": "one_time",
-          "amount": 1600022000,
+          "amount": null,
           "formattedAmount": "₹16,000 – ₹22,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -16973,7 +16973,7 @@
           "id": "gagan-public-school-sector-4-comp-4",
           "name": "Monthly Tuition / Composite",
           "category": "recurring",
-          "amount": 54506800,
+          "amount": null,
           "formattedAmount": "₹5,450 – ₹6,800",
           "frequency": "monthly",
           "mandatory": true,
@@ -16984,7 +16984,7 @@
           "id": "gagan-public-school-sector-4-comp-5",
           "name": "Transport (Optional)",
           "category": "optional",
-          "amount": 13002900,
+          "amount": null,
           "formattedAmount": "₹1,300 – ₹2,900",
           "frequency": "monthly",
           "mandatory": false,
@@ -17002,7 +17002,8 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Monthly tuition: ₹5,450–₹6,800. Prospectus ₹500, Registration ₹5,000, Admission ₹16,000–₹22,000. Transport ₹1,300–₹2,900/month. Estimated 1st-year total: ₹48,800–₹89,400."
+      "disclaimer": "Monthly tuition: ₹5,450–₹6,800. Prospectus ₹500, Registration ₹5,000, Admission ₹16,000–₹22,000. Transport ₹1,300–₹2,900/month. Estimated 1st-year total: ₹48,800–₹89,400.",
+      "estimatedFirstYearText": "₹48,800 – ₹89,400 (Estimated / Calculated)"
     },
     "facilities": [
       {
@@ -17119,8 +17120,6 @@
     },
     "auditNotes": [
       "Canonical verified school in Sector 4 / Gaur City 1 border, Greater Noida West",
-      "Affiliation 2132338 confirmed from verified source metadata; secondary source mentions 2132689.",
-      "Affiliation 2132338 confirmed from verified source metadata; secondary source mentions 2132689.",
       "Affiliation 2132338 confirmed from verified source metadata; secondary source mentions 2132689."
     ],
     "classification": "core_greater_noida_west",
@@ -17201,7 +17200,7 @@
           "id": "indirapuram-public-school-crossings-republik-comp-1",
           "name": "Exam Fee",
           "category": "recurring",
-          "amount": 3541062,
+          "amount": null,
           "formattedAmount": "₹354 / month (₹1,062 / quarter)",
           "frequency": "monthly",
           "mandatory": true,
@@ -17212,7 +17211,7 @@
           "id": "indirapuram-public-school-crossings-republik-comp-2",
           "name": "Optional Lab Fee (XI–XII CS / AI)",
           "category": "optional",
-          "amount": 8362508,
+          "amount": null,
           "formattedAmount": "₹836 / month (₹2,508 / quarter)",
           "frequency": "monthly",
           "mandatory": false,
@@ -17490,7 +17489,7 @@
           "id": "sapphire-international-school-crossings-republik-comp-2",
           "name": "Admission Fee",
           "category": "one_time",
-          "amount": 3300040000,
+          "amount": null,
           "formattedAmount": "₹33,000 – ₹40,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -17501,7 +17500,7 @@
           "id": "sapphire-international-school-crossings-republik-comp-3",
           "name": "Security Deposit",
           "category": "deposit",
-          "amount": 2000025000,
+          "amount": null,
           "formattedAmount": "₹20,000 – ₹25,000",
           "frequency": "one_time",
           "mandatory": true,
@@ -17797,7 +17796,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -17894,7 +17893,7 @@
       "cardFee": null,
       "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "Not yet available — upcoming school",
+      "rangeText": "Not publicly disclosed",
       "registrationFee": null,
       "admissionFee": null,
       "tuitionMonthly": null,
@@ -17915,7 +17914,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Current fee structure is not publicly disclosed for this upcoming school. Parents should confirm the official fee schedule directly with the school when admissions information is released.",
       "footnotes": []
     },
     "facilities": [],
@@ -17942,7 +17941,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -17977,8 +17976,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,
@@ -18106,7 +18105,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18253,7 +18252,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18393,7 +18392,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18432,8 +18431,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,
@@ -18535,7 +18534,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18694,7 +18693,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18740,8 +18739,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,
@@ -18864,7 +18863,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19022,7 +19021,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19190,7 +19189,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19331,7 +19330,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19476,7 +19475,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19623,7 +19622,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19772,7 +19771,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19815,8 +19814,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,
@@ -19826,5 +19825,403 @@
         "address"
       ]
     }
+  },
+  {
+    "id": "dps-world-school-noida-extension-alias",
+    "slug": "dps-world-school-noida-extension",
+    "name": "DPS World School Noida Extension",
+    "shortName": "DPS World School Noida Extension",
+    "alternateNames": [
+      "DPS World School Noida Extension",
+      "DPS World School",
+      "Delhi World Public School Noida Extension",
+      "DWPS Noida Extension",
+      "Delhi World Public School",
+      "DWPS",
+      "Delhi World Public School KP 5",
+      "Delhi World Public School Greater Noida West",
+      "DPWS"
+    ],
+    "tagline": "CBSE Co-Educational Senior Secondary Institution in Knowledge Park V",
+    "summary": "Legacy alias retained for the former DPS World School naming used by older Admission Pitara records and links. This record resolves to the canonical Delhi World Public School listing.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – 12"
+    },
+    "admissionAge": "3+",
+    "studentTeacherRatio": "25:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. HS-57, Knowledge Park V, Greater Noida West, Gautam Budh Nagar, Uttar Pradesh 201306",
+      "sector": "Knowledge Park V",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.5833,
+        "lng": 77.4667
+      },
+      "mapSearchQuery": "Delhi World Public School Knowledge Park V Greater Noida West",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
+    },
+    "fees": {
+      "cardFee": 91000,
+      "estimatedFirstYear": 133000,
+      "currency": "INR",
+      "rangeText": "₹91,000 – ₹1,21,000 / year (tuition + annual charges)",
+      "registrationFee": 2000,
+      "admissionFee": 40000,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": "21,000 (Pre-Nur/Nur/Prep)",
+      "tuitionAnnual": "91,000",
+      "transportMonthly": "2,500 – 3,500",
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "table": [
+        {
+          "type": "Prospectus & Application Fee",
+          "cost": "₹1,000 (One-time, non-refundable)"
+        },
+        {
+          "type": "Registration Fee",
+          "cost": "₹2,000 (One-time, non-refundable)"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹30,000 (One-time at admission)"
+        },
+        {
+          "type": "Composite Tuition Fee (Quarterly)",
+          "cost": "₹22,500 per quarter"
+        },
+        {
+          "type": "Composite Annual Tuition",
+          "cost": "₹90,000 per annum"
+        }
+      ],
+      "comparableAnnualAvailable": true,
+      "feeCategory": "Tuition & Annual Charges",
+      "billingFrequency": "quarterly",
+      "sourceUrl": "https://www.dwpsgrnoida.com/fee-structure",
+      "academicSession": "2026-2027",
+      "lastVerifiedDate": "September 2026",
+      "disclosed": true,
+      "isVerified": true,
+      "components": [
+        {
+          "id": "delhi-world-public-school-kp-5-reg",
+          "name": "Registration Fee",
+          "category": "one_time",
+          "amount": 2000,
+          "formattedAmount": "₹2,000",
+          "frequency": "one_time",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "One-time registration and application processing charge.",
+          "gradesApplicable": "All Entry Grades"
+        },
+        {
+          "id": "delhi-world-public-school-kp-5-adm",
+          "name": "Admission Fee",
+          "category": "one_time",
+          "amount": 40000,
+          "formattedAmount": "₹40,000",
+          "frequency": "one_time",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
+          "gradesApplicable": "All Entry Grades"
+        },
+        {
+          "id": "delhi-world-public-school-kp-5-tuition-quarterly",
+          "name": "Composite Tuition Fee (Quarterly)",
+          "category": "recurring",
+          "amount": 21000,
+          "formattedAmount": "₹21,000 / quarter",
+          "frequency": "quarterly",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "Payable quarterly in advance.",
+          "gradesApplicable": "Nursery – 12"
+        },
+        {
+          "id": "delhi-world-public-school-kp-5-tuition-annual",
+          "name": "Annual Composite Tuition (Calculated)",
+          "category": "recurring",
+          "amount": 91000,
+          "formattedAmount": "₹91,000 / year",
+          "frequency": "annual",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": false,
+          "notes": "Derived annual composite equivalent.",
+          "gradesApplicable": "Nursery – 12",
+          "isCalculated": true,
+          "calculationNotes": "Calculated from published quarterly fee: ₹21,000 × 4 quarters = ₹91,000/year."
+        },
+        {
+          "id": "delhi-world-public-school-kp-5-transport",
+          "name": "Transport Service (Optional)",
+          "category": "transport",
+          "amount": null,
+          "formattedAmount": "₹2,500 – 3,500 / month",
+          "frequency": "monthly",
+          "mandatory": false,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
+          "gradesApplicable": "Optional for all grades"
+        }
+      ],
+      "gradeWiseTiers": [
+        {
+          "gradeGroup": "Nursery – 12",
+          "tuitionFee": "₹21,000 (Pre-Nur/Nur/Prep) / quarter",
+          "tuitionFrequency": "quarterly",
+          "calculatedAnnualEquivalent": "₹91,000 / year",
+          "totalAnnualPayable": "₹91,000",
+          "isCalculated": true,
+          "notes": "Standard published fee tier."
+        }
+      ],
+      "concessions": [
+        {
+          "title": "Sibling Concession",
+          "category": "sibling",
+          "discountDescription": "Institutional sibling fee concession",
+          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
+          "isOfficial": true
+        }
+      ],
+      "circular": {
+        "title": "Delhi World Public School Official Fee Schedule",
+        "academicSession": "2026-2027",
+        "circularType": "web_schedule",
+        "sourceUrl": "https://www.dwpsgrnoida.com/fee-structure",
+        "summary": "Official fee structure for Delhi World Public School covering composite tuition, one-time charges, and optional services.",
+        "keyTerms": [
+          "Payment due as per institutional quarterly/monthly cycles",
+          "Online payment gateway via school portal"
+        ],
+        "officialNotes": [
+          "Fee is subject to periodic institutional revision under state educational guidelines."
+        ]
+      },
+      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
+      "footnotes": [
+        "One-time registration and admission fees are non-refundable.",
+        "Transport fee is optional and calculated on the basis of distance from pickup point."
+      ]
+    },
+    "facilities": [
+      {
+        "name": "Basketball Court",
+        "category": "Sports",
+        "icon": "fas fa-basketball-ball"
+      },
+      {
+        "name": "Football Ground",
+        "category": "Sports",
+        "icon": "fas fa-football-ball"
+      },
+      {
+        "name": "Computer Lab",
+        "category": "Academic",
+        "icon": "fas fa-laptop"
+      },
+      {
+        "name": "Science Lab",
+        "category": "Academic",
+        "icon": "fas fa-flask"
+      },
+      {
+        "name": "AC Rooms",
+        "category": "Infrastructure",
+        "icon": "fas fa-snowflake"
+      },
+      {
+        "name": "Library",
+        "category": "Academic",
+        "icon": "fas fa-book"
+      },
+      {
+        "name": "Dance Room",
+        "category": "Arts",
+        "icon": "fas fa-music"
+      },
+      {
+        "name": "Music Room",
+        "category": "Arts",
+        "icon": "fas fa-guitar"
+      },
+      {
+        "name": "Art & Craft",
+        "category": "Arts",
+        "icon": "fas fa-paint-brush"
+      },
+      {
+        "name": "CCTV Surveillance",
+        "category": "Safety",
+        "icon": "fas fa-video"
+      },
+      {
+        "name": "Medical Room",
+        "category": "Wellness",
+        "icon": "fas fa-notes-medical"
+      },
+      {
+        "name": "Cafeteria",
+        "category": "Amenities",
+        "icon": "fas fa-utensils"
+      },
+      {
+        "name": "Play Area",
+        "category": "Sports",
+        "icon": "fas fa-child"
+      },
+      {
+        "name": "Auditorium",
+        "category": "Infrastructure",
+        "icon": "fas fa-theater-masks"
+      },
+      {
+        "name": "Transport",
+        "category": "Logistics",
+        "icon": "fas fa-bus"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": "/assets/schools/delhi-world-public-school-kp-5/uniforms/boys-uniform.png",
+        "label": "Boys Uniform"
+      },
+      "girls": {
+        "image": "/assets/schools/delhi-world-public-school-kp-5/uniforms/girls-uniform.png",
+        "label": "Girls Uniform"
+      }
+    },
+    "achievements": [
+      "Winners in National & International Olympiads",
+      "Finalists at UNESCO International Youth Festival “Planet of ART”",
+      "Awards in National “Japan on Canvas” painting competition"
+    ],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Admission open from Nursery to Class 12. Assessment and registration.",
+      "session": "2027-28",
+      "sourceUrl": "https://dwpsnoidaex.com",
+      "lastVerifiedDate": "September 2026",
+      "verificationStatus": "pending_schedule",
+      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+    },
+    "contact": {
+      "phone": "+91-9205131014",
+      "website": "https://dwpsnoidaex.com",
+      "email": "info@dwpsnoidaex.com"
+    },
+    "rating": {
+      "score": 4.5,
+      "scale": 5,
+      "reviewsCount": 16
+    },
+    "assets": {
+      "featured": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
+      "hero": "/assets/schools/delhi-world-public-school-kp-5/hero/hero.jpg",
+      "gallery": [
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/student-council.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/ncc-cadets-achievement.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/book-donation-drive.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/next-mun-2024.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/ramayan-annual-function.webp",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/appreciation-certificate.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-1.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-2.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-3.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-4.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-5.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-6.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-7.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-8.jpeg"
+      ],
+      "legacyPaths": {
+        "cardImage": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
+        "sourceDirectory": "/schools/DPSWS/"
+      },
+      "coverImage": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
+      "imageSource": "Verified Official Campus Exterior & Activity Archives (Knowledge Park V)",
+      "imageSourceUrl": "https://www.dwpsgrnoida.com",
+      "imageVerifiedAt": "2026-09"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "schools/DPSWS.html",
+      "pageTitle": "DPS World School Noida Extension (legacy alias)",
+      "h1": "DPS World School Noida Extension",
+      "pageHeartKey": "DPS World School Noida Extension",
+      "cardHeartKey": "DPS World School Noida Extension",
+      "cardRatingKey": "DWPS",
+      "cardLink": "schools/DPSWS.html",
+      "legacyUrls": [
+        "schools/DPSWS.html",
+        "/schools/DPSWS.html",
+        "DPSWS.html"
+      ]
+    },
+    "auditNotes": [
+      "H1 in legacy page had typo 'Delhi Public School KP5' omitting 'World'; Title had correct name.",
+      "Rating key in legacy card was 'PWS' colliding with Pacific World School.",
+      "Contact and phone copied from DPS KP5 template; flagged for client verification.",
+      "All 12 gallery and uniform assets migrated.",
+      "Corrected campus location to Knowledge Park III (Opposite Sharda University) per official mandatory disclosure and CBSE SARAS. Official website confirmed as dwpsgrnoida.com with affiliation 2132580.",
+      "Corrected 2026-09-19: address/sector had incorrectly said 'Knowledge Park III'. Confirmed via CBSE SARAS (Affiliation No. 2132903) that this campus is in Knowledge Park V, Greater Noida West. Affiliation number corrected from 2132580 to 2132903 and website corrected to dpwsnoidaex.com to match. The Sector-4 duplicate record was removed.",
+      "Legacy alias record retained so historical 'DPS World School Noida Extension' references resolve to the canonical Delhi World Public School Knowledge Park V listing."
+    ],
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure",
+      "sourceUrl": "https://saras.cbse.gov.in/SARAS/AffiliatedList/AfflicationDetails/2132903",
+      "cbseAffiliationNumber": "2132903",
+      "schoolCode": "61048",
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "affiliation",
+        "schoolCode",
+        "fees",
+        "admissions",
+        "establishedYear"
+      ]
+    },
+    "classification": "core_greater_noida_west",
+    "sports": [
+      "Cricket",
+      "Football",
+      "Basketball",
+      "Badminton",
+      "Table Tennis",
+      "Athletics"
+    ],
+    "affiliationNumber": "2132903",
+    "establishedYear": 2016,
+    "geographicClassification": "core_greater_noida_west",
+    "recordType": "alias",
+    "canonicalSlug": "delhi-world-public-school-kp-5",
+    "status": "alias",
+    "isDuplicate": true,
+    "duplicateOf": "delhi-world-public-school-kp-5"
   }
 ]

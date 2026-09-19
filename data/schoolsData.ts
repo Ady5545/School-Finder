@@ -33,7 +33,8 @@ export type FeeFrequency =
   | 'per_term'
   | 'per_installment'
   | 'as_applicable'
-  | 'optional';
+  | 'optional'
+  | 'recurring';
 
 export type FeeVerificationStatus =
   | 'verified_from_source'
@@ -45,7 +46,8 @@ export type FeeVerificationStatus =
   | 'partially_verified'
   | 'unverified_undisclosed'
   | 'not_publicly_verified'
-  | 'pending_audit';
+  | 'pending_audit'
+  | 'unverified_third_party';
 
 export interface DetailedFeeComponent {
   id: string;
@@ -60,7 +62,9 @@ export interface DetailedFeeComponent {
     | 'activity'
     | 'examination'
     | 'transport'
-    | 'other';
+    | 'other'
+    | 'curriculum_addon'
+    | 'lab_facility';
   amount?: number | null;
   formattedAmount: string;
   frequency: FeeFrequency;
@@ -130,6 +134,7 @@ export interface HistoricalFeeStructure {
 export interface SchoolFees {
   cardFee: number | null;
   estimatedFirstYear?: number | null;
+  estimatedFirstYearText?: string;
   currency?: string;
   rangeText: string;
   registrationFee?: number | null;
@@ -282,9 +287,9 @@ export interface School {
   verification?: SchoolVerification;
   legacyIdentifiers: LegacyIdentifiers;
   auditNotes: string[];
-  classification?: 'core_greater_noida_west' | 'nearby_surrounding';
+  classification?: 'core_greater_noida_west' | 'nearby_surrounding' | 'primary' | 'upcoming';
   geographicClassification?: 'core_greater_noida_west' | 'nearby_surrounding' | 'geographic_outlier';
-  recordType?: 'canonical' | 'alias' | 'nearby_surrounding' | 'geographic_outlier';
+  recordType?: 'canonical' | 'alias' | 'nearby_surrounding' | 'geographic_outlier' | 'primary' | 'upcoming';
   canonicalSlug?: string;
   isDuplicate?: boolean;
   duplicateOf?: string | null;

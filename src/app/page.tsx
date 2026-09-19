@@ -42,7 +42,7 @@ export default function HomePage() {
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#c2410c] shrink-0" />
               <span className="font-semibold text-slate-900">Greater Noida West &amp; Noida Extension School Directory</span>
               <span className="text-slate-400 mx-0.5">•</span>
-              <span className="text-slate-600 font-normal">{allSchools.length} Verified Campuses</span>
+              <span className="text-slate-600 font-normal">{allSchools.length} Schools Listed</span>
             </div>
 
             {/* Main Confident Headline matching Image 1 */}
@@ -56,7 +56,7 @@ export default function HomePage() {
 
             {/* Supporting Subtitle matching Image 1 */}
             <p className="text-base sm:text-lg text-slate-600 mt-5 sm:mt-6 leading-relaxed max-w-2xl sm:max-w-3xl text-center mx-auto">
-              Transparent fee breakdowns, authentic facilities, verified boards (CBSE, ICSE, IB),<br className="hidden sm:inline" />
+              Transparent fee breakdowns, authentic facilities, board details (CBSE, ICSE, IB),<br className="hidden sm:inline" />
               and side-by-side comparisons for {allSchools.length} institutions across Noida Extension.
             </p>
 
@@ -104,7 +104,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-center gap-4 mt-8 pt-6 border-t border-[var(--color-border-subtle)] w-full max-w-4xl mx-auto">
               <Link href="/schools">
                 <Button variant="primary" size="lg" className="text-white font-bold shadow-warm-xs hover:shadow-warm-md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Explore All {allSchools.length} Verified Schools
+                  Explore All {allSchools.length} Listed Schools
                 </Button>
               </Link>
               <Link href="/compare">
@@ -135,7 +135,7 @@ export default function HomePage() {
                 {allSchools.length}
               </span>
               <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                Verified Campuses
+                School Directory
               </span>
             </div>
 
@@ -201,7 +201,7 @@ export default function HomePage() {
                   <h3 className="text-base font-bold text-[#0f172a]">Discover</h3>
                 </div>
                 <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
-                  Filter by sector, board (CBSE, ICSE, IB), grade span, and verified fees.
+                  Filter by sector, board (CBSE, ICSE, IB), grade span, and fee verification status.
                 </p>
               </div>
               <Link

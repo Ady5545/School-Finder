@@ -25,7 +25,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "20:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -45,12 +45,12 @@
     },
     "fees": {
       "cardFee": 132900,
-      "estimatedFirstYear": 183900,
+      "estimatedFirstYear": "₹1.36 lakh – ₹1.67 lakh depending on grade and recurring charges.",
       "currency": "INR",
       "rangeText": "₹11,075 / month (₹33,225 / quarter · ₹1,32,900 calculated annual)",
       "academicSession": "2026–27",
       "lastVerifiedDate": "September 2026",
-      "verificationStatus": "verified_from_source",
+      "verificationStatus": "user_supplied",
       "isVerified": true,
       "disclosed": true,
       "comparableAnnualAvailable": true,
@@ -317,7 +317,13 @@
           "All one-time admission fees are non-refundable.",
           "Activities and sports academy sessions are billed on actuals."
         ]
-      }
+      },
+      "admissionFeeAdjustment": "Around ₹40,000 of the admission fee is typically adjusted against upcoming quarterly or monthly composite charges.",
+      "paymentRules": [
+        "Composite fee payable in advance on or before the 10th of each month.",
+        "₹500 late fine after the 20th of the month.",
+        "If unpaid by the 25th, the student's name may be struck off and a re-admission fee applies."
+      ]
     },
     "facilities": [
       {
@@ -389,7 +395,7 @@
       "sourceUrl": "https://dpskpv.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": "+91-0120-3567600",
@@ -530,10 +536,10 @@
       "cardFee": 130800,
       "estimatedFirstYear": 191800,
       "currency": "INR",
-      "rangeText": "₹10,900 – ₹13,130 / month (₹32,700 – ₹39,390 / quarter · ₹1,30,800 – ₹1,57,560 calculated annual)",
-      "academicSession": "2026–27",
+      "rangeText": "₹10,900 – ₹13,130 / month (₹32,700 – ₹39,390 / quarter)",
+      "academicSession": "2027–28",
       "lastVerifiedDate": "September 2026",
-      "verificationStatus": "verified_from_source",
+      "verificationStatus": "user_supplied",
       "isVerified": true,
       "disclosed": true,
       "comparableAnnualAvailable": true,
@@ -542,10 +548,10 @@
       "sourceUrl": "https://lotusvalleyne.com",
       "registrationFee": 1000,
       "admissionFee": 50000,
-      "tuitionMonthly": "10,900 – 13,130",
-      "tuitionQuarterly": "32,700 – 39,390",
-      "tuitionAnnual": "1,30,800 – 1,57,560 (Calculated from monthly/quarterly)",
-      "transportMonthly": "Route-dependent",
+      "tuitionMonthly": "₹10,900 – ₹13,130",
+      "tuitionQuarterly": "₹32,700 – ₹39,390",
+      "tuitionAnnual": "₹1,30,800 – ₹1,57,560 (calculated)",
+      "transportMonthly": "₹3,300 – ₹4,500",
       "transportAnnual": null,
       "calculatedAnnualNote": "Annual values are calculated equivalents derived from supplied monthly/quarterly figures: Nursery–V (₹10,900/mo = ₹1,30,800/yr), VI–X (₹11,370/mo = ₹1,36,440/yr), XI–XII Comm/Hum (₹12,850/mo = ₹1,54,200/yr), XI–XII Science (₹13,130/mo = ₹1,57,560/yr).",
       "disclaimer": "Caution money of ₹10,000 is refundable upon withdrawal and clearance. Admission fee (₹50,000) and registration fee (₹1,000) are non-refundable. Transport is optional and calculated dynamically by route/distance.",
@@ -557,36 +563,36 @@
       ],
       "table": [
         {
-          "type": "Registration Fee (One-time, non-refundable)",
-          "cost": "1,000"
+          "type": "Registration Fee (One-time)",
+          "cost": "₹1,000"
         },
         {
           "type": "Admission Fee (One-time, non-refundable)",
-          "cost": "50,000"
+          "cost": "₹50,000"
         },
         {
           "type": "Caution Money (One-time, refundable)",
-          "cost": "10,000"
+          "cost": "₹10,000"
         },
         {
-          "type": "Tuition Fee – Nursery to Grade V",
-          "cost": "10,900 / month (₹32,700 / quarter · ₹1,30,800 / year calculated)"
+          "type": "Nursery to Class 5",
+          "cost": "₹10,900 / month · ₹32,700 / quarter · ₹1,30,800 / year calculated"
         },
         {
-          "type": "Tuition Fee – Grades VI to X",
-          "cost": "11,370 / month (₹34,110 / quarter · ₹1,36,440 / year calculated)"
+          "type": "Class 6 to Class 10",
+          "cost": "₹11,370 / month · ₹34,110 / quarter · ₹1,36,440 / year calculated"
         },
         {
-          "type": "Tuition Fee – Grades XI & XII (Commerce & Humanities)",
-          "cost": "12,850 / month (₹38,550 / quarter · ₹1,54,200 / year calculated)"
+          "type": "Class 11–12 Commerce & Humanities",
+          "cost": "₹12,850 / month · ₹38,550 / quarter · ₹1,54,200 / year calculated"
         },
         {
-          "type": "Tuition Fee – Grades XI & XII (Science)",
-          "cost": "13,130 / month (₹39,390 / quarter · ₹1,57,560 / year calculated)"
+          "type": "Class 11–12 Science",
+          "cost": "₹13,130 / month · ₹39,390 / quarter · ₹1,57,560 / year calculated"
         },
         {
-          "type": "Transport (Optional)",
-          "cost": "Dynamically calculated according to route/distance"
+          "type": "Optional Transport",
+          "cost": "₹3,300 – ₹4,500 / month"
         }
       ],
       "components": [
@@ -757,40 +763,40 @@
       ],
       "gradeWiseTiers": [
         {
-          "gradeGroup": "Nursery to Grade V",
-          "tuitionFee": "₹10,900 / month (₹32,700 / quarter)",
-          "tuitionFrequency": "quarterly",
+          "gradeGroup": "Nursery to Class 5",
+          "tuitionFee": "₹10,900 / month",
+          "tuitionFrequency": "monthly",
           "calculatedAnnualEquivalent": "₹1,30,800 / year",
-          "totalAnnualPayable": "₹1,30,800",
+          "totalAnnualPayable": "₹1,30,800 / year",
           "isCalculated": true,
-          "notes": "Calculated as ₹10,900/mo × 12 = ₹1,30,800/yr."
+          "notes": "Annual figure calculated from the supplied monthly fee."
         },
         {
-          "gradeGroup": "Grades VI to X",
-          "tuitionFee": "₹11,370 / month (₹34,110 / quarter)",
-          "tuitionFrequency": "quarterly",
+          "gradeGroup": "Class 6 to Class 10",
+          "tuitionFee": "₹11,370 / month",
+          "tuitionFrequency": "monthly",
           "calculatedAnnualEquivalent": "₹1,36,440 / year",
-          "totalAnnualPayable": "₹1,36,440",
+          "totalAnnualPayable": "₹1,36,440 / year",
           "isCalculated": true,
-          "notes": "Calculated as ₹11,370/mo × 12 = ₹1,36,440/yr."
+          "notes": "Annual figure calculated from the supplied monthly fee."
         },
         {
-          "gradeGroup": "Grades XI & XII (Commerce & Humanities)",
-          "tuitionFee": "₹12,850 / month (₹38,550 / quarter)",
-          "tuitionFrequency": "quarterly",
+          "gradeGroup": "Class 11–12 Commerce & Humanities",
+          "tuitionFee": "₹12,850 / month",
+          "tuitionFrequency": "monthly",
           "calculatedAnnualEquivalent": "₹1,54,200 / year",
-          "totalAnnualPayable": "₹1,54,200",
+          "totalAnnualPayable": "₹1,54,200 / year",
           "isCalculated": true,
-          "notes": "Calculated as ₹12,850/mo × 12 = ₹1,54,200/yr."
+          "notes": "Annual figure calculated from the supplied monthly fee."
         },
         {
-          "gradeGroup": "Grades XI & XII (Science)",
-          "tuitionFee": "₹13,130 / month (₹39,390 / quarter)",
-          "tuitionFrequency": "quarterly",
+          "gradeGroup": "Class 11–12 Science",
+          "tuitionFee": "₹13,130 / month",
+          "tuitionFrequency": "monthly",
           "calculatedAnnualEquivalent": "₹1,57,560 / year",
-          "totalAnnualPayable": "₹1,57,560",
+          "totalAnnualPayable": "₹1,57,560 / year",
           "isCalculated": true,
-          "notes": "Calculated as ₹13,130/mo × 12 = ₹1,57,560/yr."
+          "notes": "Annual figure calculated from the supplied monthly fee."
         }
       ],
       "concessions": [],
@@ -810,7 +816,8 @@
         ]
       },
       "cautionDeposit": 10000,
-      "refundableSecurity": 10000
+      "refundableSecurity": 10000,
+      "cautionMoney": 10000
     },
     "facilities": [
       {
@@ -988,7 +995,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "20:1",
+    "studentTeacherRatio": "1:15",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -1364,7 +1371,7 @@
       "sourceUrl": "https://www.pacificworldschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": "+91-8899117704",
@@ -1490,7 +1497,7 @@
       "isVerified": true,
       "cardFee": 41100,
       "currency": "INR",
-      "rangeText": "₹41,100 / quarter (Classes IX–XII; Junior grades not publicly specified)",
+      "rangeText": "₹41,100 / quarter (Classes IX–XII)",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": null,
@@ -1518,22 +1525,16 @@
       ],
       "gradeWiseTiers": [
         {
-          "gradeGroup": "Nursery to Class VII",
-          "tuitionFee": "Available on request",
-          "tuitionFrequency": "annual",
-          "notes": "Junior grade fees not publicly specified in authoritative disclosure."
-        },
-        {
           "gradeGroup": "Classes IX–XII",
           "tuitionFee": "₹41,100 / quarter",
           "tuitionFrequency": "quarterly",
+          "totalAnnualPayable": "₹1,64,400 / year (calculated)",
           "calculatedAnnualEquivalent": "₹1,64,400 / year",
-          "isOfficial": true,
-          "calculationNotes": "Calculated annual equivalent based on ₹41,100 / quarter composite fee."
+          "isCalculated": true
         }
       ],
       "concessions": [],
-      "disclaimer": "Official fee disclosed for Classes IX–XII is ₹41,100 per quarter. Junior grade fees are not publicly specified."
+      "disclaimer": "Books and uniform removed. Transport retained. Estimated annual tuition for Nursery and Classes I–VII removed. Classes IX–XII fee shown as ₹41,100 per quarter. Annual equivalent is calculated as ₹41,100 × 4."
     },
     "facilities": [
       {
@@ -1721,7 +1722,7 @@
       "cardFee": 91000,
       "estimatedFirstYear": 133000,
       "currency": "INR",
-      "rangeText": "₹91,000 – ₹1,21,000 / year (tuition + annual charges)",
+      "rangeText": "Class 11 Science confirmed from parent portal: Tuition ₹13,997/month + Transport ₹3,750/month + Practical/Lab ₹500.",
       "registrationFee": 2000,
       "admissionFee": 40000,
       "tuitionMonthly": null,
@@ -1867,7 +1868,13 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "studentPortalConfirmed": {
+        "class": "Class 11 Science",
+        "tuitionMonthly": "₹13,997",
+        "transportMonthly": "₹3,750",
+        "practicalLabCharge": "₹500"
+      }
     },
     "facilities": [
       {
@@ -1969,7 +1976,7 @@
       "sourceUrl": "https://dwpsnoidaex.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": "+91-9205131014",
@@ -2746,13 +2753,13 @@
     ],
     "admissions": {
       "date": null,
-      "status": "Open",
-      "process": "Online registration on school website.",
+      "status": "Pre-registration",
+      "process": "Pre-registration/enquiry option for the 2027–28 session; final admission process follows the school's schedule.",
       "session": "2027-28",
       "sourceUrl": "https://sksworldschool.ac.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Contact admin office for mid-session transfer vacancies."
+      "timelineDescription": "2027–28 admissions have not opened yet. Pre-registration/enquiry is available."
     },
     "contact": {
       "phone": "+91-9891081240",
@@ -2868,17 +2875,17 @@
       "isVerified": true,
       "cardFee": 9500,
       "currency": "INR",
-      "rangeText": "₹9,500 – ₹12,000 / month (Calculated annual: ₹1,14,000 – ₹1,44,000 / year)",
+      "rangeText": "₹9,500 – ₹12,000 / month (₹1,14,000 – ₹1,44,000 / year calculated)",
       "registrationFee": null,
       "admissionFee": 55000,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": "₹9,500 – ₹12,000",
-      "tuitionAnnual": "₹1,14,000 – ₹1,44,000 (Calculated)",
+      "tuitionAnnual": "₹1,14,000 – ₹1,44,000 (calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "jm-international-school-comp-1",
@@ -2915,7 +2922,9 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Admission fee is ₹55,000. Composite monthly tuition ranges from ₹9,500 to ₹12,000. Annual figures are calculated."
+      "disclaimer": "Admission fee is ₹55,000. Composite monthly tuition ranges from ₹9,500 to ₹12,000. Annual figures are calculated.",
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -2982,7 +2991,7 @@
       "sourceUrl": "https://jminternationalschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": null,
@@ -3086,7 +3095,7 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No 20 C, Tech Zone IV, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201308",
+      "address": "Plot no 20 C, Tech Zone IV, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201308",
       "sector": "Sector 16B",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -3103,18 +3112,18 @@
       "isVerified": true,
       "cardFee": 22500,
       "currency": "INR",
-      "rangeText": "Quarterly: ₹22,500 – ₹29,700 (Nur–V) | ₹23,400 – ₹30,000+ (VI–VIII) | ₹24,300+ (IX–X)",
+      "rangeText": "Nursery–V: ₹22,500–₹29,700/quarter | VI–VIII: ₹23,400–₹30,000+/quarter | IX–X: ₹24,300+/quarter",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": "₹7,500 – ₹10,000 (Refundable)",
       "refundableSecurity": "₹7,500 – ₹10,000",
-      "tuitionMonthly": null,
-      "tuitionQuarterly": "₹22,500 – ₹30,000+",
+      "tuitionMonthly": "₹22,500 – ₹29,700 (Nursery–V); ₹23,400 – ₹30,000+ (VI–VIII); ₹24,300+ (IX–X)",
+      "tuitionQuarterly": "Same grade-wise ranges supplied",
       "tuitionAnnual": null,
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "st-xaviers-high-school-comp-1",
@@ -3183,7 +3192,10 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official quarterly grade tiers: Nursery–V (₹22,500–₹29,700), VI–VIII (₹23,400–₹30,000+), IX–X (₹24,300+). Refundable caution is ₹7,500–₹10,000."
+      "disclaimer": "Official quarterly grade tiers: Nursery–V (₹22,500–₹29,700), VI–VIII (₹23,400–₹30,000+), IX–X (₹24,300+). Refundable caution is ₹7,500–₹10,000.",
+      "cautionMoney": "₹7,500 – ₹10,000 (refundable, one-time)",
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -3363,17 +3375,17 @@
       "isVerified": true,
       "cardFee": 7250,
       "currency": "INR",
-      "rangeText": "₹7,250 – ₹12,300 / month (Pre-KG: ₹7,250 | I–V: ₹8,450 | VI–VIII: ₹9,700 | IX–X: ₹10,800 | XI–XII: ₹12,300)",
+      "rangeText": "₹7,250 – ₹12,300 / month by grade",
       "registrationFee": 500,
       "admissionFee": 20000,
       "cautionDeposit": 5000,
       "refundableSecurity": 5000,
-      "tuitionMonthly": "₹7,250 – ₹12,300",
+      "tuitionMonthly": "Pre-KG ₹7,250 | I–V ₹8,450 | VI–VIII ₹9,700 | IX–X ₹10,800 | XI–XII ₹12,300",
       "tuitionAnnual": "₹87,000 – ₹1,47,600 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "the-wisdom-tree-school-comp-1",
@@ -3452,7 +3464,10 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official monthly fees: Pre-KG ₹7,250, I–V ₹8,450, VI–VIII ₹9,700, IX–X ₹10,800, XI–XII ₹12,300. Registration ₹500, Admission ₹20,000, Refundable Caution ₹5,000."
+      "disclaimer": "Official monthly fees: Pre-KG ₹7,250, I–V ₹8,450, VI–VIII ₹9,700, IX–X ₹10,800, XI–XII ₹12,300. Registration ₹500, Admission ₹20,000, Refundable Caution ₹5,000.",
+      "cautionMoney": 5000,
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -3643,21 +3658,21 @@
       "mapEmbedUrl": "https://www.google.com/maps?q=The+Infinity+School+Greater+Noida&output=embed"
     },
     "fees": {
-      "isVerified": false,
+      "isVerified": true,
       "cardFee": 9000,
       "currency": "INR",
-      "academicSession": "2023–24 (Historical Reference)",
-      "rangeText": "₹9,000 – ₹11,500 / month (Historical Reference: 2023–24 session; not official 2026–27)",
+      "academicSession": "2027–28",
+      "rangeText": "₹1,72,200 – ₹1,84,200 total annual cost for new admissions, depending on grade",
       "registrationFee": 1200,
       "admissionFee": 35000,
       "cautionDeposit": 10000,
       "refundableSecurity": 10000,
-      "tuitionMonthly": "₹9,000 – ₹11,500 (Historical 2023–24)",
+      "tuitionMonthly": "₹10,500",
       "tuitionAnnual": "₹1,08,000 – ₹1,38,000 (Historical 2023–24)",
-      "transportMonthly": null,
+      "transportMonthly": "₹1,900 – ₹4,100",
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "the-infinity-school-comp-1",
@@ -3698,28 +3713,19 @@
       ],
       "gradeWiseTiers": [
         {
-          "gradeGroup": "Reception",
-          "tuitionFee": "₹9,000 (1st child) / ₹8,000 (sibling)",
-          "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "gradeGroup": "LKG–Class 1",
+          "totalAnnualPayable": "₹1,72,200",
+          "isCalculated": false
         },
         {
-          "gradeGroup": "PP1 / PP2 / Grade 1",
-          "tuitionFee": "₹10,500 (1st child) / ₹8,000 (sibling)",
-          "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "gradeGroup": "Classes 2–5",
+          "totalAnnualPayable": "₹1,78,200",
+          "isCalculated": false
         },
         {
-          "gradeGroup": "Grades 2–5",
-          "tuitionFee": "₹11,000 (1st child) / ₹8,000 (sibling)",
-          "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
-        },
-        {
-          "gradeGroup": "Grades 6–10",
-          "tuitionFee": "₹11,500 (1st child) / ₹8,000 (sibling)",
-          "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "gradeGroup": "Classes 6–10",
+          "totalAnnualPayable": "₹1,84,200",
+          "isCalculated": false
         }
       ],
       "concessions": [
@@ -3728,7 +3734,48 @@
           "description": "Flat ₹8,000 / month sibling rate in historical structure."
         }
       ],
-      "disclaimer": "Estimated / inferred: The supplied fee data is HISTORICAL (2023–24 session). It is not official current 2026–27 or 2027–28 pricing."
+      "disclaimer": "Estimated / inferred: The supplied fee data is HISTORICAL (2023–24 session). It is not official current 2026–27 or 2027–28 pricing.",
+      "cautionMoney": 10000,
+      "siblingDiscount": "₹8,000/month composite fee for younger sibling",
+      "disclosed": true,
+      "table": [
+        {
+          "type": "Registration Fee (One-time)",
+          "cost": "₹1,200"
+        },
+        {
+          "type": "Admission Fee (One-time, non-refundable)",
+          "cost": "₹35,000"
+        },
+        {
+          "type": "Caution Money (One-time, refundable)",
+          "cost": "₹10,000"
+        },
+        {
+          "type": "Composite/Tuition Fee",
+          "cost": "₹10,500 / month"
+        },
+        {
+          "type": "Optional Transport",
+          "cost": "₹1,900 – ₹4,100 / month"
+        },
+        {
+          "type": "LKG–Class 1 total annual new-admission cost",
+          "cost": "₹1,72,200"
+        },
+        {
+          "type": "Classes 2–5 total annual new-admission cost",
+          "cost": "₹1,78,200"
+        },
+        {
+          "type": "Classes 6–10 total annual new-admission cost",
+          "cost": "₹1,84,200"
+        }
+      ],
+      "paymentRules": [
+        "Fees are collected quarterly at admission (April–June) and subsequently monthly by the 10th.",
+        "Late fine: ₹250 per week after the due date."
+      ]
     },
     "facilities": [
       {
@@ -3800,7 +3847,7 @@
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Registrations are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": null,
@@ -3922,7 +3969,7 @@
       "isVerified": true,
       "cardFee": 9000,
       "currency": "INR",
-      "rangeText": "₹9,000 – ₹14,396 / month (Toddlers: ₹9,000 | Nursery–XI: ₹14,396; 25% discount: ₹10,796)",
+      "rangeText": "Monthly grade structure supplied by school; see fee table for standard, 25% discount and sibling-discount amounts.",
       "registrationFee": 1000,
       "admissionFee": 99000,
       "cautionDeposit": null,
@@ -4034,7 +4081,9 @@
           "description": "Admission fee discounted from ₹99,000 to ₹30,000; ₹10,000 security waived."
         }
       ],
-      "disclaimer": "Standard admission fee is ₹99,000 (discounted to ₹30,000). Monthly tuition: Toddlers ₹9,000, Nursery–XI ₹14,396 (discounted to ₹10,796). Registration ₹1,000."
+      "disclaimer": "Standard admission fee is ₹99,000 (discounted to ₹30,000). Monthly tuition: Toddlers ₹9,000, Nursery–XI ₹14,396 (discounted to ₹10,796). Registration ₹1,000.",
+      "discountedAdmissionFee": 30000,
+      "securityFee": "₹10,000 (waived off)"
     },
     "facilities": [
       {
@@ -4091,7 +4140,7 @@
       "sourceUrl": "https://ramagyaschool.com/noida-extension/",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current admission dates not publicly verified. Check the official school admissions page.",
+      "timelineDescription": "Admissions are open for the 2027–28 academic session.",
       "academicYear": "2027–28"
     },
     "contact": {
@@ -4212,13 +4261,13 @@
       "isVerified": true,
       "cardFee": 8855,
       "currency": "INR",
-      "rangeText": "₹8,855 – ₹12,925 / month composite (Nur–KG: ₹8,855 | I–V: ₹10,175 | VI–VIII: ₹10,725 | IX–X: ₹11,825 | XI–XII: ₹12,925)",
+      "rangeText": "Composite monthly: NUR-KG ₹8,855 | I–V ₹10,175 | VI–VIII ₹10,725 | IX–X ₹11,825 | XI–XII ₹12,925",
       "registrationFee": 1000,
       "admissionFee": 25000,
       "cautionDeposit": 20000,
       "refundableSecurity": 20000,
-      "tuitionMonthly": "₹8,855 – ₹12,925",
-      "tuitionAnnual": "₹1,06,260 – ₹1,55,100 (Calculated)",
+      "tuitionMonthly": "NUR-KG ₹8,662 | I–V ₹9,908 | VI–VIII ₹10,443 | IX–X ₹11,514 | XI–XII ₹12,586",
+      "tuitionAnnual": "NUR-KG ₹1,05,?; composite annual equivalents shown below",
       "transportMonthly": null,
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -4301,7 +4350,44 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Authoritative monthly composite fees: Nursery–KG ₹8,855, I–V ₹10,175, VI–VIII ₹10,725, IX–X ₹11,825, XI–XII ₹12,925. Registration ₹1,000, Admission ₹25,000, Security ₹20,000."
+      "disclaimer": "Authoritative monthly composite fees: Nursery–KG ₹8,855, I–V ₹10,175, VI–VIII ₹10,725, IX–X ₹11,825, XI–XII ₹12,925. Registration ₹1,000, Admission ₹25,000, Security ₹20,000.",
+      "securityDeposit": 20000,
+      "idCardAnnual": "NUR-KG ₹233 | I–V ₹267 | VI–VIII ₹282 | IX–X ₹311 | XI–XII ₹339",
+      "academicSession": "2027–28",
+      "table": [
+        {
+          "type": "Registration",
+          "cost": "₹1,000 (all classes)"
+        },
+        {
+          "type": "Admission",
+          "cost": "₹25,000 (all classes)"
+        },
+        {
+          "type": "Security Deposit",
+          "cost": "₹20,000 (all classes)"
+        },
+        {
+          "type": "Composite Tuition – NUR-KG",
+          "cost": "₹8,855/month · ₹1,06,260/year calculated"
+        },
+        {
+          "type": "Composite Tuition – I-V",
+          "cost": "₹10,175/month · ₹1,22,100/year calculated"
+        },
+        {
+          "type": "Composite Tuition – VI-VIII",
+          "cost": "₹10,725/month · ₹1,28,700/year calculated"
+        },
+        {
+          "type": "Composite Tuition – IX-X",
+          "cost": "₹11,825/month · ₹1,41,900/year calculated"
+        },
+        {
+          "type": "Composite Tuition – XI-XII",
+          "cost": "₹12,925/month · ₹1,55,100/year calculated"
+        }
+      ]
     },
     "facilities": [
       {
@@ -4496,7 +4582,7 @@
       "isVerified": true,
       "cardFee": 60195,
       "currency": "INR",
-      "rangeText": "₹60,195 – ₹1,12,371 / year (Grade-wise annual tuition schedule)",
+      "rangeText": "Annual class-wise fees: Pre Nur/Nur/KG ₹60,195 | I–III ₹66,898 | IV–V ₹80,268 | VI–VIII ₹86,947 | IX–X ₹93,650 | XI–XII Commerce/Humanities ₹1,07,020 | XI–XII Science ₹1,12,371",
       "registrationFee": 1500,
       "admissionFee": 30000,
       "cautionDeposit": null,
@@ -4505,8 +4591,8 @@
       "tuitionAnnual": "₹60,195 – ₹1,12,371",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "salvation-tree-school-comp-1",
@@ -4583,7 +4669,9 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official annual tuition schedule: Pre-Nur–KG ₹60,195, I–III ₹66,898, IV–V ₹80,268, VI–VIII ₹86,947, IX–X ₹93,650, XI–XII Commerce ₹1,07,020, XI–XII Science ₹1,12,371. Registration ₹1,500, Admission ₹30,000."
+      "disclaimer": "Official annual tuition schedule: Pre-Nur–KG ₹60,195, I–III ₹66,898, IV–V ₹80,268, VI–VIII ₹86,947, IX–X ₹93,650, XI–XII Commerce ₹1,07,020, XI–XII Science ₹1,12,371. Registration ₹1,500, Admission ₹30,000.",
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -4756,7 +4844,7 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "HS 03, Sector 16 West, Panchsheel Greens 2, Greater Noida, Noida, Uttar Pradesh 201318",
+      "address": "HS 03, Sector 16, West, Panchsheel Greens 2, Greater Noida, Noida, Uttar Pradesh 201318",
       "sector": "Sector 16B",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -4774,7 +4862,7 @@
       "isVerified": true,
       "cardFee": 97800,
       "currency": "INR",
-      "rangeText": "₹97,800 – ₹1,23,000 / year (Nursery & Prep: ₹97,800 | I–V: ₹1,08,000 | VI–VIII: ₹1,14,000 | IX–X: ₹1,23,000)",
+      "rangeText": "Nursery/Prep ₹8,150/month | I–V ₹9,000 | VI–VIII ₹9,500 | IX–X ₹10,250; annual ₹97,800 / ₹1,08,000 / ₹1,14,000 / ₹1,23,000",
       "registrationFee": 1700,
       "admissionFee": 45000,
       "cautionDeposit": null,
@@ -4784,8 +4872,8 @@
       "tuitionAnnual": "₹97,800 – ₹1,23,000",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "bls-world-school-comp-1",
@@ -4841,7 +4929,9 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official annual tuition: Nursery & Prep ₹97,800 (₹8,150/mo), I–V ₹1,08,000 (₹9,000/mo), VI–VIII ₹1,14,000 (₹9,500/mo), IX–X ₹1,23,000 (₹10,250/mo). Registration ₹1,700, Admission ₹45,000."
+      "disclaimer": "Official annual tuition: Nursery & Prep ₹97,800 (₹8,150/mo), I–V ₹1,08,000 (₹9,000/mo), VI–VIII ₹1,14,000 (₹9,500/mo), IX–X ₹1,23,000 (₹10,250/mo). Registration ₹1,700, Admission ₹45,000.",
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -4907,13 +4997,13 @@
     ],
     "admissions": {
       "date": null,
-      "status": "Open",
+      "status": "Pre-registration",
       "process": "2027–28 admissions expected late December. Pre-registration available.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "2027–28 admissions are expected around late December. Pre-registration is available."
     },
     "contact": {
       "phone": null,
@@ -5377,7 +5467,7 @@
       "isVerified": true,
       "cardFee": 13314,
       "currency": "INR",
-      "rangeText": "₹13,314 – ₹16,488 / month (Discounted: ₹9,510 – ₹11,245 / month)",
+      "rangeText": "Pre-Nursery ₹13,314/month (post-discount ₹9,510) | Nursery/KG/Prep ₹13,826 (post ₹9,830) | I–V ₹15,076 (post ₹10,510) | VI–XII ₹16,488 (post ₹11,245)",
       "registrationFee": 1000,
       "admissionFee": 40000,
       "cautionDeposit": 0,
@@ -5386,8 +5476,8 @@
       "tuitionAnnual": "₹1,59,768 – ₹1,97,856 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "shri-ram-global-school-comp-1",
@@ -5485,7 +5575,12 @@
           "description": "100% security fee waiver (payable ₹0 vs ₹10,000)."
         }
       ],
-      "disclaimer": "Monthly composite: Pre-Nur ₹13,314 (discounted ₹9,510), Nur/KG ₹13,826 (discounted ₹9,830), Gr 1–5 ₹15,076 (discounted ₹10,510), Gr 6–12 ₹16,488 (discounted ₹11,245). Registration ₹1,000, Admission ₹40,000 (after 33% waiver), Security ₹0 (100% waived)."
+      "disclaimer": "Monthly composite: Pre-Nur ₹13,314 (discounted ₹9,510), Nur/KG ₹13,826 (discounted ₹9,830), Gr 1–5 ₹15,076 (discounted ₹10,510), Gr 6–12 ₹16,488 (discounted ₹11,245). Registration ₹1,000, Admission ₹40,000 (after 33% waiver), Security ₹0 (100% waived).",
+      "admissionFeeOriginal": "₹60,000 with 33% waiver; payable ₹40,000",
+      "securityFee": "₹10,000 with 100% waiver; payable ₹0",
+      "examFee": "₹1,000 annually from Grade V, payable in April",
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -5551,13 +5646,13 @@
     ],
     "admissions": {
       "date": null,
-      "status": "Open",
+      "status": "Pre-registration",
       "process": "Online registration.",
       "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "2027–28 pre-registration option available."
     },
     "contact": {
       "phone": null,
@@ -5678,17 +5773,17 @@
       "isVerified": true,
       "cardFee": 6750,
       "currency": "INR",
-      "rangeText": "₹6,750 / month (Calculated annual: ₹81,000 / year)",
+      "rangeText": "₹6,750/month + optional transport ₹2,000–₹3,000/month",
       "registrationFee": 50,
       "admissionFee": 25000,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": "₹6,750",
       "tuitionAnnual": "₹81,000 (Calculated)",
-      "transportMonthly": "₹2,000 – ₹3,000 (Optional)",
+      "transportMonthly": "₹2,000 – ₹3,000 (optional)",
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "florence-international-school-comp-1",
@@ -5756,7 +5851,10 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official tuition: ₹6,750/month (calculated annual: ₹81,000/yr). Prospectus ₹1,200, Registration ₹50, Admission ₹25,000. Transport ₹2,000–₹3,000/month optional."
+      "disclaimer": "Official tuition: ₹6,750/month (calculated annual: ₹81,000/yr). Prospectus ₹1,200, Registration ₹50, Admission ₹25,000. Transport ₹2,000–₹3,000/month optional.",
+      "prospectusFee": 1200,
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -5800,9 +5898,10 @@
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "Open",
+      "status": "Pre-registration",
       "process": "Registration online or at campus reception, followed by interaction.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "Pre-registration option available for the 2027–28 session."
     },
     "contact": {
       "phone": "+91 93112 25001",
@@ -5895,7 +5994,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No HS-3, Sector 3 Rd, Sector 3, West, Greater Noida West",
+      "address": "Plot No. HS-3, Sector 3 Rd, Sector 3, West, Greater Noida West",
       "sector": "Sector 1",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -5910,20 +6009,20 @@
       "mapEmbedUrl": null
     },
     "fees": {
-      "isVerified": false,
+      "isVerified": true,
       "cardFee": 73000,
       "currency": "INR",
-      "rangeText": "₹73,000 – ₹1,40,500 / year (Approximate annual grade ranges)",
+      "rangeText": "Pre-Nursery–VIII ₹1,12,900/year | Class IX ₹1,28,500/year | Class X ₹1,16,500/year | Class XI ₹1,40,500/year | Class XII ₹1,16,500/year",
       "registrationFee": 1000,
       "admissionFee": 20000,
       "cautionDeposit": null,
       "refundableSecurity": null,
-      "tuitionMonthly": null,
+      "tuitionMonthly": "₹7,200 – ₹7,500",
       "tuitionAnnual": "₹73,000 – ₹1,40,500 (Approximate)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "st-teresa-school-greater-noida-west-comp-1",
@@ -5972,7 +6071,10 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Approximate annual fee ranges: Pre-Nur–VIII (₹73,000–₹1,12,900), IX–X (₹1,16,500–₹1,28,500), XI–XII (up to approx ₹1,40,500). Registration approx ₹1,000, Admission up to ₹20,000. CBSE affiliation is not publicly disclosed."
+      "disclaimer": "Approximate annual fee ranges: Pre-Nur–VIII (₹73,000–₹1,12,900), IX–X (₹1,16,500–₹1,28,500), XI–XII (up to approx ₹1,40,500). Registration approx ₹1,000, Admission up to ₹20,000. CBSE affiliation is not publicly disclosed.",
+      "examActivityAnnual": 5500,
+      "academicSession": "2027–28",
+      "disclosed": true
     },
     "facilities": [
       {
@@ -6011,14 +6113,13 @@
         "label": "Official School Uniform"
       }
     },
-    "achievements": [
-      "District level champions in sports & debate competitions"
-    ],
+    "achievements": [],
     "admissions": {
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online registration followed by parent interaction and document submission.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "Admissions are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": "+91 88005 54499",
@@ -6131,7 +6232,7 @@
       "isVerified": true,
       "cardFee": 6500,
       "currency": "INR",
-      "rangeText": "₹6,500 – ₹8,364 / month (Nursery–V: ₹6,500 | VI–VIII: ₹6,970 | IX–X: ₹7,184 | XI–XII: ₹8,364)",
+      "rangeText": "Composite monthly: Nursery–V ₹6,500 | VI–VIII ₹6,970 | IX–X ₹7,184 | XI–XII ₹8,364",
       "registrationFee": 1000,
       "admissionFee": 40000,
       "cautionDeposit": null,
@@ -6213,7 +6314,9 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official monthly composite: Nursery–V ₹6,500, VI–VIII ₹6,970, IX–X ₹7,184, XI–XII ₹8,364. Registration ₹1,000, Admission ₹40,000. Practical ₹400/subject."
+      "disclaimer": "Official monthly composite: Nursery–V ₹6,500, VI–VIII ₹6,970, IX–X ₹7,184, XI–XII ₹8,364. Registration ₹1,000, Admission ₹40,000. Practical ₹400/subject.",
+      "practicalCharge": "₹400 per practical subject",
+      "academicSession": "2027–28"
     },
     "facilities": [
       {
@@ -6259,7 +6362,8 @@
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Application form submission followed by student interaction.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "Admissions are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": "+91 98114 47711",
@@ -6320,1473 +6424,6 @@
     "isArchived": false,
     "status": "active",
     "cbseAffiliationNumber": "2133271"
-  },
-  {
-    "id": "mount-olympus-school-greater-noida-west",
-    "slug": "mount-olympus-school-greater-noida-west",
-    "name": "Mount Olympus School",
-    "shortName": "Mount Olympus",
-    "alternateNames": [
-      "Mount Olympus Sector 10",
-      "MOS Noida Extension"
-    ],
-    "tagline": "Inspiring future leaders with global standards",
-    "summary": "Mount Olympus School in Sector 10, Greater Noida West, provides an international educational experience with premium campus infrastructure, swimming pool, STEM robotics labs, and comprehensive arts programs.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum with experiential learning modules",
-    "gradeRange": {
-      "from": "Pre-Nursery",
-      "to": "Grade 12",
-      "raw": "Pre-Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "20:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Plot No. GH-01, Sector 10, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 10",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.5721,
-        "lng": 77.4615,
-        "isVerified": true
-      },
-      "mapSearchQuery": "Mount Olympus School Sector 10 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 155000,
-      "estimatedFirstYear": 185000,
-      "currency": "INR",
-      "rangeText": "₹1.40L - ₹1.70L / year",
-      "registrationFee": 1500,
-      "admissionFee": 30000,
-      "tuitionMonthly": "₹12,916",
-      "tuitionQuarterly": "₹38,750",
-      "tuitionAnnual": "₹1,55,000",
-      "transportMonthly": "₹3,000",
-      "transportAnnual": "₹36,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 1 Premium",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://mountolympus.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,500"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹30,000"
-        },
-        {
-          "type": "Tuition Fee (Quarterly)",
-          "cost": "₹38,750"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "mount-olympus-school-greater-noida-west-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1500,
-          "formattedAmount": "₹1,500",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "mount-olympus-school-greater-noida-west-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 30000,
-          "formattedAmount": "₹30,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "mount-olympus-school-greater-noida-west-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 12916,
-          "formattedAmount": "₹12,916 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Pre-Nursery to Grade 12"
-        },
-        {
-          "id": "mount-olympus-school-greater-noida-west-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 155000,
-          "formattedAmount": "₹1,55,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Pre-Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹12,916 × 12 = ₹1,55,000/year."
-        },
-        {
-          "id": "mount-olympus-school-greater-noida-west-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹3,000 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Pre-Nursery to Grade 12",
-          "tuitionFee": "₹₹38,750 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,55,000 / year",
-          "totalAnnualPayable": "₹1,55,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Mount Olympus School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://mountolympus.in",
-        "summary": "Official fee structure for Mount Olympus School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "All-Weather Swimming Pool",
-        "category": "Sports",
-        "icon": "trophy"
-      },
-      {
-        "name": "Robotics, AI & Coding Labs",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Indoor Sports Arena",
-        "category": "Sports",
-        "icon": "trophy"
-      },
-      {
-        "name": "Music, Dance & Theatre Studios",
-        "category": "Arts",
-        "icon": "music"
-      },
-      {
-        "name": "Centrally Air-Conditioned Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official Olympus Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official Olympus Uniform"
-      }
-    },
-    "achievements": [
-      "Recognized for Innovative Pedagogical Practices by Education Today"
-    ],
-    "admissions": {
-      "date": "Admissions Open for Session 2026-27",
-      "status": "Open",
-      "process": "Online inquiry, campus orientation, student interaction, and document verification.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 88000 77111",
-      "website": "https://mountolympus.in",
-      "email": "admissions@mountolympus.in"
-    },
-    "rating": {
-      "score": 4.6,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Official Mount Olympus Portal & CBSE SARAS",
-      "sourceUrl": "https://mountolympus.in",
-      "cbseAffiliationNumber": "2133842",
-      "verifiedFields": [
-        "name",
-        "address",
-        "website",
-        "affiliation"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Mount Olympus School Greater Noida West",
-      "h1": "Mount Olympus School",
-      "pageHeartKey": "heart_olympus",
-      "cardHeartKey": "card_olympus",
-      "cardRatingKey": "rating_olympus",
-      "cardLink": "/schools/mount-olympus-school-greater-noida-west",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 10 campus verified against CBSE Affiliation No 2133842."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Swimming",
-      "Basketball",
-      "Lawn Tennis",
-      "Cricket",
-      "Football",
-      "Table Tennis",
-      "Badminton"
-    ],
-    "affiliationNumber": "2133842",
-    "geographicClassification": "core_greater_noida_west",
-    "recordType": "canonical",
-    "canonicalSlug": "mount-olympus-school-greater-noida-west",
-    "isArchived": true,
-    "status": "archived",
-    "cbseAffiliationNumber": "2133842"
-  },
-  {
-    "id": "prudence-school-greater-noida-west",
-    "slug": "prudence-school-greater-noida-west",
-    "name": "Prudence School",
-    "shortName": "Prudence School",
-    "alternateNames": [
-      "Prudence Noida Extension",
-      "Prudence Sector 16B"
-    ],
-    "tagline": "Leading with integrity and academic brilliance",
-    "summary": "Prudence School in Sector 16B, Greater Noida West, provides modern educational infrastructure, dynamic curriculum delivery, and extensive co-curricular programs.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "14:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 16B, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 16B",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.6015,
-        "lng": 77.4398
-      },
-      "mapSearchQuery": "Prudence School Sector 16B Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 130000,
-      "estimatedFirstYear": 160000,
-      "currency": "INR",
-      "rangeText": "₹1.20L - ₹1.45L / year",
-      "registrationFee": 1500,
-      "admissionFee": 28000,
-      "tuitionMonthly": "₹10,833",
-      "tuitionQuarterly": "₹32,500",
-      "tuitionAnnual": "₹1,30,000",
-      "transportMonthly": "₹2,900",
-      "transportAnnual": "₹34,800",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 1 Premium",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://prudenceschools.com",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,500"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹28,000"
-        },
-        {
-          "type": "Annual Tuition Composite",
-          "cost": "₹1,30,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "prudence-school-greater-noida-west-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1500,
-          "formattedAmount": "₹1,500",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "prudence-school-greater-noida-west-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 28000,
-          "formattedAmount": "₹28,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "prudence-school-greater-noida-west-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 10833,
-          "formattedAmount": "₹10,833 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "prudence-school-greater-noida-west-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 130000,
-          "formattedAmount": "₹1,30,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹10,833 × 12 = ₹1,30,000/year."
-        },
-        {
-          "id": "prudence-school-greater-noida-west-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,900 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹32,500 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,30,000 / year",
-          "totalAnnualPayable": "₹1,30,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Prudence School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://prudenceschools.com",
-        "summary": "Official fee structure for Prudence School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Digital Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "STEM & Robotics Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Playground & Sports Arena",
-        "category": "Sports",
-        "icon": "trophy"
-      },
-      {
-        "name": "Music & Dance Rooms",
-        "category": "Arts",
-        "icon": "music"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Outstanding CBSE Board results with top student percentiles"
-    ],
-    "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online application followed by assessment and document verification.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 99992 88811",
-      "website": "https://prudenceschools.com",
-      "email": "admissions@prudenceschools.com"
-    },
-    "rating": {
-      "score": 4.5,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": "/assets/schools/prudence-school-greater-noida-west/featured/featured.jpg",
-      "hero": "/assets/schools/prudence-school-greater-noida-west/hero/hero.jpg",
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Official Prudence School Portal & CBSE SARAS",
-      "sourceUrl": "https://prudenceschools.com",
-      "cbseAffiliationNumber": "2133719",
-      "verifiedFields": [
-        "name",
-        "address",
-        "website",
-        "affiliation"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Prudence School Greater Noida West",
-      "h1": "Prudence School",
-      "pageHeartKey": "heart_prudence",
-      "cardHeartKey": "card_prudence",
-      "cardRatingKey": "rating_prudence",
-      "cardLink": "/schools/prudence-school-greater-noida-west",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 16B campus verified against CBSE Affiliation No 2133719."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Skating"
-    ],
-    "affiliationNumber": "2133719",
-    "geographicClassification": "core_greater_noida_west",
-    "recordType": "canonical",
-    "canonicalSlug": "prudence-school-greater-noida-west",
-    "isArchived": true,
-    "status": "archived"
-  },
-  {
-    "id": "shemford-futuristic-school-greater-noida-west",
-    "slug": "shemford-futuristic-school-greater-noida-west",
-    "name": "Shemford Futuristic School",
-    "shortName": "Shemford Futuristic",
-    "alternateNames": [
-      "Shemford Noida Extension",
-      "Shemford Sector 10"
-    ],
-    "tagline": "ShemEduMAX curriculum making learning fun and engaging",
-    "summary": "Shemford Futuristic School in Sector 10, Greater Noida West, provides an activity-based learning environment emphasizing holistic skills, life skills, and academic mastery.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum with ShemEduMAX System",
-    "gradeRange": {
-      "from": "Playgroup",
-      "to": "Grade 10",
-      "raw": "Playgroup to Grade 10"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "14:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Plot No. 2, Sector 10, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 10",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.5745,
-        "lng": 77.4632
-      },
-      "mapSearchQuery": "Shemford Futuristic School Sector 10 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 92000,
-      "estimatedFirstYear": 115000,
-      "currency": "INR",
-      "rangeText": "₹85,000 - ₹1,05,000 / year",
-      "registrationFee": 1000,
-      "admissionFee": 22000,
-      "tuitionMonthly": "₹7,666",
-      "tuitionQuarterly": "₹23,000",
-      "tuitionAnnual": "₹92,000",
-      "transportMonthly": "₹2,600",
-      "transportAnnual": "₹31,200",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://shemford.com",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹22,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹92,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "shemford-futuristic-school-greater-noida-west-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "shemford-futuristic-school-greater-noida-west-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 22000,
-          "formattedAmount": "₹22,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "shemford-futuristic-school-greater-noida-west-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 7666,
-          "formattedAmount": "₹7,666 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Playgroup to Grade 10"
-        },
-        {
-          "id": "shemford-futuristic-school-greater-noida-west-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 92000,
-          "formattedAmount": "₹92,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Playgroup to Grade 10",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹7,666 × 12 = ₹92,000/year."
-        },
-        {
-          "id": "shemford-futuristic-school-greater-noida-west-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,600 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Playgroup to Grade 10",
-          "tuitionFee": "₹₹23,000 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹92,000 / year",
-          "totalAnnualPayable": "₹92,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Shemford Futuristic School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://shemford.com",
-        "summary": "Official fee structure for Shemford Futuristic School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Activity Centers & Play Zone",
-        "category": "Primary",
-        "icon": "smile"
-      },
-      {
-        "name": "Science & Math Labs",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Laboratory",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Sports Field",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official Shemford Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official Shemford Uniform"
-      }
-    },
-    "achievements": [
-      "Awarded for Best Pre-Primary to Middle Years Innovation by Education Today"
-    ],
-    "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Direct registration at campus with interaction.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 88001 22334",
-      "website": "https://shemford.com",
-      "email": "grnoidawest@shemford.com"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Official Shemford Portal & CBSE SARAS",
-      "sourceUrl": "https://shemford.com",
-      "cbseAffiliationNumber": "2133491",
-      "verifiedFields": [
-        "name",
-        "address",
-        "website",
-        "affiliation"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Shemford Futuristic School Greater Noida West",
-      "h1": "Shemford Futuristic School",
-      "pageHeartKey": "heart_shemford",
-      "cardHeartKey": "card_shemford",
-      "cardRatingKey": "rating_shemford",
-      "cardLink": "/schools/shemford-futuristic-school-greater-noida-west",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 10 campus verified."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Skating",
-      "Taekwondo"
-    ],
-    "affiliationNumber": "2133491",
-    "geographicClassification": "core_greater_noida_west",
-    "recordType": "canonical",
-    "canonicalSlug": "shemford-futuristic-school-greater-noida-west",
-    "isArchived": true,
-    "status": "archived"
-  },
-  {
-    "id": "scholars-rosary-school-noida-extension",
-    "slug": "scholars-rosary-school-noida-extension",
-    "name": "Scholars' Rosary School",
-    "shortName": "Scholars' Rosary",
-    "alternateNames": [
-      "Scholars Rosary Sector 16B",
-      "Scholars Rosary Noida Ext"
-    ],
-    "tagline": "Knowledge, wisdom, and character for tomorrow",
-    "summary": "Scholars' Rosary School in Sector 16B, Greater Noida West, offers CBSE education with an emphasis on values, foundational literacy, and modern sports facilities.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 10",
-      "raw": "Nursery to Grade 10"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Plot No. 12, Sector 16B, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 16B",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.6041,
-        "lng": 77.4385
-      },
-      "mapSearchQuery": "Scholars Rosary School Sector 16B Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Not publicly disclosed",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
-      "comparableAnnualAvailable": false,
-      "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://scholarsrosary.com",
-      "table": [],
-      "isVerified": false,
-      "disclosed": false,
-      "components": [],
-      "gradeWiseTiers": [],
-      "concessions": [],
-      "disclaimer": "This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.",
-      "footnotes": [
-        "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
-        "Please contact the school office directly for current academic session fee schedules."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science & Computer Labs",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground",
-        "category": "Sports",
-        "icon": "trophy"
-      },
-      {
-        "name": "Music & Dance Studio",
-        "category": "Arts",
-        "icon": "music"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Top inter-school cultural festival awards"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Open",
-      "process": "Inquiry online followed by campus assessment.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 97171 22445",
-      "website": null,
-      "email": "info@scholarsrosary.com"
-    },
-    "rating": {
-      "score": 4.2,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Unverified Institution Records",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Scholars' Rosary School Greater Noida West",
-      "h1": "Scholars' Rosary School",
-      "pageHeartKey": "heart_scholars_rosary",
-      "cardHeartKey": "card_scholars_rosary",
-      "cardRatingKey": "rating_scholars_rosary",
-      "cardLink": "/schools/scholars-rosary-school-noida-extension",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 16B campus verified.",
-      "Synthetic domain removed. Direct official website not publicly verified."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "recordType": "canonical",
-    "canonicalSlug": "scholars-rosary-school-noida-extension",
-    "isArchived": true,
-    "status": "archived"
-  },
-  {
-    "id": "oxford-green-public-school-greater-noida-west",
-    "slug": "oxford-green-public-school-greater-noida-west",
-    "name": "Oxford Green Public School",
-    "shortName": "Oxford Green Public",
-    "alternateNames": [
-      "Oxford Green Noida Extension",
-      "OGPS Greater Noida West"
-    ],
-    "tagline": "Quality education fostering moral and intellectual growth",
-    "summary": "Oxford Green Public School in Greater Noida West is a CBSE-affiliated institution providing accessible, quality education with dedicated sports, science, and computer infrastructure.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum (Nursery to Class XII)",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Near Gaur City 2, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Gaur City / Sector 16",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.6082,
-        "lng": 77.4321
-      },
-      "mapSearchQuery": "Oxford Green Public School Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 75000,
-      "estimatedFirstYear": 95000,
-      "currency": "INR",
-      "rangeText": "₹70,000 - ₹85,000 / year",
-      "registrationFee": 800,
-      "admissionFee": 18000,
-      "tuitionMonthly": "₹6,250",
-      "tuitionQuarterly": "₹18,750",
-      "tuitionAnnual": "₹75,000",
-      "transportMonthly": "₹2,300",
-      "transportAnnual": "₹27,600",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://oxfordgreenschool.com",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹800"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹18,000"
-        },
-        {
-          "type": "Annual Tuition Composite",
-          "cost": "₹75,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "oxford-green-public-school-greater-noida-west-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 800,
-          "formattedAmount": "₹800",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "oxford-green-public-school-greater-noida-west-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 18000,
-          "formattedAmount": "₹18,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "oxford-green-public-school-greater-noida-west-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 6250,
-          "formattedAmount": "₹6,250 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "oxford-green-public-school-greater-noida-west-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 75000,
-          "formattedAmount": "₹75,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹6,250 × 12 = ₹75,000/year."
-        },
-        {
-          "id": "oxford-green-public-school-greater-noida-west-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,300 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹18,750 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹75,000 / year",
-          "totalAnnualPayable": "₹75,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Oxford Green Public School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://oxfordgreenschool.com",
-        "summary": "Official fee structure for Oxford Green Public School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
-    },
-    "facilities": [],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Consistent academic performance in CBSE examinations"
-    ],
-    "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Direct campus walk-in and registration.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 98188 33221",
-      "website": "https://www.ogps.co.in",
-      "email": "info@oxfordgreenschool.com"
-    },
-    "rating": {
-      "score": 4.2,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Official Oxford Green Public School Portal & CBSE SARAS",
-      "sourceUrl": "https://www.ogps.co.in",
-      "cbseAffiliationNumber": null,
-      "verifiedFields": [
-        "name",
-        "address",
-        "website",
-        "affiliation",
-        "establishedYear"
-      ],
-      "notes": "Affiliation number pending independent verification from CBSE SARAS."
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Oxford Green Public School Greater Noida West",
-      "h1": "Oxford Green Public School",
-      "pageHeartKey": "heart_oxford_green",
-      "cardHeartKey": "card_oxford_green",
-      "cardRatingKey": "rating_oxford_green",
-      "cardLink": "/schools/oxford-green-public-school-greater-noida-west",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Gaur City link campus verified against CBSE Affiliation No 2133182."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis"
-    ],
-    "affiliationNumber": null,
-    "establishedYear": 2003,
-    "geographicClassification": "core_greater_noida_west",
-    "recordType": "canonical",
-    "canonicalSlug": "oxford-green-public-school-greater-noida-west",
-    "isArchived": true,
-    "status": "archived"
-  },
-  {
-    "id": "the-icon-international-school",
-    "slug": "the-icon-international-school",
-    "name": "The Icon International School",
-    "shortName": "The Icon International",
-    "alternateNames": [
-      "Icon School Noida Extension",
-      "Icon International Sector 16B"
-    ],
-    "tagline": "Shaping young minds with progressive modern education",
-    "summary": "The Icon International School in Sector 16B, Greater Noida West, provides early childhood and K-8 education with an emphasis on interactive STEM learning, arts, and athletic development.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Pre-Nursery",
-      "to": "Grade 8",
-      "raw": "Pre-Nursery to Grade 8"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "13:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Plot No. 8, Sector 16B, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 16B",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": 28.6025,
-        "lng": 77.4372
-      },
-      "mapSearchQuery": "The Icon International School Sector 16B Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Not publicly disclosed",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
-      "comparableAnnualAvailable": false,
-      "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://theiconschool.in",
-      "table": [],
-      "isVerified": false,
-      "disclosed": false,
-      "components": [],
-      "gradeWiseTiers": [],
-      "concessions": [],
-      "disclaimer": "This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.",
-      "footnotes": [
-        "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
-        "Please contact the school office directly for current academic session fee schedules."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Digitally Enabled Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Makerspace & STEM Room",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Music & Movement Studio",
-        "category": "Arts",
-        "icon": "music"
-      },
-      {
-        "name": "Outdoor Turf & Play Area",
-        "category": "Sports",
-        "icon": "trophy"
-      },
-      {
-        "name": "Infirmary & Wellness Care",
-        "category": "Health",
-        "icon": "activity"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official Icon Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official Icon Uniform"
-      }
-    },
-    "achievements": [
-      "Awarded for Creative Early Learning Curriculum in NCR"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Open",
-      "process": "Online inquiry, school visit, interaction, and document verification.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 88266 11990",
-      "website": null,
-      "email": "admissions@theiconschool.in"
-    },
-    "rating": {
-      "score": 4.4,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Local Directory Records",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name",
-        "location"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "The Icon International School Greater Noida West",
-      "h1": "The Icon International School",
-      "pageHeartKey": "heart_icon",
-      "cardHeartKey": "card_icon",
-      "cardRatingKey": "rating_icon",
-      "cardLink": "/schools/the-icon-international-school",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 16B campus verified.",
-      "Early childhood / kindergarten center. Synthetic website removed. Pre-primary institution."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Football",
-      "Cricket",
-      "Basketball",
-      "Badminton",
-      "Skating",
-      "Taekwondo"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "recordType": "canonical",
-    "canonicalSlug": "the-icon-international-school",
-    "isArchived": true,
-    "status": "archived"
   },
   {
     "id": "cambridge-school-noida-sector-27",
@@ -8997,179 +7634,6 @@
     "archiveReason": "Sector Alpha 2, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
   },
   {
-    "id": "kalka-public-school-greater-noida",
-    "slug": "kalka-public-school-greater-noida",
-    "name": "Kalka Public School",
-    "shortName": "Kalka Public School",
-    "alternateNames": [
-      "Kalka Public School Noida Extension",
-      "Kalka Public School Sector 3"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Kalka Public School in Sector 3, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 3, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 3",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "Kalka Public School Sector 3 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Not publicly disclosed",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
-      "comparableAnnualAvailable": false,
-      "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://kalkapublicschoolgreaternoida.edu.in",
-      "table": [],
-      "isVerified": false,
-      "disclosed": false,
-      "components": [],
-      "gradeWiseTiers": [],
-      "concessions": [],
-      "disclaimer": "This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.",
-      "footnotes": [
-        "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
-        "Please contact the school office directly for current academic session fee schedules."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": null,
-      "email": "info@kalkapublicschoolgreaternoida.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Local School Directory (Pending Official Disclosure)",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name",
-        "location"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Kalka Public School Greater Noida West",
-      "h1": "Kalka Public School",
-      "pageHeartKey": "heart_kalka-public-school-greater-noida",
-      "cardHeartKey": "card_kalka-public-school-greater-noida",
-      "cardRatingKey": "rating_kalka-public-school-greater-noida",
-      "cardLink": "/schools/kalka-public-school-greater-noida",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 3 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "establishedYear": null,
-    "recordType": "canonical",
-    "canonicalSlug": "kalka-public-school-greater-noida",
-    "isArchived": true,
-    "status": "archived"
-  },
-  {
     "id": "indus-valley-school-noida-ext",
     "slug": "indus-valley-school-noida-ext",
     "name": "Indus Valley Public School",
@@ -9191,11 +7655,11 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "1:30",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 62, Noida, Uttar Pradesh 201301",
+      "address": "Plot Number 1, Institutional Area, Khora Colony, Sector 62, Noida, Uttar Pradesh 201301",
       "sector": "Sector 62",
       "city": "Noida",
       "state": "Uttar Pradesh",
@@ -9579,7 +8043,8 @@
       "date": "Not publicly verified",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "2027–28 admissions are officially open via the school admission details page."
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9648,180 +8113,8 @@
     "recordType": "canonical",
     "canonicalSlug": "indus-valley-school-noida-ext",
     "isArchived": false,
-    "status": "active"
-  },
-  {
-    "id": "vienna-public-school-noida-ext",
-    "slug": "vienna-public-school-noida-ext",
-    "name": "Vienna Public School",
-    "shortName": "Vienna Public School",
-    "alternateNames": [
-      "Vienna Public School Noida Extension",
-      "Vienna Public School Sector 1"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Vienna Public School in Sector 1, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 1, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 1",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "Vienna Public School Sector 1 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Not publicly disclosed",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
-      "comparableAnnualAvailable": false,
-      "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://viennapublicschoolnoidaext.edu.in",
-      "table": [],
-      "isVerified": false,
-      "disclosed": false,
-      "components": [],
-      "gradeWiseTiers": [],
-      "concessions": [],
-      "disclaimer": "This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.",
-      "footnotes": [
-        "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
-        "Please contact the school office directly for current academic session fee schedules."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": null,
-      "email": "info@viennapublicschoolnoidaext.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Local School Directory (Pending Official Disclosure)",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name",
-        "location"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Vienna Public School Greater Noida West",
-      "h1": "Vienna Public School",
-      "pageHeartKey": "heart_vienna-public-school-noida-ext",
-      "cardHeartKey": "card_vienna-public-school-noida-ext",
-      "cardRatingKey": "rating_vienna-public-school-noida-ext",
-      "cardLink": "/schools/vienna-public-school-noida-ext",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 1 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "establishedYear": null,
-    "recordType": "canonical",
-    "canonicalSlug": "vienna-public-school-noida-ext",
-    "isArchived": true,
-    "status": "archived"
+    "status": "active",
+    "affiliationNumber": "2130746"
   },
   {
     "id": "modern-public-school-noida-extension",
@@ -10114,9 +8407,10 @@
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Open",
+      "status": "Inquire with school",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
+      "session": "2027-28",
+      "timelineDescription": "2027–28 admission status is not yet verified."
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11932,180 +10226,6 @@
     "status": "archived"
   },
   {
-    "id": "dps-monarch-international-school",
-    "slug": "dps-monarch-international-school",
-    "name": "DPS Monarch International School",
-    "shortName": "DPS Monarch International School",
-    "alternateNames": [
-      "DPS Monarch International School Noida Extension",
-      "DPS Monarch International School Sector 16"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "DPS Monarch International School in Sector 16, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 16, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 16",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "DPS Monarch International School Sector 16 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Not publicly disclosed",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
-      "comparableAnnualAvailable": false,
-      "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://dpsmonarchinternationalschool.edu.in",
-      "table": [],
-      "isVerified": false,
-      "disclosed": false,
-      "components": [],
-      "gradeWiseTiers": [],
-      "concessions": [],
-      "disclaimer": "This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.",
-      "footnotes": [
-        "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
-        "Please contact the school office directly for current academic session fee schedules."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": null,
-      "email": "info@dpsmonarchinternationalschool.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Local School Directory (Pending Official Disclosure)",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name",
-        "location"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "DPS Monarch International School Greater Noida West",
-      "h1": "DPS Monarch International School",
-      "pageHeartKey": "heart_dps-monarch-international-school",
-      "cardHeartKey": "card_dps-monarch-international-school",
-      "cardRatingKey": "rating_dps-monarch-international-school",
-      "cardLink": "/schools/dps-monarch-international-school",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 16 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "establishedYear": null,
-    "recordType": "canonical",
-    "canonicalSlug": "dps-monarch-international-school",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Actually located in Doha, Qatar. Not Greater Noida West."
-  },
-  {
     "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
     "slug": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
     "name": "Shree Thakur Dwara Balika Vidyalaya",
@@ -13799,18 +11919,18 @@
       "isVerified": true,
       "cardFee": 6500,
       "currency": "INR",
-      "rangeText": "₹6,500 – ₹8,000 / month (₹19,500 – ₹24,000 / quarter; Typical composite ~₹7,700 / month)",
-      "registrationFee": null,
-      "admissionFee": null,
+      "rangeText": "Pre-Nursery–KG ₹6,500/month | I–III ₹7,000 | IV–V ₹7,500 | VI–VIII ₹8,000 | IX–XII ₹8,500",
+      "registrationFee": "₹500 – ₹1,000",
+      "admissionFee": "₹30,000 – ₹40,000",
       "cautionDeposit": null,
       "refundableSecurity": null,
-      "tuitionMonthly": "₹6,500 – ₹8,000",
-      "tuitionQuarterly": "₹19,500 – ₹24,000",
+      "tuitionMonthly": "₹6,500 – ₹8,500 by grade",
+      "tuitionQuarterly": "₹19,500 – ₹25,500 by grade",
       "tuitionAnnual": "₹78,000 – ₹96,000 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "aster-public-school-kp5-comp-1",
@@ -13855,7 +11975,47 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Tuition: ₹6,500–₹8,000/month (₹19,500–₹24,000/quarter). Registration: ₹500–₹1,000, Admission: ₹30,000–₹40,000. Composite approximate: ₹7,700/month."
+      "disclaimer": "Tuition: ₹6,500–₹8,000/month (₹19,500–₹24,000/quarter). Registration: ₹500–₹1,000, Admission: ₹30,000–₹40,000. Composite approximate: ₹7,700/month.",
+      "academicSession": "2027–28",
+      "disclosed": true,
+      "table": [
+        {
+          "type": "Registration Fee",
+          "cost": "₹500 – ₹1,000"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹30,000 – ₹40,000"
+        },
+        {
+          "type": "Pre-Nursery–KG",
+          "cost": "₹6,500/month · ₹19,500/quarter · ₹1,08,500–₹1,19,000 first-year estimate"
+        },
+        {
+          "type": "Classes I–III",
+          "cost": "₹7,000/month · ₹21,000/quarter · ₹1,14,500–₹1,25,000 first-year estimate"
+        },
+        {
+          "type": "Classes IV–V",
+          "cost": "₹7,500/month · ₹22,500/quarter · ₹1,20,500–₹1,31,000 first-year estimate"
+        },
+        {
+          "type": "Classes VI–VIII",
+          "cost": "₹8,000/month · ₹24,000/quarter · ₹1,26,500–₹1,37,000 first-year estimate"
+        },
+        {
+          "type": "Classes IX–XII",
+          "cost": "₹8,500/month · ₹25,500/quarter · ₹1,32,500–₹1,43,000 first-year estimate"
+        },
+        {
+          "type": "Transport",
+          "cost": "Optional; billed in 12 monthly instalments"
+        },
+        {
+          "type": "Miscellaneous activities",
+          "cost": "Additional charges may apply for external board examinations, specialised excursions and events with management intimation"
+        }
+      ]
     },
     "facilities": [
       {
@@ -13999,7 +12159,7 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "GH 04, 16th Ave, Sector 16C, Gaur City 2, Greater Noida, Ghaziabad, UP 201309",
+      "address": "GH 04, 16th Ave, Sector 16C, Gaur City 2, Greater Noida, Ghaziabad, Uttar Pradesh 201309",
       "sector": "Sector 16C",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
@@ -14017,18 +12177,18 @@
       "isVerified": true,
       "cardFee": 21000,
       "currency": "INR",
-      "rangeText": "Quarterly composite: ₹21,000 (Pre-Nur) | ₹26,100 (Nur–5) | ₹27,300 (6–11)",
+      "rangeText": "Quarterly composite: Pre-Nursery ₹21,000 | Nursery–5 ₹26,100 | 6–11 ₹27,300",
       "registrationFee": 1000,
-      "admissionFee": null,
+      "admissionFee": "₹15,000 (Pre-Nursery) / ₹20,000 (Nursery–XI)",
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": null,
-      "tuitionQuarterly": "₹21,000 – ₹27,300",
+      "tuitionQuarterly": "Pre-Nursery ₹21,000 | Nursery–5 ₹26,100 | Classes 6–11 ₹27,300",
       "tuitionAnnual": "₹84,000 – ₹1,09,200 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "the-manthan-school-greater-noida-west-comp-1",
@@ -14133,7 +12293,44 @@
           "description": "25% younger sibling offline composite discount (available on request)."
         }
       ],
-      "disclaimer": "Official quarterly composite: Pre-Nursery ₹21,000, Nursery–5 ₹26,100, Classes 6–11 ₹27,300. Registration ₹1,000, Admission ₹15,000 (Pre-Nur) / ₹20,000 (Nur–XI). Concessions: 5% advance annual rebate, 25% sibling discount."
+      "disclaimer": "Official quarterly composite: Pre-Nursery ₹21,000, Nursery–5 ₹26,100, Classes 6–11 ₹27,300. Registration ₹1,000, Admission ₹15,000 (Pre-Nur) / ₹20,000 (Nur–XI). Concessions: 5% advance annual rebate, 25% sibling discount.",
+      "academicSession": "2027–28",
+      "rebates": "5% rebate on advance annual composite fee excluding transport; younger siblings 25% discount on offline composite fee",
+      "disclosed": true,
+      "table": [
+        {
+          "type": "Registration",
+          "cost": "₹1,000 non-refundable"
+        },
+        {
+          "type": "Admission – Pre-Nursery",
+          "cost": "₹15,000 non-refundable"
+        },
+        {
+          "type": "Admission – Nursery–XI",
+          "cost": "₹20,000 non-refundable"
+        },
+        {
+          "type": "Composite – Pre-Nursery",
+          "cost": "₹21,000/quarter"
+        },
+        {
+          "type": "Composite – Nursery–5",
+          "cost": "₹26,100/quarter"
+        },
+        {
+          "type": "Composite – 6–11",
+          "cost": "₹27,300/quarter"
+        },
+        {
+          "type": "Transport",
+          "cost": "Optional; quarterly and distance-dependent"
+        },
+        {
+          "type": "Activities/exams",
+          "cost": "Mindbox, Val-ed, examinations and similar charges billed at actuals"
+        }
+      ]
     },
     "facilities": [
       {
@@ -14596,13 +12793,13 @@
       "isVerified": true,
       "cardFee": 39267,
       "currency": "INR",
-      "rangeText": "CBSE: ₹39,267 – ₹42,158 / quarter | Cambridge: ₹18,755 / month",
+      "rangeText": "CBSE composite ₹39,267–₹42,158/quarter; Cambridge I–V ₹18,755/month",
       "registrationFee": 1500,
-      "admissionFee": null,
+      "admissionFee": "CBSE: ₹40,000 first child (Toddlers–SR KG), ₹30,000 second/third; ₹60,000 first child (I–XII), ₹50,000 second/third. Cambridge: ₹60,000 first child, ₹50,000 second/third.",
       "cautionDeposit": null,
       "refundableSecurity": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": "₹39,267 – ₹42,158 (CBSE)",
+      "tuitionMonthly": "Cambridge I–V: ₹18,755",
+      "tuitionQuarterly": "CBSE: ₹39,267 (Toddlers–X) / ₹42,158 (XI–XII)",
       "tuitionAnnual": null,
       "transportMonthly": null,
       "transportAnnual": null,
@@ -14705,7 +12902,9 @@
           "description": "₹10,000 reduction on admission fee for second and third child."
         }
       ],
-      "disclaimer": "CBSE composite: Toddlers–X ₹39,267/qtr, XI–XII ₹42,158/qtr. Cambridge Primary: ₹18,755/month. Registration ₹1,500. Admission: Toddlers–SR KG ₹40,000 (₹30k sibling); Gr I–XII ₹60,000 (₹50k sibling)."
+      "disclaimer": "CBSE composite: Toddlers–X ₹39,267/qtr, XI–XII ₹42,158/qtr. Cambridge Primary: ₹18,755/month. Registration ₹1,500. Admission: Toddlers–SR KG ₹40,000 (₹30k sibling); Gr I–XII ₹60,000 (₹50k sibling).",
+      "labFee": "₹500/quarter/subject for PCB, Computer, Fashion Studies, Fine Arts",
+      "academicSession": "2027–28"
     },
     "facilities": [
       {
@@ -14750,7 +12949,7 @@
     "admissions": {
       "date": "Admissions Open 2026-27",
       "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
+      "process": "Online admission form on the school website.",
       "session": "2027-28",
       "milestones": [
         {
@@ -14836,8 +13035,8 @@
   {
     "id": "the-millennium-school-noida-extension",
     "slug": "the-millennium-school-noida-extension",
-    "name": "The Millennium School, Knowledge Park V",
-    "shortName": "The Millennium School Noida Extension",
+    "name": "The Millennium School, Sector 119 Noida",
+    "shortName": "The Millennium School Noida",
     "alternateNames": [
       "The Millennium School Noida Extension Noida Extension",
       "The Millennium School Noida Extension Sector 119 Link"
@@ -14859,12 +13058,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Near Plot No SS-1, 108, RG Residency, Sector 119, Noida, UP 201316",
-      "sector": "Sector 119 Link",
+      "address": "Near Plot No. SS-1, 108, RG Residency, Sector 119, Noida, Uttar Pradesh 201316",
+      "sector": "Sector 119",
       "city": "Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Knowledge Park V",
+      "pincode": "201316",
+      "area": "Sector 119, Noida",
       "coordinates": {
         "lat": 28.5822,
         "lng": 77.4655,
@@ -14875,20 +13074,20 @@
       "subLocality": "Sector 119"
     },
     "fees": {
-      "isVerified": false,
+      "isVerified": true,
       "cardFee": 10710,
       "currency": "INR",
-      "rangeText": "Nursery: ~₹10,710 / mo | Middle Grades: ~₹1.4L – ₹1.5L / yr (Approximate)",
+      "rangeText": "Pre-Nursery–UKG ₹10,710/month | I–V ₹11,600 | VI–X ₹12,500 | XI–XII ₹13,720",
       "registrationFee": 1000,
-      "admissionFee": null,
+      "admissionFee": "₹70,000 (Pre-Nursery–X; merit-based discounts from Class III onward) / ₹48,000 (Class XI)",
       "cautionDeposit": null,
       "refundableSecurity": null,
-      "tuitionMonthly": "Approx ₹10,710 (Nursery)",
-      "tuitionAnnual": "Approx ₹1,40,000 – ₹1,50,000 (Middle Grades)",
-      "transportMonthly": null,
+      "tuitionMonthly": "Pre-Nursery–UKG ₹10,710 | I–V ₹11,600 | VI–X ₹12,500 | XI–XII ₹13,720",
+      "tuitionAnnual": "Calculated from supplied monthly fees: ₹1,28,520 / ₹1,39,200 / ₹1,50,000 / ₹1,64,640 respectively",
+      "transportMonthly": "₹3,500 – ₹4,400",
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "the-millennium-school-noida-extension-comp-1",
@@ -14940,7 +13139,49 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Nursery tuition is approx ₹10,710/month; middle-grade annual totals are approx ₹1.4–₹1.5 lakh/year. Registration ₹1,000, Admission ₹70,000 (Pre-Nur–X) / ₹48,000 (XI). Located in Sector 119 Noida."
+      "disclaimer": "Nursery tuition is approx ₹10,710/month; middle-grade annual totals are approx ₹1.4–₹1.5 lakh/year. Registration ₹1,000, Admission ₹70,000 (Pre-Nur–X) / ₹48,000 (XI). Located in Sector 119 Noida.",
+      "annualFee": "NIL",
+      "tuitionQuarterly": "Pre-Nursery–UKG ₹32,130 | I–V ₹34,800 | VI–X ₹37,500 | XI–XII ₹41,160",
+      "academicSession": "2027–28",
+      "disclosed": true,
+      "table": [
+        {
+          "type": "Registration Fee",
+          "cost": "₹1,000 one-time, non-refundable"
+        },
+        {
+          "type": "Admission Fee – Pre-Nursery to X",
+          "cost": "₹70,000 one-time; merit-based discounts from Class III onward"
+        },
+        {
+          "type": "Admission Fee – XI",
+          "cost": "₹48,000 one-time"
+        },
+        {
+          "type": "Annual Fee",
+          "cost": "NIL"
+        },
+        {
+          "type": "Pre-Nursery–UKG",
+          "cost": "₹10,710/month · ₹32,130/quarter"
+        },
+        {
+          "type": "Classes I–V",
+          "cost": "₹11,600/month · ₹34,800/quarter"
+        },
+        {
+          "type": "Classes VI–X",
+          "cost": "₹12,500/month · ₹37,500/quarter"
+        },
+        {
+          "type": "Classes XI–XII",
+          "cost": "₹13,720/month · ₹41,160/quarter"
+        },
+        {
+          "type": "Transport",
+          "cost": "₹3,500 – ₹4,400/month"
+        }
+      ]
     },
     "facilities": [
       {
@@ -15333,16 +13574,16 @@
       "isVerified": true,
       "cardFee": 32378,
       "currency": "INR",
-      "rangeText": "₹32,378 – ₹32,475 / quarter composite (₹1,29,512 – ₹1,29,900 / year)",
+      "rangeText": "Composite ₹32,378–₹32,475/quarter; transport optional",
       "registrationFee": 1500,
       "admissionFee": 35000,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": null,
-      "tuitionQuarterly": "₹32,378 – ₹32,475",
+      "tuitionQuarterly": "Composite ₹32,378–₹32,475/quarter",
       "tuitionAnnual": "₹1,29,512 – ₹1,29,900",
       "transportMonthly": null,
-      "transportQuarterly": "Gaur City: ₹7,826 | Crossing Republic: ₹8,803 | Noida/Noida Ext: ₹12,229 (Optional)",
+      "transportQuarterly": "Gaur City ₹7,826 | Crossing Republic ₹8,803 | Noida/Noida Extension ₹12,229",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
@@ -15442,7 +13683,11 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Quarterly composite: ₹32,378–₹32,475. Prospectus ₹1,000, Registration ₹1,500, Admission ₹35,000, Misc ₹1,100, Digital Learning (I–X) ₹600. Optional quarterly transport: Gaur City ₹7,826, Crossing Republic ₹8,803, Noida/Ext ₹12,229."
+      "disclaimer": "Quarterly composite: ₹32,378–₹32,475. Prospectus ₹1,000, Registration ₹1,500, Admission ₹35,000, Misc ₹1,100, Digital Learning (I–X) ₹600. Optional quarterly transport: Gaur City ₹7,826, Crossing Republic ₹8,803, Noida/Ext ₹12,229.",
+      "prospectusFee": 1000,
+      "miscFee": 1100,
+      "digitalLearningFee": "₹600 one-time (Grades I–X)",
+      "academicSession": "2027–28"
     },
     "facilities": [
       {
@@ -15846,18 +14091,18 @@
       "isVerified": true,
       "cardFee": 6500,
       "currency": "INR",
-      "rangeText": "₹6,500 – ₹8,000 / month (₹19,500 – ₹24,000 / quarter; Typical composite ~₹7,700 / month)",
-      "registrationFee": null,
-      "admissionFee": null,
+      "rangeText": "Class-wise composite fees supplied for 2027–28; annual totals exclude transport.",
+      "registrationFee": 1000,
+      "admissionFee": "₹30,000 – ₹40,000 (Pre-Nursery–X); ₹50,000 – ₹60,000 (XI–XII)",
       "cautionDeposit": null,
       "refundableSecurity": null,
-      "tuitionMonthly": "₹6,500 – ₹8,000",
+      "tuitionMonthly": "Pre-Nursery–KG ₹5,775 | I–III ₹6,160 | IV–V ₹6,700 | VI–VIII ₹7,512 | IX–X ₹9,950 | XI–XII ₹9,950+",
       "tuitionQuarterly": "₹19,500 – ₹24,000",
       "tuitionAnnual": "₹78,000 – ₹96,000 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "lastVerifiedDate": "2026-09-18",
+      "verificationStatus": "user_supplied",
+      "lastVerifiedDate": "September 2026",
       "components": [
         {
           "id": "aster-public-school-sector-3-comp-1",
@@ -15902,7 +14147,55 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Tuition: ₹6,500–₹8,000/month (₹19,500–₹24,000/quarter). Registration: ₹500–₹1,000, Admission: ₹30,000–₹40,000. Composite approximate: ₹7,700/month."
+      "disclaimer": "Tuition: ₹6,500–₹8,000/month (₹19,500–₹24,000/quarter). Registration: ₹500–₹1,000, Admission: ₹30,000–₹40,000. Composite approximate: ₹7,700/month.",
+      "academicSession": "2027–28",
+      "disclosed": true,
+      "table": [
+        {
+          "type": "Registration",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Admission – Pre-Nursery to X",
+          "cost": "₹30,000 – ₹40,000"
+        },
+        {
+          "type": "Admission – XI–XII",
+          "cost": "₹50,000 – ₹60,000"
+        },
+        {
+          "type": "Pre-Nursery–KG",
+          "cost": "₹5,775/month · ~₹69,300/year"
+        },
+        {
+          "type": "Classes I–III",
+          "cost": "₹6,160/month · ~₹73,920/year"
+        },
+        {
+          "type": "Classes IV–V",
+          "cost": "₹6,700/month · ~₹80,400/year"
+        },
+        {
+          "type": "Classes VI–VIII",
+          "cost": "₹7,512/month · ~₹90,144/year"
+        },
+        {
+          "type": "Classes IX–X",
+          "cost": "₹9,950/month · ~₹1,19,400/year"
+        },
+        {
+          "type": "Classes XI–XII",
+          "cost": "₹9,950+/month · ~₹1,20,000+/year"
+        },
+        {
+          "type": "Transport",
+          "cost": "Optional; distance-based, split into 12 monthly instalments"
+        },
+        {
+          "type": "Lab fees XI–XII",
+          "cost": "~₹500/month per practical lab subject"
+        }
+      ]
     },
     "facilities": [
       {
@@ -15948,7 +14241,7 @@
     "admissions": {
       "date": "September to March",
       "status": "Open",
-      "process": "Online registration, interaction for Nursery/KG, formal assessment for Grade 1 and above.",
+      "process": "Admissions for 2027–28 through the school's online portal.",
       "milestones": [
         {
           "id": "app_opening",
@@ -19552,7 +17845,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "1:18",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19574,7 +17867,7 @@
       "cardFee": null,
       "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "Fee details pending verification",
+      "rangeText": "Please contact the school to know the current fee structure.",
       "registrationFee": null,
       "admissionFee": null,
       "tuitionMonthly": null,
@@ -19582,12 +17875,12 @@
       "tuitionAnnual": null,
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "unverified_third_party",
+      "verificationStatus": "not_disclosed_by_school",
       "comparableAnnualAvailable": false,
       "feeCategory": null,
-      "academicSession": "2027-28",
+      "academicSession": "2027–28",
       "lastVerifiedDate": "2026-09-19",
-      "sourceUrl": null,
+      "sourceUrl": "https://mountliteragnw.com/Admission",
       "table": [],
       "disclosed": false,
       "isVerified": false,
@@ -19595,7 +17888,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Please contact the school to know the current fee structure.",
       "footnotes": []
     },
     "facilities": [],
@@ -19701,7 +17994,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "30:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19723,10 +18016,10 @@
       "cardFee": null,
       "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "Not yet available",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
+      "rangeText": "Estimated annual/overall admission cost ~₹13,464 – ₹17,784",
+      "registrationFee": 500,
+      "admissionFee": "₹500 – ₹1,000",
+      "tuitionMonthly": "₹1,080 – ₹1,440",
       "tuitionQuarterly": null,
       "tuitionAnnual": null,
       "transportMonthly": null,
@@ -19734,7 +18027,7 @@
       "verificationStatus": "unverified_third_party",
       "comparableAnnualAvailable": false,
       "feeCategory": null,
-      "academicSession": "2027-28",
+      "academicSession": "2027–28",
       "lastVerifiedDate": "2026-09-19",
       "sourceUrl": null,
       "table": [],
@@ -19745,7 +18038,8 @@
       "concessions": [],
       "circular": null,
       "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
-      "footnotes": []
+      "footnotes": [],
+      "curriculum": "State Board; not CBSE"
     },
     "facilities": [],
     "uniforms": {
@@ -20124,7 +18418,7 @@
       "sourceUrl": "https://dwpsnoidaex.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Admissions are open for the 2027–28 academic session."
     },
     "contact": {
       "phone": "+91-9205131014",

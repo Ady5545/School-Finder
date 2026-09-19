@@ -5025,195 +5025,60 @@
   {
     "id": "shiv-nadar-school",
     "slug": "shiv-nadar-school",
-    "name": "Shiv Nadar School Greater Noida/Noida",
-    "shortName": "Shiv Nadar School",
+    "name": "Shiv Nadar School",
+    "shortName": "Shiv Nadar School Sector 168",
     "alternateNames": [
-      "Shiv Nadar School - Greater Noida",
-      "Shiv Nadar Sector 168",
-      "Shiv Nadar Noida Expressway"
+      "Shiv Nadar School Noida",
+      "Shiv Nadar School Sector 168"
     ],
     "tagline": "Experiential Co-Educational Campus in Sector 168",
     "summary": "Shiv Nadar School is situated at Plot SS-1, Sector 168 along the Noida-Greater Noida Expressway, offering CBSE and International Baccalaureate (IB) curriculum options from Nursery to Grade 12.",
     "board": [
       "CBSE",
-      "ICSE"
+      "IB",
+      "Cambridge"
     ],
     "boardNote": null,
-    "curriculum": "CBSE & ICSE",
+    "curriculum": "CBSE, IGCSE, IB DP",
     "gradeRange": {
       "from": "Nursery",
-      "to": "Class 12",
-      "raw": "Nursery – 12"
+      "to": "Grade 12",
+      "raw": "Nursery – Grade 12"
     },
     "admissionAge": "3+",
     "studentTeacherRatio": "15:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. F-3, Sector 168, Express Highway, Noida / Greater Noida Expressway, Uttar Pradesh 201305",
-      "sector": "Sector 168 / Noida Expressway",
-      "city": "Noida / Greater Noida",
+      "address": "Plot No. SS-1, Noida-Greater Noida Expressway, Chhaprauli Bangar, Sector 168, Noida, Uttar Pradesh 201305",
+      "sector": "Sector 168",
+      "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201305",
-      "area": "Noida Expressway",
+      "area": "Sector 168",
       "coordinates": {
-        "lat": 28.51,
-        "lng": 77.4
+        "lat": null,
+        "lng": null
       },
-      "mapSearchQuery": "Shiv Nadar School Greater Noida",
-      "mapEmbedUrl": "https://www.google.com/maps?q=Shiv+Nadar+School+Greater+Noida&output=embed"
+      "mapSearchQuery": "Shiv Nadar School Sector 168 Noida"
     },
     "fees": {
-      "cardFee": 180000,
-      "estimatedFirstYear": 260000,
       "currency": "INR",
-      "rangeText": "₹1,80,000 – ₹1,92,000 / year",
-      "registrationFee": 5000,
-      "admissionFee": 75000,
-      "tuitionMonthly": "15,000 – 16,000",
-      "tuitionQuarterly": null,
-      "tuitionAnnual": "1,80,000 – 1,92,000",
-      "transportMonthly": "5,000 – 6,000",
-      "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "5,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "75,000"
-        },
-        {
-          "type": "Monthly Tuition Fee",
-          "cost": "15,000 – 16,000"
-        },
-        {
-          "type": "Transport",
-          "cost": "5,000 – 6,000"
-        },
-        {
-          "type": "Estimated First Year",
-          "cost": "~1,50,000 – 1,60,000"
-        }
-      ],
       "comparableAnnualAvailable": true,
-      "feeCategory": "Monthly Tuition Fee",
-      "billingFrequency": "monthly",
-      "sourceUrl": "https://shivnadarschool.edu.in",
-      "academicSession": "2026-2027",
-      "lastVerifiedDate": "September 2026",
       "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "shiv-nadar-school-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 5000,
-          "formattedAmount": "₹5,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "shiv-nadar-school-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 75000,
-          "formattedAmount": "₹75,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "shiv-nadar-school-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 1500016000,
-          "formattedAmount": "₹1,50,00,16,000 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery – 12"
-        },
-        {
-          "id": "shiv-nadar-school-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 180000,
-          "formattedAmount": "₹1,80,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery – 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹1,50,00,16,000 × 12 = ₹1,80,000/year."
-        },
-        {
-          "id": "shiv-nadar-school-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹5,000 – 6,000 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery – 12",
-          "tuitionFee": "₹15,000 – 16,000 / month",
-          "tuitionFrequency": "monthly",
-          "calculatedAnnualEquivalent": "₹1,80,000 / year",
-          "totalAnnualPayable": "₹1,80,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Shiv Nadar School Greater Noida/Noida Official Fee Schedule",
-        "academicSession": "2026-2027",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://shivnadarschool.edu.in",
-        "summary": "Official fee structure for Shiv Nadar School Greater Noida/Noida covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      "table": [],
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "footnotes": [],
+      "cardFee": 312712,
+      "annualDisplay": "₹3,12,712 – ₹3,89,160 / year (CBSE); ₹6,15,000 IGCSE; ₹8,99,000 IBDP",
+      "rangeText": "CBSE ₹3,12,712 – ₹3,89,160 / year | IGCSE ₹6,15,000 / year | IBDP ₹8,99,000 / year",
+      "registrationFee": 2000,
+      "admissionFee": 200000,
+      "tuitionAnnual": "CBSE ₹3,12,712–₹3,89,160; IGCSE ₹6,15,000; IBDP ₹8,99,000",
+      "verificationStatus": "user_supplied",
+      "academicSession": "2026-27"
     },
     "facilities": [
       {
@@ -5279,13 +5144,9 @@
     ],
     "admissions": {
       "date": null,
-      "status": "Open",
-      "process": "Online portal application.",
-      "session": "2027-28",
-      "sourceUrl": null,
-      "lastVerifiedDate": "September 2026",
-      "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "status": "Registration Open",
+      "process": "Registration → Application → Interaction/Assessment → Admission Offer → Fee Payment",
+      "session": "2026-27 / 2027-28"
     },
     "contact": {
       "phone": null,
@@ -5354,7 +5215,7 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2131652",
+    "affiliationNumber": "2131908",
     "establishedYear": 2012,
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
@@ -9348,186 +9209,60 @@
   {
     "id": "step-by-step-school-noida-feeder",
     "slug": "step-by-step-school-noida-feeder",
-    "name": "Step By Step School Noida Feeder",
-    "shortName": "Step By Step School Noida Feeder",
+    "name": "Step By Step School",
+    "shortName": "Step By Step School Sector 132",
     "alternateNames": [
-      "Step By Step School Noida Feeder Noida Extension",
-      "Step By Step School Noida Feeder Noida Expressway / GN West Feeder"
+      "Step By Step School Noida",
+      "Step By Step School Sector 132"
     ],
     "tagline": "Committed to academic rigor and well-rounded personality development",
     "summary": "Step By Step School Noida Feeder in Noida Expressway / GN West Feeder, Greater Noida West, provides quality schooling under the CBSE / IB framework with modern classrooms, laboratories, and sports grounds.",
     "board": [
       "CBSE",
-      "IB"
+      "IB",
+      "Cambridge"
     ],
     "boardNote": null,
-    "curriculum": "CBSE / IB Curriculum",
+    "curriculum": "CBSE, IGCSE, IB",
     "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "from": "Pre-Nursery",
+      "to": "Class 12",
+      "raw": "Pre-Nursery – Class 12"
     },
     "admissionAge": "3+ years for Nursery",
     "studentTeacherRatio": "15:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot A-10, Taj Expressway, Sector 132, Noida 201303",
+      "address": "A-10, Sector 132, Taj Expressway, Noida, Uttar Pradesh 201303",
       "sector": "Sector 132",
-      "city": "Greater Noida West",
+      "city": "Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
+      "pincode": "201303",
+      "area": "Sector 132",
       "coordinates": {
-        "lat": 28.5135,
-        "lng": 77.3685,
-        "isVerified": true
+        "lat": null,
+        "lng": null
       },
-      "mapSearchQuery": "Step By Step School Noida Feeder Noida Expressway / GN West Feeder Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Step By Step School Sector 132 Noida"
     },
     "fees": {
-      "cardFee": 240000,
-      "estimatedFirstYear": 300000,
       "currency": "INR",
-      "rangeText": "₹216k - ₹264k / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹20,000",
-      "tuitionQuarterly": "₹60,000",
-      "tuitionAnnual": "₹2,40,000",
-      "transportMonthly": "₹2,500",
-      "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
       "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 1 Premium",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://stepbystepschoolnoidafeeder.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹2,40,000"
-        }
-      ],
       "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "step-by-step-school-noida-feeder-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "step-by-step-school-noida-feeder-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 20000,
-          "formattedAmount": "₹20,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "step-by-step-school-noida-feeder-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 20000,
-          "formattedAmount": "₹20,000 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "step-by-step-school-noida-feeder-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 240000,
-          "formattedAmount": "₹2,40,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹20,000 × 12 = ₹2,40,000/year."
-        },
-        {
-          "id": "step-by-step-school-noida-feeder-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,500 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹60,000 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹2,40,000 / year",
-          "totalAnnualPayable": "₹2,40,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Step By Step School Noida Feeder Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://stepbystepschoolnoidafeeder.edu.in",
-        "summary": "Official fee structure for Step By Step School Noida Feeder covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      "table": [],
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "footnotes": [],
+      "cardFee": 423000,
+      "annualDisplay": "₹4,23,000 – ₹4,41,600 / year (Nursery); up to ₹7,24,500 / year (Senior)",
+      "rangeText": "Nursery ₹4,23,000 – ₹4,41,600 / year | Senior up to ₹7,24,500 / year",
+      "admissionFee": 200000,
+      "tuitionAnnual": "Nursery ₹4,23,000–₹4,41,600; Senior up to ₹7,24,500",
+      "transportMonthly": "₹7,260 – ₹8,710",
+      "verificationStatus": "user_supplied",
+      "academicSession": "2026-27"
     },
     "facilities": [
       {
@@ -9570,10 +9305,10 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
+      "date": null,
+      "status": "Expected to Open",
+      "process": "Registration → Assessment → Interaction",
+      "session": "2026-27 / 2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9631,7 +9366,7 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2130548",
+    "affiliationNumber": "2131106",
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "step-by-step-school-noida-feeder",
@@ -9641,187 +9376,65 @@
     "cbseAffiliationNumber": "2130548"
   },
   {
-    "id": "amity-international-school-gn-feeder",
-    "slug": "amity-international-school-gn-feeder",
-    "name": "Amity International School",
-    "shortName": "Amity International School",
+    "id": "amity-international-global-noida-sector-44",
+    "slug": "amity-international-global-noida-sector-44",
+    "name": "Amity International School / Amity Global School",
+    "shortName": "Amity International / Global",
     "alternateNames": [
-      "Amity International School Noida Extension",
-      "Amity International School Knowledge Park / GN West Corridor"
+      "Amity International School Noida",
+      "Amity Global School Noida",
+      "AIS Noida",
+      "AGS Noida"
     ],
     "tagline": "Committed to academic rigor and well-rounded personality development",
     "summary": "Amity International School in Knowledge Park / GN West Corridor, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
     "board": [
-      "CBSE"
+      "CBSE",
+      "IB",
+      "Cambridge"
     ],
     "boardNote": null,
-    "curriculum": "CBSE Curriculum",
+    "curriculum": "CBSE (Amity International) + IB/Cambridge (Amity Global)",
     "gradeRange": {
       "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "3:1 (Amity Global; supported, not official)",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 44, Noida, Uttar Pradesh 201301",
+      "address": "Sector 44, Noida, Uttar Pradesh 201303",
       "sector": "Sector 44",
-      "city": "Greater Noida West",
+      "city": "Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
+      "pincode": "201303",
+      "area": "Sector 44",
       "coordinates": {
-        "lat": 28.468,
-        "lng": 77.502,
-        "isVerified": true
+        "lat": null,
+        "lng": null
       },
-      "mapSearchQuery": "Amity International School Knowledge Park / GN West Corridor Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Amity International School / Amity Global School Sector 44 Noida"
     },
     "fees": {
-      "cardFee": 165000,
-      "estimatedFirstYear": 206250,
       "currency": "INR",
-      "rangeText": "₹149k - ₹182k / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹13,750",
-      "tuitionQuarterly": "₹41,250",
-      "tuitionAnnual": "₹1,65,000",
-      "transportMonthly": "₹2,500",
-      "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
       "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 1 Premium",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://amityinternationalschoolgnfeeder.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,65,000"
-        }
-      ],
       "disclosed": true,
+      "table": [],
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "footnotes": [],
+      "cardFee": 216920,
+      "annualDisplay": "₹2,16,920 – ₹2,39,420 / year (AIS); ₹2,89,400 – ₹4,17,900 / year (AGS)",
+      "rangeText": "AIS ₹2,16,920 – ₹2,39,420 / year | AGS ₹2,89,400 – ₹4,17,900 / year",
+      "registrationFee": 2500,
+      "admissionFee": 12000,
+      "tuitionAnnual": "AIS ₹2,16,920–₹2,39,420; AGS ₹2,89,400–₹4,17,900",
+      "verificationStatus": "verified_from_source",
       "isVerified": true,
-      "components": [
-        {
-          "id": "amity-international-school-gn-feeder-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "amity-international-school-gn-feeder-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 20000,
-          "formattedAmount": "₹20,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "amity-international-school-gn-feeder-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 13750,
-          "formattedAmount": "₹13,750 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "amity-international-school-gn-feeder-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 165000,
-          "formattedAmount": "₹1,65,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹13,750 × 12 = ₹1,65,000/year."
-        },
-        {
-          "id": "amity-international-school-gn-feeder-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,500 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹41,250 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,65,000 / year",
-          "totalAnnualPayable": "₹1,65,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Amity International School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://amityinternationalschoolgnfeeder.edu.in",
-        "summary": "Official fee structure for Amity International School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      "academicSession": "2026-27"
     },
     "facilities": [
       {
@@ -9864,15 +9477,15 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
+      "date": null,
+      "status": "Admissions Ongoing",
+      "process": "Registration → Interaction/Assessment → Admission Offer → Fee Payment",
+      "session": "2026-27 / 2027-28"
     },
     "contact": {
-      "phone": "+91 98110 00000",
-      "website": "https://www.amity.edu/ais/noida/",
-      "email": "info@amityinternationalschoolgnfeeder.edu.in"
+      "phone": "+91-120-4399000",
+      "website": "https://amity.edu/ais/noida",
+      "email": "amity@aisn.amity.edu"
     },
     "rating": {
       "score": 4.3,
@@ -9933,7 +9546,7 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2130456",
+    "affiliationNumber": "2130284",
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "amity-international-school-gn-feeder",
@@ -9945,11 +9558,10 @@
   {
     "id": "somerville-school-greater-noida",
     "slug": "somerville-school-greater-noida",
-    "name": "Somerville School Greater Noida",
+    "name": "Somerville School",
     "shortName": "Somerville School Greater Noida",
     "alternateNames": [
-      "Somerville School Greater Noida Noida Extension",
-      "Somerville School Greater Noida Sector Alpha 2 / GN West Corridor"
+      "Somerville School Greater Noida"
     ],
     "tagline": "Committed to academic rigor and well-rounded personality development",
     "summary": "Somerville School Greater Noida in Sector Alpha 2 / GN West Corridor, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
@@ -9957,173 +9569,47 @@
       "CBSE"
     ],
     "boardNote": null,
-    "curriculum": "CBSE Curriculum",
+    "curriculum": "CBSE",
     "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "from": "Class 1",
+      "to": "Class 12",
+      "raw": "Class 1 – Class 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "studentTeacherRatio": "Not publicly disclosed",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Block-H, Sector Alpha-II, Greater Noida, Uttar Pradesh 201310",
-      "sector": "Sector Alpha 2",
-      "city": "Greater Noida West",
+      "address": "Block H, Sector Alpha II, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Sector Alpha II",
+      "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
+      "pincode": "201310",
+      "area": "Sector Alpha II",
       "coordinates": {
-        "lat": 28.472,
-        "lng": 77.511,
-        "isVerified": true
+        "lat": null,
+        "lng": null
       },
-      "mapSearchQuery": "Somerville School Greater Noida Sector Alpha 2 / GN West Corridor Greater Noida West",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Somerville School Greater Noida Sector Alpha II"
     },
     "fees": {
-      "cardFee": 115000,
-      "estimatedFirstYear": 143750,
       "currency": "INR",
-      "rangeText": "₹104k - ₹127k / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹9,583",
-      "tuitionQuarterly": "₹28,750",
-      "tuitionAnnual": "₹1,15,000",
-      "transportMonthly": "₹2,500",
-      "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
       "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://somervilleschoolgreaternoida.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,15,000"
-        }
-      ],
       "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "somerville-school-greater-noida-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "somerville-school-greater-noida-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 20000,
-          "formattedAmount": "₹20,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "somerville-school-greater-noida-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 9583,
-          "formattedAmount": "₹9,583 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "somerville-school-greater-noida-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 115000,
-          "formattedAmount": "₹1,15,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹9,583 × 12 = ₹1,15,000/year."
-        },
-        {
-          "id": "somerville-school-greater-noida-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,500 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹28,750 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,15,000 / year",
-          "totalAnnualPayable": "₹1,15,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Somerville School Greater Noida Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://somervilleschoolgreaternoida.edu.in",
-        "summary": "Official fee structure for Somerville School Greater Noida covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      "table": [],
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "footnotes": [],
+      "cardFee": 122000,
+      "annualDisplay": "₹1,22,000 / year (Classes 1–3: ₹1,14,000 recurring + ₹8,000 annual fee)",
+      "rangeText": "₹1,22,000 / year (Classes 1–3)",
+      "registrationFee": 500,
+      "admissionFee": 3000,
+      "tuitionAnnual": "₹1,14,000 recurring + ₹8,000 annual fee",
+      "transportMonthly": "₹1,500 – ₹1,900",
+      "verificationStatus": "user_supplied",
+      "academicSession": "2026-27"
     },
     "facilities": [
       {
@@ -10166,9 +9652,9 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
+      "date": null,
+      "status": "Expected to Open",
+      "process": "Registration → Admin Fee Payment → Enrollment",
       "session": "2027-28"
     },
     "contact": {
@@ -10225,7 +9711,7 @@
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2130263",
+    "affiliationNumber": null,
     "establishedYear": 1998,
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
@@ -14846,11 +14332,11 @@
   {
     "id": "apeejay-school-sector-16a-noida",
     "slug": "apeejay-school-sector-16a-noida",
-    "name": "Apeejay School, Sector 16A, Noida",
+    "name": "Apeejay School",
     "shortName": "Apeejay School Sector 16A",
     "alternateNames": [
       "Apeejay School Noida",
-      "Apeejay School Sector 16-A"
+      "Apeejay School Sector 16A"
     ],
     "tagline": "CBSE School established 1981, Sector 16A, Noida",
     "summary": "Apeejay School, Sector 16A, Noida (CBSE Affiliation No. 2130030), established in 1981 and managed by the Apeejay Education Society, offers schooling from Nursery to Class 12.",
@@ -14858,79 +14344,46 @@
       "CBSE"
     ],
     "boardNote": null,
-    "curriculum": "CBSE Curriculum",
+    "curriculum": "CBSE",
     "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "from": "Bal Vatika 1 (Pre-Nursery)",
+      "to": "Class 12",
+      "raw": "Bal Vatika 1 – Class 12"
     },
     "admissionAge": "3+ years for Nursery",
     "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 16A, Noida, Uttar Pradesh 201301",
+      "address": "Sector 16A, Film City, Noida, Uttar Pradesh 201301",
       "sector": "Sector 16A",
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201301",
-      "area": "Noida",
+      "area": "Sector 16A",
       "coordinates": {
         "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lng": null
       },
-      "mapSearchQuery": "Apeejay School, Sector 16A, Noida Sector 16A Noida",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Apeejay School Sector 16A Noida"
     },
     "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "₹1,95,959 / year composite fee (approx.)",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": false,
-      "feeCategory": null,
-      "academicSession": "2027-28",
-      "lastVerifiedDate": "2026-09-19",
-      "sourceUrl": null,
-      "table": [
-        {
-          "type": "Registration/Application Fee (one-time)",
-          "cost": "₹500"
-        },
-        {
-          "type": "Caution Money (refundable)",
-          "cost": "₹10,000"
-        },
-        {
-          "type": "Admission Fee (one-time)",
-          "cost": "₹35,000"
-        },
-        {
-          "type": "Composite Fee (yearly)",
-          "cost": "₹1,95,959"
-        },
-        {
-          "type": "Exam Fee (monthly)",
-          "cost": "₹162"
-        }
-      ],
+      "comparableAnnualAvailable": true,
       "disclosed": true,
-      "isVerified": false,
+      "table": [],
       "components": [],
       "gradeWiseTiers": [],
       "concessions": [],
-      "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
-      "footnotes": []
+      "footnotes": [],
+      "cardFee": 223528,
+      "annualDisplay": "₹2,23,528 – ₹2,52,203 / year (depending on grade)",
+      "rangeText": "₹2,23,528 – ₹2,52,203 / year",
+      "registrationFee": 500,
+      "admissionFee": 35000,
+      "tuitionAnnual": "₹2,23,528–₹2,52,203 / year",
+      "verificationStatus": "user_supplied",
+      "academicSession": "2026-27"
     },
     "facilities": [],
     "uniforms": {
@@ -14946,9 +14399,9 @@
     "achievements": [],
     "admissions": {
       "date": null,
-      "status": "Open",
-      "process": "Contact school for details.",
-      "session": "2027-28"
+      "status": "Expected to Open",
+      "process": "Registration → Assessment/Interaction → Admission Offer",
+      "session": "2026-27 / 2027-28"
     },
     "contact": {
       "phone": null,
@@ -15947,5 +15400,157 @@
     "status": "alias",
     "isDuplicate": true,
     "duplicateOf": "delhi-world-public-school-kp-5"
+  },
+  {
+    "id": "somerville-school-sector-22-noida",
+    "slug": "somerville-school-sector-22-noida",
+    "name": "Somerville School",
+    "shortName": "Somerville School Sector 22",
+    "alternateNames": [
+      "Somerville School Noida",
+      "Somerville School Sector 22",
+      "Somerville School Noida Sector 22"
+    ],
+    "tagline": "CBSE co-educational school in Sector 22, Noida",
+    "summary": "Somerville School's Sector 22, Noida campus, with preschool through Class 12.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Pre-School",
+      "to": "Class 12",
+      "raw": "Pre-School (Nursery/LKG/UKG) – Class 12"
+    },
+    "admissionAge": "3+ Nursery; 4+ LKG; 5+ UKG",
+    "studentTeacherRatio": "22:1",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "D-89, Sector 22, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 22",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Sector 22",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Somerville School Sector 22 Noida"
+    },
+    "fees": {
+      "currency": "INR",
+      "comparableAnnualAvailable": true,
+      "disclosed": true,
+      "table": [
+        {
+          "type": "Composite Fee",
+          "cost": "₹13,250 / month"
+        },
+        {
+          "type": "Other Monthly Fee",
+          "cost": "₹100 / month"
+        },
+        {
+          "type": "Exam/Test Fee",
+          "cost": "₹100 / month (historical)"
+        },
+        {
+          "type": "Transport",
+          "cost": "Optional"
+        }
+      ],
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "footnotes": [],
+      "cardFee": 160200,
+      "annualDisplay": "₹1,60,200 / year",
+      "rangeText": "₹1,60,200 / year",
+      "registrationFee": 500,
+      "admissionFee": null,
+      "tuitionMonthly": "13,250",
+      "tuitionAnnual": "₹1,60,200 / year (₹13,250 monthly composite + ₹100 other monthly)",
+      "transportMonthly": null,
+      "verificationStatus": "user_supplied",
+      "isVerified": false,
+      "academicSession": "2027-28"
+    },
+    "facilities": [
+      {
+        "name": "6-acre Campus",
+        "category": "Infrastructure"
+      },
+      {
+        "name": "Indoor Games",
+        "category": "Sports"
+      },
+      {
+        "name": "Gymnasium",
+        "category": "Sports"
+      },
+      {
+        "name": "Dance & Music Rooms",
+        "category": "Arts"
+      },
+      {
+        "name": "Medical Facilities",
+        "category": "Wellness"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Registration Open",
+      "process": "Online Registration → Document Upload → Assessment/Observation/Interaction → Admission Confirmation → Fee Payment",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": "+91-120-2415050 / +91-120-4214595",
+      "website": "https://www.somervillenoida.in/",
+      "email": "ssn@somervillenoida.in / ssn1987.admissions@gmail.com / contact@somervillenoida.in"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Somerville School Sector 22, Noida",
+      "h1": "Somerville School Sector 22, Noida",
+      "pageHeartKey": "somerville-sector-22",
+      "cardHeartKey": "somerville-sector-22",
+      "cardRatingKey": "somerville-sector-22",
+      "cardLink": "/schools/somerville-school-sector-22-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "somerville-school-sector-22-noida",
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2130099",
+    "sports": []
   }
 ]

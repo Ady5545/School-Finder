@@ -157,6 +157,7 @@ export interface SchoolFees {
   verifiedDate?: string;
   sourceUrl?: string;
   feeDisplayOverride?: string;
+  annualDisplay?: string;
   table?: FeeItem[];
   components?: DetailedFeeComponent[];
   gradeWiseTiers?: GradeWiseFeeTier[];

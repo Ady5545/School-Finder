@@ -240,62 +240,68 @@ export default function AdminPage() {
     router.push('/login?redirect=/admin');
   };
 
-  // Check auth and initial load
-  const loadAdminData = async () => {
+  // Fast admin boot: authenticate first, then load only the section the admin opens.
+  // The old panel requested every heavy dataset on first paint, which made the
+  // control center feel frozen. This keeps the shell instant and data progressive.
+  const [loadedTabs, setLoadedTabs] = useState<Set<AdminTab>>(new Set());
+  const [loadingTab, setLoadingTab] = useState<AdminTab | null>(null);
+
+  const fetchTabData = async (tab: AdminTab, force = false) => {
+    if (!force && loadedTabs.has(tab)) return;
+    setLoadingTab(tab);
+    try {
+      const requests: Partial<Record<AdminTab, string>> = {
+        overview: \`/api/admin/overview?range=\${timeRange}\`,
+        users: '/api/admin/users?limit=100',
+        activity: '/api/admin/activity?limit=150',
+        reviews: '/api/admin/reviews?includeDeleted=true',
+        schools: '/api/admin/schools',
+        wishlists: '/api/admin/wishlists',
+        comparisons: '/api/admin/comparisons',
+        searches: '/api/admin/searches',
+        promotions: '/api/admin/promotions',
+        audit: '/api/admin/audit-log?limit=100',
+      };
+      const url = requests[tab];
+      if (!url) return;
+      const res = await fetch(url, { cache: 'no-store' });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.message || \`Failed to load \${tab}\`);
+
+      if (tab === 'overview') setOverviewData(data.metrics);
+      if (tab === 'users') setUsersList(data.users);
+      if (tab === 'activity') setActivityList(data.events);
+      if (tab === 'reviews') setReviewsList(data.reviews);
+      if (tab === 'schools') setSchoolsList(data.schools);
+      if (tab === 'wishlists') setWishlistsData(data.wishlists);
+      if (tab === 'comparisons') setComparisonsData(data);
+      if (tab === 'searches') setSearchesData(data);
+      if (tab === 'promotions') setPromotionsList(data.campaigns);
+      if (tab === 'audit') setAuditLogsList(data.logs);
+      setLoadedTabs(prev => new Set(prev).add(tab));
+    } catch (err) {
+      console.error(\`Failed to load admin \${tab} data:\`, err);
+    } finally {
+      setLoadingTab(null);
+    }
+  };
+
+  const loadAdminData = async (force = false) => {
     setIsLoading(true);
     try {
-      const authRes = await fetch('/api/admin/auth/check');
+      const authRes = await fetch('/api/admin/auth/check', { cache: 'no-store' });
       if (!authRes.ok) {
         setIsAuthenticated(false);
-        setIsLoading(false);
         return;
       }
-
       const authData = await authRes.json();
       if (!authData.authorized) {
         setIsAuthenticated(false);
-        setIsLoading(false);
         return;
       }
-
       setIsAuthenticated(true);
       setCurrentAdmin(authData.user);
-
-      // Load all datasets concurrently
-      const [
-        ovRes,
-        usRes,
-        acRes,
-        rvRes,
-        scRes,
-        wlRes,
-        cpRes,
-        srRes,
-        prRes,
-        auRes,
-      ] = await Promise.all([
-        fetch(`/api/admin/overview?range=${timeRange}`).then(r => r.json()),
-        fetch('/api/admin/users?limit=100').then(r => r.json()),
-        fetch('/api/admin/activity?limit=150').then(r => r.json()),
-        fetch('/api/admin/reviews?includeDeleted=true').then(r => r.json()),
-        fetch('/api/admin/schools').then(r => r.json()),
-        fetch('/api/admin/wishlists').then(r => r.json()),
-        fetch('/api/admin/comparisons').then(r => r.json()),
-        fetch('/api/admin/searches').then(r => r.json()),
-        fetch('/api/admin/promotions').then(r => r.json()),
-        fetch('/api/admin/audit-log?limit=100').then(r => r.json()),
-      ]);
-
-      if (ovRes.success) setOverviewData(ovRes.metrics);
-      if (usRes.success) setUsersList(usRes.users);
-      if (acRes.success) setActivityList(acRes.events);
-      if (rvRes.success) setReviewsList(rvRes.reviews);
-      if (scRes.success) setSchoolsList(scRes.schools);
-      if (wlRes.success) setWishlistsData(wlRes.wishlists);
-      if (cpRes.success) setComparisonsData(cpRes);
-      if (srRes.success) setSearchesData(srRes);
-      if (prRes.success) setPromotionsList(prRes.campaigns);
-      if (auRes.success) setAuditLogsList(auRes.logs);
+      await fetchTabData('overview', force);
     } catch (err) {
       console.error('Error loading admin control center:', err);
     } finally {
@@ -306,6 +312,10 @@ export default function AdminPage() {
   useEffect(() => {
     loadAdminData();
   }, [timeRange]);
+
+  useEffect(() => {
+    if (isAuthenticated) fetchTabData(activeTab);
+  }, [activeTab, isAuthenticated]);
 
   const showNotification = (type: 'success' | 'error', text: string) => {
     setActionMessage({ type, text });

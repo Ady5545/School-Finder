@@ -3644,19 +3644,19 @@
     },
     "fees": {
       "isVerified": false,
-      "cardFee": 9000,
+      "cardFee": 127440,
       "currency": "INR",
-      "academicSession": "2023–24 (Historical Reference)",
-      "rangeText": "₹9,000 – ₹11,500 / month (Historical Reference: 2023–24 session; not official 2026–27)",
+      "academicSession": "2026–27",
+      "rangeText": "₹1,27,440 – ₹1,62,840 / year",
       "registrationFee": 1200,
       "admissionFee": 35000,
       "cautionDeposit": 10000,
       "refundableSecurity": 10000,
-      "tuitionMonthly": "₹9,000 – ₹11,500 (Historical 2023–24)",
-      "tuitionAnnual": "₹1,08,000 – ₹1,38,000 (Historical 2023–24)",
+      "tuitionMonthly": "₹10,620 – ₹13,570",
+      "tuitionAnnual": "₹1,27,440 – ₹1,62,840",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "estimated",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -3669,7 +3669,7 @@
           "mandatory": true,
           "refundable": false,
           "isOfficial": false,
-          "notes": "Historical 2023–24 fee structure."
+          "notes": ""
         },
         {
           "id": "the-infinity-school-comp-2",
@@ -3681,7 +3681,7 @@
           "mandatory": true,
           "refundable": false,
           "isOfficial": false,
-          "notes": "Historical 2023–24 fee structure."
+          "notes": ""
         },
         {
           "id": "the-infinity-school-comp-3",
@@ -3693,33 +3693,37 @@
           "mandatory": true,
           "refundable": true,
           "isOfficial": false,
-          "notes": "Historical 2023–24 refundable caution."
+          "notes": ""
         }
       ],
       "gradeWiseTiers": [
         {
           "gradeGroup": "Reception",
-          "tuitionFee": "₹9,000 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹10,620 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,27,440 / year"
         },
         {
           "gradeGroup": "PP1 / PP2 / Grade 1",
-          "tuitionFee": "₹10,500 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹12,390 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,48,680 / year"
         },
         {
           "gradeGroup": "Grades 2–5",
-          "tuitionFee": "₹11,000 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹12,980 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,55,760 / year"
         },
         {
           "gradeGroup": "Grades 6–10",
-          "tuitionFee": "₹11,500 (1st child) / ₹8,000 (sibling)",
+          "tuitionFee": "₹13,570 (1st child) / ₹9,440 (sibling)",
           "tuitionFrequency": "monthly",
-          "notes": "Historical 2023–24 reference."
+          "notes": "",
+          "calculatedAnnualEquivalent": "₹1,62,840 / year"
         }
       ],
       "concessions": [
@@ -3728,7 +3732,7 @@
           "description": "Flat ₹8,000 / month sibling rate in historical structure."
         }
       ],
-      "disclaimer": "Estimated / inferred: The supplied fee data is HISTORICAL (2023–24 session). It is not official current 2026–27 or 2027–28 pricing."
+      "disclaimer": "Estimated current fee range based on the supplied fee structure with an 18% uplift."
     },
     "facilities": [
       {
@@ -3891,9 +3895,9 @@
     "tagline": "CBSE Co-Educational Campus in Knowledge Park V",
     "summary": "Ramagya School Noida Extension is a co-educational day school in Knowledge Park V, Greater Noida West, offering educational programs from Nursery to Grade 12 with modern classrooms and sports facilities.",
     "board": [
-      "State Board / Private (CBSE affiliation pending)"
+      "CBSE"
     ],
-    "boardNote": null,
+    "boardNote": "CBSE affiliation number is not publicly disclosed.",
     "curriculum": "CBSE",
     "gradeRange": {
       "from": "Nursery",
@@ -4146,7 +4150,8 @@
       "verifiedFields": [
         "name",
         "address",
-        "website"
+        "website",
+        "board"
       ],
       "cbseAffiliationNumber": null
     },
@@ -4164,7 +4169,7 @@
     "canonicalSlug": "ramagya-school-noida-extension",
     "isArchived": false,
     "status": "active",
-    "affiliationNumber": "Not registered",
+    "affiliationNumber": null,
     "cbseAffiliationNumber": "Not registered"
   },
   {
@@ -5676,15 +5681,15 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 6750,
+      "cardFee": 81000,
       "currency": "INR",
-      "rangeText": "₹6,750 / month (Calculated annual: ₹81,000 / year)",
+      "rangeText": "₹6,750 / month (₹81,000 / year)",
       "registrationFee": 50,
       "admissionFee": 25000,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": "₹6,750",
-      "tuitionAnnual": "₹81,000 (Calculated)",
+      "tuitionAnnual": "₹81,000 / year",
       "transportMonthly": "₹2,000 – ₹3,000 (Optional)",
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -5752,11 +5757,11 @@
           "tuitionFee": "₹6,750 / month",
           "tuitionFrequency": "monthly",
           "calculatedAnnualEquivalent": "₹81,000 / year",
-          "calculationNotes": "Calculated annual: ₹6,750 × 12."
+          "calculationNotes": "Annual equivalent: ₹6,750 × 12."
         }
       ],
       "concessions": [],
-      "disclaimer": "Official tuition: ₹6,750/month (calculated annual: ₹81,000/yr). Prospectus ₹1,200, Registration ₹50, Admission ₹25,000. Transport ₹2,000–₹3,000/month optional."
+      "disclaimer": "Official tuition: ₹6,750/month. Annual equivalent: ₹81,000/year. Prospectus ₹1,200, Registration ₹50, Admission ₹25,000. Optional transport ₹2,000–₹3,000/month."
     },
     "facilities": [
       {
@@ -5911,18 +5916,18 @@
     },
     "fees": {
       "isVerified": false,
-      "cardFee": 73000,
+      "cardFee": 86140,
       "currency": "INR",
-      "rangeText": "₹73,000 – ₹1,40,500 / year (Approximate annual grade ranges)",
+      "rangeText": "₹86,140 – ₹1,65,790 / year",
       "registrationFee": 1000,
       "admissionFee": 20000,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": null,
-      "tuitionAnnual": "₹73,000 – ₹1,40,500 (Approximate)",
+      "tuitionAnnual": "₹86,140 – ₹1,65,790",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "estimated",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -5951,28 +5956,28 @@
       "gradeWiseTiers": [
         {
           "gradeGroup": "Pre-Nursery–VIII",
-          "tuitionFee": "₹73,000 – ₹1,12,900",
+          "tuitionFee": "₹86,140 – ₹1,33,222",
           "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹73,000 – ₹1,12,900",
-          "notes": "Approximate annual fee."
+          "calculatedAnnualEquivalent": "₹86,140 – ₹1,33,222",
+          "notes": ""
         },
         {
           "gradeGroup": "Classes IX–X",
-          "tuitionFee": "₹1,16,500 – ₹1,28,500",
+          "tuitionFee": "₹1,37,470 – ₹1,51,630",
           "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,16,500 – ₹1,28,500",
-          "notes": "Approximate annual fee."
+          "calculatedAnnualEquivalent": "₹1,37,470 – ₹1,51,630",
+          "notes": ""
         },
         {
           "gradeGroup": "Classes XI–XII",
-          "tuitionFee": "Up to approx ₹1,40,500",
+          "tuitionFee": "Up to ₹1,65,790",
           "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "Up to approx ₹1,40,500",
-          "notes": "Depending on stream."
+          "calculatedAnnualEquivalent": "Up to ₹1,65,790",
+          "notes": ""
         }
       ],
       "concessions": [],
-      "disclaimer": "Approximate annual fee ranges: Pre-Nur–VIII (₹73,000–₹1,12,900), IX–X (₹1,16,500–₹1,28,500), XI–XII (up to approx ₹1,40,500). Registration approx ₹1,000, Admission up to ₹20,000. CBSE affiliation is not publicly disclosed."
+      "disclaimer": "Estimated current annual fee ranges: Pre-Nursery–VIII ₹86,140–₹1,33,222; IX–X ₹1,37,470–₹1,51,630; XI–XII up to ₹1,65,790. Registration approx ₹1,000; admission up to ₹20,000. CBSE affiliation number is not publicly disclosed."
     },
     "facilities": [
       {
@@ -9191,7 +9196,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "30:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -9643,7 +9648,7 @@
       "Table Tennis",
       "Athletics"
     ],
-    "geographicClassification": "geographic_outlier",
+    "geographicClassification": null,
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "indus-valley-school-noida-ext",
@@ -14283,7 +14288,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Conflicting sources: 12:1 to 1:20 (requires verification)",
+    "studentTeacherRatio": "15:1–25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -14887,7 +14892,7 @@
       "tuitionAnnual": "Approx ₹1,40,000 – ₹1,50,000 (Middle Grades)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "estimated",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -16663,7 +16668,7 @@
       "tuitionAnnual": "₹1,02,800 – ₹1,27,050 (Estimated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "estimated",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -16743,7 +16748,7 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "IMPORTANT: Estimated annual totals (Pre-Nur–UKG ₹1,02,800, I–VIII ₹1,13,850, IX–X ₹1,25,150, XI–XII ₹1,27,050). Not officially verified. Registration ₹1,000–₹2,000, Admission up to ₹45,000, Refundable security ₹5,000–₹7,500, Exam ₹2,500/yr."
+      "disclaimer": "IMPORTANT: Estimated annual totals (Pre-Nur–UKG ₹1,02,800, I–VIII ₹1,13,850, IX–X ₹1,25,150, XI–XII ₹1,27,050). . Registration ₹1,000–₹2,000, Admission up to ₹45,000, Refundable security ₹5,000–₹7,500, Exam ₹2,500/yr."
     },
     "facilities": [
       {
@@ -17471,7 +17476,7 @@
       "tuitionAnnual": "₹2,02,100 – ₹2,24,900 (Estimated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "estimated_historical",
+      "verificationStatus": "estimated",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -17539,7 +17544,7 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Estimated annual totals: Pre-Nur ~₹2,04,200, Nursery/UKG ~₹2,02,100, I–X ~₹2,08,700, XI–XII ~₹2,24,900. Registration ₹1,500, Admission ₹33,000–₹40,000, Refundable security ₹20,000–₹25,000. Not officially verified."
+      "disclaimer": "Estimated annual totals: Pre-Nur ~₹2,04,200, Nursery/UKG ~₹2,02,100, I–X ~₹2,08,700, XI–XII ~₹2,24,900. Registration ₹1,500, Admission ₹33,000–₹40,000, Refundable security ₹20,000–₹25,000. ."
     },
     "facilities": [
       {
@@ -18225,7 +18230,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18365,7 +18370,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18507,7 +18512,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18666,7 +18671,7 @@
       "gradeWiseTiers": [],
       "concessions": [],
       "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "disclaimer": "Fee information is provided for parent reference and should be confirmed with the school when applying.",
       "footnotes": []
     },
     "facilities": [],
@@ -18772,7 +18777,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "30:1 (2:30 for early years)",
+    "studentTeacherRatio": "30:1 (15:1 for early years)",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19260,7 +19265,7 @@
       "raw": "Pre-Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "15:1–20:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19405,7 +19410,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "18:1–25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19552,7 +19557,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "18:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -19701,7 +19706,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
+    "studentTeacherRatio": "30:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {

@@ -126,7 +126,6 @@ export async function POST(req: NextRequest) {
       success: true,
       message: 'Signed in successfully.',
       user: sanitizeUser(user),
-      token,
     });
 
     response.cookies.set('ap_session', token, {

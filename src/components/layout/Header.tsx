@@ -1,0 +1,2 @@
+'use client';
+import Link from 'next/link'; export function Header(){return <header className="sticky top-0 z-40 border-b bg-white/95 backdrop-blur"><div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3"><Link href="/" className="font-black">Admission Pitara</Link><nav className="hidden gap-5 sm:flex"><Link href="/schools">Schools</Link><Link href="/compare">Compare</Link><Link href="/wishlist">Shortlist</Link></nav><Link href="/login" className="rounded-lg bg-slate-900 px-3 py-2 text-sm text-white">Login</Link></div></header>}

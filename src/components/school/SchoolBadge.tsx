@@ -1,0 +1,1 @@
+export function SchoolBadge({type,value}:{type?:string;value?:string}){return <span className="inline-flex rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold">{value||type}</span>}

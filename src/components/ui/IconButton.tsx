@@ -1,0 +1,1 @@
+import React from 'react'; export function IconButton({children,ariaLabel,...p}:React.ButtonHTMLAttributes<HTMLButtonElement>&{ariaLabel:string}){return <button aria-label={ariaLabel} className="rounded-lg p-2 hover:bg-slate-100" {...p}>{children}</button>}

@@ -1,0 +1,1 @@
+import React from 'react'; export function Badge({children,...p}:React.HTMLAttributes<HTMLSpanElement>){return <span className="inline-flex rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold" {...p}>{children}</span>}

@@ -1,0 +1,2 @@
+import React from 'react'; import {Star} from 'lucide-react';
+export function RatingDisplay({score,reviewsCount,size='md'}:{score?:number;reviewsCount?:number;size?:string}){return <span className="inline-flex items-center gap-1 text-sm"><Star className="h-4 w-4 fill-current text-amber-500"/><b>{typeof score==='number'?score.toFixed(1):'—'}</b>{typeof reviewsCount==='number'&&<span>({reviewsCount})</span>}</span>}

@@ -1,0 +1,3 @@
+import type {Metadata} from 'next'; import type {School} from '../../data/schoolsData';
+export function buildSchoolMetadata(school:School):Metadata{return {title:school.name,description:'Explore fees, admissions, curriculum, facilities and contact details for '+school.name,alternates:{canonical:'/schools/'+school.slug}}}
+export function generateSchoolJsonLd(school:School){return {'@context':'https://schema.org','@type':'EducationalOrganization',name:school.name,url:'/schools/'+school.slug,address:{'@type':'PostalAddress',streetAddress:school.location?.address,addressLocality:school.location?.area,addressCountry:'IN'}}}

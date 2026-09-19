@@ -1,0 +1,1 @@
+export function LocationDisplay({location}:{location:any}){return <div className="text-sm text-slate-600">{location?.address||location?.area||'Location unavailable'}</div>

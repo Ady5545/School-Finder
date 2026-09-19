@@ -1,0 +1,1 @@
+export function FeeDisplay({fees}:{fees:any;variant?:string}){const value=fees?.rangeText||(fees?.cardFee?('₹'+Number(fees.cardFee).toLocaleString('en-IN')):'Not publicly disclosed');return <div className="text-sm font-semibold">{value}</div>}

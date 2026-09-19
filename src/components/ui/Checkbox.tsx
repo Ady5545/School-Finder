@@ -1,0 +1,1 @@
+import React from 'react'; export function Checkbox({label,...p}:React.InputHTMLAttributes<HTMLInputElement>&{label?:string}){return <label className="inline-flex gap-2"><input type="checkbox" {...p}/>{label}</label>}

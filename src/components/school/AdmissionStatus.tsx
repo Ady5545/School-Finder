@@ -1,0 +1,1 @@
+export function AdmissionStatus({admissions}:{admissions:any}){return <div className="font-semibold">{admissions?.status||'Inquire'}{admissions?.session&&<span className="ml-2 text-xs text-slate-500">{admissions.session}</span>}</div>}

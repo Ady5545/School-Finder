@@ -18,7 +18,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
     fees.comparableAnnualAvailable !== false &&
     fees.verificationStatus === 'verified_from_source';
 
-  const isHistorical =
+  const isEstimated =
     fees.verificationStatus === 'estimated_historical' ||
     fees.verificationStatus === 'estimated';
 
@@ -50,8 +50,8 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
 
   const tooltipExplanation = isComparable
     ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Includes annual tuition, composite recurring charges & lab access. Excludes optional transport (bus), uniform, and meal charges.`
-    : isHistorical
-    ? 'Fee figures reflect historical 2023–24 institutional data and are provided for indicative reference only. Not certified for 2027–28.'
+    : isEstimated
+    ? 'Estimated annual fee based on the available fee structure.'
     : 'Fee structure is not published publicly. Direct inquiry with the school admission office is required.';
 
   if (variant === 'compact') {
@@ -110,9 +110,9 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
               </span>
               <span className="text-xs text-[var(--color-content-muted)] font-medium">/ year</span>
             </>
-          ) : isHistorical ? (
-            <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              {fees.rangeText || 'Historical Reference'}
+          ) : isEstimated ? (
+            <span className="text-[11px] font-semibold text-[var(--color-primary)] bg-[var(--color-surface-subtle)] px-2 py-0.5 rounded border border-[var(--color-border)]">
+              {fees.rangeText || 'Estimated annual fee'}
             </span>
           ) : (
             <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
@@ -133,7 +133,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
         <div>
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-[var(--color-content-muted)]">
-              {isHistorical ? 'Historical Fee Reference' : 'Annual Fee Estimate'}
+              {'Annual Fee Estimate'}
             </span>
             <div className="relative inline-flex items-center" ref={tooltipRef}>
               <button
@@ -178,15 +178,15 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
               'font-black mt-0.5',
               isComparable
                 ? 'text-2xl text-[var(--color-primary)]'
-                : isHistorical
-                ? 'text-lg text-amber-900'
+                : isEstimated
+                ? 'text-lg text-[var(--color-primary)]'
                 : 'text-base text-slate-700'
             )}
           >
             {isComparable
               ? formatCurrency(fees.cardFee!)
-              : isHistorical
-              ? fees.rangeText || 'Historical Reference'
+              : isEstimated
+              ? fees.rangeText || 'Estimated annual fee'
               : 'Not publicly disclosed'}
           </div>
 

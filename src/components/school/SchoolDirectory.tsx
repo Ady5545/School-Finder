@@ -442,7 +442,19 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
       return copy;
     };
 
-    return [...sortSection(verifiedSchools), ...sortSection(pendingSchools)];
+    const combined = [...sortSection(verifiedSchools), ...sortSection(pendingSchools)];
+
+    // Default directory order keeps schools with disclosed annual fees first.
+    // Schools without a public annual figure stay at the end, with Ryan last as requested.
+    if (sortBy === 'featured') {
+      const publicPriority = (school: School) => {
+        if (school.slug === 'ryan-international-school-noida-extension') return 2;
+        return school.fees?.annualDisplay ? 0 : 1;
+      };
+      combined.sort((a, b) => publicPriority(a) - publicPriority(b));
+    }
+
+    return combined;
   }, [
     initialSchools,
     searchQuery,

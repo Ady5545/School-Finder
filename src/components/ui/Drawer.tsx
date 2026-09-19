@@ -1,0 +1,1 @@
+'use client'; import React from 'react'; export function Drawer({open,onClose,children}:{open:boolean;onClose:()=>void;children:React.ReactNode}){if(!open)return null;return <div className="fixed inset-0 z-50 bg-black/40" onClick={onClose}><aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white p-6" onClick={e=>e.stopPropagation()}>{children}</aside></div>}

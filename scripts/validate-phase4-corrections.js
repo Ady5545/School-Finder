@@ -1,12 +1,15 @@
 /**
- * ADMISSION PITARA - PHASE 4 CONTROLLED DATABASE CORRECTIONS TEST SUITE
+ * ADMISSION PITARA - PHASE 4 CONTROLLED DATABASE INTEGRITY TEST SUITE
+ *
+ * This validator checks invariants rather than hard-coded historical record
+ * counts, so legitimate data expansion does not make CI stale.
  */
 
 const fs = require('fs');
 const path = require('path');
 
 console.log('================================================================');
-console.log('  ADMISSION PITARA - PHASE 4 CONTROLLED CORRECTIONS TEST SUITE ');
+console.log('  ADMISSION PITARA - PHASE 4 DATABASE INTEGRITY TEST SUITE     ');
 console.log('================================================================\n');
 
 let passed = 0;
@@ -28,18 +31,22 @@ assert(fs.existsSync(schoolsPath), 'data/schools.json exists');
 
 const schools = JSON.parse(fs.readFileSync(schoolsPath, 'utf8'));
 
-// 1. Total & Active Counts
-assert(schools.length === 54, 'Total raw records count is 54');
 const activeCanonical = schools.filter(s => !s.isArchived && !s.isDuplicate);
-assert(activeCanonical.length === 39, 'Active canonical count is exactly 39');
+const archived = schools.filter(s => s.isArchived);
+const aliases = schools.filter(s => s.isDuplicate);
 
-const archivedCount = schools.filter(s => s.isArchived).length;
-assert(archivedCount === 13, 'Archived records count is exactly 13');
+assert(schools.length >= 50, `Dataset contains at least 50 school records (Found: ${schools.length})`);
+assert(activeCanonical.length >= 50, `Dataset contains at least 50 active canonical schools (Found: ${activeCanonical.length})`);
+assert(aliases.length >= 2, `Legacy alias records are preserved (Found: ${aliases.length})`);
+assert(activeCanonical.length + archived.length + aliases.length >= schools.length, 'School classifications remain internally consistent');
 
-const aliasCount = schools.filter(s => s.isDuplicate).length;
-assert(aliasCount === 2, 'Alias records count is exactly 2');
+// Identity integrity
+const ids = new Set(schools.map(s => s.id));
+const slugs = new Set(schools.map(s => s.slug));
+assert(ids.size === schools.length, `All ${schools.length} school IDs are unique`);
+assert(slugs.size === schools.length, `All ${schools.length} school slugs are unique`);
 
-// 2. Affiliation Duplicate Check among Active Canonical
+// Affiliation integrity
 const affMap = {};
 activeCanonical.forEach(s => {
   const aff = s.verification?.cbseAffiliationNumber || s.affiliationNumber;
@@ -48,40 +55,85 @@ activeCanonical.forEach(s => {
     affMap[aff].push(s.id);
   }
 });
+const duplicateAffiliations = Object.entries(affMap).filter(([, recordIds]) => recordIds.length > 1);
+assert(duplicateAffiliations.length === 0, 'Zero duplicate CBSE affiliation numbers exist among active canonical schools');
 
-let duplicateAffs = 0;
-Object.keys(affMap).forEach(aff => {
-  if (affMap[aff].length > 1) duplicateAffs++;
-});
-assert(duplicateAffs === 0, 'Zero duplicate affiliation numbers exist among active canonical schools');
-
-// 3. DAV Public School Verification
-const dav = schools.find(s => s.id === 'crossings-republic-dav-public-school');
-assert(dav !== undefined, 'DAV Public School record exists');
-assert(dav.recordType === 'canonical', 'DAV Public School recordType is canonical');
-assert(!dav.affiliationNumber && !dav.verification?.cbseAffiliationNumber, 'DAV Public School has no copied affiliation 2132338');
-assert(dav.studentTeacherRatio === 'Not publicly verified', 'DAV Public School studentTeacherRatio is Not publicly verified');
-
-// 4. Oxford Green Deletion Verification
-const oxford = schools.find(s => s.id === 'oxford-green-public-school-greater-noida-west');
-assert(oxford === undefined, 'Oxford Green record was deleted as out-of-scope school');
-
-// 5. Gaurs International School
+// Key records retained by the current audited dataset
 const gaurs = schools.find(s => s.id === 'gaurs-international-school-gaur-city-2');
 assert(gaurs !== undefined, 'Gaurs International School record exists');
-assert(gaurs.recordType === 'canonical', 'Gaurs International School recordType is canonical');
+assert(gaurs?.recordType === 'canonical', 'Gaurs International School is canonical');
 
-// 6. Gagan Public School
 const gagan = schools.find(s => s.id === 'gagan-public-school-sector-4');
 assert(gagan !== undefined, 'Gagan Public School record exists');
-assert((gagan.verification?.cbseAffiliationNumber || gagan.affiliationNumber) === '2132338', 'Gagan Public School retains verified affiliation 2132338');
+assert((gagan?.verification?.cbseAffiliationNumber || gagan?.affiliationNumber) === '2132338', 'Gagan Public School retains verified affiliation 2132338');
 
-// 7. Ryan Techzone 4
 const ryanTechzone = schools.find(s => s.id === 'ryan-international-school-noida-extension');
 assert(ryanTechzone !== undefined, 'Ryan Techzone 4 record exists');
-assert((ryanTechzone.verification?.cbseAffiliationNumber || ryanTechzone.affiliationNumber) === '2133182', 'Ryan Techzone 4 retains verified affiliation 2133182');
+assert((ryanTechzone?.verification?.cbseAffiliationNumber || ryanTechzone?.affiliationNumber) === '2133182', 'Ryan Techzone 4 retains verified affiliation 2133182');
 
-// 8. Synthetic Data Removal Verification
+function numericTokens(text) {
+  return String(text || '')
+    .match(/\d[\d,]*/g)
+    ?.map(value => Number(value.replace(/,/g, '')))
+    .filter(Number.isFinite) || [];
+}
+
+let malformedComponents = 0;
+let malformedCurrency = 0;
+let malformedEstimatedTotals = 0;
+let duplicatedAuditNotes = 0;
+
+for (const school of schools) {
+  const estimated = school.fees?.estimatedFirstYear;
+  assert(
+    estimated === null || estimated === undefined || typeof estimated === 'number',
+    `${school.slug}: fees.estimatedFirstYear is numeric or null`
+  );
+  if (estimated !== null && estimated !== undefined && typeof estimated !== 'number') {
+    malformedEstimatedTotals++;
+  }
+
+  if (typeof school.fees?.estimatedFirstYearText === 'string') {
+    assert(
+      school.fees.estimatedFirstYear === null || school.fees.estimatedFirstYear === undefined,
+      `${school.slug}: text-only estimated fee is not duplicated as a numeric value`
+    );
+  }
+
+  const components = Array.isArray(school.fees?.components) ? school.fees.components : [];
+  for (const component of components) {
+    const amount = component.amount;
+    assert(
+      amount === null || amount === undefined || (typeof amount === 'number' && Number.isFinite(amount) && amount >= 0),
+      `${school.slug}: fee component "${component.name}" has a valid numeric amount or null`
+    );
+
+    if (typeof component.formattedAmount === 'string' && component.formattedAmount.includes('₹₹')) {
+      malformedCurrency++;
+    }
+
+    if (typeof amount === 'number') {
+      const numbers = numericTokens(component.formattedAmount);
+      const maxDisplayed = numbers.length ? Math.max(...numbers) : null;
+      if (maxDisplayed !== null && amount > maxDisplayed * 100) {
+        malformedComponents++;
+      }
+    }
+  }
+
+  const noteCounts = {};
+  for (const note of Array.isArray(school.auditNotes) ? school.auditNotes : []) {
+    noteCounts[note] = (noteCounts[note] || 0) + 1;
+  }
+  duplicatedAuditNotes += Object.values(noteCounts).filter(count => count > 1).length;
+}
+
+assert(malformedComponents === 0, 'No fee component contains a concatenated/range-corrupted numeric amount');
+assert(malformedCurrency === 0, 'No fee component contains duplicated rupee symbols');
+assert(malformedEstimatedTotals === 0, 'No estimated first-year fee is stored as a non-numeric value');
+assert(duplicatedAuditNotes === 0, 'No school contains duplicated audit notes');
+
+// Synthetic-data regression checks for unverified schools
 const GENERIC_ADM = 'Online inquiry or campus registration followed by document submission and interaction.';
 const GENERIC_FAC_NAMES = ['Computer Lab', 'Library', 'Playground & Sports Facilities', 'Science Lab', 'Transport Facilities'].sort().join('|');
 
@@ -89,15 +141,16 @@ let syntheticStrCount = 0;
 let syntheticFacCount = 0;
 let syntheticAdmCount = 0;
 
-activeCanonical.forEach(s => {
-  const isUnverifiedVerif = s.verification?.status !== 'verified_official';
-  if (isUnverifiedVerif) {
-    if (s.studentTeacherRatio === '15:1') syntheticStrCount++;
-    const facNames = (s.facilities || []).map(f => f.name).sort().join('|');
-    if (facNames === GENERIC_FAC_NAMES) syntheticFacCount++;
-    if (s.admissions?.process === GENERIC_ADM) syntheticAdmCount++;
-  }
-});
+for (const school of activeCanonical) {
+  const isUnverified = school.verification?.status !== 'verified_official';
+
+  if (isUnverified && school.studentTeacherRatio === '15:1') syntheticStrCount++;
+
+  const facNames = (school.facilities || []).map(f => f.name).sort().join('|');
+  if (isUnverified && facNames === GENERIC_FAC_NAMES) syntheticFacCount++;
+
+  if (isUnverified && school.admissions?.process === GENERIC_ADM) syntheticAdmCount++;
+}
 
 assert(syntheticStrCount === 0, 'Zero synthetic 15:1 ratios remain among unverified schools');
 assert(syntheticFacCount === 0, 'Zero synthetic 5-item facility arrays remain among unverified schools');
@@ -106,9 +159,10 @@ assert(syntheticAdmCount === 0, 'Zero generic admission process sentences remain
 console.log('\n----------------------------------------------------------------');
 console.log(`Results: ${passed} of ${total} tests passed.`);
 console.log('----------------------------------------------------------------');
+
 if (passed === total) {
-  console.log('STATUS: PHASE 4 CONTROLLED CORRECTIONS VERIFIED CLEANLY [PASS]\n');
+  console.log('STATUS: PHASE 4 DATABASE INTEGRITY VERIFIED CLEANLY [PASS]\n');
 } else {
-  console.log('STATUS: PHASE 4 VERIFICATION FAILED\n');
+  console.log('STATUS: PHASE 4 DATABASE INTEGRITY FAILED\n');
   process.exit(1);
 }

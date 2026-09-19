@@ -130,6 +130,7 @@ export interface HistoricalFeeStructure {
 export interface SchoolFees {
   cardFee: number | null;
   estimatedFirstYear?: number | null;
+  estimatedFirstYearText?: string;
   currency?: string;
   rangeText: string;
   registrationFee?: number | null;

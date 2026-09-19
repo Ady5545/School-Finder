@@ -421,7 +421,9 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
                   Typical First Year Cost
                 </span>
                 <p className="text-xl font-black text-slate-900 tracking-tight">
-                  {fees.estimatedFirstYear
+                  {fees.estimatedFirstYearText
+                    ? fees.estimatedFirstYearText
+                    : fees.estimatedFirstYear
                     ? formatCurrency(fees.estimatedFirstYear)
                     : fees.cardFee
                     ? formatCurrency((fees.cardFee || 0) + (fees.admissionFee || 0) + (fees.registrationFee || 0))

@@ -224,6 +224,22 @@ export default function AdminPage() {
   const [reportYear, setReportYear] = useState<number>(() => new Date().getUTCFullYear());
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
 
+  // Sign out handler
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('ap_token');
+      localStorage.removeItem('ap_user');
+    }
+    setIsAuthenticated(false);
+    setCurrentAdmin(null);
+    router.push('/login?redirect=/admin');
+  };
+
   // Check auth and initial load
   const loadAdminData = async () => {
     setIsLoading(true);
@@ -548,14 +564,14 @@ export default function AdminPage() {
           </div>
           <div className="pt-2 flex flex-col gap-2">
             <Link
-              href="/"
-              className="w-full py-2.5 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition-colors shadow-md"
+              href="/login?redirect=/admin"
+              className="w-full py-2.5 px-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition-colors shadow-md block text-center"
             >
-              Sign In from Homepage
+              Sign In as Administrator
             </Link>
             <Link
               href="/"
-              className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 font-semibold text-xs transition-colors"
+              className="w-full py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 font-semibold text-xs transition-colors block text-center"
             >
               Back to Public Directory
             </Link>
@@ -623,6 +639,15 @@ export default function AdminPage() {
           >
             Exit to Site
           </Link>
+
+          <button
+            onClick={handleLogout}
+            className="px-3 py-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/20 text-xs font-semibold text-rose-300 hover:text-rose-200 transition-colors flex items-center gap-1.5 cursor-pointer"
+            title="Sign out of Admin Session"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+            <span>Sign Out</span>
+          </button>
         </div>
       </header>
 

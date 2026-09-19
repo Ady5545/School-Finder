@@ -16638,7 +16638,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "15:1–28:1 (Conflicting reports)",
+    "studentTeacherRatio": "15:1–28:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -16659,7 +16659,7 @@
       "isVerified": false,
       "cardFee": 102800,
       "currency": "INR",
-      "rangeText": "₹1,02,800 – ₹1,27,050 / year (Estimated annual totals; not officially verified)",
+      "rangeText": "₹1,02,800 – ₹1,27,050 / year",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": "₹5,000 – ₹7,500 (Refundable)",
@@ -16748,7 +16748,7 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "IMPORTANT: Estimated annual totals (Pre-Nur–UKG ₹1,02,800, I–VIII ₹1,13,850, IX–X ₹1,25,150, XI–XII ₹1,27,050). . Registration ₹1,000–₹2,000, Admission up to ₹45,000, Refundable security ₹5,000–₹7,500, Exam ₹2,500/yr."
+      "disclaimer": "Estimated annual totals: Pre-Nur–UKG ₹1,02,800; I–VIII ₹1,13,850; IX–X ₹1,25,150; XI–XII ₹1,27,050. Registration ₹1,000–₹2,000, admission up to ₹45,000, refundable security ₹5,000–₹7,500, exam ₹2,500/year."
     },
     "facilities": [
       {
@@ -17467,7 +17467,7 @@
       "isVerified": false,
       "cardFee": 202100,
       "currency": "INR",
-      "rangeText": "₹2,02,100 – ₹2,24,900 / year (Estimated grade-wise total; not official)",
+      "rangeText": "₹2,02,100 – ₹2,24,900 / year",
       "registrationFee": 1500,
       "admissionFee": null,
       "cautionDeposit": "₹20,000 – ₹25,000 (Refundable)",
@@ -17544,7 +17544,7 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Estimated annual totals: Pre-Nur ~₹2,04,200, Nursery/UKG ~₹2,02,100, I–X ~₹2,08,700, XI–XII ~₹2,24,900. Registration ₹1,500, Admission ₹33,000–₹40,000, Refundable security ₹20,000–₹25,000. ."
+      "disclaimer": "Estimated annual totals: Pre-Nur ~₹2,04,200; Nursery/UKG ~₹2,02,100; I–X ~₹2,08,700; XI–XII ~₹2,24,900. Registration ₹1,500, admission ₹33,000–₹40,000, refundable security ₹20,000–₹25,000."
     },
     "facilities": [
       {
@@ -18943,7 +18943,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "1:25 (30:2 for pre-primary)",
+    "studentTeacherRatio": "1:25 (1:15 for pre-primary)",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {

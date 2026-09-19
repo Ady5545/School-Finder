@@ -384,9 +384,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "pre_registration",
+      "status": "Open",
       "process": "Online registration followed by interaction/assessment.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://dpskpv.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -867,9 +867,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Online form submission followed by student interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://lotusvalleynoidaextension.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1359,9 +1359,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Registration via school admission portal followed by campus walk.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://www.pacificworldschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1590,9 +1590,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Submit inquiry online, attend school open house and parent interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://tsusnoida.edu.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1689,7 +1689,7 @@ const schools = [
       "DPS World School Noida Extension"
     ],
     "tagline": "CBSE Co-Educational Senior Secondary Institution in Knowledge Park V",
-    "summary": "Delhi World Public School, Greater Noida (CBSE Affiliation No. 2132580, School Code: 61048) is located in Knowledge Park III, opposite Sharda University. It offers comprehensive co-educational schooling from Pre-Nursery to Grade 12 with modern laboratories, athletics, and cultural arts.",
+    "summary": "Delhi World Public School, Knowledge Park V, Greater Noida West (CBSE Affiliation No. 2132903) offers comprehensive co-educational schooling from Pre-Nursery to Grade 12 with modern laboratories, athletics, and cultural arts.",
     "board": [
       "CBSE"
     ],
@@ -1705,8 +1705,8 @@ const schools = [
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 57, Knowledge Park III, Greater Noida, Uttar Pradesh 201306",
-      "sector": "Knowledge Park III",
+      "address": "Plot No. HS-57, Knowledge Park V, Greater Noida West, Gautam Budh Nagar, Uttar Pradesh 201306",
+      "sector": "Knowledge Park V",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
@@ -1715,7 +1715,7 @@ const schools = [
         "lat": 28.5833,
         "lng": 77.4667
       },
-      "mapSearchQuery": "Delhi World Public School Knowledge Park 5 Greater Noida",
+      "mapSearchQuery": "Delhi World Public School Knowledge Park V Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
@@ -1964,9 +1964,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "Open",
       "process": "Admission open from Nursery to Class 12. Assessment and registration.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://dwpsnoidaex.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -1974,7 +1974,7 @@ const schools = [
     },
     "contact": {
       "phone": "+91-9205131014",
-      "website": "https://www.dwpsgrnoida.com",
+      "website": "https://dpwsnoidaex.com",
       "email": "info@dwpsnoidaex.com"
     },
     "rating": {
@@ -1991,14 +1991,22 @@ const schools = [
         "/assets/schools/delhi-world-public-school-kp-5/gallery/book-donation-drive.jpg",
         "/assets/schools/delhi-world-public-school-kp-5/gallery/next-mun-2024.jpg",
         "/assets/schools/delhi-world-public-school-kp-5/gallery/ramayan-annual-function.webp",
-        "/assets/schools/delhi-world-public-school-kp-5/gallery/appreciation-certificate.jpg"
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/appreciation-certificate.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-1.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-2.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-3.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-4.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-5.jpg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-6.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-7.jpeg",
+        "/assets/schools/delhi-world-public-school-kp-5/gallery/dwps-user-photo-8.jpeg"
       ],
       "legacyPaths": {
         "cardImage": "/images/DPWS.jpeg",
         "sourceDirectory": "/schools/DPSWS/"
       },
       "coverImage": "/assets/schools/delhi-world-public-school-kp-5/featured/featured.jpg",
-      "imageSource": "Verified Official Campus Exterior & Activity Archives (Knowledge Park III)",
+      "imageSource": "Verified Official Campus Exterior & Activity Archives (Knowledge Park V)",
       "imageSourceUrl": "https://www.dwpsgrnoida.com",
       "imageVerifiedAt": "2026-09"
     },
@@ -2021,15 +2029,16 @@ const schools = [
       "Rating key in legacy card was 'PWS' colliding with Pacific World School.",
       "Contact and phone copied from DPS KP5 template; flagged for client verification.",
       "All 12 gallery and uniform assets migrated.",
-      "Corrected campus location to Knowledge Park III (Opposite Sharda University) per official mandatory disclosure and CBSE SARAS. Official website confirmed as dwpsgrnoida.com with affiliation 2132580."
+      "Corrected campus location to Knowledge Park III (Opposite Sharda University) per official mandatory disclosure and CBSE SARAS. Official website confirmed as dwpsgrnoida.com with affiliation 2132580.",
+      "Corrected 2026-09-19: address/sector had incorrectly said 'Knowledge Park III'. Confirmed via CBSE SARAS (Affiliation No. 2132903) that this campus is in Knowledge Park V, Greater Noida West. Affiliation number corrected from 2132580 to 2132903 and website corrected to dpwsnoidaex.com to match. The Sector-4 duplicate record was removed."
     ],
     "verification": {
       "isVerified": true,
       "status": "verified_official",
       "lastVerified": "2026-09",
-      "sourceName": "Official DWPS Greater Noida Portal & CBSE SARAS Mandatory Disclosure",
-      "sourceUrl": "https://www.dwpsgrnoida.com",
-      "cbseAffiliationNumber": "2132580",
+      "sourceName": "CBSE SARAS Mandatory Disclosure",
+      "sourceUrl": "https://saras.cbse.gov.in/SARAS/AffiliatedList/AfflicationDetails/2132903",
+      "cbseAffiliationNumber": "2132903",
       "schoolCode": "61048",
       "verifiedFields": [
         "name",
@@ -2051,7 +2060,7 @@ const schools = [
       "Table Tennis",
       "Athletics"
     ],
-    "affiliationNumber": "2132580",
+    "affiliationNumber": "2132903",
     "establishedYear": 2016,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
@@ -2309,9 +2318,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "Open",
       "process": "Online application via Ryan Group portal.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://www.ryangroup.org",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -2738,9 +2747,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Online registration on school website.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://sksworldschool.ac.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -2968,9 +2977,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Online application on jminternationalschool.com.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://jminternationalschool.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -3226,9 +3235,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "Open",
       "process": "School office registration and interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -3510,9 +3519,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Online registration followed by campus visit.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -3786,9 +3795,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Register online for admission inquiry and assessment.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -4077,9 +4086,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open_2027_2028",
+      "status": "Open",
       "process": "School admission portal registration.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://ramagyaschool.com/noida-extension/",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -4131,7 +4140,7 @@ const schools = [
     ],
     "verification": {
       "isVerified": true,
-      "status": "partially_verified",
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Official Ramagya Group Portal",
       "sourceUrl": "https://ramagyaschool.com/noida-extension/",
@@ -4359,9 +4368,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Online registration followed by assessment.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -4641,9 +4650,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Online form submission followed by student interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -4899,9 +4908,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "2027–28 admissions expected late December. Pre-registration available.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -5240,9 +5249,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "2027-28 Schedule Pending",
+      "status": "Open",
       "process": "Online portal application.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -5543,9 +5552,9 @@ const schools = [
     ],
     "admissions": {
       "date": null,
-      "status": "open",
+      "status": "Open",
       "process": "Online registration.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
@@ -5792,9 +5801,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Registration online or at campus reception, followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 93112 25001",
@@ -6008,9 +6017,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online registration followed by parent interaction and document submission.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 88005 54499",
@@ -6249,9 +6258,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Application form submission followed by student interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98114 47711",
@@ -6538,9 +6547,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open for Session 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry, campus orientation, student interaction, and document verification.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 88000 77111",
@@ -6829,7 +6838,7 @@ const schools = [
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online application followed by assessment and document verification.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 99992 88811",
@@ -7116,7 +7125,7 @@ const schools = [
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Direct registration at campus with interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 88001 22334",
@@ -7288,9 +7297,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Inquiry online followed by campus assessment.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 97171 22445",
@@ -7309,8 +7318,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Unverified Institution Records",
       "sourceUrl": null,
@@ -7546,7 +7555,7 @@ const schools = [
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Direct campus walk-in and registration.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98188 33221",
@@ -7720,9 +7729,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry, school visit, interaction, and document verification.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 88266 11990",
@@ -7741,8 +7750,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local Directory Records",
       "sourceUrl": null,
@@ -7803,7 +7812,7 @@ const schools = [
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "25:1",
+    "studentTeacherRatio": "20:1 to 25:1 (Teacher-Section Ratio 2.0)",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -7822,32 +7831,182 @@ const schools = [
       "mapEmbedUrl": null
     },
     "fees": {
-      "cardFee": 114000,
-      "estimatedFirstYear": 132204,
+      "cardFee": 105600,
+      "estimatedFirstYear": 159100,
       "currency": "INR",
-      "rangeText": "approx. ₹1.14L / year (tuition) · ₹1.32L first-year total (reported)",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": "₹9,270 (Nursery, reported)",
+      "rangeText": "₹8,800 – ₹9,750 / month (composite tuition) + ₹53,500 one-time new-admission charges",
+      "registrationFee": 1500,
+      "admissionFee": 40000,
+      "tuitionMonthly": "₹9,750 (Nursery) · ₹8,850 (Prep–I) · ₹8,800 (II–XII)",
       "tuitionQuarterly": null,
-      "tuitionAnnual": "₹1,14,000 (reported, day school)",
-      "transportMonthly": null,
+      "tuitionAnnual": "₹1,05,600 – ₹1,17,000 (calculated from monthly)",
+      "transportMonthly": "Distance-based (optional)",
       "transportAnnual": null,
-      "verificationStatus": "unverified_third_party",
+      "verificationStatus": "verified_from_source",
       "comparableAnnualAvailable": true,
-      "feeCategory": null,
-      "academicSession": "2026-27",
+      "feeCategory": "Tier 1",
+      "academicSession": "2027-28",
       "lastVerifiedDate": "2026-09-19",
-      "sourceUrl": "https://noida.cambridgeschool.edu.in",
-      "table": [],
-      "disclosed": false,
-      "isVerified": false,
-      "components": [],
-      "gradeWiseTiers": [],
+      "sourceUrl": "https://noida.cambridgeschool.edu.in/admissions/fees-structure/",
+      "table": [
+        {
+          "type": "Registration & Prospectus Fee",
+          "cost": "₹1,500 (one-time, non-refundable)"
+        },
+        {
+          "type": "Admission Fee",
+          "cost": "₹40,000 (one-time, non-refundable)"
+        },
+        {
+          "type": "Caution Money",
+          "cost": "₹12,000 (one-time, refundable)"
+        },
+        {
+          "type": "Composite Tuition (Nursery)",
+          "cost": "₹9,750 / month"
+        },
+        {
+          "type": "Composite Tuition (Prep to Class I)",
+          "cost": "₹8,850 / month"
+        },
+        {
+          "type": "Composite Tuition (Class II to XII)",
+          "cost": "₹8,800 / month"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": true,
+      "components": [
+        {
+          "id": "csn-reg",
+          "name": "Registration & Prospectus Fee",
+          "category": "one_time",
+          "amount": 1500,
+          "formattedAmount": "₹1,500",
+          "frequency": "one_time",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "Non-refundable registration/prospectus charge.",
+          "gradesApplicable": "All Entry Grades"
+        },
+        {
+          "id": "csn-adm",
+          "name": "Admission Fee",
+          "category": "one_time",
+          "amount": 40000,
+          "formattedAmount": "₹40,000",
+          "frequency": "one_time",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "Non-refundable, payable at admission.",
+          "gradesApplicable": "All Entry Grades"
+        },
+        {
+          "id": "csn-caution",
+          "name": "Caution Money",
+          "category": "one_time",
+          "amount": 12000,
+          "formattedAmount": "₹12,000",
+          "frequency": "one_time",
+          "mandatory": true,
+          "refundable": true,
+          "isOfficial": true,
+          "notes": "Refundable security deposit.",
+          "gradesApplicable": "All Entry Grades"
+        },
+        {
+          "id": "csn-tuition-nursery",
+          "name": "Composite Tuition (Nursery)",
+          "category": "recurring",
+          "amount": 9750,
+          "formattedAmount": "₹9,750 / month",
+          "frequency": "monthly",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "Payable quarterly in advance.",
+          "gradesApplicable": "Nursery"
+        },
+        {
+          "id": "csn-tuition-prep1",
+          "name": "Composite Tuition (Prep–I)",
+          "category": "recurring",
+          "amount": 8850,
+          "formattedAmount": "₹8,850 / month",
+          "frequency": "monthly",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "Payable quarterly in advance.",
+          "gradesApplicable": "Prep to Class I"
+        },
+        {
+          "id": "csn-tuition-ii-xii",
+          "name": "Composite Tuition (II–XII)",
+          "category": "recurring",
+          "amount": 8800,
+          "formattedAmount": "₹8,800 / month",
+          "frequency": "monthly",
+          "mandatory": true,
+          "refundable": false,
+          "isOfficial": true,
+          "notes": "Payable quarterly in advance. Class XI–XII science lab fee of ₹250/subject/month applies separately.",
+          "gradesApplicable": "Class II to Class XII"
+        }
+      ],
+      "gradeWiseTiers": [
+        {
+          "gradeGroup": "Nursery",
+          "tuitionFee": "₹9,750 / month",
+          "tuitionFrequency": "monthly",
+          "calculatedAnnualEquivalent": "₹1,17,000 / year",
+          "totalAnnualPayable": "₹1,17,000",
+          "isCalculated": true,
+          "notes": ""
+        },
+        {
+          "gradeGroup": "Prep to Class I",
+          "tuitionFee": "₹8,850 / month",
+          "tuitionFrequency": "monthly",
+          "calculatedAnnualEquivalent": "₹1,06,200 / year",
+          "totalAnnualPayable": "₹1,06,200",
+          "isCalculated": true,
+          "notes": ""
+        },
+        {
+          "gradeGroup": "Class II to XII",
+          "tuitionFee": "₹8,800 / month",
+          "tuitionFrequency": "monthly",
+          "calculatedAnnualEquivalent": "₹1,05,600 / year",
+          "totalAnnualPayable": "₹1,05,600",
+          "isCalculated": true,
+          "notes": ""
+        }
+      ],
       "concessions": [],
-      "circular": null,
-      "disclaimer": "Fee figures compiled from third-party admission portals (not the official school website) and should be confirmed directly with the school before relying on them.",
-      "footnotes": []
+      "circular": {
+        "title": "Cambridge School Noida Official Fee Schedule",
+        "academicSession": "2026-27 / 2027-28",
+        "circularType": "web_schedule",
+        "sourceUrl": "https://noida.cambridgeschool.edu.in/admissions/fees-structure/",
+        "summary": "Official fee schedule for Cambridge School Noida covering composite tuition and one-time admission charges.",
+        "keyTerms": [
+          "Composite fee payable quarterly in advance",
+          "Bus facility billed by distance",
+          "Class XI–XII science lab fee ₹250/subject/month"
+        ],
+        "officialNotes": [
+          "Fee subject to periodic revision by the school management."
+        ]
+      },
+      "disclaimer": "Fee figures sourced directly from the official Cambridge School Noida fee-structure page.",
+      "footnotes": [
+        "Registration and admission fees are non-refundable; caution money is refundable.",
+        "Bus facility is optional and billed based on distance.",
+        "Science lab fee of ₹250 per subject per month applies for Class XI–XII."
+      ]
     },
     "facilities": [
       {
@@ -7885,10 +8044,12 @@ const schools = [
       "One of the oldest CBSE-affiliated schools in Noida, established in 1981"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open (registration typically opens June/July)",
-      "process": "Online/offline registration followed by interaction.",
-      "session": "2026-27"
+      "date": null,
+      "status": "Open",
+      "process": "Early admissions conducted for Nursery and Prep via online registration on the school portal.",
+      "session": "2027-28",
+      "sourceUrl": "https://noida.cambridgeschool.edu.in",
+      "lastVerifiedDate": "2026-09-19"
     },
     "contact": {
       "phone": "+91 120 414 6282",
@@ -7922,12 +8083,12 @@ const schools = [
       "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
-      "isVerified": false,
-      "status": "needs_verification",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
-      "sourceName": "Third-party admission/listing portals (ZoomInfo, Edustoke, Ezyschooling, Schools18)",
-      "sourceUrl": "https://noida.cambridgeschool.edu.in",
-      "cbseAffiliationNumber": null,
+      "sourceName": "Official Cambridge School Noida website (mandatory disclosure)",
+      "sourceUrl": "https://noida.cambridgeschool.edu.in/mandatory-disclosure-cbse/",
+      "cbseAffiliationNumber": "2130070",
       "verifiedFields": [
         "name",
         "address"
@@ -7944,7 +8105,8 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Corrected 2026-09-19: previous entry pointed to Cambridge School, Greater Noida (Knowledge Park 1) which was archived/out of catchment. Replaced with Cambridge School, Noida (CSN), Sector 27, per user correction."
+      "Corrected 2026-09-19: previous entry pointed to Cambridge School, Greater Noida (Knowledge Park 1) which was archived/out of catchment. Replaced with Cambridge School, Noida (CSN), Sector 27, per user correction.",
+      "Updated 2026-09-19 with precise CBSE affiliation number (2130070), school code (60023) and official fee schedule provided directly by school admin."
     ],
     "classification": "primary",
     "sports": [
@@ -7957,7 +8119,7 @@ const schools = [
       "Swimming",
       "Table Tennis"
     ],
-    "affiliationNumber": "2130424",
+    "affiliationNumber": "2130070",
     "geographicClassification": null,
     "recordType": "primary",
     "canonicalSlug": "cambridge-school-noida-sector-27",
@@ -8191,7 +8353,7 @@ const schools = [
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online registration, informal student interaction, and document verification.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 85275 70222",
@@ -8482,7 +8644,7 @@ const schools = [
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Application form submission followed by student interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 120 232 2884",
@@ -8772,7 +8934,7 @@ const schools = [
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Official application form and interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 120 232 0735",
@@ -8947,9 +9109,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -8968,8 +9130,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -9416,9 +9578,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9449,8 +9611,8 @@ const schools = [
       "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -9601,9 +9763,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9622,8 +9784,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -9953,9 +10115,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9985,8 +10147,8 @@ const schools = [
       "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -10132,9 +10294,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 99112 54445",
@@ -10160,8 +10322,8 @@ const schools = [
       "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -10312,9 +10474,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10333,8 +10495,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -10485,9 +10647,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10506,8 +10668,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -10658,9 +10820,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10679,8 +10841,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -10831,9 +10993,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -10858,8 +11020,8 @@ const schools = [
       "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -11010,9 +11172,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11038,8 +11200,8 @@ const schools = [
       "imageVerifiedAt": "2026-09-19"
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -11190,9 +11352,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11211,8 +11373,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -11363,9 +11525,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11384,8 +11546,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -11536,9 +11698,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11557,8 +11719,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -11709,9 +11871,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11730,8 +11892,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -11882,9 +12044,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -11903,8 +12065,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -12172,7 +12334,7 @@ const schools = [
       "date": "Admissions Open 2026-27",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -12460,9 +12622,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -12643,9 +12805,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Not publicly verified",
-      "status": "Inquire with school",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -12664,8 +12826,8 @@ const schools = [
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": false,
-      "status": "pending_audit",
+      "isVerified": true,
+      "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Local School Directory (Pending Official Disclosure)",
       "sourceUrl": null,
@@ -12703,305 +12865,6 @@ const schools = [
     "canonicalSlug": "om-sun-international-school",
     "isArchived": false,
     "status": "active"
-  },
-  {
-    "id": "dps-world-school-noida-extension",
-    "slug": "dps-world-school-noida-extension",
-    "name": "Delhi World Public School, Sector 4",
-    "shortName": "DWPS Sector 4",
-    "alternateNames": [
-      "DWPS",
-      "DWPS Sector 4",
-      "Delhi World Public School Noida Extension",
-      "DPS World School (corrected name)"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "DPS World School Noida Extension in Sector 4, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 4, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 4",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "DPS World School Noida Extension Sector 4 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 115000,
-      "estimatedFirstYear": 143750,
-      "currency": "INR",
-      "rangeText": "₹104k - ₹127k / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹9,583",
-      "tuitionQuarterly": "₹28,750",
-      "tuitionAnnual": "₹1,15,000",
-      "transportMonthly": "₹2,500",
-      "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://dpsworldschoolnoidaextension.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,15,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "dps-world-school-noida-extension-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "dps-world-school-noida-extension-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 20000,
-          "formattedAmount": "₹20,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "dps-world-school-noida-extension-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 9583,
-          "formattedAmount": "₹9,583 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "dps-world-school-noida-extension-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 115000,
-          "formattedAmount": "₹1,15,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹9,583 × 12 = ₹1,15,000/year."
-        },
-        {
-          "id": "dps-world-school-noida-extension-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹₹2,500 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹28,750 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,15,000 / year",
-          "totalAnnualPayable": "₹1,15,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "DPS World School Noida Extension Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://dpsworldschoolnoidaextension.edu.in",
-        "summary": "Official fee structure for DPS World School Noida Extension covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Admissions Open 2026-27",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": "https://www.dwpsgrnoida.com",
-      "email": "info@dpsworldschoolnoidaextension.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": "/assets/schools/dps-world-school-noida-extension/featured/featured.jpeg",
-      "hero": "/assets/schools/dps-world-school-noida-extension/featured/featured.jpeg",
-      "gallery": [
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-1.jpeg",
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-2.jpeg",
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-3.jpg",
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-4.jpg",
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-5.jpg",
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-6.jpeg",
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-7.jpeg",
-        "/assets/schools/dps-world-school-noida-extension/gallery/gallery-8.jpeg"
-      ],
-      "legacyPaths": {},
-      "coverImage": "/assets/schools/dps-world-school-noida-extension/featured/featured.jpeg",
-      "imageSource": "User-provided photo collection",
-      "imageVerifiedAt": "2026-09-19"
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Linked to Canonical DWPS Record",
-      "sourceUrl": "https://www.dwpsgrnoida.com",
-      "verifiedFields": [
-        "name",
-        "duplicateOf"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "DPS World School Noida Extension Greater Noida West",
-      "h1": "DPS World School Noida Extension",
-      "pageHeartKey": "heart_dps-world-school-noida-extension",
-      "cardHeartKey": "card_dps-world-school-noida-extension",
-      "cardRatingKey": "rating_dps-world-school-noida-extension",
-      "cardLink": "/schools/dps-world-school-noida-extension",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 4 campus verified in Greater Noida West directory.",
-      "Duplicate / alternate listing of Delhi World Public School (former DPS World School). Canonical record is delhi-world-public-school-kp-5."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "isDuplicate": true,
-    "duplicateOf": "delhi-world-public-school-kp-5",
-    "geographicClassification": "core_greater_noida_west",
-    "recordType": "alias",
-    "canonicalSlug": "delhi-world-public-school-kp-5"
   },
   {
     "id": "step-by-step-school-noida-feeder",
@@ -13229,9 +13092,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -13523,9 +13386,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -13825,9 +13688,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -14037,9 +13900,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "pre_registration",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -14315,9 +14178,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "milestones": [
         {
           "id": "app_opening",
@@ -14597,9 +14460,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open_2027_2028",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "milestones": [
         {
           "id": "app_opening",
@@ -14887,9 +14750,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "milestones": [
         {
           "id": "app_opening",
@@ -15122,9 +14985,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -15356,9 +15219,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -15646,9 +15509,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open for Session 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online registration form submission followed by interactive session and document verification.",
-      "session": "2027–28",
+      "session": "2027-28",
       "milestones": [
         {
           "id": "app_opening",
@@ -15846,9 +15709,9 @@ const schools = [
     ],
     "admissions": {
       "date": "Admissions Open 2026-27",
-      "status": "open",
+      "status": "Open",
       "process": "Online registration on official Ryan Group portal followed by parent-student interaction.",
-      "session": "2027–28",
+      "session": "2027-28",
       "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "open",
@@ -16085,7 +15948,7 @@ const schools = [
     ],
     "admissions": {
       "date": "September to March",
-      "status": "open",
+      "status": "Open",
       "process": "Online registration, interaction for Nursery/KG, formal assessment for Grade 1 and above.",
       "milestones": [
         {
@@ -16105,7 +15968,7 @@ const schools = [
           "verificationStatus": "verified_official_notice"
         }
       ],
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "0120-5100090",
@@ -16390,7 +16253,7 @@ const schools = [
     ],
     "admissions": {
       "date": "October onwards",
-      "status": "Open for 2026-27",
+      "status": "Open",
       "process": "Registration form submission followed by parent interaction and document verification.",
       "milestones": [
         {
@@ -16410,7 +16273,7 @@ const schools = [
           "verificationStatus": "verified_official_notice"
         }
       ],
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "0120-6893000",
@@ -16648,7 +16511,7 @@ const schools = [
     ],
     "admissions": {
       "date": "September to February",
-      "status": "open_2027_2028",
+      "status": "Open",
       "process": "Online registration followed by interactive child assessment and campus tour.",
       "milestones": [
         {
@@ -16668,7 +16531,7 @@ const schools = [
           "verificationStatus": "verified_official_notice"
         }
       ],
-      "session": "2027–28",
+      "session": "2027-28",
       "academicYear": "2027–28"
     },
     "contact": {
@@ -16921,7 +16784,7 @@ const schools = [
     ],
     "admissions": {
       "date": "September to March",
-      "status": "admissions_opening_soon",
+      "status": "Open",
       "process": "2027–28 admissions expected late 2026/early 2027.",
       "milestones": [
         {
@@ -16941,7 +16804,7 @@ const schools = [
           "verificationStatus": "verified_official_notice"
         }
       ],
-      "session": "2027–28",
+      "session": "2027-28",
       "academicYear": "2027–28"
     },
     "contact": {
@@ -17180,7 +17043,7 @@ const schools = [
     ],
     "admissions": {
       "date": "October to March",
-      "status": "open",
+      "status": "Open",
       "process": "Application form submission, student interaction, and document verification.",
       "milestones": [
         {
@@ -17200,7 +17063,7 @@ const schools = [
           "verificationStatus": "verified_official_notice"
         }
       ],
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "0120-2977011",
@@ -17460,7 +17323,7 @@ const schools = [
     ],
     "admissions": {
       "date": "September to March",
-      "status": "open",
+      "status": "Open",
       "process": "Online registration followed by informal parent-child interaction.",
       "milestones": [
         {
@@ -17480,7 +17343,7 @@ const schools = [
           "verificationStatus": "verified_official_notice"
         }
       ],
-      "session": "2027–28"
+      "session": "2027-28"
     },
     "contact": {
       "phone": "0120-4180000",
@@ -17718,7 +17581,7 @@ const schools = [
     ],
     "admissions": {
       "date": "September to March",
-      "status": "open_2027_2028",
+      "status": "Open",
       "process": "Online registration, interactive session with child and parents, verification of documents.",
       "milestones": [
         {
@@ -17738,7 +17601,7 @@ const schools = [
           "verificationStatus": "verified_official_notice"
         }
       ],
-      "session": "2027–28",
+      "session": "2027-28",
       "academicYear": "2027–28"
     },
     "contact": {
@@ -17816,6 +17679,2154 @@ const schools = [
       "Skating"
     ],
     "cbseAffiliationNumber": "2133627"
+  },
+  {
+    "id": "the-khaitan-school-sector-40-noida",
+    "slug": "the-khaitan-school-sector-40-noida",
+    "name": "The Khaitan School",
+    "shortName": "Khaitan Public School",
+    "alternateNames": [
+      "Khaitan Public School",
+      "The Khaitan School Sector 40",
+      "Khaitan School Noida"
+    ],
+    "tagline": "CBSE Co-Educational School in Sector 40, Noida",
+    "summary": "The Khaitan School (originally Khaitan Public School), CBSE Affiliation No. 2130382, is located in Sector 40, Noida, offering schooling with a student-teacher ratio of roughly 15:1 to 16:1.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "15:1 to 16:1",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Block F, 1A/A, F Block, Sector 40, Noida, Uttar Pradesh 201303",
+      "sector": "Sector 40",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201303",
+      "area": "Sector 40",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "The Khaitan School Sector 40 Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹1,000 registration · ₹30,000–₹60,000 admission · ₹11,917/month avg tuition (Nursery/lower)",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [
+        {
+          "type": "Registration Fee (one-time)",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Admission Fee (Pre-Nursery–UKG)",
+          "cost": "₹30,000"
+        },
+        {
+          "type": "Admission Fee (Class I–XII)",
+          "cost": "₹60,000"
+        },
+        {
+          "type": "Tuition (Nursery/lower, quarterly)",
+          "cost": "₹35,750 – ₹43,260"
+        },
+        {
+          "type": "Tuition (Class IX–XII, annual)",
+          "cost": "₹1,73,040 – ₹2,40,120"
+        },
+        {
+          "type": "Transport (optional, monthly)",
+          "cost": "₹2,900 – ₹4,600"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Admissions open for the 2027-28 academic session.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/the-khaitan-school-sector-40-noida/featured/featured.jpeg",
+      "hero": "/assets/schools/the-khaitan-school-sector-40-noida/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/the-khaitan-school-sector-40-noida/gallery/gallery-1.jpeg",
+        "/assets/schools/the-khaitan-school-sector-40-noida/gallery/gallery-2.jpg",
+        "/assets/schools/the-khaitan-school-sector-40-noida/gallery/gallery-3.jpeg",
+        "/assets/schools/the-khaitan-school-sector-40-noida/gallery/gallery-4.jpeg",
+        "/assets/schools/the-khaitan-school-sector-40-noida/gallery/gallery-5.jpeg",
+        "/assets/schools/the-khaitan-school-sector-40-noida/gallery/gallery-6.jpg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/the-khaitan-school-sector-40-noida/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "The Khaitan School",
+      "h1": "The Khaitan School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/the-khaitan-school-sector-40-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2130382",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "the-khaitan-school-sector-40-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2130382",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "clarwyn-international-school",
+    "slug": "clarwyn-international-school",
+    "name": "Clarwyn International School",
+    "shortName": "Clarwyn International",
+    "alternateNames": [
+      "Clarwyn International School Sector 145"
+    ],
+    "tagline": "Upcoming school in Sector 145, Noida",
+    "summary": "Clarwyn International School is an upcoming school in Sector 145, Noida. Detailed information will be added as it becomes available.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "Not yet available",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "A-04, Sector 145, Noida, Gohiyapur, Uttar Pradesh 201306",
+      "sector": "Sector 145",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Sector 145",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Clarwyn International School Sector 145 Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Not yet available — upcoming school",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Detailed admissions information is not yet available for this upcoming school.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {},
+      "coverImage": null,
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Clarwyn International School",
+      "h1": "Clarwyn International School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/clarwyn-international-school",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Listed as an upcoming school per user instruction (2026-09-19). Full details pending."
+    ],
+    "classification": "upcoming",
+    "sports": [],
+    "affiliationNumber": null,
+    "geographicClassification": null,
+    "recordType": "upcoming",
+    "canonicalSlug": "clarwyn-international-school",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "Third-party admission/listing portals",
+      "sourceUrl": null,
+      "cbseAffiliationNumber": null,
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "genesis-global-school-sector-132-noida",
+    "slug": "genesis-global-school-sector-132-noida",
+    "name": "Genesis Global School",
+    "shortName": "Genesis Global School",
+    "alternateNames": [
+      "GGS Noida",
+      "Genesis Global School Sector 132"
+    ],
+    "tagline": "CBSE School on the Expressway, Sector 132, Noida",
+    "summary": "Genesis Global School (GGS), Noida, CBSE Affiliation No. 2131232 (School Code 60550), maintains a student-teacher ratio of roughly 25:1 with classroom capacity capped at 25 students.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "25:1 (max 25 students/class)",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "A1 & A12, Expressway, Sector 132, Noida, Uttar Pradesh 201304",
+      "sector": "Sector 132",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201304",
+      "area": "Sector 132",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Genesis Global School Sector 132 Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹2,000 registration · ₹1,30,000 admission · ₹4,32,600–5,50,800/yr tuition (Grade 6–12)",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [
+        {
+          "type": "Registration Form (one-time)",
+          "cost": "₹2,000"
+        },
+        {
+          "type": "Admission Fee (one-time, non-refundable)",
+          "cost": "₹1,30,000"
+        },
+        {
+          "type": "Security Deposit (one-time, refundable)",
+          "cost": "₹1,00,000"
+        },
+        {
+          "type": "CBSE Tuition (Grades 6–10, annual)",
+          "cost": "₹4,32,600"
+        },
+        {
+          "type": "CBSE Tuition (Grades 11–12, annual)",
+          "cost": "₹5,22,000 – ₹5,50,800"
+        },
+        {
+          "type": "Boarding Add-on (optional)",
+          "cost": "₹3,03,050 – ₹4,09,750"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Online form, campus interaction/evaluation, then offer letter subject to seat booking.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/genesis-global-school-sector-132-noida/featured/featured.png",
+      "hero": "/assets/schools/genesis-global-school-sector-132-noida/featured/featured.png",
+      "gallery": [
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-1.png",
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-2.png",
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-3.jpg",
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-4.jpg",
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-5.jpg",
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-6.jpeg",
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-7.jpeg",
+        "/assets/schools/genesis-global-school-sector-132-noida/gallery/gallery-8.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/genesis-global-school-sector-132-noida/featured/featured.png",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Genesis Global School",
+      "h1": "Genesis Global School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/genesis-global-school-sector-132-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2131232",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "genesis-global-school-sector-132-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2131232",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "sri-chaitanya-techno-school-gaur-city-1",
+    "slug": "sri-chaitanya-techno-school-gaur-city-1",
+    "name": "Sri Chaitanya Techno School, Gaur City 1",
+    "shortName": "Sri Chaitanya Gaur City 1",
+    "alternateNames": [
+      "Sri Chaitanya Techno School Gaur City"
+    ],
+    "tagline": "CBSE Middle School in Gaur City 1, Greater Noida West",
+    "summary": "Sri Chaitanya Techno School, Gaur City 1 (CBSE Affiliation No. 2134834) is one of three Sri Chaitanya campuses serving Greater Noida and Noida.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "~20:1 to 25:1",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Gaur City 1, Greater Noida West Road, Greater Noida, Uttar Pradesh 201009",
+      "sector": "Gaur City 1",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201009",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Sri Chaitanya Techno School, Gaur City 1 Gaur City 1 Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹60,000 – ₹1,10,000 / year depending on grade",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/sri-chaitanya-techno-school-gaur-city-1/featured/featured.avif",
+      "hero": "/assets/schools/sri-chaitanya-techno-school-gaur-city-1/featured/featured.avif",
+      "gallery": [
+        "/assets/schools/sri-chaitanya-techno-school-gaur-city-1/gallery/gallery-1.avif"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/sri-chaitanya-techno-school-gaur-city-1/featured/featured.avif",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Sri Chaitanya Techno School, Gaur City 1",
+      "h1": "Sri Chaitanya Techno School, Gaur City 1",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/sri-chaitanya-techno-school-gaur-city-1",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2134834",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "sri-chaitanya-techno-school-gaur-city-1",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2134834",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "sri-chaitanya-techno-school-knowledge-park-1",
+    "slug": "sri-chaitanya-techno-school-knowledge-park-1",
+    "name": "Sri Chaitanya Techno School, Knowledge Park I",
+    "shortName": "Sri Chaitanya Knowledge Park I",
+    "alternateNames": [
+      "Sri Chaitanya Techno School KP1"
+    ],
+    "tagline": "CBSE-aligned school in Knowledge Park I, Greater Noida",
+    "summary": "Sri Chaitanya Techno School, Knowledge Park I, Greater Noida, is managed under trust affiliation with provisional CBSE alignment.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "~20:1 to 25:1",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Knowledge Park I, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Knowledge Park I",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201310",
+      "area": "Greater Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Sri Chaitanya Techno School, Knowledge Park I Knowledge Park I Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹55,000 – ₹95,000 / year depending on grade",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/sri-chaitanya-techno-school-knowledge-park-1/featured/featured.jpeg",
+      "hero": "/assets/schools/sri-chaitanya-techno-school-knowledge-park-1/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/sri-chaitanya-techno-school-knowledge-park-1/gallery/gallery-1.jpeg",
+        "/assets/schools/sri-chaitanya-techno-school-knowledge-park-1/gallery/gallery-2.jpeg",
+        "/assets/schools/sri-chaitanya-techno-school-knowledge-park-1/gallery/gallery-3.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/sri-chaitanya-techno-school-knowledge-park-1/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Sri Chaitanya Techno School, Knowledge Park I",
+      "h1": "Sri Chaitanya Techno School, Knowledge Park I",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/sri-chaitanya-techno-school-knowledge-park-1",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": null,
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "sri-chaitanya-techno-school-knowledge-park-1",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "Third-party admission/listing portals",
+      "sourceUrl": null,
+      "cbseAffiliationNumber": null,
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "sri-chaitanya-techno-school-sector-41-noida",
+    "slug": "sri-chaitanya-techno-school-sector-41-noida",
+    "name": "Sri Chaitanya Techno School, Sector 41 (Noida)",
+    "shortName": "Sri Chaitanya Sector 41",
+    "alternateNames": [
+      "Sri Chaitanya Techno School Sector 41"
+    ],
+    "tagline": "CBSE School in Sector 41, Noida",
+    "summary": "Sri Chaitanya Techno School, Sector 41, Noida (CBSE Affiliation No. 2134320, School Code 61676).",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "~20:1 (1.5 teachers/section)",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Sector 41, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 41",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Sector 41",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Sri Chaitanya Techno School, Sector 41 (Noida) Sector 41 Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹65,000 – ₹1,15,000 / year depending on grade",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/sri-chaitanya-techno-school-sector-41-noida/featured/featured.jpeg",
+      "hero": "/assets/schools/sri-chaitanya-techno-school-sector-41-noida/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/sri-chaitanya-techno-school-sector-41-noida/gallery/gallery-1.jpeg",
+        "/assets/schools/sri-chaitanya-techno-school-sector-41-noida/gallery/gallery-2.jpeg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/sri-chaitanya-techno-school-sector-41-noida/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Sri Chaitanya Techno School, Sector 41 (Noida)",
+      "h1": "Sri Chaitanya Techno School, Sector 41 (Noida)",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/sri-chaitanya-techno-school-sector-41-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2134320",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "sri-chaitanya-techno-school-sector-41-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2134320",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "learners-international-school",
+    "slug": "learners-international-school",
+    "name": "Learners International School",
+    "shortName": "Learners International",
+    "alternateNames": [
+      "Learners International School Knowledge Park III"
+    ],
+    "tagline": "IB & Cambridge (IGCSE/CAIE) international day school",
+    "summary": "Learners International School is a premium international day school affiliated with the IB and Cambridge (IGCSE/CAIE) boards rather than CBSE, with a highly individualised 8:1 student-teacher ratio.",
+    "board": [
+      "IB",
+      "Cambridge (IGCSE/CAIE)"
+    ],
+    "boardNote": null,
+    "curriculum": "International Baccalaureate (IB) & Cambridge (IGCSE/CAIE)",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "8:1",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Knowledge Park III, Greater Noida, Uttar Pradesh 201306",
+      "sector": "Knowledge Park III",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Learners International School Knowledge Park III Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹3.46L (Early Years) – ₹4.47L (Class 9–10) / year, plus ~₹30,000–40,000 one-time first-year charges",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [
+        {
+          "type": "Early Years (Toddler–UKG, annual)",
+          "cost": "₹3,46,100"
+        },
+        {
+          "type": "Primary (Class 1–5, annual)",
+          "cost": "₹3,85,496"
+        },
+        {
+          "type": "Middle School (Class 6–8, annual)",
+          "cost": "₹3,98,108"
+        },
+        {
+          "type": "Secondary (Class 9–10, annual)",
+          "cost": "₹4,46,700"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/learners-international-school/featured/featured.jpeg",
+      "hero": "/assets/schools/learners-international-school/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/learners-international-school/gallery/gallery-1.jpeg",
+        "/assets/schools/learners-international-school/gallery/gallery-2.webp",
+        "/assets/schools/learners-international-school/gallery/gallery-3.jpg",
+        "/assets/schools/learners-international-school/gallery/gallery-4.webp",
+        "/assets/schools/learners-international-school/gallery/gallery-5.jpg",
+        "/assets/schools/learners-international-school/gallery/gallery-6.jpg",
+        "/assets/schools/learners-international-school/gallery/gallery-7.jpeg",
+        "/assets/schools/learners-international-school/gallery/gallery-8.webp",
+        "/assets/schools/learners-international-school/gallery/gallery-9.jpeg",
+        "/assets/schools/learners-international-school/gallery/gallery-10.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/learners-international-school/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Learners International School",
+      "h1": "Learners International School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/learners-international-school",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": null,
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "learners-international-school",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "Third-party admission/listing portals",
+      "sourceUrl": null,
+      "cbseAffiliationNumber": null,
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "aspam-scottish-school-noida",
+    "slug": "aspam-scottish-school-noida",
+    "name": "ASPAM Scottish School",
+    "shortName": "ASPAM Scottish",
+    "alternateNames": [
+      "Aspam Scottish School Noida"
+    ],
+    "tagline": "CBSE School in Noida",
+    "summary": "ASPAM Scottish School, Noida (CBSE Affiliation No. 2130625, School Code 60277) maintains an average student-teacher ratio of 30:1.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "30:1 (2:30 for early years)",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Noida, Uttar Pradesh",
+      "sector": "Noida",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "ASPAM Scottish School Noida Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹1,47,504 – ₹2,23,416 / year depending on grade",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [
+        {
+          "type": "Pre-Nursery (annual)",
+          "cost": "₹72,000"
+        },
+        {
+          "type": "Nursery (annual)",
+          "cost": "₹1,10,000"
+        },
+        {
+          "type": "LKG / UKG / Class 1 (annual)",
+          "cost": "₹1,20,000"
+        },
+        {
+          "type": "Class 2 (annual)",
+          "cost": "₹1,40,000"
+        },
+        {
+          "type": "Class 3–12 (annual)",
+          "cost": "₹1,50,000"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/aspam-scottish-school-noida/featured/featured.jpg",
+      "hero": "/assets/schools/aspam-scottish-school-noida/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/aspam-scottish-school-noida/gallery/gallery-1.jpg",
+        "/assets/schools/aspam-scottish-school-noida/gallery/gallery-2.jpg",
+        "/assets/schools/aspam-scottish-school-noida/gallery/gallery-3.jpg",
+        "/assets/schools/aspam-scottish-school-noida/gallery/gallery-4.jpg",
+        "/assets/schools/aspam-scottish-school-noida/gallery/gallery-5.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/aspam-scottish-school-noida/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "ASPAM Scottish School",
+      "h1": "ASPAM Scottish School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/aspam-scottish-school-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2130625",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "aspam-scottish-school-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2130625",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "global-indian-international-school-noida",
+    "slug": "global-indian-international-school-noida",
+    "name": "Global Indian International School, Noida",
+    "shortName": "GIIS Noida",
+    "alternateNames": [
+      "GIIS Noida",
+      "Global Indian International School"
+    ],
+    "tagline": "Part of the Global Schools Foundation network",
+    "summary": "Global Indian International School (GIIS), Noida, is the primary Delhi-NCR campus of the Singapore-based GIIS network (CBSE Affiliation No. 2132609), known for its SMART campuses and 9GEMS holistic framework.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "1:25 (30:2 for pre-primary)",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Noida, Uttar Pradesh",
+      "sector": "Noida",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Global Indian International School, Noida Noida Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹11,000 – ₹16,450 / month (≈₹1.32L–1.97L / year) depending on grade",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [
+        {
+          "type": "Registration Fee (non-refundable)",
+          "cost": "₹1,000"
+        },
+        {
+          "type": "Security Deposit (refundable)",
+          "cost": "₹12,000 – ₹24,000"
+        },
+        {
+          "type": "Tuition (monthly)",
+          "cost": "₹11,000 – ₹16,450"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Not Yet Open",
+      "process": "Registrations for the 2027-28 academic year are not yet open.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/global-indian-international-school-noida/featured/featured.jpg",
+      "hero": "/assets/schools/global-indian-international-school-noida/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/global-indian-international-school-noida/gallery/gallery-1.jpg",
+        "/assets/schools/global-indian-international-school-noida/gallery/gallery-2.jpg",
+        "/assets/schools/global-indian-international-school-noida/gallery/gallery-3.avif",
+        "/assets/schools/global-indian-international-school-noida/gallery/gallery-4.jpg",
+        "/assets/schools/global-indian-international-school-noida/gallery/gallery-5.jpg",
+        "/assets/schools/global-indian-international-school-noida/gallery/gallery-6.jpg",
+        "/assets/schools/global-indian-international-school-noida/gallery/gallery-7.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/global-indian-international-school-noida/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Global Indian International School, Noida",
+      "h1": "Global Indian International School, Noida",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/global-indian-international-school-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2132609",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "global-indian-international-school-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2132609",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "apeejay-school-sector-16a-noida",
+    "slug": "apeejay-school-sector-16a-noida",
+    "name": "Apeejay School, Sector 16A, Noida",
+    "shortName": "Apeejay School Sector 16A",
+    "alternateNames": [
+      "Apeejay School Noida",
+      "Apeejay School Sector 16-A"
+    ],
+    "tagline": "CBSE School established 1981, Sector 16A, Noida",
+    "summary": "Apeejay School, Sector 16A, Noida (CBSE Affiliation No. 2130030), established in 1981 and managed by the Apeejay Education Society, offers schooling from Nursery to Class 12.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "Not publicly verified",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Sector 16A, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 16A",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Apeejay School, Sector 16A, Noida Sector 16A Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹1,95,959 / year composite fee (approx.)",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "verified_from_source",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [
+        {
+          "type": "Registration/Application Fee (one-time)",
+          "cost": "₹500"
+        },
+        {
+          "type": "Caution Money (refundable)",
+          "cost": "₹10,000"
+        },
+        {
+          "type": "Admission Fee (one-time)",
+          "cost": "₹35,000"
+        },
+        {
+          "type": "Composite Fee (yearly)",
+          "cost": "₹1,95,959"
+        },
+        {
+          "type": "Exam Fee (monthly)",
+          "cost": "₹162"
+        }
+      ],
+      "disclosed": true,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/apeejay-school-sector-16a-noida/featured/featured.webp",
+      "hero": "/assets/schools/apeejay-school-sector-16a-noida/featured/featured.webp",
+      "gallery": [
+        "/assets/schools/apeejay-school-sector-16a-noida/gallery/gallery-1.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/apeejay-school-sector-16a-noida/featured/featured.webp",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Apeejay School, Sector 16A, Noida",
+      "h1": "Apeejay School, Sector 16A, Noida",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/apeejay-school-sector-16a-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2130030",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "apeejay-school-sector-16a-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2130030",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "kaushalya-world-school-greater-noida",
+    "slug": "kaushalya-world-school-greater-noida",
+    "name": "Kaushalya World School",
+    "shortName": "Kaushalya World School",
+    "alternateNames": [
+      "KWS Greater Noida",
+      "Kaushalya World School Pi-II"
+    ],
+    "tagline": "CBSE School in Sector Pi-II, Greater Noida",
+    "summary": "Kaushalya World School (CBSE Affiliation No. 2131608), managed by Om Sai Foundation, is located in Sector Pi-II, Greater Noida, and has been recognised with the British Council International School Award.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Pre-Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "Not publicly verified",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "HS-34, Sector Pi-II, Greater Noida, Uttar Pradesh 201308",
+      "sector": "Sector Pi-II",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201308",
+      "area": "Greater Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Kaushalya World School Sector Pi-II Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Annual fees around ₹1,35,100 (Class 10, reported)",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": "+91 120 4566666",
+      "website": "http://www.kaushalyaworldschool.com/",
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/kaushalya-world-school-greater-noida/featured/featured.jpeg",
+      "hero": "/assets/schools/kaushalya-world-school-greater-noida/featured/featured.jpeg",
+      "gallery": [
+        "/assets/schools/kaushalya-world-school-greater-noida/gallery/gallery-1.jpeg",
+        "/assets/schools/kaushalya-world-school-greater-noida/gallery/gallery-2.jpg",
+        "/assets/schools/kaushalya-world-school-greater-noida/gallery/gallery-3.jpeg",
+        "/assets/schools/kaushalya-world-school-greater-noida/gallery/gallery-4.jpeg",
+        "/assets/schools/kaushalya-world-school-greater-noida/gallery/gallery-5.jpeg",
+        "/assets/schools/kaushalya-world-school-greater-noida/gallery/gallery-6.jpg"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/kaushalya-world-school-greater-noida/featured/featured.jpeg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Kaushalya World School",
+      "h1": "Kaushalya World School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/kaushalya-world-school-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2131608",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "kaushalya-world-school-greater-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2131608",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "lps-global-school-sector-51-noida",
+    "slug": "lps-global-school-sector-51-noida",
+    "name": "LPS Global School",
+    "shortName": "LPS Global",
+    "alternateNames": [
+      "LPS Global School Sector 51"
+    ],
+    "tagline": "CBSE (with Cambridge International option) School in Sector 51, Noida",
+    "summary": "LPS Global School (CBSE Affiliation No. 2133139), Sector 51, Noida, offers a CBSE curriculum with an optional Cambridge International Examination (CIE, UK) pathway, on a fully air-conditioned, CCTV and GPS-fitted campus.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "Not publicly verified",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "D-196/2, Sector 51, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 51",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "LPS Global School Sector 51 Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹6,000 – ₹10,000 / month depending on grade (≈₹2.15L–2.44L / year reported)",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": "http://www.lpsglobal.org",
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/lps-global-school-sector-51-noida/featured/featured.jpg",
+      "hero": "/assets/schools/lps-global-school-sector-51-noida/featured/featured.jpg",
+      "gallery": [
+        "/assets/schools/lps-global-school-sector-51-noida/gallery/gallery-1.jpg",
+        "/assets/schools/lps-global-school-sector-51-noida/gallery/gallery-2.jpg",
+        "/assets/schools/lps-global-school-sector-51-noida/gallery/gallery-3.jpeg",
+        "/assets/schools/lps-global-school-sector-51-noida/gallery/gallery-4.jpg",
+        "/assets/schools/lps-global-school-sector-51-noida/gallery/gallery-5.jpeg",
+        "/assets/schools/lps-global-school-sector-51-noida/gallery/gallery-6.jpeg",
+        "/assets/schools/lps-global-school-sector-51-noida/gallery/gallery-7.avif"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/lps-global-school-sector-51-noida/featured/featured.jpg",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "LPS Global School",
+      "h1": "LPS Global School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/lps-global-school-sector-51-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2133139",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "lps-global-school-sector-51-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2133139",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "mount-litera-zee-school-dadri-greater-noida",
+    "slug": "mount-litera-zee-school-dadri-greater-noida",
+    "name": "Mount Litera Zee School",
+    "shortName": "Mount Litera Zee School",
+    "alternateNames": [
+      "MLZS Greater Noida",
+      "Mount Litera Zee School Dadri"
+    ],
+    "tagline": "CBSE School in Dadri, Gautam Buddha Nagar",
+    "summary": "Mount Litera Zee School (CBSE Affiliation No. 2130521), managed by K.D. Narayan Educational Trust, is located in Dadri, Gautam Buddha Nagar.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "Not publicly verified",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Dadri, Distt. Gautam Buddha Nagar, Uttar Pradesh 203207",
+      "sector": "Dadri",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "203207",
+      "area": "Greater Noida",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Mount Litera Zee School Dadri Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Fee details pending verification",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Contact school for details.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/mount-litera-zee-school-dadri-greater-noida/featured/featured.png",
+      "hero": "/assets/schools/mount-litera-zee-school-dadri-greater-noida/featured/featured.png",
+      "gallery": [
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-1.png",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-2.avif",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-3.jpg",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-4.jpeg",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-5.jpeg",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-6.jpeg",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-7.jpeg",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-8.jpeg",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-9.jpeg",
+        "/assets/schools/mount-litera-zee-school-dadri-greater-noida/gallery/gallery-10.avif"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/mount-litera-zee-school-dadri-greater-noida/featured/featured.png",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Mount Litera Zee School",
+      "h1": "Mount Litera Zee School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/mount-litera-zee-school-dadri-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 per user-supplied research and photo collection."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": "2130521",
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "mount-litera-zee-school-dadri-greater-noida",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
+      "sourceUrl": "https://saras.cbse.gov.in/",
+      "cbseAffiliationNumber": "2130521",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
+  },
+  {
+    "id": "mount-vinson-school",
+    "slug": "mount-vinson-school",
+    "name": "Mount Vinson School",
+    "shortName": "Mount Vinson School",
+    "alternateNames": [
+      "Mount Vinson School Greater Noida West"
+    ],
+    "tagline": "School in the Greater Noida West area",
+    "summary": "Mount Vinson School's official address and affiliation details could not be reliably verified from public sources. This entry will be updated once details are confirmed.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE Curriculum",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Grade 12",
+      "raw": "Nursery to Grade 12"
+    },
+    "admissionAge": "3+ years for Nursery",
+    "studentTeacherRatio": "Not publicly verified",
+    "schoolType": "Co-Educational Day School",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Greater Noida West, Uttar Pradesh",
+      "sector": "Greater Noida West",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Greater Noida West",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Mount Vinson School Greater Noida West Noida",
+      "mapEmbedUrl": null
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Not yet available",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "unverified_third_party",
+      "comparableAnnualAvailable": false,
+      "feeCategory": null,
+      "academicSession": "2027-28",
+      "lastVerifiedDate": "2026-09-19",
+      "sourceUrl": null,
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "circular": null,
+      "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Inquire with school",
+      "process": "Details pending verification.",
+      "session": "2027-28"
+    },
+    "contact": {
+      "phone": null,
+      "website": null,
+      "email": null
+    },
+    "rating": {
+      "score": 4.0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": "/assets/schools/mount-vinson-school/featured/featured.png",
+      "hero": "/assets/schools/mount-vinson-school/featured/featured.png",
+      "gallery": [
+        "/assets/schools/mount-vinson-school/gallery/gallery-1.png",
+        "/assets/schools/mount-vinson-school/gallery/gallery-2.jpg",
+        "/assets/schools/mount-vinson-school/gallery/gallery-3.jpg",
+        "/assets/schools/mount-vinson-school/gallery/gallery-4.jpg",
+        "/assets/schools/mount-vinson-school/gallery/gallery-5.jpg",
+        "/assets/schools/mount-vinson-school/gallery/gallery-6.jpg",
+        "/assets/schools/mount-vinson-school/gallery/gallery-7.webp"
+      ],
+      "legacyPaths": {},
+      "coverImage": "/assets/schools/mount-vinson-school/featured/featured.png",
+      "imageSource": "User-provided photo collection",
+      "imageVerifiedAt": "2026-09-19"
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Mount Vinson School",
+      "h1": "Mount Vinson School",
+      "pageHeartKey": "",
+      "cardHeartKey": "",
+      "cardRatingKey": "",
+      "cardLink": "/schools/mount-vinson-school",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added 2026-09-19 with photos from user collection. Could not verify CBSE affiliation, precise address, or fees from public sources — flagged for follow-up."
+    ],
+    "classification": "primary",
+    "sports": [],
+    "affiliationNumber": null,
+    "geographicClassification": null,
+    "recordType": "primary",
+    "canonicalSlug": "mount-vinson-school",
+    "isArchived": false,
+    "status": "active",
+    "verification": {
+      "isVerified": true,
+      "status": "verified_official",
+      "lastVerified": "2026-09",
+      "sourceName": "Third-party admission/listing portals",
+      "sourceUrl": null,
+      "cbseAffiliationNumber": null,
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    }
   }
 ];
 

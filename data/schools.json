@@ -1498,16 +1498,16 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 41100,
+      "cardFee": 164400,
       "currency": "INR",
-      "rangeText": "₹41,100 / quarter (Classes IX–XII)",
+      "rangeText": "₹41,100 / quarter",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": null,
       "refundableSecurity": null,
       "tuitionMonthly": null,
       "tuitionQuarterly": "₹41,100 (Classes IX–XII)",
-      "tuitionAnnual": "₹1,64,400 (Classes IX–XII calculated equivalent)",
+      "tuitionAnnual": "₹1,64,400 / year (₹41,100 quarterly × 4)",
       "transportMonthly": null,
       "transportAnnual": null,
       "verificationStatus": "verified_from_source",
@@ -1538,7 +1538,8 @@
       ],
       "concessions": [],
       "disclaimer": "Books and uniform removed. Transport retained. Estimated annual tuition for Nursery and Classes I–VII removed. Classes IX–XII fee shown as ₹41,100 per quarter. Annual equivalent is calculated as ₹41,100 × 4.",
-      "annualDisplay": "₹41,000 / year"
+      "annualDisplay": "₹1,64,400 / year",
+      "billingFrequency": "quarterly"
     },
     "facilities": [
       {

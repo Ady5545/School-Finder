@@ -1,0 +1,1 @@
+export function trackEvent(name:string,data?:Record<string,unknown>){if(typeof window==='undefined')return;void fetch('/api/activity/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:name,...data})}).catch(()=>{})}

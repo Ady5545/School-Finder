@@ -316,7 +316,22 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
         {/* Right Col: Institutional Credentials, Fees & Contact */}
         <div className="space-y-6">
-          {/* Institutional Credentials & Verification Card */}\n          {/* Detailed Fees Card */}
+          {/* Institutional Credentials & Verification Card */}\n          {school.slug === 'ramagya-school-noida-extension' && (
+          <section className="bg-white p-5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-3">
+            <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Board &amp; Affiliation</h2>
+            <div className="space-y-2 text-xs">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-[11px] font-semibold text-slate-600">CBSE affiliation number</span>
+                <span className="font-semibold text-slate-900">Not listed (NA)</span>
+              </div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                The Noida Extension campus does not publicly list a CBSE affiliation number in its mandatory disclosure.
+              </p>
+            </div>
+          </section>
+        )}
+
+        {/* Detailed Fees Card */}
           <section>\n            <div className="flex items-center justify-between mb-3">\n              <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>\n            </div>\n            <FeeDisplay fees={school.fees} variant="detailed" />
           </section>
 

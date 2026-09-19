@@ -63,10 +63,16 @@ assert(!dav.affiliationNumber && !dav.verification?.cbseAffiliationNumber, 'DAV 
 assert(dav.studentTeacherRatio === 'Not publicly verified', 'DAV Public School studentTeacherRatio is Not publicly verified');
 
 // 4. Oxford Green Verification
+// NOTE: Sept 2026 — Oxford Green was confirmed by the site owner not to exist in
+// Greater Noida West and was fully deleted (not just archived) at their explicit
+// request, so this record no longer exists. Guarded rather than asserting existence.
 const oxford = schools.find(s => s.id === 'oxford-green-public-school-greater-noida-west');
-assert(oxford !== undefined, 'Oxford Green record exists');
-assert(!oxford.affiliationNumber && !oxford.verification?.cbseAffiliationNumber, 'Oxford Green has no copied affiliation 2133182');
-assert(oxford.studentTeacherRatio === 'Not publicly verified', 'Oxford Green studentTeacherRatio is Not publicly verified');
+if (oxford) {
+  assert(!oxford.affiliationNumber && !oxford.verification?.cbseAffiliationNumber, 'Oxford Green has no copied affiliation 2133182');
+  assert(oxford.studentTeacherRatio === 'Not publicly verified', 'Oxford Green studentTeacherRatio is Not publicly verified');
+} else {
+  assert(true, 'Oxford Green record intentionally deleted (confirmed nonexistent) — skipping stale checks');
+}
 
 // 5. Gaurs International School
 const gaurs = schools.find(s => s.id === 'gaurs-international-school-gaur-city-2');

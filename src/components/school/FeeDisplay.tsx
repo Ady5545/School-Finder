@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Info, ShieldCheck, AlertCircle, ExternalLink } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { formatCurrency, cn } from '../../lib/utils';
 import type { SchoolFees } from '../../types/school';
 
@@ -106,13 +106,13 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
           {isComparable ? (
             <>
               <span className="text-base font-bold text-[var(--color-primary)] tracking-tight">
-                {formatCurrency(fees.cardFee!)}
+                {fees.annualDisplay || formatCurrency(fees.cardFee!)}
               </span>
               <span className="text-xs text-[var(--color-content-muted)] font-medium">/ year</span>
             </>
           ) : isHistorical ? (
             <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              {fees.rangeText || 'Historical Reference'}
+              {fees.annualDisplay || fees.rangeText || 'Historical Reference'}
             </span>
           ) : (
             <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
@@ -224,27 +224,6 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
           ))}
         </div>
       ) : null}
-
-      {/* Audit & Source Metadata */}
-      <div className="pt-3 border-t border-[var(--color-border-subtle)] flex flex-wrap items-center justify-between text-[11px] text-[var(--color-content-muted)] gap-2">
-        <span>
-          Audited:{' '}
-          <strong className="font-medium text-[var(--color-content)]">
-            {fees.lastVerifiedDate || 'September 2026'}
-          </strong>
-        </span>
-        {fees.sourceUrl && (
-          <a
-            href={fees.sourceUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--color-primary)] hover:underline font-semibold inline-flex items-center gap-1"
-          >
-            <span>Official Circular</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        )}
-      </div>
 
       {isHistorical && (
         <p className="text-[11px] text-amber-800 bg-amber-50/90 border border-amber-200 p-2.5 rounded-xl leading-relaxed">

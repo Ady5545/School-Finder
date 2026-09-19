@@ -14091,15 +14091,20 @@
     "curriculum": "CBSE Curriculum",
     "gradeRange": {
       "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "to": "Grade VIII",
+      "raw": "Nursery to Grade VIII"
     },
     "admissionAge": "3+ years for Nursery",
     "studentTeacherRatio": "20:1–25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. SSS-1/GH-01, Sector 4, Near 7th Avenue, Greater Noida West, Uttar Pradesh 201009"
+      "address": "Sri Chaitanya Techno School, Gaur City 1, Near 7th Avenue, Greater Noida (W), Uttar Pradesh 201308",
+      "sector": "Sector 4, Gaur City 1",
+      "city": "Greater Noida West",
+      "state": "Uttar Pradesh",
+      "pincode": "201308",
+      "area": "Gaur City 1"
     },
     "fees": {
       "rangeText": "₹60,000 – ₹1,10,000 / year depending on grade",
@@ -14129,9 +14134,9 @@
       "session": "2027-28"
     },
     "contact": {
-      "phone": null,
-      "website": null,
-      "email": null
+      "phone": "+91-7207931507 / +91-7396870022",
+      "website": "https://www.srichaitanyaschool.co.in/",
+      "email": "goutam.chowdhary@srichaitanyaschools.net"
     },
     "rating": {
       "score": 4,
@@ -14160,7 +14165,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "2026-09-19 audit: official Sri Chaitanya branch page confirms Gaur City 1 address, CBSE syllabus, and Nursery–Grade VIII. The record's 2027–28 fee/admission fields remain the user-supplied latest values."
     ],
     "classification": "primary",
     "sports": [],
@@ -14195,9 +14201,9 @@
     "tagline": "CBSE-aligned school in Knowledge Park I, Greater Noida",
     "summary": "Sri Chaitanya Techno School, Knowledge Park I, Greater Noida, is managed under trust affiliation with provisional CBSE alignment.",
     "board": [
-      "CBSE"
+      "Not publicly disclosed"
     ],
-    "boardNote": null,
+    "boardNote": "User-supplied latest record describes this campus as registered under a trust; no verified CBSE affiliation number is stored.",
     "curriculum": "CBSE Curriculum",
     "gradeRange": {
       "from": "Nursery",
@@ -14209,7 +14215,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Knowledge Park I, Greater Noida, Uttar Pradesh 201310"
+      "address": "Plot No. 16, Institutional Area, Knowledge Park I, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Knowledge Park I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201310",
+      "area": "Knowledge Park I"
     },
     "fees": {
       "rangeText": "₹55,000 – ₹95,000 / year depending on grade",
@@ -14237,8 +14248,8 @@
       "session": "2027-28"
     },
     "contact": {
-      "phone": null,
-      "website": null,
+      "phone": "+91-7207888124",
+      "website": "https://www.srichaitanyaschool.co.in/",
       "email": null
     },
     "rating": {
@@ -14270,7 +14281,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "2026-09-19 audit: retained as a separate Knowledge Park I campus. No CBSE affiliation number has been inserted because it was not verified for this specific campus."
     ],
     "classification": "primary",
     "sports": [],
@@ -14284,7 +14296,7 @@
       "isVerified": false,
       "status": "partially_verified",
       "lastVerified": "2026-09",
-      "sourceName": "Third-party admission/listing portals",
+      "sourceName": "User-supplied latest campus data; branch-specific public verification incomplete",
       "sourceUrl": null,
       "cbseAffiliationNumber": null,
       "verifiedFields": [
@@ -14310,16 +14322,21 @@
     "boardNote": null,
     "curriculum": "CBSE Curriculum",
     "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "from": "Class 1",
+      "to": "Class 8",
+      "raw": "Class 1 to Class 8"
     },
     "admissionAge": "3+ years for Nursery",
     "studentTeacherRatio": "~20:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Sector 41, Noida, Uttar Pradesh 201301"
+      "address": "J-206, Sector 41, Noida, Uttar Pradesh 201303",
+      "sector": "Sector 41",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201303",
+      "area": "Sector 41"
     },
     "fees": {
       "rangeText": "₹65,000 – ₹1,15,000 / year depending on grade",
@@ -14347,9 +14364,9 @@
       "session": "2027-28"
     },
     "contact": {
-      "phone": null,
-      "website": null,
-      "email": null
+      "phone": "+91-7207931507 / +91-7093684311",
+      "website": "https://srichaitanyatechnoschoolnoida3.net/",
+      "email": "goutam.chowdhary@srichaitanyaschools.net"
     },
     "rating": {
       "score": 4,
@@ -14379,7 +14396,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "2026-09-19 audit: official Sri Chaitanya branch/corporate pages confirm J-206 Sector 41, Noida 201303 and Class 1–8 for this branch. Nursery/LKG/UKG third-party fee claims were not adopted."
     ],
     "classification": "primary",
     "sports": [],
@@ -14429,18 +14447,18 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Knowledge Park III, Greater Noida, Uttar Pradesh 201306",
+      "address": "Plot No. 48, Knowledge Park III, Greater Noida, Uttar Pradesh 201310",
       "sector": "Knowledge Park III",
-      "city": "Noida",
+      "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida",
+      "pincode": "201310",
+      "area": "Knowledge Park III",
       "coordinates": {
         "lat": null,
         "lng": null,
         "isVerified": false
       },
-      "mapSearchQuery": "Learners International School Knowledge Park III Noida",
+      "mapSearchQuery": "Learners International School Knowledge Park III Greater Noida",
       "mapEmbedUrl": null
     },
     "fees": {
@@ -14490,8 +14508,8 @@
     },
     "contact": {
       "phone": null,
-      "website": null,
-      "email": null
+      "website": "https://learners.international/",
+      "email": "letsconnect@learners.international"
     },
     "rating": {
       "score": 4,
@@ -14529,7 +14547,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "2026-09-19 audit: address corrected to Plot No. 48, Knowledge Park III, Greater Noida 201310. Coordinates remain intentionally unverified."
     ],
     "classification": "primary",
     "sports": [],
@@ -14569,21 +14588,26 @@
     "boardNote": null,
     "curriculum": "CBSE Curriculum",
     "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "from": "Pre-Nursery",
+      "to": "Class 12",
+      "raw": "Pre-Nursery to Class 12"
     },
     "admissionAge": "3+ years for Nursery",
     "studentTeacherRatio": "30:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "A-43, Sector 62, Noida, Uttar Pradesh 201301"
+      "address": "A-43, Near SBI Bank, Sector 62, Noida, Uttar Pradesh 201307",
+      "sector": "Sector 62",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201307",
+      "area": "Sector 62"
     },
     "fees": {
-      "rangeText": "₹1,47,504 – ₹2,23,416 / year",
+      "rangeText": "₹72,000 – ₹1,50,000 / year (grade-dependent)",
       "cardFee": 72000,
-      "tuitionAnnual": "₹1,47,504 – ₹2,23,416",
+      "tuitionAnnual": "₹72,000 – ₹1,50,000",
       "gradeWiseTiers": [
         {
           "grades": "Pre-Nursery",
@@ -14629,9 +14653,9 @@
       "session": "2027-28"
     },
     "contact": {
-      "phone": null,
-      "website": null,
-      "email": null
+      "phone": "+91-8826302302",
+      "website": "https://aspamscottish.com/",
+      "email": "info@aspamscottish.com"
     },
     "rating": {
       "score": 4,
@@ -14664,7 +14688,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "2026-09-19 audit: official ASPAM Scottish website confirms A-43 Sector 62, Noida, affiliation 2130625 and school code 60277. 2027–28 fee values in the record remain the user-supplied latest grade-wise figures; the public official fee page currently exposes an older session."
     ],
     "classification": "primary",
     "sports": [],
@@ -14678,12 +14703,14 @@
       "isVerified": true,
       "status": "verified_official",
       "lastVerified": "2026-09",
-      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
-      "sourceUrl": "https://saras.cbse.gov.in/",
+      "sourceName": "Official ASPAM Scottish website & CBSE SARAS",
+      "sourceUrl": "https://aspamscottish.com/",
       "cbseAffiliationNumber": "2130625",
       "verifiedFields": [
         "name",
-        "address"
+        "address",
+        "website",
+        "affiliation"
       ]
     },
     "cbseAffiliationNumber": "2130625"
@@ -14705,19 +14732,24 @@
     "boardNote": null,
     "curriculum": "CBSE Curriculum",
     "gradeRange": {
-      "from": "Nursery",
+      "from": "KG1 / Pre-Primary",
       "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "raw": "KG1 / KG2 (GMP) and Grade 1–12 (CBSE)"
     },
     "admissionAge": "3+ years for Nursery",
     "studentTeacherRatio": "1:25",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "D-5, Sector 71, Noida, Uttar Pradesh 201301"
+      "address": "D-5, Sector 71, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 71",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Sector 71"
     },
     "fees": {
-      "rangeText": "₹11,000 – ₹16,450 / month (≈₹1.32L–₹1.97L / year)",
+      "rangeText": "₹11,000 – ₹16,450 / month (≈₹1,32,000–₹1,97,000 / year)",
       "cardFee": 132000,
       "registrationFee": 1000,
       "cautionDeposit": "₹12,000 – ₹24,000 (Refundable)",
@@ -14746,8 +14778,8 @@
       "timelineDescription": "Registrations specifically for 2027–28 are not yet open."
     },
     "contact": {
-      "phone": null,
-      "website": null,
+      "phone": "1800 5722 810",
+      "website": "https://globalindianschool.org/noida/",
       "email": null
     },
     "rating": {
@@ -14783,7 +14815,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "2026-09-19 audit: official GIIS site and CBSE SARAS confirm D-5 Sector 71, Noida 201301 and CBSE affiliation 2132609. 2027–28 fee/status fields remain the user-supplied latest values."
     ],
     "classification": "primary",
     "sports": [],
@@ -14797,12 +14830,15 @@
       "isVerified": true,
       "status": "verified_official",
       "lastVerified": "2026-09",
-      "sourceName": "CBSE SARAS Mandatory Disclosure & official school sources",
-      "sourceUrl": "https://saras.cbse.gov.in/",
+      "sourceName": "GIIS official website & CBSE SARAS",
+      "sourceUrl": "https://saras.cbse.gov.in/SARAS/AffiliatedList/AfflicationDetails/2132609",
       "cbseAffiliationNumber": "2132609",
       "verifiedFields": [
         "name",
-        "address"
+        "address",
+        "website",
+        "affiliation",
+        "schoolCode"
       ]
     },
     "cbseAffiliationNumber": "2132609"

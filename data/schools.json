@@ -17976,8 +17976,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,
@@ -18431,8 +18431,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,
@@ -18739,8 +18739,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,
@@ -19814,8 +19814,8 @@
     "isArchived": false,
     "status": "active",
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
       "sourceName": "Third-party admission/listing portals",
       "sourceUrl": null,

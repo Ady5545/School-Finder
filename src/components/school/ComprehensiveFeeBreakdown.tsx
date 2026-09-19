@@ -74,7 +74,7 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
     (c) => c.category === 'recurring' || c.category === 'grade_wise'
   );
   const specialComponents = components.filter(
-    (c) => c.category === 'special_curriculum' || c.category === 'activity' || c.category === 'examination'
+    (c) => c.category === 'special_curriculum' || c.category === 'curriculum_addon' || c.category === 'lab_facility' || c.category === 'activity' || c.category === 'examination'
   );
   const transportComponents = components.filter((c) => c.category === 'transport');
   const transportSchedules = fees.transportSchedule || [];

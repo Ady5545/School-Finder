@@ -336,6 +336,19 @@ export function getJwtSecret(): string {
  * Resolves the initial administrative password.
  * In production, fails closed if no password is configured.
  */
+/**
+ * Returns the configured administrative email allowlist.
+ * ADMIN_EMAILS is a comma-separated environment variable; the primary
+ * Admission Pitara admin is used as the safe default for local/dev setups.
+ */
+export function getAdminEmails(): string[] {
+  const raw = process.env.ADMIN_EMAILS || 'admin@admissionpitara.com';
+  return raw
+    .split(',')
+    .map(email => email.trim().toLowerCase())
+    .filter(Boolean);
+}
+
 export function getAdminInitialPassword(): string {
   const pass = process.env.ADMIN_INITIAL_PASSWORD || process.env.ADMIN_PASSWORD;
   if (!pass) {

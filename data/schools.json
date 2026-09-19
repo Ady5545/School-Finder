@@ -6607,9 +6607,10 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "mount-olympus-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active",
-    "cbseAffiliationNumber": "2133842"
+    "isArchived": true,
+    "status": "archived",
+    "cbseAffiliationNumber": "2133842",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "prudence-school-greater-noida-west",
@@ -6895,8 +6896,9 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "prudence-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "shemford-futuristic-school-greater-noida-west",
@@ -7182,8 +7184,9 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "shemford-futuristic-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "scholars-rosary-school-noida-extension",
@@ -7351,8 +7354,9 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "scholars-rosary-school-noida-extension",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "oxford-green-public-school-greater-noida-west",
@@ -7614,8 +7618,9 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "oxford-green-public-school-greater-noida-west",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "the-icon-international-school",
@@ -7785,8 +7790,9 @@
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
     "canonicalSlug": "the-icon-international-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "cambridge-school-noida-sector-27",
@@ -8056,7 +8062,7 @@
       "email": "info.csn@cambridgeschool.edu.in"
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -9166,8 +9172,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "kalka-public-school-greater-noida",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "indus-valley-school-noida-ext",
@@ -9820,8 +9827,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "vienna-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "modern-public-school-noida-extension",
@@ -10531,8 +10539,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "blooming-buds-senior-secondary-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "jinvani-bharti-public-school-noida-ext",
@@ -10704,8 +10713,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "jinvani-bharti-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "glorious-public-school",
@@ -10877,8 +10887,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "glorious-public-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "green-valley-academy-noida-ext",
@@ -11409,8 +11420,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "aditi-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "navjeevan-mission-school-noida-ext",
@@ -11582,8 +11594,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "navjeevan-mission-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "mother-teresa-public-school-noida-ext",
@@ -11755,8 +11768,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "mother-teresa-public-school-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "d-point-high-school",
@@ -11928,8 +11942,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "d-point-high-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "dps-monarch-international-school",
@@ -12862,8 +12877,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "om-sun-international-school",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "auditNote": "Verified not present in Greater Noida West as of Sept 2026 — flagged for archival, do not display publicly."
   },
   {
     "id": "step-by-step-school-noida-feeder",
@@ -17797,7 +17813,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -17942,7 +17958,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18106,7 +18122,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18253,7 +18269,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18393,7 +18409,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18535,7 +18551,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18694,7 +18710,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -18864,7 +18880,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19022,7 +19038,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19190,7 +19206,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19331,7 +19347,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19476,7 +19492,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19623,7 +19639,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -19772,7 +19788,7 @@
       "email": null
     },
     "rating": {
-      "score": 4.0,
+      "score": 4,
       "scale": 5,
       "reviewsCount": 0
     },

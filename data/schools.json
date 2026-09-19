@@ -6266,7 +6266,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "20:1 to 25:1 (Teacher-Section Ratio 2.0)",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -6460,7 +6460,8 @@
         "Registration and admission fees are non-refundable; caution money is refundable.",
         "Bus facility is optional and billed based on distance.",
         "Science lab fee of ₹250 per subject per month applies for Class XI–XII."
-      ]
+      ],
+      "annualDisplay": "₹1,00,000 / year (avg.)"
     },
     "facilities": [
       {
@@ -7815,7 +7816,8 @@
         ]
       },
       "cautionDeposit": 10000,
-      "refundableSecurity": 10000
+      "refundableSecurity": 10000,
+      "annualDisplay": "₹1,42,289 / year (avg.)"
     },
     "facilities": [
       {
@@ -10691,7 +10693,8 @@
       ],
       "disclaimer": "CBSE composite: Toddlers–X ₹39,267/qtr, XI–XII ₹42,158/qtr. Cambridge Primary: ₹18,755/month. Registration ₹1,500. Admission: Toddlers–SR KG ₹40,000 (₹30k sibling); Gr I–XII ₹60,000 (₹50k sibling).",
       "labFee": "₹500/quarter/subject for PCB, Computer, Fashion Studies, Fine Arts",
-      "academicSession": "2027–28"
+      "academicSession": "2027–28",
+      "annualDisplay": "₹1,73,000 / year (avg.)"
     },
     "facilities": [
       {
@@ -11475,7 +11478,8 @@
       "prospectusFee": 1000,
       "miscFee": 1100,
       "digitalLearningFee": "₹600 one-time (Grades I–X)",
-      "academicSession": "2027–28"
+      "academicSession": "2027–28",
+      "annualDisplay": "₹1,20,780 / year"
     },
     "facilities": [
       {

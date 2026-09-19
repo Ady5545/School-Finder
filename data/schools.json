@@ -323,7 +323,8 @@
         "Composite fee payable in advance on or before the 10th of each month.",
         "₹500 late fine after the 20th of the month.",
         "If unpaid by the 25th, the student's name may be struck off and a re-admission fee applies."
-      ]
+      ],
+      "annualDisplay": "₹1,32,900 / year (CBSE); ₹1,49,100 / year (Cambridge)"
     },
     "facilities": [
       {
@@ -817,7 +818,8 @@
       },
       "cautionDeposit": 10000,
       "refundableSecurity": 10000,
-      "cautionMoney": 10000
+      "cautionMoney": 10000,
+      "annualDisplay": "₹1,30,800 – ₹1,57,560 / year"
     },
     "facilities": [
       {
@@ -1309,7 +1311,8 @@
         "officialNotes": [
           "Bus fee may increase by up to 10% during the session."
         ]
-      }
+      },
+      "annualDisplay": "₹1,45,200 – ₹1,81,200 / year"
     },
     "facilities": [
       {
@@ -1534,7 +1537,8 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Books and uniform removed. Transport retained. Estimated annual tuition for Nursery and Classes I–VII removed. Classes IX–XII fee shown as ₹41,100 per quarter. Annual equivalent is calculated as ₹41,100 × 4."
+      "disclaimer": "Books and uniform removed. Transport retained. Estimated annual tuition for Nursery and Classes I–VII removed. Classes IX–XII fee shown as ₹41,100 per quarter. Annual equivalent is calculated as ₹41,100 × 4.",
+      "annualDisplay": "₹41,000 / year"
     },
     "facilities": [
       {
@@ -1874,7 +1878,8 @@
         "tuitionMonthly": "₹13,997",
         "transportMonthly": "₹3,750",
         "practicalLabCharge": "₹500"
-      }
+      },
+      "annualDisplay": "₹1,67,964 – ₹2,04,464 / year"
     },
     "facilities": [
       {
@@ -2702,7 +2707,8 @@
         "officialNotes": [
           "Transport is optional and calculated as per distance slab."
         ]
-      }
+      },
+      "annualDisplay": "₹91,200 – ₹1,39,200 / year"
     },
     "facilities": [
       {
@@ -2924,7 +2930,8 @@
       "concessions": [],
       "disclaimer": "Admission fee is ₹55,000. Composite monthly tuition ranges from ₹9,500 to ₹12,000. Annual figures are calculated.",
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,29,000 / year (avg.)"
     },
     "facilities": [
       {
@@ -3195,7 +3202,8 @@
       "disclaimer": "Official quarterly grade tiers: Nursery–V (₹22,500–₹29,700), VI–VIII (₹23,400–₹30,000+), IX–X (₹24,300+). Refundable caution is ₹7,500–₹10,000.",
       "cautionMoney": "₹7,500 – ₹10,000 (refundable, one-time)",
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹90,000 – ₹1,20,000+ / year"
     },
     "facilities": [
       {
@@ -3467,7 +3475,8 @@
       "disclaimer": "Official monthly fees: Pre-KG ₹7,250, I–V ₹8,450, VI–VIII ₹9,700, IX–X ₹10,800, XI–XII ₹12,300. Registration ₹500, Admission ₹20,000, Refundable Caution ₹5,000.",
       "cautionMoney": 5000,
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,17,300 / year (avg.)"
     },
     "facilities": [
       {
@@ -3722,7 +3731,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,78,200 / year (avg.)"
     },
     "facilities": [
       {
@@ -3878,9 +3888,7 @@
     ],
     "tagline": "CBSE Co-Educational Campus in Knowledge Park V",
     "summary": "Ramagya School Noida Extension is a co-educational day school in Knowledge Park V, Greater Noida West, offering educational programs from Nursery to Grade 12 with modern classrooms and sports facilities.",
-    "board": [
-      "State Board / Private (CBSE affiliation pending)"
-    ],
+    "board": [],
     "boardNote": null,
     "curriculum": "CBSE",
     "gradeRange": {
@@ -4024,7 +4032,8 @@
       ],
       "disclaimer": "Standard admission fee is ₹99,000 (discounted to ₹30,000). Monthly tuition: Toddlers ₹9,000, Nursery–XI ₹14,396 (discounted to ₹10,796). Registration ₹1,000.",
       "discountedAdmissionFee": 30000,
-      "securityFee": "₹10,000 (waived off)"
+      "securityFee": "₹10,000 (waived off)",
+      "annualDisplay": "₹1,40,376 / year (avg.)"
     },
     "facilities": [
       {
@@ -4328,7 +4337,8 @@
           "type": "Composite Tuition – XI-XII",
           "cost": "₹12,925/month · ₹1,55,100/year calculated"
         }
-      ]
+      ],
+      "annualDisplay": "₹1,30,812 / year (avg.)"
     },
     "facilities": [
       {
@@ -4482,7 +4492,7 @@
   {
     "id": "salvation-tree-school",
     "slug": "salvation-tree-school",
-    "name": "Salvation Tree School Greater Noida",
+    "name": "Salvation Tree School",
     "shortName": "Salvation Tree",
     "alternateNames": [
       "Salvation Tree School - Greater Noida",
@@ -4612,7 +4622,8 @@
       "concessions": [],
       "disclaimer": "Official annual tuition schedule: Pre-Nur–KG ₹60,195, I–III ₹66,898, IV–V ₹80,268, VI–VIII ₹86,947, IX–X ₹93,650, XI–XII Commerce ₹1,07,020, XI–XII Science ₹1,12,371. Registration ₹1,500, Admission ₹30,000.",
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹86,764 / year (avg.)"
     },
     "facilities": [
       {
@@ -4872,7 +4883,8 @@
       "concessions": [],
       "disclaimer": "Official annual tuition: Nursery & Prep ₹97,800 (₹8,150/mo), I–V ₹1,08,000 (₹9,000/mo), VI–VIII ₹1,14,000 (₹9,500/mo), IX–X ₹1,23,000 (₹10,250/mo). Registration ₹1,700, Admission ₹45,000.",
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,10,700 / year (avg.)"
     },
     "facilities": [
       {
@@ -5247,16 +5259,16 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "Pre-Nursery–Prep: 15:1 | Grade 1 onward: 30:1",
+    "studentTeacherRatio": "25:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
       "address": "HS-03, Shri Ram Global School, Sector Techzone 7, West, Milak Lachchhi, Greater Noida, Uttar Pradesh 203207",
-      "sector": "Sector 16B",
+      "sector": "Techzone 7",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201318",
-      "area": "Greater Noida West",
+      "area": "Techzone 7",
       "coordinates": {
         "lat": 28.599,
         "lng": 77.444,
@@ -5382,7 +5394,8 @@
       "securityFee": "₹10,000 with 100% waiver; payable ₹0",
       "examFee": "₹1,000 annually from Grade V, payable in April",
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,76,112 / year (avg.)"
     },
     "facilities": [
       {
@@ -5656,7 +5669,8 @@
       "disclaimer": "Official tuition: ₹6,750/month (calculated annual: ₹81,000/yr). Prospectus ₹1,200, Registration ₹50, Admission ₹25,000. Transport ₹2,000–₹3,000/month optional.",
       "prospectusFee": 1200,
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹81,000 / year"
     },
     "facilities": [
       {
@@ -5876,7 +5890,8 @@
       "disclaimer": "Approximate annual fee ranges: Pre-Nur–VIII (₹73,000–₹1,12,900), IX–X (₹1,16,500–₹1,28,500), XI–XII (up to approx ₹1,40,500). Registration approx ₹1,000, Admission up to ₹20,000. CBSE affiliation is not publicly disclosed.",
       "examActivityAnnual": 5500,
       "academicSession": "2027–28",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,22,980 / year (avg.)"
     },
     "facilities": [
       {
@@ -6118,7 +6133,8 @@
       "concessions": [],
       "disclaimer": "Official monthly composite: Nursery–V ₹6,500, VI–VIII ₹6,970, IX–X ₹7,184, XI–XII ₹8,364. Registration ₹1,000, Admission ₹40,000. Practical ₹400/subject.",
       "practicalCharge": "₹400 per practical subject",
-      "academicSession": "2027–28"
+      "academicSession": "2027–28",
+      "annualDisplay": "₹87,054 / year (avg.)"
     },
     "facilities": [
       {
@@ -8616,8 +8632,9 @@
     "establishedYear": null,
     "recordType": "canonical",
     "canonicalSlug": "green-valley-academy-noida-ext",
-    "isArchived": false,
-    "status": "active"
+    "isArchived": true,
+    "status": "archived",
+    "archiveReason": "Removed from public directory per data correction."
   },
   {
     "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
@@ -10010,7 +10027,7 @@
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Sector 16B",
+      "area": "Sector 16C",
       "coordinates": {
         "lat": 28.6075,
         "lng": 77.4392,
@@ -10176,7 +10193,8 @@
           "type": "Activities/exams",
           "cost": "Mindbox, Val-ed, examinations and similar charges billed at actuals"
         }
-      ]
+      ],
+      "annualDisplay": "₹99,200 / year (avg.)"
     },
     "facilities": [
       {
@@ -10326,7 +10344,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "13:1–30:1 (grade-dependent)",
+    "studentTeacherRatio": "22:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -10947,7 +10965,8 @@
           "type": "Transport",
           "cost": "₹3,500 – ₹4,400/month"
         }
-      ]
+      ],
+      "annualDisplay": "₹1,45,590 / year (avg.)"
     },
     "facilities": [
       {
@@ -11961,7 +11980,8 @@
           "type": "Lab fees XI–XII",
           "cost": "~₹500/month per practical lab subject"
         }
-      ]
+      ],
+      "annualDisplay": "₹87,000 / year (avg.)"
     },
     "facilities": [
       {
@@ -12128,7 +12148,10 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Techzone-VII, Near Roto Pumps Company, Noida Extension, Greater Noida (West), Uttar Pradesh 203207"
+      "address": "Techzone-VII, Near Roto Pumps Company, Noida Extension, Greater Noida (West), Uttar Pradesh 203207",
+      "sector": "Techzone 7",
+      "city": "Greater Noida West",
+      "area": "Techzone 7"
     },
     "fees": {
       "rangeText": "₹81,700 – ₹1,37,100 / year (grade-wise)",
@@ -12187,7 +12210,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹99,518 / year (avg.)"
     },
     "facilities": [
       {
@@ -12324,11 +12348,13 @@
       "raw": "Pre-Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "12:1–15:1",
+    "studentTeacherRatio": "15:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "HS-01, Sector 20, Buddha, Greater Noida, Uttar Pradesh 201311"
+      "address": "HS-01, Sector 20, Buddha, Greater Noida, Uttar Pradesh 201311",
+      "sector": "Knowledge Park V",
+      "area": "Knowledge Park V"
     },
     "fees": {
       "rangeText": "₹21,000 – ₹29,250 / quarter",
@@ -12350,7 +12376,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,00,500 / year (avg.)"
     },
     "facilities": [
       {
@@ -12492,7 +12519,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "15:1 (approx.)",
+    "studentTeacherRatio": "15:1",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -12534,7 +12561,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,17,213 / year (avg.)"
     },
     "facilities": [
       {
@@ -12696,7 +12724,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹73,500 / year (avg.)"
     },
     "facilities": [
       {
@@ -12900,7 +12929,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,20,312 / year (avg.)"
     },
     "facilities": [
       {
@@ -13075,7 +13105,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹2,09,975 / year (avg.)"
     },
     "facilities": [
       {
@@ -13233,7 +13264,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹2,06,580 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -13383,7 +13415,7 @@
     "admissions": {
       "status": "Coming Soon",
       "session": "2027-28",
-      "timelineDescription": "Upcoming school."
+      "timelineDescription": "Upcoming school — detailed admissions information will be published as it becomes available."
     },
     "contact": {
       "phone": null,
@@ -13464,7 +13496,10 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "A1 & A12, Expressway, Sector 132, Noida, Uttar Pradesh 201304"
+      "address": "A1 & A12, Expressway, Sector 132, Noida, Uttar Pradesh 201304",
+      "sector": "Sector 132",
+      "city": "Noida",
+      "area": "Sector 132"
     },
     "fees": {
       "rangeText": "₹4,32,600 / year (Classes 6–10); ₹5,22,000 – ₹5,50,800 / year (Classes 11–12)",
@@ -13478,7 +13513,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹5,01,800 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -13581,7 +13617,7 @@
       "raw": "Nursery to Grade VIII"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "20:1–25:1",
+    "studentTeacherRatio": "23:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -13601,7 +13637,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹85,000 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -13687,7 +13724,7 @@
     "tagline": "CBSE-aligned school in Knowledge Park I, Greater Noida",
     "summary": "Sri Chaitanya Techno School, Knowledge Park I, Greater Noida, is managed under trust affiliation with provisional CBSE alignment.",
     "board": [
-      "Not publicly disclosed"
+      "CBSE-aligned"
     ],
     "boardNote": "User-supplied latest record describes this campus as registered under a trust; no verified CBSE affiliation number is stored.",
     "curriculum": "CBSE Curriculum",
@@ -13697,7 +13734,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "20:1–25:1",
+    "studentTeacherRatio": "23:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -13715,7 +13752,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹75,000 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -13813,7 +13851,7 @@
       "raw": "Class 1 to Class 8"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "~20:1",
+    "studentTeacherRatio": "23:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -13831,7 +13869,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹90,000 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -13973,7 +14012,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹3,94,101 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -14120,7 +14160,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,18,400 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -14244,7 +14285,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,64,500 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -14377,7 +14419,7 @@
       "concessions": [],
       "footnotes": [],
       "cardFee": 223528,
-      "annualDisplay": "₹2,23,528 – ₹2,52,203 / year (depending on grade)",
+      "annualDisplay": "₹2,37,866 / year (avg.)",
       "rangeText": "₹2,23,528 – ₹2,52,203 / year",
       "registrationFee": 500,
       "admissionFee": 35000,
@@ -14505,7 +14547,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹63,000 / year (avg.)"
     },
     "facilities": [],
     "uniforms": {
@@ -14605,7 +14648,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "18:1–25:1 (third-party listings); official disclosure teacher-section ratio 1:40",
+    "studentTeacherRatio": "22:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -14625,7 +14668,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "₹1,40,000 / year (avg. incl. annual charges)"
     },
     "facilities": [],
     "uniforms": {
@@ -14732,12 +14776,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Dadri, Distt. Gautam Buddha Nagar, Uttar Pradesh 203207",
-      "sector": "Dadri",
-      "city": "Noida",
+      "address": "Sector 4, Greater Noida West, Uttar Pradesh",
+      "sector": "Sector 4",
+      "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "203207",
-      "area": "Greater Noida",
+      "area": "Sector 4",
       "coordinates": {
         "lat": null,
         "lng": null,

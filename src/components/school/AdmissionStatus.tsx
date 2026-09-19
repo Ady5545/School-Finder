@@ -20,6 +20,7 @@ export function formatAdmissionStatus(rawStatus?: string, session?: string): str
   if (lower === 'not_open' || lower === 'not open') return `Admissions Not Yet Open${sessionLabel}`;
   if (lower === 'expected') return 'Admissions Expected Soon';
   if (lower === 'not_publicly_confirmed' || lower === 'pending') return 'Schedule Pending Confirmation';
+  if (lower.includes('inquire') || lower.includes('contact')) return 'Contact School for Admissions';
   if (lower === 'closed') return 'Admissions Closed';
   if (lower === 'closing-soon' || lower === 'closing soon') return 'Closing Soon';
   // Replace simple hyphens in academic years with proper typographical en-dashes (e.g., 2027-28 -> 2027–28)

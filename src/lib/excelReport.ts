@@ -165,7 +165,7 @@ export function generateMonthlyExcelReport(year: number, month: number): Buffer 
   // SHEET 2: SCHOOL VISITS
   // --------------------------------------------------------------------------
   // Retrieve all activity events up to maximum store capacity
-  const allEvents = getActivityEvents(5000);
+  const allEvents = getActivityEvents(100000, { since: new Date(startTime).toISOString(), until: new Date(endTime).toISOString() });
   const visitEventsInMonth = allEvents.filter(evt => {
     if (evt.type !== 'school_view') return false;
     const evtTime = new Date(evt.timestamp).getTime();
@@ -619,7 +619,7 @@ export async function generateMonthlyExcelReportAsync(year: number, month: numbe
   // --------------------------------------------------------------------------
   // SHEET 2: SCHOOL VISITS
   // --------------------------------------------------------------------------
-  const allEvents = await getActivityEventsAsync(10000);
+  const allEvents = await getActivityEventsAsync(1000000, { since: new Date(startTime).toISOString(), until: new Date(endTime).toISOString() });
   const visitEventsInMonth = allEvents.filter(evt => {
     if (evt.type !== 'school_view') return false;
     const evtTime = new Date(evt.timestamp).getTime();

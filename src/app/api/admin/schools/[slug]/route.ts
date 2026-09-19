@@ -4,7 +4,6 @@ import { getAdminSchoolBySlug, updateAdminSchool } from '@/lib/schoolAdminServic
 import {
   getAdminSchoolAnalytics,
   getAllPromotions,
-  getAdminAuditLogs,
 } from '@/lib/authStore';
 
 export async function GET(
@@ -28,16 +27,11 @@ export async function GET(
 
   const analytics = getAdminSchoolAnalytics(slug);
   const promotions = getAllPromotions().filter(p => p.schoolSlug === slug);
-  const auditLogs = getAdminAuditLogs(50, { targetType: 'school' }).filter(
-    l => l.targetId === slug
-  );
-
   return NextResponse.json({
     success: true,
     school,
     analytics,
     promotions,
-    auditLogs,
   });
 }
 

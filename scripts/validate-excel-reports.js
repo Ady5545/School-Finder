@@ -36,7 +36,7 @@ assert(fs.existsSync(schoolsJsonPath), 'data/schools.json exists');
 
 // 2. School count and canonical audit
 const schools = JSON.parse(fs.readFileSync(schoolsJsonPath, 'utf8'));
-assert(schools.length >= 60, `Total raw records in schools.json is valid (Found: ${schools.length})`);
+assert(schools.length >= 50, `Total raw records in schools.json is valid (Found: ${schools.length})`);
 
 const duplicateRecords = schools.filter(s => s.isDuplicate);
 assert(duplicateRecords.length === 2, `Exactly 2 records are marked as legacy duplicates/aliases (Found: ${duplicateRecords.length})`);

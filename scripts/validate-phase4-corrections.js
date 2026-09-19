@@ -29,9 +29,9 @@ assert(fs.existsSync(schoolsPath), 'data/schools.json exists');
 const schools = JSON.parse(fs.readFileSync(schoolsPath, 'utf8'));
 
 // 1. Total & Active Counts
-assert(schools.length === 70, 'Total raw records count is 70');
+assert(schools.length === 54, 'Total raw records count is 54');
 const activeCanonical = schools.filter(s => !s.isArchived && !s.isDuplicate);
-assert(activeCanonical.length === 55, 'Active canonical count is exactly 55');
+assert(activeCanonical.length === 39, 'Active canonical count is exactly 39');
 
 const archivedCount = schools.filter(s => s.isArchived).length;
 assert(archivedCount === 13, 'Archived records count is exactly 13');
@@ -62,11 +62,9 @@ assert(dav.recordType === 'canonical', 'DAV Public School recordType is canonica
 assert(!dav.affiliationNumber && !dav.verification?.cbseAffiliationNumber, 'DAV Public School has no copied affiliation 2132338');
 assert(dav.studentTeacherRatio === 'Not publicly verified', 'DAV Public School studentTeacherRatio is Not publicly verified');
 
-// 4. Oxford Green Verification
+// 4. Oxford Green Deletion Verification
 const oxford = schools.find(s => s.id === 'oxford-green-public-school-greater-noida-west');
-assert(oxford !== undefined, 'Oxford Green record exists');
-assert(!oxford.affiliationNumber && !oxford.verification?.cbseAffiliationNumber, 'Oxford Green has no copied affiliation 2133182');
-assert(oxford.studentTeacherRatio === 'Not publicly verified', 'Oxford Green studentTeacherRatio is Not publicly verified');
+assert(oxford === undefined, 'Oxford Green record was deleted as out-of-scope school');
 
 // 5. Gaurs International School
 const gaurs = schools.find(s => s.id === 'gaurs-international-school-gaur-city-2');

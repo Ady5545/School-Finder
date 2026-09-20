@@ -181,7 +181,7 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
     <div ref={containerRef} className={cn('relative w-full', className)}>
       <form
         onSubmit={handleSubmit}
-        className="relative flex items-center bg-white rounded-2xl border-2 border-[var(--color-border-strong)] shadow-warm-md hover:shadow-warm-lg focus-within:border-[var(--color-primary)] focus-within:ring-4 focus-within:ring-[var(--color-primary-light)] transition-all p-1.5"
+        className="relative flex items-center liquid-glass glass-shine rounded-[22px] border border-white/90 shadow-warm-lg hover:shadow-[0_24px_60px_-30px_rgba(15,45,74,0.42)] focus-within:border-white focus-within:ring-4 focus-within:ring-[var(--color-primary-light)] transition-all duration-300 p-1.5"
       >
         <div className="pl-3.5 pr-2 text-[var(--color-primary)]">
           <Search className="w-5 h-5 text-[var(--color-primary)]" />
@@ -228,9 +228,9 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
 
       {/* Real-time Predictive Autocomplete Suggestions Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2.5 bg-white rounded-2xl border border-[var(--color-border-strong)] shadow-warm-xl z-50 overflow-hidden text-left divide-y divide-[var(--color-border-subtle)] animate-in fade-in-50 duration-150">
+        <div className="absolute top-full left-0 right-0 mt-2.5 liquid-glass glass-shine rounded-2xl border border-white/90 shadow-warm-xl z-50 overflow-hidden text-left divide-y divide-[var(--color-border-subtle)] animate-in fade-in-50 duration-200">
           {/* Header Banner */}
-          <div className="px-4 py-2.5 bg-[var(--color-surface-muted)] text-[11px] font-bold text-[var(--color-primary)] uppercase tracking-wider flex items-center justify-between border-b border-[var(--color-border)]">
+          <div className="px-4 py-2.5 bg-white/35 backdrop-blur-md text-[11px] font-bold text-[var(--color-primary)] uppercase tracking-wider flex items-center justify-between border-b border-[var(--color-border)]">
             <div className="flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />
               <span>{cleanQuery ? 'Predictive Suggestions' : 'Popular Sectors & Campuses'}</span>
@@ -350,7 +350,7 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
           {/* Footer Bar */}
           <div
             onClick={handleSubmit}
-            className="px-4 py-2.5 bg-[var(--color-surface-muted)] hover:bg-[var(--color-accent-light)] text-center text-xs font-bold text-[var(--color-accent)] cursor-pointer transition-colors border-t border-[var(--color-border)] flex items-center justify-center gap-1.5"
+            className="px-4 py-2.5 bg-white/35 backdrop-blur-md hover:bg-white/65 text-center text-xs font-bold text-[var(--color-accent)] cursor-pointer transition-colors border-t border-[var(--color-border)] flex items-center justify-center gap-1.5"
           >
             <span>Explore all results for &ldquo;{query || 'Greater Noida West'}&rdquo;</span>
             <ArrowRight className="w-3.5 h-3.5" />

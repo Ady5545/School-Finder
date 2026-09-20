@@ -18,6 +18,7 @@ import {
 import type { School } from '../../types/school';
 import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
+import { isSafeStoredSchoolCoordinate } from '../../lib/locationSafety';
 
 interface CampusInteractiveMapProps {
   school: School;
@@ -51,8 +52,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
 
   const lat = school.location?.coordinates?.lat;
   const lng = school.location?.coordinates?.lng;
-  const coordinatesVerified = school.location?.coordinates?.isVerified === true;
-  if (!coordinatesVerified || typeof lat !== 'number' || typeof lng !== 'number') {
+  if (!isSafeStoredSchoolCoordinate(school.location?.coordinates)) {
     return (
       <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-slate-50 text-slate-500 rounded-xl border border-slate-200">
         <p className="text-sm font-medium">Map coordinates pending verification.</p>
@@ -85,10 +85,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
     return nearbySchools
       .filter(
         s =>
-          s.id !== school.id &&
-          s.location?.coordinates?.isVerified === true &&
-          typeof s.location.coordinates.lat === 'number' &&
-          typeof s.location.coordinates.lng === 'number'
+          s.id !== school.id && isSafeStoredSchoolCoordinate(s.location?.coordinates)
       )
       .map(s => {
         const targetLat = s.location.coordinates.lat as number;

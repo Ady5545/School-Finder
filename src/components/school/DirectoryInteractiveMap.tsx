@@ -302,6 +302,11 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
             <p className="text-[11px] text-[var(--color-content-muted)] hidden sm:block truncate">
               {activeAnchor ? `Anchored near ${activeAnchor.label}` : 'Interactive Greater Noida West sectors & campuses'}
             </p>
+            {schools.some(school => !isSafeStoredSchoolCoordinate(school.location?.coordinates)) && (
+              <p className="text-[10px] text-amber-700 mt-0.5 hidden sm:block">
+                Some school locations are intentionally omitted until their coordinates are verified.
+              </p>
+            )}
           </div>
         </div>
 

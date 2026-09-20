@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X, MessageSquare } from 'lucide-react';
+import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, MessageSquare } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
@@ -185,39 +185,6 @@ export const Header: React.FC = () => {
         side="right"
       >
         <div className="flex flex-col gap-5">
-          {/* Mobile Drawer Integrated Search */}
-          <form
-            onSubmit={e => {
-              handleNavSearchSubmit(e);
-              setIsMobileMenuOpen(false);
-            }}
-            className="relative w-full"
-          >
-            <label htmlFor="mobile-nav-search" className="sr-only">
-              Search schools, sectors, boards
-            </label>
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-              <input
-                id="mobile-nav-search"
-                type="text"
-                value={navSearch}
-                onChange={e => handleNavSearchChange(e.target.value)}
-                placeholder="Search schools, sectors, boards..."
-                className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 focus:outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-light)] transition-all shadow-2xs"
-              />
-              {navSearch && (
-                <button
-                  type="button"
-                  onClick={() => handleNavSearchChange('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
-                  aria-label="Clear search"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </form>
           {isAuthenticated && user && (
             <div className="p-3.5 rounded-xl bg-sky-50 border border-sky-100 flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center shrink-0">

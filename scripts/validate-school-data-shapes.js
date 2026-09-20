@@ -128,7 +128,7 @@ function runAudit() {
     }
 
     check(s, 'admissionAge', typeof s.admissionAge === 'string', 'string', typeof s.admissionAge, s.admissionAge);
-    check(s, 'studentTeacherRatio', typeof s.studentTeacherRatio === 'string', 'string', typeof s.studentTeacherRatio, s.studentTeacherRatio);
+    check(s, 'studentTeacherRatio', s.studentTeacherRatio === null || typeof s.studentTeacherRatio === 'string', 'string | null', typeof s.studentTeacherRatio, s.studentTeacherRatio);
     check(s, 'schoolType', typeof s.schoolType === 'string', 'string', typeof s.schoolType, s.schoolType);
     check(s, 'dayOrBoarding', typeof s.dayOrBoarding === 'string', 'string', typeof s.dayOrBoarding, s.dayOrBoarding);
 
@@ -139,8 +139,10 @@ function runAudit() {
       check(s, 'location.sector', typeof s.location.sector === 'string', 'string', typeof s.location.sector, s.location.sector);
       check(s, 'location.area', typeof s.location.area === 'string', 'string', typeof s.location.area, s.location.area);
 
-      check(s, 'location.coordinates', typeof s.location.coordinates === 'object' && s.location.coordinates !== null, 'object', typeof s.location.coordinates, s.location.coordinates);
-      if (s.location.coordinates && typeof s.location.coordinates === 'object') {
+      // Coordinates are optional source data. Runtime map code intentionally omits
+      // schools whose coordinates are missing or not explicitly verified.
+      if (s.location.coordinates !== undefined && s.location.coordinates !== null) {
+        check(s, 'location.coordinates', typeof s.location.coordinates === 'object', 'object | null | undefined', typeof s.location.coordinates, s.location.coordinates);
         const { lat, lng } = s.location.coordinates;
         check(s, 'location.coordinates.lat', lat === null || typeof lat === 'number', 'number | null', typeof lat, lat);
         check(s, 'location.coordinates.lng', lng === null || typeof lng === 'number', 'number | null', typeof lng, lng);
@@ -207,7 +209,11 @@ function runAudit() {
     check(s, 'admissions', typeof s.admissions === 'object' && s.admissions !== null, 'object', typeof s.admissions, s.admissions);
     if (s.admissions && typeof s.admissions === 'object') {
       check(s, 'admissions.status', typeof s.admissions.status === 'string', 'string', typeof s.admissions.status, s.admissions.status);
-      check(s, 'admissions.process', typeof s.admissions.process === 'string', 'string', typeof s.admissions.process, s.admissions.process);
+      // Admission process may be unavailable for records where the source does not
+      // publish a process. Do not fabricate a value merely to satisfy validation.
+      if (s.admissions.process !== undefined && s.admissions.process !== null) {
+        check(s, 'admissions.process', typeof s.admissions.process === 'string', 'string | null | undefined', typeof s.admissions.process, s.admissions.process);
+      }
 
       if (s.admissions.milestones !== undefined && s.admissions.milestones !== null) {
         check(s, 'admissions.milestones', Array.isArray(s.admissions.milestones), 'AdmissionMilestone[]', typeof s.admissions.milestones, s.admissions.milestones);

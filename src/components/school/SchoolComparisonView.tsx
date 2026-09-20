@@ -579,7 +579,7 @@ export const SchoolComparisonView: React.FC = () => {
             {/* Section 3: Audited Fee Structure */}
             <div className="bg-white rounded-2xl border border-[var(--color-border)] p-4 shadow-warm-xs space-y-4">
               <h3 className="text-xs font-extrabold text-[var(--color-primary)] uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
-                <IndianRupee className="w-4 h-4 text-emerald-600" /> 3. Audited Fee Structure
+                <IndianRupee className="w-4 h-4 text-emerald-600" /> 3. Fee Structure & Evidence
               </h3>
 
               {/* Comparable Annual Figure */}

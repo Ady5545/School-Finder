@@ -9,7 +9,7 @@ import {
   getUserRatingForSchoolAsync,
   sanitizePublicRating,
 } from '../../../../../lib/authStore';
-import { getSchoolBySlug, getCanonicalSlug } from '../../../../../lib/schools';
+import { getPublicSchoolBySlug, getCanonicalSlug } from '../../../../../lib/schools';
 
 
 export async function GET(
@@ -22,7 +22,7 @@ export async function GET(
       return NextResponse.json({ success: false, message: 'School slug required' }, { status: 400 });
     }
 
-    const school = getSchoolBySlug(slug);
+    const school = getPublicSchoolBySlug(slug);
     if (!school) {
       return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
     }
@@ -68,7 +68,7 @@ export async function POST(
     }
 
     // Validate canonical school exists
-    const school = getSchoolBySlug(slug);
+    const school = getPublicSchoolBySlug(slug);
     if (!school) {
       return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
     }

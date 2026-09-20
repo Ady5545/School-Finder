@@ -7,7 +7,7 @@ import {
   updateReminderStatusAsync,
   deleteReminderAsync,
 } from '@/lib/authStore';
-import { getSchoolBySlug } from '@/lib/schools';
+import { getPublicSchoolBySlug } from '@/lib/schools';
 
 async function getAuthenticatedUser(req: NextRequest) {
   const authHeader = req.headers.get('authorization');
@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'School selection is required.' }, { status: 400 });
     }
 
-    const school = getSchoolBySlug(schoolSlug);
+    const school = getPublicSchoolBySlug(schoolSlug);
     if (!school) {
       return NextResponse.json({ success: false, message: 'Selected school was not found in the directory.' }, { status: 404 });
     }

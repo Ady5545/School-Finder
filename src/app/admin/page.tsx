@@ -2067,7 +2067,7 @@ export default function AdminPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. DWPS Admissions 2026-27 Inaugural"
+                  placeholder="e.g. DWPS Admissions 2027-28 Inaugural"
                   value={promoForm.campaignName}
                   onChange={e => setPromoForm({ ...promoForm, campaignName: e.target.value })}
                   className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-white outline-none focus:border-amber-400"

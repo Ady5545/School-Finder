@@ -324,7 +324,7 @@
         "₹500 late fine after the 20th of the month.",
         "If unpaid by the 25th, the student's name may be struck off and a re-admission fee applies."
       ],
-      "annualDisplay": "₹1,32,900 / year (CBSE); ₹1,49,100 / year (Cambridge)"
+      "annualDisplay": "1,32,900"
     },
     "facilities": [
       {
@@ -819,7 +819,7 @@
       "cautionDeposit": 10000,
       "refundableSecurity": 10000,
       "cautionMoney": 10000,
-      "annualDisplay": "₹1,30,800 – ₹1,57,560 / year"
+      "annualDisplay": "₹1,30,800 – ₹1,57,560"
     },
     "facilities": [
       {
@@ -881,7 +881,7 @@
       "sourceUrl": "https://lotusvalleynoidaextension.com",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Current 2027-28 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": "+91-8448992083",
@@ -1312,7 +1312,7 @@
           "Bus fee may increase by up to 10% during the session."
         ]
       },
-      "annualDisplay": "₹1,45,200 – ₹1,81,200 / year"
+      "annualDisplay": "1,45,200 – 1,81,200"
     },
     "facilities": [
       {
@@ -1538,7 +1538,7 @@
       ],
       "concessions": [],
       "disclaimer": "Books and uniform removed. Transport retained. Estimated annual tuition for Nursery and Classes I–VII removed. Classes IX–XII fee shown as ₹41,100 per quarter. Annual equivalent is calculated as ₹41,100 × 4.",
-      "annualDisplay": "₹1,52,400–₹1,62,000 / year",
+      "annualDisplay": "₹1,52,400 / year (Nursery–I); ₹1,58,400 / year (II–VIII); ₹1,62,000 / year (IX)",
       "billingFrequency": "monthly"
     },
     "facilities": [
@@ -1601,7 +1601,7 @@
       "sourceUrl": "https://tsusnoida.edu.in",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Current 2027-28 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": "+91-0120-5151515",
@@ -2269,7 +2269,8 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "annualDisplay": "₹1,08,000 – ₹1,20,000 / year"
     },
     "facilities": [
       {
@@ -2336,7 +2337,7 @@
       "sourceUrl": "https://www.ryangroup.org",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Current 2027-28 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": "+911204232222",
@@ -2932,7 +2933,7 @@
       "disclaimer": "Admission fee is ₹55,000. Composite monthly tuition ranges from ₹9,500 to ₹12,000. Annual figures are calculated.",
       "academicSession": "2027–28",
       "disclosed": true,
-      "annualDisplay": "₹1,29,000 / year (avg.)"
+      "annualDisplay": "₹1,14,000 – ₹1,44,000"
     },
     "facilities": [
       {
@@ -3261,7 +3262,7 @@
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Current 2027-28 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -3477,7 +3478,7 @@
       "cautionMoney": 5000,
       "academicSession": "2027–28",
       "disclosed": true,
-      "annualDisplay": "₹1,17,300 / year (avg.)"
+      "annualDisplay": "₹87,000 – ₹1,47,600"
     },
     "facilities": [
       {
@@ -3549,7 +3550,7 @@
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Current 2027-28 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -3760,7 +3761,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,78,200 / year (avg.)"
+      "annualDisplay": "₹10,500 / month composite; total new-admission annual fee ₹1,72,200–₹1,84,200 by grade"
     },
     "facilities": [
       {
@@ -4063,7 +4064,7 @@
       "disclaimer": "Standard admission fee is ₹99,000 (discounted to ₹30,000). Monthly tuition: Toddlers ₹9,000, Nursery–XI ₹14,396 (discounted to ₹10,796). Registration ₹1,000.",
       "discountedAdmissionFee": 30000,
       "securityFee": "₹10,000 (waived off)",
-      "annualDisplay": "₹1,40,376 / year (avg.)"
+      "annualDisplay": "₹1,08,000 – ₹1,72,752"
     },
     "facilities": [
       {
@@ -4368,7 +4369,7 @@
           "cost": "₹12,925/month · ₹1,55,100/year calculated"
         }
       ],
-      "annualDisplay": "₹1,30,812 / year (avg.)"
+      "annualDisplay": "₹1,06,260 – ₹1,55,100"
     },
     "facilities": [
       {
@@ -4440,7 +4441,7 @@
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Current 2027-28 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -4653,7 +4654,7 @@
       "disclaimer": "Official annual tuition schedule: Pre-Nur–KG ₹60,195, I–III ₹66,898, IV–V ₹80,268, VI–VIII ₹86,947, IX–X ₹93,650, XI–XII Commerce ₹1,07,020, XI–XII Science ₹1,12,371. Registration ₹1,500, Admission ₹30,000.",
       "academicSession": "2027–28",
       "disclosed": true,
-      "annualDisplay": "₹86,764 / year (avg.)"
+      "annualDisplay": "Annual class-wise fees: Pre Nur/Nur/KG ₹60,195 | I–III ₹66,898 | IV–V ₹80,268 | VI–VIII ₹86,947 | IX–X ₹93,650 | XI–XII Commerce/Humanities ₹1,07,020 | XI–XII Science ₹1,12,371"
     },
     "facilities": [
       {
@@ -4725,7 +4726,7 @@
       "sourceUrl": null,
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
-      "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
+      "timelineDescription": "Current 2027-28 session active; 2027-28 admissions schedule pending official release. Check official school admissions page."
     },
     "contact": {
       "phone": null,
@@ -4914,7 +4915,7 @@
       "disclaimer": "Official annual tuition: Nursery & Prep ₹97,800 (₹8,150/mo), I–V ₹1,08,000 (₹9,000/mo), VI–VIII ₹1,14,000 (₹9,500/mo), IX–X ₹1,23,000 (₹10,250/mo). Registration ₹1,700, Admission ₹45,000.",
       "academicSession": "2027–28",
       "disclosed": true,
-      "annualDisplay": "₹1,10,700 / year (avg.)"
+      "annualDisplay": "Nursery/Prep ₹8,150/month | I–V ₹9,000 | VI–VIII ₹9,500 | IX–X ₹10,250; annual ₹97,800 / ₹1,08,000 / ₹1,14,000 / ₹1,23,000"
     },
     "facilities": [
       {
@@ -5188,7 +5189,7 @@
       "date": null,
       "status": "Registration Open",
       "process": "Registration → Application → Interaction/Assessment → Admission Offer → Fee Payment",
-      "session": "2026-27 / 2027-28"
+      "session": "2027-28 / 2027-28"
     },
     "contact": {
       "phone": null,
@@ -5425,7 +5426,7 @@
       "examFee": "₹1,000 annually from Grade V, payable in April",
       "academicSession": "2027–28",
       "disclosed": true,
-      "annualDisplay": "₹1,76,112 / year (avg.)"
+      "annualDisplay": "₹1,59,768 – ₹1,97,856"
     },
     "facilities": [
       {
@@ -5700,7 +5701,7 @@
       "prospectusFee": 1200,
       "academicSession": "2027–28",
       "disclosed": true,
-      "annualDisplay": "₹81,000 / year"
+      "annualDisplay": "₹81,000"
     },
     "facilities": [
       {
@@ -5743,7 +5744,7 @@
       "Consistent 100% CBSE Board pass records"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Pre-registration",
       "process": "Registration online or at campus reception, followed by interaction.",
       "session": "2027-28",
@@ -5921,7 +5922,7 @@
       "examActivityAnnual": 5500,
       "academicSession": "2027–28",
       "disclosed": true,
-      "annualDisplay": "₹1,22,980 / year (avg.)"
+      "annualDisplay": "Pre-Nursery–VIII ₹1,12,900 / year | Class IX ₹1,28,500 / year | Class X ₹1,16,500 / year | Class XI ₹1,40,500 / year | Class XII ₹1,16,500 / year"
     },
     "facilities": [
       {
@@ -5962,7 +5963,7 @@
     },
     "achievements": [],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online registration followed by parent interaction and document submission.",
       "session": "2027-28",
@@ -6164,7 +6165,7 @@
       "disclaimer": "Official monthly composite: Nursery–V ₹6,500, VI–VIII ₹6,970, IX–X ₹7,184, XI–XII ₹8,364. Registration ₹1,000, Admission ₹40,000. Practical ₹400/subject.",
       "practicalCharge": "₹400 per practical subject",
       "academicSession": "2027–28",
-      "annualDisplay": "₹87,054 / year (avg.)"
+      "annualDisplay": "₹78,000 – ₹1,00,368"
     },
     "facilities": [
       {
@@ -6207,7 +6208,7 @@
       "Outstanding CBSE Board results in Science & Commerce streams"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Application form submission followed by student interaction.",
       "session": "2027-28",
@@ -6491,7 +6492,7 @@
         "Bus facility is optional and billed based on distance.",
         "Science lab fee of ₹250 per subject per month applies for Class XI–XII."
       ],
-      "annualDisplay": "₹1,00,000 / year (avg.)"
+      "annualDisplay": "₹1,05,600 – ₹1,17,000"
     },
     "facilities": [
       {
@@ -6792,7 +6793,8 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "annualDisplay": "₹1.50L - ₹1.75L / year"
     },
     "facilities": [
       {
@@ -6835,7 +6837,7 @@
       "Consistently top ranked in National CBSE Board Examinations"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online registration, informal student interaction, and document verification.",
       "session": "2027-28"
@@ -7083,7 +7085,8 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "annualDisplay": "₹85,000 - ₹1,00,000 / year"
     },
     "facilities": [
       {
@@ -7126,7 +7129,7 @@
       "Over two decades of 100% CBSE board pass rate"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Application form submission followed by student interaction.",
       "session": "2027-28"
@@ -7373,7 +7376,8 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "annualDisplay": "₹68,000 - ₹82,000 / year"
     },
     "facilities": [
       {
@@ -7416,7 +7420,7 @@
       "Renowned for strong discipline and value-based education"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Official application form and interaction.",
       "session": "2027-28"
@@ -7847,7 +7851,7 @@
       },
       "cautionDeposit": 10000,
       "refundableSecurity": 10000,
-      "annualDisplay": "₹1,42,289 / year (avg.)"
+      "annualDisplay": "1,28,400 – 1,51,728"
     },
     "facilities": [
       {
@@ -8214,7 +8218,7 @@
       ],
       "concessions": [],
       "disclaimer": "Official monthly tuition schedule: Pre-Nur ₹5,600, Nur ₹6,000, LKG ₹6,100, UKG ₹6,400, I ₹6,600, II ₹7,150, III ₹7,750, IV–V ₹8,300, VI–VIII ₹8,600, IX–X ₹8,700, XI–XII ₹8,800. Registration ₹1,000, Admission ₹10,000 (Pre-Nur) / ₹24,000 (Nur–XII), Caution ₹6,000/₹10,000 refundable, Dev ₹6,000, Orientation ₹1,000.",
-      "annualDisplay": "₹87,273 / year (avg.)"
+      "annualDisplay": "₹67,200 – ₹1,05,600"
     },
     "facilities": [
       {
@@ -8381,7 +8385,8 @@
       "isVerified": true,
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
-      "disclosed": true
+      "disclosed": true,
+      "annualDisplay": "Fee structure not publicly disclosed"
     },
     "facilities": [
       {
@@ -8562,7 +8567,8 @@
       "footnotes": [
         "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
         "Please contact the school office directly for current academic session fee schedules."
-      ]
+      ],
+      "annualDisplay": "Not publicly disclosed"
     },
     "facilities": [
       {
@@ -8856,7 +8862,8 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "annualDisplay": "₹41k - ₹50k / year"
     },
     "facilities": [
       {
@@ -8899,7 +8906,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28"
@@ -9146,7 +9153,8 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "annualDisplay": "₹77k - ₹94k / year"
     },
     "facilities": [
       {
@@ -9189,7 +9197,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28"
@@ -9363,7 +9371,7 @@
       "date": null,
       "status": "Expected to Open",
       "process": "Registration → Assessment → Interaction",
-      "session": "2026-27 / 2027-28"
+      "session": "2027-28 / 2027-28"
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -9535,7 +9543,7 @@
       "date": null,
       "status": "Admissions Ongoing",
       "process": "Registration → Interaction/Assessment → Admission Offer → Fee Payment",
-      "session": "2026-27 / 2027-28"
+      "session": "2027-28 / 2027-28"
     },
     "contact": {
       "phone": "+91-120-4399000",
@@ -9657,7 +9665,7 @@
       "concessions": [],
       "footnotes": [],
       "cardFee": 122000,
-      "annualDisplay": "₹1,22,000 / year (Classes 1–3: ₹1,14,000 recurring + ₹8,000 annual fee)",
+      "annualDisplay": "₹1,14,000 recurring + ₹8,000 annual fee",
       "rangeText": "₹1,22,000 / year (Classes 1–3)",
       "registrationFee": 500,
       "admissionFee": 3000,
@@ -9917,7 +9925,7 @@
           "cost": "Additional charges may apply for external board examinations, specialised excursions and events with management intimation"
         }
       ],
-      "annualDisplay": "₹90,000 / year (avg.)"
+      "annualDisplay": "₹78,000 – ₹96,000"
     },
     "facilities": [
       {
@@ -9960,7 +9968,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28"
@@ -10233,7 +10241,7 @@
           "cost": "Mindbox, Val-ed, examinations and similar charges billed at actuals"
         }
       ],
-      "annualDisplay": "₹99,200 / year (avg.)"
+      "annualDisplay": "₹84,000 – ₹1,09,200"
     },
     "facilities": [
       {
@@ -10276,7 +10284,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28",
@@ -10284,7 +10292,7 @@
         {
           "id": "app_opening",
           "label": "Application Window Open",
-          "date": "2026-09-15",
+          "date": "2027-09-15",
           "verified": true,
           "notes": "Online application & interaction",
           "verificationStatus": "verified_official_notice"
@@ -10485,7 +10493,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,18,800 / year (avg.)"
+      "annualDisplay": "₹1,02,600 – ₹1,35,000"
     },
     "facilities": [
       {
@@ -10758,7 +10766,7 @@
       "disclaimer": "CBSE composite: Toddlers–X ₹39,267/qtr, XI–XII ₹42,158/qtr. Cambridge Primary: ₹18,755/month. Registration ₹1,500. Admission: Toddlers–SR KG ₹40,000 (₹30k sibling); Gr I–XII ₹60,000 (₹50k sibling).",
       "labFee": "₹500/quarter/subject for PCB, Computer, Fashion Studies, Fine Arts",
       "academicSession": "2027–28",
-      "annualDisplay": "₹1,73,000 / year (avg.)"
+      "annualDisplay": "CBSE composite ₹39,267–₹42,158/quarter; Cambridge I–V ₹18,755/month"
     },
     "facilities": [
       {
@@ -10801,7 +10809,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online admission form on the school website.",
       "session": "2027-28",
@@ -10809,7 +10817,7 @@
         {
           "id": "app_opening",
           "label": "Admissions Open",
-          "date": "2026-09-10",
+          "date": "2027-09-10",
           "verified": true,
           "notes": "Online inquiry form",
           "verificationStatus": "verified_official_notice"
@@ -11036,7 +11044,7 @@
           "cost": "₹3,500 – ₹4,400/month"
         }
       ],
-      "annualDisplay": "₹1,45,590 / year (avg.)"
+      "annualDisplay": "Calculated from supplied monthly fees: ₹1,28,520 / ₹1,39,200 / ₹1,50,000 / ₹1,64,640 respectively"
     },
     "facilities": [
       {
@@ -11079,7 +11087,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28"
@@ -11270,7 +11278,8 @@
         }
       ],
       "concessions": [],
-      "disclaimer": "Official quarterly grade tiers: Nursery–V (₹22,500–₹29,700), VI–VIII (₹23,400–₹30,000+), IX–X (₹24,300+). Refundable caution is ₹7,500–₹10,000."
+      "disclaimer": "Official quarterly grade tiers: Nursery–V (₹22,500–₹29,700), VI–VIII (₹23,400–₹30,000+), IX–X (₹24,300+). Refundable caution is ₹7,500–₹10,000.",
+      "annualDisplay": "Quarterly: ₹22,500 – ₹29,700 (Nur–V) | ₹23,400 – ₹30,000+ (VI–VIII) | ₹24,300+ (IX–X)"
     },
     "facilities": [
       {
@@ -11313,7 +11322,7 @@
       "Strong academic and athletic track record in regional competitions"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online inquiry or campus registration followed by interaction.",
       "session": "2027-28"
@@ -11608,7 +11617,7 @@
       "Times School Survey Top Ranked School in Noida Extension"
     ],
     "admissions": {
-      "date": "Admissions Open for Session 2026-27",
+      "date": "Admissions Open for Session 2027-28",
       "status": "Open",
       "process": "Online registration form submission followed by interactive session and document verification.",
       "session": "2027-28",
@@ -11616,7 +11625,7 @@
         {
           "id": "app_opening",
           "label": "Application Window Opens",
-          "date": "2026-09-01",
+          "date": "2027-09-01",
           "verified": true,
           "notes": "Online admission portal",
           "verificationStatus": "verified_official_notice"
@@ -11764,7 +11773,8 @@
       "footnotes": [
         "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
         "Please contact the school office directly for current academic session fee schedules."
-      ]
+      ],
+      "annualDisplay": "Not publicly disclosed"
     },
     "facilities": [
       {
@@ -11808,19 +11818,19 @@
       "Ryan Group holistic child-centric learning pedagogy"
     ],
     "admissions": {
-      "date": "Admissions Open 2026-27",
+      "date": "Admissions Open 2027-28",
       "status": "Open",
       "process": "Online registration on official Ryan Group portal followed by parent-student interaction.",
       "session": "2027-28",
       "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "open",
-      "timelineDescription": "Admissions currently active for the 2026-27 session via official Ryan Group online portal.",
+      "timelineDescription": "Admissions currently active for the 2027-28 session via official Ryan Group online portal.",
       "milestones": [
         {
           "id": "app_opening",
           "label": "Application Portal Open",
-          "date": "2026-09-15",
+          "date": "2027-09-15",
           "verified": true,
           "notes": "Montessori & Primary registrations",
           "verificationStatus": "verified_official_notice"
@@ -12052,7 +12062,7 @@
           "cost": "~₹500/month per practical lab subject"
         }
       ],
-      "annualDisplay": "₹87,000 / year (avg.)"
+      "annualDisplay": "₹78,000 – ₹96,000"
     },
     "facilities": [
       {
@@ -12103,7 +12113,7 @@
         {
           "id": "app_opening",
           "label": "Application Window Opens",
-          "date": "2026-09-15",
+          "date": "2027-09-15",
           "verified": true,
           "notes": "Online forms & campus counters active",
           "verificationStatus": "verified_official_notice"
@@ -12282,7 +12292,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹99,518 / year (avg.)"
+      "annualDisplay": "₹81,700 – ₹1,37,100 / year (grade-wise)"
     },
     "facilities": [
       {
@@ -12449,7 +12459,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,00,500 / year (avg.)"
+      "annualDisplay": "₹84,000 – ₹1,17,000"
     },
     "facilities": [
       {
@@ -12642,7 +12652,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,17,213 / year (avg.)"
+      "annualDisplay": "₹1,02,800 – ₹1,27,050 / year (grade-wise estimated totals)"
     },
     "facilities": [
       {
@@ -12808,7 +12818,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹73,500 / year (avg.)"
+      "annualDisplay": "₹65,400 – ₹81,600"
     },
     "facilities": [
       {
@@ -13033,7 +13043,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,20,312 / year (avg.)"
+      "annualDisplay": "₹9,768 – ₹10,328 / month composite"
     },
     "facilities": [
       {
@@ -13214,7 +13224,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹2,09,975 / year (avg.)"
+      "annualDisplay": "₹2,02,100 – ₹2,24,900 / year (grade-wise)"
     },
     "facilities": [
       {
@@ -13378,7 +13388,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹2,06,580 / year (avg.)"
+      "annualDisplay": "₹1,73,040 – ₹2,40,120 (higher grades, grade/lab dependent)"
     },
     "facilities": [],
     "uniforms": {
@@ -13516,7 +13526,8 @@
       "concessions": [],
       "circular": null,
       "disclaimer": "Current fee structure is not publicly disclosed for this upcoming school. Parents should confirm the official fee schedule directly with the school when admissions information is released.",
-      "footnotes": []
+      "footnotes": [],
+      "annualDisplay": "Not publicly disclosed"
     },
     "facilities": [],
     "uniforms": {
@@ -13632,7 +13643,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹5,01,800 / year (avg.)"
+      "annualDisplay": "₹4,32,600 / year (Classes 6–10); ₹5,22,000 – ₹5,50,800 / year (Classes 11–12)"
     },
     "facilities": [],
     "uniforms": {
@@ -13756,7 +13767,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹85,000 / year (avg.)"
+      "annualDisplay": "₹60,000 – ₹1,10,000 / year depending on grade"
     },
     "facilities": [],
     "uniforms": {
@@ -13871,7 +13882,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹75,000 / year (avg.)"
+      "annualDisplay": "₹55,000 – ₹95,000 / year depending on grade"
     },
     "facilities": [],
     "uniforms": {
@@ -13988,7 +13999,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹90,000 / year (avg.)"
+      "annualDisplay": "₹65,000 – ₹1,15,000 / year depending on grade"
     },
     "facilities": [],
     "uniforms": {
@@ -14131,7 +14142,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹3,94,101 / year (avg.)"
+      "annualDisplay": "₹3,46,100 – ₹4,46,700 / year (grade-dependent)"
     },
     "facilities": [],
     "uniforms": {
@@ -14279,7 +14290,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,18,400 / year (avg.)"
+      "annualDisplay": "₹72,000 – ₹1,50,000 / year (grade-dependent)"
     },
     "facilities": [],
     "uniforms": {
@@ -14404,7 +14415,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,64,500 / year (avg.)"
+      "annualDisplay": "₹11,000 – ₹16,450 / month (≈₹1,32,000–₹1,97,000 / year)"
     },
     "facilities": [],
     "uniforms": {
@@ -14537,7 +14548,7 @@
       "concessions": [],
       "footnotes": [],
       "cardFee": 223528,
-      "annualDisplay": "₹2,37,866 / year (avg.)",
+      "annualDisplay": "₹2,23,528–₹2,52,203 / year",
       "rangeText": "₹2,23,528 – ₹2,52,203 / year",
       "registrationFee": 500,
       "admissionFee": 35000,
@@ -14561,7 +14572,7 @@
       "date": null,
       "status": "Expected to Open",
       "process": "Registration → Assessment/Interaction → Admission Offer",
-      "session": "2026-27 / 2027-28"
+      "session": "2027-28 / 2027-28"
     },
     "contact": {
       "phone": null,
@@ -14671,7 +14682,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹63,000 / year (avg.)"
+      "annualDisplay": "₹60,000 – ₹66,000"
     },
     "facilities": [],
     "uniforms": {
@@ -14797,7 +14808,7 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹1,40,000 / year (avg. incl. annual charges)"
+      "annualDisplay": "₹1,08,000 – ₹1,32,000"
     },
     "facilities": [],
     "uniforms": {
@@ -14944,7 +14955,8 @@
       "concessions": [],
       "circular": null,
       "disclaimer": "Please contact the school to know the current fee structure.",
-      "footnotes": []
+      "footnotes": [],
+      "annualDisplay": "Please contact the school to know the current fee structure."
     },
     "facilities": [],
     "uniforms": {
@@ -15094,7 +15106,8 @@
       "circular": null,
       "disclaimer": "Fee figures compiled from third-party admission portals and should be confirmed directly with the school.",
       "footnotes": [],
-      "curriculum": "State Board; not CBSE"
+      "curriculum": "State Board; not CBSE",
+      "annualDisplay": "Estimated annual/overall admission cost ~₹13,464 – ₹17,784"
     },
     "facilities": [],
     "uniforms": {
@@ -15371,7 +15384,8 @@
       "footnotes": [
         "One-time registration and admission fees are non-refundable.",
         "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ]
+      ],
+      "annualDisplay": "₹91,000 – ₹1,21,000 / year (tuition + annual charges)"
     },
     "facilities": [
       {
@@ -15639,7 +15653,7 @@
       "concessions": [],
       "footnotes": [],
       "cardFee": 160200,
-      "annualDisplay": "₹1,60,200 / year",
+      "annualDisplay": "₹1,60,200 / year (₹13,250 monthly composite + ₹100 other monthly)",
       "rangeText": "₹1,60,200 / year",
       "registrationFee": 500,
       "admissionFee": null,

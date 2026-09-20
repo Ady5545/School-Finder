@@ -182,11 +182,27 @@ export async function GET(req: NextRequest) {
 
     const society = String(user.residentialSociety || '').trim();
     const shortlist = Array.isArray(user.wishlist) ? user.wishlist.slice(0, 6) : [];
-    if (!society) return NextResponse.json({ success: false, code: 'SOCIETY_MISSING', message: 'Add your residential society to your Parent Account to plan your school run.' }, { status: 422 });
     if (shortlist.length === 0) return NextResponse.json({ success: false, code: 'SHORTLIST_EMPTY', message: 'Shortlist at least one school to plan your school run.' }, { status: 422 });
 
-    const origin = await geocode(`${society}, Greater Noida West, Uttar Pradesh, India`);
-    if (!origin) return NextResponse.json({ success: false, code: 'SOCIETY_NOT_FOUND', society, message: 'We could not confidently locate that society on the map yet.', diagnostic: { normalizedSociety: society.replace(/,?\s*(uttar pradesh|india|greater noida west|noida extension|greater noida)\s*$/i, '').trim(), providersTried: ['OpenStreetMap Nominatim', 'Photon'] } }, { status: 422 });
+    // The parent can plan from their saved society (default) or from their
+    // device's live GPS position (e.g. while actually standing at a pickup
+    // point). ?lat=&lng= overrides geocoding with the real coordinates the
+    // browser reported — no lookup involved, so it is exact.
+    const rawLat = req.nextUrl.searchParams.get('lat');
+    const rawLng = req.nextUrl.searchParams.get('lng');
+    const deviceLat = rawLat !== null ? Number(rawLat) : null;
+    const deviceLng = rawLng !== null ? Number(rawLng) : null;
+    const useDeviceLocation = Number.isFinite(deviceLat) && Number.isFinite(deviceLng)
+      && Math.abs(deviceLat as number) <= 90 && Math.abs(deviceLng as number) <= 180;
+
+    let origin: Point | null = null;
+    if (useDeviceLocation) {
+      origin = { lat: deviceLat as number, lng: deviceLng as number, label: 'Your current location', source: 'Device GPS' };
+    } else {
+      if (!society) return NextResponse.json({ success: false, code: 'SOCIETY_MISSING', message: 'Add your residential society to your Parent Account, or share your current location, to plan your school run.' }, { status: 422 });
+      origin = await geocode(`${society}, Greater Noida West, Uttar Pradesh, India`);
+      if (!origin) return NextResponse.json({ success: false, code: 'SOCIETY_NOT_FOUND', society, message: 'We could not confidently locate that society on the map yet. You can also share your current location instead.', diagnostic: { normalizedSociety: society.replace(/,?\s*(uttar pradesh|india|greater noida west|noida extension|greater noida)\s*$/i, '').trim(), providersTried: ['OpenStreetMap Nominatim', 'Photon'] } }, { status: 422 });
+    }
 
     const schools = shortlist.map(slug => getPublicSchoolBySlug(slug)).filter(Boolean).map(school => {
       const coords = school!.location.coordinates;
@@ -216,7 +232,7 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json({
-      success: true, origin: { ...origin, label: society }, schools: resolved,
+      success: true, origin: useDeviceLocation ? origin : { ...origin, label: society }, schools: resolved,
       note: process.env.OPENROUTESERVICE_API_KEY ? 'Walking and driving routes use OpenRouteService.' : 'Driving routes use OpenStreetMap-based routing. Walking route support can be enabled with OPENROUTESERVICE_API_KEY.',
     }, { headers: { 'Cache-Control': 'private, max-age=300' } });
   } catch (error) {

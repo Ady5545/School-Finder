@@ -11,6 +11,7 @@ const CARD_FEE_OVERRIDES: Record<string, string> = {
   'sarvottam-international-school': '₹1,57,068',
   'the-millennium-school-noida-extension': '₹1,28,000',
   'gagan-public-school-sector-4': '₹1,02,000',
+  'indirapuram-public-school-crossings-republik': '₹1,20,000',
   'the-khaitan-school-sector-40-noida': '₹1,90,000',
   'global-indian-international-school-noida': '₹2,40,000',
   'aspam-scottish-school-noida': '₹2,37,740',

@@ -6,7 +6,7 @@ import {
   recordActivityEvent,
   recordSchoolSave,
 } from '../../../../lib/authStore';
-import { getSchoolBySlug, getCanonicalSlug } from '../../../../lib/schools';
+import { getPublicSchoolBySlug, getCanonicalSlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
   try {
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
     if (action === 'sync' && Array.isArray(list)) {
       // Validate all slugs and convert to canonical slugs
       const validList = list
-        .filter((s: string) => typeof s === 'string' && getSchoolBySlug(s))
+        .filter((s: string) => typeof s === 'string' && getPublicSchoolBySlug(s))
         .map((s: string) => getCanonicalSlug(s));
       const combined = Array.from(new Set([...current.map(s => getCanonicalSlug(s)), ...validList]));
       await updateUserListsAsync(user.id, combined);
@@ -102,7 +102,7 @@ export async function POST(req: NextRequest) {
 
     const rawCleanSlug = slug.trim();
     // Validate school existence
-    if (!getSchoolBySlug(rawCleanSlug)) {
+    if (!getPublicSchoolBySlug(rawCleanSlug)) {
       return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
     }
 

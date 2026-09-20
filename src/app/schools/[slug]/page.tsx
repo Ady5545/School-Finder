@@ -200,6 +200,12 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           </div>
 
           <SchoolProfileActions school={school} />
+          <Link
+            href={'/application-tracker?school=' + encodeURIComponent(school.slug)}
+            className="inline-flex w-full items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-3 py-2.5 text-xs font-bold text-sky-800 hover:bg-sky-100 transition-colors"
+          >
+            Track this application
+          </Link>
         </div>
       </div>
 

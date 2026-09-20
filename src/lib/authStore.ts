@@ -549,7 +549,7 @@ function initDb(): void {
     const initialCampaign: SchoolPromotionCampaign = {
       id: 'promo_dwps_inaugural_2026',
       schoolSlug: 'delhi-world-public-school-kp-5',
-      campaignName: 'DWPS Greater Noida West - Premier Admissions 2026-27',
+      campaignName: 'DWPS Greater Noida West - Premier Admissions 2027-28',
       placementType: 'homepage_hero',
       title: 'Delhi World Public School, Knowledge Park 5',
       description: 'Admissions open for Nursery to Grade XI. World-class 5-acre smart campus with audited transparent fee structure.',

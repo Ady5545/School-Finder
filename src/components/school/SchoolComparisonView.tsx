@@ -167,6 +167,27 @@ export const SchoolComparisonView: React.FC = () => {
     return Array.from(set).sort();
   }, [selectedSchools]);
 
+  // Best Value helpers - parents want to know which option wins on a metric at
+  // a glance, not just that they differ. Only flags a winner when the field is
+  // actually a real, comparable number for at least 2 schools (never guesses).
+  const bestFeeId = useMemo(() => {
+    const comparable = selectedSchools.filter(
+      s =>
+        s.fees.cardFee !== null &&
+        s.fees.cardFee !== undefined &&
+        s.fees.comparableAnnualAvailable !== false &&
+        s.fees.verificationStatus === 'verified_from_source'
+    );
+    if (comparable.length < 2) return null;
+    return comparable.reduce((min, s) => (s.fees.cardFee! < min.fees.cardFee! ? s : min)).id;
+  }, [selectedSchools]);
+
+  const bestRatingId = useMemo(() => {
+    const rated = selectedSchools.filter(s => s.rating?.score && s.rating.reviewsCount > 0);
+    if (rated.length < 2) return null;
+    return rated.reduce((max, s) => (s.rating.score > max.rating.score ? s : max)).id;
+  }, [selectedSchools]);
+
   // Row comparison value difference detector
   const isRowDifferent = (getter: (s: School) => any) => {
     if (selectedSchools.length < 2) return false;
@@ -1143,6 +1164,11 @@ export const SchoolComparisonView: React.FC = () => {
                           {formatCurrency(s.fees.cardFee!)}
                         </span>
                         <span className="text-[10px] text-[var(--color-content-muted)] block font-medium">/ year</span>
+                        {bestFeeId === s.id && (
+                          <span className="inline-flex items-center gap-0.5 mt-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-1.5 py-0.5">
+                            <Check className="w-2.5 h-2.5" /> Lowest here
+                          </span>
+                        )}
                       </>
                     ) : s.fees.rangeText ? (
                       <div>
@@ -1500,6 +1526,11 @@ export const SchoolComparisonView: React.FC = () => {
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4">
                   <RatingDisplay score={s.rating.score} reviewsCount={s.rating.reviewsCount} size="sm" />
+                  {bestRatingId === s.id && (
+                    <span className="inline-flex items-center gap-0.5 mt-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-1.5 py-0.5">
+                      <Check className="w-2.5 h-2.5" /> Highest here
+                    </span>
+                  )}
                 </td>
               ))}
             </tr>

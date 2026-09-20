@@ -13,6 +13,7 @@ import {
   getAdminInitialPassword,
   hashPassword,
 } from '../../../../lib/authStore';
+import { isLoginRateLimited, recordFailedLoginAttempt, clearLoginAttempts } from '../../../../lib/loginRateLimit';
 
 export async function POST(req: NextRequest) {
   try {
@@ -77,6 +78,17 @@ export async function POST(req: NextRequest) {
         );
       }
 
+      const rateLimit = isLoginRateLimited(emailToUse);
+      if (rateLimit.limited) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: `Too many incorrect attempts. Please try again in ${Math.ceil((rateLimit.retryAfterSeconds || 60) / 60)} minute(s).`,
+          },
+          { status: 429 }
+        );
+      }
+
       if (!user.passwordHash) {
         return NextResponse.json(
           { success: false, message: 'This account was set up via email OTP. Please sign in using OTP code.' },
@@ -108,11 +120,14 @@ export async function POST(req: NextRequest) {
       }
 
       if (!isValid) {
+        recordFailedLoginAttempt(emailToUse);
         return NextResponse.json(
           { success: false, message: 'Invalid password. Please check your password and try again.' },
           { status: 401 }
         );
       }
+
+      clearLoginAttempts(emailToUse);
     }
 
     // Admin-whitelist promotion also only applies on an account's first-ever login

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { ArrowRight, Check, ClipboardList, ExternalLink, Plus, Trash2 } from 'lucide-react';
 import { useAuth } from '../../lib/authContext';
 import { getAllSchools } from '../../lib/schools';
@@ -14,6 +15,7 @@ const statusLabel = (value: ApplicationTrackerStatus) =>
 
 export const ApplicationTrackerView: React.FC = () => {
   const { user, isAuthenticated, isLoading } = useAuth();
+  const searchParams = useSearchParams();
   const { showToast } = useToast();
   const schools = getAllSchools();
   const [items, setItems] = useState<ApplicationTrackerItem[]>([]);
@@ -39,6 +41,13 @@ export const ApplicationTrackerView: React.FC = () => {
   useEffect(() => {
     if (isAuthenticated) load();
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    const requestedSchool = searchParams.get('school');
+    if (requestedSchool && schools.some(school => school.slug === requestedSchool) && !items.some(item => item.schoolSlug === requestedSchool)) {
+      setSelectedSchool(requestedSchool);
+    }
+  }, [searchParams, schools, items]);
 
   const addApplication = async () => {
     if (!selectedSchool) {

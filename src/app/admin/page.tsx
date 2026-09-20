@@ -226,6 +226,7 @@ export default function AdminPage() {
   const [reportMonth, setReportMonth] = useState<number>(() => new Date().getUTCMonth() + 1);
   const [reportYear, setReportYear] = useState<number>(() => new Date().getUTCFullYear());
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
+  const [schoolReportSlug, setSchoolReportSlug] = useState('');
 
   // Sign out handler
   const handleLogout = async () => {
@@ -1798,8 +1799,42 @@ export default function AdminPage() {
                 </div>
 
                 <div>
+                  <label className="block text-[11px] font-bold text-slate-300 mb-1.5">School-specific export</label>
+                  <select
+                    value={schoolReportSlug}
+                    onChange={e => setSchoolReportSlug(e.target.value)}
+                    className="w-full rounded-xl bg-[#07172b] border border-[#1d4b7c] text-slate-200 px-3 py-2.5 text-xs outline-none focus:border-emerald-400"
+                  >
+                    <option value="">All schools — monthly platform report</option>
+                    {schoolsList.map(s => <option key={s.slug} value={s.slug}>{s.name}</option>)}
+                  </select>
+                </div>
+
+                <div>
                   <button
-                    onClick={() => handleDownloadReport()}
+                    onClick={() => {
+                      if (!schoolReportSlug) {
+                        handleDownloadReport();
+                        return;
+                      }
+                      setIsGeneratingReport(true);
+                      fetch('/api/admin/reports?schoolSlug=' + encodeURIComponent(schoolReportSlug), { cache: 'no-store' })
+                        .then(async res => {
+                          if (!res.ok) throw new Error((await res.json().catch(() => ({}))).message || 'Failed to generate school export.');
+                          const blob = await res.blob();
+                          const school = schoolsList.find(s => s.slug === schoolReportSlug);
+                          const a = document.createElement('a');
+                          a.href = window.URL.createObjectURL(blob);
+                          a.download = 'admission-pitara-' + (school?.slug || 'school') + '.xlsx';
+                          document.body.appendChild(a);
+                          a.click();
+                          window.URL.revokeObjectURL(a.href);
+                          a.remove();
+                          showNotification('success', 'School-specific XLSX downloaded.');
+                        })
+                        .catch(err => showNotification('error', err.message || 'Failed to generate school export.'))
+                        .finally(() => setIsGeneratingReport(false));
+                    }}
                     disabled={isGeneratingReport}
                     className="w-full flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-emerald-950/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >

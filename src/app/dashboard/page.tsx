@@ -39,6 +39,7 @@ import {
   X,
   Shield,
   ClipboardList,
+  Navigation,
 } from 'lucide-react';
 import { checkShortlistDeadlines } from '../../lib/notifications';
 import { useToast } from '../../components/ui/Toast';
@@ -747,12 +748,19 @@ export default function DashboardPage() {
             </h2>
           </div>
           {wishlistedSchools.length > 0 && (
-            <button
-              onClick={clearShortlist}
-              className="text-xs font-semibold text-stone-500 hover:text-rose-600 cursor-pointer"
-            >
-              Clear Shortlist
-            </button>
+            <div className="flex items-center gap-3">
+              <Link href="/school-run">
+                <Button variant="outline" size="sm" leftIcon={<Navigation className="w-3.5 h-3.5" />} className="text-xs font-bold">
+                  Plan School Run
+                </Button>
+              </Link>
+              <button
+                onClick={clearShortlist}
+                className="text-xs font-semibold text-stone-500 hover:text-rose-600 cursor-pointer"
+              >
+                Clear Shortlist
+              </button>
+            </div>
           )}
         </div>
 

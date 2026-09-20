@@ -51,7 +51,8 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
 
   const lat = school.location?.coordinates?.lat;
   const lng = school.location?.coordinates?.lng;
-  if (typeof lat !== 'number' || typeof lng !== 'number') {
+  const coordinatesVerified = school.location?.coordinates?.isVerified === true;
+  if (!coordinatesVerified || typeof lat !== 'number' || typeof lng !== 'number') {
     return (
       <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-slate-50 text-slate-500 rounded-xl border border-slate-200">
         <p className="text-sm font-medium">Map coordinates pending verification.</p>
@@ -85,7 +86,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
       .filter(
         s =>
           s.id !== school.id &&
-          s.location?.coordinates &&
+          s.location?.coordinates?.isVerified === true &&
           typeof s.location.coordinates.lat === 'number' &&
           typeof s.location.coordinates.lng === 'number'
       )

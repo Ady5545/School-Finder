@@ -44,14 +44,14 @@ export const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/70 bg-[#fcfbf9]/72 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-[4.65rem] grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 sm:gap-5">
-        {/* Logo / Brand Mark */}
         <div className="flex items-center min-w-0 shrink-0">
           <Link href="/" className="group flex items-center rounded-2xl px-1 py-1.5 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">
             <BrandLogo size="md" />
           </Link>
+        </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex min-w-0 max-w-full items-center justify-self-center gap-1 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Main Navigation">
+        <nav className="hidden lg:flex min-w-0 w-full items-center justify-center" aria-label="Main Navigation">
+          <div className="flex min-w-0 max-w-full items-center justify-center gap-1 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {navLinks.map(link => (
               <Link
                 key={link.href}
@@ -66,43 +66,15 @@ export const Header: React.FC = () => {
                 {link.icon}
                 <span>{link.label}</span>
                 {link.badge && (
-                  <span
-                    className={cn(
-                      'text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight shrink-0',
-                      link.badgeColor || 'bg-[var(--color-accent)] text-white'
-                    )}
-                  >
+                  <span className={cn('text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight shrink-0', link.badgeColor || 'bg-[var(--color-accent)] text-white')}>
                     {link.badge}
                   </span>
                 )}
               </Link>
             ))}
-          </nav>
-        </div>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex min-w-0 max-w-full items-center justify-self-center gap-1 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Main Navigation">
-          {navLinks.map(link => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                'px-2.5 xl:px-3 py-2 rounded-xl text-[11px] xl:text-[12px] font-semibold transition-all duration-200 flex items-center gap-1 relative whitespace-nowrap shrink-0',
-                isActive(link.href)
-                  ? 'text-[var(--color-primary)] bg-white/88 border border-white shadow-sm font-bold'
-                  : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-white/65'
-              )}
-            >
-              {link.icon}
-              <span>{link.label}</span>
-              {link.badge && (
-                <span className={cn('text-[10px] font-bold px-1.5 py-0.2 rounded-full leading-tight shrink-0', link.badgeColor || 'bg-[var(--color-accent)] text-white')}>
-                  {link.badge}
-                </span>
-              )}
-            </Link>
-          ))}
+          </div>
         </nav>
+
 
         {/* Desktop Actions */}
         <div className="hidden sm:flex items-center justify-self-end gap-2.5 shrink-0">

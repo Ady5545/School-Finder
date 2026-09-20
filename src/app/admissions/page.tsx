@@ -5,8 +5,8 @@ import { buildPageMetadata } from '../../lib/seo';
 import { Calendar } from 'lucide-react';
 
 export const metadata = buildPageMetadata(
-  'School Admissions in Greater Noida, Greater Noida West & Noida Extension',
-  'Track school admissions in Greater Noida, Greater Noida West, Noida Extension and nearby Noida: admission status, registration windows, age criteria, procedures and official school portals.',
+  'School Admissions in Greater Noida | Admission Pitara',
+  'Track school admissions in Greater Noida, Greater Noida West and Noida Extension: admission status, registration windows, age criteria, procedures and official school portals.',
   '/admissions'
 );
 

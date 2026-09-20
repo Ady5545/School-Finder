@@ -3,6 +3,7 @@ import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { AdmissionsHubView } from '../../components/school/AdmissionsHubView';
 import { buildPageMetadata } from '../../lib/seo';
 import { Calendar } from 'lucide-react';
+import { AdmissionInterestForm } from '../../components/school/AdmissionInterestForm';
 
 export const metadata = buildPageMetadata(
   'School Admissions in Greater Noida | Admission Pitara',
@@ -27,6 +28,8 @@ export default function AdmissionsPage() {
           Find current admission information for schools across Greater Noida, Greater Noida West, Noida Extension and nearby Noida, including registration windows, age criteria, application procedures and official school portals.
         </p>
       </div>
+
+      <div className="mb-8"><AdmissionInterestForm /></div>
 
       <AdmissionsHubView />
     </div>

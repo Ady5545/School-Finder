@@ -5,6 +5,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { getCanonicalSchools } from '../../lib/schools';
 import {
   ShieldCheck,
   Users,
@@ -227,6 +228,7 @@ export default function AdminPage() {
   const [reportYear, setReportYear] = useState<number>(() => new Date().getUTCFullYear());
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const [schoolReportSlug, setSchoolReportSlug] = useState('');
+  const reportableSchools = getCanonicalSchools();
 
   // Sign out handler
   const handleLogout = async () => {
@@ -1806,7 +1808,7 @@ export default function AdminPage() {
                     className="w-full rounded-xl bg-[#07172b] border border-[#1d4b7c] text-slate-200 px-3 py-2.5 text-xs outline-none focus:border-emerald-400"
                   >
                     <option value="">All schools — monthly platform report</option>
-                    {schoolsList.map(s => <option key={s.slug} value={s.slug}>{s.name}</option>)}
+                    {reportableSchools.map(s => <option key={s.slug} value={s.slug}>{s.name}</option>)}
                   </select>
                 </div>
 
@@ -1822,7 +1824,7 @@ export default function AdminPage() {
                         .then(async res => {
                           if (!res.ok) throw new Error((await res.json().catch(() => ({}))).message || 'Failed to generate school export.');
                           const blob = await res.blob();
-                          const school = schoolsList.find(s => s.slug === schoolReportSlug);
+                          const school = reportableSchools.find(s => s.slug === schoolReportSlug);
                           const a = document.createElement('a');
                           a.href = window.URL.createObjectURL(blob);
                           a.download = 'admission-pitara-' + (school?.slug || 'school') + '.xlsx';

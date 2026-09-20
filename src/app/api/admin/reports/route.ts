@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
 import { generateMonthlyExcelReportAsync } from '../../../../lib/excelReport';
-import { recordAdminAuditAsync } from '../../../../lib/authStore';
+import { recordAdminAuditAsync, getSchoolRatingStatsAsync } from '../../../../lib/authStore';
+import { getSchoolBySlug } from '../../../../lib/schools';
+import * as XLSX from 'xlsx';
 
 export async function GET(req: NextRequest) {
   // 1. Strict Server-Side Admin Authorization
@@ -23,6 +25,7 @@ export async function GET(req: NextRequest) {
   // 2. Parse and Validate Query Parameters
   const { searchParams } = new URL(req.url);
   const monthParam = searchParams.get('month');
+  const schoolSlug = searchParams.get('schoolSlug');
   const yearParam = searchParams.get('year');
 
   const now = new Date();
@@ -55,6 +58,46 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    if (schoolSlug) {
+      const school = getSchoolBySlug(schoolSlug);
+      if (!school) return NextResponse.json({ success: false, message: 'School not found.' }, { status: 404 });
+      const stats = await getSchoolRatingStatsAsync(school.slug);
+      const rows = [
+        ['Admission Pitara — School Data Export'],
+        ['School', school.name],
+        ['Slug', school.slug],
+        ['Area / Sector', school.location.area || school.location.sector],
+        ['Address', school.location.address],
+        ['Board / Curriculum', Array.isArray(school.board) ? school.board.join(', ') : school.board],
+        ['Grade Range', school.gradeRange.raw],
+        ['Student–Teacher Ratio', school.studentTeacherRatio],
+        ['Admissions Status', school.admissions.status],
+        ['Admissions Session', school.admissions.session || school.admissions.academicYear || '2027-28'],
+        ['Annual Fee Display', school.fees.annualDisplay || school.fees.tuitionAnnual || school.fees.rangeText],
+        ['Monthly Fee', school.fees.tuitionMonthly || ''],
+        ['Quarterly Fee', school.fees.tuitionQuarterly || ''],
+        ['Fee Session', school.fees.academicSession || school.fees.academicYear || ''],
+        ['Fee Verification Status', school.fees.verificationStatus || ''],
+        ['Fee Source URL', school.fees.sourceUrl || ''],
+        ['Admissions Source URL', school.admissions.sourceUrl || ''],
+        ['Rating', stats?.averageRating ?? ''],
+        ['Published Reviews', stats?.totalReviews ?? 0],
+      ];
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), 'School Data');
+      const reportBuffer = XLSX.write(wb, { type: 'buffer', bookType: 'xlsx' });
+      const safeName = school.slug.replace(/[^a-z0-9-]/gi, '-');
+      await recordAdminAuditAsync(auth.user.id, auth.user.email, 'generate_school_report', 'school', school.slug, { filename: safeName + '.xlsx', generatedAt: new Date().toISOString() }, 'success');
+      return new NextResponse(new Uint8Array(reportBuffer), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          'Content-Disposition': 'attachment; filename="admission-pitara-' + safeName + '.xlsx"',
+          'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+      });
+    }
+
     // 3. Generate the Excel Workbook Server-Side with MongoDB-authoritative data
     const reportBuffer = await generateMonthlyExcelReportAsync(year, month);
     const formattedMonth = month.toString().padStart(2, '0');

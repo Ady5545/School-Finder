@@ -17,6 +17,9 @@ import { SchoolGallery } from '../../../components/school/SchoolGallery';
 import { CampusInteractiveMap } from '../../../components/school/CampusInteractiveMap';
 import { SchoolRatingsSection } from '../../../components/school/SchoolRatingsSection';
 import { SchoolAdmissionsSection } from '../../../components/school/SchoolAdmissionsSection';
+import { DataTrustPanel } from '../../../components/school/DataTrustPanel';
+import { FeeIntelligence } from '../../../components/school/FeeIntelligence';
+import { AdmissionChecklist } from '../../../components/school/AdmissionChecklist';
 import { SchoolViewTracker } from '../../../components/school/SchoolViewTracker';
 import { Button } from '../../../components/ui/Button';
 import { cn } from '../../../lib/utils';
@@ -278,6 +281,10 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <section id="fee-breakdown-section">
             <ComprehensiveFeeBreakdown fees={school.fees} schoolName={school.name} />
           </section>
+          
+          <FeeIntelligence school={school} />
+
+          <AdmissionChecklist school={school} />
 
           {/* Campus Facilities */}
           {school.facilities && school.facilities.length > 0 && (
@@ -401,6 +408,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               </div>
             </section>
           )}
+
+          <DataTrustPanel school={school} />
 
           {/* Detailed Fees Card */}
           <section>

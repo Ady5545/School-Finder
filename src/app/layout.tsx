@@ -14,13 +14,28 @@ import { generateOrganizationJsonLd, generateWebsiteJsonLd } from '../lib/seo';
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://admissionpitara.com'),
   title: {
-    default: 'Admission Pitara — Greater Noida | Find the right school in Greater Noida',
+    default: 'School Admissions in Greater Noida, Greater Noida West & Noida | Admission Pitara',
     template: '%s | Admission Pitara',
   },
   description:
-    'Admission Pitara: Find the right school in Greater Noida. The parent-first school discovery, verified fee breakdown, and admission intelligence platform for Greater Noida West & Noida Extension.',
-  applicationName: 'Admission Pitara — Greater Noida',
+    'Find schools and school admissions in Greater Noida, Greater Noida West, Noida Extension and Noida. Compare fees, boards, facilities, admission status and school profiles.',
+  applicationName: 'Admission Pitara',
+  keywords: [
+    'school admissions Greater Noida',
+    'school admissions Greater Noida West',
+    'school admissions Noida',
+    'schools in Greater Noida',
+    'schools in Greater Noida West',
+    'schools in Noida Extension',
+  ],
   icons: '/icon.svg',
+};
+
+export const viewport: Viewport = {
+  themeColor: '#0f2d4a',
+  colorScheme: 'light',
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -29,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-IN">
       <body className="min-h-screen flex flex-col bg-[var(--color-surface-muted)] text-[var(--color-content)] antialiased">
         <script
           type="application/ld+json"
@@ -58,4 +73,3 @@ export default function RootLayout({
     </html>
   );
 }
-

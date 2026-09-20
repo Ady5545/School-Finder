@@ -46,7 +46,6 @@ export const AdmissionsHubView: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBoard, setSelectedBoard] = useState<string>('all');
   const [selectedGrade, setSelectedGrade] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'grouped' | 'grid'>('grouped');
 
   // Reminder Modal state
   const [activeReminder, setActiveReminder] = useState<{
@@ -347,39 +346,11 @@ export const AdmissionsHubView: React.FC = () => {
             <option value="secondary">Middle &amp; High (Class 6 to 12)</option>
           </select>
 
-          {/* View Mode Toggle */}
-          <div className="flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200 text-xs font-bold">
-            <button
-              type="button"
-              onClick={() => setViewMode('grouped')}
-              className={cn(
-                'flex-1 py-1.5 px-2 rounded-lg text-center transition-all cursor-pointer min-h-[32px]',
-                viewMode === 'grouped'
-                  ? 'bg-white text-[var(--color-primary)] shadow-warm-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              )}
-            >
-              Status Groups
-            </button>
-            <button
-              type="button"
-              onClick={() => setViewMode('grid')}
-              className={cn(
-                'flex-1 py-1.5 px-2 rounded-lg text-center transition-all cursor-pointer min-h-[32px]',
-                viewMode === 'grid'
-                  ? 'bg-white text-[var(--color-primary)] shadow-warm-2xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              )}
-            >
-              Unified Grid ({filteredSchools.length})
-            </button>
-          </div>
         </div>
       </div>
 
       {/* VIEW MODE 1: GROUPED SECTIONS BY STATUS */}
-      {viewMode === 'grouped' ? (
-        <div className="space-y-8">
+      <div className="space-y-8">
           {groupSections.map(sec => {
             const sectionSchools = groupedSchools[sec.key];
             if (sectionSchools.length === 0) return null;

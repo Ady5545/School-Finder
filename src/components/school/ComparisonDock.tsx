@@ -6,7 +6,7 @@ import { Scale, X, ArrowRight, Trash2, Heart, CheckCircle2 } from 'lucide-react'
 import { useSchoolStore } from '../../lib/schoolStore';
 import { useAuth } from '../../lib/authContext';
 import { useToast } from '../ui/Toast';
-import { getSchoolBySlug } from '../../lib/schools';
+import { getPublicSchoolBySlug } from '../../lib/schools';
 import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
 import type { School } from '../../types/school';
@@ -21,8 +21,12 @@ export const ComparisonDock: React.FC = () => {
   }
 
   const schools: School[] = compareList
-    .map(slug => getSchoolBySlug(slug))
+    .map(slug => getPublicSchoolBySlug(slug))
     .filter((s): s is School => Boolean(s));
+
+  if (schools.length === 0) {
+    return null;
+  }
 
   const handleSaveAllToShortlist = async () => {
     if (!isAuthenticated) {

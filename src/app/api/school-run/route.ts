@@ -10,20 +10,76 @@ async function geocode(query: string): Promise<Point | null> {
   const key = query.trim().toLowerCase();
   if (!key) return null;
   if (geocodeCache.has(key)) return geocodeCache.get(key) ?? null;
+
+  // Try a few locality-aware variants. Society names are often indexed without
+  // the exact "Greater Noida West" wording, so a single query is too brittle.
+  const queries = [
+    query,
+    query.replace('Greater Noida West', 'Greater Noida'),
+    query.replace('Greater Noida West', 'Noida Extension'),
+  ];
+
   const wait = Math.max(0, 1000 - (Date.now() - lastGeocodeAt));
   if (wait) await new Promise(resolve => setTimeout(resolve, wait));
-  const params = new URLSearchParams({ q: query, format: 'jsonv2', limit: '1', countrycodes: 'in' });
-  const response = await fetch(`https://nominatim.openstreetmap.org/search?${params.toString()}`, {
-    headers: { 'User-Agent': 'AdmissionPitara/1.0 (school-run feature; https://admissionpitara.com)', Accept: 'application/json' },
-    cache: 'no-store',
-  });
-  lastGeocodeAt = Date.now();
-  if (!response.ok) return null;
-  const data = (await response.json()) as Array<{ lat: string; lon: string; display_name: string }>;
-  const first = data[0];
-  const result = first ? { lat: Number(first.lat), lng: Number(first.lon), label: first.display_name, source: 'OpenStreetMap Nominatim' } : null;
-  geocodeCache.set(key, result);
-  return result;
+
+  let best: Point | null = null;
+  for (const candidate of queries) {
+    const params = new URLSearchParams({
+      q: candidate,
+      format: 'jsonv2',
+      limit: '5',
+      countrycodes: 'in',
+      addressdetails: '1',
+    });
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?${params.toString()}`, {
+      headers: {
+        'User-Agent': 'AdmissionPitara/1.0 (school-run feature; https://admissionpitara.com)',
+        Accept: 'application/json',
+      },
+      cache: 'no-store',
+    });
+    lastGeocodeAt = Date.now();
+    if (!response.ok) continue;
+
+    const data = (await response.json()) as Array<{
+      lat: string;
+      lon: string;
+      display_name: string;
+      type?: string;
+      address?: Record<string, string>;
+    }>;
+
+    const scored = data
+      .map(item => {
+        const display = item.display_name.toLowerCase();
+        const address = Object.values(item.address || {}).join(' ').toLowerCase();
+        let score = 0;
+        if (display.includes('greater noida')) score += 8;
+        if (display.includes('noida extension') || address.includes('noida extension')) score += 7;
+        if (display.includes('greater noida west')) score += 6;
+        if (address.includes('uttar pradesh')) score += 2;
+        if (['apartments', 'residential', 'residential_area', 'building'].includes(item.type || '')) score += 2;
+        return { item, score };
+      })
+      .sort((a, b) => b.score - a.score)[0];
+
+    if (scored && (!best || scored.score > 0)) {
+      const candidatePoint = {
+        lat: Number(scored.item.lat),
+        lng: Number(scored.item.lon),
+        label: scored.item.display_name,
+        source: 'OpenStreetMap Nominatim',
+      };
+      if (Number.isFinite(candidatePoint.lat) && Number.isFinite(candidatePoint.lng)) {
+        if (!best || scored.score > 0) best = candidatePoint;
+      }
+    }
+    if (best) break;
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+
+  geocodeCache.set(key, best);
+  return best;
 }
 
 async function routeWithProvider(origin: Point, destination: Point, mode: 'driving' | 'walking') {

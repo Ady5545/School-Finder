@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
-import { Heart, Scale, Trash2, Lock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Heart, Scale, Trash2, Lock, ShieldCheck, ArrowRight, Navigation } from 'lucide-react';
 import { SchoolCard } from './SchoolCard';
 import { EmptyState } from '../ui/EmptyState';
 import { Button } from '../ui/Button';
@@ -134,6 +134,19 @@ export const WishlistContentView: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2.5">
+          {savedSchools.length >= 1 && (
+            <Link href="/school-run">
+              <Button
+                variant="primary"
+                size="sm"
+                leftIcon={<Navigation className="w-3.5 h-3.5" />}
+                className="text-xs font-bold"
+              >
+                Plan School Run
+              </Button>
+            </Link>
+          )}
+
           {savedSchools.length >= 2 && (
             <Link href="/compare">
               <Button

@@ -39,8 +39,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/icon.svg',
-        alt: 'Admission Pitara',
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Admission Pitara — school discovery and admissions in Greater Noida',
       },
     ],
   },
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'School Admissions in Greater Noida | Admission Pitara',
     description: SITE_DESCRIPTION,
-    images: ['/icon.svg'],
+    images: ['/opengraph-image'],
   },
   icons: {
     icon: [

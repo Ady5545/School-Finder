@@ -21,6 +21,9 @@ interface SchoolsPageProps {
     sibling?: string;
     fee?: string;
     sort?: string;
+    curriculum?: string;
+    transport?: string;
+    trust?: string;
   }>;
 }
 
@@ -35,6 +38,9 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const initialSibling = params.sibling === 'true';
   const selectedFee = params.fee || 'all';
   const initialSort = params.sort || 'featured';
+  const initialCurriculum = params.curriculum || '';
+  const initialTransport = params.transport || 'all';
+  const initialTrust = params.trust || 'all';
 
   const allSchools = getAllSchools();
   const boards = getDistinctBoards();
@@ -72,6 +78,9 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
         initialSiblingOnly={initialSibling}
         initialFeeTier={selectedFee}
         initialSortBy={initialSort}
+        initialCurriculum={initialCurriculum}
+        initialTransport={initialTransport}
+        initialTrust={initialTrust}
       />
     </div>
   );

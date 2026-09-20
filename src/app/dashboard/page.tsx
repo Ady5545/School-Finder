@@ -38,6 +38,7 @@ import {
   Edit3,
   X,
   Shield,
+  ClipboardList,
 } from 'lucide-react';
 import { checkShortlistDeadlines } from '../../lib/notifications';
 import { useToast } from '../../components/ui/Toast';
@@ -288,6 +289,19 @@ export default function DashboardPage() {
           </Button>
         </div>
       )}
+
+      <Link href="/application-tracker" className="block rounded-2xl border border-sky-100 bg-sky-50/70 p-5 hover:bg-sky-50 transition-colors shadow-2xs">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white border border-sky-100 text-sky-700 flex items-center justify-center shrink-0"><ClipboardList className="w-5 h-5" /></div>
+            <div>
+              <h2 className="text-sm font-extrabold text-slate-900">Application Tracker</h2>
+              <p className="text-xs text-slate-600 mt-1">Keep school-specific notes, target dates, official links and application progress in one private place.</p>
+            </div>
+          </div>
+          <ArrowRight className="w-4 h-4 text-sky-700 shrink-0" />
+        </div>
+      </Link>
 
       {/* Header Profile Card */}
       <div className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-sm relative overflow-hidden">

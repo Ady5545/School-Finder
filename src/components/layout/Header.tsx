@@ -41,21 +41,21 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#fcfbf9]/95 backdrop-blur-md border-t-2 border-t-[var(--color-accent)] border-b border-[var(--color-border)] shadow-2xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 grid grid-cols-[auto_1fr_auto] items-center gap-4">
         {/* Logo / Brand Mark */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 min-w-0">
           <Link href="/" className="group flex items-center" aria-label="Admission Pitara Home">
             <BrandLogo size="md" />
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center justify-self-center gap-2" aria-label="Main Navigation">
             {navLinks.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 relative',
+                  'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 relative',
                   isActive(link.href)
                     ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] border border-[var(--color-brand-200)]/70 font-bold shadow-2xs'
                     : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface-subtle)]/70'
@@ -79,7 +79,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden sm:flex items-center gap-2 shrink-0">
+        <div className="hidden sm:flex items-center justify-self-end gap-2.5 shrink-0">
           <Link href="/wishlist">
             <IconButton
               aria-label={`Shortlisted Schools (${shortlist.length})`}
@@ -139,7 +139,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Affordances */}
-        <div className="flex items-center gap-1.5 sm:hidden">
+        <div className="flex items-center justify-self-end gap-1.5 sm:hidden">
           {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
             <IconButton

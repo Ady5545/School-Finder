@@ -32,7 +32,7 @@ export const Tabs: React.FC<TabsProps> = ({
       className={cn(
         'flex items-center gap-1 overflow-x-auto no-scrollbar',
         variant === 'underline' && 'border-b border-[var(--color-border)]',
-        variant === 'pills' && 'bg-[var(--color-surface-subtle)] p-1 rounded-xl',
+        variant === 'pills' && 'glass-chip p-1 rounded-xl',
         className
       )}
     >
@@ -57,7 +57,7 @@ export const Tabs: React.FC<TabsProps> = ({
               variant === 'pills' && [
                 'py-1.5 px-3.5 rounded-lg',
                 isActive
-                  ? 'bg-white text-[var(--color-primary)] font-semibold shadow-xs'
+                  ? 'bg-white/85 text-[var(--color-primary)] font-semibold shadow-sm backdrop-blur-md'
                   : 'text-[var(--color-content-muted)] hover:text-[var(--color-content)]',
               ]
             )}

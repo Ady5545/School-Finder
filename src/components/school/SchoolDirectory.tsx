@@ -37,7 +37,6 @@ import { useSchoolStore } from '../../lib/schoolStore';
 import { cn } from '../../lib/utils';
 import type { School } from '../../types/school';
 import { isSafeStoredSchoolCoordinate } from '../../lib/locationSafety';
-import { getSchoolTrustSummary } from '../../lib/dataTrust';
 
 interface SchoolDirectoryProps {
   initialSchools: School[];

@@ -49,7 +49,7 @@ export const Drawer: React.FC<DrawerProps> = ({
         />
         <div
           className={cn(
-            'relative z-10 w-full max-h-[90vh] sm:max-h-[85vh] bg-white rounded-t-2xl sm:rounded-t-3xl shadow-2xl flex flex-col border-t border-[var(--color-border)] animate-in slide-in-from-bottom duration-300 pb-safe',
+            'relative z-10 w-full max-h-[90vh] sm:max-h-[85vh] liquid-glass rounded-t-3xl sm:rounded-t-3xl shadow-2xl flex flex-col border-t border-[var(--color-border)] animate-in slide-in-from-bottom duration-300 pb-safe',
             className
           )}
         >
@@ -83,7 +83,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       <div className={cn('fixed inset-y-0 flex max-w-full', side === 'right' ? 'right-0' : 'left-0')}>
         <div
           className={cn(
-            'w-screen max-w-md bg-white p-6 shadow-2xl flex flex-col border-l border-[var(--color-border)] animate-in duration-200',
+            'w-screen max-w-md liquid-glass p-6 shadow-2xl rounded-l-3xl' flex flex-col border-l border-[var(--color-border)] animate-in duration-200',
             side === 'right' ? 'slide-in-from-right' : 'slide-in-from-left',
             className
           )}

@@ -53,8 +53,9 @@ suite.
   fallback message; fee ranges that can't be a single number go in `fees.estimatedFirstYearText`
   with `fees.estimatedFirstYear` set to `null`.
 - `fees.verificationStatus` says where fee data came from (e.g. `verified_from_source`,
-  `user_supplied`, `user_supplied_latest`, `not_publicly_verified`). Don't upgrade a status
-  without a source.
+  `not_publicly_verified`, `unverified_third_party`, `not_disclosed_by_school`). Only mark a
+  school `verified_from_source` when its fee data has been checked against the school's own
+  circular or website.
 
 ## Environment
 

@@ -18,7 +18,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
       : ''
   );
 
-  // User-supplied/calculated fees are still disclosed data when an annual figure exists.
+  // Calculated fees are still disclosed data when an annual figure exists.
   const isComparable =
     fees.disclosed !== false &&
     fees.comparableAnnualAvailable !== false &&

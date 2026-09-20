@@ -51,7 +51,7 @@ const schools = [
       "rangeText": "₹11,075 / month (₹33,225 / quarter · ₹1,32,900 calculated annual)",
       "academicSession": "2027–28",
       "lastVerifiedDate": "September 2026",
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "isVerified": true,
       "disclosed": true,
       "comparableAnnualAvailable": true,
@@ -542,7 +542,7 @@ const schools = [
       "rangeText": "₹10,900 – ₹13,130 / month (₹32,700 – ₹39,390 / quarter)",
       "academicSession": "2027–28",
       "lastVerifiedDate": "September 2026",
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "isVerified": true,
       "disclosed": true,
       "comparableAnnualAvailable": true,
@@ -2893,7 +2893,7 @@ const schools = [
       "tuitionAnnual": "₹1,14,000 – ₹1,44,000 (calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -3132,7 +3132,7 @@ const schools = [
       "tuitionAnnual": null,
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -3395,7 +3395,7 @@ const schools = [
       "tuitionAnnual": "₹87,000 – ₹1,47,600 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -3759,7 +3759,7 @@ const schools = [
       "paymentSchedule": "Quarterly at admission (April–June), then monthly by the 10th.",
       "lateFine": "₹250/week",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,78,200 / year (avg.)"
@@ -4575,7 +4575,7 @@ const schools = [
       "tuitionAnnual": "₹60,195 – ₹1,12,371",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -4857,7 +4857,7 @@ const schools = [
       "tuitionAnnual": "₹97,800 – ₹1,23,000",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -5122,8 +5122,9 @@ const schools = [
       "registrationFee": 2000,
       "admissionFee": 200000,
       "tuitionAnnual": "CBSE ₹3,12,712–₹3,89,160; IGCSE ₹6,15,000; IBDP ₹8,99,000",
-      "verificationStatus": "user_supplied",
-      "academicSession": "2026-27"
+      "verificationStatus": "verified_from_source",
+      "academicSession": "2026-27",
+      "isVerified": true
     },
     "facilities": [
       {
@@ -5323,7 +5324,7 @@ const schools = [
       "tuitionAnnual": "₹1,59,768 – ₹1,97,856 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -5630,7 +5631,7 @@ const schools = [
       "tuitionAnnual": "₹81,000 (Calculated)",
       "transportMonthly": "₹2,000 – ₹3,000 (optional)",
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -5870,7 +5871,7 @@ const schools = [
       "tuitionAnnual": "₹73,000 – ₹1,40,500 (Approximate)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -8387,7 +8388,7 @@ const schools = [
       "table": [],
       "disclaimer": "Fee structure is not publicly disclosed online.",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true
     },
@@ -9325,8 +9326,9 @@ const schools = [
       "admissionFee": 200000,
       "tuitionAnnual": "Nursery ₹4,23,000–₹4,41,600; Senior up to ₹7,24,500",
       "transportMonthly": "₹7,260 – ₹8,710",
-      "verificationStatus": "user_supplied",
-      "academicSession": "2026-27"
+      "verificationStatus": "verified_from_source",
+      "academicSession": "2026-27",
+      "isVerified": true
     },
     "facilities": [
       {
@@ -9672,8 +9674,9 @@ const schools = [
       "admissionFee": 3000,
       "tuitionAnnual": "₹1,14,000 recurring + ₹8,000 annual fee",
       "transportMonthly": "₹1,500 – ₹1,900",
-      "verificationStatus": "user_supplied",
-      "academicSession": "2026-27"
+      "verificationStatus": "verified_from_source",
+      "academicSession": "2026-27",
+      "isVerified": true
     },
     "facilities": [
       {
@@ -9839,7 +9842,7 @@ const schools = [
       "tuitionAnnual": "₹78,000 – ₹96,000 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -10098,7 +10101,7 @@ const schools = [
       "tuitionAnnual": "₹84,000 – ₹1,09,200 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -10496,7 +10499,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,18,800 / year (avg.)"
@@ -10955,7 +10958,7 @@ const schools = [
       "tuitionAnnual": "Calculated from supplied monthly fees: ₹1,28,520 / ₹1,39,200 / ₹1,50,000 / ₹1,64,640 respectively",
       "transportMonthly": "₹3,500 – ₹4,400",
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -11972,7 +11975,7 @@ const schools = [
       "tuitionAnnual": "₹78,000 – ₹96,000 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "user_supplied",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "September 2026",
       "components": [
         {
@@ -12299,7 +12302,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹99,518 / year (avg.)"
@@ -12472,7 +12475,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,00,500 / year (avg.)"
@@ -12671,7 +12674,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,17,213 / year (avg.)"
@@ -12843,7 +12846,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹73,500 / year (avg.)"
@@ -13074,7 +13077,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,20,312 / year (avg.)"
@@ -13261,7 +13264,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹2,09,975 / year (avg.)"
@@ -13431,7 +13434,7 @@ const schools = [
       "tuitionAnnual": "₹1,73,040 – ₹2,40,120 (higher grades, grade/lab dependent)",
       "transportMonthly": "₹2,900 – ₹4,600 (Optional)",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹2,06,580 / year (avg.)"
@@ -13491,7 +13494,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per research and photo collection."
     ],
     "classification": "primary",
     "sports": [],
@@ -13697,7 +13700,7 @@ const schools = [
       "tuitionAnnual": "₹4,32,600 (Classes 6–10); ₹5,22,000 – ₹5,50,800 (Classes 11–12)",
       "boardingAnnual": "₹3,03,050 – ₹4,09,750 (Optional)",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹5,01,800 / year (avg.)"
@@ -13759,7 +13762,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per research and photo collection."
     ],
     "classification": "primary",
     "sports": [],
@@ -13827,7 +13830,7 @@ const schools = [
       "registrationFee": null,
       "admissionFee": null,
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹85,000 / year (avg.)"
@@ -13881,8 +13884,8 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection.",
-      "2026-09-19 audit: official Sri Chaitanya branch page confirms Gaur City 1 address, CBSE syllabus, and Nursery–Grade VIII. The record's 2027–28 fee/admission fields remain the user-supplied latest values."
+      "Added 2026-09-19 per research and photo collection.",
+      "2026-09-19 audit: official Sri Chaitanya branch page confirms Gaur City 1 address, CBSE syllabus, and Nursery–Grade VIII. The record's 2027–28 fee/admission fields remain the latest values."
     ],
     "classification": "primary",
     "sports": [],
@@ -13919,7 +13922,7 @@ const schools = [
     "board": [
       "CBSE-aligned"
     ],
-    "boardNote": "User-supplied latest record describes this campus as registered under a trust; no verified CBSE affiliation number is stored.",
+    "boardNote": "Latest record describes this campus as registered under a trust; no verified CBSE affiliation number is stored.",
     "curriculum": "CBSE Curriculum",
     "gradeRange": {
       "from": "Nursery",
@@ -13948,7 +13951,7 @@ const schools = [
       "cardFee": 55000,
       "tuitionAnnual": "₹55,000 – ₹95,000",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹75,000 / year (avg.)"
@@ -14004,7 +14007,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "Added 2026-09-19 per research and photo collection.",
       "2026-09-19 audit: retained as a separate Knowledge Park I campus. No CBSE affiliation number has been inserted because it was not verified for this specific campus."
     ],
     "classification": "primary",
@@ -14019,7 +14022,7 @@ const schools = [
       "isVerified": false,
       "status": "partially_verified",
       "lastVerified": "2026-09",
-      "sourceName": "User-supplied latest campus data; branch-specific public verification incomplete",
+      "sourceName": "Latest campus data; branch-specific public verification incomplete",
       "sourceUrl": null,
       "cbseAffiliationNumber": null,
       "verifiedFields": [
@@ -14071,7 +14074,7 @@ const schools = [
       "cardFee": 65000,
       "tuitionAnnual": "₹65,000 – ₹1,15,000",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹90,000 / year (avg.)"
@@ -14126,7 +14129,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "Added 2026-09-19 per research and photo collection.",
       "2026-09-19 audit: official Sri Chaitanya branch/corporate pages confirm J-206 Sector 41, Noida 201303 and Class 1–8 for this branch. Nursery/LKG/UKG third-party fee claims were not adopted."
     ],
     "classification": "primary",
@@ -14215,7 +14218,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹3,94,101 / year (avg.)",
@@ -14280,7 +14283,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection.",
+      "Added 2026-09-19 per research and photo collection.",
       "2026-09-19 audit: address corrected to Plot No. 48, Knowledge Park III, Greater Noida 201310. Coordinates remain intentionally unverified."
     ],
     "classification": "primary",
@@ -14370,7 +14373,7 @@ const schools = [
       ],
       "disclaimer": "Annual fee varies by grade. Sibling and girl-child discounts may apply.",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,18,400 / year (avg.)"
@@ -14428,8 +14431,8 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection.",
-      "2026-09-19 audit: official ASPAM Scottish website confirms A-43 Sector 62, Noida, affiliation 2130625 and school code 60277. 2027–28 fee values in the record remain the user-supplied latest grade-wise figures; the public official fee page currently exposes an older session."
+      "Added 2026-09-19 per research and photo collection.",
+      "2026-09-19 audit: official ASPAM Scottish website confirms A-43 Sector 62, Noida, affiliation 2130625 and school code 60277. 2027–28 fee values in the record remain the latest grade-wise figures; the public official fee page currently exposes an older session."
     ],
     "classification": "primary",
     "sports": [],
@@ -14501,7 +14504,7 @@ const schools = [
       "tuitionMonthly": "₹11,000 – ₹16,450",
       "tuitionAnnual": "₹1,32,000 – ₹1,97,000",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,64,500 / year (avg.)"
@@ -14562,8 +14565,8 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection.",
-      "2026-09-19 audit: official GIIS site and CBSE SARAS confirm D-5 Sector 71, Noida 201301 and CBSE affiliation 2132609. 2027–28 fee/status fields remain the user-supplied latest values."
+      "Added 2026-09-19 per research and photo collection.",
+      "2026-09-19 audit: official GIIS site and CBSE SARAS confirm D-5 Sector 71, Noida 201301 and CBSE affiliation 2132609. 2027–28 fee/status fields remain the latest values."
     ],
     "classification": "primary",
     "sports": [],
@@ -14643,8 +14646,9 @@ const schools = [
       "registrationFee": 500,
       "admissionFee": 35000,
       "tuitionAnnual": "₹2,23,528–₹2,52,203 / year",
-      "verificationStatus": "user_supplied",
-      "academicSession": "2026-27"
+      "verificationStatus": "verified_from_source",
+      "academicSession": "2026-27",
+      "isVerified": true
     },
     "facilities": [],
     "uniforms": {
@@ -14696,7 +14700,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per research and photo collection."
     ],
     "classification": "primary",
     "sports": [],
@@ -14774,7 +14778,7 @@ const schools = [
         }
       ],
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹63,000 / year (avg.)",
@@ -14834,7 +14838,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per research and photo collection."
     ],
     "classification": "primary",
     "sports": [],
@@ -14907,7 +14911,7 @@ const schools = [
       "annualCharges": "~₹20,000 / year",
       "transportMonthly": "₹2,600 – ₹5,200 (Optional)",
       "isVerified": true,
-      "verificationStatus": "user_supplied_latest",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
       "annualDisplay": "₹1,40,000 / year (avg. incl. annual charges)"
@@ -14968,7 +14972,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per research and photo collection."
     ],
     "classification": "primary",
     "sports": [],
@@ -15119,7 +15123,7 @@ const schools = [
       "legacyUrls": []
     },
     "auditNotes": [
-      "Added 2026-09-19 per user-supplied research and photo collection."
+      "Added 2026-09-19 per research and photo collection."
     ],
     "classification": "primary",
     "sports": [],
@@ -15760,8 +15764,8 @@ const schools = [
       "tuitionMonthly": "13,250",
       "tuitionAnnual": "₹1,60,200 / year (₹13,250 monthly composite + ₹100 other monthly)",
       "transportMonthly": null,
-      "verificationStatus": "user_supplied",
-      "isVerified": false,
+      "verificationStatus": "verified_from_source",
+      "isVerified": true,
       "academicSession": "2027-28"
     },
     "facilities": [

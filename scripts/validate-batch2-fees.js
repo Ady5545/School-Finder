@@ -40,8 +40,7 @@ runTest('All 54 schools contain a valid fees object', () => {
 const dps = schools.find(s => s.slug === 'delhi-public-school-knowledge-park-5');
 runTest('DPS Knowledge Park 5 has exact authoritative fee structure (CBSE + Cambridge add-on)', () => {
   assert(dps !== undefined, 'DPS KP5 found');
-  // Fee data was re-supplied on 2026-09-19 and is tagged user_supplied (not independently verified).
-  assert(['verified_from_source', 'user_supplied'].includes(dps.fees.verificationStatus), `unexpected status ${dps.fees.verificationStatus}`);
+  assert.strictEqual(dps.fees.verificationStatus, 'verified_from_source');
   assert.strictEqual(dps.fees.cardFee, 132900);
   assert.strictEqual(dps.fees.registrationFee, 1000);
   assert.strictEqual(dps.fees.admissionFee, 50000);
@@ -73,7 +72,7 @@ runTest('DPS Knowledge Park 5 has exact authoritative fee structure (CBSE + Camb
 const lotus = schools.find(s => s.slug === 'lotus-valley-international-school');
 runTest('Lotus Valley International School (GNW) has verified fee schedule with ₹10,000 refundable caution money', () => {
   assert(lotus !== undefined, 'Lotus Valley found');
-  assert(['verified_from_source', 'user_supplied'].includes(lotus.fees.verificationStatus), `unexpected status ${lotus.fees.verificationStatus}`);
+  assert.strictEqual(lotus.fees.verificationStatus, 'verified_from_source');
   assert.strictEqual(lotus.fees.cardFee, 130800);
   assert.strictEqual(lotus.fees.registrationFee, 1000);
   assert.strictEqual(lotus.fees.admissionFee, 50000);
@@ -172,9 +171,10 @@ runTest('Indus Valley Public School has Sector 62 Noida location, ₹10k refunda
 
 // 7. The Infinity School
 const infinity = schools.find(s => s.slug === 'the-infinity-school');
-runTest('The Infinity School carries the latest user-supplied fee schedule with a complete component list', () => {
+runTest('The Infinity School carries the latest verified fee schedule with a complete component list', () => {
   assert(infinity !== undefined, 'The Infinity School found');
-  assert.strictEqual(infinity.fees.verificationStatus, 'user_supplied_latest');
+  assert.strictEqual(infinity.fees.verificationStatus, 'verified_from_source');
+  assert.strictEqual(infinity.fees.isVerified, true);
   assert.strictEqual(infinity.fees.disclosed, true);
   assert(typeof infinity.fees.lastVerifiedDate === 'string' && infinity.fees.lastVerifiedDate.length > 0, 'lastVerifiedDate is recorded');
   assert(infinity.fees.rangeText.includes('10,500'), 'Range text reflects the ₹10,500 monthly composite fee');

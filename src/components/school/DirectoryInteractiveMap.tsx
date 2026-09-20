@@ -26,6 +26,7 @@ import type { School } from '../../types/school';
 import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
 import { RatingDisplay } from '../ui/RatingDisplay';
+import { isSafeStoredSchoolCoordinate } from '../../lib/locationSafety';
 
 export interface ProximityAnchor {
   id: string;
@@ -156,9 +157,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
   const schoolsWithCoordinates = useMemo(() => {
     return schools.filter(
       (s): s is School & { location: { coordinates: { lat: number; lng: number; isVerified: true } } } =>
-        typeof s.location?.coordinates?.lat === 'number' &&
-        typeof s.location?.coordinates?.lng === 'number' &&
-        s.location?.coordinates?.isVerified === true
+        isSafeStoredSchoolCoordinate(s.location?.coordinates)
     );
   }, [schools]);
 

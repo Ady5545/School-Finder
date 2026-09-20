@@ -582,9 +582,9 @@ export const SchoolComparisonView: React.FC = () => {
                 <IndianRupee className="w-4 h-4 text-emerald-600" /> 3. Audited Fee Structure
               </h3>
 
-              {/* Annual Fee */}
+              {/* Comparable Annual Figure */}
               <div className="space-y-2">
-                <span className="text-[11px] font-bold text-slate-500 block uppercase">Audited Annual Fee</span>
+                <span className="text-[11px] font-bold text-slate-500 block uppercase">Comparable annual directory figure</span>
                 <div className="grid grid-cols-1 gap-2">
                   {selectedSchools.map(s => {
                     const isComparable =
@@ -609,6 +609,24 @@ export const SchoolComparisonView: React.FC = () => {
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Estimated First-Year Cost */}
+              <div className="space-y-2 pt-2 border-t border-slate-100">
+                <span className="text-[11px] font-bold text-slate-500 block uppercase">Estimated First-Year Cost</span>
+                <div className="grid grid-cols-1 gap-2">
+                  {selectedSchools.map(s => (
+                    <div key={s.id} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+                      <span className="font-bold text-slate-900 truncate max-w-[160px]">{s.name}</span>
+                      <span className="font-black text-emerald-900 text-sm">
+                        {typeof s.fees.estimatedFirstYear === 'number'
+                          ? formatCurrency(s.fees.estimatedFirstYear)
+                          : s.fees.estimatedFirstYearText || 'Not documented'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[10px] text-slate-500">Shown separately from annual tuition; estimates are not guaranteed payable totals.</p>
               </div>
 
               {/* Admission & Registration Fee */}
@@ -847,9 +865,9 @@ export const SchoolComparisonView: React.FC = () => {
                         </div>
 
                         <div>
-                          <span className="text-slate-400 block text-[9px] uppercase font-bold">Annual Fee</span>
+                          <span className="text-slate-400 block text-[9px] uppercase font-bold">Comparable Annual</span>
                           <span className="font-extrabold text-emerald-800">
-                            {school.fees.cardFee ? formatCurrency(school.fees.cardFee) + '/yr' : (school.fees.rangeText || 'Disclosed')}
+                            {school.fees.cardFee && school.fees.comparableAnnualAvailable !== false ? formatCurrency(school.fees.cardFee) + '/yr' : (school.fees.rangeText || 'Not documented')}
                           </span>
                         </div>
 

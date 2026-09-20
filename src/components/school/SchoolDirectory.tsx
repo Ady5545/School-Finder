@@ -610,7 +610,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search school name, alternate name, sector, board, sports (e.g., DPS, Swimming, CBSE, Techzone 4)..."
+            placeholder="Search school, area, board, curriculum, sports or facilities (e.g., DPS, CBSE, Swimming, Techzone 4)..."
             className="w-full pl-10 pr-24 py-2.5 sm:py-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs sm:text-sm text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/75 focus:border-[var(--color-primary)] focus:ring-3 focus:ring-[var(--color-primary-light)] outline-none transition-all shadow-warm-2xs"
           />
           <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
@@ -808,7 +808,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             </div>
 
             <div className="flex items-center gap-1">
-              <span className="font-bold text-[var(--color-content)]">Data check:</span>
+              <span className="font-bold text-[var(--color-content)]">Data trust:</span>
               <select value={selectedTrust} onChange={e => setSelectedTrust(e.target.value)} className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)]">
                 <option value="all">Any</option>
                 <option value="recent">Checked recently</option>

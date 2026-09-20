@@ -54,7 +54,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION: EXACT REPLICATION FROM USER IMAGE 1                      */}
       {/* ========================================================================= */}
-      <section className="relative w-full bg-[#f4f7f8] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
+      <section className="relative w-full page-glass-section bg-[#f4f7f8] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
         {/* Quiet editorial accents — intentionally soft and non-technical. */}
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[360px] rounded-full bg-[#e7eef2] opacity-75 blur-3xl pointer-events-none" />
         <div className="absolute top-28 -left-28 w-64 h-64 rounded-full bg-[#fff3e8] opacity-55 blur-3xl pointer-events-none" />
@@ -63,7 +63,7 @@ export default function HomePage() {
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="w-full flex flex-col items-center text-center">
             {/* Top Pill Badge matching Image 1 */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-slate-800 text-xs sm:text-[13px] font-medium mb-6 sm:mb-8 border border-[#e5dfd5] shadow-xs backdrop-blur-md mx-auto">
+            <div className="inline-flex glass-interactive glass-shine items-center gap-2 px-4 py-1.5 rounded-full bg-white/55 backdrop-blur-xl text-slate-800 text-xs sm:text-[13px] font-medium mb-6 sm:mb-8 border border-[#e5dfd5] shadow-xs backdrop-blur-md mx-auto">
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#c2410c] shrink-0" />
               <span className="font-semibold text-slate-900">School discovery across Greater Noida West &amp; Noida Extension</span>
               <span className="text-slate-400 mx-0.5">•</span>
@@ -86,7 +86,7 @@ export default function HomePage() {
             </p>
 
             {/* Search Bar */}
-            <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto rounded-[22px] shadow-[0_18px_55px_rgba(15,45,74,0.10)]">
+            <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto rounded-[22px] liquid-glass-hover">
               <HomeSearch className="w-full" />
             </div>
 
@@ -95,31 +95,31 @@ export default function HomePage() {
               <span className="font-bold text-[var(--color-content)] mr-1">Quick Explore:</span>
               <Link
                 href="/schools?board=CBSE"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 CBSE
               </Link>
               <Link
                 href="/schools?board=IB"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 IB &amp; Cambridge
               </Link>
               <Link
                 href="/schools?area=Sector%2016B"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
               >
                 Sector 16B
               </Link>
               <Link
                 href="/schools?area=Techzone%204"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 Techzone 4
               </Link>
               <Link
                 href="/schools?area=Knowledge%20Park%205"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
               >
                 Knowledge Park 5
               </Link>
@@ -157,7 +157,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 2. COMPACT PROOF STRIP (SINGLE HORIZONTAL BENCHMARK SECTION)              */}
       {/* ========================================================================= */}
-      <section className="w-full bg-[#f4f7fb] border-b border-[var(--color-border)] py-8 sm:py-10 reveal-on-scroll">
+      <section className="w-full page-glass-section bg-[#f4f7fb] border-b border-[var(--color-border)] py-8 sm:py-10 reveal-on-scroll">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
             <div className="text-center pt-3 sm:pt-0">
@@ -202,7 +202,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 3. METHODOLOGY: PARENT-CENTRIC METHODOLOGY                                 */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)]">
+      <section className="w-full page-glass-section py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 flex flex-col items-center reveal-on-scroll">
             {/* Top Badge matching Image 3 */}
@@ -221,7 +221,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
             {/* 01 Discover */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="1">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="1">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#eff6ff] text-[#1e40af] font-bold text-xs mb-5">
                   01
@@ -244,7 +244,7 @@ export default function HomePage() {
             </div>
 
             {/* 02 Understand */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="2">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="2">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff7ed] text-[#9a3412] font-bold text-xs mb-5">
                   02
@@ -267,7 +267,7 @@ export default function HomePage() {
             </div>
 
             {/* 03 Compare */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="3">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="3">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#ecfdf5] text-[#065f46] font-bold text-xs mb-5">
                   03
@@ -290,7 +290,7 @@ export default function HomePage() {
             </div>
 
             {/* 04 Shortlist */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="4">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="4">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff1f2] text-[#9f1239] font-bold text-xs mb-5">
                   04
@@ -313,7 +313,7 @@ export default function HomePage() {
             </div>
 
             {/* 05 Apply */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/90 shadow-warm-2xs hover:shadow-warm-md hover:-translate-y-1 transition-all flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="5">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="5">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#f0f9ff] text-[#0369a1] font-bold text-xs mb-5">
                   05
@@ -370,7 +370,7 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 6. FINAL COMPACT CTA                                                      */}
       {/* ========================================================================= */}
-      <section className="w-full py-16 sm:py-20 bg-[#f0f5fa] border-t border-[var(--color-border)] reveal-on-scroll">
+      <section className="w-full page-glass-section py-16 sm:py-20 bg-[#f0f5fa] border-t border-[var(--color-border)] reveal-on-scroll">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
             Find the right school with clarity.

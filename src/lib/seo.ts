@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { School } from '../types/school';
+import { isSafeStoredSchoolCoordinate } from './locationSafety';
 
 export const SITE_NAME = 'Admission Pitara';
 export const SITE_SHORT_NAME = 'Admission Pitara';
@@ -142,9 +143,7 @@ export function generateSchoolJsonLd(school: School) {
       ...(school.location.pincode ? { postalCode: school.location.pincode } : {}),
       addressCountry: 'IN',
     },
-    ...(school.location?.coordinates?.isVerified === true &&
-    school.location?.coordinates?.lat != null &&
-    school.location?.coordinates?.lng != null
+    ...(isSafeStoredSchoolCoordinate(school.location?.coordinates)
       ? {
           geo: {
             '@type': 'GeoCoordinates',

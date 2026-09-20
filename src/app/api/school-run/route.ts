@@ -15,10 +15,10 @@ async function geocode(query: string): Promise<Point | null> {
   // Society names are user-entered and may already contain locality/city text.
   // Search the exact name first, then progressively broader locality variants.
   const cleaned = raw
-    .replace(/,?\\s*(uttar pradesh|india)\\s*$/i, '')
-    .replace(/,?\\s*greater noida west\\s*$/i, '')
-    .replace(/,?\\s*noida extension\\s*$/i, '')
-    .replace(/,?\\s*greater noida\\s*$/i, '')
+    .replace(/,?\s*(uttar pradesh|india)\s*$/i, '')
+    .replace(/,?\s*greater noida west\s*$/i, '')
+    .replace(/,?\s*noida extension\s*$/i, '')
+    .replace(/,?\s*greater noida\s*$/i, '')
     .trim();
 
   const queries = Array.from(new Set([

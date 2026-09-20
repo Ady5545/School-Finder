@@ -10,6 +10,7 @@ import { SchoolImage } from './SchoolImage';
 import { CardFeeDisplay } from './CardFeeDisplay';
 import { AdmissionStatus } from './AdmissionStatus';
 import { LocationDisplay } from './LocationDisplay';
+import { DataTrustBadge } from './DataTrustBadge';
 import { useSchoolStore } from '../../lib/schoolStore';
 import { useAuth } from '../../lib/authContext';
 import { useToast } from '../ui/Toast';
@@ -140,11 +141,14 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
           </div>
 
           {/* School Name */}
-          <Link href={`/schools/${school.slug}`} className="group/title block">
-            <h3 className="text-[17px] font-bold text-[var(--color-content)] group-hover/title:text-[var(--color-primary)] transition-colors line-clamp-1 leading-snug tracking-tight">
+          <div className="flex items-center justify-between gap-2">
+            <Link href={`/schools/${school.slug}`} className="group/title block min-w-0 flex-1">
+              <h3 className="text-[17px] font-bold text-[var(--color-content)] group-hover/title:text-[var(--color-primary)] transition-colors line-clamp-1 leading-snug tracking-tight">
               {school.name}
-            </h3>
-          </Link>
+              </h3>
+            </Link>
+            <DataTrustBadge school={school} compact />
+          </div>
 
           {/* Tagline / Summary */}
           <p className="text-xs text-[var(--color-content-muted)] line-clamp-2 mt-1.5 leading-relaxed">

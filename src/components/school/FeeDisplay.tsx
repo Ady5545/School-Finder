@@ -43,11 +43,17 @@ interface FeePresentation {
 }
 
 function getFeePresentation(fees: SchoolFees): FeePresentation {
-  const tuitionAnnual = typeof fees.tuitionAnnual === 'string' ? cleanFeeText(fees.tuitionAnnual) : '';
-  const annualDisplay = typeof fees.annualDisplay === 'string' ? cleanFeeText(fees.annualDisplay) : '';
-  const rangeText = typeof fees.rangeText === 'string' ? cleanFeeText(fees.rangeText) : '';
+  const rawTuitionAnnual = typeof fees.tuitionAnnual === 'string' ? fees.tuitionAnnual : '';
+  const rawAnnualDisplay = typeof fees.annualDisplay === 'string' ? fees.annualDisplay : '';
+  const rawRangeText = typeof fees.rangeText === 'string' ? fees.rangeText : '';
+  const tuitionAnnual = cleanFeeText(rawTuitionAnnual);
+  const annualDisplay = cleanFeeText(rawAnnualDisplay);
+  const rangeText = cleanFeeText(rawRangeText);
   const tuitionMonthly = typeof fees.tuitionMonthly === 'string' ? cleanFeeText(fees.tuitionMonthly) : '';
   const tuitionQuarterly = typeof fees.tuitionQuarterly === 'string' ? cleanFeeText(fees.tuitionQuarterly) : '';
+  const tuitionAnnualCalculated = /calculated|derived/i.test(rawTuitionAnnual);
+  const annualDisplayCalculated = /calculated|derived/i.test(rawAnnualDisplay);
+  const rangeTextCalculated = /calculated|derived/i.test(rawRangeText);
 
   if (
     tuitionAnnual &&
@@ -55,7 +61,7 @@ function getFeePresentation(fees: SchoolFees): FeePresentation {
     !hasQuarterlyMarker(tuitionAnnual) &&
     (hasAnnualMarker(tuitionAnnual) || isPlainAnnualValue(tuitionAnnual))
   ) {
-    const isCalculated = /calculated|derived/i.test(tuitionAnnual);
+    const isCalculated = tuitionAnnualCalculated;
     return { kind: 'annual', label: isCalculated ? 'Annual Fee (calculated)' : 'Annual Fee', value: tuitionAnnual };
   }
 
@@ -65,7 +71,7 @@ function getFeePresentation(fees: SchoolFees): FeePresentation {
     !hasQuarterlyMarker(annualDisplay) &&
     (hasAnnualMarker(annualDisplay) || isPlainAnnualValue(annualDisplay))
   ) {
-    const isCalculated = /calculated|derived/i.test(annualDisplay);
+    const isCalculated = annualDisplayCalculated;
     return { kind: 'annual', label: isCalculated ? 'Annual Fee (calculated)' : 'Annual Fee', value: annualDisplay };
   }
 
@@ -78,7 +84,7 @@ function getFeePresentation(fees: SchoolFees): FeePresentation {
   }
 
   if (rangeText && hasAnnualMarker(rangeText) && !hasMonthlyMarker(rangeText) && !hasQuarterlyMarker(rangeText)) {
-    const isCalculated = /calculated|derived/i.test(rangeText);
+    const isCalculated = rangeTextCalculated;
     return { kind: 'annual', label: isCalculated ? 'Annual Fee (calculated)' : 'Annual Fee', value: rangeText };
   }
 

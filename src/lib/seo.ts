@@ -23,7 +23,7 @@ export function buildPageMetadata(
   const fullTitle = title.includes('Admission Pitara') ? title : `${title} | Admission Pitara`;
   const metaDesc = description || SITE_DESCRIPTION;
   const canonicalUrl = absoluteUrl(path);
-  const ogImage = image ? absoluteUrl(image) : absoluteUrl('/icon.svg');
+  const ogImage = image ? absoluteUrl(image) : absoluteUrl('/opengraph-image');
 
   return {
     title: fullTitle,
@@ -176,6 +176,7 @@ export function generateOrganizationJsonLd() {
     name: SITE_SHORT_NAME,
     url: cleanBaseUrl,
     logo: absoluteUrl('/icon.svg'),
+    image: absoluteUrl('/opengraph-image'),
     description: SITE_DESCRIPTION,
     areaServed: [
       { '@type': 'City', name: 'Greater Noida' },

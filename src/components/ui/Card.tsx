@@ -13,7 +13,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         data-reveal={reveal ? 'card' : undefined}
         className={cn(
-          'rounded-xl border border-[var(--color-border)] bg-white shadow-xs',
+          'rounded-xl glass-surface shadow-xs',
           reveal && 'reveal-on-scroll',
           hoverEffect && 'tactile-card hover:border-[var(--color-border-strong)] hover:shadow-sm hover:-translate-y-0.5',
           className

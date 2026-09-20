@@ -1378,6 +1378,7 @@ export async function updateUserProfileAsync(
     preferredSchoolLocality?: string;
     preferredBoards?: string[];
     analyticsConsent?: boolean;
+    applicationTracker?: ApplicationTrackerItem[];
     status?: 'active' | 'disabled';
     role?: 'parent' | 'admin';
   }

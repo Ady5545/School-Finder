@@ -34,7 +34,7 @@ import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
 import { AdmissionStatus } from './AdmissionStatus';
 import { useSchoolStore } from '../../lib/schoolStore';
-import { getAllSchools, getSchoolBySlug, getCanonicalSchools } from '../../lib/schools';
+import { getAllSchools, getPublicSchoolBySlug, getCanonicalSchools } from '../../lib/schools';
 import { formatCurrency, cn } from '../../lib/utils';
 import type { School, DetailedFeeComponent, FeeConcession } from '../../types/school';
 
@@ -55,7 +55,7 @@ export const SchoolComparisonView: React.FC = () => {
   // Get full school objects from compareList
   const selectedSchools: School[] = useMemo(() => {
     return compareList
-      .map(slug => getSchoolBySlug(slug))
+      .map(slug => getPublicSchoolBySlug(slug))
       .filter((s): s is School => Boolean(s));
   }, [compareList]);
 
@@ -67,7 +67,7 @@ export const SchoolComparisonView: React.FC = () => {
       if (urlSchools && compareList.length === 0) {
         const slugs = urlSchools.split(',').map(s => s.trim()).filter(Boolean);
         slugs.slice(0, 4).forEach(slug => {
-          const s = getSchoolBySlug(slug);
+          const s = getPublicSchoolBySlug(slug);
           if (s) addCompare(s.slug, s.name);
         });
       }
@@ -108,7 +108,7 @@ export const SchoolComparisonView: React.FC = () => {
   const loadPreset = (slugs: string[]) => {
     clearCompare();
     slugs.forEach(slug => {
-      const school = getSchoolBySlug(slug);
+      const school = getPublicSchoolBySlug(slug);
       if (school) addCompare(school.slug, school.name);
     });
   };

@@ -55,15 +55,22 @@ export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string 
       return number ? `Up to ₹${formatIndianNumber(number[1])}${number[2] || ''}` : candidate;
     }
 
-    const annualToken = candidate.match(/₹?\s*([\d,]+)(\+)?\s*(?:\/\s*(?:year|annum)|per\s+year|annual|yearly)?/i);
-    if (annualToken) {
-      const prefix = candidate.match(/^up to\s+/i) ? 'Up to ' : '';
-      return `${prefix}₹${formatIndianNumber(annualToken[1])}${annualToken[2] || ''}`;
+    const hasMonthlyMarker = /\/\s*month|per\s+month|monthly/i.test(candidate);
+    const hasQuarterlyMarker = /\/\s*quarter|per\s+quarter|quarterly/i.test(candidate);
+    const hasAnnualMarker = /\/\s*year|per\s+year|annual|per\s+annum|yearly/i.test(candidate);
+
+    if (hasMonthlyMarker || hasQuarterlyMarker) {
+      continue;
     }
 
     const range = candidate.match(/₹?\s*([\d,]+)\s*[–-]\s*₹?\s*([\d,]+)/);
-    if (range) {
+    if (range && (hasAnnualMarker || /calculated/i.test(candidate))) {
       return `₹${formatIndianNumber(range[2])}`;
+    }
+
+    const annualToken = candidate.match(/₹?\s*([\d,]+)(\+)?/);
+    if (annualToken && (hasAnnualMarker || /^₹?\s*[\d,]+(?:\+)?$/i.test(candidate))) {
+      return `₹${formatIndianNumber(annualToken[1])}${annualToken[2] || ''}`;
     }
   }
 

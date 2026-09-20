@@ -22,7 +22,30 @@ import {
 
 export const dynamic = 'force-dynamic';
 
+export const metadata = {
+  title: 'School Admissions in Greater Noida West | Admission Pitara',
+  description:
+    'Find schools and admission information in Greater Noida West and Noida Extension. Compare fees, boards, facilities, school profiles and current admission details.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'School Admissions in Greater Noida West | Admission Pitara',
+    description:
+      'Find schools and admission information in Greater Noida West and Noida Extension. Compare fees, boards, facilities, school profiles and current admission details.',
+    url: '/',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'School Admissions in Greater Noida West | Admission Pitara',
+    description:
+      'Find schools and admission information in Greater Noida West and Noida Extension. Compare fees, boards, facilities, school profiles and current admission details.',
+  },
+};
+
 export default function HomePage() {
+
   const allSchools = getAllSchools();
 
   return (

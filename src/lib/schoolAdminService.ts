@@ -393,7 +393,7 @@ export function createAdminSchool(
       tuitionMonthly: schoolData.fees?.tuitionMonthly || '₹10,000/mo',
       tuitionQuarterly: schoolData.fees?.tuitionQuarterly || '₹30,000/qtr',
       source: schoolData.fees?.source || 'Official School Prospectus',
-      academicYear: schoolData.fees?.academicYear || '2025-2026',
+      academicYear: schoolData.fees?.academicYear || '2027-28',
       verifiedDate: new Date().toISOString().split('T')[0],
       isVerified: true,
     },
@@ -407,7 +407,7 @@ export function createAdminSchool(
     achievements: schoolData.achievements || ['Affiliated with CBSE New Delhi'],
     admissions: schoolData.admissions || {
       status: 'Admissions Open',
-      academicYear: '2025-2026',
+      academicYear: '2027-28',
       process: 'Online registration followed by parent interaction and document verification.',
       milestones: [
         {

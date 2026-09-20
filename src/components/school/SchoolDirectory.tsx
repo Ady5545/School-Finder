@@ -155,7 +155,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
       .map(value => {
         const numeric = Date.parse(value);
         if (!Number.isNaN(numeric)) return numeric;
-        const month = value.match(/^(\\d{4})-(\\d{2})$/);
+        const month = value.match(/^(\d{4})-(\d{2})$/);
         return month ? Date.parse(month[1] + '-' + month[2] + '-01') : NaN;
       })
       .filter(value => !Number.isNaN(value));

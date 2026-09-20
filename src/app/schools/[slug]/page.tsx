@@ -86,7 +86,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
   const { slug } = await params;
   const school = getSchoolBySlug(slug);
 
-  if (!school || school.isArchived) {
+  if (!school || school.slug === 'mount-vinson-school') {
     notFound();
   }
 

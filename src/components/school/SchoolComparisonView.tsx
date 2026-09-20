@@ -199,13 +199,38 @@ export const SchoolComparisonView: React.FC = () => {
     return (
       <div className="w-full flex flex-col items-center">
         <div className="max-w-xl w-full">
-          <EmptyState
-            icon={<Scale className="w-8 h-8 text-[var(--color-primary)]" />}
-            title="No schools in your comparison list"
-            description="Add 2 to 4 schools from the directory or choose one of our curated comparisons below to evaluate fees, curriculum, sports facilities, and admissions side-by-side."
-            actionLabel="Browse All Schools"
-            actionHref="/schools"
-          />
+          <div className="max-w-2xl w-full rounded-3xl border border-[var(--color-border)] bg-white p-6 sm:p-8 shadow-warm-sm">
+            <div className="flex items-start gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-[var(--color-primary-light)] text-[var(--color-primary)] flex items-center justify-center shrink-0">
+                <Scale className="w-5 h-5" />
+              </div>
+              <div>
+                <h1 className="text-xl sm:text-2xl font-black text-[var(--color-content)]">Build your comparison</h1>
+                <p className="text-sm text-[var(--color-content-muted)] mt-1">Choose up to four schools here — no need to visit the directory first.</p>
+              </div>
+            </div>
+            <div className="mt-5 relative">
+              <input
+                type="search"
+                value={selectorQuery}
+                onChange={e => setSelectorQuery(e.target.value)}
+                placeholder="Search a school, sector or area…"
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:bg-white focus:border-[var(--color-primary)]"
+              />
+              {selectorQuery && (
+                <div className="absolute z-20 top-full mt-2 left-0 right-0 max-h-64 overflow-y-auto rounded-2xl border border-slate-200 bg-white shadow-xl p-1">
+                  {filteredAvailable.slice(0, 10).map(s => (
+                    <button key={s.slug} type="button" onClick={() => { addCompare(s.slug, s.name); setSelectorQuery(''); }} className="w-full text-left px-3 py-2.5 rounded-xl hover:bg-slate-50 flex items-center justify-between gap-3">
+                      <span className="text-xs font-bold text-slate-900 truncate">{s.name}</span>
+                      <span className="text-[10px] text-slate-500 shrink-0">{s.location.area || s.location.sector}</span>
+                    </button>
+                  ))}
+                  {filteredAvailable.length === 0 && <p className="px-3 py-4 text-xs text-slate-500 text-center">No matching school found.</p>}
+                </div>
+              )}
+            </div>
+            <p className="text-[11px] text-slate-500 mt-3">Selected schools appear in the comparison matrix as you add them.</p>
+          </div>
         </div>
 
         {/* Curated Comparison Presets */}
@@ -213,7 +238,7 @@ export const SchoolComparisonView: React.FC = () => {
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="w-4 h-4 text-[var(--color-accent)]" />
             <h2 className="text-base font-bold text-[var(--color-content)]">
-              Popular Comparison Presets for Greater Noida West
+              Start with a useful comparison
             </h2>
           </div>
 
@@ -221,13 +246,13 @@ export const SchoolComparisonView: React.FC = () => {
             <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
-                  Knowledge Park 5 Giants
+                  Knowledge Park 5: everyday choices
                 </span>
                 <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
-                  DPS KP5 vs Ryan International vs Gaur International
+                  Delhi Public School vs Ryan International vs Gaurs International
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
-                  Compare infrastructure, CBSE legacy, sports facilities, and annual fee brackets.
+                  Look across location, curriculum, fees, admissions and campus details in one view.
                 </p>
               </div>
               <button
@@ -241,20 +266,20 @@ export const SchoolComparisonView: React.FC = () => {
                 }
                 className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"
               >
-                Load this comparison →
+                Compare these schools →
               </button>
             </div>
 
             <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
-                  Techzone 4 Corridors
+                  Techzone 4: premium campuses
                 </span>
                 <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
-                  Pacific World School vs BLS World vs Sarvottam
+                  Pacific World vs BLS World vs Sarvottam
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
-                  Sports academies, sibling concessions, air-conditioned campuses, and student ratios.
+                  A quick side-by-side for curriculum, facilities, fee structure and family-fit details.
                 </p>
               </div>
               <button
@@ -268,7 +293,7 @@ export const SchoolComparisonView: React.FC = () => {
                 }
                 className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"
               >
-                Load this comparison →
+                Compare these schools →
               </button>
             </div>
 
@@ -281,7 +306,7 @@ export const SchoolComparisonView: React.FC = () => {
                   Lotus Valley vs The Millennium School vs Aster Public
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
-                  Progressive pedagogy, experiential athletics, caution deposits, and campus amenities.
+                  Compare curriculum, annual fee ranges, admissions and documented campus facilities.
                 </p>
               </div>
               <button
@@ -295,7 +320,7 @@ export const SchoolComparisonView: React.FC = () => {
                 }
                 className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"
               >
-                Load this comparison →
+                Compare these schools →
               </button>
             </div>
           </div>

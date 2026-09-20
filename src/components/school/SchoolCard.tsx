@@ -131,7 +131,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
       </div>
 
       {/* Card Body */}
-      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-start">
         <div>
           {/* Location & Status */}
           <div className="flex items-center justify-between gap-2 mb-2 min-w-0">
@@ -166,7 +166,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
         </div>
 
         {/* Card Footer: Fees & Detail Link */}
-        <div className="mt-5 -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-5 sm:p-6 bg-white/38 rounded-b-2xl border-t border-white/70 backdrop-blur-md flex items-center justify-between gap-3">
+        <div className="mt-4 -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-5 sm:p-6 bg-white/38 rounded-b-2xl border-t border-white/70 backdrop-blur-md flex items-center justify-between gap-3">
           <CardFeeDisplay slug={school.slug} fees={school.fees} />
 
           <div className="flex items-center gap-1.5 shrink-0">

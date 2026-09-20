@@ -55,7 +55,7 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
           Schools in Greater Noida West &amp; Noida Extension
         </h1>
         <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1">
-          Explore school profiles, fee breakdowns, curriculum details, and admissions status for all {allSchools.length} listed institutions across Greater Noida, Greater Noida West and Noida Extension.
+          Explore school profiles, fee breakdowns, curriculum details, and admissions status across Greater Noida, Greater Noida West and Noida Extension.
         </p>
       </div>
 

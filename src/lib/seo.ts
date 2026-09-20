@@ -86,7 +86,7 @@ export function buildSchoolMetadata(school: School): Metadata {
     ? school.assets.featured.startsWith('/')
       ? absoluteUrl(school.assets.featured)
       : absoluteUrl(`/${school.assets.featured}`)
-    : absoluteUrl('/icon.svg');
+    : absoluteUrl('/favicon.svg');
 
   return {
     title,
@@ -176,7 +176,7 @@ export function generateOrganizationJsonLd() {
     '@id': `${cleanBaseUrl}/#organization`,
     name: SITE_SHORT_NAME,
     url: cleanBaseUrl,
-    logo: absoluteUrl('/icon.svg'),
+    logo: absoluteUrl('/favicon.svg'),
     image: absoluteUrl('/opengraph-image'),
     description: SITE_DESCRIPTION,
     areaServed: [

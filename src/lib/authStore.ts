@@ -2,6 +2,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 import path from 'path';
 import type { NextRequest } from 'next/server';
+import type { ApplicationTrackerItem } from './applicationTracker';
 import {
   getUsersCollection,
   getRatingsCollection,
@@ -45,6 +46,7 @@ export interface ParentUser {
   lastActivityAt?: string;
   wishlist: string[];
   compareList: string[];
+  applicationTracker?: ApplicationTrackerItem[];
 }
 
 // ----------------------------------------------------------------------------
@@ -534,6 +536,7 @@ function initDb(): void {
         lastActivityAt: new Date().toISOString(),
         wishlist: [],
         compareList: [],
+        applicationTracker: [],
       };
 
       users.set(adminUser.email.toLowerCase(), adminUser);
@@ -1260,6 +1263,7 @@ export function createParentUser(userData: {
     lastActivityAt: now,
     wishlist: [],
     compareList: [],
+    applicationTracker: [],
   };
 
   users.set(emailKey, newUser);
@@ -1326,6 +1330,7 @@ export function updateUserProfile(
     preferredSchoolLocality?: string;
     preferredBoards?: string[];
     analyticsConsent?: boolean;
+    applicationTracker?: ApplicationTrackerItem[];
     status?: 'active' | 'disabled';
     role?: 'parent' | 'admin';
   }
@@ -1351,6 +1356,7 @@ export function updateUserProfile(
   if (updates.preferredBoards !== undefined) user.preferredBoards = updates.preferredBoards;
   if (updates.childGrade !== undefined) user.childGrade = updates.childGrade;
   if (updates.analyticsConsent !== undefined) user.analyticsConsent = updates.analyticsConsent;
+  if (updates.applicationTracker !== undefined) user.applicationTracker = updates.applicationTracker;
   if (updates.status !== undefined) user.status = updates.status;
   if (updates.role !== undefined) user.role = updates.role;
 

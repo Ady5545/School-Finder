@@ -7,7 +7,7 @@ import { Heart, ArrowRight, Check, MapPin } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { RatingDisplay } from '../ui/RatingDisplay';
 import { SchoolImage } from './SchoolImage';
-import { FeeDisplay } from './FeeDisplay';
+import { CardFeeDisplay } from './CardFeeDisplay';
 import { AdmissionStatus } from './AdmissionStatus';
 import { LocationDisplay } from './LocationDisplay';
 import { useSchoolStore } from '../../lib/schoolStore';
@@ -167,7 +167,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
         {/* Card Footer: Fees & Detail Link */}
         <div className="mt-4 -mx-4.5 -mb-4.5 sm:-mx-5 sm:-mb-5 p-3.5 sm:p-4.5 bg-[#fbf9f5] rounded-b-2xl border-t border-[var(--color-border)] flex items-center justify-between gap-2">
-          <FeeDisplay fees={school.fees} variant="compact" />
+          <CardFeeDisplay slug={school.slug} fees={school.fees} />
 
           <div className="flex items-center gap-1.5 shrink-0">
             <button

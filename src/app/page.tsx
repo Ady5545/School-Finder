@@ -53,10 +53,11 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION: EXACT REPLICATION FROM USER IMAGE 1                      */}
       {/* ========================================================================= */}
-      <section className="relative w-full bg-gradient-to-b from-[#f2f6fa] via-[#f8fafc] to-[#fdfcf9] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
-        {/* Subtle grid pattern and soft primary glow for refined aesthetic */}
-        <div className="absolute inset-0 bg-grid-subtle opacity-50 pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-radial-hero pointer-events-none" />
+      <section className="relative w-full bg-[#fdfcf9] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
+        {/* Quiet editorial accents — intentionally soft and non-technical. */}
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[360px] rounded-full bg-[#eef4f8] opacity-70 blur-3xl pointer-events-none" />
+        <div className="absolute top-28 -left-28 w-64 h-64 rounded-full bg-[#fff3e8] opacity-55 blur-3xl pointer-events-none" />
+        <div className="absolute top-20 -right-28 w-64 h-64 rounded-full bg-[#edf4f8] opacity-60 blur-3xl pointer-events-none" />
 
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="w-full flex flex-col items-center text-center">
@@ -79,12 +80,12 @@ export default function HomePage() {
 
             {/* Supporting Subtitle matching Image 1 */}
             <p className="text-base sm:text-lg text-slate-600 mt-5 sm:mt-6 leading-relaxed max-w-2xl sm:max-w-3xl text-center mx-auto">
-              Transparent fee breakdowns, authentic facilities, board details (CBSE, ICSE, IB),<br className="hidden sm:inline" />
+              Clear fee breakdowns, facility details, board information (CBSE, ICSE, IB),<br className="hidden sm:inline" />
               and side-by-side comparisons for {allSchools.length} institutions across Noida Extension.
             </p>
 
             {/* Search Bar */}
-            <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto">
+            <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto rounded-[22px] shadow-[0_18px_55px_rgba(15,45,74,0.10)]">
               <HomeSearch className="w-full" />
             </div>
 
@@ -125,8 +126,13 @@ export default function HomePage() {
 
             {/* Primary & Secondary Actions */}
             <div className="flex flex-wrap items-center justify-center gap-4 mt-8 pt-6 border-t border-[var(--color-border-subtle)] w-full max-w-4xl mx-auto">
+              <div className="w-full text-center -mb-1">
+                <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+                  Start with what matters to your family
+                </span>
+              </div>
               <Link href="/schools">
-                <Button variant="primary" size="lg" className="text-white font-bold shadow-warm-xs hover:shadow-warm-md" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                <Button variant="primary" size="lg" className="text-white font-bold shadow-[0_8px_24px_rgba(15,45,74,0.16)] hover:shadow-[0_12px_30px_rgba(15,45,74,0.20)] hover:-translate-y-0.5 transition-all" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   Explore All {allSchools.length} Listed Schools
                 </Button>
               </Link>

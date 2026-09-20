@@ -64,9 +64,9 @@ export default function HomePage() {
             {/* Top Pill Badge matching Image 1 */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-slate-800 text-xs sm:text-[13px] font-medium mb-6 sm:mb-8 border border-[#e5dfd5] shadow-xs backdrop-blur-md mx-auto">
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#c2410c] shrink-0" />
-              <span className="font-semibold text-slate-900">Greater Noida West &amp; Noida Extension School Directory</span>
+              <span className="font-semibold text-slate-900">School discovery across Greater Noida West &amp; Noida Extension</span>
               <span className="text-slate-400 mx-0.5">•</span>
-              <span className="text-slate-600 font-normal">{allSchools.length} Schools Listed</span>
+              <span className="text-slate-600 font-normal">Built for clearer family decisions</span>
             </div>
 
             {/* Main Confident Headline matching Image 1 */}
@@ -81,7 +81,7 @@ export default function HomePage() {
             {/* Supporting Subtitle matching Image 1 */}
             <p className="text-base sm:text-lg text-slate-600 mt-5 sm:mt-6 leading-relaxed max-w-2xl sm:max-w-3xl text-center mx-auto">
               Clear fee breakdowns, facility details, board information (CBSE, ICSE, IB),<br className="hidden sm:inline" />
-              and side-by-side comparisons for {allSchools.length} institutions across Noida Extension.
+              and side-by-side comparisons across Noida Extension.
             </p>
 
             {/* Search Bar */}
@@ -133,7 +133,7 @@ export default function HomePage() {
               </div>
               <Link href="/schools">
                 <Button variant="primary" size="lg" className="text-white font-bold shadow-[0_8px_24px_rgba(15,45,74,0.16)] hover:shadow-[0_12px_30px_rgba(15,45,74,0.20)] hover:-translate-y-0.5 transition-all" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Explore All {allSchools.length} Listed Schools
+                  Explore all listed schools
                 </Button>
               </Link>
               <Link href="/compare">
@@ -161,10 +161,10 @@ export default function HomePage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
             <div className="text-center pt-3 sm:pt-0">
               <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-primary)] block tracking-tight">
-                {allSchools.length}
+                Schools
               </span>
               <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                School Directory
+                Worth discovering
               </span>
             </div>
 
@@ -188,10 +188,10 @@ export default function HomePage() {
 
             <div className="text-center pt-3 sm:pt-0">
               <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-primary)] block tracking-tight">
-                51
+                Clearer
               </span>
               <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                Schools in Directory
+                School decisions
               </span>
             </div>
           </div>

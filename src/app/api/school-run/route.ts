@@ -84,7 +84,7 @@ export async function GET(req: NextRequest) {
 
     const resolved = [];
     for (const item of schools) {
-      let point = item.point;
+      let point: Point | null = item.point;
       if (!point) {
         const school = item.school;
         point = await geocode(school.location.mapSearchQuery || `${school.name}, ${school.location.address}, ${school.location.sector}, Greater Noida West, Uttar Pradesh, India`);

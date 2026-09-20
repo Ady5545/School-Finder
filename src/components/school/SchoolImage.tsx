@@ -50,7 +50,7 @@ export const SchoolImage: React.FC<SchoolImageProps> = ({
     >
       <Image
         src={imageSource}
-        alt={isPlaceholder ? `${alt} — Official Verification Pending` : alt}
+        alt={alt}
         fill={fill}
         priority={priority}
         loading={priority ? 'eager' : 'lazy'}

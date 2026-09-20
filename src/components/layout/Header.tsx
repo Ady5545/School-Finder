@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X } from 'lucide-react';
+import { Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X, MessageSquare } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
@@ -81,6 +81,7 @@ export const Header: React.FC = () => {
       badgeColor: 'bg-rose-500 text-white',
     },
     { label: 'About', href: '/about', icon: null },
+    { label: 'Reviews', href: '/reviews', icon: <MessageSquare className="w-4 h-4" /> },
   ];
 
   const isActive = (href: string) => {

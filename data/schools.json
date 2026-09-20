@@ -3683,34 +3683,61 @@
           "name": "Registration Fee",
           "amount": 1200,
           "frequency": "one_time",
-          "refundable": false
+          "refundable": false,
+          "id": "the-infinity-school-fee-registration-fee",
+          "category": "one_time",
+          "formattedAmount": "₹1,200",
+          "mandatory": true
         },
         {
           "name": "Admission Fee",
           "amount": 35000,
           "frequency": "one_time",
-          "refundable": false
+          "refundable": false,
+          "id": "the-infinity-school-fee-admission-fee",
+          "category": "one_time",
+          "formattedAmount": "₹35,000",
+          "mandatory": true
         },
         {
           "name": "Caution Money",
           "amount": 10000,
           "frequency": "one_time",
-          "refundable": true
+          "refundable": true,
+          "id": "the-infinity-school-fee-caution-money",
+          "category": "deposit",
+          "formattedAmount": "₹10,000",
+          "mandatory": true
         },
         {
           "name": "Composite / Tuition Fee",
           "amount": 10500,
-          "frequency": "monthly"
+          "frequency": "monthly",
+          "id": "the-infinity-school-fee-composite-tuition-fee",
+          "category": "recurring",
+          "formattedAmount": "₹10,500",
+          "mandatory": true,
+          "refundable": false
         },
         {
           "name": "Optional Transport",
           "amount": "₹1,900 – ₹4,100",
-          "frequency": "monthly"
+          "frequency": "monthly",
+          "id": "the-infinity-school-fee-optional-transport",
+          "category": "transport",
+          "formattedAmount": "₹1,900 – ₹4,100",
+          "mandatory": false,
+          "refundable": false
         },
         {
           "name": "Sibling Younger Child Composite",
           "amount": 8000,
-          "frequency": "monthly"
+          "frequency": "monthly",
+          "id": "the-infinity-school-fee-sibling-younger-child-composite",
+          "category": "recurring",
+          "formattedAmount": "₹8,000",
+          "mandatory": true,
+          "refundable": false
         }
       ],
       "gradeWiseTiers": [
@@ -3889,7 +3916,9 @@
     ],
     "tagline": "CBSE Co-Educational Campus in Knowledge Park V",
     "summary": "Ramagya School Noida Extension is a co-educational day school in Knowledge Park V, Greater Noida West, offering educational programs from Nursery to Grade 12 with modern classrooms and sports facilities.",
-    "board": [],
+    "board": [
+      "CBSE"
+    ],
     "boardNote": null,
     "curriculum": "CBSE",
     "gradeRange": {
@@ -8331,7 +8360,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Maripat Road Roza Yakubpur, Roza Jalalpur Village, Greater Noida, Uttar Pradesh 201009"
+      "address": "Maripat Road Roza Yakubpur, Roza Jalalpur Village, Greater Noida, Uttar Pradesh 201009",
+      "sector": "Roza Yakubpur",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201009",
+      "area": "Roza Yakubpur"
     },
     "fees": {
       "rangeText": "Fee structure not publicly disclosed",
@@ -10353,7 +10387,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No.2, Techzone VII, Milak Lachchhi, Greater Noida, Uttar Pradesh 203207"
+      "address": "Plot No.2, Techzone VII, Milak Lachchhi, Greater Noida, Uttar Pradesh 203207",
+      "sector": "Techzone 7",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "203207",
+      "area": "Techzone 7"
     },
     "fees": {
       "rangeText": "₹8,550 – ₹11,250 / month composite",
@@ -10389,27 +10428,51 @@
           "name": "Registration Fee",
           "amount": 1250,
           "frequency": "one_time",
-          "refundable": false
+          "refundable": false,
+          "id": "bgs-vijnatham-school-fee-registration-fee",
+          "category": "one_time",
+          "formattedAmount": "₹1,250",
+          "mandatory": true
         },
         {
           "name": "Admission Fee",
           "amount": 40000,
-          "frequency": "one_time"
+          "frequency": "one_time",
+          "id": "bgs-vijnatham-school-fee-admission-fee",
+          "category": "one_time",
+          "formattedAmount": "₹40,000",
+          "mandatory": true,
+          "refundable": false
         },
         {
           "name": "Examination Fee (Step VI onwards)",
           "amount": 1250,
-          "frequency": "annual"
+          "frequency": "annual",
+          "id": "bgs-vijnatham-school-fee-examination-fee-step-vi-onwards",
+          "category": "examination",
+          "formattedAmount": "₹1,250",
+          "mandatory": true,
+          "refundable": false
         },
         {
           "name": "Lab Fee (Step XI–XII)",
           "amount": 250,
-          "frequency": "quarterly per subject"
+          "frequency": "quarterly per subject",
+          "id": "bgs-vijnatham-school-fee-lab-fee-step-xi-xii",
+          "category": "lab_facility",
+          "formattedAmount": "₹250",
+          "mandatory": true,
+          "refundable": false
         },
         {
           "name": "Transport (Optional)",
           "amount": "₹1,500 – ₹3,000",
-          "frequency": "monthly"
+          "frequency": "monthly",
+          "id": "bgs-vijnatham-school-fee-transport-optional",
+          "category": "transport",
+          "formattedAmount": "₹1,500 – ₹3,000",
+          "mandatory": false,
+          "refundable": false
         }
       ],
       "concessions": [
@@ -12567,7 +12630,12 @@
         {
           "name": "Exam Fee",
           "amount": 2500,
-          "frequency": "annual"
+          "frequency": "annual",
+          "id": "seth-anandram-jaipuria-school-greater-noida-west-fee-exam-fee",
+          "category": "examination",
+          "formattedAmount": "₹2,500",
+          "mandatory": true,
+          "refundable": false
         }
       ],
       "isVerified": true,
@@ -12884,7 +12952,12 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. EF-7 & 8B, Dundahera, Crossings Republik, Ghaziabad, Uttar Pradesh 201016"
+      "address": "Plot No. EF-7 & 8B, Dundahera, Crossings Republik, Ghaziabad, Uttar Pradesh 201016",
+      "sector": "Crossings Republik",
+      "city": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "pincode": "201016",
+      "area": "Crossings Republik"
     },
     "fees": {
       "rangeText": "₹9,768 – ₹10,328 / month composite",
@@ -12926,19 +12999,34 @@
         {
           "name": "Examination Fee",
           "amount": "₹354/month (₹1,062/quarter)",
-          "frequency": "monthly"
+          "frequency": "monthly",
+          "id": "indirapuram-public-school-crossings-republik-fee-examination-fee",
+          "category": "examination",
+          "formattedAmount": "₹354/month (₹1,062/quarter)",
+          "mandatory": true,
+          "refundable": false
         },
         {
           "name": "Lab Fee — XI–XII CS/AI",
           "amount": "₹836/month (₹2,508/quarter)",
           "frequency": "monthly",
-          "optional": true
+          "optional": true,
+          "id": "indirapuram-public-school-crossings-republik-fee-lab-fee-xi-xii-cs-ai",
+          "category": "lab_facility",
+          "formattedAmount": "₹836/month (₹2,508/quarter)",
+          "mandatory": true,
+          "refundable": false
         },
         {
           "name": "Lab Fee — XI–XII Physics/Chemistry/Biology",
           "amount": "₹536/month",
           "frequency": "monthly",
-          "optional": true
+          "optional": true,
+          "id": "indirapuram-public-school-crossings-republik-fee-lab-fee-xi-xii-physics-chemistry-biology",
+          "category": "lab_facility",
+          "formattedAmount": "₹536/month",
+          "mandatory": true,
+          "refundable": false
         }
       ],
       "isVerified": true,
@@ -13089,7 +13177,12 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot no. EF 7&8, adjoining GH-07 Gate no. 2, Crossing Infra, Sain Vihar Road, Crossings Republik, Ghaziabad, Uttar Pradesh 201016"
+      "address": "Plot no. EF 7&8, adjoining GH-07 Gate no. 2, Crossing Infra, Sain Vihar Road, Crossings Republik, Ghaziabad, Uttar Pradesh 201016",
+      "sector": "Crossings Republik",
+      "city": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "pincode": "201016",
+      "area": "Crossings Republik"
     },
     "fees": {
       "rangeText": "₹2,02,100 – ₹2,24,900 / year (grade-wise)",
@@ -13262,11 +13355,16 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1–16:1",
+    "studentTeacherRatio": "15:1",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Block F, 1A/A, F Block, Sector 40, Noida, Uttar Pradesh 201303"
+      "address": "Block F, 1A/A, F Block, Sector 40, Noida, Uttar Pradesh 201303",
+      "sector": "Sector 40",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201303",
+      "area": "Sector 40"
     },
     "fees": {
       "rangeText": "₹35,750 – ₹43,260 / quarter for lower grades; higher classes vary by grade",
@@ -13385,7 +13483,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "A-04, Sector 145, Noida, Gohiyapur, Uttar Pradesh 201306"
+      "address": "A-04, Sector 145, Noida, Gohiyapur, Uttar Pradesh 201306",
+      "sector": "Sector 145",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Sector 145"
     },
     "fees": {
       "cardFee": null,
@@ -14541,7 +14644,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "HS-34, P-2, Sector Pi I & II, Greater Noida, Uttar Pradesh 201310"
+      "address": "HS-34, P-2, Sector Pi I & II, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Sector Pi I & II",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201310",
+      "area": "Sector Pi I & II"
     },
     "fees": {
       "rangeText": "₹5,000 – ₹5,500 / month",
@@ -14667,7 +14775,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "D-196/2, Sector 51, Noida, Uttar Pradesh 201301"
+      "address": "D-196/2, Sector 51, Noida, Uttar Pradesh 201301",
+      "sector": "Sector 51",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201301",
+      "area": "Sector 51"
     },
     "fees": {
       "rangeText": "₹9,000 – ₹11,000 / month + ~₹20,000 annual charges",

@@ -104,5 +104,48 @@ export function generateSchoolJsonLd(school: School) {
     ...(school.contact.phone ? { telephone: school.contact.phone } : {}),
     ...(school.contact.email ? { email: school.contact.email } : {}),
     ...(school.contact.website ? { sameAs: school.contact.website } : {}),
+    // Powers star-rating rich snippets in search results. Only emitted when there
+    // is at least one real review behind it - never a fabricated/default score.
+    ...(school.rating?.score && school.rating?.reviewsCount > 0
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: school.rating.score,
+            reviewCount: school.rating.reviewsCount,
+            bestRating: school.rating.scale || 5,
+          },
+        }
+      : {}),
+  };
+}
+
+export function generateOrganizationJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE_SHORT_NAME,
+    url: BASE_URL,
+    description: SITE_DESCRIPTION,
+    areaServed: {
+      '@type': 'City',
+      name: 'Greater Noida West',
+    },
+  };
+}
+
+export function generateWebsiteJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_SHORT_NAME,
+    url: BASE_URL,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${BASE_URL}/schools?search={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 }

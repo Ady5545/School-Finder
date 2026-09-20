@@ -56,12 +56,21 @@ interface RatingSummary {
 interface SchoolRatingsSectionProps {
   schoolSlug: string;
   schoolName: string;
+  /** Defaults to the per-school ratings API. Overridable so this same component
+   *  can power platform-wide reviews (see PlatformReviewsSection) without
+   *  duplicating 700+ lines of tested form/list logic. */
+  apiEndpoint?: string;
+  /** Skip the school page-view tracking beacon when this isn't a real school page. */
+  trackView?: boolean;
 }
 
 export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
   schoolSlug,
   schoolName,
+  apiEndpoint,
+  trackView = true,
 }) => {
+  const ratingsUrl = apiEndpoint || `/api/schools/${schoolSlug}/ratings`;
   const { user, isAuthenticated } = useAuth();
   const { showToast } = useToast();
 
@@ -93,7 +102,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
     async function loadRatings() {
       try {
-        const res = await fetch(`/api/schools/${schoolSlug}/ratings`);
+        const res = await fetch(ratingsUrl);
         if (res.ok) {
           const data = await res.json();
           if (mounted && data.success) {
@@ -125,13 +134,15 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
     loadRatings();
 
-    // Fire view tracking
-    fetch(`/api/schools/${schoolSlug}/view`, { method: 'POST' }).catch(() => {});
+    // Fire view tracking (school pages only - not applicable to platform reviews)
+    if (trackView) {
+      fetch(`/api/schools/${schoolSlug}/view`, { method: 'POST' }).catch(() => {});
+    }
 
     return () => {
       mounted = false;
     };
-  }, [schoolSlug]);
+  }, [schoolSlug, ratingsUrl, trackView]);
 
   const handleSubmitRating = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,7 +155,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
     setIsSubmitting(true);
     try {
-      const res = await fetch(`/api/schools/${schoolSlug}/ratings`, {
+      const res = await fetch(ratingsUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -174,7 +185,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
       }
 
       // Re-fetch ratings to update list and summary with sanitized public views
-      const refreshRes = await fetch(`/api/schools/${schoolSlug}/ratings`);
+      const refreshRes = await fetch(ratingsUrl);
       if (refreshRes.ok) {
         const refreshData = await refreshRes.json();
         if (refreshData.success) {
@@ -197,7 +208,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/schools/${schoolSlug}/ratings`, {
+      const res = await fetch(ratingsUrl, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -219,7 +230,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
       }
 
       // Refresh list
-      const refreshRes = await fetch(`/api/schools/${schoolSlug}/ratings`);
+      const refreshRes = await fetch(ratingsUrl);
       if (refreshRes.ok) {
         const refreshData = await refreshRes.json();
         if (refreshData.success) {

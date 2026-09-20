@@ -35,9 +35,10 @@ export default function PrivacyPage() {
         </section>
 
         <section className="space-y-2">
-          <h2 className="text-base font-bold text-[var(--color-content)]">3. Parent Reviews & Public Anonymity Handling</h2>
+          <h2 className="text-base font-bold text-[var(--color-content)]">3. Reviews & Public Anonymity Handling</h2>
           <p>
-            When you submit a rating or review for a school on Admission Pitara:
+            When you submit a rating or review — whether for a school, or for Admission Pitara itself on our{' '}
+            <a href="/reviews" className="text-[var(--color-primary)] hover:underline">Reviews page</a>:
           </p>
           <ul className="list-disc pl-5 space-y-1 text-xs">
             <li>
@@ -60,7 +61,7 @@ export default function PrivacyPage() {
         </section>
 
         <section className="space-y-2 pt-2 border-t border-[var(--color-border)]">
-          <h2 className="text-base font-bold text-[var(--color-content)]">4. Privacy Contact</h2>
+          <h2 className="text-base font-bold text-[var(--color-content)]">5. Privacy Contact</h2>
           <p>
             For questions or requests regarding your data and account privacy, contact our editorial team at{' '}
             <a

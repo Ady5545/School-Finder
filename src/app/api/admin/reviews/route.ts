@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
       const user = await getUserByIdAsync(r.userId);
       return {
         ...r,
-        schoolName: school?.name || r.schoolSlug,
+        schoolName: school?.name || (r.schoolSlug === '__platform__' ? 'Admission Pitara (platform review)' : r.schoolSlug),
         userEmail: user?.email || '',
         userStatus: user?.status || 'active',
       };

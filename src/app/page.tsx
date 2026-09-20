@@ -159,10 +159,10 @@ export default function HomePage() {
 
             <div className="text-center pt-3 sm:pt-0">
               <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-primary)] block tracking-tight">
-                0
+                81
               </span>
               <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                Paid Rankings
+                Schools Tracked
               </span>
             </div>
           </div>

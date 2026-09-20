@@ -151,12 +151,14 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
     return POPULAR_PROXIMITY_AREAS.find(a => a.id === selectedProximityArea) || null;
   }, [selectedProximityArea, customUserCoords]);
 
-  // Only schools with real, verified coordinates are mapped
+  // Only explicitly verified stored coordinates are eligible for directory markers.
+  // Missing or false verification flags are treated conservatively and excluded.
   const schoolsWithCoordinates = useMemo(() => {
     return schools.filter(
-      (s): s is School & { location: { coordinates: { lat: number; lng: number } } } =>
+      (s): s is School & { location: { coordinates: { lat: number; lng: number; isVerified: true } } } =>
         typeof s.location?.coordinates?.lat === 'number' &&
-        typeof s.location?.coordinates?.lng === 'number'
+        typeof s.location?.coordinates?.lng === 'number' &&
+        s.location?.coordinates?.isVerified === true
     );
   }, [schools]);
 

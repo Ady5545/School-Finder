@@ -191,8 +191,8 @@ export async function GET(req: NextRequest) {
       const coords = school!.location.coordinates;
       return {
         school: school!,
-        point: typeof coords.lat === 'number' && typeof coords.lng === 'number'
-          ? { lat: coords.lat, lng: coords.lng, label: school!.name, source: coords.isVerified ? 'verified school coordinates' : 'school coordinates' }
+        point: coords.isVerified === true && typeof coords.lat === 'number' && typeof coords.lng === 'number'
+          ? { lat: coords.lat, lng: coords.lng, label: school!.name, source: 'verified school coordinates' }
           : null,
       };
     });

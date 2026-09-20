@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X, MessageSquare } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
@@ -15,7 +15,6 @@ import { cn } from '../../lib/utils';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { shortlist, compareList } = useSchoolStore();
   const { user, isAuthenticated } = useAuth();

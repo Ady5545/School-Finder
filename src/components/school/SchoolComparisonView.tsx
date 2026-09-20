@@ -249,7 +249,7 @@ export const SchoolComparisonView: React.FC = () => {
                   Knowledge Park 5: everyday choices
                 </span>
                 <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
-                  Delhi Public School vs Ryan International vs Gaurs International
+                  Delhi World Public School vs Ryan International vs Gaurs International
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
                   Look across location, curriculum, fees, admissions and campus details in one view.
@@ -259,7 +259,7 @@ export const SchoolComparisonView: React.FC = () => {
                 type="button"
                 onClick={() =>
                   loadPreset([
-                    'delhi-public-school-knowledge-park-5',
+                    'delhi-world-public-school-kp-5',
                     'ryan-international-school-noida-extension',
                     'gaurs-international-school-gaur-city-2',
                   ])

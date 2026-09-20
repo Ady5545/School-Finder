@@ -80,7 +80,7 @@ export async function GET(req: NextRequest) {
         ['Fee Verification Status', school.fees.verificationStatus || ''],
         ['Fee Source URL', school.fees.sourceUrl || ''],
         ['Admissions Source URL', school.admissions.sourceUrl || ''],
-        ['Rating', stats?.averageRating ?? ''],
+        ['Rating', stats?.averageScore ?? ''],
         ['Published Reviews', stats?.totalReviews ?? 0],
       ];
       const wb = XLSX.utils.book_new();

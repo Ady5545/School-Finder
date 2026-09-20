@@ -31,7 +31,7 @@ export const Tabs: React.FC<TabsProps> = ({
       aria-label="Navigation tabs"
       className={cn(
         'flex items-center gap-1 overflow-x-auto no-scrollbar',
-        variant === 'underline' && 'border-b border-[var(--color-border)]',
+        variant === 'underline' && 'border-b border-white/60 bg-white/18 backdrop-blur-md rounded-t-xl',
         variant === 'pills' && 'glass-chip p-1 rounded-xl',
         className
       )}
@@ -55,9 +55,9 @@ export const Tabs: React.FC<TabsProps> = ({
                   : 'border-transparent text-[var(--color-content-muted)] hover:text-[var(--color-content)] hover:border-[var(--color-border-strong)]',
               ],
               variant === 'pills' && [
-                'py-1.5 px-3.5 rounded-lg',
+                'py-1.5 px-3.5 rounded-xl glass-interactive',
                 isActive
-                  ? 'bg-white/85 text-[var(--color-primary)] font-semibold shadow-sm backdrop-blur-md'
+                  ? 'liquid-glass bg-white/72 text-[var(--color-primary)] font-semibold shadow-sm backdrop-blur-xl'
                   : 'text-[var(--color-content-muted)] hover:text-[var(--color-content)]',
               ]
             )}

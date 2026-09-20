@@ -36,6 +36,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useSchoolStore } from '../../lib/schoolStore';
 import { cn } from '../../lib/utils';
 import type { School } from '../../types/school';
+import { isSafeStoredSchoolCoordinate } from '../../lib/locationSafety';
 
 interface SchoolDirectoryProps {
   initialSchools: School[];
@@ -331,11 +332,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     initialSchools.forEach(s => {
       const lat = s.location.coordinates?.lat;
       const lng = s.location.coordinates?.lng;
-      if (
-        s.location.coordinates?.isVerified === true &&
-        typeof lat === 'number' &&
-        typeof lng === 'number'
-      ) {
+      if (isSafeStoredSchoolCoordinate(s.location.coordinates)) {
         const dist = calculateDistance(proximityCoords.lat, proximityCoords.lng, lat, lng);
         map.set(s.id, dist);
       }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { getAllSchools } from '../lib/schools';
 import { HomeSearch } from '../components/school/HomeSearch';
 import { HomeSchoolShowcase } from '../components/school/HomeSchoolShowcase';
@@ -51,142 +52,120 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col bg-[#fdfcf9] text-[var(--color-content)]">
       {/* ========================================================================= */}
-      {/* 1. HERO SECTION: EXACT REPLICATION FROM USER IMAGE 1                      */}
+      {/* 1. HERO: DISCOVERY-FIRST, PREMIUM, TRUST-LED                            */}
       {/* ========================================================================= */}
-      <section className="relative w-full bg-gradient-to-b from-[#f2f6fa] via-[#f8fafc] to-[#fdfcf9] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
-        {/* Subtle grid pattern and soft primary glow for refined aesthetic */}
-        <div className="absolute inset-0 bg-grid-subtle opacity-50 pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-radial-hero pointer-events-none" />
+      <section className="relative isolate w-full overflow-hidden bg-[#0b1726] text-white border-b border-slate-900/20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(245,158,11,0.22),transparent_30%),radial-gradient(circle_at_18%_72%,rgba(37,99,235,0.20),transparent_32%)] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.08] bg-[linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] bg-[size:56px_56px] pointer-events-none" />
 
-        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="w-full flex flex-col items-center text-center">
-            {/* Top Pill Badge matching Image 1 */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-slate-800 text-xs sm:text-[13px] font-medium mb-6 sm:mb-8 border border-[#e5dfd5] shadow-xs backdrop-blur-md mx-auto">
-              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#c2410c] shrink-0" />
-              <span className="font-semibold text-slate-900">Greater Noida West &amp; Noida Extension School Directory</span>
-              <span className="text-slate-400 mx-0.5">•</span>
-              <span className="text-slate-600 font-normal">{allSchools.length} Schools Listed</span>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 pb-12 sm:pb-16 lg:pb-20">
+          <div className="grid lg:grid-cols-[1.05fr_.95fr] gap-10 lg:gap-14 items-center">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-2 text-[11px] sm:text-xs font-semibold tracking-wide text-slate-200 backdrop-blur-md">
+                <span className="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_14px_rgba(251,191,36,.65)]" />
+                GREATER NOIDA WEST • NOIDA EXTENSION
+              </div>
+
+              <p className="mt-7 text-sm sm:text-base font-semibold text-amber-300 tracking-[0.18em] uppercase">
+                Every school. Every fee. Every detail.
+              </p>
+
+              <h1 className="mt-4 text-4xl sm:text-5xl lg:text-[4.35rem] font-black tracking-[-0.045em] leading-[0.98] text-white">
+                Find the right school
+                <span className="block text-slate-300">with confidence.</span>
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-base sm:text-lg lg:text-xl leading-relaxed text-slate-300">
+                Discover schools, compare fees and boards, explore admissions, and build your shortlist — all in one place, organized for parents.
+              </p>
+
+              <div className="mt-8 max-w-2xl rounded-2xl border border-white/10 bg-white/[0.08] p-2 shadow-2xl shadow-black/20 backdrop-blur-xl">
+                <HomeSearch className="w-full" />
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center gap-2 text-xs text-slate-300">
+                <span className="font-semibold text-white mr-1">Explore:</span>
+                <Link href="/schools?board=CBSE" className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 hover:bg-white/10 transition-colors">CBSE</Link>
+                <Link href="/schools?board=IB" className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 hover:bg-white/10 transition-colors">IB &amp; Cambridge</Link>
+                <Link href="/schools?area=Sector%2016B" className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 hover:bg-white/10 transition-colors">Sector 16B</Link>
+                <Link href="/schools?area=Techzone%204" className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 hover:bg-white/10 transition-colors">Techzone 4</Link>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/schools">
+                  <Button variant="accent" size="lg" className="text-white font-bold shadow-lg shadow-black/20" rightIcon={<ArrowRight className="w-4 h-4" />}>
+                    Explore schools
+                  </Button>
+                </Link>
+                <Link href="/compare">
+                  <Button variant="outline" size="lg" className="bg-white/95 text-slate-900 border-white/30 hover:bg-white font-bold" rightIcon={<Scale className="w-4 h-4" />}>
+                    Compare schools
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-xs sm:text-sm text-slate-400">
+                <span className="inline-flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Parent-first discovery</span>
+                <span className="inline-flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> Transparent school information</span>
+                <span className="inline-flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> No pressure to choose</span>
+              </div>
             </div>
 
-            {/* Main Confident Headline matching Image 1 */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-[4rem] font-black tracking-tight text-[#0f172a] leading-[1.14] sm:leading-[1.10] w-full max-w-4xl lg:max-w-5xl text-center mx-auto">
-              Find the right school in Greater<br className="hidden sm:inline" /> Noida with{' '}
-              <span className="relative inline-block whitespace-nowrap">
-                <span className="relative z-10 text-[#0f2d4a]">complete clarity.</span>
-                <span className="absolute left-0 bottom-0.5 sm:bottom-1 w-full h-[3px] sm:h-[4px] bg-[#c2410c] rounded-full" />
-              </span>
-            </h1>
+            <div className="relative lg:min-h-[560px] flex items-center justify-center">
+              <div className="absolute -inset-5 rounded-[2rem] bg-amber-400/10 blur-3xl pointer-events-none" />
+              <div className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 shadow-2xl shadow-black/30 backdrop-blur-sm">
+                <div className="relative aspect-[1.08/1] overflow-hidden">
+                  <Image
+                    src="/images/gaurs.png"
+                    alt="School campus in Greater Noida West featured by Admission Pitara"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 46vw"
+                    className="object-cover object-center scale-[1.02] transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#07111e] via-[#07111e]/10 to-transparent" />
 
-            {/* Supporting Subtitle matching Image 1 */}
-            <p className="text-base sm:text-lg text-slate-600 mt-5 sm:mt-6 leading-relaxed max-w-2xl sm:max-w-3xl text-center mx-auto">
-              Transparent fee breakdowns, authentic facilities, board details (CBSE, ICSE, IB),<br className="hidden sm:inline" />
-              and side-by-side comparisons for {allSchools.length} institutions across Noida Extension.
-            </p>
-
-            {/* Search Bar */}
-            <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto">
-              <HomeSearch className="w-full" />
-            </div>
-
-            {/* Quick Explore Navigation */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-5 text-xs text-[var(--color-content-muted)] max-w-4xl mx-auto">
-              <span className="font-bold text-[var(--color-content)] mr-1">Quick Explore:</span>
-              <Link
-                href="/schools?board=CBSE"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
-              >
-                CBSE
-              </Link>
-              <Link
-                href="/schools?board=IB"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
-              >
-                IB &amp; Cambridge
-              </Link>
-              <Link
-                href="/schools?area=Sector%2016B"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
-              >
-                Sector 16B
-              </Link>
-              <Link
-                href="/schools?area=Techzone%204"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
-              >
-                Techzone 4
-              </Link>
-              <Link
-                href="/schools?area=Knowledge%20Park%205"
-                className="px-3 py-1.5 rounded-lg bg-white border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
-              >
-                Knowledge Park 5
-              </Link>
-            </div>
-
-            {/* Primary & Secondary Actions */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8 pt-6 border-t border-[var(--color-border-subtle)] w-full max-w-4xl mx-auto">
-              <Link href="/schools">
-                <Button variant="primary" size="lg" className="text-white font-bold shadow-warm-xs hover:shadow-warm-md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Explore All {allSchools.length} Listed Schools
-                </Button>
-              </Link>
-              <Link href="/compare">
-                <Button variant="outline" size="lg" className="bg-white hover:bg-slate-50 font-bold border-[var(--color-border-strong)] hover:border-amber-500 hover:text-amber-800" rightIcon={<Scale className="w-4 h-4" />}>
-                  Compare Schools Side-by-Side
-                </Button>
-              </Link>
+                  <div className="absolute left-5 right-5 bottom-5 sm:left-7 sm:right-7 sm:bottom-7">
+                    <div className="rounded-2xl border border-white/15 bg-[#07111e]/75 p-5 backdrop-blur-xl">
+                      <div className="flex items-center justify-between gap-4">
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-amber-300">Built for the school search</p>
+                          <p className="mt-1.5 text-lg sm:text-xl font-bold text-white">Explore → Compare → Shortlist → Apply</p>
+                        </div>
+                        <div className="hidden sm:flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/10 border border-white/10">
+                          <Search className="w-5 h-5 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================================= */}
-      {/* PROMOTED / SPONSORED PARTNER BANNER (IF ACTIVE CAMPAIGN CONFIGURED)       */}
+      {/* 2. TRUST STRIP: ONLY CLAIMS THE PRODUCT CAN ACTUALLY SUPPORT             */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 reveal-on-scroll">
-        <SponsoredPlacementCard placement="homepage_hero" />
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 2. COMPACT PROOF STRIP (SINGLE HORIZONTAL BENCHMARK SECTION)              */}
-      {/* ========================================================================= */}
-      <section className="w-full bg-[#f4f7fb] border-b border-[var(--color-border)] py-8 sm:py-10 reveal-on-scroll">
+      <section className="w-full bg-[#f8f6f1] border-b border-[var(--color-border)] py-7 sm:py-9">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
-            <div className="text-center pt-3 sm:pt-0">
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-primary)] block tracking-tight">
-                {allSchools.length}
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                School Directory
-              </span>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 lg:divide-x divide-[var(--color-border)]">
+            <div className="text-center px-3">
+              <span className="text-2xl sm:text-3xl font-black text-[#0f2d4a] block">{allSchools.length}</span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-600 mt-1 block">School profiles</span>
             </div>
-
-            <div className="text-center pt-3 sm:pt-0">
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-700 block tracking-tight">
-                100%
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                Fee Audits
-              </span>
+            <div className="text-center px-3">
+              <span className="text-2xl sm:text-3xl font-black text-[#0f2d4a] block">20+</span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-600 mt-1 block">Comparison fields</span>
             </div>
-
-            <div className="text-center pt-3 sm:pt-0">
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-amber-600 block tracking-tight">
-                20+
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                Comparison Metrics
-              </span>
+            <div className="text-center px-3">
+              <span className="text-2xl sm:text-3xl font-black text-[#0f2d4a] block">Fees</span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-600 mt-1 block">Broken down clearly</span>
             </div>
-
-            <div className="text-center pt-3 sm:pt-0">
-              <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[var(--color-primary)] block tracking-tight">
-                81
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                Schools Tracked
-              </span>
+            <div className="text-center px-3">
+              <span className="text-2xl sm:text-3xl font-black text-[#0f2d4a] block">Admissions</span>
+              <span className="text-xs sm:text-sm font-semibold text-slate-600 mt-1 block">Status &amp; process</span>
             </div>
           </div>
         </div>
@@ -205,10 +184,10 @@ export default function HomePage() {
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0f172a] tracking-tight">
-              How parents make confident school choices
+              A clearer way to choose a school
             </h2>
             <p className="text-sm sm:text-base text-slate-500 mt-2.5">
-              Step-by-step clarity from initial discovery to admission confirmation.
+              Everything you need to move from a long list of schools to a confident shortlist.
             </p>
           </div>
 
@@ -364,10 +343,10 @@ export default function HomePage() {
       <section className="w-full py-16 sm:py-20 bg-[#f0f5fa] border-t border-[var(--color-border)] reveal-on-scroll">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-4xl font-black text-[var(--color-content)] tracking-tight">
-            Find the right school with clarity.
+            Your school search, finally organized.
           </h2>
           <p className="text-sm sm:text-base text-[var(--color-content-muted)] mt-3 max-w-xl mx-auto leading-relaxed">
-            Explore Greater Noida schools, compare what matters, and build your shortlist.
+            Discover schools, understand the details that matter, and build a shortlist you can trust.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">

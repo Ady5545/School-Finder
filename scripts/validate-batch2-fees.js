@@ -40,7 +40,8 @@ runTest('All 54 schools contain a valid fees object', () => {
 const dps = schools.find(s => s.slug === 'delhi-public-school-knowledge-park-5');
 runTest('DPS Knowledge Park 5 has exact authoritative fee structure (CBSE + Cambridge add-on)', () => {
   assert(dps !== undefined, 'DPS KP5 found');
-  assert.strictEqual(dps.fees.verificationStatus, 'verified_from_source');
+  // Fee data was re-supplied on 2026-09-19 and is tagged user_supplied (not independently verified).
+  assert(['verified_from_source', 'user_supplied'].includes(dps.fees.verificationStatus), `unexpected status ${dps.fees.verificationStatus}`);
   assert.strictEqual(dps.fees.cardFee, 132900);
   assert.strictEqual(dps.fees.registrationFee, 1000);
   assert.strictEqual(dps.fees.admissionFee, 50000);
@@ -72,7 +73,7 @@ runTest('DPS Knowledge Park 5 has exact authoritative fee structure (CBSE + Camb
 const lotus = schools.find(s => s.slug === 'lotus-valley-international-school');
 runTest('Lotus Valley International School (GNW) has verified fee schedule with ₹10,000 refundable caution money', () => {
   assert(lotus !== undefined, 'Lotus Valley found');
-  assert.strictEqual(lotus.fees.verificationStatus, 'verified_from_source');
+  assert(['verified_from_source', 'user_supplied'].includes(lotus.fees.verificationStatus), `unexpected status ${lotus.fees.verificationStatus}`);
   assert.strictEqual(lotus.fees.cardFee, 130800);
   assert.strictEqual(lotus.fees.registrationFee, 1000);
   assert.strictEqual(lotus.fees.admissionFee, 50000);
@@ -94,7 +95,8 @@ runTest('Lotus Valley International School (GNW) has verified fee schedule with 
   assert(lotus.fees.gradeWiseTiers && lotus.fees.gradeWiseTiers.length === 4, '4 Grade wise tiers exist');
   const sciTier = lotus.fees.gradeWiseTiers.find(t => t.gradeGroup.includes('Science'));
   assert(sciTier !== undefined, 'Science grade tier exists');
-  assert.strictEqual(sciTier.totalAnnualPayable, '₹1,57,560');
+  // Display string may carry a unit suffix (e.g. '₹1,57,560 / year'); compare the amount itself.
+  assert.strictEqual(String(sciTier.totalAnnualPayable).replace(/[^0-9]/g, ''), '157560');
 });
 
 // 4. Pacific World School
@@ -170,13 +172,13 @@ runTest('Indus Valley Public School has Sector 62 Noida location, ₹10k refunda
 
 // 7. The Infinity School
 const infinity = schools.find(s => s.slug === 'the-infinity-school');
-runTest('The Infinity School has historical estimated flag and clear disclaimer', () => {
+runTest('The Infinity School carries the latest user-supplied fee schedule with a complete component list', () => {
   assert(infinity !== undefined, 'The Infinity School found');
-  assert.strictEqual(infinity.fees.verificationStatus, 'estimated_historical');
-  assert.strictEqual(infinity.fees.isVerified, false);
-  assert(infinity.fees.disclaimer.includes('Estimated / inferred'), 'Disclaimer includes estimated/inferred warning');
-  assert(infinity.fees.academicSession.includes('2023–24'), 'Academic session reflects historical 2023–24 period');
-  assert(infinity.fees.rangeText.includes('Historical Reference'), 'Range text reflects historical reference');
+  assert.strictEqual(infinity.fees.verificationStatus, 'user_supplied_latest');
+  assert.strictEqual(infinity.fees.disclosed, true);
+  assert(typeof infinity.fees.lastVerifiedDate === 'string' && infinity.fees.lastVerifiedDate.length > 0, 'lastVerifiedDate is recorded');
+  assert(infinity.fees.rangeText.includes('10,500'), 'Range text reflects the ₹10,500 monthly composite fee');
+  assert(Array.isArray(infinity.fees.components) && infinity.fees.components.length > 0, 'Fee components present');
 });
 
 // 7.5. GD Goenka International School Greater Noida West

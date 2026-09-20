@@ -45,7 +45,7 @@
     },
     "fees": {
       "cardFee": 132900,
-      "estimatedFirstYear": "₹1.36 lakh – ₹1.67 lakh depending on grade and recurring charges.",
+      "estimatedFirstYear": null,
       "currency": "INR",
       "rangeText": "₹11,075 / month (₹33,225 / quarter · ₹1,32,900 calculated annual)",
       "academicSession": "2027–28",
@@ -324,7 +324,8 @@
         "₹500 late fine after the 20th of the month.",
         "If unpaid by the 25th, the student's name may be struck off and a re-admission fee applies."
       ],
-      "annualDisplay": "₹1,32,900 / year (CBSE); ₹1,49,100 / year (Cambridge)"
+      "annualDisplay": "₹1,32,900 / year (CBSE); ₹1,49,100 / year (Cambridge)",
+      "estimatedFirstYearText": "₹1.36 lakh – ₹1.67 lakh depending on grade and recurring charges."
     },
     "facilities": [
       {
@@ -3721,7 +3722,7 @@
         },
         {
           "name": "Optional Transport",
-          "amount": "₹1,900 – ₹4,100",
+          "amount": null,
           "frequency": "monthly",
           "id": "the-infinity-school-fee-optional-transport",
           "category": "transport",
@@ -3826,7 +3827,8 @@
     ],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": null,
@@ -8356,7 +8358,7 @@
       "raw": "Nursery to Grade 12"
     },
     "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": null,
+    "studentTeacherRatio": "Not publicly verified",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
@@ -8365,7 +8367,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201009",
-      "area": "Roza Yakubpur"
+      "area": "Roza Yakubpur",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Golden Valley School Roza Yakubpur Greater Noida"
     },
     "fees": {
       "rangeText": "Fee structure not publicly disclosed",
@@ -8426,7 +8433,8 @@
     "admissions": {
       "status": "Inquire with school",
       "session": "2027-28",
-      "timelineDescription": "Admission schedule is not publicly listed."
+      "timelineDescription": "Admission schedule is not publicly listed.",
+      "process": ""
     },
     "contact": {
       "phone": "+91 99112 54445",
@@ -10392,7 +10400,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "203207",
-      "area": "Techzone 7"
+      "area": "Techzone 7",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "BGS Vijnatham School Techzone 7 Greater Noida"
     },
     "fees": {
       "rangeText": "₹8,550 – ₹11,250 / month composite",
@@ -10466,7 +10479,7 @@
         },
         {
           "name": "Transport (Optional)",
-          "amount": "₹1,500 – ₹3,000",
+          "amount": null,
           "frequency": "monthly",
           "id": "bgs-vijnatham-school-fee-transport-optional",
           "category": "transport",
@@ -10530,7 +10543,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Admissions for 2027–28 are open online and offline."
+      "timelineDescription": "Admissions for 2027–28 are open online and offline.",
+      "process": ""
     },
     "contact": {
       "phone": "+91 98110 00000",
@@ -12222,7 +12236,12 @@
       "address": "Techzone-VII, Near Roto Pumps Company, Noida Extension, Greater Noida (West), Uttar Pradesh 203207",
       "sector": "Techzone 7",
       "city": "Greater Noida West",
-      "area": "Techzone 7"
+      "area": "Techzone 7",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Bloom International School Techzone 7 Greater Noida West"
     },
     "fees": {
       "rangeText": "₹81,700 – ₹1,37,100 / year (grade-wise)",
@@ -12323,7 +12342,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Admissions for 2027–28 are processed online or directly at campus."
+      "timelineDescription": "Admissions for 2027–28 are processed online or directly at campus.",
+      "process": ""
     },
     "contact": {
       "phone": "0120-6893000",
@@ -12426,7 +12446,12 @@
       "address": "HS-01, Sector 20, Buddha, Greater Noida, Uttar Pradesh 201311",
       "sector": "Knowledge Park V",
       "area": "Knowledge Park V",
-      "city": "Greater Noida West"
+      "city": "Greater Noida West",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Sparsh Global School Knowledge Park V Greater Noida West"
     },
     "fees": {
       "rangeText": "₹21,000 – ₹29,250 / quarter",
@@ -12489,7 +12514,8 @@
     ],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": "0120-7195555",
@@ -12598,7 +12624,12 @@
       "address": "Plot No 2A & 2B, Chauganpur, Knowledge Park V, Greater Noida, Uttar Pradesh 201306",
       "city": "Greater Noida West",
       "sector": "Knowledge Park V",
-      "area": "Knowledge Park V"
+      "area": "Knowledge Park V",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Seth Anandram Jaipuria School Knowledge Park V Greater Noida West"
     },
     "fees": {
       "rangeText": "₹1,02,800 – ₹1,27,050 / year (grade-wise estimated totals)",
@@ -12683,7 +12714,8 @@
     "admissions": {
       "status": "Expected to open",
       "session": "2027-28",
-      "timelineDescription": "2027–28 admissions are expected to open in late 2026 or early 2027."
+      "timelineDescription": "2027–28 admissions are expected to open in late 2026 or early 2027.",
+      "process": ""
     },
     "contact": {
       "phone": "8800049460",
@@ -12787,7 +12819,12 @@
       "address": "HS 1, Sector 4, Near Gaur City 1, Greater Noida West, Uttar Pradesh 201308",
       "city": "Greater Noida West",
       "sector": "Sector 4",
-      "area": "Sector 4"
+      "area": "Sector 4",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Gagan Public School Sector 4 Greater Noida West"
     },
     "fees": {
       "rangeText": "₹5,450 – ₹6,800 / month",
@@ -12849,7 +12886,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Admissions for 2027–28 are managed online and offline."
+      "timelineDescription": "Admissions for 2027–28 are managed online and offline.",
+      "process": ""
     },
     "contact": {
       "phone": "0120-2977011",
@@ -12957,7 +12995,12 @@
       "city": "Ghaziabad",
       "state": "Uttar Pradesh",
       "pincode": "201016",
-      "area": "Crossings Republik"
+      "area": "Crossings Republik",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Indirapuram Public School, Crossings Republik Crossings Republik Ghaziabad"
     },
     "fees": {
       "rangeText": "₹9,768 – ₹10,328 / month composite",
@@ -12998,7 +13041,7 @@
       "components": [
         {
           "name": "Examination Fee",
-          "amount": "₹354/month (₹1,062/quarter)",
+          "amount": null,
           "frequency": "monthly",
           "id": "indirapuram-public-school-crossings-republik-fee-examination-fee",
           "category": "examination",
@@ -13008,7 +13051,7 @@
         },
         {
           "name": "Lab Fee — XI–XII CS/AI",
-          "amount": "₹836/month (₹2,508/quarter)",
+          "amount": null,
           "frequency": "monthly",
           "optional": true,
           "id": "indirapuram-public-school-crossings-republik-fee-lab-fee-xi-xii-cs-ai",
@@ -13019,7 +13062,7 @@
         },
         {
           "name": "Lab Fee — XI–XII Physics/Chemistry/Biology",
-          "amount": "₹536/month",
+          "amount": null,
           "frequency": "monthly",
           "optional": true,
           "id": "indirapuram-public-school-crossings-republik-fee-lab-fee-xi-xii-physics-chemistry-biology",
@@ -13074,7 +13117,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Admissions for 2027–28 typically begin around September 2026."
+      "timelineDescription": "Admissions for 2027–28 typically begin around September 2026.",
+      "process": ""
     },
     "contact": {
       "phone": "0120-4180000",
@@ -13182,7 +13226,12 @@
       "city": "Ghaziabad",
       "state": "Uttar Pradesh",
       "pincode": "201016",
-      "area": "Crossings Republik"
+      "area": "Crossings Republik",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Sapphire International School, Crossings Republik Crossings Republik Ghaziabad"
     },
     "fees": {
       "rangeText": "₹2,02,100 – ₹2,24,900 / year (grade-wise)",
@@ -13254,7 +13303,8 @@
     ],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": "0120-4355555",
@@ -13364,7 +13414,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201303",
-      "area": "Sector 40"
+      "area": "Sector 40",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "The Khaitan School Sector 40 Noida"
     },
     "fees": {
       "rangeText": "₹35,750 – ₹43,260 / quarter for lower grades; higher classes vary by grade",
@@ -13395,7 +13450,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Admissions are open for 2027–28."
+      "timelineDescription": "Admissions are open for 2027–28.",
+      "process": ""
     },
     "contact": {
       "phone": null,
@@ -13488,7 +13544,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Sector 145"
+      "area": "Sector 145",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Clarwyn International School Sector 145 Noida"
     },
     "fees": {
       "cardFee": null,
@@ -13533,7 +13594,8 @@
     "admissions": {
       "status": "Coming Soon",
       "session": "2027-28",
-      "timelineDescription": "Upcoming school — detailed admissions information will be published as it becomes available."
+      "timelineDescription": "Upcoming school — detailed admissions information will be published as it becomes available.",
+      "process": ""
     },
     "contact": {
       "phone": null,
@@ -13617,7 +13679,12 @@
       "address": "A1 & A12, Expressway, Sector 132, Noida, Uttar Pradesh 201304",
       "sector": "Sector 132",
       "city": "Noida",
-      "area": "Sector 132"
+      "area": "Sector 132",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Genesis Global School Sector 132 Noida"
     },
     "fees": {
       "rangeText": "₹4,32,600 / year (Classes 6–10); ₹5,22,000 – ₹5,50,800 / year (Classes 11–12)",
@@ -13649,7 +13716,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Admissions are officially open for 2027–28."
+      "timelineDescription": "Admissions are officially open for 2027–28.",
+      "process": ""
     },
     "contact": {
       "phone": null,
@@ -13744,7 +13812,12 @@
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201308",
-      "area": "Gaur City 1"
+      "area": "Gaur City 1",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Sri Chaitanya Techno School, Gaur City 1 Gaur City 1 Greater Noida West"
     },
     "fees": {
       "rangeText": "₹60,000 – ₹1,10,000 / year depending on grade",
@@ -13772,7 +13845,8 @@
     "achievements": [],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": "+91-7207931507 / +91-7396870022",
@@ -13861,7 +13935,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201310",
-      "area": "Knowledge Park I"
+      "area": "Knowledge Park I",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Sri Chaitanya Techno School, Knowledge Park I Knowledge Park I Greater Noida"
     },
     "fees": {
       "rangeText": "₹55,000 – ₹95,000 / year depending on grade",
@@ -13887,7 +13966,8 @@
     "achievements": [],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": "+91-7207888124",
@@ -13978,7 +14058,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201303",
-      "area": "Sector 41"
+      "area": "Sector 41",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Sri Chaitanya Techno School, Sector 41 (Noida) Sector 41 Noida"
     },
     "fees": {
       "rangeText": "₹65,000 – ₹1,15,000 / year depending on grade",
@@ -14004,7 +14089,8 @@
     "achievements": [],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": "+91-7207931507 / +91-7093684311",
@@ -14108,7 +14194,7 @@
       "rangeText": "₹3,46,100 – ₹4,46,700 / year (grade-dependent)",
       "cardFee": 346100,
       "tuitionAnnual": "₹3,46,100 – ₹4,46,700",
-      "estimatedFirstYear": "Add approximately ₹30,000–₹40,000 one-time registration/admission/security charges.",
+      "estimatedFirstYear": null,
       "gradeWiseTiers": [
         {
           "grades": "Early Years (Toddler, Pre-Nursery, Nursery, LKG, UKG)",
@@ -14131,7 +14217,8 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹3,94,101 / year (avg.)"
+      "annualDisplay": "₹3,94,101 / year (avg.)",
+      "estimatedFirstYearText": "Add approximately ₹30,000–₹40,000 one-time registration/admission/security charges."
     },
     "facilities": [],
     "uniforms": {
@@ -14148,7 +14235,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Registrations and admission enquiries are open for 2027–28."
+      "timelineDescription": "Registrations and admission enquiries are open for 2027–28.",
+      "process": ""
     },
     "contact": {
       "phone": null,
@@ -14246,7 +14334,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201307",
-      "area": "Sector 62"
+      "area": "Sector 62",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "ASPAM Scottish School Sector 62 Noida"
     },
     "fees": {
       "rangeText": "₹72,000 – ₹1,50,000 / year (grade-dependent)",
@@ -14295,7 +14388,8 @@
     "achievements": [],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": "+91-8826302302",
@@ -14391,7 +14485,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201301",
-      "area": "Sector 71"
+      "area": "Sector 71",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Global Indian International School, Noida Sector 71 Noida"
     },
     "fees": {
       "rangeText": "₹11,000 – ₹16,450 / month (≈₹1,32,000–₹1,97,000 / year)",
@@ -14421,7 +14520,8 @@
     "admissions": {
       "status": "Not Yet Open",
       "session": "2027-28",
-      "timelineDescription": "Registrations specifically for 2027–28 are not yet open."
+      "timelineDescription": "Registrations specifically for 2027–28 are not yet open.",
+      "process": ""
     },
     "contact": {
       "phone": "1800 5722 810",
@@ -14649,7 +14749,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201310",
-      "area": "Sector Pi I & II"
+      "area": "Sector Pi I & II",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "Kaushalya World School Sector Pi I & II Greater Noida"
     },
     "fees": {
       "rangeText": "₹5,000 – ₹5,500 / month",
@@ -14659,7 +14764,7 @@
       "tuitionMonthly": "₹5,000 – ₹5,500",
       "tuitionAnnual": "₹60,000 – ₹66,000 (calculated)",
       "transportMonthly": "₹800 – ₹4,000 (Optional)",
-      "estimatedFirstYear": "₹70,500 – ₹87,900",
+      "estimatedFirstYear": null,
       "gradeWiseTiers": [
         {
           "grades": "All Grades",
@@ -14671,7 +14776,8 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹63,000 / year (avg.)"
+      "annualDisplay": "₹63,000 / year (avg.)",
+      "estimatedFirstYearText": "₹70,500 – ₹87,900"
     },
     "facilities": [],
     "uniforms": {
@@ -14687,7 +14793,8 @@
     "achievements": [],
     "admissions": {
       "status": "Open",
-      "session": "2027-28"
+      "session": "2027-28",
+      "process": ""
     },
     "contact": {
       "phone": "+91 120 4566666",
@@ -14780,7 +14887,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201301",
-      "area": "Sector 51"
+      "area": "Sector 51",
+      "coordinates": {
+        "lat": null,
+        "lng": null
+      },
+      "mapSearchQuery": "LPS Global School Sector 51 Noida"
     },
     "fees": {
       "rangeText": "₹9,000 – ₹11,000 / month + ~₹20,000 annual charges",
@@ -14814,7 +14926,8 @@
     "admissions": {
       "status": "Open",
       "session": "2027-28",
-      "timelineDescription": "Admissions for 2027–28 are open."
+      "timelineDescription": "Admissions for 2027–28 are open.",
+      "process": ""
     },
     "contact": {
       "phone": null,
@@ -14922,7 +15035,7 @@
       "cardFee": null,
       "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "Please contact the school to know the current fee structure.",
+      "rangeText": "Not publicly disclosed",
       "registrationFee": null,
       "admissionFee": null,
       "tuitionMonthly": null,

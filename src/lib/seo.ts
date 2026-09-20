@@ -6,7 +6,8 @@ export const SITE_SHORT_NAME = 'Admission Pitara';
 export const SITE_TAGLINE = 'School admissions and discovery in Greater Noida, Greater Noida West and Noida Extension.';
 export const SITE_DESCRIPTION =
   'Find schools and school admissions in Greater Noida, Greater Noida West, Noida Extension and Noida. Compare fees, boards, facilities, admission status and school profiles.';
-export const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://admissionpitara.com';
+export const BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://admissionpitara.com';
 
 const cleanBaseUrl = BASE_URL.replace(/\/$/, '');
 

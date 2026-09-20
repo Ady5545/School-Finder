@@ -11,3 +11,5 @@ build/
 temp_*
 data/auth_db.json*
 data/*.tmp.*
+# This repo uses bun (bun.lock); avoid mixed lockfiles
+package-lock.json

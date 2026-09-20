@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, MessageSquare, SlidersHorizontal } from 'lucide-react';
+import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, MessageSquare, SlidersHorizontal, ClipboardList } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
@@ -30,6 +30,7 @@ export const Header: React.FC = () => {
       badgeColor: 'bg-[var(--color-primary)] text-white',
     },
     { label: 'School Match', href: '/match', icon: <SlidersHorizontal className="w-4 h-4" /> },
+    { label: 'Applications', href: '/application-tracker', icon: <ClipboardList className="w-4 h-4" /> },
     { label: 'Admissions 2027-28', href: '/admissions', icon: <Calendar className="w-4 h-4" />, featured: true },
     { label: 'Reviews', href: '/reviews', icon: <MessageSquare className="w-4 h-4" /> },
     { label: 'About', href: '/about', icon: null },

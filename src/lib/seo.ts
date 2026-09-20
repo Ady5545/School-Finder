@@ -5,7 +5,7 @@ export const SITE_NAME = 'Admission Pitara';
 export const SITE_SHORT_NAME = 'Admission Pitara';
 export const SITE_TAGLINE = 'School admissions and discovery in Greater Noida, Greater Noida West and Noida Extension.';
 export const SITE_DESCRIPTION =
-  'Find schools and school admissions in Greater Noida, Greater Noida West, Noida Extension and nearby Noida. Compare fees, boards, facilities, admission status and school profiles.';
+  'Find schools and school admissions in Greater Noida, Greater Noida West, Noida Extension and Noida. Compare fees, boards, facilities, admission status and school profiles.';
 export const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://admissionpitara.com';
 
 const cleanBaseUrl = BASE_URL.replace(/\/$/, '');
@@ -23,7 +23,7 @@ export function buildPageMetadata(
   const fullTitle = title.includes('Admission Pitara') ? title : `${title} | Admission Pitara`;
   const metaDesc = description || SITE_DESCRIPTION;
   const canonicalUrl = absoluteUrl(path);
-  const ogImage = image ? absoluteUrl(image) : absoluteUrl('/og-image.png');
+  const ogImage = image ? absoluteUrl(image) : absoluteUrl('/icon.svg');
 
   return {
     title: fullTitle,
@@ -44,7 +44,7 @@ export function buildPageMetadata(
       siteName: SITE_SHORT_NAME,
       locale: 'en_IN',
       type: 'website',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: fullTitle }],
+      images: [{ url: ogImage, alt: fullTitle }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -85,7 +85,7 @@ export function buildSchoolMetadata(school: School): Metadata {
     ? school.assets.featured.startsWith('/')
       ? absoluteUrl(school.assets.featured)
       : absoluteUrl(`/${school.assets.featured}`)
-    : absoluteUrl('/og-image.png');
+    : absoluteUrl('/icon.svg');
 
   return {
     title,
@@ -107,7 +107,7 @@ export function buildSchoolMetadata(school: School): Metadata {
       siteName: SITE_SHORT_NAME,
       locale: 'en_IN',
       type: 'website',
-      images: [{ url: image, width: 1200, height: 630, alt: `${school.name} in Greater Noida` }],
+      images: [{ url: image, alt: `${school.name} in Greater Noida` }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -142,7 +142,7 @@ export function generateSchoolJsonLd(school: School) {
       ...(school.location.pincode ? { postalCode: school.location.pincode } : {}),
       addressCountry: 'IN',
     },
-    ...(school.location?.coordinates?.lat && school.location?.coordinates?.lng
+    ...(school.location?.coordinates?.lat != null && school.location?.coordinates?.lng != null
       ? {
           geo: {
             '@type': 'GeoCoordinates',
@@ -154,7 +154,7 @@ export function generateSchoolJsonLd(school: School) {
     ...(school.contact.phone ? { telephone: school.contact.phone } : {}),
     ...(school.contact.email ? { email: school.contact.email } : {}),
     ...(school.contact.website ? { sameAs: [school.contact.website] } : {}),
-    ...(school.studentTeacherRatio ? { educationalLevel: school.gradeRange.raw } : {}),
+    ...(school.gradeRange?.raw ? { educationalLevel: school.gradeRange.raw } : {}),
     ...(school.rating?.score && school.rating?.reviewsCount > 0
       ? {
           aggregateRating: {

@@ -5,11 +5,17 @@ import { BrandLogo } from '../../../components/ui/BrandLogo';
 import { buildPageMetadata } from '../../../lib/seo';
 import { ShieldCheck, BookmarkCheck, Scale } from 'lucide-react';
 
-export const metadata = buildPageMetadata(
+export const metadata = {
+  ...buildPageMetadata(
   'Parent Sign In',
   'Sign in to your Admission Pitara parent account to access saved school shortlists, fee comparisons, and admission trackers in Greater Noida.',
   '/auth/login'
-);
+),
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export const dynamic = 'force-dynamic';
 

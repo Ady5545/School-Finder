@@ -3,11 +3,17 @@ import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { SchoolComparisonView } from '../../components/school/SchoolComparisonView';
 import { buildPageMetadata } from '../../lib/seo';
 
-export const metadata = buildPageMetadata(
+export const metadata = {
+  ...buildPageMetadata(
   'Compare Schools in Greater Noida West',
   'Compare top schools in Greater Noida West side-by-side across fees, curriculum, student-teacher ratio, and sports facilities.',
   '/compare'
-);
+),
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export const dynamic = 'force-dynamic';
 

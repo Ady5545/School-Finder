@@ -9,26 +9,55 @@ import { SchoolStoreProvider } from '../lib/schoolStore';
 import { ComparisonDock } from '../components/school/ComparisonDock';
 import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
-import { generateOrganizationJsonLd, generateWebsiteJsonLd } from '../lib/seo';
+import { generateOrganizationJsonLd, generateWebsiteJsonLd, BASE_URL, SITE_DESCRIPTION, SITE_SHORT_NAME } from '../lib/seo';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://admissionpitara.com'),
+  metadataBase: new URL(`${BASE_URL.replace(/\/$/, '')}/`),
   title: {
-    default: 'School Admissions in Greater Noida, Greater Noida West & Noida | Admission Pitara',
+    default: 'School Admissions in Greater Noida | Admission Pitara',
     template: '%s | Admission Pitara',
   },
-  description:
-    'Find schools and school admissions in Greater Noida, Greater Noida West, Noida Extension and Noida. Compare fees, boards, facilities, admission status and school profiles.',
-  applicationName: 'Admission Pitara',
-  keywords: [
-    'school admissions Greater Noida',
-    'school admissions Greater Noida West',
-    'school admissions Noida',
-    'schools in Greater Noida',
-    'schools in Greater Noida West',
-    'schools in Noida Extension',
-  ],
-  icons: '/icon.svg',
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_SHORT_NAME,
+  category: 'education',
+  alternates: {
+    canonical: BASE_URL.replace(/\/$/, ''),
+  },
+  robots: {
+    index: true,
+    follow: true,
+    'max-image-preview': 'large',
+    'max-snippet': -1,
+    'max-video-preview': -1,
+  },
+  openGraph: {
+    title: 'School Admissions in Greater Noida | Admission Pitara',
+    description: SITE_DESCRIPTION,
+    url: BASE_URL.replace(/\/$/, ''),
+    siteName: SITE_SHORT_NAME,
+    locale: 'en_IN',
+    type: 'website',
+    images: [
+      {
+        url: '/icon.svg',
+        alt: 'Admission Pitara',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'School Admissions in Greater Noida | Admission Pitara',
+    description: SITE_DESCRIPTION,
+    images: ['/icon.svg'],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.svg',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export const viewport: Viewport = {

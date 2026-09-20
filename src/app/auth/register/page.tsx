@@ -5,11 +5,14 @@ import { BrandLogo } from '../../../components/ui/BrandLogo';
 import { buildPageMetadata } from '../../../lib/seo';
 import { Shield, Sparkles, CheckCircle2 } from 'lucide-react';
 
-export const metadata = buildPageMetadata(
-  'Parent Registration',
-  'Create a verified parent account on Admission Pitara to track admission deadlines, fee structures, and school shortlists across Greater Noida.',
-  '/auth/register'
-);
+export const metadata = {
+  ...buildPageMetadata(
+    'Parent Registration',
+    'Create a verified parent account on Admission Pitara to track admission deadlines, fee structures, and school shortlists across Greater Noida.',
+    '/auth/register'
+  ),
+  robots: { index: false, follow: false },
+};
 
 export const dynamic = 'force-dynamic';
 

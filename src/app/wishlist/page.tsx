@@ -3,11 +3,17 @@ import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { WishlistContentView } from '../../components/school/WishlistContentView';
 import { buildPageMetadata } from '../../lib/seo';
 
-export const metadata = buildPageMetadata(
+export const metadata = {
+  ...buildPageMetadata(
   'Shortlisted Schools in Greater Noida West',
   'Your saved schools and shortlisted institutions for Greater Noida West admissions.',
   '/wishlist'
-);
+),
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export const dynamic = 'force-dynamic';
 

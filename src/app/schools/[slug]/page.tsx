@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getSchoolBySlug, getAllSchoolSlugs, getAllSchools } from '../../../lib/schools';
-import { buildSchoolMetadata, generateSchoolJsonLd } from '../../../lib/seo';
+import { buildSchoolMetadata, generateSchoolJsonLd, generateBreadcrumbJsonLd } from '../../../lib/seo';
 import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { SchoolImage } from '../../../components/school/SchoolImage';
 import { SchoolBadge } from '../../../components/school/SchoolBadge';
@@ -91,6 +91,11 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
   }
 
   const jsonLd = generateSchoolJsonLd(school);
+  const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+    { name: 'Home', path: '/' },
+    { name: 'Schools', path: '/schools' },
+    { name: school.name, path: `/schools/${school.slug}` },
+  ]);
   const allSchools = getAllSchools();
   const schoolBoards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
   const affiliationNumber = school.affiliationNumber || school.verification?.cbseAffiliationNumber;
@@ -119,6 +124,10 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
       {/* Breadcrumbs */}

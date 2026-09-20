@@ -53,9 +53,9 @@ export default function HomePage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION: EXACT REPLICATION FROM USER IMAGE 1                      */}
       {/* ========================================================================= */}
-      <section className="relative w-full bg-[#fdfcf9] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
+      <section className="relative w-full bg-[#f4f7f8] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
         {/* Quiet editorial accents — intentionally soft and non-technical. */}
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[360px] rounded-full bg-[#eef4f8] opacity-70 blur-3xl pointer-events-none" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[360px] rounded-full bg-[#e7eef2] opacity-75 blur-3xl pointer-events-none" />
         <div className="absolute top-28 -left-28 w-64 h-64 rounded-full bg-[#fff3e8] opacity-55 blur-3xl pointer-events-none" />
         <div className="absolute top-20 -right-28 w-64 h-64 rounded-full bg-[#edf4f8] opacity-60 blur-3xl pointer-events-none" />
 

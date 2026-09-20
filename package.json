@@ -9,7 +9,7 @@
     "dev": "next dev -p 3000 -H 0.0.0.0",
     "build": "next build",
     "start": "next start -p 3000 -H 0.0.0.0",
-    "lint": "tsc --noEmit",
+    "lint": "tsc --noEmit && node scripts/run-validations.js",
     "test": "node scripts/run-validations.js",
     "test:shapes": "node scripts/validate-school-data-shapes.js",
     "test:phase1": "node scripts/validate-phase1.js",

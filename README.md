@@ -23,12 +23,13 @@ bun run dev               # http://localhost:3000
 | Script | What it does |
 | --- | --- |
 | `bun run dev` / `build` / `start` | Next.js dev server, production build, production server |
-| `bun run lint` (alias `typecheck`) | TypeScript check (`tsc --noEmit`) |
+| `bun run lint` | Typecheck **and** the validation suite (what CI currently calls) |
+| `bun run typecheck` | TypeScript check only (`tsc --noEmit`) |
 | `bun run test` (alias `validate`) | Runs the full data/security validation suite (`scripts/run-validations.js`) |
 | `bun run test:shapes`, `test:fees`, … | Run a single validator |
 
 CI (`.github/workflows/`) runs typecheck, build and the validation
-suite (`bun run lint`, `build`, `test`).
+suite.
 
 ## Project layout
 

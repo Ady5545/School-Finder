@@ -74,7 +74,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
   };
 
   return (
-    <Card hoverEffect reveal={false} className={cn('group flex flex-col overflow-hidden h-full bg-white border border-[var(--color-border)] hover:border-[var(--color-border-strong)] rounded-2xl shadow-warm-xs hover:shadow-warm-lg hover:-translate-y-1.5 transition-all duration-300 ease-out tactile-card', className)}>
+    <Card hoverEffect reveal={false} className={cn('group flex flex-col overflow-hidden h-full glass-surface-strong border-white/75 hover:border-white rounded-2xl shadow-warm-xs hover:shadow-warm-lg hover:-translate-y-1.5 transition-all duration-300 ease-out tactile-card', className)}>
       {/* Featured Image & Overlays */}
       <div className="relative overflow-hidden">
         <Link href={`/schools/${school.slug}`} tabIndex={-1} aria-hidden="true" className="block overflow-hidden">
@@ -124,14 +124,14 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
               </span>
             ))}
           </div>
-          <div className="bg-white px-2.5 py-0.5 rounded-md shadow-warm-2xs border border-[var(--color-border)]">
+          <div className="glass-chip px-2.5 py-0.5 rounded-md shadow-warm-2xs">
             <RatingDisplay score={school.rating.score} size="sm" showCount={false} />
           </div>
         </div>
       </div>
 
       {/* Card Body */}
-      <div className="p-4.5 sm:p-5 flex-1 flex flex-col justify-between">
+      <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
         <div>
           {/* Location & Status */}
           <div className="flex items-center justify-between gap-2 mb-2 min-w-0">
@@ -153,11 +153,11 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
           {/* Key Quick Detail */}
           <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[var(--color-border-subtle)]">
-            <span className="text-[11px] text-[var(--color-content-muted)] bg-[var(--color-surface-subtle)] px-2 py-0.5 rounded-md font-semibold border border-[var(--color-border)]">
+            <span className="text-[11px] text-[var(--color-content-muted)] glass-chip px-2.5 py-1 rounded-md font-semibold">
               Ratio: {school.studentTeacherRatio}
             </span>
             {distanceKm !== undefined && (
-              <span className="text-[11px] text-amber-800 bg-amber-50 px-2 py-0.5 rounded-md font-bold border border-amber-200 flex items-center gap-1 shadow-2xs">
+              <span className="text-[11px] text-amber-800 glass-chip px-2.5 py-1 rounded-md font-bold flex items-center gap-1 shadow-2xs">
                 <MapPin className="w-3 h-3 text-amber-600" />
                 {distanceKm === 0 ? 'In area' : `${distanceKm} km`}
               </span>
@@ -166,7 +166,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
         </div>
 
         {/* Card Footer: Fees & Detail Link */}
-        <div className="mt-4 -mx-4.5 -mb-4.5 sm:-mx-5 sm:-mb-5 p-3.5 sm:p-4.5 bg-[#fbf9f5] rounded-b-2xl border-t border-[var(--color-border)] flex items-center justify-between gap-2">
+        <div className="mt-5 -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-5 sm:p-6 bg-white/38 rounded-b-2xl border-t border-white/70 backdrop-blur-md flex items-center justify-between gap-3">
           <CardFeeDisplay slug={school.slug} fees={school.fees} />
 
           <div className="flex items-center gap-1.5 shrink-0">

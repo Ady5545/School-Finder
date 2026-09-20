@@ -107,6 +107,36 @@ async function geocode(query: string): Promise<Point | null> {
     if (bestScore >= 25) break;
   }
 
+  // Nominatim does not always contain newer housing societies. Try Photon as a
+  // second public geocoder before declaring the society unlocatable.
+  if (!best) {
+    for (const candidate of queries.slice(0, 3)) {
+      try {
+        const params = new URLSearchParams({ q: candidate, limit: '5' });
+        const response = await fetch('https://photon.komoot.io/api/?' + params.toString(), { cache: 'no-store' });
+        if (!response.ok) continue;
+        const data = await response.json();
+        const features = Array.isArray(data?.features) ? data.features : [];
+        for (const feature of features) {
+          const coords = feature?.geometry?.coordinates;
+          if (!Array.isArray(coords) || coords.length < 2) continue;
+          const lng = Number(coords[0]);
+          const lat = Number(coords[1]);
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+          const props = feature?.properties || {};
+          const label = [props.name, props.street, props.city, props.state, props.country].filter(Boolean).join(', ');
+          const haystack = label.toLowerCase();
+          if (!haystack.includes('greater noida') && !haystack.includes('noida')) continue;
+          best = { lat, lng, label: label || candidate, source: 'Photon' };
+          break;
+        }
+      } catch {
+        // Try the next candidate/provider.
+      }
+      if (best) break;
+    }
+  }
+
   geocodeCache.set(key, best);
   return best;
 }
@@ -155,7 +185,7 @@ export async function GET(req: NextRequest) {
     if (shortlist.length === 0) return NextResponse.json({ success: false, code: 'SHORTLIST_EMPTY', message: 'Shortlist at least one school to plan your school run.' }, { status: 422 });
 
     const origin = await geocode(`${society}, Greater Noida West, Uttar Pradesh, India`);
-    if (!origin) return NextResponse.json({ success: false, code: 'SOCIETY_NOT_FOUND', message: 'We could not confidently locate that society on the map yet. Please update the society name in your Parent Account.' }, { status: 422 });
+    if (!origin) return NextResponse.json({ success: false, code: 'SOCIETY_NOT_FOUND', society, message: 'We could not confidently locate that society on the map yet.', diagnostic: { normalizedSociety: society.replace(/,?\s*(uttar pradesh|india|greater noida west|noida extension|greater noida)\s*$/i, '').trim(), providersTried: ['OpenStreetMap Nominatim', 'Photon'] } }, { status: 422 });
 
     const schools = shortlist.map(slug => getSchoolBySlug(slug)).filter(Boolean).map(school => {
       const coords = school!.location.coordinates;

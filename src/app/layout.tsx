@@ -62,7 +62,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#0f2d4a',
-  colorScheme: 'light',
+  colorScheme: 'light dark',
   width: 'device-width',
   initialScale: 1,
 };
@@ -74,6 +74,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-IN">
+      <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('admission-pitara-theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.dataset.theme=t}catch(e){}})()` }} />
       <body className="min-h-screen flex flex-col bg-[var(--color-surface-muted)] text-[var(--color-content)] antialiased">
         <script
           type="application/ld+json"

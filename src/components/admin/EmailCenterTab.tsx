@@ -27,12 +27,12 @@ interface EmailCampaign {
 
 const TEMPLATES = [
   {
-    name: '2025-26 Admission Timeline Alert',
+    name: '2027-28 Admission Timeline Alert',
     subject: 'Important: Greater Noida West School Admission Deadlines Approaching',
     content: `<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #1e293b; line-height: 1.6;">
   <h2 style="color: #0f172a; border-bottom: 2px solid #f59e0b; padding-bottom: 8px;">Admission Season Update</h2>
   <p>Dear Parent,</p>
-  <p>Several leading CBSE and Cambridge schools across <strong>Greater Noida West (Noida Extension)</strong> have announced application deadlines for the upcoming 2025-2026 academic session.</p>
+  <p>Several leading CBSE and Cambridge schools across <strong>Greater Noida West (Noida Extension)</strong> have announced application deadlines for the upcoming 2027–28 academic session.</p>
   <p>You can track open registration portals, verified fee structures, and campus milestones directly on your Admission Pitara account.</p>
   <div style="margin: 24px 0;">
     <a href="https://admissionpitara.com" style="background-color: #f59e0b; color: #000; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">View Active School Admissions</a>

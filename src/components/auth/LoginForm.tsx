@@ -194,7 +194,7 @@ export const LoginForm: React.FC = () => {
 
             <div className="pt-1 flex flex-col sm:flex-row gap-2">
               <Link
-                href={`/register?email=${encodeURIComponent(noAccountFound.email)}`}
+                href={`/auth/register?email=${encodeURIComponent(noAccountFound.email)}`}
                 className="flex-1"
               >
                 <Button
@@ -429,7 +429,7 @@ export const LoginForm: React.FC = () => {
         <span>Need a parent account?</span>
         <Link
           id="register-link-from-login"
-          href="/register"
+          href="/auth/register"
           className="font-semibold text-amber-800 hover:text-amber-950 transition-colors"
         >
           Create Verified Account &rarr;

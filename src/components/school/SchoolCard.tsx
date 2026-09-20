@@ -91,7 +91,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1e33]/70 via-transparent to-black/25 pointer-events-none opacity-85 group-hover:opacity-95 transition-opacity" />
 
         {school.recordType === 'upcoming' && (
-          <div className="absolute top-3 left-3 z-10 px-3 py-1.5 rounded-lg bg-white/95 text-[var(--color-primary)] border border-white/70 shadow-warm-sm text-[11px] font-extrabold uppercase tracking-wider">
+          <div className="absolute top-3 left-3 z-10 px-3 py-1.5 rounded-xl liquid-glass glass-interactive bg-white/62 backdrop-blur-xl text-[var(--color-primary)] border border-white/70 shadow-warm-sm text-[11px] font-extrabold uppercase tracking-wider">
             Upcoming School
           </div>
         )}
@@ -106,7 +106,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
               'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer shadow-warm-xs active:scale-90 min-w-[40px] min-h-[40px]',
               isSaved
                 ? 'bg-rose-500 text-white hover:bg-rose-600 ring-2 ring-rose-300/60 shadow-warm-sm'
-                : 'bg-white text-[var(--color-content-muted)] hover:bg-white hover:text-rose-600 border border-[var(--color-border)] hover:scale-105 shadow-2xs'
+                : 'liquid-glass glass-interactive glass-shine bg-white/58 text-[var(--color-content-muted)] hover:text-rose-600 border-white/80 hover:scale-105 shadow-2xs'
             )}
           >
             <Heart className={cn('w-4.5 h-4.5 transition-transform', isSaved ? 'fill-white scale-110' : 'group-hover/heart:scale-110')} />
@@ -181,7 +181,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
                 'text-xs px-3 py-2 rounded-xl border font-semibold transition-all duration-200 cursor-pointer active:scale-95 shadow-warm-2xs min-h-[38px]',
                 isCompared
                   ? 'border-[var(--color-primary)] bg-[var(--color-primary-light)] text-[var(--color-primary)] font-bold'
-                  : 'border-[var(--color-border-strong)] bg-white text-[var(--color-content)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-light)] font-semibold'
+                  : 'border-white/80 bg-white/55 backdrop-blur-md text-[var(--color-content)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-light)] font-semibold'
               )}
             >
               {isCompared ? (
@@ -195,7 +195,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
             <Link
               href={`/schools/${school.slug}`}
-              className="inline-flex items-center justify-center p-2.5 rounded-xl bg-white border border-[var(--color-border-strong)] text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] transition-all duration-200 hover:scale-105 active:scale-95 shadow-warm-2xs min-w-[38px] min-h-[38px]"
+              className="inline-flex items-center justify-center p-2.5 rounded-xl liquid-glass glass-shine bg-white/58 border-white/80 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] transition-all duration-200 hover:scale-105 active:scale-95 shadow-warm-2xs min-w-[38px] min-h-[38px]"
               aria-label={`View details for ${school.name}`}
             >
               <ArrowRight className="w-4 h-4" />

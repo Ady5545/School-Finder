@@ -5,6 +5,7 @@ import { HomeSearch } from '../components/school/HomeSearch';
 import { HomeSchoolShowcase } from '../components/school/HomeSchoolShowcase';
 import { HomeRatingsDiscovery } from '../components/home/HomeRatingsDiscovery';
 import { WhyAdmissionPitara } from '../components/home/WhyAdmissionPitara';
+import { DataTrustAdvantage } from '../components/school/DataTrustAdvantage';
 import { SponsoredPlacementCard } from '../components/school/SponsoredPlacementCard';
 import { Button } from '../components/ui/Button';
 import {
@@ -363,6 +364,8 @@ export default function HomePage() {
       {/* 6. WHY ADMISSION PITARA: POLISHED 6-PILLAR TRUST & DISCOVERY SECTION      */}
       {/* ========================================================================= */}
       <WhyAdmissionPitara />
+
+      <DataTrustAdvantage />
 
       {/* ========================================================================= */}
       {/* 6. FINAL COMPACT CTA                                                      */}

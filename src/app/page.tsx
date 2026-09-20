@@ -171,10 +171,10 @@ export default function HomePage() {
 
             <div className="text-center pt-3 sm:pt-0">
               <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-emerald-700 block tracking-tight">
-                100%
+                Evidence
               </span>
               <span className="text-xs sm:text-sm font-bold text-[var(--color-content)] mt-1 block">
-                Fee Audits
+                Fee source tracking
               </span>
             </div>
 

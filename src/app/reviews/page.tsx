@@ -22,33 +22,37 @@ export default function ReviewsPage() {
       <div className="space-y-3 pb-8 border-b border-[var(--color-border)]">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] text-xs font-semibold">
           <MessageSquare className="w-3.5 h-3.5" />
-          <span>Admission Pitara feedback</span>
+          <span>School reviews</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-black text-[var(--color-content)] tracking-tight">
-          Reviews that help parents decide
+          School Reviews
         </h1>
         <p className="text-sm text-[var(--color-content-muted)] max-w-2xl">
-          Explore published parent reviews for the schools in our directory, then share your own experience from the school profile. At the bottom, you can also review Admission Pitara itself.
-        </p>
-        <p className="text-xs text-[var(--color-content-muted)] max-w-2xl">
-          You can post anonymously to other visitors. See our{' '}
-          <Link href="/privacy" className="underline hover:text-[var(--color-primary)]">
-            Privacy Policy
-          </Link>{' '}
-          for how reviews are stored and moderated.
+          Explore parent experiences by school, see review summaries, and share your own experience through the existing verified-parent review flow.
         </p>
       </div>
 
       <SchoolReviewsDirectory />
 
-      <div className="pt-12 mt-10 border-t border-[var(--color-border)]">
+      <section className="pt-12 mt-10 border-t border-[var(--color-border)]">
+        <div className="mb-5">
+          <div className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+            About Admission Pitara
+          </div>
+          <h2 className="text-xl sm:text-2xl font-black text-[var(--color-content)] mt-1">
+            Share feedback about the platform
+          </h2>
+          <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1 max-w-2xl">
+            This is separate from school reviews. Use it to tell us how the Admission Pitara experience can be improved.
+          </p>
+        </div>
         <SchoolRatingsSection
           schoolSlug="__platform__"
           schoolName="Admission Pitara"
           apiEndpoint="/api/platform-reviews"
           trackView={false}
         />
-      </div>
+      </section>
     </div>
   );
 }

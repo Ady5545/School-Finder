@@ -13,6 +13,10 @@ export const AdmissionCalendarView: React.FC<{ schools: School[] }> = ({ schools
         .flatMap(school =>
           (school.admissions?.milestones || [])
             .filter(milestone => Boolean(milestone.date))
+            .filter(() => {
+              const cycle = String(school.admissions?.academicYear || school.admissions?.session || '');
+              return !cycle || /2027/.test(cycle);
+            })
             .map(milestone => ({ school, milestone }))
         )
         .sort((a, b) => a.milestone.date.localeCompare(b.milestone.date)),

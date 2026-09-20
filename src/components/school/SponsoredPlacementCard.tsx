@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Sparkles, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
-import { getSchoolBySlug } from '../../lib/schools';
+import { getPublicSchoolBySlug } from '../../lib/schools';
 import type { School } from '../../types/school';
 
 interface PromoData {
@@ -37,7 +37,7 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
           if (data.promotions && data.promotions.length > 0 && isMounted) {
             const first = data.promotions[0];
             setPromo(first);
-            const foundSchool = getSchoolBySlug(first.schoolSlug);
+            const foundSchool = getPublicSchoolBySlug(first.schoolSlug);
             if (foundSchool) setSchool(foundSchool);
 
             // Log impression

@@ -316,7 +316,15 @@ export function getRawSchools(): School[] {
  * Returns strictly unique active canonical schools (excluding aliases, duplicate records, and archived records).
  */
 export function getCanonicalSchools(): School[] {
-  return schools.filter(s => !s.isDuplicate && !s.isArchived);
+  const canonical = schools.filter(s => !s.isDuplicate && !s.isArchived);
+  // Keep the current featured school first across directory surfaces without
+  // presenting it as an objective ranking.
+  const featuredSlug = 'delhi-world-public-school-kp-5';
+  return [...canonical].sort((a, b) => {
+    if (a.slug === featuredSlug) return -1;
+    if (b.slug === featuredSlug) return 1;
+    return 0;
+  });
 }
 
 /**

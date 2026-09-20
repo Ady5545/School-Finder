@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { SchoolRatingsSection } from '../../components/school/SchoolRatingsSection';
+import { SchoolReviewsDirectory } from '../../components/school/SchoolReviewsDirectory';
 import { buildPageMetadata } from '../../lib/seo';
 import { MessageSquare } from 'lucide-react';
 
@@ -21,19 +22,13 @@ export default function ReviewsPage() {
       <div className="space-y-3 pb-8 border-b border-[var(--color-border)]">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] text-xs font-semibold">
           <MessageSquare className="w-3.5 h-3.5" />
-          <span>Parent Feedback</span>
+          <span>Admission Pitara feedback</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-black text-[var(--color-content)] tracking-tight">
-          Reviews of Admission Pitara
+          Reviews that help parents decide
         </h1>
         <p className="text-sm text-[var(--color-content-muted)] max-w-2xl">
-          This page is for reviewing the platform itself — how useful it was, whether the fee
-          and admissions data helped, anything we got wrong. Looking to review a specific
-          school instead? Head to that school&apos;s profile page — every listing has its own
-          reviews section.{' '}
-          <Link href="/schools" className="font-semibold text-[var(--color-primary)] hover:underline">
-            Browse schools →
-          </Link>
+          Explore published parent reviews for the schools in our directory, then share your own experience from the school profile. At the bottom, you can also review Admission Pitara itself.
         </p>
         <p className="text-xs text-[var(--color-content-muted)] max-w-2xl">
           You can post anonymously to other visitors. See our{' '}
@@ -44,7 +39,9 @@ export default function ReviewsPage() {
         </p>
       </div>
 
-      <div className="pt-8">
+      <SchoolReviewsDirectory />
+
+      <div className="pt-12 mt-10 border-t border-[var(--color-border)]">
         <SchoolRatingsSection
           schoolSlug="__platform__"
           schoolName="Admission Pitara"

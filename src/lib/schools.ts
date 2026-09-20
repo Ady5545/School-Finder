@@ -47,6 +47,17 @@ export function getSchoolBySlug(slug: string): School | undefined {
   return getBySlug(slug);
 }
 
+/**
+ * Resolves only schools that are currently eligible for public discovery.
+ * Archived and duplicate records remain available through getSchoolBySlug()
+ * for internal/admin and historical use.
+ */
+export function getPublicSchoolBySlug(slug: string): School | undefined {
+  const school = getBySlug(slug);
+  if (!school || school.isArchived || school.isDuplicate) return undefined;
+  return school;
+}
+
 export function getSchoolByLegacyFile(filePath: string): School | undefined {
   if (!filePath) return undefined;
   const clean = filePath.replace(/^\/+/, '');

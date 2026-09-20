@@ -5,7 +5,7 @@ import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { buildPageMetadata, generateSchoolDirectoryJsonLd } from '../../lib/seo';
 
 export const metadata = buildPageMetadata(
-  'Schools in Greater Noida, Greater Noida West & Noida Extension',
+  'Schools in Greater Noida West & Noida Extension',
   'Browse schools in Greater Noida, Greater Noida West and Noida Extension. Compare fees, boards, facilities, student-teacher ratios and current admission information.',
   '/schools'
 );

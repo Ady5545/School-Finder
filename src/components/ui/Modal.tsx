@@ -59,7 +59,7 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={cn(
-          'relative w-full rounded-2xl glass-surface-strong p-6 shadow-xl border-white/80 transition-transform animate-in zoom-in-95 duration-150',
+          'relative w-full rounded-3xl liquid-glass glass-shine glass-float p-6 shadow-xl border-white/80 transition-transform animate-in zoom-in-95 duration-150',
           maxStyles[maxWidth],
           className
         )}

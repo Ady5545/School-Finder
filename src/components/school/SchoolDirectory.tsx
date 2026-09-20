@@ -330,10 +330,13 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     if (!proximityCoords) return map;
 
     initialSchools.forEach(s => {
-      const lat = s.location.coordinates?.lat;
-      const lng = s.location.coordinates?.lng;
       if (isSafeStoredSchoolCoordinate(s.location.coordinates)) {
-        const dist = calculateDistance(proximityCoords.lat, proximityCoords.lng, lat, lng);
+        const dist = calculateDistance(
+          proximityCoords.lat,
+          proximityCoords.lng,
+          s.location.coordinates.lat,
+          s.location.coordinates.lng
+        );
         map.set(s.id, dist);
       }
     });

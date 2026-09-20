@@ -36,7 +36,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           onChange={handleChange}
           placeholder={placeholder}
           className={cn(
-            'w-full pl-10 pr-10 py-2.5 text-sm glass-chip rounded-xl border-white/80 text-[var(--color-content)] placeholder:text-[var(--color-content-subtle)] transition-all focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-light)] focus:outline-none shadow-xs',
+            'w-full pl-10 pr-10 py-2.5 text-sm liquid-glass glass-interactive rounded-xl border-white/80 text-[var(--color-content)] placeholder:text-[var(--color-content-subtle)] transition-all focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-light)] focus:outline-none shadow-xs',
             className
           )}
           {...props}

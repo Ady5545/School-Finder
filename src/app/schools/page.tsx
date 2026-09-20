@@ -2,15 +2,13 @@ import React from 'react';
 import { getAllSchools, getDistinctBoards, getDistinctAreas } from '../../lib/schools';
 import { SchoolDirectory } from '../../components/school/SchoolDirectory';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
-import { buildPageMetadata } from '../../lib/seo';
+import { buildPageMetadata, generateSchoolDirectoryJsonLd } from '../../lib/seo';
 
 export const metadata = buildPageMetadata(
-  'Schools in Greater Noida West',
-  'Browse and discover schools in Greater Noida West and Noida Extension with audited fees, boards, facilities, and admission information.',
+  'Schools in Greater Noida, Greater Noida West & Noida Extension',
+  'Browse schools in Greater Noida, Greater Noida West and Noida Extension. Compare fees, boards, facilities, student-teacher ratios and current admission information.',
   '/schools'
 );
-
-export const dynamic = 'force-dynamic';
 
 interface SchoolsPageProps {
   searchParams: Promise<{
@@ -42,22 +40,25 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const boards = getDistinctBoards();
   const areas = getDistinctAreas();
 
+  const directoryJsonLd = generateSchoolDirectoryJsonLd(allSchools);
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
-      {/* Breadcrumbs */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(directoryJsonLd) }}
+      />
       <Breadcrumbs items={[{ label: 'Schools', isCurrent: true }]} className="mb-4" />
 
-      {/* Header */}
       <div className="pb-6">
         <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-content)] tracking-tight">
-          Schools in Greater Noida West & Noida Extension
+          Schools in Greater Noida West &amp; Noida Extension
         </h1>
         <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1">
-          Explore school profiles, fee breakdowns, curriculum details, and admissions status for all {allSchools.length} listed institutions.
+          Explore school profiles, fee breakdowns, curriculum details, and admissions status for all {allSchools.length} listed institutions across Greater Noida, Greater Noida West and Noida Extension.
         </p>
       </div>
 
-      {/* Directory Component with Search, Filters, Sort, and Compare */}
       <SchoolDirectory
         initialSchools={allSchools}
         distinctBoards={boards}
@@ -75,4 +76,3 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
     </div>
   );
 }
-

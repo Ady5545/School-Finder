@@ -11,14 +11,28 @@ export interface FeeDisplayProps {
   className?: string;
 }
 
+function getConsistentAnnualDisplay(fees: SchoolFees): string {
+  const candidates = [fees.tuitionAnnual, fees.annualDisplay, fees.rangeText].filter(Boolean) as string[];
+  const annual = candidates.find(value => /year|annual|calculated/i.test(value) && !/avg\.?\)/i.test(value));
+  if (annual) {
+    return annual
+      .replace(/\s*\((?:calculated|calculated from[^)]*|calculated annual)[^)]*\)/gi, '')
+      .replace(/\s*\/\s*year/gi, ' / year')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  }
+  const exact = candidates.find(value => !/avg\.?\)/i.test(value));
+  return exact ? exact.replace(/\s*\(avg\.?\)/gi, '').trim() : '';
+}
+
 export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact', className }) => {
-  const annualDisplay = fees.annualDisplay || fees.tuitionAnnual || (
+  const annualDisplay = getConsistentAnnualDisplay(fees) || (
     fees.billingFrequency === 'annual' && fees.cardFee
       ? formatCurrency(fees.cardFee)
       : ''
   );
 
-  // User-supplied/calculated fees are still disclosed data when an annual figure exists.
+  // Card pricing is deliberately normalized to an annual exact/range figure when the dataset supports one.
   const isComparable =
     fees.disclosed !== false &&
     fees.comparableAnnualAvailable !== false &&

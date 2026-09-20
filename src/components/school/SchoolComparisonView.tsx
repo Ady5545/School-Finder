@@ -559,7 +559,7 @@ export const SchoolComparisonView: React.FC = () => {
                       <AdmissionStatus admissions={s.admissions} showDate={false} className="shrink-0" />
                     </div>
                     <p className="text-[11px] text-slate-600">
-                      <span className="font-semibold text-slate-700">Cycle:</span> {s.admissions.academicYear || s.admissions.session || '2025–2026 Session'}
+                      <span className="font-semibold text-slate-700">Cycle:</span> {s.admissions.academicYear || s.admissions.session || '2027–28 Session'}
                     </p>
                     {s.admissions.date && (
                       <p className="text-[11px] text-slate-600">
@@ -1134,7 +1134,7 @@ export const SchoolComparisonView: React.FC = () => {
               </td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-semibold text-slate-800">
-                  {s.admissions.academicYear || s.admissions.session || '2025–2026 Academic Session'}
+                  {s.admissions.academicYear || s.admissions.session || '2027–28 Academic Session'}
                 </td>
               ))}
             </tr>
@@ -1145,7 +1145,7 @@ export const SchoolComparisonView: React.FC = () => {
               </td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-medium text-[var(--color-content)]">
-                  {s.admissions.date || 'Open for 2025–2026'}
+                  {s.admissions.date || 'Open for 2027–28'}
                 </td>
               ))}
             </tr>

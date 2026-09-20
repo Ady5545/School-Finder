@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifySessionToken, getUserByIdAsync } from '../../../../lib/authStore';
-import { getSchoolBySlug } from '../../../../lib/schools';
+import { verifySessionToken, getUserByIdAsync } from '../../../lib/authStore';
+import { getSchoolBySlug } from '../../../lib/schools';
 
 type Point = { lat: number; lng: number; label: string; source?: string };
 const geocodeCache = new Map<string, Point | null>();

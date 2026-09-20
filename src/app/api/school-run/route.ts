@@ -199,11 +199,12 @@ export async function GET(req: NextRequest) {
 
     const resolved = [];
     for (const item of schools) {
-      let point: Point | null = item.point;
-      if (!point) {
-        const school = item.school;
-        point = await geocode(school.location.mapSearchQuery || `${school.name}, ${school.location.address}, ${school.location.sector}, Greater Noida West, Uttar Pradesh, India`);
-      }
+      let point: Point | null = null;
+      const school = item.school;
+      const query = school.location.mapSearchQuery || [school.name, school.location.address, school.location.sector, 'Greater Noida West', 'Uttar Pradesh', 'India'].filter(Boolean).join(', ');
+      // Prefer live geocoding so stale legacy coordinates cannot move the map to the wrong campus.
+      point = await geocode(query);
+      if (!point && item.point) point = item.point;
       if (!point) continue;
       const [driving, walking] = await Promise.all([routeWithProvider(origin, point, 'driving'), routeWithProvider(origin, point, 'walking')]);
       resolved.push({

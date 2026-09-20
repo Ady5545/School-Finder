@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X, MessageSquare } from 'lucide-react';
+import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X, MessageSquare } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
@@ -17,53 +17,11 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [navSearch, setNavSearch] = useState('');
   const { shortlist, compareList } = useSchoolStore();
   const { user, isAuthenticated } = useAuth();
 
-  // Sync navbar search with URL query when on /schools
-  useEffect(() => {
-    if (typeof window !== 'undefined' && pathname === '/schools') {
-      const params = new URLSearchParams(window.location.search);
-      const q = params.get('q') || '';
-      setNavSearch(q);
-    }
-  }, [pathname]);
-
-  const handleNavSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const query = navSearch.trim();
-    if (pathname === '/schools') {
-      const params = new URLSearchParams(window.location.search);
-      if (query) {
-        params.set('q', query);
-      } else {
-        params.delete('q');
-      }
-      const newUrl = `/schools${params.toString() ? '?' + params.toString() : ''}`;
-      window.history.replaceState({}, '', newUrl);
-      window.dispatchEvent(new CustomEvent('nav-search-change', { detail: query }));
-    } else {
-      router.push(`/schools${query ? `?q=${encodeURIComponent(query)}` : ''}`);
-    }
-  };
-
-  const handleNavSearchChange = (val: string) => {
-    setNavSearch(val);
-    if (pathname === '/schools') {
-      const params = new URLSearchParams(window.location.search);
-      if (val.trim()) {
-        params.set('q', val.trim());
-      } else {
-        params.delete('q');
-      }
-      const newUrl = `/schools${params.toString() ? '?' + params.toString() : ''}`;
-      window.history.replaceState({}, '', newUrl);
-      window.dispatchEvent(new CustomEvent('nav-search-change', { detail: val.trim() }));
-    }
-  };
-
   const navLinks = [
+    { label: 'Home', href: '/', icon: <Home className="w-4 h-4" /> },
     { label: 'Schools', href: '/schools', icon: <Compass className="w-4 h-4" /> },
     {
       label: 'Compare',
@@ -72,16 +30,9 @@ export const Header: React.FC = () => {
       badge: compareList.length > 0 ? compareList.length : null,
       badgeColor: 'bg-[var(--color-accent)] text-white',
     },
-    { label: 'Admissions 2026-27', href: '/admissions', icon: <Calendar className="w-4 h-4" /> },
-    {
-      label: 'Shortlist',
-      href: '/wishlist',
-      icon: <Heart className="w-4 h-4" />,
-      badge: shortlist.length > 0 ? shortlist.length : null,
-      badgeColor: 'bg-rose-500 text-white',
-    },
-    { label: 'About', href: '/about', icon: null },
+    { label: 'Admissions 2027-28', href: '/admissions', icon: <Calendar className="w-4 h-4" /> },
     { label: 'Reviews', href: '/reviews', icon: <MessageSquare className="w-4 h-4" /> },
+    { label: 'About', href: '/about', icon: null },
   ];
 
   const isActive = (href: string) => {
@@ -126,36 +77,6 @@ export const Header: React.FC = () => {
               </Link>
             ))}
           </nav>
-        </div>
-
-        {/* Desktop Search Field */}
-        <div className="hidden sm:flex items-center flex-1 max-w-xs md:max-w-sm lg:max-w-md mx-3">
-          <form onSubmit={handleNavSearchSubmit} className="relative w-full">
-            <label htmlFor="nav-school-search" className="sr-only">
-              Search schools, sectors, boards
-            </label>
-            <div className="relative w-full">
-              <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none" />
-              <input
-                id="nav-school-search"
-                type="text"
-                value={navSearch}
-                onChange={e => handleNavSearchChange(e.target.value)}
-                placeholder="Search schools, sectors, boards..."
-                className="w-full pl-8 pr-7 py-1.5 rounded-xl border border-[var(--color-border-strong)] bg-white/95 text-xs text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 focus:outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-light)] transition-all shadow-2xs"
-              />
-              {navSearch && (
-                <button
-                  type="button"
-                  onClick={() => handleNavSearchChange('')}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
-                  aria-label="Clear search"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-          </form>
         </div>
 
         {/* Desktop Actions */}

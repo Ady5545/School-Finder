@@ -640,7 +640,7 @@ export default function DashboardPage() {
             <span className="text-xl font-black text-stone-900">{nearbySchools.length} Schools</span>
           </div>
           <div className="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-            <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">Admissions 2026-27</span>
+            <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">Admissions 2027-28</span>
             <span className="text-xl font-black text-emerald-700">Open</span>
           </div>
         </div>

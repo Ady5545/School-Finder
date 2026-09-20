@@ -118,7 +118,7 @@ export const WishlistLoginModal: React.FC<WishlistLoginModalProps> = ({
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-              <span>Instant alerts for 2026-27 admission cycle opening dates</span>
+              <span>Instant alerts for 2027-28 admission cycle opening dates</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />

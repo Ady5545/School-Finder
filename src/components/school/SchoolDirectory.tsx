@@ -331,7 +331,11 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     initialSchools.forEach(s => {
       const lat = s.location.coordinates?.lat;
       const lng = s.location.coordinates?.lng;
-      if (typeof lat === 'number' && typeof lng === 'number') {
+      if (
+        s.location.coordinates?.isVerified === true &&
+        typeof lat === 'number' &&
+        typeof lng === 'number'
+      ) {
         const dist = calculateDistance(proximityCoords.lat, proximityCoords.lng, lat, lng);
         map.set(s.id, dist);
       }

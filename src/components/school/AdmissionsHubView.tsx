@@ -437,66 +437,6 @@ export const AdmissionsHubView: React.FC = () => {
             </div>
           )}
         </div>
-      ) : (
-        /* VIEW MODE 2: UNIFIED FILTERED GRID */
-        <div className="space-y-4">
-          <div className="flex items-center justify-between text-xs text-slate-600 px-1">
-            <span>Showing {filteredSchools.length} matching institutions</span>
-            {searchQuery && <span>Search: "{searchQuery}"</span>}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredSchools.map(school => (
-              <AdmissionCard
-                key={school.id}
-                school={school}
-                compareList={compareList}
-                addCompare={addCompare}
-                removeCompare={removeCompare}
-                isInShortlist={isInShortlist}
-                toggleShortlist={toggleShortlist}
-                onSetReminder={milestone => {
-                  if (!isAuthenticated) {
-                    openAuthPrompt({
-                      slug: school.slug,
-                      name: school.name,
-                      image: school.assets.featured,
-                      area: school.location.area,
-                    });
-                    return;
-                  }
-                  setActiveReminder({
-                    schoolSlug: school.slug,
-                    schoolName: school.name,
-                    milestoneId: milestone.id,
-                    milestoneLabel: milestone.label,
-                    targetDate: milestone.date,
-                  });
-                }}
-              />
-            ))}
-          </div>
-
-          {filteredSchools.length === 0 && (
-            <div className="p-8 text-center bg-white rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-3">
-              <AlertCircle className="w-8 h-8 text-slate-400 mx-auto" />
-              <h3 className="text-sm font-bold text-slate-800">No schools match your search parameters</h3>
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchQuery('');
-                  setSelectedBoard('all');
-                  setSelectedGrade('all');
-                  setSelectedGroup('all');
-                }}
-                className="text-xs font-bold text-[var(--color-primary)] hover:underline cursor-pointer"
-              >
-                Reset All Filters
-              </button>
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Admission Reminder Modal Integration */}
       {activeReminder && (

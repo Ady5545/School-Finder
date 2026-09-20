@@ -290,11 +290,15 @@ export const SchoolReviewsDirectory: React.FC = () => {
 
                     <div className="flex flex-wrap gap-2 mt-3">
                       <Link
-                        href={'/schools/' + school.slug + '#reviews'}
+                        href={isAuthenticated ? '/schools/' + school.slug + '#reviews' : '/auth/login'}
                         className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-[var(--color-primary)] text-white text-[11px] font-extrabold"
                       >
                         <PenLine className="w-3.5 h-3.5" />
-                        {reviewCount > 0 ? 'Write a Review' : 'Be the First to Review'}
+                        {isAuthenticated
+                          ? reviewCount > 0
+                            ? 'Write a Review'
+                            : 'Be the First to Review'
+                          : 'Sign in to Review'}
                       </Link>
                       <button
                         type="button"

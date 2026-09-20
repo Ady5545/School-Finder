@@ -142,7 +142,9 @@ export function generateSchoolJsonLd(school: School) {
       ...(school.location.pincode ? { postalCode: school.location.pincode } : {}),
       addressCountry: 'IN',
     },
-    ...(school.location?.coordinates?.lat != null && school.location?.coordinates?.lng != null
+    ...(school.location?.coordinates?.isVerified === true &&
+    school.location?.coordinates?.lat != null &&
+    school.location?.coordinates?.lng != null
       ? {
           geo: {
             '@type': 'GeoCoordinates',

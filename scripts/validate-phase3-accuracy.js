@@ -93,8 +93,27 @@ assert(!renaissance, 'Renaissance Bulandshahr geographic outlier cleanly removed
 assert(gaurs && gaurs.boardNote.includes('2132595') && gaurs.location.sector === 'Sector 16C', 'Gaurs International Gaur City-2 verified in Sector 16C with CBSE 2132595');
 
 // 10. Truthful unverified fee & admission status
-const unverifiedCount = schools.filter(s => s.fees.verificationStatus === 'not_publicly_verified').length;
-assert(unverifiedCount >= 5, `Unverified schools (${unverifiedCount}) truthfully declare not_publicly_verified`);
+// Historical/estimated, undisclosed, copied, third-party, pending, and partial
+// verification states are intentionally distinct metadata values. Count all
+// explicit non-verified states rather than forcing them into one label.
+const nonVerifiedStatuses = new Set([
+  'not_publicly_verified',
+  'estimated_historical',
+  'estimated',
+  'unverified_undisclosed',
+  'unverified_copied_from_wisdom_tree',
+  'unverified_third_party',
+  'pending_audit',
+  'partially_verified',
+]);
+const unverifiedCount = schools.filter(s =>
+  s.fees &&
+  (s.fees.isVerified === false || nonVerifiedStatuses.has(s.fees.verificationStatus))
+).length;
+assert(
+  unverifiedCount >= 5,
+  `Unverified fee records (${unverifiedCount}) truthfully retain an explicit non-verified status`
+);
 
 console.log('----------------------------------------------------------------');
 console.log(`Results: ${passedTests} of ${totalTests} tests passed.`);

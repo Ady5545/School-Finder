@@ -4,6 +4,8 @@ import { AdmissionsHubView } from '../../components/school/AdmissionsHubView';
 import { buildPageMetadata } from '../../lib/seo';
 import { Calendar } from 'lucide-react';
 import { AdmissionInterestForm } from '../../components/school/AdmissionInterestForm';
+import { AdmissionCalendarView } from '../../components/school/AdmissionCalendarView';
+import { getAllSchools } from '../../lib/schools';
 
 export const metadata = buildPageMetadata(
   'School Admissions in Greater Noida | Admission Pitara',
@@ -31,7 +33,9 @@ export default function AdmissionsPage() {
 
       <div className="mb-8"><AdmissionInterestForm /></div>
 
-      <AdmissionsHubView />
+      <AdmissionCalendarView schools={getAllSchools()} />
+
+      <div className="mt-8"><AdmissionsHubView /></div>
     </div>
   );
 }

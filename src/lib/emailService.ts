@@ -476,7 +476,7 @@ export async function sendAdmissionDeadlineAlertEmail({
         Urgent Admission Deadline Alert
       </h1>
       <p style="color: #cbd5e1; font-size: 13px; margin: 4px 0 0 0;">
-        Greater Noida West School Admissions 2026-2027
+        Greater Noida West School Admissions 2027-28
       </p>
     </div>
 

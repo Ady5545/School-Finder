@@ -72,7 +72,7 @@ export function SchoolEditorModal({
 
   // Admissions
   const [admissionStatus, setAdmissionStatus] = useState('Admissions Open');
-  const [admissionSession, setAdmissionSession] = useState('2025-2026');
+  const [admissionSession, setAdmissionSession] = useState('2027-28');
   const [admissionProcess, setAdmissionProcess] = useState('');
   const [milestones, setMilestones] = useState<AdmissionMilestone[]>([]);
 
@@ -118,7 +118,7 @@ export function SchoolEditorModal({
       setFeeSourceUrl(schoolToEdit.fees?.sourceUrl || '');
 
       setAdmissionStatus(schoolToEdit.admissions?.status || 'Admissions Open');
-      setAdmissionSession(schoolToEdit.admissions?.session || '2025-2026');
+      setAdmissionSession(schoolToEdit.admissions?.session || '2027-28');
       setAdmissionProcess(schoolToEdit.admissions?.process || '');
       setMilestones(schoolToEdit.admissions?.milestones || []);
 
@@ -157,7 +157,7 @@ export function SchoolEditorModal({
       setFeeVerificationStatus('partially_verified');
       setFeeSourceUrl('');
       setAdmissionStatus('Admissions Open');
-      setAdmissionSession('2025-2026');
+      setAdmissionSession('2027-28');
       setAdmissionProcess('');
       setMilestones([]);
       setFeaturedImage('');
@@ -774,7 +774,7 @@ export function SchoolEditorModal({
                     value={admissionSession}
                     onChange={e => setAdmissionSession(e.target.value)}
                     className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="2025-2026"
+                    placeholder="2027-28"
                   />
                 </div>
               </div>

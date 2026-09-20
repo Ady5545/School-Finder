@@ -17,6 +17,9 @@ import { SchoolGallery } from '../../../components/school/SchoolGallery';
 import { CampusInteractiveMap } from '../../../components/school/CampusInteractiveMap';
 import { SchoolRatingsSection } from '../../../components/school/SchoolRatingsSection';
 import { SchoolAdmissionsSection } from '../../../components/school/SchoolAdmissionsSection';
+import { DataTrustPanel } from '../../../components/school/DataTrustPanel';
+import { FeeIntelligence } from '../../../components/school/FeeIntelligence';
+import { AdmissionChecklist } from '../../../components/school/AdmissionChecklist';
 import { SchoolViewTracker } from '../../../components/school/SchoolViewTracker';
 import { Button } from '../../../components/ui/Button';
 import { cn } from '../../../lib/utils';
@@ -86,7 +89,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
   const { slug } = await params;
   const school = getSchoolBySlug(slug);
 
-  if (!school) {
+  if (!school || school.slug === 'mount-vinson-school') {
     notFound();
   }
 
@@ -197,6 +200,12 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           </div>
 
           <SchoolProfileActions school={school} />
+          <Link
+            href={'/application-tracker?school=' + encodeURIComponent(school.slug)}
+            className="inline-flex w-full items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-3 py-2.5 text-xs font-bold text-sky-800 hover:bg-sky-100 transition-colors"
+          >
+            Track this application
+          </Link>
         </div>
       </div>
 
@@ -278,6 +287,10 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <section id="fee-breakdown-section">
             <ComprehensiveFeeBreakdown fees={school.fees} schoolName={school.name} />
           </section>
+          
+          <FeeIntelligence school={school} />
+
+          <AdmissionChecklist school={school} />
 
           {/* Campus Facilities */}
           {school.facilities && school.facilities.length > 0 && (
@@ -401,6 +414,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               </div>
             </section>
           )}
+
+          <DataTrustPanel school={school} />
 
           {/* Detailed Fees Card */}
           <section>

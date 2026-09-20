@@ -151,11 +151,16 @@ export function calculateSchoolCompleteness(s: School): SchoolCompletenessCheckl
       passed: Boolean(
         (s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) &&
         (s.location?.coordinates?.lng ?? s.location?.coordinates?.longitude) &&
-        s.location?.coordinates?.isVerified !== false &&
+        s.location?.coordinates?.isVerified === true &&
         // Ensure no fallback coordinates (28.595, 77.445)
         Math.abs(((s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) || 0) - 28.595) > 0.001
       ),
-      description: (s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) ? 'Latitude & Longitude verified' : 'Coordinates unverified / missing',
+      description:
+        s.location?.coordinates?.isVerified === true &&
+        (s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) &&
+        (s.location?.coordinates?.lng ?? s.location?.coordinates?.longitude)
+          ? 'Latitude & Longitude verified'
+          : 'Coordinates unverified / missing',
       severity: 'required',
     },
     {
@@ -388,7 +393,7 @@ export function createAdminSchool(
       tuitionMonthly: schoolData.fees?.tuitionMonthly || '₹10,000/mo',
       tuitionQuarterly: schoolData.fees?.tuitionQuarterly || '₹30,000/qtr',
       source: schoolData.fees?.source || 'Official School Prospectus',
-      academicYear: schoolData.fees?.academicYear || '2025-2026',
+      academicYear: schoolData.fees?.academicYear || '2027-28',
       verifiedDate: new Date().toISOString().split('T')[0],
       isVerified: true,
     },
@@ -402,7 +407,7 @@ export function createAdminSchool(
     achievements: schoolData.achievements || ['Affiliated with CBSE New Delhi'],
     admissions: schoolData.admissions || {
       status: 'Admissions Open',
-      academicYear: '2025-2026',
+      academicYear: '2027-28',
       process: 'Online registration followed by parent interaction and document verification.',
       milestones: [
         {

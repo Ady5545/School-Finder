@@ -36,6 +36,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useSchoolStore } from '../../lib/schoolStore';
 import { cn } from '../../lib/utils';
 import type { School } from '../../types/school';
+import { isSafeStoredSchoolCoordinate } from '../../lib/locationSafety';
 
 interface SchoolDirectoryProps {
   initialSchools: School[];
@@ -50,6 +51,9 @@ interface SchoolDirectoryProps {
   initialSiblingOnly?: boolean;
   initialFeeTier?: string;
   initialSortBy?: string;
+  initialCurriculum?: string;
+  initialTransport?: string;
+  initialTrust?: string;
 }
 
 export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
@@ -65,6 +69,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
   initialSiblingOnly = false,
   initialFeeTier = 'all',
   initialSortBy = 'featured',
+  initialCurriculum = '',
+  initialTransport = 'all',
+  initialTrust = 'all',
 }) => {
   const { compareList, clearCompare, removeCompare } = useSchoolStore();
 
@@ -76,6 +83,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
   const [selectedGrade, setSelectedGrade] = useState<string>(initialGrade);
   const [siblingOnly, setSiblingOnly] = useState<boolean>(initialSiblingOnly);
   const [selectedFeeTier, setSelectedFeeTier] = useState<string>(initialFeeTier);
+  const [selectedCurriculum, setSelectedCurriculum] = useState<string>(initialCurriculum);
+  const [selectedTransport, setSelectedTransport] = useState<string>(initialTransport);
+  const [selectedTrust, setSelectedTrust] = useState<string>(initialTrust);
   const [sortBy, setSortBy] = useState<'featured' | 'name' | 'fee-asc' | 'fee-desc' | 'rating' | 'distance'>(
     (initialSortBy as any) || 'featured'
   );
@@ -114,6 +124,50 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     });
     return Array.from(set).sort();
   }, [initialSchools]);
+
+
+  const availableCurricula = useMemo(() => {
+    const set = new Set<string>();
+    initialSchools.forEach(school => {
+      if (school.curriculum && school.curriculum.trim()) set.add(school.curriculum.trim());
+    });
+    return Array.from(set).sort();
+  }, [initialSchools]);
+
+  const getTransportStatus = (school: School): 'documented' | 'undocumented' => {
+    const componentTransport = Array.isArray(school.fees?.components) && school.fees.components.some(
+      component => component.category === 'transport'
+    );
+    const scheduleTransport = Array.isArray(school.fees?.transportSchedule) && school.fees.transportSchedule.length > 0;
+    const textTransport = Array.isArray(school.facilities) && school.facilities.some(
+      facility => /transport|bus/i.test(facility.name || '')
+    );
+    return componentTransport || scheduleTransport || textTransport ? 'documented' : 'undocumented';
+  };
+
+  const getLatestCheckTime = (school: School): number | null => {
+    const candidates = [
+      school.verification?.lastVerified,
+      school.fees?.lastVerifiedDate,
+      school.admissions?.lastVerifiedDate,
+    ].filter(Boolean) as string[];
+    const times = candidates
+      .map(value => {
+        const numeric = Date.parse(value);
+        if (!Number.isNaN(numeric)) return numeric;
+        const month = value.match(/^(\d{4})-(\d{2})$/);
+        return month ? Date.parse(month[1] + '-' + month[2] + '-01') : NaN;
+      })
+      .filter(value => !Number.isNaN(value));
+    return times.length ? Math.max(...times) : null;
+  };
+
+  const getTrustFilterStatus = (school: School): 'recent' | 'needs-check' => {
+    const latest = getLatestCheckTime(school);
+    if (latest === null) return 'needs-check';
+    const ninetyDays = 90 * 24 * 60 * 60 * 1000;
+    return Date.now() - latest <= ninetyDays ? 'recent' : 'needs-check';
+  };
 
   // Close desktop sports dropdown when clicking outside
   useEffect(() => {
@@ -160,6 +214,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     if (selectedGrade !== 'all') params.set('grade', selectedGrade);
     if (siblingOnly) params.set('sibling', 'true');
     if (selectedFeeTier !== 'all') params.set('fee', selectedFeeTier);
+    if (selectedCurriculum) params.set('curriculum', selectedCurriculum);
+    if (selectedTransport !== 'all') params.set('transport', selectedTransport);
+    if (selectedTrust !== 'all') params.set('trust', selectedTrust);
     if (sortBy !== 'featured') params.set('sort', sortBy);
     
     const newUrl = `${pathname}${params.toString() ? '?' + params.toString() : ''}`;
@@ -173,6 +230,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     selectedGrade,
     siblingOnly,
     selectedFeeTier,
+    selectedCurriculum,
+    selectedTransport,
+    selectedTrust,
     sortBy,
     pathname,
   ]);
@@ -265,7 +325,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
       boards.some(b => b.toLowerCase().includes(q)) ||
       (school.tagline || '').toLowerCase().includes(q) ||
       (school.summary || '').toLowerCase().includes(q) ||
-      sports.some(sp => sp.toLowerCase().includes(q))
+      (school.curriculum || '').toLowerCase().includes(q) ||
+      sports.some(sp => sp.toLowerCase().includes(q)) ||
+      (Array.isArray(school.facilities) && school.facilities.some(fac => (fac.name || '').toLowerCase().includes(q)))
     );
   };
 
@@ -329,10 +391,13 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     if (!proximityCoords) return map;
 
     initialSchools.forEach(s => {
-      const lat = s.location.coordinates?.lat;
-      const lng = s.location.coordinates?.lng;
-      if (typeof lat === 'number' && typeof lng === 'number') {
-        const dist = calculateDistance(proximityCoords.lat, proximityCoords.lng, lat, lng);
+      if (isSafeStoredSchoolCoordinate(s.location.coordinates)) {
+        const dist = calculateDistance(
+          proximityCoords.lat,
+          proximityCoords.lng,
+          s.location.coordinates.lat,
+          s.location.coordinates.lng
+        );
         map.set(s.id, dist);
       }
     });
@@ -390,6 +455,18 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     }
 
     // 8. Fee Tier Filter
+    if (selectedCurriculum) {
+      result = result.filter(s => (s.curriculum || '').toLowerCase() === selectedCurriculum.toLowerCase());
+    }
+
+    if (selectedTransport !== 'all') {
+      result = result.filter(s => getTransportStatus(s) === selectedTransport);
+    }
+
+    if (selectedTrust !== 'all') {
+      result = result.filter(s => getTrustFilterStatus(s) === selectedTrust);
+    }
+
     if (selectedFeeTier !== 'all') {
       result = result.filter(s => {
         if (!s.fees.cardFee || s.fees.comparableAnnualAvailable === false || s.fees.verificationStatus !== 'verified_from_source') {
@@ -465,6 +542,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     selectedGrade,
     siblingOnly,
     selectedFeeTier,
+    selectedCurriculum,
+    selectedTransport,
+    selectedTrust,
     selectedRadiusKm,
     proximityCoords,
     schoolDistances,
@@ -479,6 +559,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     (selectedGrade !== 'all' ? 1 : 0) +
     (siblingOnly ? 1 : 0) +
     (selectedFeeTier !== 'all' ? 1 : 0) +
+    (selectedCurriculum ? 1 : 0) +
+    (selectedTransport !== 'all' ? 1 : 0) +
+    (selectedTrust !== 'all' ? 1 : 0) +
     (selectedProximityArea ? 1 : 0) +
     (selectedRadiusKm ? 1 : 0) +
     (searchQuery.trim() ? 1 : 0);
@@ -492,6 +575,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     setSelectedGrade('all');
     setSiblingOnly(false);
     setSelectedFeeTier('all');
+    setSelectedCurriculum('');
+    setSelectedTransport('all');
+    setSelectedTrust('all');
     setSelectedProximityArea('');
     setSelectedRadiusKm(null);
     setProximityCoords(null);
@@ -524,7 +610,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             type="text"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            placeholder="Search school name, alternate name, sector, board, sports (e.g., DPS, Swimming, CBSE, Techzone 4)..."
+            placeholder="Search school, area, board, curriculum, sports or facilities (e.g., DPS, CBSE, Swimming, Techzone 4)..."
             className="w-full pl-10 pr-24 py-2.5 sm:py-3 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs sm:text-sm text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/75 focus:border-[var(--color-primary)] focus:ring-3 focus:ring-[var(--color-primary-light)] outline-none transition-all shadow-warm-2xs"
           />
           <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
@@ -701,6 +787,32 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                 <option value="100k-150k">₹1L – ₹1.5L</option>
                 <option value="150k-200k">₹1.5L – ₹2L</option>
                 <option value="above-200k">Above ₹2L</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-[var(--color-content)]">Curriculum:</span>
+              <select value={selectedCurriculum} onChange={e => setSelectedCurriculum(e.target.value)} className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] max-w-[150px]">
+                <option value="">Any Curriculum</option>
+                {availableCurricula.map(item => <option key={item} value={item}>{item}</option>)}
+              </select>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-[var(--color-content)]">Transport:</span>
+              <select value={selectedTransport} onChange={e => setSelectedTransport(e.target.value)} className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)]">
+                <option value="all">Any</option>
+                <option value="documented">Documented</option>
+                <option value="undocumented">Not documented</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <span className="font-bold text-[var(--color-content)]">Data trust:</span>
+              <select value={selectedTrust} onChange={e => setSelectedTrust(e.target.value)} className="px-2 py-1 rounded-lg border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)]">
+                <option value="all">Any</option>
+                <option value="recent">Checked recently</option>
+                <option value="needs-check">Needs verification</option>
               </select>
             </div>
 
@@ -1019,6 +1131,27 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               </span>
             )}
 
+            {selectedCurriculum && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-blue-50 text-blue-900 font-bold border border-blue-200 shrink-0">
+                Curriculum: {selectedCurriculum}
+                <button type="button" onClick={() => setSelectedCurriculum('')} className="p-0.5 hover:text-rose-600"><X className="w-3 h-3" /></button>
+              </span>
+            )}
+
+            {selectedTransport !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-50 text-cyan-900 font-bold border border-cyan-200 shrink-0">
+                Transport: {selectedTransport === 'documented' ? 'Documented' : 'Not documented'}
+                <button type="button" onClick={() => setSelectedTransport('all')} className="p-0.5 hover:text-rose-600"><X className="w-3 h-3" /></button>
+              </span>
+            )}
+
+            {selectedTrust !== 'all' && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 font-bold border border-emerald-200 shrink-0">
+                Data: {selectedTrust === 'recent' ? 'Checked recently' : 'Needs verification'}
+                <button type="button" onClick={() => setSelectedTrust('all')} className="p-0.5 hover:text-rose-600"><X className="w-3 h-3" /></button>
+              </span>
+            )}
+
             {selectedFeeTier !== 'all' && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 font-bold border border-emerald-200 shrink-0">
                 Fee: {selectedFeeTier.replace('-', ' ')}
@@ -1089,6 +1222,32 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                   {board}
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">Curriculum</label>
+              <select value={selectedCurriculum} onChange={e => setSelectedCurriculum(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold min-h-[42px]">
+                <option value="">Any Curriculum</option>
+                {availableCurricula.map(item => <option key={item} value={item}>{item}</option>)}
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">Transport</label>
+              <select value={selectedTransport} onChange={e => setSelectedTransport(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold min-h-[42px]">
+                <option value="all">Any</option>
+                <option value="documented">Documented</option>
+                <option value="undocumented">Not documented</option>
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">Data check</label>
+              <select value={selectedTrust} onChange={e => setSelectedTrust(e.target.value)} className="w-full p-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-bold min-h-[42px]">
+                <option value="all">Any</option>
+                <option value="recent">Checked recently</option>
+                <option value="needs-check">Needs verification</option>
+              </select>
             </div>
           </div>
 

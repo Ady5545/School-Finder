@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySessionToken, getUserByIdAsync } from '../../../lib/authStore';
-import { getSchoolBySlug } from '../../../lib/schools';
+import { getPublicSchoolBySlug } from '../../../lib/schools';
+import { isSafeStoredSchoolCoordinate } from '../../../lib/locationSafety';
 
 type Point = { lat: number; lng: number; label: string; source?: string };
 const geocodeCache = new Map<string, Point | null>();
@@ -187,12 +188,12 @@ export async function GET(req: NextRequest) {
     const origin = await geocode(`${society}, Greater Noida West, Uttar Pradesh, India`);
     if (!origin) return NextResponse.json({ success: false, code: 'SOCIETY_NOT_FOUND', society, message: 'We could not confidently locate that society on the map yet.', diagnostic: { normalizedSociety: society.replace(/,?\s*(uttar pradesh|india|greater noida west|noida extension|greater noida)\s*$/i, '').trim(), providersTried: ['OpenStreetMap Nominatim', 'Photon'] } }, { status: 422 });
 
-    const schools = shortlist.map(slug => getSchoolBySlug(slug)).filter(Boolean).map(school => {
+    const schools = shortlist.map(slug => getPublicSchoolBySlug(slug)).filter(Boolean).map(school => {
       const coords = school!.location.coordinates;
       return {
         school: school!,
-        point: typeof coords.lat === 'number' && typeof coords.lng === 'number'
-          ? { lat: coords.lat, lng: coords.lng, label: school!.name, source: coords.isVerified ? 'verified school coordinates' : 'school coordinates' }
+        point: isSafeStoredSchoolCoordinate(coords)
+          ? { lat: coords.lat, lng: coords.lng, label: school!.name, source: 'verified school coordinates' }
           : null,
       };
     });

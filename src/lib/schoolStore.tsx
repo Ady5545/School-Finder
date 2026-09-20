@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { useToast } from '../components/ui/Toast';
-import { getCanonicalSlug } from './schools';
+import { getCanonicalSlug, getPublicSchoolBySlug } from './schools';
 import { useAuth } from './authContext';
 import { WishlistLoginModal, type WishlistModalTarget } from '../components/auth/WishlistLoginModal';
 
@@ -34,6 +34,19 @@ const ANON_SHORTLIST_KEY = 'admission_pitara_anon_shortlist_v1';
 const COMPARE_STORAGE_KEY = 'admission_pitara_compare_v1';
 const MAX_COMPARE_ITEMS = 4;
 
+function toPublicCanonicalSlug(slug: string): string | null {
+  const school = getPublicSchoolBySlug(slug);
+  return school ? getCanonicalSlug(school.slug) : null;
+}
+
+function normalizePublicSlugs(slugs: string[]): string[] {
+  return Array.from(new Set(
+    slugs
+      .map(s => toPublicCanonicalSlug(String(s)))
+      .filter((slug): slug is string => Boolean(slug))
+  ));
+}
+
 export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isAuthenticated, isLoading: isAuthLoading } = useAuth();
   const [shortlist, setShortlist] = useState<string[]>([]);
@@ -50,7 +63,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
       if (savedCompare) {
         const parsed = JSON.parse(savedCompare);
         if (Array.isArray(parsed)) {
-          setCompareList(Array.from(new Set(parsed.map(s => getCanonicalSlug(String(s))))));
+          setCompareList(normalizePublicSlugs(parsed));
         }
       }
 
@@ -59,7 +72,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
       if (savedAnon) {
         const parsed = JSON.parse(savedAnon);
         if (Array.isArray(parsed)) {
-          setShortlist(Array.from(new Set(parsed.map(s => getCanonicalSlug(String(s))))));
+          setShortlist(normalizePublicSlugs(parsed));
         }
       }
     } catch {
@@ -83,7 +96,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
         if (savedAnon) {
           const parsed = JSON.parse(savedAnon);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            anonList = parsed.map(s => getCanonicalSlug(String(s)));
+            anonList = normalizePublicSlugs(parsed);
           }
         }
       } catch {}
@@ -98,7 +111,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           .then(r => r.json())
           .then(data => {
             if (data?.success && Array.isArray(data.wishlist)) {
-              const merged: string[] = Array.from(new Set<string>((data.wishlist as string[]).map((s: string) => getCanonicalSlug(s))));
+              const merged = normalizePublicSlugs(data.wishlist as string[]);
               setShortlist(merged);
               try {
                 localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(merged));
@@ -108,8 +121,8 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           })
           .catch(() => {
             // Fallback to local merge
-            const existingUserList = Array.isArray(user.wishlist) ? user.wishlist.map(s => getCanonicalSlug(String(s))) : [];
-            const merged: string[] = Array.from(new Set<string>([...existingUserList, ...anonList]));
+            const existingUserList = Array.isArray(user.wishlist) ? normalizePublicSlugs(user.wishlist) : [];
+            const merged = normalizePublicSlugs([...existingUserList, ...anonList]);
             setShortlist(merged);
             try {
               localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(merged));
@@ -118,9 +131,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           });
       } else {
         // User is authenticated: load THIS user's server-backed wishlist
-        const userWishlist: string[] = Array.isArray(user.wishlist)
-          ? Array.from(new Set<string>(user.wishlist.map(s => getCanonicalSlug(String(s)))))
-          : [];
+        const userWishlist = Array.isArray(user.wishlist) ? normalizePublicSlugs(user.wishlist) : [];
         setShortlist(userWishlist);
 
         try {
@@ -135,7 +146,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
         if (savedAnon) {
           const parsed = JSON.parse(savedAnon);
           if (Array.isArray(parsed)) {
-            const anonRestored: string[] = Array.from(new Set<string>(parsed.map(s => getCanonicalSlug(String(s)))));
+            const anonRestored = normalizePublicSlugs(parsed);
             setShortlist(anonRestored);
             return;
           }
@@ -157,7 +168,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, [compareList, isHydrated]);
 
   const setShortlistFromServer = useCallback((slugs: string[]) => {
-    const canonical = Array.from(new Set(slugs.map(s => getCanonicalSlug(String(s)))));
+    const canonical = normalizePublicSlugs(slugs);
     setShortlist(canonical);
     if (user?.id) {
       try {
@@ -175,13 +186,17 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, []);
 
   const isInShortlist = useCallback(
-    (slug: string) => shortlist.includes(getCanonicalSlug(slug)),
+    (slug: string) => {
+      const canonical = toPublicCanonicalSlug(slug);
+      return Boolean(canonical && shortlist.includes(canonical));
+    },
     [shortlist]
   );
 
   const toggleShortlist = useCallback(
     (slug: string, schoolName?: string) => {
-      const canonical = getCanonicalSlug(slug);
+      const canonical = toPublicCanonicalSlug(slug);
+      if (!canonical) return;
       let isRemoving = false;
       let nextList: string[] = [];
 
@@ -225,7 +240,8 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
   const addToShortlist = useCallback(
     (slug: string, schoolName?: string) => {
-      const canonical = getCanonicalSlug(slug);
+      const canonical = toPublicCanonicalSlug(slug);
+      if (!canonical) return;
       let nextList: string[] = [];
 
       setShortlist(prev => {
@@ -256,7 +272,8 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
 
   const removeFromShortlist = useCallback(
     (slug: string) => {
-      const canonical = getCanonicalSlug(slug);
+      const canonical = toPublicCanonicalSlug(slug);
+      if (!canonical) return;
       let nextList: string[] = [];
 
       setShortlist(prev => {
@@ -305,13 +322,17 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, [showToast, isAuthenticated, user?.id]);
 
   const isInCompare = useCallback(
-    (slug: string) => compareList.includes(getCanonicalSlug(slug)),
+    (slug: string) => {
+      const canonical = toPublicCanonicalSlug(slug);
+      return Boolean(canonical && compareList.includes(canonical));
+    },
     [compareList]
   );
 
   const toggleCompare = useCallback(
     (slug: string, schoolName?: string) => {
-      const canonical = getCanonicalSlug(slug);
+      const canonical = toPublicCanonicalSlug(slug);
+      if (!canonical) return;
       setCompareList(prev => {
         const exists = prev.includes(canonical);
         if (exists) {
@@ -338,7 +359,8 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   );
 
   const removeFromCompare = useCallback((slug: string) => {
-    const canonical = getCanonicalSlug(slug);
+    const canonical = toPublicCanonicalSlug(slug);
+    if (!canonical) return;
     setCompareList(prev => prev.filter(s => s !== canonical));
   }, []);
 
@@ -348,7 +370,8 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   }, [showToast]);
 
   const addCompare = useCallback((slug: string, schoolName?: string) => {
-    const canonical = getCanonicalSlug(slug);
+    const canonical = toPublicCanonicalSlug(slug);
+    if (!canonical) return;
     setCompareList(prev => {
       if (prev.includes(canonical)) return prev;
       if (prev.length >= MAX_COMPARE_ITEMS) {

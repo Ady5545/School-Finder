@@ -39,12 +39,23 @@ export function getAllSchools(options?: { includeAliases?: boolean; includeArchi
  * Returns every school slug so static routes and legacy URLs continue resolving without 404s.
  */
 export function getAllSchoolSlugs(): string[] {
-  return schools.map(s => s.slug);
+  return schools.filter(s => s.slug !== 'mount-vinson-school').map(s => s.slug);
 }
 
 export function getSchoolBySlug(slug: string): School | undefined {
   if (!slug) return undefined;
   return getBySlug(slug);
+}
+
+/**
+ * Resolves only schools that are currently eligible for public discovery.
+ * Archived and duplicate records remain available through getSchoolBySlug()
+ * for internal/admin and historical use.
+ */
+export function getPublicSchoolBySlug(slug: string): School | undefined {
+  const school = getBySlug(slug);
+  if (!school || school.isArchived || school.isDuplicate) return undefined;
+  return school;
 }
 
 export function getSchoolByLegacyFile(filePath: string): School | undefined {

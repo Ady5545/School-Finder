@@ -15173,8 +15173,8 @@
     "geographicClassification": null,
     "recordType": "primary",
     "canonicalSlug": "mount-vinson-school",
-    "isArchived": false,
-    "status": "active",
+    "isArchived": true,
+    "status": "archived",
     "verification": {
       "isVerified": false,
       "status": "partially_verified",
@@ -15186,7 +15186,8 @@
         "name",
         "address"
       ]
-    }
+    },
+    "archiveReason": "Removed from public Admission Pitara discovery; retained only as historical repository data."
   },
   {
     "id": "dps-world-school-noida-extension-alias",

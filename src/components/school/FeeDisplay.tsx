@@ -11,43 +11,132 @@ export interface FeeDisplayProps {
   className?: string;
 }
 
-function getConsistentAnnualDisplay(fees: SchoolFees): string {
-  const candidates = [fees.tuitionAnnual, fees.annualDisplay, fees.rangeText].filter(Boolean) as string[];
-  const annual = candidates.find(value => /year|annual|calculated/i.test(value) && !/avg\.?\)/i.test(value));
-  if (annual) {
-    return annual
-      .replace(/\s*\((?:calculated|calculated from[^)]*|calculated annual)[^)]*\)/gi, '')
-      .replace(/\s*\/\s*year/gi, ' / year')
-      .replace(/\s{2,}/g, ' ')
-      .trim();
+function cleanFeeText(value: string): string {
+  return value
+    .replace(/\s*\((?:calculated|calculated from[^)]*|calculated annual)[^)]*\)/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+function hasMonthlyMarker(value: string): boolean {
+  return /\/\s*month|per\s+month|monthly/i.test(value);
+}
+
+function hasQuarterlyMarker(value: string): boolean {
+  return /\/\s*quarter|per\s+quarter|quarterly/i.test(value);
+}
+
+function hasAnnualMarker(value: string): boolean {
+  return /\/\s*year|per\s+year|annual(?:ly)?|per\s+annum|yearly/i.test(value);
+}
+
+function isPlainAnnualValue(value: string): boolean {
+  return /^₹?\s*[\d,]+(?:\s*[–-]\s*₹?\s*[\d,]+)?$/i.test(value.trim());
+}
+
+type FeePresentationKind = 'annual' | 'monthly' | 'quarterly' | 'details' | 'unavailable';
+
+interface FeePresentation {
+  kind: FeePresentationKind;
+  label: string;
+  value: string;
+}
+
+function getFeePresentation(fees: SchoolFees): FeePresentation {
+  const rawTuitionAnnual = typeof fees.tuitionAnnual === 'string' ? fees.tuitionAnnual : '';
+  const rawAnnualDisplay = typeof fees.annualDisplay === 'string' ? fees.annualDisplay : '';
+  const rawRangeText = typeof fees.rangeText === 'string' ? fees.rangeText : '';
+  const tuitionAnnual = cleanFeeText(rawTuitionAnnual);
+  const annualDisplay = cleanFeeText(rawAnnualDisplay);
+  const rangeText = cleanFeeText(rawRangeText);
+  const tuitionMonthly = typeof fees.tuitionMonthly === 'string' ? cleanFeeText(fees.tuitionMonthly) : '';
+  const tuitionQuarterly = typeof fees.tuitionQuarterly === 'string' ? cleanFeeText(fees.tuitionQuarterly) : '';
+  const tuitionAnnualCalculated = /calculated|derived/i.test(rawTuitionAnnual);
+  const annualDisplayCalculated = /calculated|derived/i.test(rawAnnualDisplay);
+  const rangeTextCalculated = /calculated|derived/i.test(rawRangeText);
+
+  if (
+    tuitionAnnual &&
+    !hasMonthlyMarker(tuitionAnnual) &&
+    !hasQuarterlyMarker(tuitionAnnual) &&
+    (hasAnnualMarker(tuitionAnnual) || isPlainAnnualValue(tuitionAnnual))
+  ) {
+    const isCalculated = tuitionAnnualCalculated;
+    return { kind: 'annual', label: isCalculated ? 'Annual Fee (calculated)' : 'Annual Fee', value: tuitionAnnual };
   }
-  const exact = candidates.find(value => !/avg\.?\)/i.test(value));
-  return exact ? exact.replace(/\s*\(avg\.?\)/gi, '').trim() : '';
+
+  if (
+    annualDisplay &&
+    !hasMonthlyMarker(annualDisplay) &&
+    !hasQuarterlyMarker(annualDisplay) &&
+    (hasAnnualMarker(annualDisplay) || isPlainAnnualValue(annualDisplay))
+  ) {
+    const isCalculated = annualDisplayCalculated;
+    return { kind: 'annual', label: isCalculated ? 'Annual Fee (calculated)' : 'Annual Fee', value: annualDisplay };
+  }
+
+  if (
+    fees.billingFrequency === 'annual' &&
+    typeof fees.cardFee === 'number' &&
+    Number.isFinite(fees.cardFee)
+  ) {
+    return { kind: 'annual', label: 'Annual Fee', value: formatCurrency(fees.cardFee) };
+  }
+
+  if (rangeText && hasAnnualMarker(rangeText) && !hasMonthlyMarker(rangeText) && !hasQuarterlyMarker(rangeText)) {
+    const isCalculated = rangeTextCalculated;
+    return { kind: 'annual', label: isCalculated ? 'Annual Fee (calculated)' : 'Annual Fee', value: rangeText };
+  }
+
+  if (tuitionMonthly) {
+    return { kind: 'monthly', label: 'Monthly Fee', value: tuitionMonthly };
+  }
+
+  const monthlyText = [annualDisplay, rangeText].find(value => value && hasMonthlyMarker(value));
+  if (monthlyText) {
+    return { kind: 'monthly', label: 'Monthly Fee', value: monthlyText };
+  }
+
+  if (tuitionQuarterly) {
+    return { kind: 'quarterly', label: 'Quarterly Fee', value: tuitionQuarterly };
+  }
+
+  const quarterlyText = [annualDisplay, rangeText].find(value => value && hasQuarterlyMarker(value));
+  if (quarterlyText) {
+    return { kind: 'quarterly', label: 'Quarterly Fee', value: quarterlyText };
+  }
+
+  const detailText = fees.feeDisplayOverride || rangeText || annualDisplay;
+  if (
+    typeof detailText === 'string' &&
+    detailText.trim() &&
+    !/not publicly disclosed|not disclosed/i.test(detailText)
+  ) {
+    return { kind: 'details', label: 'Fee details available', value: cleanFeeText(detailText) };
+  }
+
+  return { kind: 'unavailable', label: 'Not publicly disclosed', value: '' };
 }
 
 export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact', className }) => {
-  const annualDisplay = getConsistentAnnualDisplay(fees) || (
-    fees.billingFrequency === 'annual' && fees.cardFee
-      ? formatCurrency(fees.cardFee)
-      : ''
-  );
-
-  // Card pricing is deliberately normalized to an annual exact/range figure when the dataset supports one.
-  const isComparable =
-    fees.disclosed !== false &&
-    fees.comparableAnnualAvailable !== false &&
-    Boolean(annualDisplay);
-
+  const presentation = getFeePresentation(fees);
   const isHistorical =
     fees.verificationStatus === 'estimated_historical' ||
     fees.verificationStatus === 'estimated';
-
+  const verificationStatus = String(fees.verificationStatus || '').toLowerCase();
+  const isSourceUnverified = [
+    'user_supplied',
+    'user_supplied_latest',
+    'unverified_third_party',
+    'pending_audit',
+    'not_publicly_verified',
+    'partially_verified',
+  ].includes(verificationStatus);
   const isUndisclosed =
+    presentation.kind === 'unavailable' ||
     fees.disclosed === false ||
-    fees.verificationStatus === 'not_publicly_verified' ||
-    fees.verificationStatus === 'unverified_undisclosed' ||
-    fees.verificationStatus === 'unverified_copied_from_wisdom_tree' ||
-    !fees.cardFee;
+    verificationStatus === 'unverified_undisclosed';
+  const displayLabel = isHistorical ? 'Historical ' + presentation.label : presentation.label;
 
   const [showTooltip, setShowTooltip] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -68,18 +157,21 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
     };
   }, [showTooltip]);
 
-  const tooltipExplanation = isComparable
-    ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Includes annual tuition, composite recurring charges & lab access. Excludes optional transport (bus), uniform, and meal charges.`
+  const tooltipExplanation = isUndisclosed
+    ? 'Fee structure is not published publicly. Direct inquiry with the school admission office is required.'
     : isHistorical
-    ? 'Fee figures reflect historical 2023–24 institutional data and are provided for indicative reference only. Not certified for 2027–28.'
-    : 'Fee structure is not published publicly. Direct inquiry with the school admission office is required.';
+    ? displayLabel + ' shown for reference only. It is not certified for the 2027–28 cycle.'
+    : (fees.feeCategory ? fees.feeCategory + ': ' : '') + presentation.label + ' shown from the available source data. Optional transport (bus), uniform, and meal charges may be separate.';
+  const transparencyNote = isSourceUnverified
+    ? 'This fee information has not been independently verified by Admission Pitara.'
+    : '';
 
   if (variant === 'compact') {
     return (
       <div className={cn('flex flex-col relative', className)}>
         <div className="flex items-center gap-1">
           <span className="text-[10px] uppercase font-bold text-[var(--color-content-muted)] tracking-wider">
-            Annual Fee
+            {displayLabel}
           </span>
           <div className="relative inline-flex items-center" ref={tooltipRef}>
             <button
@@ -123,19 +215,17 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
         </div>
 
         <div className="flex items-baseline gap-1.5 mt-0.5">
-          {isComparable ? (
-            <>
-              <span className="text-base font-bold text-[var(--color-primary)] tracking-tight">
-                {annualDisplay}
-              </span>
-            </>
-          ) : isHistorical ? (
-            <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              {annualDisplay || fees.rangeText || 'Historical Reference'}
-            </span>
-          ) : (
+          {presentation.kind === 'unavailable' ? (
             <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
               Not publicly disclosed
+            </span>
+          ) : isHistorical ? (
+            <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+              {presentation.value}
+            </span>
+          ) : (
+            <span className="text-base font-bold text-[var(--color-primary)] tracking-tight">
+              {presentation.value}
             </span>
           )}
         </div>
@@ -152,7 +242,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
         <div>
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-[var(--color-content-muted)]">
-              {isHistorical ? 'Historical Fee Reference' : 'Annual Fee Estimate'}
+              {displayLabel}
             </span>
             <div className="relative inline-flex items-center" ref={tooltipRef}>
               <button
@@ -195,18 +285,14 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
           <div
             className={cn(
               'font-black mt-0.5',
-              isComparable
+              presentation.kind === 'annual'
                 ? 'text-2xl text-[var(--color-primary)]'
-                : isHistorical
-                ? 'text-lg text-amber-900'
-                : 'text-base text-slate-700'
+                : presentation.kind === 'unavailable'
+                ? 'text-base text-slate-700'
+                : 'text-xl text-[var(--color-primary)]'
             )}
           >
-            {isComparable
-              ? annualDisplay
-              : isHistorical
-              ? fees.rangeText || 'Historical Reference'
-              : 'Not publicly disclosed'}
+            {presentation.kind === 'unavailable' ? 'Not publicly disclosed' : presentation.value}
           </div>
 
           {fees.academicSession && (
@@ -214,9 +300,14 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
               Academic Session {fees.academicSession}
             </span>
           )}
+          {transparencyNote && (
+            <span className="text-[11px] text-amber-800 bg-amber-50/80 border border-amber-200 px-2.5 py-1 rounded-md inline-block mt-2">
+              {transparencyNote}
+            </span>
+          )}
         </div>
 
-        {fees.rangeText && isComparable && (
+        {presentation.kind === 'annual' && fees.rangeText && hasAnnualMarker(fees.rangeText) && (
           <span className="text-xs px-2.5 py-1 rounded-md bg-[var(--color-surface-subtle)] font-semibold text-[var(--color-primary)] border border-[var(--color-border)]">
             {fees.rangeText}
           </span>

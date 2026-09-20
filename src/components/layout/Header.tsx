@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, X, MessageSquare } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, MessageSquare, SlidersHorizontal, ClipboardList } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
@@ -15,7 +15,6 @@ import { cn } from '../../lib/utils';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
-  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { shortlist, compareList } = useSchoolStore();
   const { user, isAuthenticated } = useAuth();
@@ -28,9 +27,11 @@ export const Header: React.FC = () => {
       href: '/compare',
       icon: <Scale className="w-4 h-4" />,
       badge: compareList.length > 0 ? compareList.length : null,
-      badgeColor: 'bg-[var(--color-accent)] text-white',
+      badgeColor: 'bg-[var(--color-primary)] text-white',
     },
-    { label: 'Admissions 2027-28', href: '/admissions', icon: <Calendar className="w-4 h-4" /> },
+    { label: 'School Match', href: '/match', icon: <SlidersHorizontal className="w-4 h-4" /> },
+    { label: 'Applications', href: '/application-tracker', icon: <ClipboardList className="w-4 h-4" /> },
+    { label: 'Admissions 2027-28', href: '/admissions', icon: <Calendar className="w-4 h-4" />, featured: true },
     { label: 'Reviews', href: '/reviews', icon: <MessageSquare className="w-4 h-4" /> },
     { label: 'About', href: '/about', icon: null },
   ];
@@ -41,25 +42,25 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#fcfbf9]/95 backdrop-blur-md border-t-2 border-t-[var(--color-accent)] border-b border-[var(--color-border)] shadow-2xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-40 w-full border-b border-white/70 bg-[#fcfbf9]/72 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-[4.65rem] grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
         {/* Logo / Brand Mark */}
-        <div className="flex items-center gap-6">
-          <Link href="/" className="group flex items-center" aria-label="Admission Pitara Home">
+        <div className="flex items-center gap-5 min-w-0">
+          <Link href="/" className="group flex items-center rounded-2xl px-1 py-1.5 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">
             <BrandLogo size="md" />
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center justify-self-center gap-1 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl" aria-label="Main Navigation">
             {navLinks.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 relative',
+                  'px-3.5 py-2 rounded-xl text-[12px] font-semibold transition-all duration-200 flex items-center gap-1.5 relative whitespace-nowrap',
                   isActive(link.href)
-                    ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] border border-[var(--color-brand-200)]/70 font-bold shadow-2xs'
-                    : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-surface-subtle)]/70'
+                    ? 'text-[var(--color-primary)] bg-white/88 border border-white shadow-sm font-bold'
+                    : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-white/65'
                 )}
               >
                 {link.icon}
@@ -80,13 +81,13 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden sm:flex items-center gap-2 shrink-0">
+        <div className="hidden sm:flex items-center justify-self-end gap-2.5 shrink-0">
           <Link href="/wishlist">
             <IconButton
               aria-label={`Shortlisted Schools (${shortlist.length})`}
               size="sm"
               variant={shortlist.length > 0 ? 'secondary' : 'ghost'}
-              className="relative"
+              className="relative rounded-xl hover:bg-white/65"
             >
               <Heart className={cn('w-4 h-4', shortlist.length > 0 ? 'text-rose-600 fill-rose-500' : 'text-slate-600')} />
               {shortlist.length > 0 && (
@@ -105,7 +106,7 @@ export const Header: React.FC = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-xs font-bold border-amber-300 bg-amber-50 text-amber-900 hover:bg-amber-100"
+                    className="text-xs font-bold border-white/80 bg-white/55 text-amber-900 hover:bg-white/80 backdrop-blur-md"
                   >
                     Admin Audit
                   </Button>
@@ -115,7 +116,7 @@ export const Header: React.FC = () => {
                 <Button
                   variant="secondary"
                   size="sm"
-                  className="text-xs font-bold border border-sky-200 bg-sky-50 text-sky-900 hover:bg-sky-100"
+                  className="text-xs font-bold border border-white/80 bg-white/55 text-sky-900 hover:bg-white/80 backdrop-blur-md"
                   leftIcon={<LayoutDashboard className="w-3.5 h-3.5 text-sky-700" />}
                 >
                   <span>{user.name.split(' ')[0]}</span>
@@ -126,12 +127,12 @@ export const Header: React.FC = () => {
           ) : (
             <div className="flex items-center gap-1.5">
               <Link href="/auth/login">
-                <Button variant="ghost" size="sm" leftIcon={<User className="w-3.5 h-3.5" />} className="text-xs font-semibold text-[var(--color-primary)]">
+                <Button variant="ghost" size="sm" leftIcon={<User className="w-3.5 h-3.5" />} className="text-xs font-semibold text-[var(--color-primary)] hover:bg-white/65">
                   Sign in
                 </Button>
               </Link>
               <Link href="/auth/register">
-                <Button variant="accent" size="sm" className="text-xs font-bold">
+                <Button variant="accent" size="sm" className="text-xs font-bold shadow-sm hover:-translate-y-0.5 transition-transform">
                   Parent Signup
                 </Button>
               </Link>
@@ -140,7 +141,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Affordances */}
-        <div className="flex items-center gap-1.5 sm:hidden">
+        <div className="flex items-center justify-self-end gap-1 sm:hidden rounded-2xl border border-white/75 bg-white/50 px-1 py-1 backdrop-blur-xl shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
           {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
             <IconButton
@@ -171,6 +172,7 @@ export const Header: React.FC = () => {
             aria-label="Open mobile menu"
             size="sm"
             variant="outline"
+            className="border-white/80 bg-white/55 backdrop-blur-md"
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <Menu className="w-5 h-5" />
@@ -186,39 +188,6 @@ export const Header: React.FC = () => {
         side="right"
       >
         <div className="flex flex-col gap-5">
-          {/* Mobile Drawer Integrated Search */}
-          <form
-            onSubmit={e => {
-              handleNavSearchSubmit(e);
-              setIsMobileMenuOpen(false);
-            }}
-            className="relative w-full"
-          >
-            <label htmlFor="mobile-nav-search" className="sr-only">
-              Search schools, sectors, boards
-            </label>
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-              <input
-                id="mobile-nav-search"
-                type="text"
-                value={navSearch}
-                onChange={e => handleNavSearchChange(e.target.value)}
-                placeholder="Search schools, sectors, boards..."
-                className="w-full pl-9 pr-8 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 focus:outline-none focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[var(--color-primary-light)] transition-all shadow-2xs"
-              />
-              {navSearch && (
-                <button
-                  type="button"
-                  onClick={() => handleNavSearchChange('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
-                  aria-label="Clear search"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </form>
           {isAuthenticated && user && (
             <div className="p-3.5 rounded-xl bg-sky-50 border border-sky-100 flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center shrink-0">

@@ -34,7 +34,7 @@ import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
 import { AdmissionStatus } from './AdmissionStatus';
 import { useSchoolStore } from '../../lib/schoolStore';
-import { getAllSchools, getSchoolBySlug, getCanonicalSchools } from '../../lib/schools';
+import { getAllSchools, getPublicSchoolBySlug, getCanonicalSchools } from '../../lib/schools';
 import { formatCurrency, cn } from '../../lib/utils';
 import type { School, DetailedFeeComponent, FeeConcession } from '../../types/school';
 
@@ -55,7 +55,7 @@ export const SchoolComparisonView: React.FC = () => {
   // Get full school objects from compareList
   const selectedSchools: School[] = useMemo(() => {
     return compareList
-      .map(slug => getSchoolBySlug(slug))
+      .map(slug => getPublicSchoolBySlug(slug))
       .filter((s): s is School => Boolean(s));
   }, [compareList]);
 
@@ -67,7 +67,7 @@ export const SchoolComparisonView: React.FC = () => {
       if (urlSchools && compareList.length === 0) {
         const slugs = urlSchools.split(',').map(s => s.trim()).filter(Boolean);
         slugs.slice(0, 4).forEach(slug => {
-          const s = getSchoolBySlug(slug);
+          const s = getPublicSchoolBySlug(slug);
           if (s) addCompare(s.slug, s.name);
         });
       }
@@ -108,7 +108,7 @@ export const SchoolComparisonView: React.FC = () => {
   const loadPreset = (slugs: string[]) => {
     clearCompare();
     slugs.forEach(slug => {
-      const school = getSchoolBySlug(slug);
+      const school = getPublicSchoolBySlug(slug);
       if (school) addCompare(school.slug, school.name);
     });
   };
@@ -249,7 +249,7 @@ export const SchoolComparisonView: React.FC = () => {
                   Knowledge Park 5: everyday choices
                 </span>
                 <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
-                  Delhi Public School vs Ryan International vs Gaurs International
+                  Delhi World Public School vs Ryan International vs Gaurs International
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
                   Look across location, curriculum, fees, admissions and campus details in one view.
@@ -259,7 +259,7 @@ export const SchoolComparisonView: React.FC = () => {
                 type="button"
                 onClick={() =>
                   loadPreset([
-                    'delhi-public-school-knowledge-park-5',
+                    'delhi-world-public-school-kp-5',
                     'ryan-international-school-noida-extension',
                     'gaurs-international-school-gaur-city-2',
                   ])
@@ -559,7 +559,7 @@ export const SchoolComparisonView: React.FC = () => {
                       <AdmissionStatus admissions={s.admissions} showDate={false} className="shrink-0" />
                     </div>
                     <p className="text-[11px] text-slate-600">
-                      <span className="font-semibold text-slate-700">Cycle:</span> {s.admissions.academicYear || s.admissions.session || '2025–2026 Session'}
+                      <span className="font-semibold text-slate-700">Cycle:</span> {s.admissions.academicYear || s.admissions.session || '2027–28 Session'}
                     </p>
                     {s.admissions.date && (
                       <p className="text-[11px] text-slate-600">
@@ -579,12 +579,12 @@ export const SchoolComparisonView: React.FC = () => {
             {/* Section 3: Audited Fee Structure */}
             <div className="bg-white rounded-2xl border border-[var(--color-border)] p-4 shadow-warm-xs space-y-4">
               <h3 className="text-xs font-extrabold text-[var(--color-primary)] uppercase tracking-wider flex items-center gap-1.5 pb-2 border-b border-slate-100">
-                <IndianRupee className="w-4 h-4 text-emerald-600" /> 3. Audited Fee Structure
+                <IndianRupee className="w-4 h-4 text-emerald-600" /> 3. Fee Structure & Evidence
               </h3>
 
-              {/* Annual Fee */}
+              {/* Comparable Annual Figure */}
               <div className="space-y-2">
-                <span className="text-[11px] font-bold text-slate-500 block uppercase">Audited Annual Fee</span>
+                <span className="text-[11px] font-bold text-slate-500 block uppercase">Comparable annual directory figure</span>
                 <div className="grid grid-cols-1 gap-2">
                   {selectedSchools.map(s => {
                     const isComparable =
@@ -609,6 +609,24 @@ export const SchoolComparisonView: React.FC = () => {
                     );
                   })}
                 </div>
+              </div>
+
+              {/* Estimated First-Year Cost */}
+              <div className="space-y-2 pt-2 border-t border-slate-100">
+                <span className="text-[11px] font-bold text-slate-500 block uppercase">Estimated First-Year Cost</span>
+                <div className="grid grid-cols-1 gap-2">
+                  {selectedSchools.map(s => (
+                    <div key={s.id} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+                      <span className="font-bold text-slate-900 truncate max-w-[160px]">{s.name}</span>
+                      <span className="font-black text-emerald-900 text-sm">
+                        {typeof s.fees.estimatedFirstYear === 'number'
+                          ? formatCurrency(s.fees.estimatedFirstYear)
+                          : s.fees.estimatedFirstYearText || 'Not documented'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[10px] text-slate-500">Shown separately from annual tuition; estimates are not guaranteed payable totals.</p>
               </div>
 
               {/* Admission & Registration Fee */}
@@ -847,9 +865,9 @@ export const SchoolComparisonView: React.FC = () => {
                         </div>
 
                         <div>
-                          <span className="text-slate-400 block text-[9px] uppercase font-bold">Annual Fee</span>
+                          <span className="text-slate-400 block text-[9px] uppercase font-bold">Comparable Annual</span>
                           <span className="font-extrabold text-emerald-800">
-                            {school.fees.cardFee ? formatCurrency(school.fees.cardFee) + '/yr' : (school.fees.rangeText || 'Disclosed')}
+                            {school.fees.cardFee && school.fees.comparableAnnualAvailable !== false ? formatCurrency(school.fees.cardFee) + '/yr' : (school.fees.rangeText || 'Not documented')}
                           </span>
                         </div>
 
@@ -1134,7 +1152,7 @@ export const SchoolComparisonView: React.FC = () => {
               </td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-semibold text-slate-800">
-                  {s.admissions.academicYear || s.admissions.session || '2025–2026 Academic Session'}
+                  {s.admissions.academicYear || s.admissions.session || '2027–28 Academic Session'}
                 </td>
               ))}
             </tr>
@@ -1145,7 +1163,7 @@ export const SchoolComparisonView: React.FC = () => {
               </td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-medium text-[var(--color-content)]">
-                  {s.admissions.date || 'Open for 2025–2026'}
+                  {s.admissions.date || 'Open for 2027–28'}
                 </td>
               ))}
             </tr>

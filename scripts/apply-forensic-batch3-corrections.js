@@ -868,42 +868,8 @@ function findSchool(slugOrId) {
 }
 
 // 20. MOUNT VINSON SCHOOL
-// Note: If record is under mount-olympus or similar, let's ensure any mount vinson school references are accurate or if not present we note it.
-{
-  const s = findSchool('mount-vinson-school');
-  if (s) {
-    s.board = 'State Board';
-    s.affiliationNumber = null;
-    s.cbseAffiliationNumber = null;
-    s.studentTeacherRatio = '30:1';
-    s.fees = {
-      isVerified: true,
-      cardFee: 1080,
-      currency: 'INR',
-      rangeText: '₹1,080 – ₹1,440 / month (Estimated total admission cost: ₹13,464 – ₹17,784)',
-      registrationFee: 500,
-      admissionFee: '₹500 – ₹1,000',
-      cautionDeposit: null,
-      refundableSecurity: null,
-      tuitionMonthly: '₹1,080 – ₹1,440',
-      tuitionAnnual: '₹12,960 – ₹17,280 (Calculated)',
-      transportMonthly: null,
-      transportAnnual: null,
-      verificationStatus: 'verified_from_source',
-      lastVerifiedDate: '2026-09-18',
-      components: [
-        { name: 'Registration Fee', amount: 500, frequency: 'one_time', type: 'one_time', isMandatory: true, isOfficial: true },
-        { name: 'Admission Fee', amount: '₹500 – ₹1,000', frequency: 'one_time', type: 'one_time', isMandatory: true, isOfficial: true }
-      ],
-      gradeWiseTiers: [
-        { grades: 'All Grades', tuitionMonthly: '₹1,080 – ₹1,440', notes: 'State board curriculum.' }
-      ],
-      concessions: [],
-      disclaimer: 'State Board curriculum. Tuition: ₹1,080–₹1,440/month. Registration ₹500, Admission approx ₹500–₹1,000. Estimated total admission cost: ₹13,464–₹17,784.'
-    };
-    audit.push({ name: s.name, slug: s.slug, change: '20. Mount Vinson forensic fix' });
-  }
-}
+// Intentionally not reintroduced: the school was removed from public discovery
+// and retained only as archived historical data in data/schools.json.
 
 // 21. MOUNT LITERA ZEE SCHOOL GNW
 {

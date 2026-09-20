@@ -21,6 +21,9 @@ interface SchoolsPageProps {
     sibling?: string;
     fee?: string;
     sort?: string;
+    curriculum?: string;
+    transport?: string;
+    trust?: string;
   }>;
 }
 
@@ -35,6 +38,9 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const initialSibling = params.sibling === 'true';
   const selectedFee = params.fee || 'all';
   const initialSort = params.sort || 'featured';
+  const initialCurriculum = params.curriculum || '';
+  const initialTransport = params.transport || 'all';
+  const initialTrust = params.trust || 'all';
 
   const allSchools = getAllSchools();
   const boards = getDistinctBoards();
@@ -55,7 +61,7 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
           Schools in Greater Noida West &amp; Noida Extension
         </h1>
         <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1">
-          Explore school profiles, fee breakdowns, curriculum details, and admissions status for all {allSchools.length} listed institutions across Greater Noida, Greater Noida West and Noida Extension.
+          Explore school profiles, fee breakdowns, curriculum details, and admissions status across Greater Noida, Greater Noida West and Noida Extension.
         </p>
       </div>
 
@@ -72,6 +78,9 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
         initialSiblingOnly={initialSibling}
         initialFeeTier={selectedFee}
         initialSortBy={initialSort}
+        initialCurriculum={initialCurriculum}
+        initialTransport={initialTransport}
+        initialTrust={initialTrust}
       />
     </div>
   );

@@ -26,6 +26,7 @@ import type { School } from '../../types/school';
 import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
 import { RatingDisplay } from '../ui/RatingDisplay';
+import { isSafeStoredSchoolCoordinate } from '../../lib/locationSafety';
 
 export interface ProximityAnchor {
   id: string;
@@ -151,12 +152,12 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
     return POPULAR_PROXIMITY_AREAS.find(a => a.id === selectedProximityArea) || null;
   }, [selectedProximityArea, customUserCoords]);
 
-  // Only schools with real, verified coordinates are mapped
+  // Only explicitly verified stored coordinates are eligible for directory markers.
+  // Missing or false verification flags are treated conservatively and excluded.
   const schoolsWithCoordinates = useMemo(() => {
     return schools.filter(
-      (s): s is School & { location: { coordinates: { lat: number; lng: number } } } =>
-        typeof s.location?.coordinates?.lat === 'number' &&
-        typeof s.location?.coordinates?.lng === 'number'
+      (s): s is School & { location: { coordinates: { lat: number; lng: number; isVerified: true } } } =>
+        isSafeStoredSchoolCoordinate(s.location?.coordinates)
     );
   }, [schools]);
 
@@ -301,6 +302,11 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
             <p className="text-[11px] text-[var(--color-content-muted)] hidden sm:block truncate">
               {activeAnchor ? `Anchored near ${activeAnchor.label}` : 'Interactive Greater Noida West sectors & campuses'}
             </p>
+            {schools.some(school => !isSafeStoredSchoolCoordinate(school.location?.coordinates)) && (
+              <p className="text-[10px] text-amber-700 mt-0.5 hidden sm:block">
+                Some school locations are intentionally omitted until their coordinates are verified.
+              </p>
+            )}
           </div>
         </div>
 

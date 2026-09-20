@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useToast } from '../components/ui/Toast';
+import type { ApplicationTrackerItem } from './applicationTracker';
 
 export interface ParentUserProfile {
   id: string;
@@ -21,6 +22,7 @@ export interface ParentUserProfile {
   createdAt: string;
   wishlist?: string[];
   compareList?: string[];
+  applicationTracker?: ApplicationTrackerItem[];
 }
 
 interface AuthContextType {

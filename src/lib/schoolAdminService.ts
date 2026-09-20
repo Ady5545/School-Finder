@@ -151,11 +151,16 @@ export function calculateSchoolCompleteness(s: School): SchoolCompletenessCheckl
       passed: Boolean(
         (s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) &&
         (s.location?.coordinates?.lng ?? s.location?.coordinates?.longitude) &&
-        s.location?.coordinates?.isVerified !== false &&
+        s.location?.coordinates?.isVerified === true &&
         // Ensure no fallback coordinates (28.595, 77.445)
         Math.abs(((s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) || 0) - 28.595) > 0.001
       ),
-      description: (s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) ? 'Latitude & Longitude verified' : 'Coordinates unverified / missing',
+      description:
+        s.location?.coordinates?.isVerified === true &&
+        (s.location?.coordinates?.lat ?? s.location?.coordinates?.latitude) &&
+        (s.location?.coordinates?.lng ?? s.location?.coordinates?.longitude)
+          ? 'Latitude & Longitude verified'
+          : 'Coordinates unverified / missing',
       severity: 'required',
     },
     {

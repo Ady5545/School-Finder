@@ -28,8 +28,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
     fees.disclosed === false ||
     fees.verificationStatus === 'not_publicly_verified' ||
     fees.verificationStatus === 'unverified_undisclosed' ||
-    fees.verificationStatus === 'unverified_copied_from_wisdom_tree' ||
-    !fees.cardFee;
+    fees.verificationStatus === 'unverified_copied_from_wisdom_tree';
 
   const [showTooltip, setShowTooltip] = useState(false);
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -61,7 +60,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
       <div className={cn('flex flex-col relative', className)}>
         <div className="flex items-center gap-1">
           <span className="text-[10px] uppercase font-bold text-[var(--color-content-muted)] tracking-wider">
-            Annual Fee
+            {isComparable ? 'Annual Fee' : 'Fee Details'}
           </span>
           <div className="relative inline-flex items-center" ref={tooltipRef}>
             <button

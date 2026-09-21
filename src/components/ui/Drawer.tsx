@@ -83,7 +83,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       <div className={cn('fixed inset-y-0 flex max-w-full', side === 'right' ? 'right-0' : 'left-0')}>
         <div
           className={cn(
-            'w-screen max-w-md liquid-glass p-6 shadow-2xl rounded-l-3xl' flex flex-col border-l border-[var(--color-border)] animate-in duration-200',
+            'w-screen max-w-md liquid-glass p-6 shadow-2xl rounded-l-3xl flex flex-col border-l border-[var(--color-border)] animate-in duration-200',
             side === 'right' ? 'slide-in-from-right' : 'slide-in-from-left',
             className
           )}

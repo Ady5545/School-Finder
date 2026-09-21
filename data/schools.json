@@ -1491,9 +1491,9 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": null,
+      "cardFee": 41100,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹41,100 / quarter (Classes IX–XII; Junior grades not publicly specified)",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": null,
@@ -1503,7 +1503,7 @@
       "tuitionAnnual": "₹1,64,400 (Classes IX–XII calculated equivalent)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -1537,8 +1537,8 @@
       ],
       "concessions": [],
       "disclaimer": "Official fee disclosed for Classes IX–XII is ₹41,100 per quarter. Junior grade fees are not publicly specified.",
-      "comparableAnnualAvailable": false,
-      "disclosed": false
+      "comparableAnnualAvailable": true,
+      "disclosed": true
     },
     "facilities": [
       {
@@ -1725,10 +1725,10 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": null,
+      "cardFee": 91000,
       "estimatedFirstYear": 133000,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹91,000 – ₹1,21,000 / year (tuition + annual charges)",
       "registrationFee": 2000,
       "admissionFee": 40000,
       "tuitionMonthly": null,
@@ -1736,7 +1736,7 @@
       "tuitionAnnual": "91,000",
       "transportMonthly": "2,500 – 3,500",
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "verified_from_source",
       "table": [
         {
           "type": "Prospectus & Application Fee",
@@ -1759,13 +1759,13 @@
           "cost": "₹90,000 per annum"
         }
       ],
-      "comparableAnnualAvailable": false,
+      "comparableAnnualAvailable": true,
       "feeCategory": "Tuition & Annual Charges",
       "billingFrequency": "quarterly",
       "sourceUrl": "https://www.dwpsgrnoida.com/fee-structure",
       "academicSession": "2026-2027",
       "lastVerifiedDate": "September 2026",
-      "disclosed": false,
+      "disclosed": true,
       "isVerified": true,
       "components": [
         {
@@ -3659,10 +3659,10 @@
     },
     "fees": {
       "isVerified": false,
-      "cardFee": null,
+      "cardFee": 9000,
       "currency": "INR",
       "academicSession": "2023–24 (Historical Reference)",
-      "rangeText": "Fee details",
+      "rangeText": "₹9,000 – ₹11,500 / month (Historical Reference: 2023–24 session; not official 2026–27)",
       "registrationFee": 1200,
       "admissionFee": 35000,
       "cautionDeposit": 10000,
@@ -3671,7 +3671,7 @@
       "tuitionAnnual": "₹1,08,000 – ₹1,38,000 (Historical 2023–24)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "estimated_historical",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -3745,7 +3745,7 @@
       ],
       "disclaimer": "Estimated / inferred: The supplied fee data is HISTORICAL (2023–24 session). It is not official current 2026–27 or 2027–28 pricing.",
       "comparableAnnualAvailable": false,
-      "disclosed": false
+      "disclosed": true
     },
     "facilities": [
       {
@@ -5943,9 +5943,9 @@
     },
     "fees": {
       "isVerified": false,
-      "cardFee": null,
+      "cardFee": 73000,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹73,000 – ₹1,40,500 / year (Approximate annual grade ranges)",
       "registrationFee": 1000,
       "admissionFee": 20000,
       "cautionDeposit": null,
@@ -5954,7 +5954,7 @@
       "tuitionAnnual": "₹73,000 – ₹1,40,500 (Approximate)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "estimated_historical",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -6006,7 +6006,7 @@
       "concessions": [],
       "disclaimer": "Approximate annual fee ranges: Pre-Nur–VIII (₹73,000–₹1,12,900), IX–X (₹1,16,500–₹1,28,500), XI–XII (up to approx ₹1,40,500). Registration approx ₹1,000, Admission up to ₹20,000. CBSE affiliation is not publicly disclosed.",
       "comparableAnnualAvailable": false,
-      "disclosed": false
+      "disclosed": true
     },
     "facilities": [
       {
@@ -6164,9 +6164,9 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": null,
+      "cardFee": 6500,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹6,500 – ₹8,364 / month (Nursery–V: ₹6,500 | VI–VIII: ₹6,970 | IX–X: ₹7,184 | XI–XII: ₹8,364)",
       "registrationFee": 1000,
       "admissionFee": 40000,
       "cautionDeposit": null,
@@ -6175,7 +6175,7 @@
       "tuitionAnnual": "₹78,000 – ₹1,00,368 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -6249,8 +6249,8 @@
       ],
       "concessions": [],
       "disclaimer": "Official monthly composite: Nursery–V ₹6,500, VI–VIII ₹6,970, IX–X ₹7,184, XI–XII ₹8,364. Registration ₹1,000, Admission ₹40,000. Practical ₹400/subject.",
-      "comparableAnnualAvailable": false,
-      "disclosed": false
+      "comparableAnnualAvailable": true,
+      "disclosed": true
     },
     "facilities": [
       {
@@ -9905,9 +9905,9 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": null,
+      "cardFee": 5600,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹5,600 – ₹8,800 / month (Pre-Nur: ₹5,600 | Nur: ₹6,000 | LKG: ₹6,100 | UKG: ₹6,400 | I: ₹6,600 | II: ₹7,150 | III: ₹7,750 | IV–V: ₹8,300 | VI–VIII: ₹8,600 | IX–X: ₹8,700 | XI–XII: ₹8,800)",
       "registrationFee": 1000,
       "admissionFee": null,
       "cautionDeposit": "Pre-Nursery/Muskan: ₹6,000 | Nursery–XII: ₹10,000 (Refundable)",
@@ -9916,7 +9916,7 @@
       "tuitionAnnual": "₹67,200 – ₹1,05,600 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -10111,8 +10111,8 @@
       ],
       "concessions": [],
       "disclaimer": "Official monthly tuition schedule: Pre-Nur ₹5,600, Nur ₹6,000, LKG ₹6,100, UKG ₹6,400, I ₹6,600, II ₹7,150, III ₹7,750, IV–V ₹8,300, VI–VIII ₹8,600, IX–X ₹8,700, XI–XII ₹8,800. Registration ₹1,000, Admission ₹10,000 (Pre-Nur) / ₹24,000 (Nur–XII), Caution ₹6,000/₹10,000 refundable, Dev ₹6,000, Orientation ₹1,000.",
-      "comparableAnnualAvailable": false,
-      "disclosed": false
+      "comparableAnnualAvailable": true,
+      "disclosed": true
     },
     "facilities": [
       {
@@ -14335,9 +14335,9 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": null,
+      "cardFee": 8550,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹8,550 – ₹11,250 / month composite (Pre-primary: ₹8,550 | I–V: ₹10,150 | VI–X: ₹10,650 | XI–XII: ₹11,250)",
       "registrationFee": 1250,
       "admissionFee": 40000,
       "cautionDeposit": null,
@@ -14346,7 +14346,7 @@
       "tuitionAnnual": "₹1,02,600 – ₹1,35,000 (Calculated)",
       "transportMonthly": "₹1,500 – ₹3,000 (Optional)",
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -14448,8 +14448,8 @@
         }
       ],
       "disclaimer": "Official monthly composite: Pre-primary ₹8,550, I–V ₹10,150, VI–X ₹10,650, XI–XII ₹11,250. Registration ₹1,250, Admission ₹40,000. Exam fee ₹1,250/yr (VI+), Lab ₹250/qtr/subject (XI–XII). Optional transport ₹1,500–₹3,000/mo. Sibling concession 40% on monthly composite.",
-      "comparableAnnualAvailable": false,
-      "disclosed": false
+      "comparableAnnualAvailable": true,
+      "disclosed": true
     },
     "facilities": [
       {
@@ -14876,9 +14876,9 @@
     },
     "fees": {
       "isVerified": false,
-      "cardFee": null,
+      "cardFee": 10710,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "Nursery: ~₹10,710 / mo | Middle Grades: ~₹1.4L – ₹1.5L / yr (Approximate)",
       "registrationFee": 1000,
       "admissionFee": null,
       "cautionDeposit": null,
@@ -14887,7 +14887,7 @@
       "tuitionAnnual": "Approx ₹1,40,000 – ₹1,50,000 (Middle Grades)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "estimated_historical",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -14942,7 +14942,7 @@
       "concessions": [],
       "disclaimer": "Nursery tuition is approx ₹10,710/month; middle-grade annual totals are approx ₹1.4–₹1.5 lakh/year. Registration ₹1,000, Admission ₹70,000 (Pre-Nur–X) / ₹48,000 (XI). Located in Sector 119 Noida.",
       "comparableAnnualAvailable": false,
-      "disclosed": false
+      "disclosed": true
     },
     "facilities": [
       {
@@ -15813,9 +15813,9 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": null,
+      "cardFee": 6500,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹6,500 – ₹8,000 / month (₹19,500 – ₹24,000 / quarter; Typical composite ~₹7,700 / month)",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": null,
@@ -15825,7 +15825,7 @@
       "tuitionAnnual": "₹78,000 – ₹96,000 (Calculated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "verified_from_source",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -15872,8 +15872,8 @@
       ],
       "concessions": [],
       "disclaimer": "Tuition: ₹6,500–₹8,000/month (₹19,500–₹24,000/quarter). Registration: ₹500–₹1,000, Admission: ₹30,000–₹40,000. Composite approximate: ₹7,700/month.",
-      "comparableAnnualAvailable": false,
-      "disclosed": false
+      "comparableAnnualAvailable": true,
+      "disclosed": true
     },
     "facilities": [
       {
@@ -16574,9 +16574,9 @@
     },
     "fees": {
       "isVerified": false,
-      "cardFee": null,
+      "cardFee": 102800,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹1,02,800 – ₹1,27,050 / year (Estimated annual totals; not officially verified)",
       "registrationFee": null,
       "admissionFee": null,
       "cautionDeposit": "₹5,000 – ₹7,500 (Refundable)",
@@ -16585,7 +16585,7 @@
       "tuitionAnnual": "₹1,02,800 – ₹1,27,050 (Estimated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "estimated_historical",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -16667,7 +16667,7 @@
       "concessions": [],
       "disclaimer": "IMPORTANT: Estimated annual totals (Pre-Nur–UKG ₹1,02,800, I–VIII ₹1,13,850, IX–X ₹1,25,150, XI–XII ₹1,27,050). Not officially verified. Registration ₹1,000–₹2,000, Admission up to ₹45,000, Refundable security ₹5,000–₹7,500, Exam ₹2,500/yr.",
       "comparableAnnualAvailable": false,
-      "disclosed": false
+      "disclosed": true
     },
     "facilities": [
       {
@@ -17333,9 +17333,9 @@
     },
     "fees": {
       "isVerified": false,
-      "cardFee": null,
+      "cardFee": 202100,
       "currency": "INR",
-      "rangeText": "Fee details",
+      "rangeText": "₹2,02,100 – ₹2,24,900 / year (Estimated grade-wise total; not official)",
       "registrationFee": 1500,
       "admissionFee": null,
       "cautionDeposit": "₹20,000 – ₹25,000 (Refundable)",
@@ -17344,7 +17344,7 @@
       "tuitionAnnual": "₹2,02,100 – ₹2,24,900 (Estimated)",
       "transportMonthly": null,
       "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
+      "verificationStatus": "estimated_historical",
       "lastVerifiedDate": "2026-09-18",
       "components": [
         {
@@ -17414,7 +17414,7 @@
       "concessions": [],
       "disclaimer": "Estimated annual totals: Pre-Nur ~₹2,04,200, Nursery/UKG ~₹2,02,100, I–X ~₹2,08,700, XI–XII ~₹2,24,900. Registration ₹1,500, Admission ₹33,000–₹40,000, Refundable security ₹20,000–₹25,000. Not officially verified.",
       "comparableAnnualAvailable": false,
-      "disclosed": false
+      "disclosed": true
     },
     "facilities": [
       {

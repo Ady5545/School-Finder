@@ -19,6 +19,10 @@ export const RatingDisplay: React.FC<RatingDisplayProps> = ({
   showCount = true,
   className,
 }) => {
+  if (!Number.isFinite(score) || score <= 0 || !reviewsCount || reviewsCount <= 0) {
+    return null;
+  }
+
   const roundedScore = Math.round(score * 10) / 10;
   const ariaLabel = `Rating: ${roundedScore} out of ${scale} stars${reviewsCount ? ` from ${reviewsCount} reviews` : ''}`;
 

@@ -490,7 +490,7 @@ export const SchoolComparisonView: React.FC = () => {
                           </span>
                         )}
                         <span className="text-slate-600 font-medium">
-                          {s.affiliationNumber ? `Affil: ${s.affiliationNumber}` : 'Pending registration'}
+                          {s.affiliationNumber ? `Affil: ${s.affiliationNumber}` : '—'}
                         </span>
                       </div>
                     </div>
@@ -824,7 +824,7 @@ export const SchoolComparisonView: React.FC = () => {
                         <div>
                           <span className="text-slate-400 block text-[9px] uppercase font-bold">Sibling Discount</span>
                           <span className="font-semibold text-slate-700">
-                            {sibling ? sibling.discountDescription || sibling.title : 'Not disclosed'}
+                            {sibling ? sibling.discountDescription || sibling.title : '—'}
                           </span>
                         </div>
 
@@ -833,7 +833,7 @@ export const SchoolComparisonView: React.FC = () => {
                           <span className="font-semibold text-slate-800">
                             {Array.isArray(school.sports) && school.sports.length > 0
                               ? school.sports.slice(0, 3).join(', ') + (school.sports.length > 3 ? ` +${school.sports.length - 3}` : '')
-                              : 'Not disclosed'}
+                              : '—'}
                           </span>
                         </div>
 
@@ -1046,7 +1046,7 @@ export const SchoolComparisonView: React.FC = () => {
               </td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-medium text-slate-800">
-                  {s.establishedYear ? `Established in ${s.establishedYear}` : 'Not disclosed'}
+                  {s.establishedYear ? `Established in ${s.establishedYear}` : '—'}
                 </td>
               ))}
             </tr>
@@ -1057,7 +1057,7 @@ export const SchoolComparisonView: React.FC = () => {
               </td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-medium text-slate-800">
-                  {s.affiliationNumber ? s.affiliationNumber : 'Pending registration / Not disclosed'}
+                  {s.affiliationNumber ? s.affiliationNumber : '—'}
                 </td>
               ))}
             </tr>
@@ -1167,7 +1167,7 @@ export const SchoolComparisonView: React.FC = () => {
               </td>
               {selectedSchools.map(s => (
                 <td key={s.id} className="p-4 font-medium text-slate-800">
-                  {s.fees.registrationFee ? formatCurrency(s.fees.registrationFee) : (s.fees.registrationFee === 0 ? 'Nil' : 'Included / Not disclosed')}
+                  {s.fees.registrationFee ? formatCurrency(s.fees.registrationFee) : (s.fees.registrationFee === 0 ? 'Nil' : 'Included')}
                 </td>
               ))}
             </tr>
@@ -1240,7 +1240,7 @@ export const SchoolComparisonView: React.FC = () => {
                         : 'bg-amber-50 text-amber-800 border border-amber-200'
                     )}
                   >
-                    {s.fees.verificationStatus === 'verified_from_source' ? 'Verified Source' : 'Pending Audit'}
+                    {s.fees.verificationStatus === 'verified_from_source' ? 'Verified Source' : 'Fee details'}
                   </span>
                 </td>
               ))}

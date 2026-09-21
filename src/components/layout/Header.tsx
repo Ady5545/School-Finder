@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, MessageSquare, SlidersHorizontal, ClipboardList } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { ThemeToggle } from '../ui/ThemeToggle';
 import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
 import { BrandLogo } from '../ui/BrandLogo';
@@ -79,7 +78,6 @@ export const Header: React.FC = () => {
 
         {/* Desktop Actions */}
         <div className="hidden sm:flex items-center justify-self-end gap-2.5 shrink-0">
-          <ThemeToggle />
           <Link href="/wishlist">
             <IconButton
               aria-label={`Shortlisted Schools (${shortlist.length})`}
@@ -186,10 +184,6 @@ export const Header: React.FC = () => {
         side="right"
       >
         <div className="flex flex-col gap-5">
-          <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-bold text-[var(--color-content-muted)]">Appearance</span>
-            <ThemeToggle />
-          </div>
           {isAuthenticated && user && (
             <div className="p-3.5 rounded-xl liquid-glass glass-interactive flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center shrink-0">

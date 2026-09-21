@@ -195,7 +195,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
             <Link
               href={`/schools/${school.slug}`}
-              className="inline-flex items-center justify-center p-2.5 rounded-xl liquid-glass glass-shine bg-white/58 border-white/80 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] transition-all duration-200 hover:scale-105 active:scale-95 shadow-warm-2xs min-w-[38px] min-h-[38px]"
+              className="inline-flex items-center justify-center p-2.5 rounded-xl liquid-glass glass-shine bg-white/58 border-white/80 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] transition-all duration-200 hover:scale-105 relative z-20 active:scale-95 shadow-warm-2xs min-w-[38px] min-h-[38px]"
               aria-label={`View details for ${school.name}`}
             >
               <ArrowRight className="w-4 h-4" />

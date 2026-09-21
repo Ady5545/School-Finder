@@ -154,7 +154,7 @@ export const SchoolGallery: React.FC<SchoolGalleryProps> = ({ school, className 
           ))}
         </div>
       ) : (
-        /* Empty / Verification Pending State */
+        /* Empty gallery state */
         <div className="p-6 rounded-xl bg-[#faf8f5] border border-dashed border-[#d9e2ec] flex flex-col items-center justify-center text-center space-y-3">
           <div className="w-12 h-12 rounded-full bg-white border border-[#d9e2ec] flex items-center justify-center text-slate-400 shadow-2xs">
             <Info className="w-6 h-6 text-[#0f253e]" />
@@ -163,11 +163,11 @@ export const SchoolGallery: React.FC<SchoolGalleryProps> = ({ school, className 
             <h3 className="text-sm font-bold text-[var(--color-content)]">
               {isRamagyaPending
                 ? 'Official Campus Gallery Under Verification'
-                : 'Campus Photographs Pending Official Verification'}
+                : 'Campus gallery'}
             </h3>
             <p className="text-xs text-[var(--color-content-muted)] leading-relaxed">
               {isRamagyaPending
-                ? 'Admission Pitara strictly publishes genuine, source-verified campus imagery. Rather than copying photos from neighboring campuses, this gallery remains pending until the official administration verifies the latest campus photos.'
+                ? 'For current campus imagery, visit the school's official website.'
                 : 'To maintain strict editorial integrity, Admission Pitara does not use generic stock photos or AI-generated campus placeholders.'}
             </p>
           </div>

@@ -13,10 +13,12 @@ export interface FeeDisplayProps {
 
 export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact', className }) => {
   const isComparable =
+    fees.billingFrequency === 'annual' &&
     fees.cardFee !== null &&
     fees.cardFee !== undefined &&
     fees.comparableAnnualAvailable !== false &&
-    fees.verificationStatus === 'verified_from_source';
+    (fees.verificationStatus === 'verified_from_source' ||
+      fees.verificationStatus === 'verified_official');
 
   const isHistorical =
     fees.verificationStatus === 'estimated_historical' ||
@@ -49,10 +51,10 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
   }, [showTooltip]);
 
   const tooltipExplanation = isComparable
-    ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Includes annual tuition, composite recurring charges & lab access. Excludes optional transport (bus), uniform, and meal charges.`
+    ? `${fees.feeCategory ? `${fees.feeCategory}: ` : ''}Published annual fee figure.`
     : isHistorical
-    ? 'Fee figures reflect historical 2023–24 institutional data and are provided for indicative reference only. Not certified for 2027–28.'
-    : 'Fee structure is not published publicly. Direct inquiry with the school admission office is required.';
+    ? 'This fee reference is from an earlier academic session. Contact the school for the current fee schedule.'
+    : 'Contact the school admission office for current fee details.';
 
   if (variant === 'compact') {
     return (
@@ -111,12 +113,12 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
               <span className="text-xs text-[var(--color-content-muted)] font-medium">/ year</span>
             </>
           ) : isHistorical ? (
-            <span className="text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-              {fees.rangeText || 'Historical Reference'}
+            <span className="text-[11px] font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+              Contact school for current fee details
             </span>
           ) : (
-            <span className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
-              Not publicly disclosed
+            <span className="text-[11px] font-semibold text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+              Contact school for current fee details
             </span>
           )}
         </div>

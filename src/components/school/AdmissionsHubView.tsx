@@ -188,7 +188,7 @@ export const AdmissionsHubView: React.FC = () => {
     },
     {
       key: 'upcoming',
-      title: 'Upcoming / Pending Release',
+      title: 'Admissions information',
       subtitle: 'Admissions schedule expected shortly based on documented school notices or official release calendars.',
       icon: <Calendar className="w-5 h-5 text-sky-600" />,
       badgeColor: 'bg-sky-100 text-sky-950 border-sky-300',
@@ -202,7 +202,7 @@ export const AdmissionsHubView: React.FC = () => {
     },
     {
       key: 'not_disclosed',
-      title: 'Status Not Disclosed',
+      title: 'Enquire with school',
       subtitle: 'Admissions status is not publicly verified in source documentation. Inquire directly with the institution.',
       icon: <AlertCircle className="w-5 h-5 text-slate-500" />,
       badgeColor: 'bg-slate-100 text-slate-800 border-slate-300',
@@ -276,7 +276,7 @@ export const AdmissionsHubView: React.FC = () => {
             )}
           >
             <Calendar className="w-3.5 h-3.5 text-sky-600" />
-            <span>Upcoming / Pending</span>
+            <span>Enquire for Dates</span>
             <span className="px-1.5 py-0.5 rounded-full text-[10px] bg-sky-200/80 text-sky-950">
               {counts.upcoming}
             </span>
@@ -665,7 +665,7 @@ const AdmissionCard: React.FC<AdmissionCardProps> = ({
             Documented Procedure
           </span>
           <p className="text-[11px] text-slate-700 leading-relaxed bg-slate-50/60 p-2 rounded-lg border border-slate-100">
-            {school.admissions.process || 'Application procedure not disclosed in public schedule.'}
+            {school.admissions.process || 'Contact admissions for the current application process.'}
           </p>
         </div>
 

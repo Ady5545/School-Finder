@@ -79,7 +79,7 @@ export const SchoolHeroVisual: React.FC<SchoolHeroVisualProps> = ({
           <div className="relative w-full h-full flex items-center justify-center">
             <Image
               src={NEUTRAL_PLACEHOLDER}
-              alt={`${school.name} — Campus Photograph Pending Official Verification`}
+              alt={`${school.name} — Campus Photograph`}
               fill
               priority
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 50vw"
@@ -87,7 +87,7 @@ export const SchoolHeroVisual: React.FC<SchoolHeroVisualProps> = ({
             />
             <div className="absolute bottom-3 left-3 px-3 py-1 rounded-lg bg-slate-900/90 text-white text-xs font-semibold tracking-wide uppercase flex items-center gap-1.5 shadow-md">
               <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span>Photo Pending Verification</span>
+              <span>Campus image</span>
             </div>
           </div>
         ) : (

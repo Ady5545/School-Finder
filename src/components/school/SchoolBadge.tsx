@@ -1,6 +1,6 @@
 import React from 'react';
 import { Badge } from '../ui/Badge';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 export interface SchoolBadgeProps {

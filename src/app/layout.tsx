@@ -11,6 +11,7 @@ import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
 import { Analytics } from '@vercel/analytics/next';
 import { generateOrganizationJsonLd, generateWebsiteJsonLd, BASE_URL, SITE_DESCRIPTION, SITE_SHORT_NAME } from '../lib/seo';
+import { THEME_INIT_SCRIPT } from '../components/layout/ThemeToggle';
 
 export const metadata: Metadata = {
   metadataBase: new URL(`${BASE_URL.replace(/\/$/, '')}/`),
@@ -63,8 +64,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0f2d4a',
-  colorScheme: 'light',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#faf7f2' },
+    { media: '(prefers-color-scheme: dark)', color: '#08111b' },
+  ],
+  colorScheme: 'light dark',
   width: 'device-width',
   initialScale: 1,
 };
@@ -75,7 +79,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+      </head>
       <body className="min-h-screen flex flex-col bg-[var(--color-surface-muted)] text-[var(--color-content)] antialiased">
         <script
           type="application/ld+json"

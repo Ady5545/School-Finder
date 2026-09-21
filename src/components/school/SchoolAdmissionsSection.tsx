@@ -22,7 +22,7 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
   const milestones = school.admissions?.milestones || [];
   const hasVerifiedMilestones = milestones.length > 0;
 
-  const rawStatus = school.admissions?.status || 'Admissions Active';
+  const rawStatus = school.admissions?.status || 'Inquire';
   const statusLower = rawStatus.toLowerCase();
   const isOpen = statusLower.includes('open') || statusLower.includes('ongoing') || statusLower.includes('active');
   const isPending = statusLower.includes('pending') || statusLower.includes('inquire') || statusLower.includes('contact') || statusLower.includes('release');
@@ -107,7 +107,7 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
             Academic Session
           </span>
           <p className="text-sm font-bold text-[#0f172a]">
-            {school.admissions?.session || '2027–28'}
+            {school.admissions?.session || school.admissions?.academicYear || 'Current session'}
           </p>
         </div>
 
@@ -229,9 +229,9 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
           <div className="p-4 rounded-xl bg-amber-50/60 border border-amber-200 text-amber-900 text-xs flex items-start gap-3">
             <AlertCircle className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
             <div className="space-y-1">
-              <p className="font-bold">2027–2028 Specific Schedule Pending Official Release</p>
+              <p className="font-bold">Admission dates</p>
               <p className="text-[11px] text-amber-800 leading-relaxed">
-                Specific deadline dates for this school are awaiting official publication. Admission Pitara strictly presents verified institutional data and does not construct estimated timelines. Check back or visit the school&apos;s official portal above.
+                Visit the school&apos;s official admission portal for the current application dates and requirements.
               </p>
             </div>
           </div>

@@ -2413,11 +2413,11 @@
     "alternateNames": [
       "SKS World School Greater Noida West",
       "SKS World School Sector 16",
-      "SKS World School HS-01",
-      "SKS World School - Greater Noida"
+      "SKS World School - Greater Noida",
+      "SKS World School HS-04 Sector 16"
     ],
-    "tagline": "CBSE Senior Secondary Co-Educational Institution in Sector 16, Greater Noida West",
-    "summary": "SKS World School (CBSE Affiliation No. 2133039, School Code 61218) is situated at Plot No. HS-01, Sector 16, Greater Noida West, offering holistic schooling from Pre-Nursery through Grade 12 with modern science labs, library, and comprehensive sports infrastructure.",
+    "tagline": "CBSE senior-secondary co-educational school in Sector 16, Greater Noida West",
+    "summary": "SKS World School is a CBSE-affiliated co-educational school in Sector 16, Greater Noida West, offering education through Class XII.",
     "board": [
       "CBSE"
     ],
@@ -2429,7 +2429,7 @@
       "raw": "Nursery – 12"
     },
     "admissionAge": "3+",
-    "studentTeacherRatio": "24:1",
+    "studentTeacherRatio": "",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -2707,34 +2707,39 @@
     },
     "facilities": [
       {
+        "name": "Playground",
+        "category": "Sports",
+        "icon": "fas fa-running"
+      },
+      {
         "name": "Basketball Court",
         "category": "Sports",
         "icon": "fas fa-basketball-ball"
       },
       {
-        "name": "Football Ground",
+        "name": "Lawn Tennis Court",
         "category": "Sports",
-        "icon": "fas fa-football-ball"
+        "icon": "fas fa-table-tennis"
       },
       {
-        "name": "Computer Lab",
-        "category": "Academic",
-        "icon": "fas fa-laptop"
+        "name": "Cricket Nets",
+        "category": "Sports",
+        "icon": "fas fa-baseball-ball"
       },
       {
-        "name": "Science Lab",
-        "category": "Academic",
-        "icon": "fas fa-flask"
+        "name": "Badminton Court",
+        "category": "Sports",
+        "icon": "fas fa-shuttlecock"
       },
       {
-        "name": "Library",
-        "category": "Academic",
-        "icon": "fas fa-book"
+        "name": "Skating Rink",
+        "category": "Sports",
+        "icon": "fas fa-person-skating"
       },
       {
-        "name": "Transport",
-        "category": "Logistics",
-        "icon": "fas fa-bus"
+        "name": "Indoor Children's Play Area",
+        "category": "Campus",
+        "icon": "fas fa-child"
       }
     ],
     "uniforms": {
@@ -2757,7 +2762,7 @@
       "status": "Inquire",
       "process": "Online registration on school website.",
       "session": "2027-28",
-      "sourceUrl": "https://sksworldschool.ac.in",
+      "sourceUrl": "https://skswsgnw.ac.in/",
       "lastVerifiedDate": "September 2026",
       "verificationStatus": "pending_schedule",
       "timelineDescription": "Current 2026-27 session active; 2027-28 admissions schedule pending official release. Contact admin office for mid-session transfer vacancies.",
@@ -2778,8 +2783,8 @@
       "hero": "/assets/schools/sks-world-school-greater-noida-west/hero/hero.jpg",
       "gallery": [],
       "legacyPaths": {},
-      "imageSource": "Official SKS World School Portal - HS-01 Sector 16 Campus Banner",
-      "imageSourceUrl": "https://sksworldschool.ac.in",
+      "imageSource": "Official SKS World School portal — HS-04 Sector 16 campus",
+      "imageSourceUrl": "https://skswsgnw.ac.in/",
       "imageVerifiedAt": "September 2026"
     },
     "legacyIdentifiers": {
@@ -2820,12 +2825,10 @@
     "classification": "core_greater_noida_west",
     "sports": [
       "Cricket",
-      "Football",
       "Basketball",
+      "Tennis",
       "Badminton",
-      "Table Tennis",
-      "Skating",
-      "Swimming"
+      "Skating"
     ],
     "affiliationNumber": "2134098",
     "geographicClassification": "core_greater_noida_west",
@@ -2833,7 +2836,7 @@
     "canonicalSlug": "sks-world-school-greater-noida-west",
     "isArchived": false,
     "status": "active",
-    "cbseAffiliationNumber": "2132777"
+    "cbseAffiliationNumber": "2134098"
   },
   {
     "id": "jm-international-school",
@@ -3918,8 +3921,8 @@
       "to": "Class 12",
       "raw": "Nursery – 12"
     },
-    "admissionAge": "3+",
-    "studentTeacherRatio": "30:1",
+    "admissionAge": "",
+    "studentTeacherRatio": "1:25",
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
@@ -3927,7 +3930,7 @@
       "sector": "Noida Extension",
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
-      "pincode": "Unknown",
+      "pincode": "",
       "area": "Greater Noida West",
       "coordinates": {
         "lat": null,
@@ -4192,7 +4195,7 @@
     "isArchived": false,
     "status": "active",
     "affiliationNumber": null,
-    "cbseAffiliationNumber": "Not registered"
+    "cbseAffiliationNumber": null
   },
   {
     "id": "gd-goenka-international-school",
@@ -13515,151 +13518,60 @@
       "Somerville School Greater Noida Noida Extension",
       "Somerville School Greater Noida Sector Alpha 2 / GN West Corridor"
     ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Somerville School Greater Noida in Sector Alpha 2 / GN West Corridor, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
+    "tagline": "",
+    "summary": "Somerville School Greater Noida was established on 2 July 1998 and is administered by the Lott Carey Baptist Mission in India. It is an unaided Christian minority school affiliated to CBSE.",
     "board": [
       "CBSE"
     ],
     "boardNote": null,
-    "curriculum": "CBSE Curriculum",
+    "curriculum": "CBSE",
     "gradeRange": {
       "from": "Nursery",
       "to": "Grade 12",
       "raw": "Nursery to Grade 12"
     },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
+    "admissionAge": "",
+    "studentTeacherRatio": "",
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
       "address": "Block-H, Sector Alpha-II, Greater Noida, Uttar Pradesh 201310",
-      "sector": "Sector Alpha 2",
-      "city": "Greater Noida West",
+      "sector": "Sector Alpha II",
+      "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
+      "pincode": "201310",
+      "area": "Sector Alpha II",
       "coordinates": {
         "lat": null,
         "lng": null,
         "isVerified": false
       },
-      "mapSearchQuery": "Somerville School Greater Noida Sector Alpha 2 / GN West Corridor Greater Noida West",
+      "mapSearchQuery": "Somerville School Block-H Sector Alpha-II Greater Noida",
       "mapEmbedUrl": null
     },
     "fees": {
       "cardFee": null,
-      "estimatedFirstYear": 143750,
+      "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "₹104k - ₹127k / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹9,583",
-      "tuitionQuarterly": "₹28,750",
-      "tuitionAnnual": "₹1,15,000",
-      "transportMonthly": "₹2,500",
-      "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
+      "rangeText": "Fee details",
+      "registrationFee": null,
+      "admissionFee": null,
+      "tuitionMonthly": null,
+      "tuitionQuarterly": null,
+      "tuitionAnnual": null,
+      "transportMonthly": null,
+      "transportAnnual": null,
+      "verificationStatus": "not_publicly_verified",
       "comparableAnnualAvailable": false,
       "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
+      "academicSession": null,
       "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://somervilleschoolgreaternoida.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,15,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "somerville-school-greater-noida-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "somerville-school-greater-noida-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 20000,
-          "formattedAmount": "₹20,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "somerville-school-greater-noida-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 9583,
-          "formattedAmount": "₹9,583 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "somerville-school-greater-noida-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 115000,
-          "formattedAmount": "₹1,15,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹9,583 × 12 = ₹1,15,000/year."
-        },
-        {
-          "id": "somerville-school-greater-noida-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,500 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹28,750 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,15,000 / year",
-          "totalAnnualPayable": "₹1,15,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
+      "sourceUrl": "https://www.somervillegreaternoida.in/",
+      "table": [],
+      "disclosed": false,
+      "isVerified": false,
+      "components": [],
+      "gradeWiseTiers": [],
       "concessions": [
         {
           "title": "Sibling Concession",
@@ -13692,29 +13604,29 @@
     },
     "facilities": [
       {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
+        "name": "Indoor Games",
         "category": "Sports",
-        "icon": "trophy"
+        "icon": "gamepad"
+      },
+      {
+        "name": "Music Rooms",
+        "category": "Arts",
+        "icon": "music"
+      },
+      {
+        "name": "Dance Rooms",
+        "category": "Arts",
+        "icon": "music"
+      },
+      {
+        "name": "Medical / Health Support",
+        "category": "Health",
+        "icon": "heart-pulse"
+      },
+      {
+        "name": "CCTV",
+        "category": "Safety",
+        "icon": "shield-check"
       }
     ],
     "uniforms": {
@@ -13732,15 +13644,16 @@
     ],
     "admissions": {
       "date": null,
-      "status": "Inquire",
-      "process": "Online inquiry or campus registration followed by interaction.",
+      "status": "Open",
+      "process": "Registration is open for Pre School for session 2027–28 through the school portal.",
       "session": "2027-28",
-      "milestones": []
+      "milestones": [],
+      "sourceUrl": "https://www.somervillegreaternoida.in/"
     },
     "contact": {
-      "phone": "+91 98110 00000",
-      "website": "https://somervillegreaternoida.in/",
-      "email": "info@somervilleschoolgreaternoida.edu.in"
+      "phone": "+91-7042492964",
+      "website": "https://www.somervillegreaternoida.in/",
+      "email": "somervillegn@gmail.com"
     },
     "rating": {
       "score": 0,
@@ -13756,16 +13669,16 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Official Somerville School Greater Noida Portal & CBSE SARAS",
-      "sourceUrl": "https://somervillegreaternoida.in/",
-      "cbseAffiliationNumber": "2130253",
+      "lastVerified": "2026-09-21",
+      "sourceName": "Somerville School official website and CBSE SARAS",
+      "sourceUrl": "https://www.somervillegreaternoida.in/about",
+      "cbseAffiliationNumber": "2130546",
       "verifiedFields": [
         "name",
         "address",
-        "website",
         "affiliation",
-        "establishedYear"
+        "establishedYear",
+        "website"
       ]
     },
     "legacyIdentifiers": {
@@ -13780,18 +13693,13 @@
     },
     "auditNotes": [
       "Sector Alpha 2 / GN West Corridor campus verified in Greater Noida West directory.",
-      "Established Greater Noida core school founded in 1998 in Sector Alpha-II."
+      "Established Greater Noida core school founded in 1998 in Sector Alpha-II.",
+      "Corrected 2026-09-21: current official site gives Block-H, Sector Alpha-II, Greater NOIDA 201310; CBSE SARAS lists the campus affiliation as 2130546 and PIN 201306. Official school contact page uses 201310.",
+      "Current official homepage states registration is open for Pre School session 2027–28."
     ],
     "classification": "nearby_surrounding",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "affiliationNumber": "2130263",
+    "sports": [],
+    "affiliationNumber": "2130546",
     "establishedYear": 1998,
     "geographicClassification": "geographic_outlier",
     "recordType": "canonical",
@@ -13799,9 +13707,10 @@
     "isArchived": false,
     "status": "active",
     "archiveReason": "Sector Alpha 2, Greater Noida (Core Greater Noida, outside Greater Noida West catchment).",
-    "cbseAffiliationNumber": "2130263",
+    "cbseAffiliationNumber": "2130546",
     "isDuplicate": false,
-    "duplicateOf": null
+    "duplicateOf": null,
+    "transport": null
   },
   {
     "id": "aster-public-school-kp5",
@@ -14843,7 +14752,7 @@
       "The Millennium School Noida Extension Sector 119 Link"
     ],
     "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "The Millennium School Noida Extension in Sector 119 Link, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
+    "summary": "The Millennium School, Sector 119 Noida, is a CBSE K–12 school on Plot No. SS-01, Sector 119, Noida.",
     "board": [
       "CBSE"
     ],
@@ -14859,11 +14768,11 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Near Plot No SS-1, 108, RG Residency, Sector 119, Noida, UP 201316",
+      "address": "Plot No. SS-01, Sector 119, Noida, Uttar Pradesh 201305",
       "sector": "Sector 119",
       "city": "Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201316",
+      "pincode": "201305",
       "area": "Sector 119",
       "coordinates": {
         "lat": null,
@@ -14986,15 +14895,16 @@
     ],
     "admissions": {
       "date": null,
-      "status": "Inquire",
-      "process": "Online inquiry or campus registration followed by interaction.",
+      "status": "Open",
+      "process": "Online enquiry or admission registration through the school; admissions are offered subject to seat availability.",
       "session": "2027-28",
-      "milestones": []
+      "milestones": [],
+      "sourceUrl": "https://themillenniumschools.com/tmsnoida119/admission-overview/"
     },
     "contact": {
-      "phone": "+91 98110 00000",
-      "website": "https://tmsnoidaextension.com/",
-      "email": "info@themillenniumschoolnoidaextension.edu.in"
+      "phone": "+91-9958889650",
+      "website": "https://themillenniumschools.com/tmsnoida119/",
+      "email": "principal.noida119@themillenniumschools.com"
     },
     "rating": {
       "score": 0,
@@ -15010,9 +14920,9 @@
     "verification": {
       "isVerified": true,
       "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Official The Millennium School Portal & CBSE SARAS",
-      "sourceUrl": "https://tmsnoidaextension.com/",
+      "lastVerified": "2026-09-21",
+      "sourceName": "The Millennium School official public disclosure",
+      "sourceUrl": "https://themillenniumschools.com/tmsnoida119/public-disclosure-noida/",
       "cbseAffiliationNumber": "2133481",
       "verifiedFields": [
         "name",
@@ -15033,7 +14943,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Sector 119 Link campus verified in Greater Noida West directory."
+      "Sector 119 Link campus verified in Greater Noida West directory.",
+      "Corrected 2026-09-21: official public disclosure identifies this campus as The Millennium School Sector 119 Noida, Plot SS-01, PIN 201305, affiliation 2133481."
     ],
     "classification": "core_greater_noida_west",
     "sports": [

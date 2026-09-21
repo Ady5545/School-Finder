@@ -63,8 +63,7 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
     fees.disclosed === false ||
     fees.verificationStatus === 'not_publicly_verified' ||
     fees.verificationStatus === 'unverified_undisclosed' ||
-    fees.verificationStatus === 'unverified_copied_from_wisdom_tree' ||
-    !fees.cardFee;
+    fees.verificationStatus === 'unverified_copied_from_wisdom_tree';
 
   const components = fees.components || [];
   const oneTimeComponents = components.filter(
@@ -106,8 +105,8 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
       fees.billingFrequency === 'annual' && typeof fees.cardFee === 'number'
         ? fees.cardFee
         : 0;
-    if (currentGradeTier) {
-      // Parse totalAnnualPayable or calculatedAnnualEquivalent
+    if (currentGradeTier && currentGradeTier.isCalculated !== true) {
+      // Use only published annual totals; calculated annual equivalents stay out of the annual base.
       const parsed =
         parseInt(
           (currentGradeTier.totalAnnualPayable || currentGradeTier.calculatedAnnualEquivalent || '')

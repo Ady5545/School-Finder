@@ -32,7 +32,6 @@ import {
   CheckCircle2,
   ExternalLink,
   ShieldCheck,
-  AlertCircle,
   Compass,
   Trophy,
   Activity,

@@ -189,7 +189,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
               ? formatCurrency(fees.cardFee!)
               : isHistorical
               ? fees.rangeText || 'Historical Reference'
-              : 'Not publicly disclosed'}
+              : 'Contact school for current fee details'}
           </div>
 
           {fees.academicSession && (
@@ -250,13 +250,13 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
 
       {isHistorical && (
         <p className="text-[11px] text-amber-800 bg-amber-50/90 border border-amber-200 p-2.5 rounded-xl leading-relaxed">
-          <strong>Note:</strong> Historical reference only. Certified current pricing must be verified directly with school administration.
+          <strong>Fee note:</strong> Contact the school for the current fee schedule.
         </p>
       )}
 
       {isUndisclosed && (
         <p className="text-[11px] text-slate-700 bg-slate-50 border border-slate-200 p-2.5 rounded-xl leading-relaxed">
-          This institution has not released a public fee schedule. Consult admissions for official prospectus.
+          Contact the admissions office for the current fee schedule and official prospectus.
         </p>
       )}
     </div>

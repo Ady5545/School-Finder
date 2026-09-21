@@ -101,8 +101,11 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
 
     const totalOneTime = registrationCost + admissionCost + cautionCost;
 
-    // Recurring annual tuition
-    let baseAnnualTuition = fees.cardFee || 0;
+    // Only an explicitly annual card fee may be used as an annual base.
+    let baseAnnualTuition =
+      fees.billingFrequency === 'annual' && typeof fees.cardFee === 'number'
+        ? fees.cardFee
+        : 0;
     if (currentGradeTier) {
       // Parse totalAnnualPayable or calculatedAnnualEquivalent
       const parsed =
@@ -184,19 +187,18 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
                 Institutional Fee Structure
               </h3>
               <p className="text-xs text-[var(--color-content-muted)] font-medium">
-                Public circular status: Awaiting institutional disclosure
+                Contact the school admissions office for the current fee schedule.
               </p>
             </div>
           </div>
-          <span className="text-[11px] font-bold text-amber-900 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full">
-            Not Publicly Disclosed
+          <span className="text-[11px] font-bold text-slate-700 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
+            Fee details
           </span>
         </div>
 
         <div className="p-4.5 rounded-xl bg-[#faf8f5] border border-[var(--color-border)] space-y-3">
           <p className="text-xs text-[var(--color-content)] leading-relaxed">
-            {fees.disclaimer ||
-              'This institution has not published a certified public fee circular online. In accordance with Admission Pitara data accuracy standards, no synthetic or fabricated amounts are displayed.'}
+            {fees.disclaimer || 'Contact the school admissions office for the current fee schedule.'}
           </p>
           <div className="flex items-center gap-2 text-xs font-semibold text-[var(--color-primary)] pt-1">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />

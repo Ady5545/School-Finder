@@ -55,7 +55,8 @@ assert(ryanTechzone && ryanTechzone.affiliationNumber === '2133182', 'Ryan Techz
 // 6. SKS World School campus banner verification
 const sks = schools.find(s => s.slug === 'sks-world-school-greater-noida-west');
 assert(sks && sks.assets.featured && sks.assets.featured.includes('featured.jpg'), 'SKS World School has verified campus photo');
-assert(sks && sks.location.address.includes('HS-01'), 'SKS World School address verified at HS-01 Sector 16');
+assert(sks && sks.location.address.includes('HS-04'), 'SKS World School address verified at HS-04 Sector 16');
+assert(sks && (sks.affiliationNumber || sks.verification?.cbseAffiliationNumber) === '2134098', 'SKS World School CBSE affiliation verified as 2134098');
 
 // 5. DPS Knowledge Park-V verification
 const dps = schools.find(s => s.slug === 'delhi-public-school-knowledge-park-5');

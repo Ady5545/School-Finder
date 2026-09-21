@@ -52,9 +52,28 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
   const lat = school.location?.coordinates?.lat;
   const lng = school.location?.coordinates?.lng;
   if (typeof lat !== 'number' || typeof lng !== 'number') {
+    const mapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      `${school.name}, ${school.location.address || school.location.area || 'Greater Noida West'}`
+    )}`;
+
     return (
-      <div className="w-full h-full min-h-[300px] flex items-center justify-center bg-slate-50 text-slate-500 rounded-xl border border-slate-200">
-        <p className="text-sm font-medium">Map coordinates pending verification.</p>
+      <div className="w-full min-h-[300px] flex items-center justify-center bg-slate-50 rounded-xl border border-slate-200 p-6">
+        <div className="max-w-md text-center space-y-3">
+          <MapPin className="w-7 h-7 mx-auto text-[var(--color-primary)]" />
+          <h3 className="text-base font-bold text-slate-900">Campus location</h3>
+          <p className="text-sm text-slate-600 leading-relaxed">
+            {school.location.address || school.location.area || 'Greater Noida West'}
+          </p>
+          <a
+            href={mapsSearchUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-primary)] px-4 py-2 text-xs font-bold text-white hover:opacity-90"
+          >
+            Open in Maps
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        </div>
       </div>
     );
   }

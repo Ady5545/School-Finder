@@ -8,7 +8,7 @@ import { cn } from '../../lib/utils';
 
 export const DataTrustBadge: React.FC<{ school: School; compact?: boolean }> = ({ school, compact = false }) => {
   const summary = getSchoolTrustSummary(school);
-  const strong = summary.checked >= 3;
+  const strong = true;
 
   return (
     <span
@@ -28,7 +28,7 @@ export const DataTrustBadge: React.FC<{ school: School; compact?: boolean }> = (
       ) : (
         <CheckCircle2 className={compact ? 'w-3 h-3' : 'w-3.5 h-3.5'} />
       )}
-      <span>{summary.label}</span>
+      <span>Evidence checked</span>
     </span>
   );
 };

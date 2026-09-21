@@ -134,7 +134,7 @@ export const FeeDisplay: React.FC<FeeDisplayProps> = ({ fees, variant = 'compact
         <div>
           <div className="flex items-center gap-1.5">
             <span className="text-xs font-semibold text-[var(--color-content-muted)]">
-              {isHistorical ? 'Historical Fee Reference' : 'Annual Fee Estimate'}
+              {isComparable ? 'Annual Fee' : isHistorical ? 'Historical Fee Reference' : 'Fee Details'}
             </span>
             <div className="relative inline-flex items-center" ref={tooltipRef}>
               <button

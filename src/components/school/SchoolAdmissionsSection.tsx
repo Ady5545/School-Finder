@@ -152,7 +152,9 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
       </div>
 
       {/* Procedure Text */}
-      {school.admissions?.process && (
+      {school.admissions?.process &&
+        (school.admissions?.verificationStatus === 'verified_official' ||
+          school.admissions?.verificationStatus === 'verified_from_source') && (
         <div className="space-y-1.5">
           <h3 className="text-xs font-bold text-[#0f172a] uppercase tracking-wider">
             Admission Procedure

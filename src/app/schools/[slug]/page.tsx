@@ -173,7 +173,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--color-content-muted)] pt-1">
             <div className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-              <span>{school.location.address || `${school.location.area}, Greater Noida West`}</span>
+              {school.location.address && <span>{school.location.address}</span>}
             </div>
             <RatingDisplay score={school.rating.score} reviewsCount={school.rating.reviewsCount} size="sm" />
           </div>
@@ -230,7 +230,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-[var(--color-primary)]" /> Age Entry
               </span>
-              <p className="text-sm font-bold text-[var(--color-content)]">{school.admissionAge || '3+ for Nursery'}</p>
+              <p className="text-sm font-bold text-[var(--color-content)]">{school.admissionAge || '—'}</p>
             </div>
             {school.establishedYear && (
               <div className="space-y-1">
@@ -324,27 +324,12 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
         {/* Right Col: Institutional Credentials, Fees & Contact */}
         <div className="space-y-6">
-          {/* Institutional Credentials & Verification Card */}
-          {school.verification && (
-            <section
-              className={
-                school.verification.isVerified
-                  ? 'bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-3'
-                  : 'bg-amber-50/60 p-5 rounded-2xl border border-amber-200 shadow-warm-xs space-y-3'
-              }
-            >
+          {/* Institutional Credentials */}
+          {school.verification?.isVerified && (
+            <section className="bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-3">
               <div className="flex items-center gap-2 font-bold text-xs">
-                {school.verification.isVerified ? (
-                  <>
-                    <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span className="text-emerald-900">Institutional Credentials & Audit</span>
-                  </>
-                ) : (
-                  <>
-                    <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span className="text-amber-900">Institutional Audit Pending</span>
-                  </>
-                )}
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span className="text-emerald-900">Institutional Credentials</span>
               </div>
 
               <div className="space-y-2 pt-1 text-xs">
@@ -372,25 +357,9 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                 </div>
               )}
 
-              <p
-                className={
-                  school.verification.isVerified
-                    ? 'text-[11px] text-emerald-800 leading-relaxed pt-1 border-t border-emerald-200/60'
-                    : 'text-[11px] text-amber-800 leading-relaxed pt-1 border-t border-amber-200/60'
-                }
-              >
-                {school.verification.isVerified
-                  ? `Information, address, and affiliation audited from ${school.verification.sourceName}.`
-                  : 'This school directory entry is awaiting direct institutional disclosure. Synthetic attributes have been removed in accordance with Admission Pitara data accuracy standards.'}
+              <p className="text-[11px] text-emerald-800 leading-relaxed pt-1 border-t border-emerald-200/60">
+                Information, address, and affiliation audited from {school.verification.sourceName}.
               </p>
-
-              <div
-                className={
-                  school.verification.isVerified ? 'text-[10px] text-emerald-700/80' : 'text-[10px] text-amber-700/80'
-                }
-              >
-                Audited: {school.verification.lastVerified}
-              </div>
             </section>
           )}
 
@@ -398,16 +367,12 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <section>
             <div className="flex items-center justify-between mb-3">
               <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
-              {school.fees.verificationStatus === 'verified_from_source' ? (
+              {school.fees.verificationStatus === 'verified_from_source' && (
                 <span className="text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
                   Audited &amp; Verified
                 </span>
-              ) : (
-                <span className="text-[11px] font-bold text-amber-800 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full shadow-warm-2xs">
-                  Audit Pending
-                </span>
               )}
-            </div>
+          </div>
             <FeeDisplay fees={school.fees} variant="detailed" />
           </section>
 
@@ -415,10 +380,12 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <section className="bg-white p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
             <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">School Contact & Address</h2>
             <div className="space-y-3.5 text-xs">
+              {(school.location.address || school.location.area) && (
               <div className="flex items-start gap-2.5 text-[var(--color-content-muted)]">
                 <MapPin className="w-4 h-4 text-[var(--color-accent)] shrink-0 mt-0.5" />
-                <span className="leading-relaxed font-medium">{school.location.address || `${school.location.area}, Greater Noida West`}</span>
+                <span className="leading-relaxed font-medium">{school.location.address || school.location.area}</span>
               </div>
+            )}
               {school.contact.phone && (
                 <div className="flex items-center gap-2.5 text-[var(--color-content-muted)]">
                   <Phone className="w-4 h-4 text-[var(--color-primary)] shrink-0" />

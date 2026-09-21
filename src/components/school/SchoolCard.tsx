@@ -123,7 +123,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             ))}
           </div>
           <div className="bg-white px-2.5 py-0.5 rounded-md shadow-warm-2xs border border-[var(--color-border)]">
-            <RatingDisplay score={school.rating.score} size="sm" showCount={false} />
+            <RatingDisplay score={school.rating.score} reviewsCount={school.rating.reviewsCount} size="sm" showCount={false} />
           </div>
         </div>
       </div>

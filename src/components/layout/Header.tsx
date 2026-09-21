@@ -9,6 +9,7 @@ import { IconButton } from '../ui/IconButton';
 import { Drawer } from '../ui/Drawer';
 import { BrandLogo } from '../ui/BrandLogo';
 import { NotificationCenter } from './NotificationCenter';
+import { ThemeToggle } from './ThemeToggle';
 import { useSchoolStore } from '../../lib/schoolStore';
 import { useAuth } from '../../lib/authContext';
 import { cn } from '../../lib/utils';
@@ -42,7 +43,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/70 bg-[#fcfbf9]/72 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
+    <header className="sticky top-0 z-40 w-full border-b border-white/70 dark:border-white/10 bg-[#fcfbf9]/72 dark:bg-[#0b1420]/80 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-[4.65rem] grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
         {/* Logo / Brand Mark */}
         <div className="flex items-center gap-5 min-w-0">
@@ -51,7 +52,7 @@ export const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center justify-self-center gap-1 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center justify-self-center gap-1 rounded-2xl border border-white/80 dark:border-white/10 bg-white/45 dark:bg-white/5 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] dark:shadow-none backdrop-blur-xl" aria-label="Main Navigation">
             {navLinks.map(link => (
               <Link
                 key={link.href}
@@ -59,8 +60,8 @@ export const Header: React.FC = () => {
                 className={cn(
                   'px-3.5 py-2 rounded-xl text-[12px] font-semibold transition-all duration-200 flex items-center gap-1.5 relative whitespace-nowrap',
                   isActive(link.href)
-                    ? 'text-[var(--color-primary)] bg-white/88 border border-white shadow-sm font-bold'
-                    : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-white/65'
+                    ? 'text-[var(--color-primary)] bg-white/88 dark:bg-white/10 border border-white dark:border-white/10 shadow-sm font-bold'
+                    : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-white/65 dark:hover:bg-white/10'
                 )}
               >
                 {link.icon}
@@ -82,6 +83,7 @@ export const Header: React.FC = () => {
 
         {/* Desktop Actions */}
         <div className="hidden sm:flex items-center justify-self-end gap-2.5 shrink-0">
+          <ThemeToggle />
           <Link href="/wishlist">
             <IconButton
               aria-label={`Shortlisted Schools (${shortlist.length})`}
@@ -141,7 +143,8 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Affordances */}
-        <div className="flex items-center justify-self-end gap-1 sm:hidden rounded-2xl border border-white/75 bg-white/50 px-1 py-1 backdrop-blur-xl shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
+        <div className="flex items-center justify-self-end gap-1 sm:hidden rounded-2xl border border-white/75 dark:border-white/10 bg-white/50 dark:bg-white/5 px-1 py-1 backdrop-blur-xl shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)] dark:shadow-none">
+          <ThemeToggle className="!w-8 !h-8 border-0 bg-transparent hover:bg-white/60" />
           {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
             <IconButton

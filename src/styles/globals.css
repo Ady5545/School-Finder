@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
   --color-brand-50: #eff5fa;
   --color-brand-100: #dbe7f3;
@@ -95,6 +97,182 @@
   --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+}
+
+/*
+ * Dark theme. Toggled via <html data-theme="dark">, set by ThemeToggle and
+ * the anti-flash init script in the root layout. Because nearly every
+ * component reads colors from these custom properties (var(--color-*))
+ * rather than hardcoding hex values, redefining them here re-themes the
+ * large majority of the site automatically. The utility-remap block below
+ * covers the remaining places that used raw Tailwind white/slate/stone
+ * classes directly instead of a token.
+ */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-primary: #4f8fc7;
+  --color-primary-hover: #6fa5d6;
+  --color-primary-light: #16273a;
+
+  --color-accent: #4f8fc7;
+  --color-accent-hover: #6fa5d6;
+  --color-accent-light: #16273a;
+
+  --color-surface: #0b1420;
+  --color-surface-elevated: #101c2b;
+  --color-surface-muted: #08111b;
+  --color-surface-subtle: #17232f;
+
+  --color-content: #eef2f6;
+  --color-content-muted: #a7b6c8;
+  --color-content-subtle: #7c8ea3;
+
+  --color-border: #24384c;
+  --color-border-subtle: #1a2a3a;
+  --color-border-strong: #395878;
+
+  --color-success: #34d399;
+  --color-success-bg: #0d2b22;
+  --color-success-text: #6ee7b7;
+
+  --color-warning: #fbbf24;
+  --color-warning-bg: #2e2308;
+  --color-warning-text: #fcd34d;
+
+  --color-error: #fb7185;
+  --color-error-bg: #2e0f16;
+  --color-error-text: #fda4af;
+
+  --color-info: #38bdf8;
+  --color-info-bg: #082436;
+  --color-info-text: #7dd3fc;
+
+  --color-rating: #f5a524;
+
+  --color-brand-50: #0c1826;
+  --color-brand-100: #0f2032;
+  --color-brand-200: #16324a;
+  --color-brand-500: #4f8fc7;
+  --color-brand-600: #6fa5d6;
+  --color-brand-700: #93bfe3;
+  --color-brand-800: #bcd9ef;
+  --color-brand-900: #dfeefa;
+  --color-brand-950: #f2f9ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    color-scheme: dark;
+    --color-primary: #4f8fc7;
+    --color-primary-hover: #6fa5d6;
+    --color-primary-light: #16273a;
+    --color-accent: #4f8fc7;
+    --color-accent-hover: #6fa5d6;
+    --color-accent-light: #16273a;
+    --color-surface: #0b1420;
+    --color-surface-elevated: #101c2b;
+    --color-surface-muted: #08111b;
+    --color-surface-subtle: #17232f;
+    --color-content: #eef2f6;
+    --color-content-muted: #a7b6c8;
+    --color-content-subtle: #7c8ea3;
+    --color-border: #24384c;
+    --color-border-subtle: #1a2a3a;
+    --color-border-strong: #395878;
+    --color-success: #34d399;
+    --color-success-bg: #0d2b22;
+    --color-success-text: #6ee7b7;
+    --color-warning: #fbbf24;
+    --color-warning-bg: #2e2308;
+    --color-warning-text: #fcd34d;
+    --color-error: #fb7185;
+    --color-error-bg: #2e0f16;
+    --color-error-text: #fda4af;
+    --color-info: #38bdf8;
+    --color-info-bg: #082436;
+    --color-info-text: #7dd3fc;
+    --color-rating: #f5a524;
+  }
+}
+
+/*
+ * Utility remap: many cards/panels were written with literal Tailwind
+ * neutrals (bg-white, text-slate-700, border-slate-200...) instead of the
+ * design tokens above. These are unambiguously "light card surface" usages
+ * (as opposed to text-white/bg-slate-900/border-white etc., which are
+ * mostly deliberate light-on-dark decorative sections like the Footer and
+ * hero bands, and are left untouched so they keep working in both themes).
+ * Attribute-selector specificity naturally wins over the plain utility.
+ */
+[data-theme="dark"] .bg-white { background-color: var(--color-surface-elevated); }
+[data-theme="dark"] .from-white { --tw-gradient-from: var(--color-surface-elevated); }
+[data-theme="dark"] .to-white { --tw-gradient-to: var(--color-surface-elevated); }
+[data-theme="dark"] .via-white { --tw-gradient-via: var(--color-surface-elevated); }
+
+[data-theme="dark"] .text-slate-900,
+[data-theme="dark"] .text-slate-950,
+[data-theme="dark"] .text-stone-900,
+[data-theme="dark"] .text-stone-950,
+[data-theme="dark"] .text-slate-800,
+[data-theme="dark"] .text-stone-800 { color: var(--color-content); }
+
+[data-theme="dark"] .text-slate-700,
+[data-theme="dark"] .text-slate-600,
+[data-theme="dark"] .text-stone-700,
+[data-theme="dark"] .text-stone-600 { color: var(--color-content-muted); }
+
+[data-theme="dark"] .text-slate-500,
+[data-theme="dark"] .text-stone-500 { color: var(--color-content-subtle); }
+
+[data-theme="dark"] .bg-slate-50,
+[data-theme="dark"] .bg-slate-100,
+[data-theme="dark"] .bg-stone-50,
+[data-theme="dark"] .bg-stone-100 { background-color: var(--color-surface-subtle); }
+
+[data-theme="dark"] .border-slate-100,
+[data-theme="dark"] .border-slate-200,
+[data-theme="dark"] .border-slate-300,
+[data-theme="dark"] .border-stone-100,
+[data-theme="dark"] .border-stone-200,
+[data-theme="dark"] .border-stone-300,
+[data-theme="dark"] .divide-slate-100,
+[data-theme="dark"] .divide-stone-100 { border-color: var(--color-border); }
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) .bg-white { background-color: var(--color-surface-elevated); }
+  html:not([data-theme]) .text-slate-900,
+  html:not([data-theme]) .text-slate-950,
+  html:not([data-theme]) .text-stone-900,
+  html:not([data-theme]) .text-stone-950,
+  html:not([data-theme]) .text-slate-800,
+  html:not([data-theme]) .text-stone-800 { color: var(--color-content); }
+  html:not([data-theme]) .text-slate-700,
+  html:not([data-theme]) .text-slate-600,
+  html:not([data-theme]) .text-stone-700,
+  html:not([data-theme]) .text-stone-600 { color: var(--color-content-muted); }
+  html:not([data-theme]) .text-slate-500,
+  html:not([data-theme]) .text-stone-500 { color: var(--color-content-subtle); }
+  html:not([data-theme]) .bg-slate-50,
+  html:not([data-theme]) .bg-slate-100,
+  html:not([data-theme]) .bg-stone-50,
+  html:not([data-theme]) .bg-stone-100 { background-color: var(--color-surface-subtle); }
+  html:not([data-theme]) .border-slate-100,
+  html:not([data-theme]) .border-slate-200,
+  html:not([data-theme]) .border-slate-300,
+  html:not([data-theme]) .border-stone-100,
+  html:not([data-theme]) .border-stone-200,
+  html:not([data-theme]) .border-stone-300,
+  html:not([data-theme]) .divide-slate-100,
+  html:not([data-theme]) .divide-stone-100 { border-color: var(--color-border); }
+}
+
+/* Smooth, non-jarring theme switches on the properties that actually change. */
+html {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.bg-white, [class*="border-slate"], [class*="border-stone"], [class*="text-slate"], [class*="text-stone"], [class*="bg-slate"], [class*="bg-stone"] {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 html {
@@ -359,4 +537,30 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
 
 @media (prefers-reduced-transparency: reduce) {
   .glass-surface, .glass-surface-strong, .glass-chip { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.96); }
+}
+
+/* Dark-theme glass: same frosted effect, tinted from the dark surface instead of white. */
+[data-theme="dark"] .glass-panel {
+  background: rgba(16, 28, 43, 0.75);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .glass-surface {
+  background: rgba(16, 28, 43, 0.58);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 34px -28px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+[data-theme="dark"] .glass-surface-strong {
+  background: rgba(16, 28, 43, 0.78);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 42px -30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+[data-theme="dark"] .glass-chip {
+  background: rgba(16, 28, 43, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) .glass-panel { background: rgba(16, 28, 43, 0.75); border-color: rgba(255, 255, 255, 0.08); }
+  html:not([data-theme]) .glass-surface { background: rgba(16, 28, 43, 0.58); border-color: rgba(255, 255, 255, 0.1); }
+  html:not([data-theme]) .glass-surface-strong { background: rgba(16, 28, 43, 0.78); border-color: rgba(255, 255, 255, 0.12); }
+  html:not([data-theme]) .glass-chip { background: rgba(16, 28, 43, 0.6); border-color: rgba(255, 255, 255, 0.1); }
 }

@@ -43,7 +43,13 @@ export function buildSchoolMetadata(school: School): Metadata {
   const primarySlug = isDup ? school.duplicateOf! : school.slug;
   const title = `${school.name} | ${SITE_SHORT_NAME}`;
   const boardText = Array.isArray(school.board) ? school.board.join(', ') : school.board || 'CBSE';
-  const description = `${school.name} in ${school.location.area || school.location.city}, Greater Noida. Affiliated to ${boardText}. Grade range: ${school.gradeRange.raw}. Verified fee structure: ${school.fees.cardFee ? '₹' + school.fees.cardFee.toLocaleString('en-IN') + '/yr' : 'Available on request'}. Review verified admissions, teacher-student ratios, and campus facilities.`;
+  const feeDescription =
+    (school.fees.billingFrequency === 'annual' &&
+      typeof school.fees.cardFee === 'number' &&
+      (school.fees.verificationStatus === 'verified_from_source' || school.fees.verificationStatus === 'verified_official'))
+      ? `Published annual fee: ₹${school.fees.cardFee.toLocaleString('en-IN')}`
+      : 'Fee details available on the profile';
+  const description = `${school.name} in ${school.location.area || school.location.city}, Greater Noida. Affiliated to ${boardText}. Grade range: ${school.gradeRange.raw}. ${feeDescription}. Review admissions, teacher-student ratios, and campus facilities.`;
   const canonicalUrl = `${BASE_URL}/schools/${primarySlug}`;
 
   return {

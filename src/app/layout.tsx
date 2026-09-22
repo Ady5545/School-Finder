@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     images: ['/opengraph-image'],
   },
   icons: {
-    icon: [{ url: '/favicon.png', type: 'image/png' }],
-    shortcut: '/favicon.png',
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg',
   },
   manifest: '/site.webmanifest',
 };
@@ -73,7 +73,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-IN">
-      <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('admission-pitara-theme')||'system';var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',d);document.documentElement.dataset.theme=t}catch(e){}})()` }} />
       <body className="min-h-screen flex flex-col bg-[var(--color-surface-muted)] text-[var(--color-content)] antialiased">
         <script
           type="application/ld+json"

@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import SchoolRunJourney3D from './SchoolRunJourney3D';
 
 type Point = { lat: number; lng: number; label: string };
 type RouteSchool = { slug: string; name: string; sector?: string; point: Point; driving: { coordinates: [number, number][] } | null; walking: { coordinates: [number, number][] } | null };
@@ -20,7 +21,16 @@ const schoolIcon = L.divIcon({ className: 'school-run-school-marker', html: '<di
 
 export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: { origin: Point; schools: RouteSchool[]; activeSlug: string | null; onSelect: (slug: string) => void }) {
   const active = schools.find(s => s.slug === activeSlug) || schools[0];
-  return <div className="h-[430px] sm:h-[520px] w-full overflow-hidden rounded-2xl border border-[var(--color-border)]">
+  return <div className="space-y-5">
+    {active ? (
+      <SchoolRunJourney3D
+        origin={origin}
+        school={active}
+        animationToken={active.slug}
+      />
+    ) : null}
+
+    <div className="relative h-[430px] sm:h-[520px] w-full overflow-hidden rounded-2xl border border-[var(--color-border)] shadow-warm-sm">
     <MapContainer center={[origin.lat, origin.lng]} zoom={13} scrollWheelZoom className="h-full w-full">
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <FitBounds origin={origin} schools={schools} />
@@ -29,5 +39,6 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
       {active?.driving?.coordinates?.length ? <Polyline positions={active.driving.coordinates.map(([lng,lat]) => [lat,lng] as [number,number])} pathOptions={{ color: '#0f4c81', weight: 5, opacity: .82 }} /> : null}
       {active?.walking?.coordinates?.length ? <Polyline positions={active.walking.coordinates.map(([lng,lat]) => [lat,lng] as [number,number])} pathOptions={{ color: '#f28b5b', weight: 4, opacity: .9, dashArray: '8 8' }} /> : null}
     </MapContainer>
+    </div>
   </div>;
 }

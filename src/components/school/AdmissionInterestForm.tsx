@@ -97,17 +97,17 @@ export const AdmissionInterestForm: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <label className="text-xs font-bold text-slate-700">Parent name<input required value={name} onChange={e => setName(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Your name" /></label>
           <label className="text-xs font-bold text-slate-700">Email<input required type="email" value={email} onChange={e => setEmail(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="you@example.com" /></label>
-          <label className="text-xs font-bold text-slate-700">Phone<input value={phone} onChange={e => setPhone(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Optional" /></label>
-          <label className="text-xs font-bold text-slate-700">Child's class<input value={childGrade} onChange={e => setChildGrade(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="e.g. Grade 3" /></label>
+          <label className="text-xs font-bold text-slate-700">Phone<input required value={phone} onChange={e => setPhone(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Optional" /></label>
+          <label className="text-xs font-bold text-slate-700">Child's class<input required value={childGrade} onChange={e => setChildGrade(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="e.g. Grade 3" /></label>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-          <p className="text-[11px] text-slate-500 max-w-xl">Your request opens an email to Admission Pitara. It does not submit an application directly to the school; official applications should still be completed through the school's own admissions process.</p>
+          <p className="text-[11px] text-slate-500 max-w-xl">Your request is sent directly from this website to Admission Pitara. It does not submit an application directly to the school; official applications should still be completed through the school's own admissions process.</p>
           <button type="submit" className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-primary)] text-white text-xs font-black hover:-translate-y-0.5 transition-all shadow-sm">
-            {mode === 'register' ? 'Send registration interest' : 'Send pre-registration'} <ArrowRight className="w-3.5 h-3.5" />{submitting ? 'Sending...' : ''}</button>
+            {submitting ? 'Sending...' : mode === 'register' ? 'Send registration interest' : 'Send pre-registration'} <ArrowRight className="w-3.5 h-3.5" /></button>
         </div>
 
-        {sent && <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Your email draft is ready. Send it from your mail app to complete the request.</div>}
+        {sent && <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Your request has been sent directly to Admission Pitara. You do not need to open an email app.</div>}
       </form>
     </section>
   );

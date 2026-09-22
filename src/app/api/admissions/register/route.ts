@@ -87,7 +87,7 @@ export async function POST(req: NextRequest) {
       ? `Pre-Registration for ${cleanSchoolName} (${academicSession})`
       : `Admission Pitara Registration for ${cleanSchoolName} (${academicSession})`;
 
-    const description = `Parent: ${cleanParentName} | Email: ${cleanEmail} | Phone: ${cleanPhone} | Target Grade: ${childGrade} | Society: ${residentialSociety || 'Not specified'} | Session: ${academicSession}`;
+    const description = `Parent: ${cleanParentName} | Email: ${cleanEmail} | Phone: ${cleanPhone} | Target Grade: ${childGrade} | Society: ${cleanResidentialSociety || 'Not specified'} | Session: ${academicSession}`;
 
     const submission = await createSchoolSubmissionAsync({
       type: cleanType,
@@ -114,14 +114,14 @@ export async function POST(req: NextRequest) {
       `Email: ${cleanEmail}`,
       `Phone: ${cleanPhone}`,
       `Child Grade: ${childGrade}`,
-      `Residential Society: ${residentialSociety || 'Not specified'}`,
+      `Residential Society: ${cleanResidentialSociety || 'Not specified'}`,
       `School: ${cleanSchoolName}`,
       `School Slug: ${cleanSchoolSlug || 'Not provided'}`,
       `Academic Session: ${academicSession}`,
       `Submission ID: ${submission.id}`,
       '',
-      'Submitted through the Admission Pitara website.',
-    ].join('\\n');
+      'Submitted through the Admission Pitara website. Please follow up with the school regarding this parent’s interest.',
+    ].join('\n');
 
     const emailDelivery = await sendPublicEnquiryEmail({
       subject: `${isPreReg ? 'Pre-registration' : 'Admission registration'} interest — ${cleanSchoolName} — ${academicSession}`,

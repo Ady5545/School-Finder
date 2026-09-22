@@ -51,13 +51,13 @@ export const Header: React.FC = () => {
         </div>
 
         <nav className="hidden lg:flex min-w-0 w-full items-center justify-center" aria-label="Main Navigation">
-          <div className="flex min-w-0 max-w-full items-center justify-center gap-0.5 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex min-w-0 max-w-full items-center justify-start gap-0.5 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {navLinks.map(link => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'px-2 xl:px-2.5 py-1.5 rounded-xl text-[10px] xl:text-[11px] font-semibold transition-all duration-200 flex items-center gap-1 relative whitespace-nowrap shrink-0',
+                  'px-2 xl:px-2.5 py-1.5 rounded-xl text-[10px] xl:text-[11px] font-semibold transition-all duration-200 flex items-center gap-1 relative whitespace-nowrap shrink-0 snap-start',
                   isActive(link.href)
                     ? 'text-[var(--color-primary)] bg-white/88 border border-white shadow-sm font-bold'
                     : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-white/65'

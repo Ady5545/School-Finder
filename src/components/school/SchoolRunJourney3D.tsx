@@ -307,7 +307,7 @@ export default function SchoolRunJourney3D({
   const [webglFailed, setWebglFailed] = useState(false);
   const mountRef = useRef<HTMLDivElement | null>(null);
   const runningRef = useRef(true);
-  const replayRef = useRef(0);
+  const [replayNonce, setReplayNonce] = useState(0);
 
   const selectedRoute = mode === 'walk' ? (school.walking || school.driving) : school.driving;
   const distance = school.driving ? school.driving.distanceKm : null;
@@ -323,7 +323,6 @@ export default function SchoolRunJourney3D({
   useEffect(function () {
     runningRef.current = true;
     setRunning(true);
-    replayRef.current += 1;
   }, [animationToken, routeSignature]);
 
   useEffect(function () {
@@ -531,7 +530,7 @@ export default function SchoolRunJourney3D({
         }
       }
     };
-  }, [mode, origin.lat, origin.lng, school.point.lat, school.point.lng, selectedRoute, routeSignature]);
+  }, [mode, origin.lat, origin.lng, school.point.lat, school.point.lng, selectedRoute, routeSignature, replayNonce]);
 
   const setRunState = function (value: boolean) {
     runningRef.current = value;
@@ -581,7 +580,7 @@ export default function SchoolRunJourney3D({
             <button
               type="button"
               onClick={function () {
-                replayRef.current += 1;
+                setReplayNonce(function (value) { return value + 1; });
                 runningRef.current = true;
                 setRunning(true);
               }}

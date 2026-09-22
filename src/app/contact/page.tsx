@@ -204,7 +204,7 @@ export default function ContactPage() {
                   </div>
                   <h3 className="font-bold text-base">Message Prepared</h3>
                   <p className="text-xs text-emerald-800 max-w-md mx-auto leading-relaxed">
-                    Your message has been sent directly to <strong className="font-mono font-semibold">{PUBLIC_ENQUIRY_EMAIL}</strong>. You do not need to open an email app.
+                    Your message has been received by the Admission Pitara team. We’ll review it and get back to you if a response is needed.
                   </p>
                   <div className="pt-2 flex justify-center">
                     <button type="button" onClick={() => setSubmitted(false)} className="px-4 py-2 bg-white text-emerald-900 border border-emerald-300 font-semibold text-xs rounded-xl hover:bg-emerald-100/50">

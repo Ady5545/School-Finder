@@ -51,7 +51,7 @@ export const Header: React.FC = () => {
         </div>
 
         <nav className="hidden lg:flex min-w-0 w-full items-center justify-center" aria-label="Main Navigation">
-          <div className="flex min-w-0 max-w-full min-w-0 items-center justify-center gap-0.5 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex min-w-0 max-w-full items-center justify-center gap-0.5 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {navLinks.map(link => (
               <Link
                 key={link.href}

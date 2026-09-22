@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { checkRateLimitAsync, getClientIp, verifySessionToken, createSchoolSubmissionAsync, recordActivityEvent } from '@/lib/authStore';
+import { checkRateLimitAsync, getClientIp, verifySessionToken, getUserByIdAsync, createSchoolSubmissionAsync, recordActivityEvent } from '@/lib/authStore';
 import { sendPublicEnquiryEmail } from '@/lib/emailService';
 
 export async function POST(req: NextRequest) {
@@ -67,13 +67,20 @@ export async function POST(req: NextRequest) {
     const headerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
     const token = cookieToken || headerToken;
     let userId: string | undefined = undefined;
+    let profileSociety = '';
 
     if (token) {
       const session = verifySessionToken(token);
       if (session) {
         userId = session.sub;
+        const profileUser = await getUserByIdAsync(session.sub);
+        profileSociety = String(profileUser?.residentialSociety || '').trim();
       }
     }
+
+    // For logged-in parents, the saved profile society is authoritative.
+    // Do not depend on the public form sending this private profile field.
+    const cleanResidentialSociety = profileSociety || (typeof residentialSociety === 'string' ? residentialSociety.trim() : '');
 
     // Create Submission Record
     const title = isPreReg
@@ -94,7 +101,7 @@ export async function POST(req: NextRequest) {
       description,
       academicSession,
       childGrade,
-      residentialSociety: residentialSociety ? String(residentialSociety).trim() : undefined,
+      residentialSociety: cleanResidentialSociety || undefined,
       consent: true,
       userId,
       sourceReference: isPreReg ? 'Admission Pitara Pre-Registration' : 'Admission Pitara Registration',
@@ -137,7 +144,7 @@ export async function POST(req: NextRequest) {
         targetType: 'school',
         targetId: cleanSchoolSlug,
         schoolSlug: cleanSchoolSlug,
-        locality: residentialSociety || undefined,
+        locality: cleanResidentialSociety || undefined,
         details: {
           childGrade,
           academicSession,

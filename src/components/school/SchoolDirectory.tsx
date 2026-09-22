@@ -1045,7 +1045,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             type="button"
             onClick={() => setShowMap(!showMap)}
             className={cn(
-              'p-2 rounded-xl border text-xs font-bold transition-all min-h-[42px] min-w-[42px] flex items-center justify-center cursor-pointer shadow-2xs shrink-0',
+              'px-3 py-2 rounded-xl border text-xs font-bold transition-all min-h-[42px] flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs shrink-0',
               showMap
                 ? 'bg-amber-50 text-amber-900 border-amber-300'
                 : 'bg-white text-slate-600 border-[var(--color-border-strong)]'
@@ -1053,6 +1053,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             aria-label={showMap ? 'Hide interactive map' : 'Show interactive map'} title={showMap ? 'Hide map' : 'Open map'}
           >
             <MapPin className={cn('w-4 h-4', showMap ? 'text-amber-600' : 'text-slate-500')} />
+            <span className="hidden sm:inline">{showMap ? 'Hide map' : 'Open map'}</span>
           </button>
         </div>
 

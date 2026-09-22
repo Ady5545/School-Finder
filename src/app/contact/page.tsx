@@ -31,6 +31,8 @@ export default function ContactPage() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PUBLIC_ENQUIRY_EMAIL);
@@ -38,17 +40,36 @@ export default function ContactPage() {
     setTimeout(() => setCopied(false), 2500);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || !email.trim()) return;
 
-    // Create a pre-filled mailto URL as fallback or direct action
-    const mailtoSubject = encodeURIComponent(`[${inquiryType.toUpperCase()}] ${subject || 'Admission Pitara Inquiry'}`);
-    const mailtoBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCategory: ${inquiryType}\n\nMessage:\n${message}`);
-    
-    // Trigger mailto link
-    window.location.href = `mailto:${PUBLIC_ENQUIRY_EMAIL}?subject=${mailtoSubject}&body=${mailtoBody}`;
-    setSubmitted(true);
+    setSubmitting(true);
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim().toLowerCase(),
+          inquiryType,
+          subject: subject.trim(),
+          message: message.trim(),
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok || !data.success) {
+        setErrorMessage(data.message || 'We could not send your message. Please try again.');
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setErrorMessage('Network error while sending your message. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -175,11 +196,15 @@ export default function ContactPage() {
                 Send a Direct Inquiry
               </CardTitle>
               <CardDescription className="text-xs text-[var(--color-content-muted)]">
-                Fill out the form below. Clicking send will open your email app pre-formatted to deliver directly to <strong className="text-stone-900 font-mono">{PUBLIC_ENQUIRY_EMAIL}</strong>.
+                Your message is sent securely from the website directly to <strong className="text-stone-900 font-mono">{PUBLIC_ENQUIRY_EMAIL}</strong>.
               </CardDescription>
             </CardHeader>
 
             <CardContent className="pt-6 space-y-4">
+              {errorMessage && (
+                <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs mb-4">{errorMessage}</div>
+              )}
+
               {submitted ? (
                 <div className="p-6 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-900 space-y-3 animate-fade-in text-center">
                   <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto">
@@ -187,20 +212,10 @@ export default function ContactPage() {
                   </div>
                   <h3 className="font-bold text-base">Message Prepared</h3>
                   <p className="text-xs text-emerald-800 max-w-md mx-auto leading-relaxed">
-                    Your email client should have opened with your formatted inquiry addressed to <strong className="font-mono font-semibold">{PUBLIC_ENQUIRY_EMAIL}</strong>. If not, click below to email directly.
+                    Your message has been sent directly to <strong className="font-mono font-semibold">{PUBLIC_ENQUIRY_EMAIL}</strong>. You do not need to open an email app.
                   </p>
-                  <div className="pt-2 flex justify-center gap-3">
-                    <a
-                      href={`mailto:${PUBLIC_ENQUIRY_EMAIL}`}
-                      className="px-4 py-2 bg-emerald-700 text-white font-semibold text-xs rounded-xl hover:bg-emerald-800"
-                    >
-                      Send via Email Client
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => setSubmitted(false)}
-                      className="px-4 py-2 bg-white text-emerald-900 border border-emerald-300 font-semibold text-xs rounded-xl hover:bg-emerald-100/50"
-                    >
+                  <div className="pt-2 flex justify-center">
+                    <button type="button" onClick={() => setSubmitted(false)} className="px-4 py-2 bg-white text-emerald-900 border border-emerald-300 font-semibold text-xs rounded-xl hover:bg-emerald-100/50">
                       Write Another Message
                     </button>
                   </div>
@@ -287,7 +302,7 @@ export default function ContactPage() {
                     className="w-full sm:w-auto bg-amber-800 hover:bg-amber-900 text-white font-semibold text-xs justify-center"
                   >
                     <Send className="w-4 h-4 mr-2" />
-                    <span>Send Message via Email</span>
+                    <span>{submitting ? 'Sending...' : 'Send Message'}</span>
                   </Button>
                 </form>
               )}

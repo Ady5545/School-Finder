@@ -62,6 +62,8 @@ interface SchoolRatingsSectionProps {
   apiEndpoint?: string;
   /** Skip the school page-view tracking beacon when this isn't a real school page. */
   trackView?: boolean;
+  showPublishedReviews?: boolean;
+  openFormInitially?: boolean;
 }
 
 export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
@@ -69,6 +71,8 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
   schoolName,
   apiEndpoint,
   trackView = true,
+  showPublishedReviews = true,
+  openFormInitially = false,
 }) => {
   const ratingsUrl = apiEndpoint || `/api/schools/${schoolSlug}/ratings`;
   const { user, isAuthenticated } = useAuth();
@@ -80,7 +84,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
   const [isLoading, setIsLoading] = useState(true);
 
   // Form State
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(openFormInitially);
   const [score, setScore] = useState(5);
   const [hoverScore, setHoverScore] = useState(0);
   const [title, setTitle] = useState('');
@@ -291,6 +295,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
         )}
       </div>
 
+      {showPublishedReviews && (
       {/* Summary Scoreboard */}
       {summary && (
         <div className="bg-white rounded-2xl border border-[var(--color-border)] p-6 shadow-2xs mb-8">
@@ -371,6 +376,8 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
             </div>
           </div>
         </div>
+      )}
+
       )}
 
       {/* Review Submission Form */}
@@ -615,6 +622,8 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
         </form>
       )}
 
+
+      {showPublishedReviews && (
       {/* Reviews List */}
       <div className="space-y-4">
         {isLoading ? (
@@ -769,3 +778,4 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
     </section>
   );
 };
+      )}

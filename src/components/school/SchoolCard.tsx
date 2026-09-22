@@ -195,10 +195,10 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
 
             <Link
               href={`/schools/${school.slug}`}
-              className="relative z-30 isolate inline-flex items-center justify-center p-2.5 rounded-xl liquid-glass bg-white/65 border-white/85 text-[var(--color-primary)] group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] transition-[transform,background-color,border-color,color,box-shadow] duration-200 hover:scale-105 active:scale-95 shadow-warm-2xs min-w-[38px] min-h-[38px] overflow-hidden"
+              className="relative z-50 isolate inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/80 border border-white/90 text-[var(--color-primary)] shadow-warm-2xs transition-[transform,background-color,border-color,color,box-shadow] duration-200 group-hover:bg-[var(--color-primary)] group-hover:text-white group-hover:border-[var(--color-primary)] hover:scale-105 active:scale-95 shrink-0"
               aria-label={`View details for ${school.name}`}
             >
-              <ArrowRight className="relative z-10 w-4 h-4 shrink-0" />
+              <ArrowRight className="w-4 h-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>

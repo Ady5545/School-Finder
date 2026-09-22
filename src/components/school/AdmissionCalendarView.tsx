@@ -41,11 +41,11 @@ export const AdmissionCalendarView: React.FC<{ schools: School[] }> = ({ schools
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.16em] text-sky-700"><CalendarDays className="w-3.5 h-3.5" /> 2027–28 admissions calendar</div>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Verified dates, one view</h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1.5 max-w-2xl">Only dated milestones already present in the directory appear here. Missing dates remain missing rather than being estimated.</p>
+          <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Admission dates &amp; periods</h2>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1.5 max-w-2xl">Only admission dates explicitly recorded in the directory appear here. Exact dates are never estimated from a general month or admission window.</p>
         </div>
         <div className="rounded-xl bg-amber-50 border border-amber-200 px-3 py-2 text-[10px] text-amber-900">
-          {entries.length ? entries.length + (entries.length === 1 ? ' recorded milestone' : ' recorded milestones') : 'No dated milestones are recorded yet'}
+          {entries.length ? `${new Set(entries.map(entry => entry.school.slug)).size} schools · ${entries.length} dated events` : 'No dated admission events are recorded yet'}
         </div>
       </div>
 

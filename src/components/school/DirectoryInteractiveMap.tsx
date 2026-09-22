@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {
   MapPin,
@@ -27,6 +28,8 @@ import { Button } from '../ui/Button';
 import { cn } from '../../lib/utils';
 import { RatingDisplay } from '../ui/RatingDisplay';
 import { isSafeStoredSchoolCoordinate } from '../../lib/locationSafety';
+
+const DirectoryStreetMap = dynamic(() => import('./DirectoryStreetMap'), { ssr: false });
 
 export interface ProximityAnchor {
   id: string;
@@ -126,7 +129,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
   onClose,
   className,
 }) => {
-  const [mapMode, setMapMode] = useState<'interactive' | 'osm'>('interactive');
+  const [mapMode, setMapMode] = useState<'interactive' | 'osm'>('osm');
   const [selectedPinSlug, setSelectedPinSlug] = useState<string | null>(activeSchoolSlug || null);
   const [isLocating, setIsLocating] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
@@ -217,22 +220,6 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
     const x = Math.max(5, Math.min(95, ((lng - bounds.minLng) / lngSpan) * 100));
     return { x, y };
   };
-
-  // OpenStreetMap embed URL
-  const osmEmbedUrl = useMemo(() => {
-    let centerLat = 28.59;
-    let centerLng = 77.45;
-    if (activeAnchor) {
-      centerLat = activeAnchor.coords.lat;
-      centerLng = activeAnchor.coords.lng;
-    }
-    const delta = 0.04;
-    const minLng = (centerLng - delta).toFixed(4);
-    const maxLng = (centerLng + delta).toFixed(4);
-    const minLat = (centerLat - delta * 0.7).toFixed(4);
-    const maxLat = (centerLat + delta * 0.7).toFixed(4);
-    return `https://www.openstreetmap.org/export/embed.html?bbox=${minLng}%2C${minLat}%2C${maxLng}%2C${maxLat}&layer=mapnik&marker=${centerLat}%2C${centerLng}`;
-  }, [activeAnchor]);
 
   // Handle Geolocation
   const handleUseMyLocation = () => {
@@ -463,26 +450,18 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
       {/* Main Map Canvas Display */}
       <div className="relative w-full h-[300px] sm:h-[350px] bg-[#f2f4f8] overflow-hidden select-none">
         {mapMode === 'osm' ? (
-          /* OpenStreetMap Real-world Map View */
-          <div className="relative w-full h-full">
-            <iframe
-              title="OpenStreetMap Greater Noida West Schools"
-              src={osmEmbedUrl}
-              className="w-full h-full border-0"
-              loading="lazy"
-            />
-            <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200 shadow-warm-xs text-xs">
-              <span className="font-bold text-[var(--color-content)]">
-                Showing all {schools.length} Greater Noida West campuses
-              </span>
-              <span className="text-[10px] text-slate-500 block">
-                Click "Street Map / Sector Navigator" to toggle spatial mode.
-              </span>
-            </div>
-          </div>
+          <DirectoryStreetMap
+            schools={schoolsWithDistance}
+            activeSlug={selectedPinSlug}
+            activeAnchor={activeAnchor}
+            onSelect={school => {
+              setSelectedPinSlug(school.slug);
+              onSelectSchool?.(school);
+            }}
+          />
         ) : (
           /* Interactive Geographic Sector Canvas & Radar Navigator */
-          <div className="relative w-full h-full bg-[#f9fafc] overflow-hidden">
+          <div className="relative w-full h-full bg-[#f9fafc] overflow-hidden" aria-label="Sector fallback map">
             {/* Grid Pattern Background */}
             <div
               className="absolute inset-0 opacity-40 pointer-events-none"

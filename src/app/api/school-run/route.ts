@@ -200,24 +200,40 @@ export async function GET(req: NextRequest) {
 
     const resolved = [];
     for (const item of schools) {
-      let point: Point | null = null;
-      const school = item.school;
-      const query = school.location.mapSearchQuery || [school.name, school.location.address, school.location.sector, 'Greater Noida West', 'Uttar Pradesh', 'India'].filter(Boolean).join(', ');
-      // Prefer live geocoding so stale legacy coordinates cannot move the map to the wrong campus.
-      point = await geocode(query);
-      if (!point && item.point) point = item.point;
+      // School destinations are deterministic data. Never re-geocode them:
+      // geocoders can return a nearby road/building and would undermine the
+      // exact coordinate dataset used by the directory map.
+      const point = item.point;
       if (!point) continue;
-      const [driving, walking] = await Promise.all([routeWithProvider(origin, point, 'driving'), routeWithProvider(origin, point, 'walking')]);
+      const [driving, walking] = await Promise.all([
+        routeWithProvider(origin, point, 'driving'),
+        routeWithProvider(origin, point, 'walking'),
+      ]);
       resolved.push({
-        slug: item.school.slug, name: item.school.name, shortName: item.school.shortName, sector: item.school.location.sector, address: item.school.location.address, point,
-        driving: driving ? { distanceKm: Number(driving.distanceKm.toFixed(2)), durationMin: Math.max(1, Math.round(driving.durationMin)), coordinates: driving.coordinates, provider: driving.provider } : null,
-        walking: walking ? { distanceKm: Number(walking.distanceKm.toFixed(2)), durationMin: Math.max(1, Math.round(walking.durationMin)), coordinates: walking.coordinates, provider: walking.provider } : null,
+        slug: item.school.slug,
+        name: item.school.name,
+        shortName: item.school.shortName,
+        sector: item.school.location.sector,
+        address: item.school.location.address,
+        point,
+        driving: driving ? {
+          distanceKm: Number(driving.distanceKm.toFixed(2)),
+          durationMin: Math.max(1, Math.round(driving.durationMin)),
+          coordinates: driving.coordinates,
+          provider: driving.provider
+        } : null,
+        walking: walking ? {
+          distanceKm: Number(walking.distanceKm.toFixed(2)),
+          durationMin: Math.max(1, Math.round(walking.durationMin)),
+          coordinates: walking.coordinates,
+          provider: walking.provider
+        } : null,
       });
     }
 
     return NextResponse.json({
       success: true, origin: { ...origin, label: society }, schools: resolved,
-      note: process.env.OPENROUTESERVICE_API_KEY ? 'Walking and driving routes use OpenRouteService.' : 'Driving routes use OpenStreetMap-based routing. Walking route support can be enabled with OPENROUTESERVICE_API_KEY.',
+      note: process.env.OPENROUTESERVICE_API_KEY ? 'Routes use OpenRouteService; school destinations use the exact stored campus coordinates.' : 'Driving routes use OpenStreetMap-based routing; school destinations use the exact stored campus coordinates.'
     }, { headers: { 'Cache-Control': 'private, max-age=300' } });
   } catch (error) {
     console.error('[SCHOOL_RUN]', error);

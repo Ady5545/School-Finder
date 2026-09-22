@@ -4,6 +4,23 @@ import { getPublicSchoolBySlug } from '../../../lib/schools';
 import { isSafeStoredSchoolCoordinate } from '../../../lib/locationSafety';
 
 type Point = { lat: number; lng: number; label: string; source?: string };
+
+function straightLineKm(a: Point, b: Point) {
+  const R = 6371;
+  const dLat = ((b.lat - a.lat) * Math.PI) / 180;
+  const dLng = ((b.lng - a.lng) * Math.PI) / 180;
+  const lat1 = (a.lat * Math.PI) / 180;
+  const lat2 = (b.lat * Math.PI) / 180;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(Math.max(0, 1 - h)));
+}
+
+function saneRoute(origin: Point, destination: Point, distanceKm: number) {
+  if (!Number.isFinite(distanceKm) || distanceKm <= 0) return false;
+  const directKm = straightLineKm(origin, destination);
+  const maxReasonableKm = Math.max(15, directKm * 20);
+  return distanceKm <= maxReasonableKm;
+}
 const geocodeCache = new Map<string, Point | null>();
 let lastGeocodeAt = 0;
 
@@ -158,7 +175,10 @@ async function routeWithProvider(origin: Point, destination: Point, mode: 'drivi
       const summary = feature?.properties?.summary;
       const coordinates = feature?.geometry?.coordinates;
       if (summary && Array.isArray(coordinates)) {
-        return { distanceKm: Number(summary.distance) / 1000, durationMin: Number(summary.duration) / 60, coordinates, provider: 'OpenRouteService' };
+        const distanceKm = Number(summary.distance) / 1000;
+        if (saneRoute(origin, destination, distanceKm)) {
+          return { distanceKm, durationMin: Number(summary.duration) / 60, coordinates, provider: 'OpenRouteService' };
+        }
       }
     }
   }
@@ -168,7 +188,9 @@ async function routeWithProvider(origin: Point, destination: Point, mode: 'drivi
   const data = await response.json();
   const route = data?.routes?.[0];
   if (!route) return null;
-  return { distanceKm: Number(route.distance) / 1000, durationMin: Number(route.duration) / 60, coordinates: route.geometry?.coordinates ?? [], provider: 'OSRM' };
+  const distanceKm = Number(route.distance) / 1000;
+  if (!saneRoute(origin, destination, distanceKm)) return null;
+  return { distanceKm, durationMin: Number(route.duration) / 60, coordinates: route.geometry?.coordinates ?? [], provider: 'OSRM' };
 }
 
 export async function GET(req: NextRequest) {

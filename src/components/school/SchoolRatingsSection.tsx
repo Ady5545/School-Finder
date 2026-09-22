@@ -777,6 +777,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
         })
       )}
       </div>
+      </div>
       )}
     </section>
   );

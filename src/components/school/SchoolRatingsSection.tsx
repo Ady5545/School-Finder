@@ -296,6 +296,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
       </div>
 
       {showPublishedReviews && (
+      <div>
       {/* Summary Scoreboard */}
       {summary && (
         <div className="bg-white rounded-2xl border border-[var(--color-border)] p-6 shadow-2xs mb-8">
@@ -377,7 +378,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
           </div>
         </div>
       )}
-
+      </div>
       )}
 
       {/* Review Submission Form */}
@@ -624,6 +625,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
 
       {showPublishedReviews && (
+      <div>
       {/* Reviews List */}
       <div className="space-y-4">
         {isLoading ? (
@@ -775,7 +777,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
         })
       )}
       </div>
+      )}
     </section>
   );
 };
-      )}

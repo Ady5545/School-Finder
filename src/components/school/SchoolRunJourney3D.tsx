@@ -169,15 +169,15 @@ export default function SchoolRunJourney3D({
 }: {
   origin: Point;
   school: RouteSchool;
-  animationToken: number;
+  animationToken: string;
 }) {
   const mode = chooseMode(school);
   const selectedRoute = mode === 'walk' ? (school.walking || school.driving) : school.driving;
   const [running, setRunning] = useState(true);
-  const [replayKey, setReplayKey] = useState(animationToken);
+  const [replayKey, setReplayKey] = useState(0);
 
   useEffect(function () {
-    setReplayKey(animationToken);
+    setReplayKey(function (value) { return value + 1; });
     setRunning(true);
   }, [animationToken]);
 

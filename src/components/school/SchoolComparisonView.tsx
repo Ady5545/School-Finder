@@ -95,13 +95,32 @@ export const SchoolComparisonView: React.FC = () => {
   const filteredAvailable = useMemo(() => {
     const q = selectorQuery.trim().toLowerCase();
     if (!q) return availableSchools;
-    return availableSchools.filter(
-      s =>
-        s.name.toLowerCase().includes(q) ||
-        s.location.area.toLowerCase().includes(q) ||
-        s.location.sector.toLowerCase().includes(q) ||
-        (Array.isArray(s.alternateNames) && s.alternateNames.some(alt => alt.toLowerCase().includes(q)))
-    );
+
+    const aliases: Record<string, string[]> = {
+      kp5: ['knowledge park 5', 'knowledge park v'],
+      kp3: ['knowledge park 3', 'knowledge park iii'],
+      kp4: ['knowledge park 4', 'knowledge park iv'],
+      kp2: ['knowledge park 2', 'knowledge park ii'],
+      tz4: ['techzone 4', 'tech zone 4'],
+      techzone4: ['techzone 4', 'tech zone 4'],
+    };
+    const expandedTerms = [q, ...(aliases[q] || [])];
+
+    return availableSchools.filter(s => {
+      const haystack = [
+        s.name,
+        s.location.area,
+        s.location.sector,
+        s.location.city,
+        s.location.address,
+        ...(Array.isArray(s.alternateNames) ? s.alternateNames : []),
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+
+      return expandedTerms.some(term => haystack.includes(term));
+    });
   }, [availableSchools, selectorQuery]);
 
   // Preset quick comparisons with active canonical slugs
@@ -246,10 +265,10 @@ export const SchoolComparisonView: React.FC = () => {
             <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
-                  Knowledge Park 5: everyday choices
+                  Knowledge Park 5 (KP5): everyday choices
                 </span>
                 <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
-                  Delhi World Public School vs Ryan International vs Gaurs International
+                  Delhi World Public School vs Delhi Public School vs Aster Public School
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
                   Look across location, curriculum, fees, admissions and campus details in one view.
@@ -260,8 +279,8 @@ export const SchoolComparisonView: React.FC = () => {
                 onClick={() =>
                   loadPreset([
                     'delhi-world-public-school-kp-5',
-                    'ryan-international-school-noida-extension',
-                    'gaurs-international-school-gaur-city-2',
+                    'delhi-public-school-knowledge-park-5',
+                    'aster-public-school-kp5',
                   ])
                 }
                 className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"
@@ -273,10 +292,10 @@ export const SchoolComparisonView: React.FC = () => {
             <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
-                  Techzone 4: premium campuses
+                  Techzone 4 (TZ4): premium campuses
                 </span>
                 <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
-                  Pacific World vs BLS World vs Sarvottam
+                  Pacific World vs Lotus Valley vs Sarvottam
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
                   A quick side-by-side for curriculum, facilities, fee structure and family-fit details.
@@ -287,7 +306,7 @@ export const SchoolComparisonView: React.FC = () => {
                 onClick={() =>
                   loadPreset([
                     'pacific-world-school-techzone-4',
-                    'bls-world-school',
+                    'lotus-valley-international-school',
                     'sarvottam-international-school',
                   ])
                 }
@@ -300,22 +319,22 @@ export const SchoolComparisonView: React.FC = () => {
             <div className="p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] transition-colors flex flex-col justify-between">
               <div>
                 <span className="text-xs font-bold text-[var(--color-accent)] uppercase tracking-wider">
-                  Global Curriculum &amp; Sports
+                  Curriculum &amp; Sports
                 </span>
                 <p className="text-xs font-bold text-[var(--color-content)] mt-1.5">
-                  Lotus Valley vs The Millennium School vs Aster Public
+                  DPS Knowledge Park V vs Lotus Valley vs Pacific World
                 </p>
                 <p className="text-[11px] text-[var(--color-content-muted)] mt-1">
-                  Compare curriculum, annual fee ranges, admissions and documented campus facilities.
+                  Compare curriculum, annual fee ranges, admissions and documented sports and campus facilities.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() =>
                   loadPreset([
+                    'delhi-public-school-knowledge-park-5',
                     'lotus-valley-international-school',
-                    'the-millennium-school-noida-extension',
-                    'aster-public-school-kp5',
+                    'pacific-world-school-techzone-4',
                   ])
                 }
                 className="mt-4 text-xs font-bold text-[var(--color-accent)] hover:underline flex items-center gap-1 cursor-pointer"

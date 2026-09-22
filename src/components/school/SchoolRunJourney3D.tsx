@@ -309,11 +309,12 @@ export default function SchoolRunJourney3D({
   const runningRef = useRef(true);
   const [replayNonce, setReplayNonce] = useState(0);
 
-  const selectedRoute = mode === 'walk' ? (school.walking || school.driving) : school.driving;
+  const selectedRoute = mode === 'walk' ? school.walking : school.driving;
   const distance = school.driving ? school.driving.distanceKm : null;
-  const durationText = formatDuration(
-    mode === 'walk' && school.walking ? school.walking.durationMin : school.driving ? school.driving.durationMin : null
-  );
+  const walkingFallbackMinutes = distance == null ? null : Math.max(1, Math.round((distance / 4.8) * 60));
+  const durationText = mode === 'walk'
+    ? (school.walking ? formatDuration(school.walking.durationMin) : (walkingFallbackMinutes ? '~' + formatDuration(walkingFallbackMinutes) : 'Walking estimate unavailable'))
+    : formatDuration(school.driving ? school.driving.durationMin : null);
 
   const routeSignature = useMemo(function () {
     const route = selectedRoute && selectedRoute.coordinates ? selectedRoute.coordinates : [];

@@ -5,6 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Play, Pause, RotateCcw, Gauge } from 'lucide-react';
 import RouteRunner from './RouteRunner';
+import SchoolRunScene from './SchoolRunScene';
 
 type Point = { lat: number; lng: number; label: string };
 type RouteSchool = { slug: string; name: string; sector?: string; point: Point; driving: { distanceKm: number; durationMin: number; coordinates: [number, number][] } | null; walking: { distanceKm: number; durationMin: number; coordinates: [number, number][] } | null };
@@ -42,6 +43,11 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
   const route = mode === 'driving' ? active?.driving : active?.walking;
   const hasWalking = !!active?.walking?.coordinates?.length;
   useEffect(() => { if (mode === 'walking' && !hasWalking) setMode('driving'); }, [mode, hasWalking]);
+  useEffect(() => {
+    if (!active) return;
+    const autoMode = active.walking?.coordinates?.length && active.driving?.distanceKm != null && active.driving.distanceKm <= 2.5 ? 'walking' : 'driving';
+    setMode(autoMode);
+  }, [activeSlug]);
   useEffect(() => { setPlaying(false); }, [activeSlug, mode]);
 
   const resetKey = `${active?.slug || 'none'}:${mode}`;
@@ -52,6 +58,15 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
   const remainingRealMin = Math.max(0, realDurationMin - elapsedRealMin);
 
   return <div className="rounded-2xl border border-[var(--color-border)] overflow-hidden bg-white">
+    <SchoolRunScene
+      mode={mode}
+      playing={playing}
+      progress={progress.fraction}
+      originLabel={origin.label === 'Your current location' ? 'Your current location' : origin.label}
+      schoolName={active?.name || 'School'}
+      distanceKm={route?.distanceKm ?? null}
+      durationMin={route?.durationMin ?? null}
+    />
     <div className="h-[430px] sm:h-[520px] w-full">
       <MapContainer center={[origin.lat, origin.lng]} zoom={13} scrollWheelZoom className="h-full w-full">
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

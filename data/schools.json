@@ -9788,9 +9788,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "somerville-school-greater-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector Alpha 2, Greater Noida (Core Greater Noida, outside Greater Noida West catchment).",
+    "isArchived": false,
+    "status": "active",
     "cbseAffiliationNumber": "2130263"
   },
   {

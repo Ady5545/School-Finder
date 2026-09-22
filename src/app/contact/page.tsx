@@ -129,13 +129,6 @@ export default function ContactPage() {
             )}
           </Button>
 
-          <a
-            href={`mailto:${PUBLIC_ENQUIRY_EMAIL}?subject=Admission%20Pitara%20Enquiry`}
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-amber-400 text-amber-950 font-bold text-xs rounded-xl hover:bg-amber-300 transition-colors shadow-sm"
-          >
-            <span>Open Email Client</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
         </div>
       </div>
 

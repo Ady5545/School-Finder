@@ -26,7 +26,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   const titleSizes = {
     xs: 'text-xs',
-    sm: 'text-sm font-bold',
+    sm: 'text-[15px] font-black',
     md: 'text-lg font-black',
     lg: 'text-xl font-black',
     xl: 'text-2xl font-black',
@@ -34,14 +34,14 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   const subtextSizes = {
     xs: 'text-[8px]',
-    sm: 'text-[9px]',
-    md: 'text-[10px]',
+    sm: 'text-[7px]',
+    md: 'text-[9px]',
     lg: 'text-xs',
     xl: 'text-sm',
   };
 
   return (
-    <div className={cn('flex items-center gap-2.5 select-none', className)}>
+    <div className={cn('flex items-center gap-2 select-none min-w-0 max-w-full', className)}>
       {/* Brand Vector Emblem (The Pitara Treasure Box with Radiant Golden Sunbeams) */}
       <div
         className={cn(
@@ -103,7 +103,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           <div className="flex items-center gap-1.5 leading-none">
             <span
               className={cn(
-                'tracking-tight leading-tight',
+                'tracking-tight leading-tight whitespace-nowrap',
                 titleSizes[size],
                 theme === 'light' ? 'text-[#0f172a]' : 'text-white'
               )}
@@ -114,7 +114,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           {subtext && (
             <span
               className={cn(
-                'font-bold tracking-[0.22em] uppercase mt-0.5',
+                'font-bold tracking-[0.16em] uppercase mt-0.5 whitespace-nowrap overflow-hidden text-ellipsis max-w-full',
                 subtextSizes[size],
                 theme === 'light' ? 'text-[#52657e]' : 'text-slate-300'
               )}

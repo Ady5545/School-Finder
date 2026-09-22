@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { SchoolRatingsSection } from '../../components/school/SchoolRatingsSection';
+import { ReviewsShowcase } from '../../components/school/ReviewsShowcase';
 import { SchoolReviewsDirectory } from '../../components/school/SchoolReviewsDirectory';
 import { buildPageMetadata } from '../../lib/seo';
 import { MessageSquare } from 'lucide-react';
@@ -22,28 +23,28 @@ export default function ReviewsPage() {
       <div className="space-y-3 pb-8 border-b border-[var(--color-border)]">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] text-xs font-semibold">
           <MessageSquare className="w-3.5 h-3.5" />
-          <span>School reviews</span>
+          <span>Parent reviews</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-black text-[var(--color-content)] tracking-tight">
-          School Reviews
+          Parent Reviews
         </h1>
         <p className="text-sm text-[var(--color-content-muted)] max-w-2xl">
           Explore parent experiences by school, see review summaries, and share your own experience through the existing verified-parent review flow.
         </p>
       </div>
 
-      <SchoolReviewsDirectory />
+      <ReviewsShowcase />
 
-      <section className="pt-12 mt-10 border-t border-[var(--color-border)]">
+      <section className="pt-10 mt-8 border-t border-[var(--color-border)]">
         <div className="mb-5">
           <div className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-accent)]">
             About Admission Pitara
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-[var(--color-content)] mt-1">
-            Share feedback about the platform
+            Share your review
           </h2>
           <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1 max-w-2xl">
-            This is separate from school reviews. Use it to tell us how the Admission Pitara experience can be improved.
+            Tell us about your experience with Admission Pitara. Your review is submitted directly through the website.
           </p>
         </div>
         <SchoolRatingsSection
@@ -51,7 +52,12 @@ export default function ReviewsPage() {
           schoolName="Admission Pitara"
           apiEndpoint="/api/platform-reviews"
           trackView={false}
+          showPublishedReviews={false}
+          openFormInitially
         />
+        <div className="mt-10 pt-8 border-t border-[var(--color-border)]">
+          <SchoolReviewsDirectory />
+        </div>
       </section>
     </div>
   );

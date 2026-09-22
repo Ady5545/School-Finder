@@ -552,3 +552,58 @@ Admission Pitara - Greater Noida West
   }
 }
 
+
+
+export interface SendPublicEnquiryEmailOptions {
+  subject: string;
+  text: string;
+  html?: string;
+  replyTo?: string;
+}
+
+export async function sendPublicEnquiryEmail({
+  subject,
+  text,
+  html,
+  replyTo,
+}: SendPublicEnquiryEmailOptions): Promise<{ success: boolean; error?: string; category?: EmailErrorCode }> {
+  const creds = getEmailCredentials();
+  const recipient = 'enquiry.admissionpitara@gmail.com';
+
+  if (!creds.hasUser || !creds.hasPass) {
+    logSmtpDiagnostics('sendPublicEnquiryEmail', {
+      category: 'EMAIL_CONFIG_MISSING',
+      hasUser: creds.hasUser,
+      hasPass: creds.hasPass,
+      smtpHost: creds.smtpHost,
+      smtpPort: creds.smtpPort,
+      errorSnippet: 'Missing SMTP credentials',
+    });
+    return { success: false, category: 'EMAIL_CONFIG_MISSING', error: 'Email delivery is not configured on the server.' };
+  }
+
+  try {
+    const transporter = createTransporter(creds);
+    await transporter.sendMail({
+      from: creds.smtpFrom,
+      to: recipient,
+      replyTo: replyTo || undefined,
+      subject,
+      text,
+      html: html || undefined,
+    });
+    console.log('[EMAIL_SUCCESS] Public enquiry delivered to Admission Pitara enquiry inbox.');
+    return { success: true };
+  } catch (err: unknown) {
+    const classified = classifySmtpError(err);
+    logSmtpDiagnostics('sendPublicEnquiryEmail', {
+      category: classified.category,
+      hasUser: creds.hasUser,
+      hasPass: creds.hasPass,
+      smtpHost: creds.smtpHost,
+      smtpPort: creds.smtpPort,
+      errorSnippet: classified.detail,
+    });
+    return { success: false, category: classified.category, error: classified.safeUserMessage };
+  }
+}

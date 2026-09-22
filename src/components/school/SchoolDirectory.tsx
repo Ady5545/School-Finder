@@ -184,13 +184,6 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     };
   }, [isSportsMenuOpen]);
 
-  // On large desktop screens, open map in supporting sidebar by default
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
-      setShowMap(true);
-    }
-  }, []);
-
   // Listen to search changes triggered from Header's integrated search field
   useEffect(() => {
     const handleNavSearch = (e: Event) => {
@@ -631,7 +624,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         </div>
 
         {/* Row 2: Desktop Compact Filters Ribbon (>= md) */}
-        <div className="hidden md:flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-3 border-t border-[var(--color-border-subtle)] text-xs">
+        <div className="hidden">
           {/* Left Controls: Board, Sector, Grade, Admissions, Fees, Sports, Sibling */}
           <div className="flex flex-wrap items-center gap-2">
             {/* Board Selector */}
@@ -1009,8 +1002,8 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </div>
         )}
 
-        {/* Mobile Filter Control Bar (< md) */}
-        <div className="flex md:hidden items-center gap-2 w-full pt-2.5 mt-2.5 border-t border-[var(--color-border-subtle)]">
+        {/* Compact controls */}
+        <div className="flex items-center gap-2 w-full pt-2.5 mt-2.5 border-t border-[var(--color-border-subtle)]">
           {/* Filter Drawer Trigger Button */}
           <button
             type="button"
@@ -1052,14 +1045,15 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             type="button"
             onClick={() => setShowMap(!showMap)}
             className={cn(
-              'p-2 rounded-xl border text-xs font-bold transition-all min-h-[42px] min-w-[42px] flex items-center justify-center cursor-pointer shadow-2xs shrink-0',
+              'px-3 py-2 rounded-xl border text-xs font-bold transition-all min-h-[42px] flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs shrink-0',
               showMap
                 ? 'bg-amber-50 text-amber-900 border-amber-300'
                 : 'bg-white text-slate-600 border-[var(--color-border-strong)]'
             )}
-            aria-label={showMap ? 'Hide interactive map' : 'Show interactive map'}
+            aria-label={showMap ? 'Hide interactive map' : 'Show interactive map'} title={showMap ? 'Hide map' : 'Open map'}
           >
             <MapPin className={cn('w-4 h-4', showMap ? 'text-amber-600' : 'text-slate-500')} />
+            <span className="hidden sm:inline">{showMap ? 'Hide map' : 'Open map'}</span>
           </button>
         </div>
 

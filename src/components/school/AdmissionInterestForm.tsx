@@ -67,7 +67,7 @@ export const AdmissionInterestForm: React.FC = () => {
             <p className="text-[11px] font-black uppercase tracking-[0.16em] text-[var(--color-accent)]">One place for parent interest</p>
             <h2 className="text-xl sm:text-2xl font-black text-[var(--color-content)] mt-1">Register interest for 2027–28</h2>
             <p className="text-sm text-[var(--color-content-muted)] mt-1 max-w-2xl">
-              Tell us which school you are considering. For schools already accepting applications, this records your registration interest; for others, it creates a pre-registration request so we can keep you informed.
+              Tell us which school you are interested in and give us the details we need. We will receive your request, follow it up with the school, and help move your admission interest forward.
             </p>
           </div>
         </div>
@@ -97,17 +97,17 @@ export const AdmissionInterestForm: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <label className="text-xs font-bold text-slate-700">Parent name<input required value={name} onChange={e => setName(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Your name" /></label>
           <label className="text-xs font-bold text-slate-700">Email<input required type="email" value={email} onChange={e => setEmail(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="you@example.com" /></label>
-          <label className="text-xs font-bold text-slate-700">Phone<input required value={phone} onChange={e => setPhone(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Optional" /></label>
+          <label className="text-xs font-bold text-slate-700">Phone<input required value={phone} onChange={e => setPhone(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="10-digit mobile number" /></label>
           <label className="text-xs font-bold text-slate-700">Child's class<input required value={childGrade} onChange={e => setChildGrade(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="e.g. Grade 3" /></label>
         </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
-          <p className="text-[11px] text-slate-500 max-w-xl">Your request is sent directly from this website to Admission Pitara. It does not submit an application directly to the school; official applications should still be completed through the school's own admissions process.</p>
+          <p className="text-[11px] text-slate-500 max-w-xl">Your details are sent directly to Admission Pitara. We receive your request and will follow up with the school on your behalf.</p>
           <button type="submit" className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--color-primary)] text-white text-xs font-black hover:-translate-y-0.5 transition-all shadow-sm">
             {submitting ? 'Sending...' : mode === 'register' ? 'Send registration interest' : 'Send pre-registration'} <ArrowRight className="w-3.5 h-3.5" /></button>
         </div>
 
-        {sent && <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Your request has been sent directly to Admission Pitara. You do not need to open an email app.</div>}
+        {sent && <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><CheckCircle2 className="w-4 h-4" /> Your request has been received by Admission Pitara. We’ll take it from here and follow up with the school.</div>}
       </form>
     </section>
   );

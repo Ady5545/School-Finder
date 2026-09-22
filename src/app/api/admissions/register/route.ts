@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimitAsync, getClientIp, verifySessionToken, createSchoolSubmissionAsync, recordActivityEvent } from '@/lib/authStore';
+import { sendPublicEnquiryEmail } from '@/lib/emailService';
 
 export async function POST(req: NextRequest) {
   try {
@@ -98,6 +99,35 @@ export async function POST(req: NextRequest) {
       userId,
       sourceReference: isPreReg ? 'Admission Pitara Pre-Registration' : 'Admission Pitara Registration',
     });
+
+    const enquiryText = [
+      isPreReg ? 'NEW PRE-REGISTRATION REQUEST' : 'NEW ADMISSION REGISTRATION REQUEST',
+      '',
+      `Parent / Guardian: ${cleanParentName}`,
+      `Email: ${cleanEmail}`,
+      `Phone: ${cleanPhone}`,
+      `Child Grade: ${childGrade}`,
+      `Residential Society: ${residentialSociety || 'Not specified'}`,
+      `School: ${cleanSchoolName}`,
+      `School Slug: ${cleanSchoolSlug || 'Not provided'}`,
+      `Academic Session: ${academicSession}`,
+      `Submission ID: ${submission.id}`,
+      '',
+      'Submitted through the Admission Pitara website.',
+    ].join('\\n');
+
+    const emailDelivery = await sendPublicEnquiryEmail({
+      subject: `${isPreReg ? 'Pre-registration' : 'Admission registration'} interest — ${cleanSchoolName} — ${academicSession}`,
+      text: enquiryText,
+      replyTo: cleanEmail,
+    });
+
+    if (!emailDelivery.success) {
+      return NextResponse.json(
+        { success: false, message: 'Your form was recorded, but we could not deliver the notification email. Please try again shortly.' },
+        { status: 503 }
+      );
+    }
 
     // Log Activity Event for Admin Dashboard Analytics
     try {

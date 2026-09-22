@@ -15,7 +15,6 @@ import {
   CheckCircle2,
   Copy,
   Check,
-  ExternalLink,
   ShieldCheck,
   Send,
   HelpCircle,

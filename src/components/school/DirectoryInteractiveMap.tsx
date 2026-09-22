@@ -453,7 +453,15 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
           <DirectoryStreetMap
             schools={schoolsWithDistance}
             activeSlug={selectedPinSlug}
-            activeAnchor={activeAnchor}
+            activeAnchor={
+              activeAnchor
+                ? {
+                    lat: activeAnchor.coords.lat,
+                    lng: activeAnchor.coords.lng,
+                    label: activeAnchor.label,
+                  }
+                : null
+            }
             onSelect={school => {
               setSelectedPinSlug(school.slug);
               onSelectSchool?.(school);

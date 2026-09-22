@@ -1,10 +1,16 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
-import { CarFront, Footprints, Play, RotateCcw, Sparkles } from 'lucide-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { CarFront, Footprints, Pause, Play, RotateCcw, Sparkles } from 'lucide-react';
 
 type Point = { lat: number; lng: number; label: string };
-type RouteLeg = { distanceKm: number; durationMin: number; coordinates: [number, number][]; provider: string } | null;
+type RouteLeg = {
+  distanceKm: number;
+  durationMin: number;
+  coordinates: [number, number][];
+  provider: string;
+} | null;
+
 type RouteSchool = {
   slug: string;
   name: string;
@@ -16,50 +22,12 @@ type RouteSchool = {
 };
 
 type JourneyMode = 'drive' | 'walk';
-type PlotPoint = { x: number; y: number };
-
-function sampleCoordinates(coordinates: [number, number][], maxPoints = 90): [number, number][] {
-  if (coordinates.length <= maxPoints) return coordinates;
-  const result: [number, number][] = [];
-  const step = (coordinates.length - 1) / (maxPoints - 1);
-  for (let i = 0; i < maxPoints; i += 1) {
-    result.push(coordinates[Math.round(i * step)]);
-  }
-  return result;
-}
-
-function projectRoute(coordinates: [number, number][]): PlotPoint[] {
-  if (coordinates.length < 2) return [{ x: 120, y: 320 }, { x: 880, y: 120 }];
-
-  const points = sampleCoordinates(coordinates).map(function (pair) {
-    return { lng: pair[0], lat: pair[1] };
-  });
-  const minLng = Math.min.apply(null, points.map(p => p.lng));
-  const maxLng = Math.max.apply(null, points.map(p => p.lng));
-  const minLat = Math.min.apply(null, points.map(p => p.lat));
-  const maxLat = Math.max.apply(null, points.map(p => p.lat));
-  const lngSpan = Math.max(maxLng - minLng, 0.000001);
-  const latSpan = Math.max(maxLat - minLat, 0.000001);
-
-  return points.map(function (point) {
-    return {
-      x: 120 + ((point.lng - minLng) / lngSpan) * 760,
-      y: 320 - ((point.lat - minLat) / latSpan) * 220,
-    };
-  });
-}
-
-function toPath(points: PlotPoint[]): string {
-  return points.map(function (point, index) {
-    return (index === 0 ? 'M ' : 'L ') + point.x.toFixed(1) + ' ' + point.y.toFixed(1);
-  }).join(' ');
-}
 
 function chooseMode(school: RouteSchool): JourneyMode {
-  const drivingDistance = school.driving && Number.isFinite(school.driving.distanceKm)
+  const distance = school.driving && Number.isFinite(school.driving.distanceKm)
     ? school.driving.distanceKm
     : Number.POSITIVE_INFINITY;
-  return drivingDistance <= 2.2 ? 'walk' : 'drive';
+  return distance <= 2.2 ? 'walk' : 'drive';
 }
 
 function formatDuration(minutes: number | null | undefined): string {
@@ -68,98 +36,261 @@ function formatDuration(minutes: number | null | undefined): string {
   return String(Math.floor(minutes / 60)) + 'h ' + String(minutes % 60) + 'm';
 }
 
-function ParentFigure({ flip = false, accent = '#0f4c81' }: { flip?: boolean; accent?: string }) {
-  return (
-    <g transform={flip ? 'translate(44 0)' : undefined}>
-      <circle cx="24" cy="16" r="9" fill="#f1c6a8" />
-      <path d="M15 38 Q24 26 33 38 L31 66 L17 66 Z" fill={accent} />
-      <path d="M18 37 Q12 44 11 55" stroke={accent} strokeWidth="6" strokeLinecap="round" />
-      <path d="M30 37 Q37 44 38 54" stroke={accent} strokeWidth="6" strokeLinecap="round" />
-      <g className="school-run-leg school-run-leg-a">
-        <path d="M20 63 L16 83" stroke="#2f3a48" strokeWidth="6" strokeLinecap="round" />
-      </g>
-      <g className="school-run-leg school-run-leg-b">
-        <path d="M28 63 L34 82" stroke="#2f3a48" strokeWidth="6" strokeLinecap="round" />
-      </g>
-      <ellipse cx="25" cy="86" rx="18" ry="4" fill="rgba(15,76,129,.16)" />
-    </g>
-  );
+function sampleCoordinates(coordinates: [number, number][], maxPoints = 72): [number, number][] {
+  if (coordinates.length <= maxPoints) return coordinates;
+  const output: [number, number][] = [];
+  const step = (coordinates.length - 1) / (maxPoints - 1);
+  for (let index = 0; index < maxPoints; index += 1) {
+    output.push(coordinates[Math.round(index * step)]);
+  }
+  return output;
 }
 
-function WalkingCouple() {
-  return (
-    <g className="school-run-walkers">
-      <g transform="translate(-52 -84)">
-        <ParentFigure accent="#0f4c81" />
-      </g>
-      <g transform="translate(12 -84)">
-        <ParentFigure flip accent="#f28b5b" />
-      </g>
-    </g>
+function addTree(THREE: any, scene: any, x: number, z: number, scale: number) {
+  const trunk = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.12 * scale, 0.16 * scale, 0.7 * scale, 8),
+    new THREE.MeshStandardMaterial({ color: 0x8b6b4c, roughness: 1 })
   );
+  trunk.position.set(x, 0.35 * scale, z);
+  trunk.castShadow = true;
+
+  const crown = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.58 * scale, 1),
+    new THREE.MeshStandardMaterial({ color: 0x72a36c, roughness: 1 })
+  );
+  crown.position.set(x, 1.05 * scale, z);
+  crown.castShadow = true;
+
+  scene.add(trunk, crown);
 }
 
-function RoadCar() {
-  return (
-    <g className="school-run-car">
-      <ellipse cx="0" cy="29" rx="76" ry="12" fill="rgba(15,76,129,.18)" />
-      <g transform="translate(-74 -40)">
-        <path d="M15 53 L24 28 Q28 17 44 15 L102 15 Q118 18 128 31 L140 54 Z" fill="url(#carBody)" stroke="#dce5ee" strokeWidth="3" />
-        <path d="M42 20 L61 20 L67 39 L35 39 Z" fill="#b7d1e6" stroke="#edf6ff" strokeWidth="2" />
-        <path d="M72 20 L100 20 Q111 22 120 38 L72 38 Z" fill="#b7d1e6" stroke="#edf6ff" strokeWidth="2" />
-        <path d="M18 53 L138 53" stroke="#f4a261" strokeWidth="5" strokeLinecap="round" />
-        <g className="school-run-wheel">
-          <circle cx="42" cy="56" r="17" fill="#202733" />
-          <circle cx="42" cy="56" r="7" fill="#cbd5e1" />
-        </g>
-        <g className="school-run-wheel">
-          <circle cx="112" cy="56" r="17" fill="#202733" />
-          <circle cx="112" cy="56" r="7" fill="#cbd5e1" />
-        </g>
-        <rect x="124" y="37" width="12" height="8" rx="3" fill="#f8fafc" />
-        <rect x="2" y="37" width="10" height="9" rx="3" fill="#fff3bf" />
-        <rect x="84" y="48" width="28" height="7" rx="3.5" fill="#ffffff" opacity=".85" />
-        <text x="98" y="54" textAnchor="middle" fontSize="7" fontWeight="900" fill="#0f4c81">ROXX</text>
-      </g>
-    </g>
+function addBuilding(THREE: any, scene: any, x: number, z: number, school: boolean) {
+  const group = new THREE.Group();
+  const width = school ? 6.2 : 5.2;
+  const depth = school ? 4.2 : 3.6;
+  const height = school ? 3.9 : 5.4;
+
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(width, height, depth),
+    new THREE.MeshStandardMaterial({
+      color: school ? 0xf0f5f8 : 0xe4edf3,
+      roughness: 0.78,
+      metalness: 0.05,
+    })
   );
+  body.position.y = height / 2;
+  body.castShadow = true;
+  body.receiveShadow = true;
+  group.add(body);
+
+  const side = new THREE.Mesh(
+    new THREE.BoxGeometry(0.24, height * 0.88, depth * 0.9),
+    new THREE.MeshStandardMaterial({ color: school ? 0xd5e3eb : 0xcbd9e4 })
+  );
+  side.position.set(width / 2 + 0.12, height / 2, 0);
+  group.add(side);
+
+  const roof = new THREE.Mesh(
+    new THREE.ConeGeometry((Math.max(width, depth) * 0.72), school ? 1.4 : 1.1, 4),
+    new THREE.MeshStandardMaterial({ color: school ? 0xffffff : 0xcddbe5, roughness: 0.8 })
+  );
+  roof.position.y = height + (school ? 0.55 : 0.45);
+  roof.rotation.y = Math.PI / 4;
+  roof.castShadow = true;
+  group.add(roof);
+
+  const windowMaterial = new THREE.MeshStandardMaterial({
+    color: school ? 0x8eb5cc : 0x91afc3,
+    roughness: 0.25,
+    metalness: 0.05,
+  });
+
+  const rows = school ? 2 : 3;
+  const cols = school ? 4 : 3;
+  for (let row = 0; row < rows; row += 1) {
+    for (let col = 0; col < cols; col += 1) {
+      const window = new THREE.Mesh(
+        new THREE.BoxGeometry(0.72, 0.48, 0.06),
+        windowMaterial
+      );
+      const start = -((cols - 1) * 0.95) / 2;
+      window.position.set(start + col * 0.95, 1.05 + row * 1.18, -depth / 2 - 0.04);
+      group.add(window);
+    }
+  }
+
+  const door = new THREE.Mesh(
+    new THREE.BoxGeometry(0.9, 1.55, 0.08),
+    new THREE.MeshStandardMaterial({ color: school ? 0x527f9c : 0x607c8d })
+  );
+  door.position.set(0, 0.78, depth / 2 + 0.05);
+  group.add(door);
+
+  group.position.set(x, 0, z);
+  scene.add(group);
+  return group;
 }
 
-function SocietyBuilding() {
-  return (
-    <g transform="translate(18 235)">
-      <ellipse cx="90" cy="74" rx="86" ry="12" fill="rgba(15,76,129,.11)" />
-      <path d="M24 72 L24 8 L90 -18 L156 8 L156 72 Z" fill="url(#societyFront)" stroke="#dfe6ee" strokeWidth="3" />
-      <path d="M156 8 L179 20 L179 78 L156 72 Z" fill="#d7e2eb" stroke="#c7d3de" strokeWidth="3" />
-      <path d="M24 8 L90 -18 L156 8 L90 35 Z" fill="#eef5fa" stroke="#d1dae4" strokeWidth="3" />
-      <g fill="#91b2c9">
-        <rect x="43" y="18" width="14" height="16" rx="2" />
-        <rect x="69" y="10" width="14" height="16" rx="2" />
-        <rect x="95" y="18" width="14" height="16" rx="2" />
-        <rect x="121" y="10" width="14" height="16" rx="2" />
-        <rect x="43" y="45" width="14" height="16" rx="2" />
-        <rect x="69" y="37" width="14" height="16" rx="2" />
-        <rect x="95" y="45" width="14" height="16" rx="2" />
-        <rect x="121" y="37" width="14" height="16" rx="2" />
-      </g>
-      <text x="90" y="92" textAnchor="middle" fontSize="13" fontWeight="900" fill="#0f4c81">YOUR SOCIETY</text>
-    </g>
+function addParent(THREE: any, accent: number) {
+  const group = new THREE.Group();
+
+  const body = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.34, 0.44, 0.95, 12),
+    new THREE.MeshStandardMaterial({ color: accent, roughness: 0.8 })
   );
+  body.position.y = 1.15;
+  body.castShadow = true;
+  group.add(body);
+
+  const head = new THREE.Mesh(
+    new THREE.SphereGeometry(0.31, 16, 12),
+    new THREE.MeshStandardMaterial({ color: 0xf1c6a8, roughness: 0.92 })
+  );
+  head.position.y = 1.98;
+  head.castShadow = true;
+  group.add(head);
+
+  const armMaterial = new THREE.MeshStandardMaterial({ color: accent, roughness: 0.8 });
+  const legMaterial = new THREE.MeshStandardMaterial({ color: 0x263142, roughness: 0.92 });
+
+  const armA = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 0.82, 10), armMaterial);
+  const armB = armA.clone();
+  armA.position.set(-0.42, 1.17, 0);
+  armB.position.set(0.42, 1.17, 0);
+  armA.rotation.z = -0.48;
+  armB.rotation.z = 0.48;
+  armA.castShadow = armB.castShadow = true;
+
+  const legA = new THREE.Mesh(new THREE.CylinderGeometry(0.105, 0.12, 0.92, 10), legMaterial);
+  const legB = legA.clone();
+  legA.position.set(-0.16, 0.46, 0);
+  legB.position.set(0.16, 0.46, 0);
+  legA.rotation.z = -0.12;
+  legB.rotation.z = 0.12;
+  legA.castShadow = legB.castShadow = true;
+
+  group.add(armA, armB, legA, legB);
+  group.userData.armA = armA;
+  group.userData.armB = armB;
+  group.userData.legA = legA;
+  group.userData.legB = legB;
+
+  return group;
 }
 
-function SchoolBuilding() {
-  return (
-    <g transform="translate(800 130)">
-      <ellipse cx="72" cy="180" rx="92" ry="12" fill="rgba(15,76,129,.13)" />
-      <path d="M4 176 L4 66 L70 28 L140 66 L140 176 Z" fill="url(#schoolFront)" stroke="#dce6ef" strokeWidth="3" />
-      <path d="M140 66 L168 82 L168 182 L140 176 Z" fill="#d8e3ed" stroke="#c6d2de" strokeWidth="3" />
-      <path d="M4 66 L70 28 L140 66 L70 94 Z" fill="#f4fbff" stroke="#d5dee7" strokeWidth="3" />
-      <rect x="52" y="115" width="40" height="61" rx="5" fill="#d7e6ef" stroke="#b8cbd8" strokeWidth="3" />
-      <path d="M21 91 L45 79 L45 107 L21 120 Z" fill="#95bad0" />
-      <path d="M101 79 L125 91 L125 120 L101 107 Z" fill="#95bad0" />
-      <text x="72" y="205" textAnchor="middle" fontSize="13" fontWeight="900" fill="#0f4c81">SCHOOL</text>
-    </g>
+function addWalkingCouple(THREE: any, scene: any) {
+  const couple = new THREE.Group();
+  const parentA = addParent(THREE, 0x0f4c81);
+  const parentB = addParent(THREE, 0xf28b5b);
+
+  parentA.position.x = -0.62;
+  parentB.position.x = 0.62;
+  parentB.position.z = 0.16;
+  couple.add(parentA, parentB);
+
+  const shadow = new THREE.Mesh(
+    new THREE.CircleGeometry(1.55, 32),
+    new THREE.MeshBasicMaterial({ color: 0x0f4c81, transparent: true, opacity: 0.10 })
   );
+  shadow.rotation.x = -Math.PI / 2;
+  shadow.position.y = 0.035;
+  couple.add(shadow);
+
+  scene.add(couple);
+  return couple;
+}
+
+function addCar(THREE: any, scene: any) {
+  const car = new THREE.Group();
+
+  const body = new THREE.Mesh(
+    new THREE.BoxGeometry(2.05, 0.78, 4.0),
+    new THREE.MeshStandardMaterial({ color: 0xf8fafc, roughness: 0.45, metalness: 0.08 })
+  );
+  body.position.y = 0.92;
+  body.castShadow = true;
+  car.add(body);
+
+  const bonnet = new THREE.Mesh(
+    new THREE.BoxGeometry(1.96, 0.28, 0.72),
+    new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.38 })
+  );
+  bonnet.position.set(0, 1.28, 1.38);
+  bonnet.castShadow = true;
+  car.add(bonnet);
+
+  const cabin = new THREE.Mesh(
+    new THREE.BoxGeometry(1.78, 0.78, 2.1),
+    new THREE.MeshStandardMaterial({ color: 0xe9eef2, roughness: 0.5 })
+  );
+  cabin.position.set(0, 1.48, -0.05);
+  cabin.castShadow = true;
+  car.add(cabin);
+
+  const frontGlass = new THREE.Mesh(
+    new THREE.BoxGeometry(1.5, 0.46, 0.08),
+    new THREE.MeshStandardMaterial({ color: 0x8eb0c7, roughness: 0.2, metalness: 0.15 })
+  );
+  frontGlass.position.set(0, 1.51, 1.02);
+  frontGlass.rotation.x = -0.08;
+  car.add(frontGlass);
+
+  const rearGlass = frontGlass.clone();
+  rearGlass.position.z = -1.12;
+  rearGlass.rotation.x = 0.08;
+  car.add(rearGlass);
+
+  const roof = new THREE.Mesh(
+    new THREE.BoxGeometry(1.86, 0.11, 2.45),
+    new THREE.MeshStandardMaterial({ color: 0xdfe6eb, roughness: 0.5 })
+  );
+  roof.position.set(0, 1.91, -0.03);
+  car.add(roof);
+
+  const bumper = new THREE.Mesh(
+    new THREE.BoxGeometry(2.1, 0.22, 0.28),
+    new THREE.MeshStandardMaterial({ color: 0xcbd4dc, roughness: 0.55 })
+  );
+  bumper.position.set(0, 0.68, 1.93);
+  car.add(bumper);
+
+  const wheelMaterial = new THREE.MeshStandardMaterial({ color: 0x202732, roughness: 0.9 });
+  const hubMaterial = new THREE.MeshStandardMaterial({ color: 0xbfc8d0, metalness: 0.5, roughness: 0.38 });
+  const wheels: any[] = [];
+
+  [[-1.03, 1.28], [1.03, 1.28], [-1.03, -1.28], [1.03, -1.28]].forEach(function (entry) {
+    const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.43, 0.43, 0.24, 18), wheelMaterial);
+    wheel.rotation.z = Math.PI / 2;
+    wheel.position.set(entry[0], 0.52, entry[1]);
+    wheel.castShadow = true;
+    const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.26, 14), hubMaterial);
+    hub.rotation.z = Math.PI / 2;
+    wheel.add(hub);
+    car.add(wheel);
+    wheels.push(wheel);
+  });
+
+  const headlight = new THREE.Mesh(
+    new THREE.BoxGeometry(0.48, 0.18, 0.08),
+    new THREE.MeshStandardMaterial({ color: 0xfff6c7, emissive: 0xffee9d, emissiveIntensity: 1.25 })
+  );
+  headlight.position.set(-0.62, 1.0, 2.02);
+  const headlightB = headlight.clone();
+  headlightB.position.x = 0.62;
+  car.add(headlight, headlightB);
+
+  const shadow = new THREE.Mesh(
+    new THREE.CircleGeometry(2.15, 32),
+    new THREE.MeshBasicMaterial({ color: 0x0f4c81, transparent: true, opacity: 0.11 })
+  );
+  shadow.rotation.x = -Math.PI / 2;
+  shadow.position.y = 0.035;
+  car.add(shadow);
+
+  car.userData.wheels = wheels;
+  car.userData.speedLines = [];
+  scene.add(car);
+  return car;
 }
 
 export default function SchoolRunJourney3D({
@@ -172,73 +303,273 @@ export default function SchoolRunJourney3D({
   animationToken: string;
 }) {
   const mode = chooseMode(school);
-  const selectedRoute = mode === 'walk' ? (school.walking || school.driving) : school.driving;
   const [running, setRunning] = useState(true);
-  const [replayKey, setReplayKey] = useState(0);
+  const [webglFailed, setWebglFailed] = useState(false);
+  const mountRef = useRef<HTMLDivElement | null>(null);
+  const runningRef = useRef(true);
+  const replayRef = useRef(0);
+
+  const selectedRoute = mode === 'walk' ? (school.walking || school.driving) : school.driving;
+  const distance = school.driving ? school.driving.distanceKm : null;
+  const durationText = formatDuration(
+    mode === 'walk' && school.walking ? school.walking.durationMin : school.driving ? school.driving.durationMin : null
+  );
+
+  const routeSignature = useMemo(function () {
+    const route = selectedRoute && selectedRoute.coordinates ? selectedRoute.coordinates : [];
+    return route.length + ':' + (route[0] ? route[0][0] + ':' + route[0][1] : '') + ':' + (route[route.length - 1] ? route[route.length - 1][0] + ':' + route[route.length - 1][1] : '');
+  }, [selectedRoute]);
 
   useEffect(function () {
-    setReplayKey(function (value) { return value + 1; });
+    runningRef.current = true;
     setRunning(true);
-  }, [animationToken]);
+    replayRef.current += 1;
+  }, [animationToken, routeSignature]);
 
-  const plot = useMemo(function () {
-    const coords = selectedRoute && selectedRoute.coordinates && selectedRoute.coordinates.length
-      ? selectedRoute.coordinates
-      : [[origin.lng, origin.lat], [school.point.lng, school.point.lat]] as [number, number][];
-    const points = projectRoute(coords);
-    return { path: toPath(points) };
-  }, [origin.lat, origin.lng, school.point.lat, school.point.lng, selectedRoute]);
+  useEffect(function () {
+    if (!mountRef.current) return;
 
-  const distance = school.driving ? school.driving.distanceKm : null;
-  const duration = mode === 'walk'
-    ? Math.max(5.5, Math.min(11, (distance || 1) * 2.3))
-    : Math.max(6.5, Math.min(12, (distance || 2) * 0.9));
-  const distanceText = distance == null ? '—' : distance.toFixed(2) + ' km';
-  const durationText = formatDuration(mode === 'walk' && school.walking ? school.walking.durationMin : school.driving && school.driving.durationMin);
+    let disposed = false;
+    let renderer: any = null;
+    let frame = 0;
+    let resizeHandler: (() => void) | null = null;
+
+    async function boot() {
+      try {
+        const THREE = await import('three');
+        if (disposed || !mountRef.current) return;
+
+        const mount = mountRef.current;
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xeaf4fa);
+        scene.fog = new THREE.Fog(0xeaf4fa, 28, 65);
+
+        const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 150);
+        camera.position.set(13, 13, 22);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        mount.innerHTML = '';
+        mount.appendChild(renderer.domElement);
+
+        const ambient = new THREE.HemisphereLight(0xfafcff, 0xa5b8c5, 1.65);
+        scene.add(ambient);
+
+        const sun = new THREE.DirectionalLight(0xffffff, 2.5);
+        sun.position.set(12, 20, 10);
+        sun.castShadow = true;
+        sun.shadow.mapSize.set(1024, 1024);
+        scene.add(sun);
+
+        const ground = new THREE.Mesh(
+          new THREE.PlaneGeometry(70, 52),
+          new THREE.MeshStandardMaterial({ color: 0xf7fafb, roughness: 1 })
+        );
+        ground.rotation.x = -Math.PI / 2;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        const coords = selectedRoute && selectedRoute.coordinates && selectedRoute.coordinates.length >= 2
+          ? sampleCoordinates(selectedRoute.coordinates)
+          : [[origin.lng, origin.lat], [school.point.lng, school.point.lat]] as [number, number][];
+
+        const minLng = Math.min.apply(null, coords.map(p => p[0]));
+        const maxLng = Math.max.apply(null, coords.map(p => p[0]));
+        const minLat = Math.min.apply(null, coords.map(p => p[1]));
+        const maxLat = Math.max.apply(null, coords.map(p => p[1]));
+        const lngSpan = Math.max(maxLng - minLng, 0.00001);
+        const latSpan = Math.max(maxLat - minLat, 0.00001);
+        const routePoints = coords.map(function (pair) {
+          return new THREE.Vector3(
+            ((pair[0] - minLng) / lngSpan - 0.5) * 30,
+            0.48,
+            -((pair[1] - minLat) / latSpan - 0.5) * 18
+          );
+        });
+
+        const curve = new THREE.CatmullRomCurve3(routePoints, false, 'catmullrom', 0.18);
+        const road = new THREE.Mesh(
+          new THREE.TubeGeometry(curve, 160, 0.78, 6, false),
+          new THREE.MeshStandardMaterial({ color: 0xc7d3dd, roughness: 0.95, metalness: 0 })
+        );
+        road.receiveShadow = true;
+        road.castShadow = true;
+        scene.add(road);
+
+        const routeGlow = new THREE.Mesh(
+          new THREE.TubeGeometry(curve, 160, 0.07, 6, false),
+          new THREE.MeshStandardMaterial({ color: mode === 'walk' ? 0xf28b5b : 0x0f4c81, emissive: mode === 'walk' ? 0x7a3214 : 0x063456, emissiveIntensity: 0.55 })
+        );
+        routeGlow.position.y += 0.72;
+        scene.add(routeGlow);
+
+        const center = curve.getPointAt(0.5);
+        addBuilding(THREE, scene, routePoints[0].x - 4.8, routePoints[0].z - 1.8, false);
+        addBuilding(THREE, scene, routePoints[routePoints.length - 1].x + 4.2, routePoints[routePoints.length - 1].z + 0.6, true);
+
+        addTree(THREE, scene, center.x - 7, center.z + 3.6, 1.1);
+        addTree(THREE, scene, center.x + 6, center.z - 3.1, 0.9);
+        addTree(THREE, scene, center.x - 3, center.z - 4.4, 0.82);
+
+        const clouds: any[] = [];
+        for (let i = 0; i < 7; i += 1) {
+          const cloud = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(0.95 + (i % 2) * 0.25, 1),
+            new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1, transparent: true, opacity: 0.82 })
+          );
+          cloud.position.set(-18 + i * 6.2, 9 + (i % 3) * 1.15, -6 - (i % 2) * 2);
+          cloud.scale.set(1.45, 0.65, 0.85);
+          scene.add(cloud);
+          clouds.push(cloud);
+        }
+
+        const traveler = mode === 'walk'
+          ? addWalkingCouple(THREE, scene)
+          : addCar(THREE, scene);
+
+        let progress = 0;
+        let startTime = performance.now();
+        const loopDuration = mode === 'walk' ? 10.5 : 8.5;
+
+        function resize() {
+          if (!renderer || !mountRef.current) return;
+          const width = mountRef.current.clientWidth || 1;
+          const height = mountRef.current.clientHeight || 1;
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+          renderer.setSize(width, height, false);
+        }
+
+        resizeHandler = resize;
+        window.addEventListener('resize', resize);
+        resize();
+
+        function lookAtCenter() {
+          const lookTarget = new THREE.Vector3(center.x, 0.7, center.z);
+          camera.lookAt(lookTarget);
+        }
+
+        lookAtCenter();
+
+        function animate(now: number) {
+          if (disposed || !renderer) return;
+
+          const delta = Math.min(0.05, (now - startTime) / 1000);
+          startTime = now;
+
+          if (runningRef.current) {
+            progress = (progress + delta / loopDuration) % 1;
+          }
+
+          const point = curve.getPointAt(progress);
+          const tangent = curve.getTangentAt(progress).normalize();
+          const angle = Math.atan2(tangent.x, tangent.z);
+
+          traveler.position.copy(point);
+          traveler.position.y = mode === 'walk' ? 1.15 : 0.75;
+          traveler.rotation.y = angle;
+
+          if (mode === 'walk') {
+            const parentA = traveler.children[0];
+            const parentB = traveler.children[1];
+            const walkWave = Math.sin(progress * Math.PI * 2 * 16);
+            const parentAData = parentA.userData;
+            const parentBData = parentB.userData;
+            if (parentAData.legA) parentAData.legA.rotation.z = -0.45 + walkWave * 0.38;
+            if (parentAData.legB) parentAData.legB.rotation.z = 0.45 - walkWave * 0.38;
+            if (parentAData.armA) parentAData.armA.rotation.z = -0.25 - walkWave * 0.24;
+            if (parentAData.armB) parentAData.armB.rotation.z = 0.25 + walkWave * 0.24;
+            if (parentBData.legA) parentBData.legA.rotation.z = 0.45 - walkWave * 0.38;
+            if (parentBData.legB) parentBData.legB.rotation.z = -0.45 + walkWave * 0.38;
+            if (parentBData.armA) parentBData.armA.rotation.z = -0.25 + walkWave * 0.24;
+            if (parentBData.armB) parentBData.armB.rotation.z = 0.25 - walkWave * 0.24;
+            traveler.position.y += Math.abs(walkWave) * 0.04;
+          } else {
+            const wheels = traveler.userData.wheels || [];
+            wheels.forEach(function (wheel: any) {
+              wheel.rotation.x += delta * 8.6;
+            });
+            traveler.position.y += Math.sin(progress * Math.PI * 2 * 14) * 0.025;
+          }
+
+          clouds.forEach(function (cloud: any, index: number) {
+            cloud.position.x += delta * (0.12 + index * 0.008);
+            if (cloud.position.x > 24) cloud.position.x = -24;
+            cloud.rotation.y += delta * 0.05;
+          });
+
+          const cameraBob = Math.sin(now / 2900) * 0.35;
+          camera.position.y = 13 + cameraBob;
+          camera.position.x = 13 + Math.sin(now / 4600) * 1.1;
+          camera.position.z = 22 + Math.cos(now / 5200) * 1.4;
+          lookAtCenter();
+
+          renderer.render(scene, camera);
+          frame = requestAnimationFrame(animate);
+        }
+
+        frame = requestAnimationFrame(animate);
+      } catch (error) {
+        console.error('[SCHOOL_RUN_3D]', error);
+        if (!disposed) setWebglFailed(true);
+      }
+    }
+
+    void boot();
+
+    return function () {
+      disposed = true;
+      cancelAnimationFrame(frame);
+      if (resizeHandler) window.removeEventListener('resize', resizeHandler);
+      if (renderer) {
+        renderer.dispose();
+        if (renderer.domElement && renderer.domElement.parentElement) {
+          renderer.domElement.parentElement.removeChild(renderer.domElement);
+        }
+      }
+    };
+  }, [mode, origin.lat, origin.lng, school.point.lat, school.point.lng, selectedRoute, routeSignature]);
+
+  const setRunState = function (value: boolean) {
+    runningRef.current = value;
+    setRunning(value);
+  };
 
   return (
     <section className="relative overflow-hidden rounded-[28px] border border-slate-200/80 bg-[linear-gradient(145deg,#f7fbff_0%,#ffffff_56%,#fff7f1_100%)] shadow-[0_24px_70px_rgba(15,76,129,.10)]">
-      <style jsx>{`
-        .school-run-scene { perspective: 1200px; }
-        .school-run-stage { transform: rotateX(7deg); transform-style: preserve-3d; transition: transform .7s ease; }
-        .school-run-stage:hover { transform: rotateX(3deg) translateY(-2px); }
-        .school-run-grid {
-          background-image: linear-gradient(rgba(15,76,129,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(15,76,129,.06) 1px, transparent 1px);
-          background-size: 38px 38px;
-          mask-image: linear-gradient(to bottom, transparent, black 18%, black 78%, transparent);
+      <style jsx>{\`
+        .school-run-3d-grid {
+          background-image:
+            linear-gradient(rgba(15,76,129,.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(15,76,129,.06) 1px, transparent 1px);
+          background-size: 34px 34px;
         }
-        @keyframes schoolRunFloat { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-8px) rotate(2deg); } }
-        @keyframes schoolRunGlow { 0%,100% { opacity:.32; transform: scale(.98); } 50% { opacity:.78; transform: scale(1.04); } }
-        @keyframes schoolRunBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        @keyframes schoolRunLegA { 0%,100% { transform: rotate(20deg); } 50% { transform: rotate(-22deg); } }
-        @keyframes schoolRunLegB { 0%,100% { transform: rotate(-20deg); } 50% { transform: rotate(22deg); } }
-        @keyframes schoolRunSpin { to { transform: rotate(360deg); } }
-        .school-run-float { animation: schoolRunFloat 3.8s ease-in-out infinite; }
-        .school-run-glow { animation: schoolRunGlow 2.8s ease-in-out infinite; }
-        .school-run-walkers { animation: schoolRunBob .62s ease-in-out infinite; }
-        .school-run-leg { transform-box: fill-box; transform-origin: top center; }
-        .school-run-leg-a { animation: schoolRunLegA .62s ease-in-out infinite; }
-        .school-run-leg-b { animation: schoolRunLegB .62s ease-in-out infinite; }
-        .school-run-wheel { animation: schoolRunSpin .7s linear infinite; transform-box: fill-box; transform-origin: center; }
-        .school-run-pulse { animation: schoolRunGlow 1.6s ease-in-out infinite; }
+        @keyframes schoolRunBadge {
+          0%,100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+        .school-run-badge { animation: schoolRunBadge 2.8s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) {
-          .school-run-stage, .school-run-float, .school-run-glow, .school-run-walkers, .school-run-leg-a, .school-run-leg-b, .school-run-wheel, .school-run-pulse { animation: none !important; transition: none !important; }
+          .school-run-badge { animation: none !important; }
         }
-      `}</style>
+      \`}</style>
 
-      <div className="relative z-10 flex flex-col gap-4 border-b border-slate-200/80 px-4 py-4 sm:px-6 sm:py-5">
+      <div className="relative z-10 border-b border-slate-200/80 px-4 py-4 sm:px-6 sm:py-5">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[10px] font-black uppercase tracking-[.16em] text-[var(--color-primary)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> 3D family journey
+            <div className="school-run-badge inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[10px] font-black uppercase tracking-[.16em] text-[var(--color-primary)] backdrop-blur">
+              <Sparkles className="h-3.5 w-3.5" /> Real 3D family journey
             </div>
             <h3 className="mt-2 text-lg font-black tracking-tight text-[var(--color-content)] sm:text-xl">
               {mode === 'walk' ? 'They walk together' : 'They’re off to school'}
             </h3>
-            <p className="mt-1 max-w-2xl text-xs text-[var(--color-content-muted)]">
+            <p className="mt-1 max-w-3xl text-xs text-[var(--color-content-muted)]">
               {mode === 'walk'
-                ? school.name + ' is close enough for a walking run from ' + origin.label + '.'
-                : school.name + ' is far enough away that the family takes the car from ' + origin.label + '.'}
+                ? school.name + ' is close enough to make this a walk from ' + origin.label + '.'
+                : school.name + ' is far enough away that the parents take the car from ' + origin.label + '.'}
             </p>
           </div>
 
@@ -250,7 +581,8 @@ export default function SchoolRunJourney3D({
             <button
               type="button"
               onClick={function () {
-                setReplayKey(function (value) { return value + 1; });
+                replayRef.current += 1;
+                runningRef.current = true;
                 setRunning(true);
               }}
               className="inline-flex min-h-[40px] items-center gap-1.5 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-xs font-black text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300"
@@ -260,103 +592,65 @@ export default function SchoolRunJourney3D({
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-2">
+        <div className="mt-4 grid grid-cols-3 gap-2">
           <div className="rounded-2xl border border-white bg-white/80 p-3 shadow-sm backdrop-blur">
             <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">Distance</div>
-            <div className="mt-1 text-sm font-black text-slate-900">{distanceText}</div>
+            <div className="mt-1 text-sm font-black text-slate-900">{distance == null ? '—' : distance.toFixed(2) + ' km'}</div>
           </div>
           <div className="rounded-2xl border border-white bg-white/80 p-3 shadow-sm backdrop-blur">
             <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">Travel</div>
             <div className="mt-1 text-sm font-black text-slate-900">{durationText}</div>
           </div>
           <div className="rounded-2xl border border-white bg-white/80 p-3 shadow-sm backdrop-blur">
-            <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">Destination</div>
-            <div className="mt-1 truncate text-sm font-black text-slate-900">{school.shortName || school.name}</div>
+            <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">Mode rule</div>
+            <div className="mt-1 truncate text-sm font-black text-slate-900">{mode === 'walk' ? '≤ 2.2 km · walk' : '> 2.2 km · drive'}</div>
           </div>
         </div>
       </div>
 
-      <div className="school-run-scene relative h-[370px] overflow-hidden sm:h-[440px]">
-        <div className="school-run-grid absolute inset-0 opacity-70" />
-        <div className="school-run-glow absolute left-[8%] top-[18%] h-28 w-28 rounded-full bg-sky-200/40 blur-2xl" />
-        <div className="school-run-pulse absolute right-[12%] top-[20%] h-32 w-32 rounded-full bg-orange-200/30 blur-3xl" />
+      <div className="school-run-3d-grid relative h-[420px] overflow-hidden bg-[radial-gradient(circle_at_50%_20%,#ffffff_0%,#eef7fb_42%,#dbe8ee_100%)] sm:h-[500px]">
+        <div ref={mountRef} className="absolute inset-0" />
 
-        <div className="school-run-stage absolute inset-3 sm:inset-5">
-          <svg viewBox="0 0 1000 400" className="h-full w-full" role="img" aria-label={'Animated route from ' + origin.label + ' to ' + school.name}>
-            <defs>
-              <linearGradient id="road" x1="0" x2="1">
-                <stop offset="0%" stopColor="#dfe8ef" />
-                <stop offset="55%" stopColor="#c8d4df" />
-                <stop offset="100%" stopColor="#e7edf2" />
-              </linearGradient>
-              <linearGradient id="carBody" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="60%" stopColor="#f4f6f8" />
-                <stop offset="100%" stopColor="#d7dee6" />
-              </linearGradient>
-              <linearGradient id="societyFront" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#edf5fa" />
-                <stop offset="100%" stopColor="#cbd9e4" />
-              </linearGradient>
-              <linearGradient id="schoolFront" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="#ffffff" />
-                <stop offset="100%" stopColor="#d7e5ee" />
-              </linearGradient>
-              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="#0f4c81" floodOpacity=".12" />
-              </filter>
-            </defs>
-
-            <path d="M 120 305 C 300 242, 385 348, 540 260 S 758 192, 900 128" fill="none" stroke="rgba(15,76,129,.12)" strokeWidth="54" strokeLinecap="round" />
-            <path d={plot.path} fill="none" stroke="url(#road)" strokeWidth="42" strokeLinecap="round" filter="url(#softShadow)" />
-            <path d={plot.path} fill="none" stroke="#ffffff" strokeWidth="3" strokeDasharray="14 18" strokeLinecap="round" opacity=".72">
-              <animate attributeName="stroke-dashoffset" from="0" to="-64" dur="1.6s" repeatCount="indefinite" />
-            </path>
-
-            <SocietyBuilding />
-            <SchoolBuilding />
-
-            <g transform="translate(198 76)" className="school-run-float">
-              <circle cx="0" cy="0" r="22" fill="#eaf5ff" />
-              <text x="0" y="4" textAnchor="middle" fontSize="10" fontWeight="900" fill="#0f4c81">BASE</text>
-            </g>
-
-            <g transform="translate(875 84)" className="school-run-float" style={{ animationDelay: '.8s' }}>
-              <circle cx="0" cy="0" r="22" fill="#fff1e8" />
-              <text x="0" y="4" textAnchor="middle" fontSize="10" fontWeight="900" fill="#d56534">GO</text>
-            </g>
-
-            {running ? (
-              <g key={replayKey}>
-                <animateMotion dur={String(duration) + 's'} path={plot.path} rotate="auto" fill="freeze" />
-                {mode === 'walk' ? <WalkingCouple /> : <RoadCar />}
-              </g>
-            ) : null}
-
-            <g transform="translate(500 356)">
-              <rect x="-145" y="-16" width="290" height="32" rx="16" fill="rgba(255,255,255,.82)" stroke="rgba(15,76,129,.10)" />
-              <text x="0" y="4" textAnchor="middle" fontSize="12" fontWeight="800" fill="#334155">
-                {mode === 'walk' ? 'Nearby school · walking mode' : 'Longer school run · driving mode'}
-              </text>
-            </g>
-          </svg>
-        </div>
-
-        <div className="pointer-events-none absolute left-4 top-4 rounded-2xl border border-white/80 bg-white/72 px-3 py-2 text-[10px] font-black text-slate-600 shadow-sm backdrop-blur">
-          {mode === 'walk' ? '👟 Couple walking' : '🚙 White ROXX-style SUV'}
-        </div>
-
-        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 rounded-2xl border border-white/90 bg-white/78 px-4 py-3 shadow-lg backdrop-blur-xl">
-          <div className="min-w-0">
-            <div className="text-[10px] font-black uppercase tracking-[.14em] text-slate-400">Journey</div>
-            <div className="truncate text-xs font-extrabold text-slate-900">{origin.label + ' → ' + school.name}</div>
+        {webglFailed ? (
+          <div className="absolute inset-0 grid place-items-center p-6">
+            <div className="max-w-md rounded-3xl border border-white bg-white/90 p-6 text-center shadow-xl backdrop-blur">
+              <Sparkles className="mx-auto h-8 w-8 text-[var(--color-primary)]" />
+              <h4 className="mt-3 text-base font-black text-slate-900">3D mode is unavailable in this browser</h4>
+              <p className="mt-1 text-xs leading-5 text-slate-500">
+                The real route map below still works normally, and your exact school coordinates remain the source for the journey.
+              </p>
+            </div>
           </div>
+        ) : null}
+
+        <div className="pointer-events-none absolute left-4 top-4 rounded-2xl border border-white/90 bg-white/82 px-3 py-2 shadow-lg backdrop-blur-xl">
+          <div className="text-[10px] font-black uppercase tracking-[.14em] text-slate-400">Base</div>
+          <div className="max-w-[180px] truncate text-xs font-extrabold text-slate-900">{origin.label}</div>
+        </div>
+
+        <div className="pointer-events-none absolute right-4 top-4 rounded-2xl border border-white/90 bg-white/82 px-3 py-2 text-right shadow-lg backdrop-blur-xl">
+          <div className="text-[10px] font-black uppercase tracking-[.14em] text-slate-400">School</div>
+          <div className="max-w-[180px] truncate text-xs font-extrabold text-slate-900">{school.name}</div>
+        </div>
+
+        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 rounded-2xl border border-white/90 bg-white/82 px-4 py-3 shadow-lg backdrop-blur-xl">
+          <div className="min-w-0">
+            <div className="text-[10px] font-black uppercase tracking-[.14em] text-slate-400">
+              {mode === 'walk' ? '👟 Parents walking together' : '🚙 White ROXX-style SUV easter egg'}
+            </div>
+            <div className="truncate text-xs font-extrabold text-slate-900">
+              {origin.label + ' → ' + school.name}
+            </div>
+          </div>
+
           <button
             type="button"
-            onClick={function () { setRunning(function (value) { return !value; }); }}
-            className="inline-flex min-h-[40px] shrink-0 items-center gap-1.5 rounded-2xl bg-[var(--color-primary)] px-3.5 py-2 text-xs font-black text-white shadow-md transition hover:-translate-y-0.5"
+            onClick={function () {
+              setRunState(!running);
+            }}
+            className="inline-flex min-h-[42px] shrink-0 items-center gap-1.5 rounded-2xl bg-[var(--color-primary)] px-3.5 py-2 text-xs font-black text-white shadow-md transition hover:-translate-y-0.5"
           >
-            <Play className="h-3.5 w-3.5 fill-current" />
+            {running ? <Pause className="h-3.5 w-3.5 fill-current" /> : <Play className="h-3.5 w-3.5 fill-current" />}
             {running ? 'Pause' : 'Play'}
           </button>
         </div>

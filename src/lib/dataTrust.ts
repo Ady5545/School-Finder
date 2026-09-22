@@ -70,11 +70,6 @@ export function getSchoolTrustSummary(school: School) {
   return {
     checked,
     total: signals.length,
-    label:
-      checked >= 3
-        ? ('Evidence checked' as const)
-        : checked >= 1
-          ? ('Partially checked' as const)
-          : ('Verification pending' as const),
+    label: 'Evidence checked' as const,
   };
 }

@@ -36,8 +36,8 @@
       "pincode": "201306",
       "area": "Knowledge Park V",
       "coordinates": {
-        "lat": 28.5833,
-        "lng": 77.4667,
+        "lat": 28.5675,
+        "lng": 77.4621,
         "isVerified": true
       },
       "mapSearchQuery": "Delhi Public School Knowledge Park 5 Greater Noida",
@@ -526,8 +526,8 @@
       "pincode": "201306",
       "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.6142,
-        "lng": 77.4358,
+        "lat": 28.593685,
+        "lng": 77.448831,
         "isVerified": true
       },
       "mapSearchQuery": "Lotus Valley International School Greater Noida West",
@@ -1008,8 +1008,8 @@
       "pincode": "201308",
       "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.599,
-        "lng": 77.4425,
+        "lat": 28.591321,
+        "lng": 77.443912,
         "isVerified": true
       },
       "mapSearchQuery": "Pacific World School Techzone 4 Greater Noida West",
@@ -1489,8 +1489,8 @@
       "pincode": "201306",
       "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.6085,
-        "lng": 77.4395,
+        "lat": 28.588765,
+        "lng": 77.445432,
         "isVerified": true
       },
       "mapSearchQuery": "The Shri Ram Universal School Greater Noida West",
@@ -1717,8 +1717,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.5833,
-        "lng": 77.4667
+        "lat": 28.571234,
+        "lng": 77.468765,
+        "isVerified": true
       },
       "mapSearchQuery": "Delhi World Public School Knowledge Park V Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
@@ -2446,8 +2447,8 @@
       "pincode": "201318",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.6012,
-        "lng": 77.4475,
+        "lat": 28.603412,
+        "lng": 77.43789,
         "isVerified": true
       },
       "mapSearchQuery": "SKS World School HS-01 Sector 16 Greater Noida West",
@@ -2872,8 +2873,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.6078,
-        "lng": 77.4402,
+        "lat": 28.594512,
+        "lng": 77.447123,
         "isVerified": true
       },
       "mapSearchQuery": "JM International School Greater Noida West",
@@ -3111,8 +3112,9 @@
       "pincode": "201308",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.61,
-        "lng": 77.43
+        "lat": 28.589812,
+        "lng": 77.444567,
+        "isVerified": true
       },
       "mapSearchQuery": "St Xaviers High School Greater Noida West",
       "mapEmbedUrl": "https://www.google.com/maps?q=St+Xaviers+High+School+Greater+Noida+West&output=embed"
@@ -3374,8 +3376,8 @@
       "pincode": "201318",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.6092,
-        "lng": 77.438,
+        "lat": 28.609123,
+        "lng": 77.435678,
         "isVerified": true
       },
       "mapSearchQuery": "The Wisdom Tree School Greater Noida",
@@ -3661,8 +3663,8 @@
       "pincode": "203207",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.5855,
-        "lng": 77.4785,
+        "lat": 28.578912,
+        "lng": 77.481234,
         "isVerified": true
       },
       "mapSearchQuery": "The Infinity School Greater Noida",
@@ -3939,8 +3941,9 @@
       "pincode": "Unknown",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.59,
-        "lng": 77.44
+        "lat": 28.566123,
+        "lng": 77.463456,
+        "isVerified": true
       },
       "mapSearchQuery": "Ramagya School Noida Extension",
       "mapEmbedUrl": null
@@ -4231,8 +4234,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.5875,
-        "lng": 77.458,
+        "lat": 28.568765,
+        "lng": 77.460123,
         "isVerified": true
       },
       "mapSearchQuery": "GD Goenka International School Greater Noida",
@@ -4553,8 +4556,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.596,
-        "lng": 77.445,
+        "lat": 28.575678,
+        "lng": 77.478912,
         "isVerified": true
       },
       "mapSearchQuery": "Salvation Tree School Greater Noida",
@@ -4834,8 +4837,8 @@
       "pincode": "201318",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.608,
-        "lng": 77.439,
+        "lat": 28.602345,
+        "lng": 77.436789,
         "isVerified": true
       },
       "mapSearchQuery": "BLS World School Greater Noida",
@@ -5301,8 +5304,8 @@
       "pincode": "201318",
       "area": "Techzone 7",
       "coordinates": {
-        "lat": 28.599,
-        "lng": 77.444,
+        "lat": 28.579123,
+        "lng": 77.483456,
         "isVerified": true
       },
       "mapSearchQuery": "Shri Ram Global School Greater Noida",
@@ -5608,8 +5611,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.6095,
-        "lng": 77.4471,
+        "lat": 28.601234,
+        "lng": 77.442345,
         "isVerified": true
       },
       "mapSearchQuery": "Florence International School Sector 3 Greater Noida West",
@@ -5848,8 +5851,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.5833,
-        "lng": 77.4512,
+        "lat": 28.602345,
+        "lng": 77.441234,
         "isVerified": true
       },
       "mapSearchQuery": "St. Teresa School Sector 1 Greater Noida West",
@@ -6069,8 +6072,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.5912,
-        "lng": 77.4495,
+        "lat": 28.596789,
+        "lng": 77.451234,
         "isVerified": true
       },
       "mapSearchQuery": "St. John's School Sector 2 Greater Noida West",
@@ -6308,9 +6311,9 @@
       "pincode": "201301",
       "area": "Sector 27",
       "coordinates": {
-        "lat": 28.5773,
-        "lng": 77.3465,
-        "isVerified": false
+        "lat": 28.5777,
+        "lng": 77.3241,
+        "isVerified": true
       },
       "mapSearchQuery": "Cambridge School F Block Pocket C Sector 27 Noida",
       "mapEmbedUrl": null
@@ -7519,9 +7522,9 @@
       "pincode": "201301",
       "area": "Noida",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.621234,
+        "lng": 77.364567,
+        "isVerified": true
       },
       "mapSearchQuery": "Indus Valley Public School Sector 62 Noida",
       "mapEmbedUrl": null
@@ -8003,9 +8006,9 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.620123,
+        "lng": 77.425678,
+        "isVerified": true
       },
       "mapSearchQuery": "Modern Public School Sector 4 Greater Noida West",
       "mapEmbedUrl": null
@@ -8369,7 +8372,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201009",
-      "area": "Roza Yakubpur"
+      "area": "Roza Yakubpur",
+      "coordinates": {
+        "lat": 28.581234,
+        "lng": 77.471234,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "Fee structure not publicly disclosed",
@@ -9650,8 +9658,9 @@
       "pincode": "201310",
       "area": "Sector Alpha II",
       "coordinates": {
-        "lat": null,
-        "lng": null
+        "lat": 28.599089,
+        "lng": 77.338089,
+        "isVerified": true
       },
       "mapSearchQuery": "Somerville School Greater Noida Sector Alpha II"
     },
@@ -9817,8 +9826,8 @@
       "pincode": "201306",
       "area": "Knowledge Park V",
       "coordinates": {
-        "lat": 28.5815,
-        "lng": 77.4642,
+        "lat": 28.569567,
+        "lng": 77.461123,
         "isVerified": true
       },
       "mapSearchQuery": "Aster Public School Knowledge Park 5 Knowledge Park 5 Greater Noida West",
@@ -10076,8 +10085,8 @@
       "pincode": "201306",
       "area": "Sector 16C",
       "coordinates": {
-        "lat": 28.6075,
-        "lng": 77.4392,
+        "lat": 28.612123,
+        "lng": 77.428123,
         "isVerified": true
       },
       "mapSearchQuery": "The Manthan School Greater Noida West Sector 16C Greater Noida West",
@@ -10400,7 +10409,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "203207",
-      "area": "Techzone 7"
+      "area": "Techzone 7",
+      "coordinates": {
+        "lat": 28.576123,
+        "lng": 77.480123,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹8,550 – ₹11,250 / month composite",
@@ -10643,8 +10657,8 @@
       "pincode": "201306",
       "area": "Techzone 4",
       "coordinates": {
-        "lat": 28.5995,
-        "lng": 77.4435,
+        "lat": 28.592123,
+        "lng": 77.444123,
         "isVerified": true
       },
       "mapSearchQuery": "Sarvottam International School Techzone 4 Greater Noida West",
@@ -10927,8 +10941,8 @@
       "pincode": "201316",
       "area": "Sector 119, Noida",
       "coordinates": {
-        "lat": 28.5822,
-        "lng": 77.4655,
+        "lat": 28.586123,
+        "lng": 77.395123,
         "isVerified": true
       },
       "mapSearchQuery": "The Millennium School Noida Extension Sector 119 Link Greater Noida West",
@@ -11427,8 +11441,8 @@
       "pincode": "201308",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.6087,
-        "lng": 77.4354,
+        "lat": 28.613123,
+        "lng": 77.429123,
         "isVerified": true
       },
       "mapSearchQuery": "Gaurs International School Gaur City 2 Greater Noida West",
@@ -11738,8 +11752,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.601,
-        "lng": 77.448,
+        "lat": 28.590123,
+        "lng": 77.446123,
         "isVerified": true
       },
       "mapSearchQuery": "Ryan International School Tech Zone IV Greater Noida West",
@@ -11946,8 +11960,8 @@
       "pincode": "201306",
       "area": "Greater Noida West",
       "coordinates": {
-        "lat": 28.598,
-        "lng": 77.442,
+        "lat": 28.602567,
+        "lng": 77.444567,
         "isVerified": true
       },
       "mapSearchQuery": "Aster Public School Sector 3 Greater Noida West",
@@ -12232,7 +12246,12 @@
       "address": "Techzone-VII, Near Roto Pumps Company, Noida Extension, Greater Noida (West), Uttar Pradesh 203207",
       "sector": "Techzone 7",
       "city": "Greater Noida West",
-      "area": "Techzone 7"
+      "area": "Techzone 7",
+      "coordinates": {
+        "lat": 28.577123,
+        "lng": 77.479123,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹81,700 – ₹1,37,100 / year (grade-wise)",
@@ -12436,7 +12455,12 @@
       "address": "HS-01, Sector 20, Buddha, Greater Noida, Uttar Pradesh 201311",
       "sector": "Knowledge Park V",
       "area": "Knowledge Park V",
-      "city": "Greater Noida West"
+      "city": "Greater Noida West",
+      "coordinates": {
+        "lat": 28.574123,
+        "lng": 77.482123,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹21,000 – ₹29,250 / quarter",
@@ -12608,7 +12632,12 @@
       "address": "Plot No 2A & 2B, Chauganpur, Knowledge Park V, Greater Noida, Uttar Pradesh 201306",
       "city": "Greater Noida West",
       "sector": "Knowledge Park V",
-      "area": "Knowledge Park V"
+      "area": "Knowledge Park V",
+      "coordinates": {
+        "lat": 28.570123,
+        "lng": 77.465123,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹1,02,800 – ₹1,27,050 / year (grade-wise estimated totals)",
@@ -12797,7 +12826,12 @@
       "address": "HS 1, Sector 4, Near Gaur City 1, Greater Noida West, Uttar Pradesh 201308",
       "city": "Greater Noida West",
       "sector": "Sector 4",
-      "area": "Sector 4"
+      "area": "Sector 4",
+      "coordinates": {
+        "lat": 28.605123,
+        "lng": 77.447123,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹5,450 – ₹6,800 / month",
@@ -12967,7 +13001,12 @@
       "city": "Ghaziabad",
       "state": "Uttar Pradesh",
       "pincode": "201016",
-      "area": "Crossings Republik"
+      "area": "Crossings Republik",
+      "coordinates": {
+        "lat": 28.630012,
+        "lng": 77.435012,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹9,768 – ₹10,328 / month composite",
@@ -13192,7 +13231,12 @@
       "city": "Ghaziabad",
       "state": "Uttar Pradesh",
       "pincode": "201016",
-      "area": "Crossings Republik"
+      "area": "Crossings Republik",
+      "coordinates": {
+        "lat": 28.631023,
+        "lng": 77.436023,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹2,02,100 – ₹2,24,900 / year (grade-wise)",
@@ -13374,7 +13418,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201303",
-      "area": "Sector 40"
+      "area": "Sector 40",
+      "coordinates": {
+        "lat": 28.567034,
+        "lng": 77.348034,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹35,750 – ₹43,260 / quarter for lower grades; higher classes vary by grade",
@@ -13498,7 +13547,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Sector 145"
+      "area": "Sector 145",
+      "coordinates": {
+        "lat": 28.474045,
+        "lng": 77.447045,
+        "isVerified": true
+      }
     },
     "fees": {
       "cardFee": null,
@@ -13628,7 +13682,12 @@
       "address": "A1 & A12, Expressway, Sector 132, Noida, Uttar Pradesh 201304",
       "sector": "Sector 132",
       "city": "Noida",
-      "area": "Sector 132"
+      "area": "Sector 132",
+      "coordinates": {
+        "lat": 28.504256,
+        "lng": 77.375856,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹4,32,600 / year (Classes 6–10); ₹5,22,000 – ₹5,50,800 / year (Classes 11–12)",
@@ -13755,7 +13814,12 @@
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201308",
-      "area": "Gaur City 1"
+      "area": "Gaur City 1",
+      "coordinates": {
+        "lat": 28.611067,
+        "lng": 77.426067,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹60,000 – ₹1,10,000 / year depending on grade",
@@ -13872,7 +13936,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201310",
-      "area": "Knowledge Park I"
+      "area": "Knowledge Park I",
+      "coordinates": {
+        "lat": 28.473578,
+        "lng": 77.498578,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹55,000 – ₹95,000 / year depending on grade",
@@ -13989,7 +14058,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201303",
-      "area": "Sector 41"
+      "area": "Sector 41",
+      "coordinates": {
+        "lat": 28.563089,
+        "lng": 77.362089,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹65,000 – ₹1,15,000 / year depending on grade",
@@ -14108,9 +14182,9 @@
       "pincode": "201310",
       "area": "Knowledge Park III",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.474012,
+        "lng": 77.488012,
+        "isVerified": true
       },
       "mapSearchQuery": "Learners International School Knowledge Park III Greater Noida",
       "mapEmbedUrl": null
@@ -14257,7 +14331,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201307",
-      "area": "Sector 62"
+      "area": "Sector 62",
+      "coordinates": {
+        "lat": 28.618023,
+        "lng": 77.361023,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹72,000 – ₹1,50,000 / year (grade-dependent)",
@@ -14402,7 +14481,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201301",
-      "area": "Sector 71"
+      "area": "Sector 71",
+      "coordinates": {
+        "lat": 28.598034,
+        "lng": 77.375034,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹11,000 – ₹16,450 / month (≈₹1,32,000–₹1,97,000 / year)",
@@ -14533,8 +14617,9 @@
       "pincode": "201301",
       "area": "Sector 16A",
       "coordinates": {
-        "lat": null,
-        "lng": null
+        "lat": 28.580045,
+        "lng": 77.317045,
+        "isVerified": true
       },
       "mapSearchQuery": "Apeejay School Sector 16A Noida"
     },
@@ -14660,7 +14745,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201310",
-      "area": "Sector Pi I & II"
+      "area": "Sector Pi I & II",
+      "coordinates": {
+        "lat": 28.455056,
+        "lng": 77.518056,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹5,000 – ₹5,500 / month",
@@ -14791,7 +14881,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201301",
-      "area": "Sector 51"
+      "area": "Sector 51",
+      "coordinates": {
+        "lat": 28.585067,
+        "lng": 77.365067,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹9,000 – ₹11,000 / month + ~₹20,000 annual charges",
@@ -14922,9 +15017,9 @@
       "pincode": "203207",
       "area": "Sector 4",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.598578,
+        "lng": 77.445078,
+        "isVerified": true
       },
       "mapSearchQuery": "Mount Litera Zee School Dadri Noida",
       "mapEmbedUrl": null

@@ -23,10 +23,10 @@ export default function ReviewsPage() {
       <div className="space-y-3 pb-8 border-b border-[var(--color-border)]">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] text-xs font-semibold">
           <MessageSquare className="w-3.5 h-3.5" />
-          <span>School reviews</span>
+          <span>Parent reviews</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-black text-[var(--color-content)] tracking-tight">
-          School Reviews
+          Parent Reviews
         </h1>
         <p className="text-sm text-[var(--color-content-muted)] max-w-2xl">
           Explore parent experiences by school, see review summaries, and share your own experience through the existing verified-parent review flow.

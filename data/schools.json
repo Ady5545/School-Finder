@@ -10292,7 +10292,7 @@
         {
           "id": "app_opening",
           "label": "Application Window Open",
-          "date": "2027-09-15",
+          "date": "2026-09-15",
           "verified": true,
           "notes": "Online application & interaction",
           "verificationStatus": "verified_official_notice"
@@ -10817,7 +10817,7 @@
         {
           "id": "app_opening",
           "label": "Admissions Open",
-          "date": "2027-09-10",
+          "date": "2026-09-10",
           "verified": true,
           "notes": "Online inquiry form",
           "verificationStatus": "verified_official_notice"
@@ -11625,7 +11625,7 @@
         {
           "id": "app_opening",
           "label": "Application Window Opens",
-          "date": "2027-09-01",
+          "date": "2026-09-01",
           "verified": true,
           "notes": "Online admission portal",
           "verificationStatus": "verified_official_notice"
@@ -11830,7 +11830,7 @@
         {
           "id": "app_opening",
           "label": "Application Portal Open",
-          "date": "2027-09-15",
+          "date": "2026-09-15",
           "verified": true,
           "notes": "Montessori & Primary registrations",
           "verificationStatus": "verified_official_notice"
@@ -12113,7 +12113,7 @@
         {
           "id": "app_opening",
           "label": "Application Window Opens",
-          "date": "2027-09-15",
+          "date": "2026-09-15",
           "verified": true,
           "notes": "Online forms & campus counters active",
           "verificationStatus": "verified_official_notice"

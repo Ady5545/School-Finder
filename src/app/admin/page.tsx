@@ -288,6 +288,7 @@ export default function AdminPage() {
       setLoadedTabs(prev => new Set(prev).add(tab));
     } catch (err) {
       console.error(`Failed to load admin ${tab} data:`, err);
+      setActionMessage({ type: 'error', text: err instanceof Error ? err.message : `Failed to load ${tab}.` });
     } finally {
       setLoadingTab(null);
     }

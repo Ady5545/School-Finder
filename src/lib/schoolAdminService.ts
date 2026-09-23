@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { School, schools, getCanonicalSchools, getArchivedSchools } from '../../data/schoolsData';
 import { recordAdminAudit } from './authStore';
+import { getSchoolsCollection, isMongoConfigured } from './mongodb';
 
 // In-memory overlay for newly created or modified schools to prevent desynchronization
 const globalSchoolStore = globalThis as unknown as {
@@ -124,6 +125,174 @@ export function getAdminSchoolBySlug(slug: string): (School & { completeness: Sc
     ...found,
     completeness: calculateSchoolCompleteness(found),
   };
+}
+
+let lastMongoSchoolSyncAt = 0;
+const MONGO_SCHOOL_SYNC_TTL_MS = 1500;
+
+async function syncSchoolsFromMongo(force = false): Promise<void> {
+  if (!isMongoConfigured()) return;
+  const now = Date.now();
+  if (!force && now - lastMongoSchoolSyncAt < MONGO_SCHOOL_SYNC_TTL_MS) return;
+
+  const collection = await getSchoolsCollection(true);
+  if (!collection) return;
+
+  const docs = await collection.find({}).toArray();
+  const baseSlugs = new Set(schools.map(s => s.slug));
+
+  for (const doc of docs) {
+    if (!doc?.school?.slug) continue;
+    if (baseSlugs.has(doc.slug)) {
+      schoolOverlays.set(doc.slug, doc.school);
+    } else {
+      const existingIndex = newSchools.findIndex(s => s.slug === doc.slug);
+      if (existingIndex >= 0) {
+        newSchools[existingIndex] = doc.school;
+      } else {
+        newSchools.push(doc.school);
+      }
+    }
+  }
+
+  lastMongoSchoolSyncAt = now;
+}
+
+export async function getAdminSchoolsListAsync(options?: Parameters<typeof getAdminSchoolsList>[0]) {
+  try {
+    await syncSchoolsFromMongo();
+  } catch (error) {
+    console.warn('[SCHOOL_STORE_READ_WARN]', error instanceof Error ? error.message : error);
+  }
+  return getAdminSchoolsList(options);
+}
+
+export async function getAdminSchoolBySlugAsync(slug: string) {
+  try {
+    await syncSchoolsFromMongo();
+  } catch (error) {
+    console.warn('[SCHOOL_STORE_READ_WARN]', error instanceof Error ? error.message : error);
+  }
+  return getAdminSchoolBySlug(slug);
+}
+
+async function persistSchoolRecord(
+  school: School,
+  kind: 'override' | 'new',
+  adminUser: { id: string; email: string; name: string },
+  createdAt?: string,
+): Promise<void> {
+  if (!isMongoConfigured()) return;
+
+  const collection = await getSchoolsCollection(true);
+  if (!collection) throw new Error('Persistent school store is unavailable.');
+
+  const now = new Date().toISOString();
+  await collection.updateOne(
+    { slug: school.slug },
+    {
+      $set: {
+        school,
+        kind,
+        updatedAt: now,
+        updatedBy: adminUser.email,
+      },
+      $setOnInsert: {
+        createdAt: createdAt || now,
+      },
+    },
+    { upsert: true }
+  );
+  lastMongoSchoolSyncAt = now ? Date.now() : 0;
+}
+
+export async function updateAdminSchoolAsync(
+  slug: string,
+  updates: Partial<School>,
+  adminUser: { id: string; email: string; name: string },
+  reason: string
+): Promise<{ success: boolean; school?: School; error?: string }> {
+  const current = await getAdminSchoolBySlugAsync(slug);
+  if (!current) return { success: false, error: `School with slug '${slug}' not found.` };
+
+  if (updates.location?.coordinates) {
+    const coords = updates.location.coordinates;
+    const coordVal = validateCoordinates(
+      coords.lat ?? coords.latitude,
+      coords.lng ?? coords.longitude
+    );
+    if (!coordVal.valid) return { success: false, error: coordVal.error };
+  }
+
+  const updatedSchool: School = {
+    ...current,
+    ...updates,
+    location: { ...current.location, ...(updates.location || {}), coordinates: {
+      ...current.location.coordinates,
+      ...(updates.location?.coordinates || {}),
+    } },
+    fees: { ...current.fees, ...(updates.fees || {}) },
+    contact: { ...current.contact, ...(updates.contact || {}) },
+    admissions: { ...current.admissions, ...(updates.admissions || {}) },
+    assets: { ...current.assets, ...(updates.assets || {}) },
+    verification: { ...current.verification, ...(updates.verification || {}) } as School['verification'],
+    rating: { ...current.rating, ...(updates.rating || {}) },
+    uniforms: { ...current.uniforms, ...(updates.uniforms || {}) },
+  };
+
+  const previousOverlay = schoolOverlays.get(slug);
+  const previousNewIndex = newSchools.findIndex(s => s.slug === slug);
+  const previousNew = previousNewIndex >= 0 ? newSchools[previousNewIndex] : undefined;
+
+  try {
+    await persistSchoolRecord(updatedSchool, 'override', adminUser);
+    schoolOverlays.set(slug, updatedSchool);
+    if (previousNewIndex >= 0) newSchools[previousNewIndex] = updatedSchool;
+
+    recordAdminAudit(
+      adminUser.id,
+      adminUser.email,
+      'update_school_record',
+      'school',
+      slug,
+      { updatedFields: Object.keys(updates), reason, schoolName: updatedSchool.name },
+      'success'
+    );
+
+    return { success: true, school: updatedSchool };
+  } catch (error) {
+    if (previousOverlay) schoolOverlays.set(slug, previousOverlay);
+    else schoolOverlays.delete(slug);
+    if (previousNewIndex >= 0 && previousNew) newSchools[previousNewIndex] = previousNew;
+    return { success: false, error: error instanceof Error ? error.message : 'Persistent school update failed.' };
+  }
+}
+
+export async function createAdminSchoolAsync(
+  schoolData: Partial<School>,
+  adminUser: { id: string; email: string; name: string },
+  reason: string
+): Promise<{ success: boolean; school?: School; error?: string }> {
+  if (isMongoConfigured()) {
+    try {
+      await getSchoolsCollection(true);
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Persistent school store is unavailable.' };
+    }
+  }
+
+  const result = createAdminSchool(schoolData, adminUser, reason);
+  if (!result.success || !result.school) return result;
+
+  try {
+    await persistSchoolRecord(result.school, 'new', adminUser);
+    return result;
+  } catch (error) {
+    const idx = newSchools.findIndex(s => s.slug === result.school!.slug);
+    if (idx >= 0) newSchools.splice(idx, 1);
+    schoolOverlays.delete(result.school.slug);
+    return { success: false, error: error instanceof Error ? error.message : 'Failed to persist new school.' };
+  }
 }
 
 /**
@@ -264,8 +433,8 @@ export function updateAdminSchool(
   // Validate coordinates if being updated
   if (updates.location?.coordinates) {
     const coordVal = validateCoordinates(
-      updates.location.coordinates.latitude,
-      updates.location.coordinates.longitude
+      updates.location.coordinates.lat ?? updates.location.coordinates.latitude,
+      updates.location.coordinates.lng ?? updates.location.coordinates.longitude
     );
     if (!coordVal.valid) {
       return { success: false, error: coordVal.error };
@@ -295,6 +464,18 @@ export function updateAdminSchool(
     admissions: {
       ...current.admissions,
       ...(updates.admissions || {}),
+    },
+    verification: {
+      ...(current.verification || {}),
+      ...(updates.verification || {}),
+    },
+    rating: {
+      ...current.rating,
+      ...(updates.rating || {}),
+    },
+    uniforms: {
+      ...current.uniforms,
+      ...(updates.uniforms || {}),
     },
   };
 
@@ -350,8 +531,8 @@ export function createAdminSchool(
   // Validate coordinates if provided
   if (schoolData.location?.coordinates) {
     const coordVal = validateCoordinates(
-      schoolData.location.coordinates.latitude,
-      schoolData.location.coordinates.longitude
+      schoolData.location.coordinates.lat ?? schoolData.location.coordinates.latitude,
+      schoolData.location.coordinates.lng ?? schoolData.location.coordinates.longitude
     );
     if (!coordVal.valid) {
       return { success: false, error: coordVal.error };
@@ -364,20 +545,20 @@ export function createAdminSchool(
     name: schoolData.name.trim(),
     shortName: schoolData.shortName || schoolData.name.split(' ')[0],
     alternateNames: schoolData.alternateNames || [],
-    tagline: schoolData.tagline || 'Excellence in holistic child education',
-    summary: schoolData.summary || `${schoolData.name} provides premier schooling and academic rigor in Greater Noida West.`,
-    board: schoolData.board && schoolData.board.length > 0 ? schoolData.board : ['CBSE'],
+    tagline: schoolData.tagline || '',
+    summary: schoolData.summary || '',
+    board: schoolData.board && schoolData.board.length > 0 ? schoolData.board : [],
     boardNote: schoolData.boardNote || null,
-    curriculum: schoolData.curriculum || 'CBSE National Curriculum Framework',
-    gradeRange: schoolData.gradeRange || { from: 'Nursery', to: 'Grade 12', raw: 'Nursery to Grade 12' },
-    admissionAge: schoolData.admissionAge || '3+ years for Nursery',
-    studentTeacherRatio: schoolData.studentTeacherRatio || '1:20',
-    schoolType: schoolData.schoolType || 'Co-Educational',
-    dayOrBoarding: schoolData.dayOrBoarding || 'Day School',
+    curriculum: schoolData.curriculum || '',
+    gradeRange: schoolData.gradeRange || { from: '', to: '', raw: '' },
+    admissionAge: schoolData.admissionAge || '',
+    studentTeacherRatio: schoolData.studentTeacherRatio || '',
+    schoolType: schoolData.schoolType || '',
+    dayOrBoarding: schoolData.dayOrBoarding || '',
     location: {
-      address: schoolData.location?.address || 'Greater Noida West, Uttar Pradesh 201306',
-      area: schoolData.location?.area || 'Greater Noida West',
-      sector: schoolData.location?.sector || 'Techzone 4',
+      address: schoolData.location?.address || '',
+      area: schoolData.location?.area || '',
+      sector: schoolData.location?.sector || '',
       coordinates: schoolData.location?.coordinates || {
         lat: null,
         lng: null,
@@ -387,47 +568,33 @@ export function createAdminSchool(
       },
     },
     fees: {
-      cardFee: schoolData.fees?.cardFee || 120000,
-      tuitionAnnual: schoolData.fees?.tuitionAnnual || '₹1,20,000/yr',
-      rangeText: schoolData.fees?.rangeText || '₹1.0L - ₹1.5L / year',
-      tuitionMonthly: schoolData.fees?.tuitionMonthly || '₹10,000/mo',
-      tuitionQuarterly: schoolData.fees?.tuitionQuarterly || '₹30,000/qtr',
-      source: schoolData.fees?.source || 'Official School Prospectus',
-      academicYear: schoolData.fees?.academicYear || '2027-28',
+      ...(schoolData.fees || {}),
+      cardFee: schoolData.fees?.cardFee ?? null,
+      rangeText: schoolData.fees?.rangeText || '',
+      currency: schoolData.fees?.currency || 'INR',
+      verificationStatus: schoolData.fees?.verificationStatus || 'pending_audit',
+      academicSession: schoolData.fees?.academicSession || schoolData.fees?.academicYear || '2027-28',
       verifiedDate: new Date().toISOString().split('T')[0],
-      isVerified: true,
     },
-    facilities: schoolData.facilities || [
-      { name: 'Smart Classrooms', category: 'Infrastructure', available: true },
-      { name: 'Composite Science Labs', category: 'Labs', available: true },
-      { name: 'Library & Reading Room', category: 'Academic', available: true },
-      { name: 'GPS-enabled Transport', category: 'Safety', available: true },
-    ],
-    uniforms: schoolData.uniforms || { notes: 'Standard school uniform prescribed by administration' },
-    achievements: schoolData.achievements || ['Affiliated with CBSE New Delhi'],
+    facilities: schoolData.facilities || [],
+    uniforms: schoolData.uniforms || { notes: '' },
+    achievements: schoolData.achievements || [],
     admissions: schoolData.admissions || {
-      status: 'Admissions Open',
-      academicYear: '2027-28',
-      process: 'Online registration followed by parent interaction and document verification.',
-      milestones: [
-        {
-          id: 'adm-reg-open',
-          label: 'Application Forms Available',
-          date: '2025-08-01',
-          type: 'opening',
-          status: 'verified',
-        },
-      ],
+      status: 'Not publicly disclosed',
+      session: '2027-28',
+      process: '',
+      date: null,
+      milestones: [],
     },
     contact: schoolData.contact || {
-      phone: '0120-0000000',
-      email: 'admissions@example.com',
-      website: 'https://example.com',
+      phone: null,
+      email: null,
+      website: null,
     },
-    rating: {
-      score: 4.5,
+    rating: schoolData.rating || {
+      score: 0,
+      scale: 5,
       reviewsCount: 0,
-      breakdown: { academics: 4.5, infrastructure: 4.5, faculty: 4.5, safety: 4.5 },
     },
     assets: schoolData.assets || {
       featured: null,
@@ -435,13 +602,13 @@ export function createAdminSchool(
       gallery: [],
       legacyPaths: {},
     },
-    verification: {
-      isVerified: true,
-      status: 'verified_official',
+    verification: schoolData.verification || {
+      isVerified: false,
+      status: 'pending_audit',
       lastVerified: new Date().toISOString().split('T')[0],
-      sourceName: 'Official Administrative Verification',
-      cbseAffiliationNumber: schoolData.affiliationNumber || 'Pending',
-      verifiedFields: ['name', 'location', 'fees', 'contact'],
+      sourceName: '',
+      cbseAffiliationNumber: schoolData.affiliationNumber || null,
+      verifiedFields: [],
     },
     legacyIdentifiers: {
       pageFile: `${rawSlug}.html`,
@@ -454,7 +621,7 @@ export function createAdminSchool(
       legacyUrls: [`/schools/${rawSlug}`],
     },
     auditNotes: [`Created by admin ${adminUser.email} on ${new Date().toISOString()}`],
-    classification: 'core_greater_noida_west',
+    classification: schoolData.classification || 'nearby_surrounding',
     status: 'active',
     isArchived: false,
   };

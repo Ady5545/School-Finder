@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
 import { generateMonthlyExcelReportAsync } from '../../../../lib/excelReport';
 import { recordAdminAuditAsync, getSchoolRatingStatsAsync } from '../../../../lib/authStore';
-import { getSchoolBySlug } from '../../../../lib/schools';
+import { getPublicSchoolBySlugAsync } from '../../../../lib/publicSchoolData';
 import * as XLSX from 'xlsx';
 
 export async function GET(req: NextRequest) {
@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
 
   try {
     if (schoolSlug) {
-      const school = getSchoolBySlug(schoolSlug);
+      const school = await getPublicSchoolBySlugAsync(schoolSlug);
       if (!school) return NextResponse.json({ success: false, message: 'School not found.' }, { status: 404 });
       const stats = await getSchoolRatingStatsAsync(school.slug);
       const rows = [

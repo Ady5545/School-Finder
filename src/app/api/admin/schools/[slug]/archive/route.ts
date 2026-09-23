@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { archiveAdminSchool } from '@/lib/schoolAdminService';
+import { archiveAdminSchoolAsync } from '@/lib/schoolAdminService';
 
 export async function POST(
   req: NextRequest,
@@ -30,7 +30,7 @@ export async function POST(
       );
     }
 
-    const result = archiveAdminSchool(
+    const result = await archiveAdminSchoolAsync(
       slug,
       reason.trim(),
       { id: auth.user.id, email: auth.user.email, name: auth.user.name }

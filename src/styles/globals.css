@@ -637,3 +637,84 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
   }
 }
 
+
+
+/* Mobile-first performance + ergonomics pass
+   Keep the phone experience fast, thumb-friendly, and visually calm. */
+@media (max-width: 639px) {
+  html {
+    scrollbar-gutter: auto;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overscroll-behavior-x: none;
+  }
+
+  body {
+    min-width: 0;
+    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a, button, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Heavy glass blur is disproportionately expensive on phones. */
+  .liquid-glass,
+  .glass-surface,
+  .glass-surface-strong,
+  .glass-chip,
+  .glass-panel {
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    backdrop-filter: blur(10px) saturate(120%);
+  }
+
+  .liquid-glass-hover:hover,
+  .tactile-card:hover {
+    transform: none;
+  }
+
+  .animate-shimmer::after {
+    animation-duration: 3.5s;
+  }
+
+  html.has-scroll-reveal .reveal-on-scroll.is-pending {
+    transform: translateY(10px);
+  }
+
+  html.has-scroll-reveal .reveal-on-scroll.is-revealed {
+    transition-duration: 0.32s;
+  }
+
+  [data-reveal-delay="1"] { --reveal-delay: 40ms; }
+  [data-reveal-delay="2"] { --reveal-delay: 80ms; }
+  [data-reveal-delay="3"] { --reveal-delay: 120ms; }
+  [data-reveal-delay="4"] { --reveal-delay: 160ms; }
+  [data-reveal-delay="5"] { --reveal-delay: 200ms; }
+  [data-reveal-delay="6"] { --reveal-delay: 240ms; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .tactile-card,
+  .liquid-glass-hover {
+    transition-duration: 180ms;
+  }
+
+  .tactile-card:active,
+  .liquid-glass-hover:active {
+    transform: scale(0.99);
+  }
+}
+
+@media (max-width: 380px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}

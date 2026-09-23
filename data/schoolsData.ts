@@ -300,6 +300,9 @@ export interface School {
   affiliationNumber?: string | null;
   establishedYear?: number | null;
   sports?: string[];
+  timings?: string;
+  transportDetails?: string;
+  extraDetails?: Record<string, unknown>;
 }
 
 export const schools: School[] = schoolsJson as unknown as School[];

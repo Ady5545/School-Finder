@@ -5,7 +5,7 @@ import { buildPageMetadata } from '../../lib/seo';
 import { Calendar } from 'lucide-react';
 import { AdmissionInterestForm } from '../../components/school/AdmissionInterestForm';
 import { AdmissionCalendarView } from '../../components/school/AdmissionCalendarView';
-import { getAllSchools } from '../../lib/schools';
+import { getPublicSchoolsAsync } from '../../lib/publicSchoolData';
 
 export const metadata = buildPageMetadata(
   'School Admissions in Greater Noida | Admission Pitara',
@@ -13,7 +13,7 @@ export const metadata = buildPageMetadata(
   '/admissions'
 );
 
-export default function AdmissionsPage() {
+export default async function AdmissionsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'Admissions', isCurrent: true }]} className="mb-4" />
@@ -33,7 +33,7 @@ export default function AdmissionsPage() {
 
       <div className="mb-8"><AdmissionInterestForm /></div>
 
-      <AdmissionCalendarView schools={getAllSchools()} />
+      <AdmissionCalendarView schools={await getPublicSchoolsAsync()} />
 
       <div className="mt-8"><AdmissionsHubView /></div>
     </div>

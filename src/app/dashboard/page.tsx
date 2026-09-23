@@ -98,8 +98,8 @@ export default function DashboardPage() {
   }, []);
 
   const { urgentAlerts } = React.useMemo(() => {
-    return checkShortlistDeadlines(shortlist);
-  }, [shortlist]);
+    return checkShortlistDeadlines(shortlist, undefined, allSchools);
+  }, [shortlist, allSchools]);
 
   const handleSendEmailAlert = async () => {
     if (!user?.email) {

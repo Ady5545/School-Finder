@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: SchoolDetailPageProps) {
 
 export default async function SchoolDetailPage({ params }: SchoolDetailPageProps) {
   const { slug } = await params;
-  const school = getSchoolBySlug(slug);
+  const school = await getPublicSchoolBySlugAsync(slug);
 
   if (!school || school.slug === 'mount-vinson-school') {
     notFound();

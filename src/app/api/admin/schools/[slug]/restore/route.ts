@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { restoreAdminSchool } from '@/lib/schoolAdminService';
+import { restoreAdminSchoolAsync } from '@/lib/schoolAdminService';
 
 export async function POST(
   req: NextRequest,
@@ -23,7 +23,7 @@ export async function POST(
     const body = await req.json().catch(() => ({}));
     const { reason } = body || {};
 
-    const result = restoreAdminSchool(
+    const result = await restoreAdminSchoolAsync(
       slug,
       reason || 'Restored to active directory listing by admin',
       { id: auth.user.id, email: auth.user.email, name: auth.user.name }

@@ -13605,7 +13605,7 @@
       "email": null
     },
     "rating": {
-      "score": 4,
+      "score": 0,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -13629,7 +13629,8 @@
       "legacyUrls": []
     },
     "auditNotes": [
-      "Listed as an upcoming school per user instruction (2026-09-19). Full details pending."
+      "Listed as an upcoming school per user instruction (2026-09-19). Full details pending.",
+      "2026-09-23 data-integrity correction: removed the previously populated 4.0/5 rating because the school is an upcoming campus and no verified school-review dataset supports a public rating. Upcoming schools must not display fabricated review scores or counts."
     ],
     "classification": "upcoming",
     "sports": [],
@@ -13642,9 +13643,9 @@
     "verification": {
       "isVerified": false,
       "status": "partially_verified",
-      "lastVerified": "2026-09",
-      "sourceName": "Third-party admission/listing portals",
-      "sourceUrl": null,
+      "lastVerified": "2026-09-23",
+      "sourceName": "Official Clarwyn contact/admissions sources; rating intentionally not populated",
+      "sourceUrl": "https://www.clarwynschool.com/get-in-touch/contact-us/",
       "cbseAffiliationNumber": null,
       "verifiedFields": [
         "name",

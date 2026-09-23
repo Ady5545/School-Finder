@@ -268,12 +268,48 @@ export async function updateAdminSchoolAsync(
   }
 }
 
+export async function archiveAdminSchoolAsync(
+  slug: string,
+  reason: string,
+  adminUser: { id: string; email: string; name: string }
+): Promise<{ success: boolean; error?: string }> {
+  if (!reason || reason.trim().length < 5) {
+    return { success: false, error: 'A mandatory, descriptive archive reason is required.' };
+  }
+  const result = await updateAdminSchoolAsync(
+    slug,
+    { isArchived: true, status: 'archived', archiveReason: reason.trim() },
+    adminUser,
+    `Archived: ${reason.trim()}`
+  );
+  return { success: result.success, error: result.error };
+}
+
+export async function restoreAdminSchoolAsync(
+  slug: string,
+  reason: string,
+  adminUser: { id: string; email: string; name: string }
+): Promise<{ success: boolean; error?: string }> {
+  const result = await updateAdminSchoolAsync(
+    slug,
+    { isArchived: false, status: 'active', archiveReason: undefined },
+    adminUser,
+    `Restored: ${reason || 'Restored by administrator'}`
+  );
+  return { success: result.success, error: result.error };
+}
+
 export async function createAdminSchoolAsync(
   schoolData: Partial<School>,
   adminUser: { id: string; email: string; name: string },
   reason: string
 ): Promise<{ success: boolean; school?: School; error?: string }> {
   if (isMongoConfigured()) {
+    try {
+      await syncSchoolsFromMongo(true);
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Persistent school store is unavailable.' };
+    }
     try {
       await getSchoolsCollection(true);
     } catch (error) {

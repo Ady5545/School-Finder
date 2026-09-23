@@ -42,10 +42,10 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/70 bg-[#fcfbf9]/72 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-[4.25rem] grid grid-cols-[minmax(175px,220px)_minmax(0,1fr)_auto] items-center gap-2.5 sm:gap-4">
+    <header className="sticky top-0 z-40 w-full border-b border-white/70 bg-[#fcfbf9]/88 sm:bg-[#fcfbf9]/72 backdrop-blur-xl sm:backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 sm:h-[4.25rem] grid grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(175px,220px)_minmax(0,1fr)_auto] items-center gap-2 sm:gap-4">
         <div className="flex items-center min-w-0 shrink-0">
-          <Link href="/" className="group flex items-center min-w-0 max-w-[220px] overflow-hidden rounded-2xl px-1 py-1 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">
+          <Link href="/" className="group flex items-center min-w-0 max-w-[180px] sm:max-w-[220px] overflow-hidden rounded-2xl px-1 py-1 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">
             <BrandLogo size="sm" subtext="GREATER NOIDA WEST" className="max-w-full" />
           </Link>
         </div>
@@ -137,7 +137,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Affordances */}
-        <div className="flex items-center justify-self-end gap-1 sm:hidden rounded-2xl border border-white/75 bg-white/50 px-1 py-1 backdrop-blur-xl shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
+        <div className="flex items-center justify-self-end gap-0.5 sm:hidden rounded-2xl border border-white/75 bg-white/65 px-0.5 py-0.5 backdrop-blur-lg shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
           {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
             <IconButton

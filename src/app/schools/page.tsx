@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllSchools, getDistinctBoards, getDistinctAreas } from '../../lib/schools';
+import { getPublicSchoolsAsync, getDistinctBoardsFromSchools, getDistinctAreasFromSchools } from '../../lib/publicSchoolData';
 import { SchoolDirectory } from '../../components/school/SchoolDirectory';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { buildPageMetadata, generateSchoolDirectoryJsonLd } from '../../lib/seo';
@@ -42,9 +42,9 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const initialTransport = params.transport || 'all';
   const initialTrust = params.trust || 'all';
 
-  const allSchools = getAllSchools();
-  const boards = getDistinctBoards();
-  const areas = getDistinctAreas();
+  const allSchools = await getPublicSchoolsAsync();
+  const boards = getDistinctBoardsFromSchools(allSchools);
+  const areas = getDistinctAreasFromSchools(allSchools);
 
   const directoryJsonLd = generateSchoolDirectoryJsonLd(allSchools);
 

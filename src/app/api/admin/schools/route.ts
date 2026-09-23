@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
 import { getAdminSchoolsListAsync, createAdminSchoolAsync } from '@/lib/schoolAdminService';
@@ -64,6 +66,8 @@ export async function GET(req: NextRequest) {
       saves: summary?.saves || 0,
       reviewsCount: summary?.reviewsCount || 0,
       averageRating: summary?.averageRating || 0,
+      directoryRating: school.rating?.score ?? 0,
+      directoryReviewsCount: school.rating?.reviewsCount ?? 0,
       contact: school.contact,
       admissions: school.admissions,
       assets: school.assets,

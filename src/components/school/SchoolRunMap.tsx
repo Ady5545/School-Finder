@@ -67,7 +67,7 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
       distanceKm={route?.distanceKm ?? null}
       durationMin={route?.durationMin ?? null}
     />
-    <div className="h-[430px] sm:h-[520px] w-full">
+    <div className="h-[300px] xs:h-[340px] sm:h-[520px] w-full">
       <MapContainer center={[origin.lat, origin.lng]} zoom={13} scrollWheelZoom className="h-full w-full">
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <FitBounds origin={origin} schools={schools} />
@@ -87,7 +87,7 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
         ) : null}
       </MapContainer>
     </div>
-    <div className="flex flex-wrap items-center gap-3 px-4 py-3 border-t border-[var(--color-border)] bg-[#faf8f5]">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 border-t border-[var(--color-border)] bg-[#faf8f5]">
       <div className="inline-flex rounded-xl border border-[var(--color-border-strong)] bg-white p-0.5 text-xs font-bold">
         <button type="button" onClick={() => setMode('driving')} className={`px-3 py-1.5 rounded-[10px] transition-colors ${mode === 'driving' ? 'bg-[var(--color-primary)] text-white' : 'text-[var(--color-content-muted)]'}`}>🚗 Drive</button>
         <button type="button" disabled={!hasWalking} onClick={() => setMode('walking')} className={`px-3 py-1.5 rounded-[10px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${mode === 'walking' ? 'bg-[var(--color-accent)] text-white' : 'text-[var(--color-content-muted)]'}`}>🚶 Walk</button>
@@ -111,8 +111,8 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
         <Gauge className="w-3.5 h-3.5" />
         {SPEED_OPTIONS.map((opt, i) => <button key={opt.label} type="button" onClick={() => setSpeedIdx(i)} className={`px-2 py-1 rounded-lg ${speedIdx === i ? 'bg-[var(--color-primary)] text-white' : 'hover:bg-white'}`}>{opt.label}</button>)}
       </div>
-      <div className="ml-auto flex items-center gap-4 text-xs">
-        <div className="min-w-[160px]">
+      <div className="ml-0 sm:ml-auto flex w-full sm:w-auto items-center gap-3 sm:gap-4 text-xs">
+        <div className="min-w-0 flex-1 sm:min-w-[160px]">
           <div className="h-1.5 w-full rounded-full bg-slate-200 overflow-hidden"><div className="h-full bg-[var(--color-primary)] transition-[width]" style={{ width: `${Math.round(progress.fraction * 100)}%` }} /></div>
           <div className="mt-1 text-[10px] text-[var(--color-content-muted)]">{progress.totalKm > 0 ? `${progress.coveredKm.toFixed(2)} / ${progress.totalKm.toFixed(2)} km` : 'Select a route'}</div>
         </div>

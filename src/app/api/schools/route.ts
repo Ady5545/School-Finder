@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllSchools, filterSchools } from '../../../lib/schools';
+import { getPublicSchoolsAsync, filterPublicSchoolsAsync } from '../../../lib/publicSchoolData';
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,14 +13,14 @@ export async function GET(request: NextRequest) {
     const area = areaParam ? areaParam.split(',') : undefined;
 
     if (!q && !board && !area) {
-      const schools = getAllSchools({ includeAliases });
+      const schools = await getPublicSchoolsAsync({ includeAliases });
       return NextResponse.json({
         total: schools.length,
         schools,
       });
     }
 
-    const filtered = filterSchools({ searchQuery: q, board, area });
+    const filtered = await filterPublicSchoolsAsync({ searchQuery: q, board, area });
     return NextResponse.json({
       total: filtered.length,
       schools: filtered,

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { getAdminSchoolBySlug, updateAdminSchool } from '@/lib/schoolAdminService';
+import { getAdminSchoolBySlugAsync, updateAdminSchoolAsync } from '@/lib/schoolAdminService';
 import {
   getAdminSchoolAnalyticsAsync,
   getAllPromotions,
@@ -20,7 +20,7 @@ export async function GET(
     return NextResponse.json({ success: false, message: 'School slug required' }, { status: 400 });
   }
 
-  const school = getAdminSchoolBySlug(slug);
+  const school = await getAdminSchoolBySlugAsync(slug);
   if (!school) {
     return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
   }
@@ -60,7 +60,7 @@ export async function PATCH(
       return NextResponse.json({ success: false, message: 'Missing update payload' }, { status: 400 });
     }
 
-    const result = updateAdminSchool(
+    const result = await updateAdminSchoolAsync(
       slug,
       updates,
       { id: auth.user.id, email: auth.user.email, name: auth.user.name },

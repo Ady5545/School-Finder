@@ -14,6 +14,7 @@ import {
   getAllSchoolsAdminOverviewAsync,
 } from './authStore';
 import { getCanonicalSchools, getSchoolBySlug } from './schools';
+import { getPublicSchoolsAsync } from './publicSchoolData';
 
 // Indian Standard Time (IST) is UTC+05:30 (5 hours 30 minutes ahead of UTC)
 const IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
@@ -537,6 +538,8 @@ export async function generateMonthlyExcelReportAsync(year: number, month: numbe
   const periodLabel = `${monthName} ${year} (IST)`;
 
   const wb = XLSX.utils.book_new();
+  const liveSchools = await getPublicSchoolsAsync();
+  const liveSchoolMap = new Map(liveSchools.map(school => [school.slug, school]));
 
   // --------------------------------------------------------------------------
   // SHEET 1: PARENT ACCOUNTS
@@ -644,7 +647,7 @@ export async function generateMonthlyExcelReportAsync(year: number, month: numbe
 
   if (visitEventsInMonth.length > 0) {
     for (const evt of visitEventsInMonth) {
-      const school = evt.schoolSlug ? getSchoolBySlug(evt.schoolSlug) : undefined;
+      const school = evt.schoolSlug ? liveSchoolMap.get(evt.schoolSlug) : undefined;
       const schoolName = school?.name || evt.schoolSlug || 'Unknown School';
       const sector = evt.locality || school?.location?.sector || school?.location?.area || 'Greater Noida West';
 
@@ -731,7 +734,7 @@ export async function generateMonthlyExcelReportAsync(year: number, month: numbe
 
   if (wishlistEventsInMonth.length > 0) {
     for (const evt of wishlistEventsInMonth) {
-      const school = evt.schoolSlug ? getSchoolBySlug(evt.schoolSlug) : undefined;
+      const school = evt.schoolSlug ? liveSchoolMap.get(evt.schoolSlug) : undefined;
       const schoolName = school?.name || evt.schoolSlug || 'Unknown School';
       const sector = evt.locality || school?.location?.sector || school?.location?.area || 'Greater Noida West';
 
@@ -824,7 +827,7 @@ export async function generateMonthlyExcelReportAsync(year: number, month: numbe
 
   if (reviewsInMonth.length > 0) {
     for (const r of reviewsInMonth) {
-      const school = getSchoolBySlug(r.schoolSlug);
+      const school = liveSchoolMap.get(r.schoolSlug);
       const schoolName = school?.name || r.schoolSlug;
       let authorUser = userMap.get(r.userId);
       if (!authorUser) {
@@ -888,7 +891,7 @@ export async function generateMonthlyExcelReportAsync(year: number, month: numbe
   // --------------------------------------------------------------------------
   // SHEET 5: SCHOOL SUMMARY
   // --------------------------------------------------------------------------
-  const canonicalSchools = getCanonicalSchools();
+  const canonicalSchools = liveSchools;
   const allTimeOverview = await getAllSchoolsAdminOverviewAsync();
   const allTimeMap = new Map(allTimeOverview.map(s => [s.slug, s]));
 

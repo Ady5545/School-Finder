@@ -1,7 +1,8 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getSchoolBySlug, getAllSchoolSlugs, getAllSchools } from '../../../lib/schools';
+import { getAllSchoolSlugs } from '../../../lib/schools';
+import { getPublicSchoolBySlugAsync, getPublicSchoolsAsync } from '../../../lib/publicSchoolData';
 import { buildSchoolMetadata, generateSchoolJsonLd, generateBreadcrumbJsonLd } from '../../../lib/seo';
 import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { SchoolImage } from '../../../components/school/SchoolImage';
@@ -80,7 +81,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: SchoolDetailPageProps) {
   const { slug } = await params;
-  const school = getSchoolBySlug(slug);
+  const school = await getPublicSchoolBySlugAsync(slug);
   if (!school) return {};
   return buildSchoolMetadata(school);
 }
@@ -99,7 +100,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
     { name: 'Schools', path: '/schools' },
     { name: school.name, path: `/schools/${school.slug}` },
   ]);
-  const allSchools = getAllSchools();
+  const allSchools = await getPublicSchoolsAsync();
   const schoolBoards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
   const affiliationNumber = school.affiliationNumber || school.verification?.cbseAffiliationNumber;
 

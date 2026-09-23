@@ -137,6 +137,7 @@ export function SchoolEditorModal({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [rawJson, setRawJson] = useState('');
+  const [jsonBase, setJsonBase] = useState<Partial<School> | null>(null);
 
   const [name, setName] = useState('');
   const [shortName, setShortName] = useState('');
@@ -221,8 +222,6 @@ export function SchoolEditorModal({
   const uploadInputRef = useRef<HTMLInputElement | null>(null);
   const [pendingUploadType, setPendingUploadType] = useState<'featured' | 'hero' | 'gallery' | null>(null);
 
-  const currentBase = useMemo(() => (schoolToEdit ? cleanForJson(schoolToEdit) as Partial<School> : emptySchool()), [schoolToEdit]);
-
   const loadSchoolIntoForm = (source: Partial<School>) => {
     const s = source || emptySchool();
     setName(s.name || '');
@@ -303,6 +302,7 @@ export function SchoolEditorModal({
     setVerificationStatus(s.verification?.status || 'pending_audit');
     setVerificationSourceName(s.verification?.sourceName || '');
     setVerificationSourceUrl(s.verification?.sourceUrl || '');
+    setJsonBase(cleanForJson(s) as Partial<School>);
     setRawJson(JSON.stringify(cleanForJson(s), null, 2));
   };
 
@@ -314,11 +314,6 @@ export function SchoolEditorModal({
     setSuccessMessage(null);
     setUploadingType(null);
   }, [isOpen, schoolToEdit]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-    setRawJson(JSON.stringify(cleanForJson(buildPayload(false)), null, 2));
-  }, [activeTab]);
 
   if (!isOpen) return null;
 
@@ -338,7 +333,7 @@ export function SchoolEditorModal({
       breakdown = undefined;
     }
 
-    const source = includeOriginal && schoolToEdit ? cleanForJson(schoolToEdit) as Partial<School> : {};
+    const source = includeOriginal ? (jsonBase || (schoolToEdit ? cleanForJson(schoolToEdit) as Partial<School> : {})) : {};
     return {
       ...source,
       name: name.trim(),
@@ -457,7 +452,9 @@ export function SchoolEditorModal({
     try {
       const parsed = JSON.parse(rawJson);
       if (!parsed || typeof parsed !== 'object') throw new Error('JSON must contain a school object.');
-      loadSchoolIntoForm(parsed as Partial<School>);
+      const parsedSchool = parsed as Partial<School>;
+      setJsonBase(cleanForJson(parsedSchool) as Partial<School>);
+      loadSchoolIntoForm(parsedSchool);
       setSuccessMessage('JSON applied to the form. Review it, then click Save School.');
       setActiveTab('basic');
     } catch (error) {

@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, MapPin, Building, ArrowRight, Sparkles, X, ChevronRight, Compass } from 'lucide-react';
-import { getAllSchools } from '../../lib/schools';
 import type { School } from '../../types/school';
 import { cn } from '../../lib/utils';
 
@@ -25,7 +24,16 @@ export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setSchools(getAllSchools());
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
+      .then(res => res.json())
+      .then(data => {
+        if (!cancelled && data?.schools) setSchools(data.schools);
+      })
+      .catch(() => {
+        if (!cancelled) setSchools([]);
+      });
+    return () => { cancelled = true; };
   }, []);
 
   // Close dropdown when clicked outside

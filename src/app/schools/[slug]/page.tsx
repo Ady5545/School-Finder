@@ -463,6 +463,24 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                   </a>
                 </div>
               )}
+              {school.timings && (
+                <div className="flex items-start gap-2.5 text-[var(--color-content-muted)]">
+                  <Clock className="w-4 h-4 text-[var(--color-primary)] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="block text-[10px] font-bold uppercase tracking-wider text-[var(--color-content-muted)]">School timings</span>
+                    <span className="font-semibold">{school.timings}</span>
+                  </div>
+                </div>
+              )}
+              {school.transportDetails && (
+                <div className="flex items-start gap-2.5 text-[var(--color-content-muted)]">
+                  <Compass className="w-4 h-4 text-[var(--color-primary)] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="block text-[10px] font-bold uppercase tracking-wider text-[var(--color-content-muted)]">Transport</span>
+                    <span className="font-semibold leading-relaxed">{school.transportDetails}</span>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="pt-3 border-t border-stone-100 flex items-start gap-2 text-[11px] text-stone-600 bg-amber-50/50 p-3 rounded-xl border border-amber-200/60">

@@ -1,5 +1,6 @@
 import { MongoClient, Db, Collection } from 'mongodb';
 import type {
+  School,
   ParentUser,
   SchoolRating,
   AdmissionReminder,
@@ -8,6 +9,15 @@ import type {
   SchoolPromotionCampaign,
   SchoolSubmission,
 } from './authStore';
+
+export interface SchoolRecordDoc {
+  slug: string;
+  school: School;
+  kind: 'override' | 'new';
+  createdAt: string;
+  updatedAt: string;
+  updatedBy?: string;
+}
 
 export interface SchoolViewDoc {
   slug: string;
@@ -77,6 +87,7 @@ async function ensureMongoIndexes(client: MongoClient): Promise<void> {
       db.collection('rate_limits').createIndex({ resetAt: 1 }),
       db.collection('school_submissions').createIndex({ id: 1 }, { unique: true }),
       db.collection('school_submissions').createIndex({ createdAt: -1 }),
+      db.collection('schools').createIndex({ slug: 1 }, { unique: true }),
     ]);
     indexesEnsured = true;
   } catch (idxErr) {
@@ -141,6 +152,11 @@ export async function requireMongoDb(): Promise<Db> {
     throw new Error('Database is currently unreachable');
   }
   return db;
+}
+
+export async function getSchoolsCollection(required = false): Promise<Collection<SchoolRecordDoc> | null> {
+  const db = await getMongoDb(required);
+  return db ? db.collection<SchoolRecordDoc>('schools') : null;
 }
 
 // Typed collection getters

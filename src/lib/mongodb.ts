@@ -1,6 +1,6 @@
 import { MongoClient, Db, Collection } from 'mongodb';
+import type { School } from '../../data/schoolsData';
 import type {
-  School,
   ParentUser,
   SchoolRating,
   AdmissionReminder,

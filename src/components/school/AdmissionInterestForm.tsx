@@ -1,12 +1,23 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import type { School } from '../../data/schoolsData';
 import { ArrowRight, Bell, CheckCircle2 } from 'lucide-react';
-import { getAllSchools } from '../../lib/schools';
 import { cn } from '../../lib/utils';
 
 export const AdmissionInterestForm: React.FC = () => {
-  const schools = getAllSchools();
+  const [schools, setSchools] = useState<School[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
+      .then(res => res.json())
+      .then(data => {
+        if (!cancelled && Array.isArray(data?.schools)) setSchools(data.schools);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
   const [schoolSlug, setSchoolSlug] = useState('');
   const [mode, setMode] = useState<'register' | 'pre_register'>('pre_register');
   const [name, setName] = useState('');

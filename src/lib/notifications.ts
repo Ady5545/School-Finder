@@ -75,7 +75,8 @@ export function getSchoolDeadlineAlert(school: School, refDate: Date = new Date(
  */
 export function checkShortlistDeadlines(
   shortlistSlugs: string[],
-  simulationReferenceDate?: Date
+  simulationReferenceDate?: Date,
+  schoolsOverride?: School[]
 ): {
   allAlerts: AdmissionDeadlineAlert[];
   urgentAlerts: AdmissionDeadlineAlert[];
@@ -84,7 +85,7 @@ export function checkShortlistDeadlines(
     return { allAlerts: [], urgentAlerts: [] };
   }
 
-  const allSchools = getAllSchools();
+  const allSchools = schoolsOverride || getAllSchools();
   const shortlistedSchools = allSchools.filter(s => shortlistSlugs.includes(s.slug));
 
   const allAlerts: AdmissionDeadlineAlert[] = [];

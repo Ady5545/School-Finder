@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { GridFSBucket } from 'mongodb';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { getSchoolsCollection, getMongoDb } from '@/lib/mongodb';
+import { getMongoDb } from '@/lib/mongodb';
 import { getAdminSchoolBySlugAsync, updateAdminSchoolAsync } from '@/lib/schoolAdminService';
 
 export const runtime = 'nodejs';
@@ -86,20 +86,21 @@ export async function POST(req: NextRequest) {
       if (!assets.gallery.includes(publicUrl)) assets.gallery.push(publicUrl);
     }
 
+    let extraDetails = school.extraDetails;
     if (altText) {
       const currentExtra = (school.extraDetails || {}) as Record<string, unknown>;
       const currentMediaNotes = Array.isArray(currentExtra.mediaNotes)
         ? [...currentExtra.mediaNotes]
         : [];
       currentMediaNotes.push({ url: publicUrl, altText });
-      (school as SchoolWithExtras).extraDetails = { ...currentExtra, mediaNotes: currentMediaNotes };
+      extraDetails = { ...currentExtra, mediaNotes: currentMediaNotes };
     }
 
     const updated = await updateAdminSchoolAsync(
       schoolSlug,
       {
         assets,
-        ...(altText ? { extraDetails: school.extraDetails } : {}),
+        ...(extraDetails ? { extraDetails } : {}),
       },
       { id: auth.user.id, email: auth.user.email, name: auth.user.name },
       `Uploaded ${type} image ${filename}`
@@ -124,5 +125,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
-type SchoolWithExtras = Awaited<ReturnType<typeof getAdminSchoolBySlugAsync>>;

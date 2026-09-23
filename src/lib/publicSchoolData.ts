@@ -18,10 +18,17 @@ export async function getPublicSchoolsAsync(options?: {
     includeArchived: Boolean(options?.includeArchived),
   });
 
-  return records
+  const filtered = records
     .filter((school) => options?.includeArchived || !school.isArchived)
     .filter((school) => options?.includeAliases || !school.isDuplicate)
     .map(({ completeness: _completeness, ...school }) => toPublicSchool(school as School));
+
+  const featuredSlug = 'delhi-world-public-school-kp-5';
+  return filtered.sort((a, b) => {
+    if (a.slug === featuredSlug) return -1;
+    if (b.slug === featuredSlug) return 1;
+    return 0;
+  });
 }
 
 export async function getPublicSchoolBySlugAsync(slug: string): Promise<School | undefined> {

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '@/lib/adminAuth';
-import { getCanonicalSchools, getArchivedSchools } from '@data/schoolsData';
+import { getPublicSchoolsAsync } from '@/lib/publicSchoolData';
 import { getAllParentUsersAsync, getAllRatingsAsync, getAdminAuditLogs } from '@/lib/authStore';
 import { getEmailCredentials } from '@/lib/emailService';
 
@@ -10,8 +10,9 @@ export async function GET(req: NextRequest) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const activeSchools = getCanonicalSchools();
-  const archivedSchools = getArchivedSchools();
+  const allSchoolRecords = await getPublicSchoolsAsync({ includeArchived: true });
+  const activeSchools = allSchoolRecords.filter(s => !s.isArchived);
+  const archivedSchools = allSchoolRecords.filter(s => Boolean(s.isArchived));
   const users = await getAllParentUsersAsync();
   const ratings = await getAllRatingsAsync();
   const creds = getEmailCredentials();

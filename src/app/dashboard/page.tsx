@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../lib/authContext';
 import { useSchoolStore } from '../../lib/schoolStore';
-import { getAllSchools } from '../../lib/schools';
+import type { School } from '../../data/schoolsData';
 import { SchoolCard } from '../../components/school/SchoolCard';
 import { Button } from '../../components/ui/Button';
 import { Input } from '../../components/ui/Input';
@@ -84,7 +84,18 @@ export default function DashboardPage() {
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const [profileError, setProfileError] = useState<string | null>(null);
 
-  const allSchools = getAllSchools();
+  const [allSchools, setAllSchools] = useState<School[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
+      .then(res => res.json())
+      .then(data => {
+        if (!cancelled && Array.isArray(data?.schools)) setAllSchools(data.schools);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
 
   const { urgentAlerts } = React.useMemo(() => {
     return checkShortlistDeadlines(shortlist);

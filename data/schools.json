@@ -6311,9 +6311,9 @@
       "pincode": "201301",
       "area": "Sector 27",
       "coordinates": {
-        "lat": 28.5773,
-        "lng": 77.3465,
-        "isVerified": false
+        "lat": 28.573046670072838,
+        "lng": 77.3283867642763,
+        "isVerified": true
       },
       "mapSearchQuery": "Cambridge School F Block Pocket C Sector 27 Noida",
       "mapEmbedUrl": null
@@ -13417,7 +13417,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201303",
-      "area": "Sector 40"
+      "area": "Sector 40",
+      "coordinates": {
+        "lat": 28.565377878324547,
+        "lng": 77.35191995219574,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹35,750 – ₹43,260 / quarter for lower grades; higher classes vary by grade",
@@ -13541,7 +13546,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201306",
-      "area": "Sector 145"
+      "area": "Sector 145",
+      "coordinates": {
+        "lat": 28.479681566881453,
+        "lng": 77.4467271989931,
+        "isVerified": true
+      }
     },
     "fees": {
       "cardFee": null,
@@ -13671,7 +13681,12 @@
       "address": "A1 & A12, Expressway, Sector 132, Noida, Uttar Pradesh 201304",
       "sector": "Sector 132",
       "city": "Noida",
-      "area": "Sector 132"
+      "area": "Sector 132",
+      "coordinates": {
+        "lat": 28.514648469977196,
+        "lng": 77.38019066753864,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹4,32,600 / year (Classes 6–10); ₹5,22,000 – ₹5,50,800 / year (Classes 11–12)",
@@ -13798,7 +13813,12 @@
       "city": "Greater Noida West",
       "state": "Uttar Pradesh",
       "pincode": "201308",
-      "area": "Gaur City 1"
+      "area": "Gaur City 1",
+      "coordinates": {
+        "lat": 28.615133327061468,
+        "lng": 77.42811345544146,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹60,000 – ₹1,10,000 / year depending on grade",
@@ -13915,7 +13935,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201310",
-      "area": "Knowledge Park I"
+      "area": "Knowledge Park I",
+      "coordinates": {
+        "lat": 28.472044355553876,
+        "lng": 77.50113577917621,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹55,000 – ₹95,000 / year depending on grade",
@@ -14032,7 +14057,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201303",
-      "area": "Sector 41"
+      "area": "Sector 41",
+      "coordinates": {
+        "lat": 28.56383716640373,
+        "lng": 77.36349318103177,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹65,000 – ₹1,15,000 / year depending on grade",
@@ -14151,9 +14181,9 @@
       "pincode": "201310",
       "area": "Knowledge Park III",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.466941608661504,
+        "lng": 77.4876861656717,
+        "isVerified": true
       },
       "mapSearchQuery": "Learners International School Knowledge Park III Greater Noida",
       "mapEmbedUrl": null
@@ -14300,7 +14330,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201307",
-      "area": "Sector 62"
+      "area": "Sector 62",
+      "coordinates": {
+        "lat": 28.624529432358035,
+        "lng": 77.37256017884928,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹72,000 – ₹1,50,000 / year (grade-dependent)",
@@ -14445,7 +14480,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201301",
-      "area": "Sector 71"
+      "area": "Sector 71",
+      "coordinates": {
+        "lat": 28.592157041460855,
+        "lng": 77.37927038473823,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹11,000 – ₹16,450 / month (≈₹1,32,000–₹1,97,000 / year)",
@@ -14576,8 +14616,9 @@
       "pincode": "201301",
       "area": "Sector 16A",
       "coordinates": {
-        "lat": null,
-        "lng": null
+        "lat": 28.57105958025019,
+        "lng": 77.3137814,
+        "isVerified": true
       },
       "mapSearchQuery": "Apeejay School Sector 16A Noida"
     },
@@ -14703,7 +14744,12 @@
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201310",
-      "area": "Sector Pi I & II"
+      "area": "Sector Pi I & II",
+      "coordinates": {
+        "lat": 28.47911551522179,
+        "lng": 77.53667438081581,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹5,000 – ₹5,500 / month",
@@ -14834,7 +14880,12 @@
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201301",
-      "area": "Sector 51"
+      "area": "Sector 51",
+      "coordinates": {
+        "lat": 28.580059504872914,
+        "lng": 77.37589296747876,
+        "isVerified": true
+      }
     },
     "fees": {
       "rangeText": "₹9,000 – ₹11,000 / month + ~₹20,000 annual charges",
@@ -14965,9 +15016,9 @@
       "pincode": "203207",
       "area": "Sector 4",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.6079738638414,
+        "lng": 77.42955603231952,
+        "isVerified": true
       },
       "mapSearchQuery": "Mount Litera Zee School Dadri Noida",
       "mapEmbedUrl": null

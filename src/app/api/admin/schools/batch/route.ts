@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
           {
             admissions: {
               status: admStatus,
-              academicYear: data?.academicYear || '2025-2026',
+              academicYear: data?.academicYear || '2027-28',
               process: 'Online & Offline Application',
               date: null,
             },

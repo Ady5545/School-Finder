@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { archiveAdminSchool, updateAdminSchoolAsync } from '@/lib/schoolAdminService';
+import { archiveAdminSchoolAsync, updateAdminSchoolAsync } from '@/lib/schoolAdminService';
 import { recordAdminAudit } from '@/lib/authStore';
 
 export async function POST(req: NextRequest) {
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, message: 'Descriptive archive reason required' }, { status: 400 });
       }
       for (const slug of slugs) {
-        const res = archiveAdminSchool(slug, reason, adminUser);
+        const res = await archiveAdminSchoolAsync(slug, reason, adminUser);
         results.push({ slug, success: res.success, message: res.error });
       }
     } else if (action === 'verify_status') {
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     } else if (action === 'update_admission_status') {
       const admStatus = data?.admissionStatus || 'Admissions Open';
       for (const slug of slugs) {
-        const res = updateAdminSchool(
+        const res = await updateAdminSchoolAsync(
           slug,
           {
             admissions: {

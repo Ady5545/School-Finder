@@ -83,7 +83,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       <div className={cn('fixed inset-y-0 flex max-w-full', side === 'right' ? 'right-0' : 'left-0')}>
         <div
           className={cn(
-            'w-screen max-w-md liquid-glass p-6 shadow-2xl rounded-l-3xl flex flex-col border-l border-[var(--color-border)] animate-in duration-200',
+            'w-[min(88vw,22rem)] sm:w-screen sm:max-w-md liquid-glass p-4 sm:p-6 shadow-2xl rounded-l-3xl flex flex-col border-l border-[var(--color-border)] animate-in duration-200',
             side === 'right' ? 'slide-in-from-right' : 'slide-in-from-left',
             className
           )}
@@ -99,7 +99,7 @@ export const Drawer: React.FC<DrawerProps> = ({
               <X className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
-          <div className="mt-4 flex-1 overflow-y-auto">{children}</div>
+          <div className="mt-3 sm:mt-4 flex-1 overflow-y-auto overscroll-contain">{children}</div>
         </div>
       </div>
     </div>

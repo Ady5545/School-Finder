@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Archive, Database, Edit3, ExternalLink, Loader2, Plus, RefreshCw, Search, ShieldCheck } from 'lucide-react';
 import type { School } from '../../data/schoolsData';
@@ -25,24 +25,32 @@ export function SchoolManagerTab() {
   const [editorSchool, setEditorSchool] = useState<Partial<School> | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [editingSlug, setEditingSlug] = useState('');
+  const requestController = useRef<AbortController | null>(null);
 
   const load = useCallback(async (silent = false) => {
     silent ? setRefreshing(true) : setLoading(true);
     setError('');
+    requestController.current?.abort();
+    const controller = new AbortController();
+    requestController.current = controller;
     try {
       const params = new URLSearchParams({ status, _ts: String(Date.now()) });
       if (search.trim()) params.set('q', search.trim());
       if (verification !== 'all') params.set('verification', verification);
-      const res = await fetch('/api/admin/schools?' + params, { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
+      const res = await fetch('/api/admin/schools?' + params, { signal: controller.signal, cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.success) throw new Error(data.message || 'Could not load the school registry.');
       setRows(Array.isArray(data.schools) ? data.schools : []);
       setLastUpdated(new Date().toLocaleTimeString('en-IN'));
     } catch (e) {
+      if (e instanceof DOMException && e.name === 'AbortError') return;
+      if (controller.signal.aborted) return;
       setError(e instanceof Error ? e.message : 'Could not load the school registry.');
     } finally {
-      setLoading(false);
-      setRefreshing(false);
+      if (requestController.current === controller) {
+        setLoading(false);
+        setRefreshing(false);
+      }
     }
   }, [search, status, verification]);
 

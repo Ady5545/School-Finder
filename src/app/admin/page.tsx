@@ -250,7 +250,7 @@ export default function AdminPage() {
   // Fast admin boot: authenticate first, then load only the section the admin opens.
   // The old panel requested every heavy dataset on first paint, which made the
   // control center feel frozen. This keeps the shell instant and data progressive.
-  const [loadedTabs, setLoadedTabs] = useState<Set<AdminTab>>(new Set(['overview']));
+  const [loadedTabs, setLoadedTabs] = useState<Set<AdminTab>>(new Set());
   const [loadingTab, setLoadingTab] = useState<AdminTab | null>(null);
 
   const fetchTabData = async (tab: AdminTab, force = false) => {
@@ -308,7 +308,7 @@ export default function AdminPage() {
       }
       setIsAuthenticated(true);
       setCurrentAdmin(authData.user);
-      await fetchTabData('overview', force);
+      await fetchTabData('overview', true);
     } catch (err) {
       console.error('Error loading admin control center:', err);
     } finally {
@@ -316,12 +316,22 @@ export default function AdminPage() {
     }
   };
 
+  const refreshTabData = async (tab: AdminTab) => {
+    setLoadedTabs(prev => {
+      const next = new Set(prev);
+      next.delete(tab);
+      return next;
+    });
+    await fetchTabData(tab, true);
+  };
+
+
   useEffect(() => {
     loadAdminData();
   }, [timeRange]);
 
   useEffect(() => {
-    if (isAuthenticated) fetchTabData(activeTab);
+    if (isAuthenticated) fetchTabData(activeTab, true);
   }, [activeTab, isAuthenticated]);
 
   const showNotification = (type: 'success' | 'error', text: string) => {
@@ -340,7 +350,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', `User account set to ${newStatus}.`);
-        loadAdminData();
+        refreshTabData(activeTab);
       } else {
         showNotification('error', 'Failed to update user status.');
       }
@@ -358,7 +368,7 @@ export default function AdminPage() {
       const data = await res.json();
       if (res.ok && data.success) {
         showNotification('success', 'User account deleted successfully.');
-        loadAdminData();
+        refreshTabData(activeTab);
       } else {
         showNotification('error', data.message || 'Failed to delete user.');
       }
@@ -377,7 +387,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', 'Review deleted and school rating recalculated.');
-        loadAdminData();
+        refreshTabData(activeTab);
       }
     } catch {
       showNotification('error', 'Failed to delete review.');
@@ -393,7 +403,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', 'Review restored to published state.');
-        loadAdminData();
+        refreshTabData(activeTab);
       }
     } catch {
       showNotification('error', 'Failed to restore review.');
@@ -411,7 +421,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', `Campaign status updated to ${newStatus}.`);
-        loadAdminData();
+        refreshTabData(activeTab);
       }
     } catch {
       showNotification('error', 'Failed to update campaign.');
@@ -424,7 +434,7 @@ export default function AdminPage() {
       const res = await fetch(`/api/admin/promotions?id=${promoId}`, { method: 'DELETE' });
       if (res.ok) {
         showNotification('success', 'Campaign deleted.');
-        loadAdminData();
+        refreshTabData(activeTab);
       }
     } catch {
       showNotification('error', 'Failed to delete campaign.');
@@ -443,7 +453,7 @@ export default function AdminPage() {
       if (res.ok && data.success) {
         showNotification('success', 'New promotion campaign launched.');
         setShowPromoModal(false);
-        loadAdminData();
+        refreshTabData(activeTab);
       } else {
         showNotification('error', data.message || 'Failed to create campaign.');
       }

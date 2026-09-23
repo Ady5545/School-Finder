@@ -37,7 +37,7 @@ export async function GET(
     return new Response(webStream, {
       status: 200,
       headers: {
-        'Content-Type': file.contentType || 'application/octet-stream',
+        'Content-Type': String(file.metadata?.contentType || 'application/octet-stream'),
         'Cache-Control': 'public, max-age=31536000, immutable',
         'Content-Length': String(file.length ?? ''),
       },

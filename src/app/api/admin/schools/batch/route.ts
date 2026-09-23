@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { archiveAdminSchool, updateAdminSchool } from '@/lib/schoolAdminService';
+import { archiveAdminSchool, updateAdminSchoolAsync } from '@/lib/schoolAdminService';
 import { recordAdminAudit } from '@/lib/authStore';
 
 export async function POST(req: NextRequest) {
@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     } else if (action === 'verify_status') {
       const statusToSet = data?.verificationStatus || 'verified_official';
       for (const slug of slugs) {
-        const res = updateAdminSchool(
+        const res = await updateAdminSchoolAsync(
           slug,
           {
             verification: {

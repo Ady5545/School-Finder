@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getAdminSchoolsList } from '../../../../lib/schoolAdminService';
+import { getAdminSchoolsListAsync } from '../../../../lib/schoolAdminService';
 
 export async function GET(req: NextRequest) {
   const auth = await requireAdminAuth(req);
@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const allSchools = getAdminSchoolsList({ includeArchived: true });
+  const allSchools = await getAdminSchoolsListAsync({ includeArchived: true });
 
   const total = allSchools.length;
   const completeCount = allSchools.filter(s => s.completeness.level === 'complete').length;

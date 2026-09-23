@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { getAdminSchoolsList, createAdminSchool } from '@/lib/schoolAdminService';
+import { getAdminSchoolsListAsync, createAdminSchoolAsync } from '@/lib/schoolAdminService';
 import { getRawSchools } from '@/lib/schools';
 import {
   getAllSchoolsAdminOverviewAsync,
@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
   const areaFilter = searchParams.get('area') || undefined;
   const boardFilter = searchParams.get('board') || undefined;
 
-  const schools = getAdminSchoolsList({
+  const schools = await getAdminSchoolsListAsync({
     includeArchived: statusFilter !== 'active',
     filterStatus: statusFilter,
     searchQuery,
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Missing school payload data' }, { status: 400 });
     }
 
-    const result = createAdminSchool(
+    const result = await createAdminSchoolAsync(
       schoolData,
       { id: auth.user.id, email: auth.user.email, name: auth.user.name },
       reason || 'School created via Admin CMS'

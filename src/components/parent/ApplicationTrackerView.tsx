@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Check, ClipboardList, ExternalLink, Plus, Trash2 } from 'lucide-react';
 import { useAuth } from '../../lib/authContext';
-import { getAllSchools } from '../../lib/schools';
+import type { School } from '../../data/schoolsData';
 import { APPLICATION_TRACKER_STATUSES, type ApplicationTrackerItem, type ApplicationTrackerStatus } from '../../lib/applicationTracker';
 import { Button } from '../ui/Button';
 import { useToast } from '../ui/Toast';
@@ -15,7 +15,18 @@ const statusLabel = (value: ApplicationTrackerStatus) =>
 export const ApplicationTrackerView: React.FC = () => {
   const { user, isAuthenticated, isLoading } = useAuth();
   const { showToast } = useToast();
-  const schools = useMemo(() => getAllSchools(), []);
+  const [schools, setSchools] = useState<School[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
+      .then(res => res.json())
+      .then(data => {
+        if (!cancelled && Array.isArray(data?.schools)) setSchools(data.schools);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
   const [items, setItems] = useState<ApplicationTrackerItem[]>([]);
   const [selectedSchool, setSelectedSchool] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<ApplicationTrackerStatus>('researching');

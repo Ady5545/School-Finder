@@ -34,14 +34,24 @@ import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
 import { AdmissionStatus } from './AdmissionStatus';
 import { useSchoolStore } from '../../lib/schoolStore';
-import { getAllSchools, getPublicSchoolBySlug, getCanonicalSchools } from '../../lib/schools';
 import { formatCurrency, cn } from '../../lib/utils';
 import type { School, DetailedFeeComponent, FeeConcession } from '../../types/school';
 
 export const SchoolComparisonView: React.FC = () => {
   const { compareList, addCompare, removeCompare, clearCompare, isInShortlist, toggleShortlist } =
     useSchoolStore();
-  const allSchools = getAllSchools();
+  const [allSchools, setAllSchools] = useState<School[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
+      .then(res => res.json())
+      .then(data => {
+        if (!cancelled && Array.isArray(data?.schools)) setAllSchools(data.schools);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
 
   const [highlightDiff, setHighlightDiff] = useState(false);
   const [selectorQuery, setSelectorQuery] = useState('');
@@ -55,7 +65,7 @@ export const SchoolComparisonView: React.FC = () => {
   // Get full school objects from compareList
   const selectedSchools: School[] = useMemo(() => {
     return compareList
-      .map(slug => getPublicSchoolBySlug(slug))
+      .map(slug => allSchools.find(s => s.slug === slug))
       .filter((s): s is School => Boolean(s));
   }, [compareList]);
 
@@ -67,7 +77,7 @@ export const SchoolComparisonView: React.FC = () => {
       if (urlSchools && compareList.length === 0) {
         const slugs = urlSchools.split(',').map(s => s.trim()).filter(Boolean);
         slugs.slice(0, 4).forEach(slug => {
-          const s = getPublicSchoolBySlug(slug);
+          const s = allSchools.find(item => item.slug === slug);
           if (s) addCompare(s.slug, s.name);
         });
       }

@@ -555,10 +555,16 @@ export function createAdminSchool(
     studentTeacherRatio: schoolData.studentTeacherRatio || '',
     schoolType: schoolData.schoolType || '',
     dayOrBoarding: schoolData.dayOrBoarding || '',
+    timings: schoolData.timings || '',
+    transportDetails: schoolData.transportDetails || '',
+    extraDetails: schoolData.extraDetails || {},
     location: {
       address: schoolData.location?.address || '',
       area: schoolData.location?.area || '',
       sector: schoolData.location?.sector || '',
+      city: schoolData.location?.city || 'Greater Noida',
+      state: schoolData.location?.state || 'Uttar Pradesh',
+      pincode: schoolData.location?.pincode || '',
       coordinates: schoolData.location?.coordinates || {
         lat: null,
         lng: null,
@@ -566,6 +572,8 @@ export function createAdminSchool(
         longitude: null,
         isVerified: false,
       },
+      mapSearchQuery: schoolData.location?.mapSearchQuery || '',
+      mapEmbedUrl: schoolData.location?.mapEmbedUrl || null,
     },
     fees: {
       ...(schoolData.fees || {}),
@@ -622,8 +630,14 @@ export function createAdminSchool(
     },
     auditNotes: [`Created by admin ${adminUser.email} on ${new Date().toISOString()}`],
     classification: schoolData.classification || 'nearby_surrounding',
-    status: 'active',
-    isArchived: false,
+    geographicClassification: schoolData.geographicClassification,
+    recordType: schoolData.recordType || 'canonical',
+    canonicalSlug: schoolData.canonicalSlug,
+    isDuplicate: schoolData.isDuplicate || false,
+    duplicateOf: schoolData.duplicateOf || null,
+    status: schoolData.status || 'active',
+    isArchived: schoolData.isArchived || false,
+    archiveReason: schoolData.archiveReason,
   };
 
   newSchools.push(newSchool);

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
 import { getAdminSchoolBySlugAsync, updateAdminSchoolAsync } from '@/lib/schoolAdminService';

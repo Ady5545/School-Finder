@@ -2,7 +2,8 @@ import type { School } from '../../data/schoolsData';
 import { schools } from '../../data/schoolsData';
 import { getManagedSchoolsCollection, isMongoConfigured } from './mongodb';
 
-const CACHE_TTL_MS = 5_000;
+// Keep the CMS highly fresh. Admin writes also invalidate this cache immediately on the current instance.
+const CACHE_TTL_MS = 1_000;
 
 type ManagedCache = {
   schools: School[];
@@ -50,18 +51,26 @@ export async function getManagedSchoolRecordsAsync(): Promise<School[]> {
   if (cache.promise) return cache.promise;
 
   cache.promise = (async () => {
-    const collection = await getManagedSchoolsCollection(false);
-    if (!collection) return [];
+    try {
+      const collection = await getManagedSchoolsCollection(false);
+      if (!collection) return [];
 
-    const docs = await collection.find({}).sort({ updatedAt: 1 }).toArray();
-    const normalized = docs.map(doc => {
-      const { _id, updatedAt, updatedBy, updateReason, ...school } = doc as any;
-      return school as School;
-    });
+      const docs = await collection.find({}).sort({ updatedAt: 1 }).toArray();
+      const normalized = docs.map(doc => {
+        const { _id, updatedAt, updatedBy, updateReason, ...school } = doc as any;
+        return school as School;
+      });
 
-    cache.schools = normalized;
-    cache.expiresAt = Date.now() + CACHE_TTL_MS;
-    return normalized;
+      cache.schools = normalized;
+      cache.expiresAt = Date.now() + CACHE_TTL_MS;
+      return normalized;
+    } catch (error) {
+      // A temporary CMS database outage must not take the public school directory down.
+      console.warn('[MANAGED_SCHOOLS_READ]', error);
+      cache.schools = [];
+      cache.expiresAt = 0;
+      return [];
+    }
   })().finally(() => {
     cache.promise = undefined;
   });

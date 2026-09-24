@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { restoreAdminSchool } from '@/lib/schoolAdminService';
+import { restoreAdminSchoolAsync } from '@/lib/schoolAdminService';
 
 export async function POST(
   req: NextRequest,

@@ -3264,8 +3264,12 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
   const viewsCountInRange = viewsEventsInRange.length;
   const savesCountInRange = savesEventsInRange.length;
 
+  // Count authenticated parents by user ID and anonymous visitors by their
+  // stable visitor ID. Calling these "unique visitors" keeps the metric honest.
   const uniqueParentsViewing = new Set(
-    viewsEventsInRange.map(e => e.userId).filter(Boolean)
+    viewsEventsInRange
+      .map(e => e.userId || e.visitorId)
+      .filter(Boolean)
   ).size;
 
   // Top viewed schools in selected time range
@@ -3389,8 +3393,11 @@ export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '
   for (const r of activeRatings) ratingSum += r.score;
   const averageRating = activeRatings.length > 0 ? Math.round((ratingSum / activeRatings.length) * 10) / 10 : 0;
 
+  // Admin analytics must not silently truncate the selected time range after
+  // 5,000 events. Production activity is persisted in MongoDB, so use a generous
+  // ceiling for the admin analytics workload.
   const filteredActivity = await getActivityEventsAsync(
-    5000,
+    100000,
     timeThreshold ? { since: new Date(timeThreshold).toISOString() } : undefined
   );
 

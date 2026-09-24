@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import {
-  recordActivityEvent,
+  recordActivityEventAsync,
   verifySessionToken,
 } from '../../../../../lib/authStore';
 import { getCanonicalSlug } from '../../../../../lib/schools';
@@ -60,7 +60,9 @@ export async function POST(
       return NextResponse.json({ success: true, duplicate: true });
     }
 
-    recordActivityEvent({
+    // Await persistence: on serverless hosts a fire-and-forget Mongo write can be
+    // interrupted as soon as the HTTP response finishes, silently losing views.
+    await recordActivityEventAsync({
       type: 'school_view',
       schoolSlug: canonicalSlug,
       targetType: 'school',

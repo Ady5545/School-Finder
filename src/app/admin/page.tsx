@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 
 export const dynamic = 'force-dynamic';
 import Link from 'next/link';
@@ -252,6 +252,7 @@ export default function AdminPage() {
   // control center feel frozen. This keeps the shell instant and data progressive.
   const [loadedTabs, setLoadedTabs] = useState<Set<AdminTab>>(new Set(['overview']));
   const [loadingTab, setLoadingTab] = useState<AdminTab | null>(null);
+  const tabRequestSerial = useRef<Partial<Record<AdminTab, number>>>({});
 
   const fetchTabData = async (tab: AdminTab, force = false) => {
     if (tab === 'schools') {
@@ -259,6 +260,9 @@ export default function AdminPage() {
       return;
     }
     if (!force && loadedTabs.has(tab)) return;
+
+    const requestId = (tabRequestSerial.current[tab] || 0) + 1;
+    tabRequestSerial.current[tab] = requestId;
     setLoadingTab(tab);
     try {
       const requests: Partial<Record<AdminTab, string>> = {
@@ -275,8 +279,9 @@ export default function AdminPage() {
       };
       const url = requests[tab];
       if (!url) return;
-      const res = await fetch(url + (url.includes('?') ? '&' : '?') + '_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
+      const res = await fetch(url, { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
       const data = await res.json();
+      if (requestId !== tabRequestSerial.current[tab]) return;
       if (!data.success) throw new Error(data.message || `Failed to load ${tab}`);
 
       if (tab === 'overview') setOverviewData(data.metrics);
@@ -290,9 +295,13 @@ export default function AdminPage() {
       if (tab === 'audit') setAuditLogsList(data.logs);
       setLoadedTabs(prev => new Set(prev).add(tab));
     } catch (err) {
-      console.error(`Failed to load admin ${tab} data:`, err);
+      if (requestId === tabRequestSerial.current[tab]) {
+        console.error(`Failed to load admin ${tab} data:`, err);
+      }
     } finally {
-      setLoadingTab(null);
+      if (requestId === tabRequestSerial.current[tab]) {
+        setLoadingTab(null);
+      }
     }
   };
 
@@ -332,10 +341,9 @@ export default function AdminPage() {
       setIsAuthenticated(true);
       setCurrentAdmin(authData.user);
 
-      // The shell should not wait for Mongo-backed overview analytics.
-      // The active admin section becomes usable immediately.
+      // Authentication is complete; the shell can render immediately.
+      // Overview analytics are fetched by the time-range effect below.
       setIsLoading(false);
-      void fetchTabData('overview', true);
     } catch (err) {
       console.error('Error loading admin control center:', err);
     } finally {
@@ -344,11 +352,19 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
-    loadAdminData();
-  }, [timeRange]);
+    void loadAdminData();
+  }, []);
 
   useEffect(() => {
-    if (isAuthenticated) fetchTabData(activeTab);
+    if (isAuthenticated) {
+      void fetchTabData('overview', true);
+    }
+  }, [timeRange, isAuthenticated]);
+
+  useEffect(() => {
+    if (isAuthenticated && activeTab !== 'overview') {
+      void fetchTabData(activeTab);
+    }
   }, [activeTab, isAuthenticated]);
 
   const showNotification = (type: 'success' | 'error', text: string) => {

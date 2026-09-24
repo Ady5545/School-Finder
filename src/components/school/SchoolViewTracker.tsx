@@ -7,47 +7,26 @@ interface SchoolViewTrackerProps {
 }
 
 /**
- * SchoolViewTracker
- * Tracks school profile visits with client-side deduplication to prevent
- * accidental duplicate telemetry events on tab switches or component re-renders.
+ * Records a real school-profile visit.
+ *
+ * The server owns deduplication (30-second rapid-repeat window), so we do not
+ * suppress legitimate revisits in sessionStorage. The ref only protects this
+ * mounted tracker from React re-runs during the same page mount.
  */
 export function SchoolViewTracker({ slug }: SchoolViewTrackerProps) {
   const trackedRef = useRef(false);
 
   useEffect(() => {
     if (!slug || trackedRef.current) return;
+    trackedRef.current = true;
 
-    try {
-      // Check session storage to deduplicate within the current browser tab session
-      const sessionKey = `ap_viewed_${slug}`;
-      const lastViewed = sessionStorage.getItem(sessionKey);
-      const now = Date.now();
-
-      // Deduplicate if viewed in the last 10 minutes in the same session
-      if (lastViewed && now - parseInt(lastViewed, 10) < 10 * 60 * 1000) {
-        trackedRef.current = true;
-        return;
-      }
-
-      trackedRef.current = true;
-      sessionStorage.setItem(sessionKey, String(now));
-
-      fetch(`/api/schools/${slug}/view`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      }).catch(() => {
-        // Silently ignore network failures for analytics
-      });
-    } catch {
-      // Storage blocked or private browsing
-      if (!trackedRef.current) {
-        trackedRef.current = true;
-        fetch(`/api/schools/${slug}/view`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-        }).catch(() => {});
-      }
-    }
+    fetch(`/api/schools/${slug}/view`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      keepalive: true,
+    }).catch(() => {
+      // Analytics failures must never block the school profile.
+    });
   }, [slug]);
 
   return null;

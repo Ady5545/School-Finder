@@ -47,6 +47,10 @@ export function SchoolManagerTab() {
     reviewsCount: number;
     averageRating: number;
   }> | null>(null);
+  const metricsCacheAt = useRef(0);
+  const metricsRequest = useRef<Promise<void> | null>(null);
+
+  const METRICS_CLIENT_TTL_MS = 20_000;
 
   const mergeCachedMetrics = useCallback((items: SchoolRow[]) => {
     const cache = metricsCache.current;
@@ -58,15 +62,23 @@ export function SchoolManagerTab() {
   }, []);
 
   const loadSchoolMetrics = useCallback(async () => {
-    if (metricsCache.current) {
+    const now = Date.now();
+    if (metricsCache.current && now - metricsCacheAt.current < METRICS_CLIENT_TTL_MS) {
       setSchools(prev => mergeCachedMetrics(prev));
       return;
     }
 
-    setMetricsLoading(true);
-    let lastError: unknown = null;
+    if (metricsRequest.current) {
+      await metricsRequest.current;
+      return;
+    }
 
-    for (let attempt = 0; attempt < 2; attempt += 1) {
+    setMetricsLoading(true);
+
+    const request = (async () => {
+      let lastError: unknown = null;
+
+      for (let attempt = 0; attempt < 2; attempt += 1) {
       try {
         const res = await fetch('/api/admin/schools/metrics', { cache: 'no-store' });
         const data = await res.json().catch(() => ({}));
@@ -91,17 +103,28 @@ export function SchoolManagerTab() {
         }
 
         metricsCache.current = nextCache;
+        metricsCacheAt.current = Date.now();
         setSchools(prev => mergeCachedMetrics(prev));
         lastError = null;
         break;
-      } catch (err) {
-        lastError = err;
-        if (attempt === 0) await new Promise(resolve => setTimeout(resolve, 350));
+        } catch (err) {
+          lastError = err;
+          if (attempt === 0) await new Promise(resolve => setTimeout(resolve, 350));
+        }
+      }
+
+      if (lastError) console.error('School analytics load failed:', lastError);
+    })();
+
+    metricsRequest.current = request;
+    try {
+      await request;
+    } finally {
+      if (metricsRequest.current === request) {
+        metricsRequest.current = null;
+        setMetricsLoading(false);
       }
     }
-
-    if (lastError) console.error('School analytics load failed:', lastError);
-    setMetricsLoading(false);
   }, [mergeCachedMetrics]);
 
   const loadSchools = useCallback(async (silent = false) => {

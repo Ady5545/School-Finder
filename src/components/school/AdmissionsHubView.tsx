@@ -30,7 +30,6 @@ import { useAuth } from '../../lib/authContext';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { cn } from '../../lib/utils';
-import type { School, AdmissionMilestone } from '../../types/school';
 
 export type AdmissionGroupKey = 'all' | 'open' | 'pre_registration' | 'upcoming' | 'inquire' | 'not_disclosed';
 

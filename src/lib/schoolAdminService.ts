@@ -446,8 +446,8 @@ export function updateAdminSchool(
   // Validate coordinates if being updated
   if (updates.location?.coordinates) {
     const coordVal = validateCoordinates(
-      updates.location.coordinates.latitude,
-      updates.location.coordinates.longitude
+      updates.location.coordinates.lat ?? updates.location.coordinates.latitude,
+      updates.location.coordinates.lng ?? updates.location.coordinates.longitude
     );
     if (!coordVal.valid) {
       return { success: false, error: coordVal.error };
@@ -532,8 +532,8 @@ export function createAdminSchool(
   // Validate coordinates if provided
   if (schoolData.location?.coordinates) {
     const coordVal = validateCoordinates(
-      schoolData.location.coordinates.latitude,
-      schoolData.location.coordinates.longitude
+      schoolData.location.coordinates.lat ?? schoolData.location.coordinates.latitude,
+      schoolData.location.coordinates.lng ?? schoolData.location.coordinates.longitude
     );
     if (!coordVal.valid) {
       return { success: false, error: coordVal.error };

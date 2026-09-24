@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { getAllSchoolsAsync } from '../lib/schools';
+import { getAllSchoolsAsync } from '../lib/schoolsServer';
 import { HomeSearch } from '../components/school/HomeSearch';
 import { HomeSchoolShowcase } from '../components/school/HomeSchoolShowcase';
 import { HomeRatingsDiscovery } from '../components/home/HomeRatingsDiscovery';

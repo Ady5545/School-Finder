@@ -88,8 +88,13 @@ export async function POST(req: NextRequest) {
 
     if (action === 'sync' && Array.isArray(list)) {
       // Validate all slugs and convert to canonical slugs
-      const validList = list
-        .filter((s: string) => typeof s === 'string' && getPublicSchoolBySlugAsync(s))
+      const validated = await Promise.all(
+        list
+          .filter((s: string) => typeof s === 'string')
+          .map(async (s: string) => (await getPublicSchoolBySlugAsync(s)) ? s : null),
+      );
+      const validList = validated
+        .filter((s): s is string => Boolean(s))
         .map((s: string) => getCanonicalSlug(s));
       const combined = Array.from(new Set([...current.map(s => getCanonicalSlug(s)), ...validList]));
       await updateUserListsAsync(user.id, combined);
@@ -102,7 +107,7 @@ export async function POST(req: NextRequest) {
 
     const rawCleanSlug = slug.trim();
     // Validate school existence
-    if (!getPublicSchoolBySlugAsync(rawCleanSlug)) {
+    if (!(await getPublicSchoolBySlugAsync(rawCleanSlug))) {
       return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
     }
 

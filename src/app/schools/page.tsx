@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllSchoolsAsync, getDistinctBoardsAsync, getDistinctAreasAsync } from '../../lib/schools';
+import { getAllSchoolsAsync, getDistinctBoardsAsync, getDistinctAreasAsync } from '../../lib/schoolsServer';
 import { SchoolDirectory } from '../../components/school/SchoolDirectory';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { buildPageMetadata, generateSchoolDirectoryJsonLd } from '../../lib/seo';

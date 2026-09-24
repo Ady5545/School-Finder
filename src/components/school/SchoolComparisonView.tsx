@@ -136,7 +136,7 @@ export const SchoolComparisonView: React.FC<{ initialSchools?: School[] }> = ({ 
   const loadPreset = (slugs: string[]) => {
     clearCompare();
     slugs.forEach(slug => {
-      const school = getPublicSchoolBySlug(slug);
+      const school = allSchools.find(s => s.slug === slug);
       if (school) addCompare(school.slug, school.name);
     });
   };

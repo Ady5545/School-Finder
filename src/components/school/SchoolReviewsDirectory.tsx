@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { ChevronDown, Filter, MessageSquare, PenLine, Search, Star } from 'lucide-react';
-import { getAllSchools } from '../../lib/schools';
+import type { School } from '../../types/school';
 import { useAuth } from '../../lib/authContext';
 import { SchoolImage } from './SchoolImage';
 
@@ -21,8 +21,17 @@ type Summary = {
   totalReviews?: number;
 };
 
-export const SchoolReviewsDirectory: React.FC = () => {
-  const schools = getAllSchools();
+export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = ({ initialSchools = [] }) => {
+  const [schools, setSchools] = React.useState<School[]>(initialSchools);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => { if (!cancelled && data?.success && Array.isArray(data.schools)) setSchools(data.schools); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
   const { isAuthenticated } = useAuth();
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const [selectedReviewSlug, setSelectedReviewSlug] = useState(schools[0]?.slug || '');

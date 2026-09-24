@@ -35,7 +35,15 @@ import { cn } from '../../lib/utils';
 export type AdmissionGroupKey = 'all' | 'open' | 'pre_registration' | 'upcoming' | 'inquire' | 'not_disclosed';
 
 export const AdmissionsHubView: React.FC<{ initialSchools?: School[] }> = ({ initialSchools = [] }) => {
-  const allSchools = getAllSchools();
+  const [allSchools, setAllSchools] = useState<School[]>(initialSchools);
+  React.useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
+      .then(r => r.json())
+      .then(data => { if (!cancelled && data?.success && Array.isArray(data.schools)) setAllSchools(data.schools); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
   const { compareList, addCompare, removeCompare, isInShortlist, toggleShortlist, openAuthPrompt } =
     useSchoolStore();
   const { isAuthenticated } = useAuth();

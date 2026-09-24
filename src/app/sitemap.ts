@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { getCanonicalSchoolsAsync } from '../lib/schools';
+import { getCanonicalSchoolsAsync } from '../lib/schoolsServer';
 import { BASE_URL } from '../lib/seo';
 
 const SITE_URL = BASE_URL.replace(/\/$/, '');

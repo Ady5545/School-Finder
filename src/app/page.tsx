@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { getAllSchools } from '../lib/schools';
+import { getAllSchoolsAsync } from '../lib/schools';
 import { HomeSearch } from '../components/school/HomeSearch';
 import { HomeSchoolShowcase } from '../components/school/HomeSchoolShowcase';
 import { HomeRatingsDiscovery } from '../components/home/HomeRatingsDiscovery';
@@ -45,9 +45,9 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
 
-  const allSchools = getAllSchools();
+  const allSchools = await getAllSchoolsAsync();
 
   return (
     <div className="w-full flex flex-col bg-[#fdfcf9] text-[var(--color-content)]">
@@ -87,7 +87,7 @@ export default function HomePage() {
 
             {/* Search Bar */}
             <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto rounded-[22px] liquid-glass-hover">
-              <HomeSearch className="w-full" />
+              <HomeSearch className="w-full" initialSchools={allSchools} />
             </div>
 
             {/* Quick Explore Navigation */}

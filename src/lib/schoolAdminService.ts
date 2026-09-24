@@ -2,6 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import { School, schools, getCanonicalSchools, getArchivedSchools } from '../../data/schoolsData';
 import { recordAdminAudit } from './authStore';
+import {
+  getEffectiveSchoolsAsync,
+  getEffectiveSchoolBySlugAsync,
+  invalidateManagedSchoolsCache,
+} from './managedSchools';
+import { getManagedSchoolsCollection, isMongoConfigured } from './mongodb';
 
 // In-memory overlay for newly created or modified schools to prevent desynchronization
 const globalSchoolStore = globalThis as unknown as {
@@ -110,6 +116,182 @@ export function getAdminSchoolsList(options?: {
 
     return true;
   });
+}
+
+export async function getAdminSchoolsListAsync(options?: {
+  includeArchived?: boolean;
+  filterStatus?: string;
+  searchQuery?: string;
+  verificationStatus?: string;
+  area?: string;
+  board?: string;
+}): Promise<(School & { completeness: SchoolCompletenessChecklist })[]> {
+  const merged = await getEffectiveSchoolsAsync();
+  const withChecklist = merged.map(s => ({ ...s, completeness: calculateSchoolCompleteness(s) }));
+
+  return withChecklist.filter(s => {
+    if (options?.includeArchived === false && s.isArchived) return false;
+    if (options?.filterStatus === 'active' && s.isArchived) return false;
+    if (options?.filterStatus === 'archived' && !s.isArchived) return false;
+
+    if (options?.verificationStatus) {
+      const vStatus = s.verification?.status || 'pending_audit';
+      if (options.verificationStatus === 'verified' && vStatus !== 'verified_official') return false;
+      if (options.verificationStatus === 'pending' && vStatus === 'verified_official') return false;
+    }
+
+    if (options?.area && options.area !== 'all') {
+      const sArea = s.location?.sector || s.location?.area || '';
+      if (!sArea.toLowerCase().includes(options.area.toLowerCase())) return false;
+    }
+
+    if (options?.board && options.board !== 'all') {
+      const sBoards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+      if (!sBoards.includes(options.board)) return false;
+    }
+
+    if (options?.searchQuery) {
+      const q = options.searchQuery.toLowerCase().trim();
+      const matchName = s.name.toLowerCase().includes(q);
+      const matchSlug = s.slug.toLowerCase().includes(q);
+      const matchAddress = (s.location?.address || '').toLowerCase().includes(q);
+      const matchSector = (s.location?.sector || '').toLowerCase().includes(q);
+      const sBoards = Array.isArray(s.board) ? s.board : [s.board].filter(Boolean) as string[];
+      const matchBoard = sBoards.some(b => b.toLowerCase().includes(q));
+      if (!matchName && !matchSlug && !matchAddress && !matchSector && !matchBoard) return false;
+    }
+
+    return true;
+  });
+}
+
+export async function getAdminSchoolBySlugAsync(slug: string): Promise<(School & { completeness: SchoolCompletenessChecklist }) | null> {
+  const found = await getEffectiveSchoolBySlugAsync(slug);
+  if (!found) return null;
+  return { ...found, completeness: calculateSchoolCompleteness(found) };
+}
+
+async function persistManagedSchoolAsync(
+  school: School,
+  adminUser: { id: string; email: string; name: string },
+  reason: string,
+): Promise<void> {
+  const collection = await getManagedSchoolsCollection(true);
+  if (!collection) throw new Error('Persistent school database is not configured.');
+
+  await collection.updateOne(
+    { slug: school.slug },
+    {
+      $set: {
+        ...school,
+        updatedAt: new Date().toISOString(),
+        updatedBy: adminUser.email,
+        updateReason: reason,
+      },
+    },
+    { upsert: true },
+  );
+
+  invalidateManagedSchoolsCache();
+}
+
+export async function updateAdminSchoolAsync(
+  slug: string,
+  updates: Partial<School>,
+  adminUser: { id: string; email: string; name: string },
+  reason: string,
+): Promise<{ success: boolean; school?: School; error?: string }> {
+  const current = await getEffectiveSchoolBySlugAsync(slug);
+  if (!current) return { success: false, error: `School with slug '${slug}' not found.` };
+
+  // Seed the local overlay so the existing merge/update logic can operate on
+  // the same dynamic record during this request.
+  schoolOverlays.set(slug, current);
+  if (!newSchools.some(s => s.slug === slug) && !schools.some(s => s.slug === slug)) {
+    newSchools.push(current);
+  }
+
+  const result = updateAdminSchool(slug, updates, adminUser, reason);
+  if (!result.success || !result.school) return result;
+
+  try {
+    if (!isMongoConfigured()) {
+      return {
+        success: false,
+        error: 'Persistent school storage is unavailable. Configure MONGO_URI before saving CMS changes.',
+      };
+    }
+    await persistManagedSchoolAsync(result.school, adminUser, reason);
+  } catch (err) {
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Failed to persist school changes.',
+    };
+  }
+
+  return result;
+}
+
+export async function createAdminSchoolAsync(
+  schoolData: Partial<School>,
+  adminUser: { id: string; email: string; name: string },
+  reason: string,
+): Promise<{ success: boolean; school?: School; error?: string }> {
+  const rawSlug = schoolData.slug || schoolData.name?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  if (!rawSlug) return { success: false, error: 'Valid URL slug could not be generated.' };
+
+  const existing = await getEffectiveSchoolBySlugAsync(rawSlug);
+  if (existing) return { success: false, error: `A school with slug '${rawSlug}' already exists.` };
+
+  if (!isMongoConfigured()) {
+    return {
+      success: false,
+      error: 'Persistent school storage is unavailable. Configure MONGO_URI before adding schools from the CMS.',
+    };
+  }
+
+  const result = createAdminSchool(schoolData, adminUser, reason);
+  if (!result.success || !result.school) return result;
+
+  try {
+    await persistManagedSchoolAsync(result.school, adminUser, reason);
+  } catch (err) {
+    // Roll back only this process-local addition if Mongo persistence fails.
+    const idx = newSchools.findIndex(s => s.slug === result.school?.slug);
+    if (idx >= 0) newSchools.splice(idx, 1);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : 'Failed to persist new school.',
+    };
+  }
+
+  return result;
+}
+
+export async function archiveAdminSchoolAsync(
+  slug: string,
+  reason: string,
+  adminUser: { id: string; email: string; name: string },
+) {
+  return updateAdminSchoolAsync(
+    slug,
+    { isArchived: true, status: 'archived', archiveReason: reason.trim() },
+    adminUser,
+    `Archived: ${reason}`,
+  );
+}
+
+export async function restoreAdminSchoolAsync(
+  slug: string,
+  reason: string,
+  adminUser: { id: string; email: string; name: string },
+) {
+  return updateAdminSchoolAsync(
+    slug,
+    { isArchived: false, status: 'active', archiveReason: undefined },
+    adminUser,
+    `Restored: ${reason || 'Restored by administrator'}`,
+  );
 }
 
 export function getAdminSchoolBySlug(slug: string): (School & { completeness: SchoolCompletenessChecklist }) | null {
@@ -371,7 +553,7 @@ export function createAdminSchool(
     curriculum: schoolData.curriculum || 'CBSE National Curriculum Framework',
     gradeRange: schoolData.gradeRange || { from: 'Nursery', to: 'Grade 12', raw: 'Nursery to Grade 12' },
     admissionAge: schoolData.admissionAge || '3+ years for Nursery',
-    studentTeacherRatio: schoolData.studentTeacherRatio || '1:20',
+    studentTeacherRatio: schoolData.studentTeacherRatio || 'Not publicly disclosed',
     schoolType: schoolData.schoolType || 'Co-Educational',
     dayOrBoarding: schoolData.dayOrBoarding || 'Day School',
     location: {
@@ -387,15 +569,15 @@ export function createAdminSchool(
       },
     },
     fees: {
-      cardFee: schoolData.fees?.cardFee || 120000,
-      tuitionAnnual: schoolData.fees?.tuitionAnnual || '₹1,20,000/yr',
-      rangeText: schoolData.fees?.rangeText || '₹1.0L - ₹1.5L / year',
-      tuitionMonthly: schoolData.fees?.tuitionMonthly || '₹10,000/mo',
-      tuitionQuarterly: schoolData.fees?.tuitionQuarterly || '₹30,000/qtr',
-      source: schoolData.fees?.source || 'Official School Prospectus',
+      cardFee: schoolData.fees?.cardFee ?? null,
+      tuitionAnnual: schoolData.fees?.tuitionAnnual || null,
+      rangeText: schoolData.fees?.rangeText || 'Not publicly disclosed',
+      tuitionMonthly: schoolData.fees?.tuitionMonthly || null,
+      tuitionQuarterly: schoolData.fees?.tuitionQuarterly || null,
+      source: schoolData.fees?.source || 'Admin CMS',
       academicYear: schoolData.fees?.academicYear || '2027-28',
       verifiedDate: new Date().toISOString().split('T')[0],
-      isVerified: true,
+      isVerified: Boolean(schoolData.fees?.isVerified),
     },
     facilities: schoolData.facilities || [
       { name: 'Smart Classrooms', category: 'Infrastructure', available: true },
@@ -404,7 +586,7 @@ export function createAdminSchool(
       { name: 'GPS-enabled Transport', category: 'Safety', available: true },
     ],
     uniforms: schoolData.uniforms || { notes: 'Standard school uniform prescribed by administration' },
-    achievements: schoolData.achievements || ['Affiliated with CBSE New Delhi'],
+    achievements: schoolData.achievements || [],
     admissions: schoolData.admissions || {
       status: 'Admissions Open',
       academicYear: '2027-28',
@@ -420,14 +602,14 @@ export function createAdminSchool(
       ],
     },
     contact: schoolData.contact || {
-      phone: '0120-0000000',
-      email: 'admissions@example.com',
-      website: 'https://example.com',
+      phone: null,
+      email: null,
+      website: null,
     },
-    rating: {
-      score: 4.5,
+    rating: schoolData.rating || {
+      score: 0,
+      scale: 5,
       reviewsCount: 0,
-      breakdown: { academics: 4.5, infrastructure: 4.5, faculty: 4.5, safety: 4.5 },
     },
     assets: schoolData.assets || {
       featured: null,
@@ -440,7 +622,7 @@ export function createAdminSchool(
       status: 'verified_official',
       lastVerified: new Date().toISOString().split('T')[0],
       sourceName: 'Official Administrative Verification',
-      cbseAffiliationNumber: schoolData.affiliationNumber || 'Pending',
+      cbseAffiliationNumber: schoolData.affiliationNumber || null,
       verifiedFields: ['name', 'location', 'fees', 'contact'],
     },
     legacyIdentifiers: {

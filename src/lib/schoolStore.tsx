@@ -36,7 +36,7 @@ const MAX_COMPARE_ITEMS = 4;
 
 function toPublicCanonicalSlug(slug: string): string | null {
   const school = getPublicSchoolBySlug(slug);
-  return school ? getCanonicalSlug(school.slug) : null;
+  return school ? getCanonicalSlug(school.slug) : (slug && slug.trim() ? slug.trim() : null);
 }
 
 function normalizePublicSlugs(slugs: string[]): string[] {

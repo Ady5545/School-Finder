@@ -5,7 +5,7 @@ import { buildPageMetadata } from '../../lib/seo';
 import { Calendar } from 'lucide-react';
 import { AdmissionInterestForm } from '../../components/school/AdmissionInterestForm';
 import { AdmissionCalendarView } from '../../components/school/AdmissionCalendarView';
-import { getAllSchoolsAsync } from '../../lib/schools';
+import { getAllSchoolsAsync } from '../../lib/schoolsServer';
 
 export const metadata = buildPageMetadata(
   'School Admissions in Greater Noida | Admission Pitara',

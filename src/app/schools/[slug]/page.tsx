@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getSchoolBySlugAsync, getAllSchoolSlugsAsync, getAllSchoolsAsync } from '../../../lib/schools';
+import { getSchoolBySlugAsync, getAllSchoolSlugsAsync, getAllSchoolsAsync } from '../../../lib/schoolsServer';
 import { buildSchoolMetadata, generateSchoolJsonLd, generateBreadcrumbJsonLd } from '../../../lib/seo';
 import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { SchoolImage } from '../../../components/school/SchoolImage';

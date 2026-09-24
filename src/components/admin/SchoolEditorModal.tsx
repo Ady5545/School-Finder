@@ -358,7 +358,7 @@ export function SchoolEditorModal({
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div><label className={labelClass}>URL slug *</label><input value={String(draft.slug || '')} onChange={e => update({ slug: slugify(e.target.value) })} className={inputClass + ' font-mono'} disabled={!isNew} /></div>
-                <div><label className={labelClass}>Boards (comma-separated)</label><input value={(draft.board || []).join(', ')} onChange={e => update({ board: e.target.value.split(',').map(x => x.trim()).filter(Boolean) })} className={inputClass} placeholder="CBSE, ICSE, IB" /></div>
+                <div><label className={labelClass}>Boards (comma-separated)</label><input value={(Array.isArray(draft.board) ? draft.board : draft.board ? [draft.board] : []).join(', ')} onChange={e => update({ board: e.target.value.split(',').map(x => x.trim()).filter(Boolean) })} className={inputClass} placeholder="CBSE, ICSE, IB" /></div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div><label className={labelClass}>Curriculum</label><input value={String(draft.curriculum || '')} onChange={e => update({ curriculum: e.target.value })} className={inputClass} /></div>

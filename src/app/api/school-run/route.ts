@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySessionToken, getUserByIdAsync } from '../../../lib/authStore';
-import { getPublicSchoolBySlug } from '../../../lib/schools';
+import { getPublicSchoolBySlugAsync } from '../../../lib/schoolsServer';
 import { isSafeStoredSchoolCoordinate } from '../../../lib/locationSafety';
 
 type Point = { lat: number; lng: number; label: string; source?: string };
@@ -210,7 +210,7 @@ export async function GET(req: NextRequest) {
     const origin = await geocode(`${society}, Greater Noida West, Uttar Pradesh, India`);
     if (!origin) return NextResponse.json({ success: false, code: 'SOCIETY_NOT_FOUND', society, message: 'We could not confidently locate that society on the map yet.', diagnostic: { normalizedSociety: society.replace(/,?\s*(uttar pradesh|india|greater noida west|noida extension|greater noida)\s*$/i, '').trim(), providersTried: ['OpenStreetMap Nominatim', 'Photon'] } }, { status: 422 });
 
-    const schools = shortlist.map(slug => getPublicSchoolBySlug(slug)).filter(Boolean).map(school => {
+    const schools = (await Promise.all(shortlist.map(slug => getPublicSchoolBySlugAsync(slug)))).filter(Boolean).map(school => {
       const coords = school!.location.coordinates;
       return {
         school: school!,
@@ -238,7 +238,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       success: true, origin: { ...origin, label: society }, schools: resolved,
       note: process.env.OPENROUTESERVICE_API_KEY ? 'Walking and driving routes use OpenRouteService.' : 'Driving routes use OpenStreetMap-based routing. Walking route support can be enabled with OPENROUTESERVICE_API_KEY.',
-    }, { headers: { 'Cache-Control': 'private, max-age=300' } });
+    }, { headers: { 'Cache-Control': 'private, no-store, max-age=0' } });
   } catch (error) {
     console.error('[SCHOOL_RUN]', error);
     return NextResponse.json({ success: false, message: 'School Run could not load right now.' }, { status: 500 });

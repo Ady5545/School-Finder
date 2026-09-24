@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
       board: Array.isArray(school.board) ? school.board.join(', ') : school.board || 'CBSE',
       boardsList: Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[],
       schoolType: school.schoolType,
-      establishedYear: school.establishedYear || 2015,
+      establishedYear: school.establishedYear || null,
       verifiedFee: school.fees?.annualDisplay || school.fees?.rangeText || school.fees?.tuitionAnnual || (school.fees?.cardFee ? `₹${school.fees.cardFee.toLocaleString('en-IN')}/yr` : 'Not publicly disclosed'),
       tuitionAnnual: school.fees?.tuitionAnnual,
       cardFee: school.fees?.cardFee,

@@ -541,6 +541,7 @@ export function createAdminSchool(
   }
 
   const newSchool: School = {
+    ...(schoolData as School),
     id: schoolData.id || rawSlug,
     slug: rawSlug,
     name: schoolData.name.trim(),

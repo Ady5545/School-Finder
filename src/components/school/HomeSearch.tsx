@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, MapPin, Building, ArrowRight, Sparkles, X, ChevronRight, Compass } from 'lucide-react';
-import { getAllSchools } from '../../lib/schools';
 import type { School } from '../../types/school';
 import { cn } from '../../lib/utils';
 
@@ -15,17 +14,24 @@ interface LocationSuggestion {
   type: 'sector' | 'area';
 }
 
-export const HomeSearch: React.FC<{ className?: string }> = ({ className }) => {
+export const HomeSearch: React.FC<{ className?: string; initialSchools?: School[] }> = ({ className, initialSchools = [] }) => {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [schools, setSchools] = useState<School[]>([]);
+  const [schools, setSchools] = useState<School[]>(initialSchools);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setSchools(getAllSchools());
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
+      .then(r => r.json())
+      .then(data => {
+        if (!cancelled && data?.success && Array.isArray(data.schools)) setSchools(data.schools);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
   }, []);
 
   // Close dropdown when clicked outside

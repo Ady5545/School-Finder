@@ -5,6 +5,7 @@ import { SchoolRatingsSection } from '../../components/school/SchoolRatingsSecti
 import { ReviewsShowcase } from '../../components/school/ReviewsShowcase';
 import { SchoolReviewsDirectory } from '../../components/school/SchoolReviewsDirectory';
 import { buildPageMetadata } from '../../lib/seo';
+import { getAllSchoolsAsync } from '../../lib/schools';
 import { MessageSquare } from 'lucide-react';
 
 export const metadata = buildPageMetadata(
@@ -15,7 +16,8 @@ export const metadata = buildPageMetadata(
 
 export const dynamic = 'force-dynamic';
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const allSchools = await getAllSchoolsAsync();
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'Reviews', isCurrent: true }]} className="mb-6" />
@@ -56,7 +58,7 @@ export default function ReviewsPage() {
           openFormInitially
         />
         <div className="mt-10 pt-8 border-t border-[var(--color-border)]">
-          <SchoolReviewsDirectory />
+          <SchoolReviewsDirectory initialSchools={allSchools} />
         </div>
       </section>
     </div>

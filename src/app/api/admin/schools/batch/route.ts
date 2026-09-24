@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     } else if (action === 'update_admission_status') {
       const admStatus = data?.admissionStatus || 'Admissions Open';
       for (const slug of slugs) {
-        const res = updateAdminSchool(
+        const res = await updateAdminSchoolAsync(
           slug,
           {
             admissions: {

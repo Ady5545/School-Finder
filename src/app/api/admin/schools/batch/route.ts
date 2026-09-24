@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     } else if (action === 'verify_status') {
       const statusToSet = data?.verificationStatus || 'verified_official';
       for (const slug of slugs) {
-        const res = updateAdminSchool(
+        const res = await updateAdminSchoolAsync(
           slug,
           {
             verification: {

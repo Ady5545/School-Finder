@@ -1,6 +1,6 @@
 import React from 'react';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
-import { getAllSchoolsAsync } from '../../lib/schools';
+import { getAllSchoolsAsync } from '../../lib/schoolsServer';
 import { SchoolComparisonView } from '../../components/school/SchoolComparisonView';
 import { buildPageMetadata } from '../../lib/seo';
 

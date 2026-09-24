@@ -6649,9 +6649,9 @@
       "pincode": "201310",
       "area": "Knowledge Park III",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.4780855807376,
+        "lng": 77.49954476753115,
+        "isVerified": true
       },
       "mapSearchQuery": "Apeejay School Greater Noida Knowledge Park III"
     },
@@ -11576,10 +11576,10 @@
     "affiliationNumber": "2132595"
   },
   {
-    "id": "ryan-international-school-noida-extension",
-    "slug": "ryan-international-school-noida-extension",
-    "name": "Ryan International School, Greater Noida West",
-    "shortName": "Ryan International Techzone 4",
+    "id": "ryan-international-school-greater-noida-beta-i",
+    "slug": "ryan-international-school-greater-noida-beta-i",
+    "name": "Ryan International School, Greater Noida",
+    "shortName": "Ryan International School, Beta I",
     "alternateNames": [
       "Ryan International School Greater Noida West",
       "Ryan Techzone 4",
@@ -11602,15 +11602,15 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 4, Tech Zone IV, Near Amrapali Dream Valley, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Techzone 4",
-      "city": "Greater Noida West",
+      "address": "HS-6, Block E, Beta I, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh 201308",
+      "sector": "Beta I",
+      "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
+      "pincode": "201308",
+      "area": "Beta I",
       "coordinates": {
-        "lat": 28.595795017719674,
-        "lng": 77.44434825590226,
+        "lat": 28.479127234083677,
+        "lng": 77.51109056753765,
         "isVerified": true
       },
       "mapSearchQuery": "Ryan International School Tech Zone IV Greater Noida West",
@@ -11631,7 +11631,7 @@
       "verificationStatus": "not_publicly_verified",
       "comparableAnnualAvailable": false,
       "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
+      "academicSession": "2027-28",
       "lastVerifiedDate": "2026-09-15",
       "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
       "table": [],
@@ -11774,7 +11774,7 @@
       "Badminton",
       "Table Tennis"
     ],
-    "affiliationNumber": "2133182",
+    "affiliationNumber": "2130728",
     "establishedYear": 2016,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",
@@ -15724,12 +15724,12 @@
       "sector": "Knowledge Park I",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
+      "pincode": "201310",
       "area": "Knowledge Park I",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.478076150100208,
+        "lng": 77.49951258102925,
+        "isVerified": true
       },
       "mapSearchQuery": "Cambridge School Greater Noida Knowledge Park I"
     },
@@ -15857,9 +15857,9 @@
       "pincode": "201310",
       "area": "Delta I",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.479976715874685,
+        "lng": 77.52326198102928,
+        "isVerified": true
       },
       "mapSearchQuery": "Modern School Greater Noida Delta I"
     },
@@ -15996,12 +15996,12 @@
       "sector": "Omega I",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201308",
+      "pincode": "201310",
       "area": "Omega I",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.45343184489032,
+        "lng": 77.51098151534448,
+        "isVerified": true
       },
       "mapSearchQuery": "Sheoran International School Omega 1 Greater Noida"
     },
@@ -16144,9 +16144,9 @@
       "pincode": "201308",
       "area": "Omega II",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.451220170619862,
+        "lng": 77.50144588102837,
+        "isVerified": true
       },
       "mapSearchQuery": "RPS International School Omega II Greater Noida"
     },
@@ -16410,12 +16410,12 @@
       "sector": "Omicron 1A",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201306",
+      "pincode": "201310",
       "area": "Omicron 1A",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.45696993206171,
+        "lng": 77.56217774232776,
+        "isVerified": true
       },
       "mapSearchQuery": "Millennium International School Omicron 1A Greater Noida"
     },
@@ -16553,12 +16553,12 @@
       "sector": "Sigma I",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201308",
+      "pincode": "201315",
       "area": "Sigma I",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.455234087878722,
+        "lng": 77.54460584603346,
+        "isVerified": true
       },
       "mapSearchQuery": "Greater Noida World School Sigma I"
     },
@@ -16819,9 +16819,9 @@
     "sports": []
   },
   {
-    "id": "gurukul-the-school-ghaziabad",
-    "slug": "gurukul-the-school-ghaziabad",
-    "name": "Gurukul The School",
+    "id": "gurukul-the-school-crossings-republik",
+    "slug": "gurukul-the-school-crossings-republik",
+    "name": "Gurukul The School, Crossings Republik",
     "shortName": "Gurukul The School",
     "alternateNames": [
       "Gurukul The School",
@@ -16844,16 +16844,16 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "27.5 KM NH-24, Hapur Bypass Road, Ghaziabad, Uttar Pradesh 201002",
-      "sector": "NH-24 / Hapur Bypass",
+      "address": "Crossings Republik, Ghaziabad, Uttar Pradesh 201016",
+      "sector": "Crossings Republik",
       "city": "Ghaziabad",
       "state": "Uttar Pradesh",
-      "pincode": "201002",
-      "area": "NH-24 / Hapur Bypass",
+      "pincode": "201016",
+      "area": "Crossings Republik",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.624171404128024,
+        "lng": 77.4310351252141,
+        "isVerified": true
       },
       "mapSearchQuery": "Gurukul The School NH 24 Hapur Bypass Ghaziabad"
     },
@@ -16963,7 +16963,7 @@
     "id": "the-shriram-millennium-school-noida-sector-135",
     "slug": "the-shriram-millennium-school-noida-sector-135",
     "name": "The Shriram Millennium School, Noida",
-    "shortName": "TSMS Noida",
+    "shortName": "The Shriram Millennium School, Sector 135",
     "alternateNames": [
       "The Shriram Millennium School Noida",
       "TSMS Noida",
@@ -16986,16 +16986,16 @@
     "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot S-1, off Noida–Greater Noida Expressway, Sector 135, Noida, Uttar Pradesh 201304",
+      "address": "Plot S-1, Sector 135, off Noida–Greater Noida Expressway, Noida, Uttar Pradesh 201304",
       "sector": "Sector 135",
       "city": "Noida",
       "state": "Uttar Pradesh",
       "pincode": "201304",
       "area": "Sector 135",
       "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
+        "lat": 28.499551421664318,
+        "lng": 77.3973332387021,
+        "isVerified": true
       },
       "mapSearchQuery": "The Shriram Millennium School Sector 135 Noida"
     },
@@ -17103,6 +17103,132 @@
     "canonicalSlug": "the-shriram-millennium-school-noida-sector-135",
     "isDuplicate": false,
     "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": null,
+    "establishedYear": null,
+    "sports": []
+  },
+  {
+    "id": "narayana-school-greater-noida",
+    "slug": "narayana-school-greater-noida",
+    "name": "Narayana e-Techno School, Greater Noida",
+    "shortName": "Narayana e-Techno School",
+    "alternateNames": [
+      "Narayana School Greater Noida",
+      "Narayana e-Techno School Greater Noida"
+    ],
+    "tagline": "CBSE co-educational school in Omicron I, Greater Noida",
+    "summary": "Narayana e-Techno School's Greater Noida campus at HS-38, Omicron I.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "HS-38, Omicron I, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Omicron I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201310",
+      "area": "Omicron I",
+      "coordinates": {
+        "lat": 28.461981861517973,
+        "lng": 77.56842425581938,
+        "isVerified": true
+      },
+      "mapSearchQuery": "Narayana e-Techno School HS-38 Omicron I Greater Noida"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Not publicly disclosed",
+      "academicSession": "2027-28",
+      "verificationStatus": "pending_audit",
+      "isVerified": false,
+      "disclosed": false,
+      "comparableAnnualAvailable": false,
+      "billingFrequency": "annual",
+      "table": [],
+      "components": [],
+      "gradeWiseTiers": [],
+      "concessions": [],
+      "footnotes": []
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Contact school for current admission process and seat availability.",
+      "session": "2027-28",
+      "verificationStatus": "pending_schedule"
+    },
+    "contact": {
+      "phone": null,
+      "website": "https://www.narayanaschools.in/",
+      "email": null
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "pending_audit",
+      "lastVerified": "2026-09",
+      "sourceName": "Narayana Schools official branch listing",
+      "sourceUrl": "https://www.narayanaschools.in/best-cbse-schools-in-ncr",
+      "verifiedFields": [
+        "name",
+        "address"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Narayana e-Techno School, Greater Noida",
+      "h1": "Narayana e-Techno School, Greater Noida",
+      "pageHeartKey": "narayana-school-greater-noida",
+      "cardHeartKey": "narayana-school-greater-noida",
+      "cardRatingKey": "narayana-school-greater-noida",
+      "cardLink": "/schools/narayana-school-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "Added in the September 2026 Greater Noida school expansion batch.",
+      "Campus and coordinates were user-confirmed; fee and admission details remain pending CMS verification."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "narayana-school-greater-noida",
     "isArchived": false,
     "status": "active",
     "affiliationNumber": null,

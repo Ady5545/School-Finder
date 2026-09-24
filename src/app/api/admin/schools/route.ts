@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       boardsList: Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[],
       schoolType: school.schoolType,
       establishedYear: school.establishedYear || 2015,
-      verifiedFee: school.fees?.annualDisplay || school.fees?.rangeText || school.fees?.tuitionAnnual || `₹${school.fees?.cardFee?.toLocaleString('en-IN') || '1,20,000'}/yr`,
+      verifiedFee: school.fees?.annualDisplay || school.fees?.rangeText || school.fees?.tuitionAnnual || (school.fees?.cardFee ? `₹${school.fees.cardFee.toLocaleString('en-IN')}/yr` : 'Not publicly disclosed'),
       tuitionAnnual: school.fees?.tuitionAnnual,
       cardFee: school.fees?.cardFee,
       isArchived: Boolean(school.isArchived),

@@ -2,7 +2,7 @@ import React from 'react';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { SchoolMatchView } from '../../components/school/SchoolMatchView';
 import { buildPageMetadata } from '../../lib/seo';
-import { getAllSchoolsAsync } from '../../lib/schools';
+import { getAllSchoolsAsync } from '../../lib/schoolsServer';
 
 export const metadata = buildPageMetadata(
   'School Match | Admission Pitara',

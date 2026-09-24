@@ -1,10 +1,10 @@
 import type { MetadataRoute } from 'next';
-import { getCanonicalSchools } from '../lib/schools';
+import { getCanonicalSchoolsAsync } from '../lib/schools';
 import { BASE_URL } from '../lib/seo';
 
 const SITE_URL = BASE_URL.replace(/\/$/, '');
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, changeFrequency: 'daily', priority: 1.0 },
     { url: `${SITE_URL}/schools`, changeFrequency: 'daily', priority: 0.9 },
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Keep the sitemap focused on canonical, useful, indexable pages.
   // Private/session pages and utility views are intentionally excluded.
-  const schoolRoutes: MetadataRoute.Sitemap = getCanonicalSchools().map(school => ({
+  const schoolRoutes: MetadataRoute.Sitemap = (await getCanonicalSchoolsAsync()).map(school => ({
     url: `${SITE_URL}/schools/${school.slug}`,
     changeFrequency: 'weekly',
     priority: 0.8,

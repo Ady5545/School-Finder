@@ -283,7 +283,6 @@ export default function AdminPage() {
       if (tab === 'users') setUsersList(data.users);
       if (tab === 'activity') setActivityList(data.events);
       if (tab === 'reviews') setReviewsList(data.reviews);
-      if (tab === 'schools') setSchoolsList(data.schools);
       if (tab === 'wishlists') setWishlistsData(data.wishlists);
       if (tab === 'comparisons') setComparisonsData(data);
       if (tab === 'searches') setSearchesData(data);

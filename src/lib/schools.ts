@@ -10,6 +10,14 @@ import {
 } from '../../data/schoolsData';
 import type { SchoolFilterOptions } from '../types/school';
 
+export function getAllSchools(options?: { includeAliases?: boolean; includeArchived?: boolean }): School[] {
+  const base = options?.includeAliases ? getRawSchools() : getCanonicalSchools();
+  if (options?.includeArchived) return base;
+  return base.filter(s => !s.isArchived && !s.isDuplicate);
+}
+
+export { getCanonicalSchools, getArchivedSchools, getCanonicalSchoolsCount, getCanonicalSlug, getRawSchools };
+
 /**
  * Returns every school slug so static routes and legacy URLs continue resolving without 404s.
  */
@@ -70,40 +78,6 @@ export function getDistinctBoards(): string[] {
     sBoards.forEach(b => boards.add(b));
   });
   return Array.from(boards).sort();
-}
-
-export async function filterSchoolsAsync(options: SchoolFilterOptions): Promise<School[]> {
-  const baseSchools = await getEffectiveCanonicalSchoolsAsync();
-  const q = options.searchQuery?.toLowerCase().trim() || '';
-  const selectedBoards = options.board || [];
-  const selectedAreas = options.area || [];
-
-  return baseSchools
-    .map(school => {
-      const schoolBoards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
-      let relevance = 0;
-      if (q) {
-        const nameLower = school.name.toLowerCase();
-        const shortLower = school.shortName?.toLowerCase() || '';
-        const haystack = [school.name, school.shortName, school.location?.area, school.location?.sector, school.location?.address, ...(Array.isArray(school.alternateNames) ? school.alternateNames : []), ...schoolBoards].filter(Boolean).join(' ').toLowerCase();
-        const matchName = nameLower.includes(q);
-        const matchShort = shortLower.includes(q);
-        const matchAlt = school.alternateNames?.some(alt => alt.toLowerCase().includes(q));
-        const matchArea = (school.location?.area || '').toLowerCase().includes(q);
-        const matchSector = (school.location?.sector || '').toLowerCase().includes(q);
-        const matchAddress = (school.location?.address || '').toLowerCase().includes(q);
-        const matchBoard = schoolBoards.some(b => b.toLowerCase().includes(q));
-        const matchFuzzy = !matchName && !matchShort && !matchAlt && !matchArea && !matchSector && !matchAddress && !matchBoard && q.length >= 4 && fuzzyWordMatch(q, haystack);
-        if (!matchName && !matchShort && !matchAlt && !matchArea && !matchSector && !matchAddress && !matchBoard && !matchFuzzy) return null;
-        relevance = nameLower === q ? 100 : nameLower.startsWith(q) ? 90 : matchName ? 80 : matchShort ? 70 : matchAlt ? 60 : matchFuzzy ? 20 : 40;
-      }
-      if (selectedBoards.length > 0 && !schoolBoards.some(b => selectedBoards.some(sel => b.toLowerCase().includes(sel.toLowerCase())))) return null;
-      if (selectedAreas.length > 0 && !selectedAreas.some(sel => (`${school.location?.area || ''} ${school.location?.sector || ''} ${school.location?.address || ''}`).toLowerCase().includes(sel.toLowerCase()))) return null;
-      return { school, relevance };
-    })
-    .filter((item): item is { school: School; relevance: number } => Boolean(item))
-    .sort((a, b) => b.relevance - a.relevance)
-    .map(item => item.school);
 }
 
 // Small Levenshtein distance, used only as a typo-tolerant fallback when a

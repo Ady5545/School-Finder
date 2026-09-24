@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllSchoolsAsync, filterSchoolsAsync } from '../../../lib/schools';
+import { getAllSchoolsAsync, filterSchoolsAsync } from '../../../lib/schoolsServer';
 
 export async function GET(request: NextRequest) {
   try {

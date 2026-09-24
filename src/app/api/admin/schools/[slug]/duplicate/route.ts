@@ -20,7 +20,7 @@ export async function POST(
   }
 
   try {
-    const original = getAdminSchoolBySlug(slug);
+    const original = await getAdminSchoolBySlugAsync(slug);
     if (!original) {
       return NextResponse.json({ success: false, message: `School '${slug}' not found.` }, { status: 404 });
     }

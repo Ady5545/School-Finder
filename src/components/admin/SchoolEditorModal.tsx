@@ -1,22 +1,23 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
-  X,
-  Save,
-  Building,
-  MapPin,
-  IndianRupee,
-  Calendar,
-  Image as ImageIcon,
-  ShieldCheck,
   AlertCircle,
-  Plus,
-  Trash2,
-  ExternalLink,
+  Building,
+  Calendar,
   CheckCircle2,
+  ExternalLink,
+  Image as ImageIcon,
+  IndianRupee,
+  MapPin,
+  Plus,
+  Save,
+  ShieldCheck,
+  Trash2,
+  Upload,
+  X,
 } from 'lucide-react';
-import type { School, AdmissionMilestone } from '../../../data/schoolsData';
+import type { AdmissionMilestone, School, SchoolTimings } from '../../../data/schoolsData';
 
 interface SchoolEditorModalProps {
   isOpen: boolean;
@@ -26,6 +27,22 @@ interface SchoolEditorModalProps {
   isNew?: boolean;
 }
 
+const inputClass =
+  'w-full px-3 py-2.5 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs focus:outline-none focus:border-amber-400';
+const labelClass = 'block text-[11px] font-semibold text-slate-300 mb-1';
+
+function cloneDraft(input?: Partial<School> | null): Partial<School> {
+  return input ? JSON.parse(JSON.stringify(input)) : {};
+}
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export function SchoolEditorModal({
   isOpen,
   onClose,
@@ -33,937 +50,456 @@ export function SchoolEditorModal({
   schoolToEdit,
   isNew = false,
 }: SchoolEditorModalProps) {
-  const [activeTab, setActiveTab] = useState<'basic' | 'location' | 'fees' | 'admissions' | 'media' | 'verification'>('basic');
+  const [activeTab, setActiveTab] = useState<'basic' | 'location' | 'fees' | 'admissions' | 'timings' | 'media' | 'json'>('basic');
+  const [draft, setDraft] = useState<Partial<School>>({});
+  const [jsonText, setJsonText] = useState('');
+  const [jsonError, setJsonError] = useState<string | null>(null);
+  const [auditReason, setAuditReason] = useState('Updated via Admission Pitara Admin CMS');
   const [isSaving, setIsSaving] = useState(false);
+  const [uploadingKind, setUploadingKind] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  // Form State
-  const [name, setName] = useState('');
-  const [shortName, setShortName] = useState('');
-  const [slug, setSlug] = useState('');
-  const [tagline, setTagline] = useState('');
-  const [summary, setSummary] = useState('');
-  const [boards, setBoards] = useState<string[]>(['CBSE']);
-  const [curriculum, setCurriculum] = useState('CBSE');
-  const [schoolType, setSchoolType] = useState('Co-educational');
-  const [dayOrBoarding, setDayOrBoarding] = useState('Day School');
-  const [gradeFrom, setGradeFrom] = useState('Nursery');
-  const [gradeTo, setGradeTo] = useState('Class 12');
-  const [establishedYear, setEstablishedYear] = useState<number | string>(2015);
-  const [studentTeacherRatio, setStudentTeacherRatio] = useState('Not publicly verified');
-
-  // Location
-  const [sector, setSector] = useState('Sector 16B');
-  const [address, setAddress] = useState('');
-  const [pincode, setPincode] = useState('201306');
-  const [lat, setLat] = useState<string>('');
-  const [lng, setLng] = useState<string>('');
-  const [mapSearchQuery, setMapSearchQuery] = useState('');
-
-  // Fees
-  const [cardFee, setCardFee] = useState<string>('120000');
-  const [tuitionAnnual, setTuitionAnnual] = useState<string>('');
-  const [registrationFee, setRegistrationFee] = useState<string>('');
-  const [admissionFee, setAdmissionFee] = useState<string>('');
-  const [rangeText, setRangeText] = useState('₹1,20,000 - ₹1,50,000 / year');
-  const [feeVerificationStatus, setFeeVerificationStatus] = useState<string>('partially_verified');
-  const [feeSourceUrl, setFeeSourceUrl] = useState('');
-
-  // Admissions
-  const [admissionStatus, setAdmissionStatus] = useState('Admissions Open');
-  const [admissionSession, setAdmissionSession] = useState('2027-28');
-  const [admissionProcess, setAdmissionProcess] = useState('');
-  const [milestones, setMilestones] = useState<AdmissionMilestone[]>([]);
-
-  // Media
-  const [featuredImage, setFeaturedImage] = useState('');
-  const [heroImage, setHeroImage] = useState('');
-  const [imageSource, setImageSource] = useState('');
-
-  // Verification & Editorial
-  const [affiliationNumber, setAffiliationNumber] = useState('');
-  const [verificationStatus, setVerificationStatus] = useState<'verified_official' | 'pending_audit' | 'partially_verified'>('verified_official');
-  const [auditReason, setAuditReason] = useState('Updated via Admin School Editor');
-
   useEffect(() => {
-    if (schoolToEdit) {
-      setName(schoolToEdit.name || '');
-      setShortName(schoolToEdit.shortName || schoolToEdit.name || '');
-      setSlug(schoolToEdit.slug || '');
-      setTagline(schoolToEdit.tagline || '');
-      setSummary(schoolToEdit.summary || '');
-      setBoards(schoolToEdit.board || ['CBSE']);
-      setCurriculum(schoolToEdit.curriculum || 'CBSE');
-      setSchoolType(schoolToEdit.schoolType || 'Co-educational');
-      setDayOrBoarding(schoolToEdit.dayOrBoarding || 'Day School');
-      setGradeFrom(schoolToEdit.gradeRange?.from || 'Nursery');
-      setGradeTo(schoolToEdit.gradeRange?.to || 'Class 12');
-      setEstablishedYear(schoolToEdit.establishedYear || 2015);
-      setStudentTeacherRatio(schoolToEdit.studentTeacherRatio || 'Not publicly verified');
-
-      setSector(schoolToEdit.location?.sector || 'Sector 16B');
-      setAddress(schoolToEdit.location?.address || '');
-      setPincode(schoolToEdit.location?.pincode || '201306');
-      setLat(schoolToEdit.location?.coordinates?.lat ? String(schoolToEdit.location.coordinates.lat) : '');
-      setLng(schoolToEdit.location?.coordinates?.lng ? String(schoolToEdit.location.coordinates.lng) : '');
-      setMapSearchQuery(schoolToEdit.location?.mapSearchQuery || '');
-
-      setCardFee(schoolToEdit.fees?.cardFee ? String(schoolToEdit.fees.cardFee) : '120000');
-      setTuitionAnnual(schoolToEdit.fees?.tuitionAnnual || '');
-      setRegistrationFee(schoolToEdit.fees?.registrationFee ? String(schoolToEdit.fees.registrationFee) : '');
-      setAdmissionFee(schoolToEdit.fees?.admissionFee ? String(schoolToEdit.fees.admissionFee) : '');
-      setRangeText(schoolToEdit.fees?.rangeText || '');
-      setFeeVerificationStatus(schoolToEdit.fees?.verificationStatus || 'partially_verified');
-      setFeeSourceUrl(schoolToEdit.fees?.sourceUrl || '');
-
-      setAdmissionStatus(schoolToEdit.admissions?.status || 'Admissions Open');
-      setAdmissionSession(schoolToEdit.admissions?.session || '2027-28');
-      setAdmissionProcess(schoolToEdit.admissions?.process || '');
-      setMilestones(schoolToEdit.admissions?.milestones || []);
-
-      setFeaturedImage(schoolToEdit.assets?.featured || '');
-      setHeroImage(schoolToEdit.assets?.hero || '');
-      setImageSource(schoolToEdit.assets?.imageSource || '');
-
-      setAffiliationNumber(schoolToEdit.affiliationNumber || schoolToEdit.verification?.cbseAffiliationNumber || '');
-      setVerificationStatus(schoolToEdit.verification?.status || 'verified_official');
-    } else if (isNew) {
-      // Clear fields for new school
-      setName('');
-      setShortName('');
-      setSlug('');
-      setTagline('');
-      setSummary('');
-      setBoards(['CBSE']);
-      setCurriculum('CBSE');
-      setSchoolType('Co-educational');
-      setDayOrBoarding('Day School');
-      setGradeFrom('Nursery');
-      setGradeTo('Class 12');
-      setEstablishedYear(2018);
-      setStudentTeacherRatio('Not publicly verified');
-      setSector('Sector 16B');
-      setAddress('');
-      setPincode('201306');
-      setLat('');
-      setLng('');
-      setMapSearchQuery('');
-      setCardFee('120000');
-      setTuitionAnnual('');
-      setRegistrationFee('');
-      setAdmissionFee('');
-      setRangeText('₹1,20,000 - ₹1,50,000 / year');
-      setFeeVerificationStatus('partially_verified');
-      setFeeSourceUrl('');
-      setAdmissionStatus('Admissions Open');
-      setAdmissionSession('2027-28');
-      setAdmissionProcess('');
-      setMilestones([]);
-      setFeaturedImage('');
-      setHeroImage('');
-      setImageSource('');
-      setAffiliationNumber('');
-      setVerificationStatus('verified_official');
+    if (!isOpen) return;
+    const next = cloneDraft(schoolToEdit);
+    if (isNew) {
+      next.name = '';
+      next.shortName = '';
+      next.slug = '';
+      next.board = ['CBSE'];
+      next.curriculum = 'CBSE';
+      next.schoolType = 'Co-educational';
+      next.dayOrBoarding = 'Day School';
+      next.gradeRange = { from: 'Nursery', to: 'Class 12', raw: 'Nursery to Class 12' };
+      next.studentTeacherRatio = 'Not publicly disclosed';
+      next.location = {
+        address: '',
+        sector: '',
+        city: 'Greater Noida',
+        state: 'Uttar Pradesh',
+        pincode: '',
+        area: '',
+        coordinates: { lat: null, lng: null, isVerified: false },
+      };
+      next.fees = {
+        cardFee: null,
+        rangeText: 'Not publicly disclosed',
+        tuitionAnnual: null,
+        registrationFee: null,
+        admissionFee: null,
+        currency: 'INR',
+        academicYear: '2027-28',
+        verificationStatus: 'partially_verified',
+        isVerified: false,
+      };
+      next.admissions = {
+        status: 'Admissions Open',
+        session: '2027-28',
+        academicYear: '2027-28',
+        process: '',
+        milestones: [],
+      };
+      next.timings = {};
+      next.transportNotes = '';
+      next.editorialNotes = '';
+      next.rating = { score: 0, scale: 5, reviewsCount: 0 };
+      next.assets = { featured: null, hero: null, gallery: [], legacyPaths: {} };
+      next.verification = {
+        isVerified: false,
+        status: 'pending_audit',
+        lastVerified: new Date().toISOString().slice(0, 10),
+        sourceName: 'Admission Pitara Admin CMS',
+        cbseAffiliationNumber: null,
+        verifiedFields: [],
+      };
     }
+    setDraft(next);
+    setJsonText(JSON.stringify(next, null, 2));
+    setJsonError(null);
     setErrorMessage(null);
     setSuccessMessage(null);
-  }, [schoolToEdit, isNew, isOpen]);
+    setActiveTab('basic');
+  }, [isOpen, isNew, schoolToEdit]);
 
-  if (!isOpen) return null;
-
-  const handleNameChange = (val: string) => {
-    setName(val);
-    if (isNew && !slug) {
-      setSlug(
-        val
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '-')
-          .replace(/^-|-$/g, '')
-      );
-    }
+  const update = (patch: Partial<School>) => {
+    setDraft(prev => {
+      const next = { ...prev, ...patch };
+      setJsonText(JSON.stringify(next, null, 2));
+      return next;
+    });
+    setJsonError(null);
   };
 
-  const handleAddMilestone = () => {
-    const newM: AdmissionMilestone = {
-      id: `milestone_${Date.now()}`,
-      label: 'Application Deadline',
-      date: new Date().toISOString().split('T')[0],
+  const updateLocation = (patch: Partial<School['location']>) =>
+    update({ location: { ...(draft.location || {}), ...patch } as School['location'] });
+
+  const updateFees = (patch: Partial<NonNullable<School['fees']>>) =>
+    update({ fees: { ...(draft.fees || {}), ...patch } as School['fees'] });
+
+  const updateAdmissions = (patch: Partial<NonNullable<School['admissions']>>) =>
+    update({ admissions: { ...(draft.admissions || {}), ...patch } as School['admissions'] });
+
+  const updateAssets = (patch: Partial<NonNullable<School['assets']>>) =>
+    update({ assets: { ...(draft.assets || {}), ...patch } as School['assets'] });
+
+  const updateTimings = (patch: Partial<SchoolTimings>) =>
+    update({ timings: { ...(draft.timings || {}), ...patch } });
+
+  const addMilestone = () => {
+    const current = draft.admissions?.milestones || [];
+    const milestone: AdmissionMilestone = {
+      id: 'milestone_' + Date.now(),
+      label: 'Application milestone',
+      date: new Date().toISOString().slice(0, 10),
+      type: 'custom',
+      status: 'verified',
       verified: true,
       notes: '',
     };
-    setMilestones([...milestones, newM]);
+    updateAdmissions({ milestones: [...current, milestone] });
   };
 
-  const handleUpdateMilestone = (idx: number, updates: Partial<AdmissionMilestone>) => {
-    const updated = [...milestones];
-    updated[idx] = { ...updated[idx], ...updates };
-    setMilestones(updated);
+  const editMilestone = (index: number, patch: Partial<AdmissionMilestone>) => {
+    const current = [...(draft.admissions?.milestones || [])];
+    current[index] = { ...current[index], ...patch };
+    updateAdmissions({ milestones: current });
   };
 
-  const handleDeleteMilestone = (idx: number) => {
-    setMilestones(milestones.filter((_, i) => i !== idx));
+  const deleteMilestone = (index: number) => {
+    updateAdmissions({ milestones: (draft.admissions?.milestones || []).filter((_, i) => i !== index) });
   };
 
-  const handleSave = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim()) {
+  const importJsonIntoForm = () => {
+    try {
+      const parsed = JSON.parse(jsonText);
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        throw new Error('School data must be a JSON object.');
+      }
+      if (!parsed.name && !isNew) throw new Error('JSON must contain the school name.');
+      setDraft(parsed);
+      setJsonText(JSON.stringify(parsed, null, 2));
+      setJsonError(null);
+      setSuccessMessage('JSON loaded into the editor. Review the form, then save.');
+    } catch (err) {
+      setJsonError(err instanceof Error ? err.message : 'Invalid JSON.');
+    }
+  };
+
+  const syncJsonFromForm = () => {
+    setJsonText(JSON.stringify(draft, null, 2));
+    setJsonError(null);
+  };
+
+  const uploadImage = async (file: File, kind: 'featured' | 'hero' | 'gallery') => {
+    const targetSlug = String(draft.slug || slugify(String(draft.name || 'school'))).trim();
+    if (!targetSlug) {
+      setErrorMessage('Enter the school name first so the upload can be attached to this record.');
+      return;
+    }
+
+    setUploadingKind(kind);
+    setErrorMessage(null);
+    try {
+      const form = new FormData();
+      form.append('slug', targetSlug);
+      form.append('kind', kind);
+      form.append('file', file);
+
+      const res = await fetch('/api/admin/schools/assets', {
+        method: 'POST',
+        body: form,
+        cache: 'no-store',
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || 'Image upload failed.');
+
+      if (kind === 'featured') updateAssets({ featured: data.url });
+      if (kind === 'hero') updateAssets({ hero: data.url });
+      if (kind === 'gallery') updateAssets({ gallery: [...(draft.assets?.gallery || []), data.url] });
+
+      setSuccessMessage('Image uploaded and attached to this school draft.');
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : 'Image upload failed.');
+    } finally {
+      setUploadingKind(null);
+    }
+  };
+
+  const removeGalleryImage = (index: number) => {
+    updateAssets({ gallery: (draft.assets?.gallery || []).filter((_, i) => i !== index) });
+  };
+
+  const handleNameChange = (name: string) => {
+    const patch: Partial<School> = { name };
+    if (isNew && !draft.slug) patch.slug = slugify(name);
+    update(patch);
+  };
+
+  const canSave = Boolean(String(draft.name || '').trim() && String(draft.slug || '').trim());
+
+  const tabs = useMemo(
+    () => [
+      ['basic', 'Basic', Building],
+      ['location', 'Location', MapPin],
+      ['fees', 'Fees', IndianRupee],
+      ['admissions', 'Admissions', Calendar],
+      ['timings', 'Timings', Calendar],
+      ['media', 'Media', ImageIcon],
+      ['json', 'Full Data', ShieldCheck],
+    ] as const,
+    [],
+  );
+
+  const handleSave = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!String(draft.name || '').trim()) {
       setErrorMessage('School name is required.');
       return;
     }
-    if (isNew && !slug.trim()) {
+    if (!String(draft.slug || '').trim()) {
       setErrorMessage('School slug is required.');
       return;
+    }
+
+    let payload: Partial<School> = cloneDraft(draft);
+    if (activeTab === 'json') {
+      try {
+        const parsed = JSON.parse(jsonText);
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('Full Data must be a JSON object.');
+        payload = parsed;
+      } catch (err) {
+        setJsonError(err instanceof Error ? err.message : 'Invalid JSON.');
+        return;
+      }
     }
 
     setIsSaving(true);
     setErrorMessage(null);
     setSuccessMessage(null);
-
-    const parsedLat = lat.trim() ? parseFloat(lat) : null;
-    const parsedLng = lng.trim() ? parseFloat(lng) : null;
-
-    const payload = {
-      name: name.trim(),
-      shortName: shortName.trim() || name.trim(),
-      slug: slug.trim(),
-      tagline: tagline.trim(),
-      summary: summary.trim(),
-      board: boards,
-      curriculum: curriculum.trim(),
-      schoolType,
-      dayOrBoarding,
-      gradeRange: { from: gradeFrom, to: gradeTo, raw: `${gradeFrom} to ${gradeTo}` },
-      establishedYear: establishedYear ? Number(establishedYear) : null,
-      studentTeacherRatio: studentTeacherRatio.trim(),
-      affiliationNumber: affiliationNumber.trim() || null,
-      location: {
-        address: address.trim(),
-        sector: sector.trim(),
-        city: 'Greater Noida',
-        state: 'Uttar Pradesh',
-        pincode: pincode.trim(),
-        area: sector.trim(),
-        coordinates: { lat: parsedLat, lng: parsedLng },
-        mapSearchQuery: mapSearchQuery.trim() || `${name.trim()}, ${sector.trim()}, Greater Noida West`,
-        mapEmbedUrl: null,
-      },
-      fees: {
-        ...(schoolToEdit?.fees || {}),
-        cardFee: Number(cardFee) || 120000,
-        currency: 'INR',
-        rangeText: rangeText.trim() || `₹${Number(cardFee).toLocaleString('en-IN')}/yr`,
-        tuitionAnnual: tuitionAnnual.trim() || null,
-        registrationFee: registrationFee ? Number(registrationFee) : null,
-        admissionFee: admissionFee ? Number(admissionFee) : null,
-        verificationStatus: feeVerificationStatus,
-        sourceUrl: feeSourceUrl.trim() || undefined,
-        table: schoolToEdit?.fees?.table || [],
-      },
-      admissions: {
-        status: admissionStatus,
-        session: admissionSession,
-        process: admissionProcess.trim(),
-        milestones,
-      },
-      assets: {
-        featured: featuredImage.trim() || null,
-        hero: heroImage.trim() || null,
-        gallery: schoolToEdit?.assets?.gallery || [],
-        imageSource: imageSource.trim() || undefined,
-        legacyPaths: schoolToEdit?.assets?.legacyPaths || {},
-      },
-      verification: {
-        isVerified: verificationStatus === 'verified_official',
-        status: verificationStatus,
-        lastVerified: new Date().toISOString().split('T')[0],
-        sourceName: 'Admission Pitara Editorial Verification',
-        cbseAffiliationNumber: affiliationNumber.trim() || null,
-        verifiedFields: ['name', 'location', 'fees', 'contact', 'board'],
-      },
-    };
-
     try {
-      if (isNew) {
-        const res = await fetch('/api/admin/schools', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            schoolData: payload,
-            reason: auditReason || 'New school entry created',
-          }),
-        });
-        const data = await res.json();
-        if (!data.success) throw new Error(data.message || 'Creation failed');
-        setSuccessMessage('School created successfully!');
-        onSaved(data.school);
-        setTimeout(() => onClose(), 800);
-      } else {
-        const targetSlug = schoolToEdit?.slug || slug;
-        const res = await fetch(`/api/admin/schools/${targetSlug}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            updates: payload,
-            reason: auditReason || 'Admin edited school details',
-          }),
-        });
-        const data = await res.json();
-        if (!data.success) throw new Error(data.message || 'Update failed');
-        setSuccessMessage('School details updated successfully!');
-        onSaved(data.school);
-        setTimeout(() => onClose(), 800);
-      }
-    } catch (err: unknown) {
-      setErrorMessage(err instanceof Error ? err.message : String(err));
+      const url = isNew
+        ? '/api/admin/schools'
+        : '/api/admin/schools/' + encodeURIComponent(String(schoolToEdit?.slug || draft.slug));
+      const res = await fetch(url, {
+        method: isNew ? 'POST' : 'PATCH',
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' },
+        cache: 'no-store',
+        body: JSON.stringify(
+          isNew
+            ? { schoolData: payload, reason: auditReason.trim() || 'Created via Admin CMS' }
+            : { updates: payload, reason: auditReason.trim() || 'Updated via Admin CMS' },
+        ),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || 'Could not save school.');
+      onSaved(data.school);
+      setSuccessMessage(isNew ? 'School created successfully.' : 'School updated successfully.');
+      window.setTimeout(onClose, 450);
+    } catch (err) {
+      setErrorMessage(err instanceof Error ? err.message : 'Could not save school.');
     } finally {
       setIsSaving(false);
     }
   };
 
+  if (!isOpen) return null;
+
+  const location = draft.location || ({} as School['location']);
+  const fees = draft.fees || ({} as School['fees']);
+  const admissions = draft.admissions || ({} as School['admissions']);
+  const assets = draft.assets || ({} as School['assets']);
+  const timings = draft.timings || {};
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs overflow-y-auto">
-      <div className="relative w-full max-w-4xl bg-[#0c1f38] border border-[#1e4875] rounded-2xl shadow-2xl text-slate-200 overflow-hidden flex flex-col my-8 max-h-[90vh]">
-        {/* Modal Header */}
-        <div className="px-6 py-4 bg-[#0a1b32] border-b border-[#1b3d63] flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-amber-400/10 border border-amber-400/30 text-amber-400 flex items-center justify-center">
-              <Building className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-base font-bold text-white font-serif">
-                {isNew ? 'Register New School Record' : `Edit: ${schoolToEdit?.name || 'School'}`}
-              </h2>
-              <p className="text-xs text-slate-400">
-                {isNew ? 'Direct canonical listing entry' : `Slug: ${schoolToEdit?.slug}`}
-              </p>
-            </div>
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-3 sm:p-5">
+      <div className="w-full max-w-6xl max-h-[94vh] overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col">
+        <div className="px-5 py-4 border-b border-[#1b3d63] bg-[#08172b] flex items-center justify-between gap-3">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.16em] text-amber-400 font-black">Admission Pitara CMS</p>
+            <h2 className="text-lg font-black text-white font-serif">{isNew ? 'Add a school' : 'Edit school data'}</h2>
+            <p className="text-[11px] text-slate-400 mt-0.5">
+              Everything here is editable. The Full Data tab is the escape hatch for any field not represented by a visual control.
+            </p>
           </div>
-          <button
-            onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
-          >
+          <button type="button" onClick={onClose} className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-white">
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Modal Tabs */}
-        <div className="flex items-center gap-1 px-6 py-2.5 bg-[#08172b] border-b border-[#1b3d63] overflow-x-auto text-xs">
-          {[
-            { id: 'basic', label: 'Basic Info', icon: Building },
-            { id: 'location', label: 'Location & Map', icon: MapPin },
-            { id: 'fees', label: 'Fees & Structure', icon: IndianRupee },
-            { id: 'admissions', label: 'Admissions & Dates', icon: Calendar },
-            { id: 'media', label: 'Media Assets', icon: ImageIcon },
-            { id: 'verification', label: 'Verification & Editorial', icon: ShieldCheck },
-          ].map(tab => {
-            const Icon = tab.icon;
-            const active = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-colors whitespace-nowrap cursor-pointer ${
-                  active
-                    ? 'bg-amber-400 text-slate-950 shadow-xs'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
+        <div className="flex gap-1 overflow-x-auto px-4 py-2 border-b border-[#1b3d63] bg-[#091a30]">
+          {tabs.map(([id, label, Icon]) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setActiveTab(id)}
+              className={'shrink-0 inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-[11px] font-bold ' + (activeTab === id ? 'bg-amber-400 text-slate-950' : 'text-slate-400 hover:text-white hover:bg-white/5')}
+            >
+              <Icon className="w-3.5 h-3.5" />
+              {label}
+            </button>
+          ))}
         </div>
 
-        {/* Messages */}
-        {errorMessage && (
-          <div className="mx-6 mt-4 p-3 rounded-xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
-            <span>{errorMessage}</span>
-          </div>
-        )}
-        {successMessage && (
-          <div className="mx-6 mt-4 p-3 rounded-xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-400" />
-            <span>{successMessage}</span>
+        {(errorMessage || successMessage || jsonError) && (
+          <div className="px-5 pt-3">
+            {errorMessage && <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs flex gap-2"><AlertCircle className="w-4 h-4 shrink-0" />{errorMessage}</div>}
+            {successMessage && <div className="mt-2 p-3 rounded-xl bg-emerald-950/60 border border-emerald-800 text-emerald-300 text-xs flex gap-2"><CheckCircle2 className="w-4 h-4 shrink-0" />{successMessage}</div>}
+            {jsonError && <div className="mt-2 p-3 rounded-xl bg-rose-950/60 border border-rose-800 text-rose-300 text-xs">{jsonError}</div>}
           </div>
         )}
 
-        {/* Form Body */}
-        <form onSubmit={handleSave} className="flex-1 overflow-y-auto p-6 space-y-6">
+        <form onSubmit={handleSave} className="flex-1 overflow-y-auto p-5 sm:p-6">
           {activeTab === 'basic' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Official School Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={name}
-                    onChange={e => handleNameChange(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs focus:outline-hidden focus:border-amber-400"
-                    placeholder="e.g. Lotus Valley International School"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Display Short Name
-                  </label>
-                  <input
-                    type="text"
-                    value={shortName}
-                    onChange={e => setShortName(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs focus:outline-hidden focus:border-amber-400"
-                    placeholder="e.g. Lotus Valley, Noida Extension"
-                  />
-                </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Official school name *</label><input value={String(draft.name || '')} onChange={e => handleNameChange(e.target.value)} className={inputClass} required /></div>
+                <div><label className={labelClass}>Short/display name</label><input value={String(draft.shortName || '')} onChange={e => update({ shortName: e.target.value })} className={inputClass} /></div>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Unique URL Slug *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    disabled={!isNew}
-                    value={slug}
-                    onChange={e => setSlug(e.target.value)}
-                    className={`w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-xs font-mono focus:outline-hidden focus:border-amber-400 ${
-                      !isNew ? 'opacity-60 cursor-not-allowed text-slate-400' : 'text-amber-400'
-                    }`}
-                    placeholder="e.g. lotus-valley-international-school-noida-extension"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Affiliation Board(s)
-                  </label>
-                  <input
-                    type="text"
-                    value={boards.join(', ')}
-                    onChange={e => setBoards(e.target.value.split(',').map(s => s.trim()).filter(Boolean))}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs focus:outline-hidden focus:border-amber-400"
-                    placeholder="CBSE, Cambridge, IB"
-                  />
-                </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>URL slug *</label><input value={String(draft.slug || '')} onChange={e => update({ slug: slugify(e.target.value) })} className={inputClass + ' font-mono'} disabled={!isNew} /></div>
+                <div><label className={labelClass}>Boards (comma-separated)</label><input value={(draft.board || []).join(', ')} onChange={e => update({ board: e.target.value.split(',').map(x => x.trim()).filter(Boolean) })} className={inputClass} placeholder="CBSE, ICSE, IB" /></div>
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Tagline (Editorial Headline)
-                </label>
-                <input
-                  type="text"
-                  value={tagline}
-                  onChange={e => setTagline(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs focus:outline-hidden focus:border-amber-400"
-                  placeholder="e.g. Holistic child-centric education with state-of-the-art campus"
-                />
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Curriculum</label><input value={String(draft.curriculum || '')} onChange={e => update({ curriculum: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>School type</label><input value={String(draft.schoolType || '')} onChange={e => update({ schoolType: e.target.value })} className={inputClass} /></div>
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Editorial Summary
-                </label>
-                <textarea
-                  rows={3}
-                  value={summary}
-                  onChange={e => setSummary(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs focus:outline-hidden focus:border-amber-400 leading-relaxed"
-                  placeholder="Detailed overview for parents..."
-                />
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Day / boarding</label><input value={String(draft.dayOrBoarding || '')} onChange={e => update({ dayOrBoarding: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>Established year</label><input type="number" value={draft.establishedYear ?? ''} onChange={e => update({ establishedYear: e.target.value ? Number(e.target.value) : null })} className={inputClass} /></div>
               </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    School Type
-                  </label>
-                  <select
-                    value={schoolType}
-                    onChange={e => setSchoolType(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  >
-                    <option value="Co-educational">Co-educational</option>
-                    <option value="All Girls">All Girls</option>
-                    <option value="All Boys">All Boys</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Day / Boarding
-                  </label>
-                  <select
-                    value={dayOrBoarding}
-                    onChange={e => setDayOrBoarding(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  >
-                    <option value="Day School">Day School</option>
-                    <option value="Day-cum-Boarding">Day-cum-Boarding</option>
-                    <option value="Boarding School">Boarding School</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Established Year
-                  </label>
-                  <input
-                    type="number"
-                    value={establishedYear}
-                    onChange={e => setEstablishedYear(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Student-Teacher Ratio
-                  </label>
-                  <input
-                    type="text"
-                    value={studentTeacherRatio}
-                    onChange={e => setStudentTeacherRatio(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="e.g. 20:1 or Not publicly verified"
-                  />
-                </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Grades from</label><input value={draft.gradeRange?.from || ''} onChange={e => update({ gradeRange: { ...(draft.gradeRange || {}), from: e.target.value, raw: (e.target.value || '') + ' to ' + (draft.gradeRange?.to || '') } as School['gradeRange'] })} className={inputClass} /></div>
+                <div><label className={labelClass}>Grades to</label><input value={draft.gradeRange?.to || ''} onChange={e => update({ gradeRange: { ...(draft.gradeRange || {}), to: e.target.value, raw: (draft.gradeRange?.from || '') + ' to ' + (e.target.value || '') } as School['gradeRange'] })} className={inputClass} /></div>
               </div>
+              <div><label className={labelClass}>Admission age / eligibility</label><input value={String(draft.admissionAge || '')} onChange={e => update({ admissionAge: e.target.value })} className={inputClass} placeholder="e.g. Nursery 3+ by 31 March" /></div>
+              <div><label className={labelClass}>Student-teacher ratio</label><input value={String(draft.studentTeacherRatio || '')} onChange={e => update({ studentTeacherRatio: e.target.value })} className={inputClass} placeholder="e.g. 20:1 or Not publicly disclosed" /></div>
+              <div><label className={labelClass}>Tagline</label><input value={String(draft.tagline || '')} onChange={e => update({ tagline: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>Summary</label><textarea rows={4} value={String(draft.summary || '')} onChange={e => update({ summary: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>Alternate names / search aliases (one per line)</label><textarea rows={3} value={(draft.alternateNames || []).join('\n')} onChange={e => update({ alternateNames: e.target.value.split('\n').map(x => x.trim()).filter(Boolean) })} className={inputClass} /></div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Phone</label><input value={String(draft.contact?.phone || '')} onChange={e => update({ contact: { ...(draft.contact || { phone: null, email: null, website: null }), phone: e.target.value || null } })} className={inputClass} /></div>
+                <div><label className={labelClass}>Email</label><input value={String(draft.contact?.email || '')} onChange={e => update({ contact: { ...(draft.contact || { phone: null, email: null, website: null }), email: e.target.value || null } })} className={inputClass} /></div>
+              </div>
+              <div><label className={labelClass}>Website</label><input value={String(draft.contact?.website || '')} onChange={e => update({ contact: { ...(draft.contact || { phone: null, email: null, website: null }), website: e.target.value || null } })} className={inputClass} /></div>
+              <div><label className={labelClass}>Facilities (one per line)</label><textarea rows={6} value={(draft.facilities || []).map(f => f.name).join('\n')} onChange={e => update({ facilities: e.target.value.split('\n').map(x => x.trim()).filter(Boolean).map(name => ({ name, category: 'General', available: true })) })} className={inputClass} /></div>
+              <div><label className={labelClass}>Sports / activities (one per line)</label><textarea rows={5} value={(draft.sports || []).join('\n')} onChange={e => update({ sports: e.target.value.split('\n').map(x => x.trim()).filter(Boolean) })} className={inputClass} /></div>
+              <div><label className={labelClass}>Achievements / highlights (one per line)</label><textarea rows={5} value={(draft.achievements || []).join('\n')} onChange={e => update({ achievements: e.target.value.split('\n').map(x => x.trim()).filter(Boolean) })} className={inputClass} /></div>
+              <div><label className={labelClass}>Transport notes</label><textarea rows={3} value={String(draft.transportNotes || '')} onChange={e => update({ transportNotes: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>Editorial notes</label><textarea rows={3} value={String(draft.editorialNotes || '')} onChange={e => update({ editorialNotes: e.target.value })} className={inputClass} /></div>
             </div>
           )}
 
           {activeTab === 'location' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Sector / Locality *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={sector}
-                    onChange={e => setSector(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="e.g. Sector 16B, Techzone 4"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Pincode
-                  </label>
-                  <input
-                    type="text"
-                    value={pincode}
-                    onChange={e => setPincode(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="201306"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    City / Region
-                  </label>
-                  <input
-                    type="text"
-                    disabled
-                    value="Greater Noida West, UP"
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-slate-400 text-xs opacity-70"
-                  />
-                </div>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div><label className={labelClass}>Area / sector *</label><input value={String(location.sector || '')} onChange={e => updateLocation({ sector: e.target.value, area: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>PIN code</label><input value={String(location.pincode || '')} onChange={e => updateLocation({ pincode: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>City</label><input value={String(location.city || '')} onChange={e => updateLocation({ city: e.target.value })} className={inputClass} /></div>
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Full Campus Address
-                </label>
-                <textarea
-                  rows={2}
-                  value={address}
-                  onChange={e => setAddress(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  placeholder="Plot No., Sector, Greater Noida West, Uttar Pradesh 201306"
-                />
+              <div><label className={labelClass}>Full campus address *</label><textarea rows={3} value={String(location.address || '')} onChange={e => updateLocation({ address: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>State / region</label><input value={String(location.state || '')} onChange={e => updateLocation({ state: e.target.value })} className={inputClass} /></div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Latitude</label><input type="number" step="any" value={location.coordinates?.lat ?? ''} onChange={e => updateLocation({ coordinates: { ...(location.coordinates || { lat: null, lng: null }), lat: e.target.value ? Number(e.target.value) : null, isVerified: true } })} className={inputClass + ' font-mono'} /></div>
+                <div><label className={labelClass}>Longitude</label><input type="number" step="any" value={location.coordinates?.lng ?? ''} onChange={e => updateLocation({ coordinates: { ...(location.coordinates || { lat: null, lng: null }), lng: e.target.value ? Number(e.target.value) : null, isVerified: true } })} className={inputClass + ' font-mono'} /></div>
               </div>
-
-              <div className="p-4 rounded-xl bg-[#08182d] border border-[#1b3e66] space-y-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xs font-bold text-white flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-amber-400" />
-                      Map Coordinates (Greater Noida West)
-                    </h3>
-                    <p className="text-[11px] text-slate-400 mt-0.5">
-                      Standard Greater Noida West bounds: Lat ~28.55 to 28.65, Lng ~77.40 to 77.52.
-                      Missing coordinates = no map pin (never use fallback placeholders).
-                    </p>
-                  </div>
-                  {lat && lng && (
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-[11px] text-amber-400 hover:underline"
-                    >
-                      <span>Preview Pin</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
-                      Latitude
-                    </label>
-                    <input
-                      type="number"
-                      step="any"
-                      value={lat}
-                      onChange={e => setLat(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs font-mono"
-                      placeholder="e.g. 28.6012"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] font-semibold text-slate-300 mb-1">
-                      Longitude
-                    </label>
-                    <input
-                      type="number"
-                      step="any"
-                      value={lng}
-                      onChange={e => setLng(e.target.value)}
-                      className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs font-mono"
-                      placeholder="e.g. 77.4485"
-                    />
-                  </div>
-                </div>
-              </div>
+              {location.coordinates?.lat && location.coordinates?.lng && <a className="inline-flex items-center gap-1.5 text-xs text-amber-300 hover:underline" href={'https://www.google.com/maps/search/?api=1&query=' + location.coordinates.lat + ',' + location.coordinates.lng} target="_blank" rel="noreferrer"><ExternalLink className="w-3.5 h-3.5" />Preview exact pin</a>}
+              <div><label className={labelClass}>Map search query</label><input value={String(location.mapSearchQuery || '')} onChange={e => updateLocation({ mapSearchQuery: e.target.value })} className={inputClass} /></div>
             </div>
           )}
 
           {activeTab === 'fees' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Card / Display Annual Fee (₹)
-                  </label>
-                  <input
-                    type="number"
-                    value={cardFee}
-                    onChange={e => setCardFee(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="120000"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Fee Range Display Text
-                  </label>
-                  <input
-                    type="text"
-                    value={rangeText}
-                    onChange={e => setRangeText(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="₹1,20,000 - ₹1,50,000 / year"
-                  />
-                </div>
+              <div className="rounded-2xl border border-amber-400/20 bg-amber-400/5 p-4 text-xs text-amber-100">
+                Use this section for the amount you want displayed on Admission Pitara. The year shown below is independently editable, so you can carry forward a prior fee schedule for the next admissions cycle.
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Tuition (Annual / Periodic)
-                  </label>
-                  <input
-                    type="text"
-                    value={tuitionAnnual}
-                    onChange={e => setTuitionAnnual(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="e.g. ₹95,000 / yr"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Registration Fee (₹)
-                  </label>
-                  <input
-                    type="number"
-                    value={registrationFee}
-                    onChange={e => setRegistrationFee(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="e.g. 2000"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    One-Time Admission Fee (₹)
-                  </label>
-                  <input
-                    type="number"
-                    value={admissionFee}
-                    onChange={e => setAdmissionFee(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="e.g. 25000"
-                  />
-                </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Card / comparable annual fee (₹)</label><input type="number" value={fees.cardFee ?? ''} onChange={e => updateFees({ cardFee: e.target.value ? Number(e.target.value) : null })} className={inputClass} /></div>
+                <div><label className={labelClass}>Annual display / range text</label><input value={String(fees.annualDisplay || fees.rangeText || '')} onChange={e => updateFees({ annualDisplay: e.target.value, rangeText: e.target.value })} className={inputClass} /></div>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Fee Verification Level
-                  </label>
-                  <select
-                    value={feeVerificationStatus}
-                    onChange={e => setFeeVerificationStatus(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  >
-                    <option value="verified_from_source">Verified from Source / Official Prospectus</option>
-                    <option value="partially_verified">Partially Verified</option>
-                    <option value="unverified_undisclosed">Undisclosed / On Request</option>
-                    <option value="not_publicly_verified">Not Publicly Verified</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Fee Source URL / Document Reference
-                  </label>
-                  <input
-                    type="url"
-                    value={feeSourceUrl}
-                    onChange={e => setFeeSourceUrl(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="https://school.edu.in/fees-structure-2025"
-                  />
-                </div>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div><label className={labelClass}>Tuition annual</label><input value={String(fees.tuitionAnnual || '')} onChange={e => updateFees({ tuitionAnnual: e.target.value || null })} className={inputClass} /></div>
+                <div><label className={labelClass}>Registration fee (₹)</label><input type="number" value={fees.registrationFee ?? ''} onChange={e => updateFees({ registrationFee: e.target.value ? Number(e.target.value) : null })} className={inputClass} /></div>
+                <div><label className={labelClass}>Admission fee (₹)</label><input type="number" value={fees.admissionFee ?? ''} onChange={e => updateFees({ admissionFee: e.target.value ? Number(e.target.value) : null })} className={inputClass} /></div>
               </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Academic year / display year</label><input value={String(fees.academicYear || '2027-28')} onChange={e => updateFees({ academicYear: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>Source / note</label><input value={String(fees.source || '')} onChange={e => updateFees({ source: e.target.value })} className={inputClass} placeholder="e.g. 2026-27 official fee schedule carried forward" /></div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div><label className={labelClass}>Fee source URL</label><input value={String(fees.sourceUrl || '')} onChange={e => updateFees({ sourceUrl: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>Verification status</label><select value={String(fees.verificationStatus || 'partially_verified')} onChange={e => updateFees({ verificationStatus: e.target.value as any })} className={inputClass}><option value="verified_from_source">Verified from source</option><option value="verified_official">Verified official</option><option value="partially_verified">Partially verified</option><option value="estimated_historical">Estimated / historical</option><option value="unverified_undisclosed">Undisclosed</option></select></div>
+              </div>
+              <div><label className={labelClass}>Simple fee table (one item per line: label | cost)</label><textarea rows={7} value={(fees.table || []).map(x => x.type + ' | ' + x.cost).join('\n')} onChange={e => updateFees({ table: e.target.value.split('\n').map(x => x.trim()).filter(Boolean).map(line => { const [type, ...cost] = line.split('|'); return { type: type.trim(), cost: cost.join('|').trim() }; }) })} className={inputClass} /></div>
+              <div><label className={labelClass}>Fee notes / footnotes (one per line)</label><textarea rows={5} value={(fees.footnotes || []).join('\n')} onChange={e => updateFees({ footnotes: e.target.value.split('\n').map(x => x.trim()).filter(Boolean) })} className={inputClass} /></div>
             </div>
           )}
 
           {activeTab === 'admissions' && (
             <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Admission Status
-                  </label>
-                  <select
-                    value={admissionStatus}
-                    onChange={e => setAdmissionStatus(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  >
-                    <option value="Admissions Open">Admissions Open</option>
-                    <option value="Upcoming (Starting Soon)">Upcoming (Starting Soon)</option>
-                    <option value="Admissions Closed">Admissions Closed</option>
-                    <option value="Waitlist Only">Waitlist Only</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Target Academic Session
-                  </label>
-                  <input
-                    type="text"
-                    value={admissionSession}
-                    onChange={e => setAdmissionSession(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                    placeholder="2027-28"
-                  />
-                </div>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div><label className={labelClass}>Status</label><input value={String(admissions.status || '')} onChange={e => updateAdmissions({ status: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>Session</label><input value={String(admissions.session || admissions.academicYear || '2027-28')} onChange={e => updateAdmissions({ session: e.target.value, academicYear: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>Admissions source URL</label><input value={String(admissions.sourceUrl || '')} onChange={e => updateAdmissions({ sourceUrl: e.target.value })} className={inputClass} /></div>
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Admission Process Summary
-                </label>
-                <textarea
-                  rows={2}
-                  value={admissionProcess}
-                  onChange={e => setAdmissionProcess(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs leading-relaxed"
-                  placeholder="Online registration, document submission, student interaction, fee deposit."
-                />
+              <div><label className={labelClass}>Admission process</label><textarea rows={4} value={String(admissions.process || '')} onChange={e => updateAdmissions({ process: e.target.value })} className={inputClass} /></div>
+              <div><label className={labelClass}>Timeline description</label><textarea rows={3} value={String(admissions.timelineDescription || '')} onChange={e => updateAdmissions({ timelineDescription: e.target.value })} className={inputClass} /></div>
+              <div className="rounded-2xl border border-[#1b3d63] bg-[#08182d] p-4 space-y-3">
+                <div className="flex items-center justify-between gap-3"><div><h3 className="text-sm font-bold text-white">Admission milestones</h3><p className="text-[10px] text-slate-400">Only add dates you want the calendar/reminder system to use.</p></div><button type="button" onClick={addMilestone} className="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-black"><Plus className="w-3.5 h-3.5" />Add</button></div>
+                {(admissions.milestones || []).map((m, index) => <div key={m.id || index} className="grid sm:grid-cols-[1fr_160px_auto] gap-2 p-2 rounded-xl bg-[#0b203a] border border-white/5"><input value={m.label} onChange={e => editMilestone(index,{label:e.target.value})} className={inputClass} /><input type="date" value={m.date} onChange={e => editMilestone(index,{date:e.target.value})} className={inputClass} /><button type="button" onClick={() => deleteMilestone(index)} className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-lg"><Trash2 className="w-4 h-4" /></button></div>)}
+                {(!admissions.milestones || admissions.milestones.length === 0) && <p className="text-xs text-slate-500 text-center py-4">No milestones configured.</p>}
               </div>
+            </div>
+          )}
 
-              {/* Milestones List */}
-              <div className="p-4 rounded-xl bg-[#08182d] border border-[#1b3e66] space-y-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-xs font-bold text-white flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                      Admission Dates & Milestones (Notification Trigger Points)
-                    </h3>
-                    <p className="text-[11px] text-slate-400 mt-0.5">
-                      Used by parents for automated email alerts and calendar reminders.
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={handleAddMilestone}
-                    className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-400/10 text-amber-400 border border-amber-400/30 text-xs font-bold hover:bg-amber-400/20 transition-colors cursor-pointer"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>Add Milestone</span>
-                  </button>
-                </div>
-
-                {milestones.length === 0 ? (
-                  <p className="text-xs text-slate-400 py-2 text-center italic">
-                    No admission milestones configured yet.
-                  </p>
-                ) : (
-                  <div className="space-y-2">
-                    {milestones.map((m, idx) => (
-                      <div
-                        key={m.id || idx}
-                        className="flex flex-col sm:flex-row items-center gap-2 p-2 rounded-lg bg-[#0b203a] border border-white/5 text-xs"
-                      >
-                        <input
-                          type="text"
-                          value={m.label}
-                          onChange={e => handleUpdateMilestone(idx, { label: e.target.value })}
-                          className="flex-1 px-2.5 py-1 rounded bg-[#071629] border border-white/10 text-white text-xs"
-                          placeholder="Milestone Label (e.g. Application Closes)"
-                        />
-                        <input
-                          type="date"
-                          value={m.date}
-                          onChange={e => handleUpdateMilestone(idx, { date: e.target.value })}
-                          className="px-2.5 py-1 rounded bg-[#071629] border border-white/10 text-white text-xs"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleDeleteMilestone(idx)}
-                          className="p-1 text-slate-400 hover:text-rose-400 transition-colors"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                )}
+          {activeTab === 'timings' && (
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-sky-200/10 bg-sky-400/5 p-4 text-xs text-sky-100">
+                Timings were not a first-class field in the old school schema. They are now stored here and can be edited without touching code.
               </div>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div><label className={labelClass}>Monday–Friday</label><input value={String(timings.weekdays || '')} onChange={e => updateTimings({ weekdays: e.target.value })} className={inputClass} placeholder="8:00 AM – 2:30 PM" /></div>
+                <div><label className={labelClass}>Saturday</label><input value={String(timings.saturday || '')} onChange={e => updateTimings({ saturday: e.target.value })} className={inputClass} /></div>
+                <div><label className={labelClass}>Sunday</label><input value={String(timings.sunday || '')} onChange={e => updateTimings({ sunday: e.target.value })} className={inputClass} /></div>
+              </div>
+              <div><label className={labelClass}>Timing notes</label><textarea rows={4} value={String(timings.notes || '')} onChange={e => updateTimings({ notes: e.target.value })} className={inputClass} /></div>
             </div>
           )}
 
           {activeTab === 'media' && (
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Featured / Thumbnail Image URL
-                </label>
-                <input
-                  type="url"
-                  value={featuredImage}
-                  onChange={e => setFeaturedImage(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  placeholder="https://images.unsplash.com/... or /images/schools/..."
-                />
+            <div className="space-y-5">
+              <div className="grid md:grid-cols-2 gap-4">
+                {(['featured','hero'] as const).map(kind => (
+                  <div key={kind} className="rounded-2xl border border-[#1b3d63] bg-[#08182d] p-4 space-y-3">
+                    <div className="flex items-center gap-2 text-white text-sm font-bold"><ImageIcon className="w-4 h-4 text-amber-400" />{kind === 'featured' ? 'Featured image' : 'Hero image'}</div>
+                    <input value={String(kind === 'featured' ? assets.featured || '' : assets.hero || '')} onChange={e => updateAssets(kind === 'featured' ? { featured: e.target.value || null } : { hero: e.target.value || null })} className={inputClass} placeholder="https://... or /api/schools/assets/..." />
+                    <label className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-black cursor-pointer"><Upload className="w-4 h-4" />{uploadingKind === kind ? 'Uploading…' : 'Upload image'}<input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" className="hidden" onChange={e => { const file=e.target.files?.[0]; if(file) void uploadImage(file,kind); e.currentTarget.value=''; }} /></label>
+                    {((kind === 'featured' ? assets.featured : assets.hero) || '') && <img src={String(kind === 'featured' ? assets.featured : assets.hero)} alt="" className="w-full h-36 object-cover rounded-xl border border-white/10" onError={e => { e.currentTarget.style.display='none'; }} />}
+                  </div>
+                ))}
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Hero Header Image URL
-                </label>
-                <input
-                  type="url"
-                  value={heroImage}
-                  onChange={e => setHeroImage(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  placeholder="https://images.unsplash.com/... or /images/schools/..."
-                />
+              <div className="rounded-2xl border border-[#1b3d63] bg-[#08182d] p-4 space-y-3">
+                <div className="flex items-center justify-between"><div><h3 className="text-sm font-bold text-white">Gallery</h3><p className="text-[10px] text-slate-400">Upload multiple campus images or paste existing image URLs.</p></div><label className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-black cursor-pointer"><Upload className="w-4 h-4" />{uploadingKind === 'gallery' ? 'Uploading…' : 'Upload image'}<input type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" className="hidden" onChange={e => { const file=e.target.files?.[0]; if(file) void uploadImage(file,'gallery'); e.currentTarget.value=''; }} /></label></div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">{(assets.gallery || []).map((url,index)=><div key={index} className="relative group"><img src={url} alt="" className="w-full aspect-[4/3] object-cover rounded-xl border border-white/10" onError={e=>{e.currentTarget.style.opacity='0.2'}} /><button type="button" onClick={()=>removeGalleryImage(index)} className="absolute top-2 right-2 p-1.5 rounded-lg bg-rose-600 text-white opacity-0 group-hover:opacity-100"><X className="w-3.5 h-3.5"/></button></div>)}</div>
+                <textarea rows={4} value={(assets.gallery || []).join('\n')} onChange={e=>updateAssets({gallery:e.target.value.split('\n').map(x=>x.trim()).filter(Boolean)})} className={inputClass} placeholder="One gallery URL per line" />
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Image Attribution / Photographer Source
-                </label>
-                <input
-                  type="text"
-                  value={imageSource}
-                  onChange={e => setImageSource(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  placeholder="e.g. Official Campus Media / Admission Pitara Verified Field Visit"
-                />
-              </div>
+              <div><label className={labelClass}>Image source / attribution</label><input value={String(assets.imageSource || '')} onChange={e=>updateAssets({ imageSource:e.target.value })} className={inputClass} /></div>
             </div>
           )}
 
-          {activeTab === 'verification' && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    CBSE / Board Affiliation Number
-                  </label>
-                  <input
-                    type="text"
-                    value={affiliationNumber}
-                    onChange={e => setAffiliationNumber(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs font-mono"
-                    placeholder="e.g. 2132338"
-                  />
-                  <p className="text-[10px] text-slate-400 mt-1">
-                    Cross-checked against CBSE SARAS public registry.
-                  </p>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">
-                    Verification Status
-                  </label>
-                  <select
-                    value={verificationStatus}
-                    onChange={e => setVerificationStatus(e.target.value as typeof verificationStatus)}
-                    className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  >
-                    <option value="verified_official">Verified Official</option>
-                    <option value="partially_verified">Partially Verified</option>
-                    <option value="pending_audit">Pending Audit</option>
-                  </select>
-                </div>
+          {activeTab === 'json' && (
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div><h3 className="text-sm font-bold text-white">Full school data</h3><p className="text-[10px] text-slate-400">Paste a complete JSON object, load it, then save. This supports fields added to the schema later without rebuilding the form.</p></div>
+                <div className="flex gap-2"><button type="button" onClick={syncJsonFromForm} className="px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-slate-300">Refresh JSON</button><button type="button" onClick={importJsonIntoForm} className="px-3 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-black">Load JSON</button></div>
               </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
-                  Administrative Reason / Change Notes *
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={auditReason}
-                  onChange={e => setAuditReason(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-[#091b32] border border-[#1d4672] text-white text-xs"
-                  placeholder="e.g. Updated fee structure from 2025 prospectus after tele-verification"
-                />
-              </div>
+              <textarea value={jsonText} onChange={e=>setJsonText(e.target.value)} className="w-full min-h-[520px] rounded-2xl bg-[#071629] border border-[#1d4672] px-4 py-4 text-[11px] leading-relaxed font-mono text-emerald-200 outline-none focus:border-amber-400" spellCheck={false} />
             </div>
           )}
 
-          {/* Modal Footer */}
-          <div className="pt-4 border-t border-[#1b3d63] flex items-center justify-between">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-semibold transition-colors cursor-pointer"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={isSaving}
-              className="flex items-center gap-2 px-5 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs shadow-md transition-colors cursor-pointer disabled:opacity-50"
-            >
-              <Save className="w-4 h-4" />
-              <span>{isSaving ? 'Saving Record...' : isNew ? 'Create School Record' : 'Save Changes'}</span>
-            </button>
+          <div className="mt-6 pt-4 border-t border-[#1b3d63] grid md:grid-cols-[1fr_auto] gap-4 items-end">
+            <div><label className={labelClass}>Admin change note *</label><input value={auditReason} onChange={e=>setAuditReason(e.target.value)} className={inputClass} required /></div>
+            <div className="flex gap-2 justify-end"><button type="button" onClick={onClose} className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-slate-300">Cancel</button><button type="submit" disabled={isSaving || uploadingKind !== null || !canSave} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black disabled:opacity-50"><Save className="w-4 h-4" />{isSaving ? 'Saving…' : isNew ? 'Create school' : 'Save changes'}</button></div>
           </div>
         </form>
       </div>

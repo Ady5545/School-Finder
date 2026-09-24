@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getSchoolBySlug, getAllSchoolSlugs, getAllSchools } from '../../../lib/schools';
+import { getSchoolBySlugAsync, getAllSchoolSlugsAsync, getAllSchoolsAsync } from '../../../lib/schools';
 import { buildSchoolMetadata, generateSchoolJsonLd, generateBreadcrumbJsonLd } from '../../../lib/seo';
 import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { SchoolImage } from '../../../components/school/SchoolImage';
@@ -74,13 +74,13 @@ function getSportIcon(sport: string) {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllSchoolSlugs();
+  const slugs = await getAllSchoolSlugsAsync();
   return slugs.map(slug => ({ slug }));
 }
 
 export async function generateMetadata({ params }: SchoolDetailPageProps) {
   const { slug } = await params;
-  const school = getSchoolBySlug(slug);
+  const school = await getSchoolBySlugAsync(slug);
   if (!school) return {};
   return buildSchoolMetadata(school);
 }
@@ -99,7 +99,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
     { name: 'Schools', path: '/schools' },
     { name: school.name, path: `/schools/${school.slug}` },
   ]);
-  const allSchools = getAllSchools();
+  const allSchools = await getAllSchoolsAsync();
   const schoolBoards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
   const affiliationNumber = school.affiliationNumber || school.verification?.cbseAffiliationNumber;
 

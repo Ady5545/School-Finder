@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ success: false, message: 'Descriptive archive reason required' }, { status: 400 });
       }
       for (const slug of slugs) {
-        const res = archiveAdminSchool(slug, reason, adminUser);
+        const res = await archiveAdminSchoolAsync(slug, reason, adminUser);
         results.push({ slug, success: res.success, message: res.error });
       }
     } else if (action === 'verify_status') {

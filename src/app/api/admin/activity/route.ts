@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getActivityEventsAsync, getUserByIdAsync } from '../../../../lib/authStore';
+import { getActivityEventsAsync, getAllUsersSanitizedAsync } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
@@ -23,33 +23,21 @@ export async function GET(req: NextRequest) {
     since,
   });
 
-  // Enrich events with user names and school names
-  const enrichedEvents = await Promise.all(events.map(async evt => {
-    let userName: string | undefined = undefined;
-    let userEmail: string | undefined = undefined;
-    if (evt.userId) {
-      const user = await getUserByIdAsync(evt.userId);
-      if (user) {
-        userName = user.name;
-        userEmail = user.email;
-      }
-    }
+  // Enrich from one user lookup rather than querying Mongo once per event.
+  const users = await getAllUsersSanitizedAsync();
+  const usersById = new Map(users.map(user => [user.id, user]));
 
-    let schoolName: string | undefined = undefined;
-    if (evt.schoolSlug) {
-      const school = getSchoolBySlug(evt.schoolSlug);
-      if (school) {
-        schoolName = school.name;
-      }
-    }
+  const enrichedEvents = events.map(evt => {
+    const user = evt.userId ? usersById.get(evt.userId) : undefined;
+    const school = evt.schoolSlug ? getSchoolBySlug(evt.schoolSlug) : undefined;
 
     return {
       ...evt,
-      userName,
-      userEmail,
-      schoolName,
+      userName: user?.name,
+      userEmail: user?.email,
+      schoolName: school?.name,
     };
-  }));
+  });
 
   return NextResponse.json({
     success: true,

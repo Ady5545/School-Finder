@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
-import { getAllUsersSanitizedAsync, getUserActivityTimelineAsync } from '../../../../lib/authStore';
+import { getAllUsersSanitizedAsync, getActivityEventsAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
   const auth = await requireAdminAuth(req);
@@ -20,23 +20,48 @@ export async function GET(req: NextRequest) {
 
   const allUsers = await getAllUsersSanitizedAsync();
 
-  // Augment with activity summary metrics
-  const augmentedUsers = await Promise.all(
-    allUsers.map(async u => {
-      const activity = await getUserActivityTimelineAsync(u.id);
-      return {
-        ...u,
-        engagement: {
-          schoolsViewedCount: activity.summary.schoolsViewedCount,
-          searchesPerformedCount: activity.summary.searchesPerformedCount,
-          comparisonsCount: activity.summary.comparisonsCount,
-          shortlistedCount: Array.isArray(u.wishlist) ? u.wishlist.length : 0,
-          reviewsSubmittedCount: activity.summary.reviewsSubmittedCount,
-          totalEvents: activity.summary.totalEvents,
-        },
-      };
-    })
-  );
+  // Fetch telemetry once and aggregate in memory instead of issuing one
+  // database query per user. This removes the admin Users-tab N+1 waterfall.
+  const activityEvents = await getActivityEventsAsync(100000);
+  const engagementByUser = new Map<string, {
+    schoolsViewedCount: number;
+    searchesPerformedCount: number;
+    comparisonsCount: number;
+    reviewsSubmittedCount: number;
+    totalEvents: number;
+  }>();
+
+  for (const event of activityEvents) {
+    if (!event.userId) continue;
+    const summary = engagementByUser.get(event.userId) || {
+      schoolsViewedCount: 0,
+      searchesPerformedCount: 0,
+      comparisonsCount: 0,
+      reviewsSubmittedCount: 0,
+      totalEvents: 0,
+    };
+    summary.totalEvents += 1;
+    if (event.type === 'school_view') summary.schoolsViewedCount += 1;
+    if (event.type === 'search_performed') summary.searchesPerformedCount += 1;
+    if (event.type === 'compare_view') summary.comparisonsCount += 1;
+    if (event.type === 'rating_submitted') summary.reviewsSubmittedCount += 1;
+    engagementByUser.set(event.userId, summary);
+  }
+
+  const augmentedUsers = allUsers.map(u => {
+    const activity = engagementByUser.get(u.id);
+    return {
+      ...u,
+      engagement: {
+        schoolsViewedCount: activity?.schoolsViewedCount || 0,
+        searchesPerformedCount: activity?.searchesPerformedCount || 0,
+        comparisonsCount: activity?.comparisonsCount || 0,
+        shortlistedCount: Array.isArray(u.wishlist) ? u.wishlist.length : 0,
+        reviewsSubmittedCount: activity?.reviewsSubmittedCount || 0,
+        totalEvents: activity?.totalEvents || 0,
+      },
+    };
+  });
 
   // Filter
   let filtered = augmentedUsers.filter(u => {

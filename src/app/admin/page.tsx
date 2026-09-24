@@ -367,7 +367,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', `User account set to ${newStatus}.`);
-        loadAdminData();
+        void fetchTabData('users', true);
       } else {
         showNotification('error', 'Failed to update user status.');
       }
@@ -385,7 +385,7 @@ export default function AdminPage() {
       const data = await res.json();
       if (res.ok && data.success) {
         showNotification('success', 'User account deleted successfully.');
-        loadAdminData();
+        void fetchTabData('users', true);
       } else {
         showNotification('error', data.message || 'Failed to delete user.');
       }
@@ -404,7 +404,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', 'Review deleted and school rating recalculated.');
-        loadAdminData();
+        void fetchTabData('reviews', true);
       }
     } catch {
       showNotification('error', 'Failed to delete review.');
@@ -420,7 +420,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', 'Review restored to published state.');
-        loadAdminData();
+        void fetchTabData('reviews', true);
       }
     } catch {
       showNotification('error', 'Failed to restore review.');
@@ -438,7 +438,7 @@ export default function AdminPage() {
       });
       if (res.ok) {
         showNotification('success', `Campaign status updated to ${newStatus}.`);
-        loadAdminData();
+        void fetchTabData('promotions', true);
       }
     } catch {
       showNotification('error', 'Failed to update campaign.');
@@ -451,7 +451,7 @@ export default function AdminPage() {
       const res = await fetch(`/api/admin/promotions?id=${promoId}`, { method: 'DELETE' });
       if (res.ok) {
         showNotification('success', 'Campaign deleted.');
-        loadAdminData();
+        void fetchTabData('promotions', true);
       }
     } catch {
       showNotification('error', 'Failed to delete campaign.');
@@ -470,7 +470,7 @@ export default function AdminPage() {
       if (res.ok && data.success) {
         showNotification('success', 'New promotion campaign launched.');
         setShowPromoModal(false);
-        loadAdminData();
+        void fetchTabData('promotions', true);
       } else {
         showNotification('error', data.message || 'Failed to create campaign.');
       }

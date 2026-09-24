@@ -4,7 +4,7 @@ import {
   getAllRatingsAsync,
   adminDeleteRatingAsync,
   adminRestoreRatingAsync,
-  getUserByIdAsync,
+  getAllUsersSanitizedAsync,
 } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
@@ -44,18 +44,20 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  const enriched = await Promise.all(
-    ratings.map(async r => {
-      const school = getSchoolBySlug(r.schoolSlug);
-      const user = await getUserByIdAsync(r.userId);
-      return {
-        ...r,
-        schoolName: school?.name || (r.schoolSlug === '__platform__' ? 'Admission Pitara (platform review)' : r.schoolSlug),
-        userEmail: user?.email || '',
-        userStatus: user?.status || 'active',
-      };
-    })
-  );
+  // Enrich all reviews from one user lookup instead of an N+1 query.
+  const users = await getAllUsersSanitizedAsync();
+  const usersById = new Map(users.map(user => [user.id, user]));
+
+  const enriched = ratings.map(r => {
+    const school = getSchoolBySlug(r.schoolSlug);
+    const user = usersById.get(r.userId);
+    return {
+      ...r,
+      schoolName: school?.name || (r.schoolSlug === '__platform__' ? 'Admission Pitara (platform review)' : r.schoolSlug),
+      userEmail: user?.email || '',
+      userStatus: user?.status || 'active',
+    };
+  });
 
   return NextResponse.json({
     success: true,

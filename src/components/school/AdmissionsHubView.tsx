@@ -22,7 +22,7 @@ import {
   Building,
   Sparkles,
 } from 'lucide-react';
-import { getAllSchools } from '../../lib/schools';
+import type { School } from '../../types/school';
 import { AdmissionStatus } from './AdmissionStatus';
 import { SchoolImage } from './SchoolImage';
 import { AdmissionReminderModal } from './AdmissionReminderModal';
@@ -35,7 +35,7 @@ import type { School, AdmissionMilestone } from '../../types/school';
 
 export type AdmissionGroupKey = 'all' | 'open' | 'pre_registration' | 'upcoming' | 'inquire' | 'not_disclosed';
 
-export const AdmissionsHubView: React.FC = () => {
+export const AdmissionsHubView: React.FC<{ initialSchools?: School[] }> = ({ initialSchools = [] }) => {
   const allSchools = getAllSchools();
   const { compareList, addCompare, removeCompare, isInShortlist, toggleShortlist, openAuthPrompt } =
     useSchoolStore();

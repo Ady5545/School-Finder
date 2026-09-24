@@ -6,7 +6,8 @@ import {
   recordActivityEvent,
   recordSchoolSave,
 } from '../../../../lib/authStore';
-import { getPublicSchoolBySlugAsync, getCanonicalSlug } from '../../../../lib/schoolsServer';
+import { getPublicSchoolBySlugAsync } from '../../../../lib/schoolsServer';
+import { getCanonicalSlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
   try {

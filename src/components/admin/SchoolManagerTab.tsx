@@ -14,7 +14,7 @@ import {
   ShieldCheck,
   UploadCloud,
 } from 'lucide-react';
-import type { School } from '../../data/schoolsData';
+import type { School } from '../../../data/schoolsData';
 import { SchoolEditorModal } from './SchoolEditorModal';
 
 type SchoolRow = School & {

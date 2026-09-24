@@ -39,7 +39,7 @@ export async function POST(
       archiveReason: undefined,
     };
 
-    const result = createAdminSchool(
+    const result = await createAdminSchoolAsync(
       clonedData,
       { id: auth.user.id, email: auth.user.email, name: auth.user.name },
       `Cloned from existing school ${original.slug}`

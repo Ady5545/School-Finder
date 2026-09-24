@@ -254,6 +254,10 @@ export default function AdminPage() {
   const [loadingTab, setLoadingTab] = useState<AdminTab | null>(null);
 
   const fetchTabData = async (tab: AdminTab, force = false) => {
+    if (tab === 'schools') {
+      setLoadingTab(null);
+      return;
+    }
     if (!force && loadedTabs.has(tab)) return;
     setLoadingTab(tab);
     try {
@@ -271,7 +275,7 @@ export default function AdminPage() {
       };
       const url = requests[tab];
       if (!url) return;
-      const res = await fetch(url, { cache: 'no-store' });
+      const res = await fetch(url + (url.includes('?') ? '&' : '?') + '_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
       const data = await res.json();
       if (!data.success) throw new Error(data.message || `Failed to load ${tab}`);
 

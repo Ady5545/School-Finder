@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifySessionToken, getUserByIdAsync, updateUserProfileAsync } from '../../../../lib/authStore';
-import { getPublicSchoolBySlugAsync } from '../../../../lib/schools';
+import { getPublicSchoolBySlugAsync } from '../../../../lib/schoolsServer';
 import {
   APPLICATION_TRACKER_STATUSES,
   type ApplicationTrackerItem,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
+import { getAllSchoolsAsync } from '../../lib/schools';
 import { SchoolComparisonView } from '../../components/school/SchoolComparisonView';
 import { buildPageMetadata } from '../../lib/seo';
 
@@ -17,7 +18,8 @@ export const metadata = {
 
 export const dynamic = 'force-dynamic';
 
-export default function ComparePage() {
+export default async function ComparePage() {
+  const allSchools = await getAllSchoolsAsync();
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'Compare Schools', isCurrent: true }]} className="mb-4" />
@@ -31,7 +33,7 @@ export default function ComparePage() {
         </p>
       </div>
 
-      <SchoolComparisonView />
+      <SchoolComparisonView initialSchools={allSchools} />
     </div>
   );
 }

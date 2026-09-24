@@ -34,14 +34,23 @@ import { Button } from '../ui/Button';
 import { EmptyState } from '../ui/EmptyState';
 import { AdmissionStatus } from './AdmissionStatus';
 import { useSchoolStore } from '../../lib/schoolStore';
-import { getAllSchools, getPublicSchoolBySlug, getCanonicalSchools } from '../../lib/schools';
+import { getAllSchools, getCanonicalSchools } from '../../lib/schools';
 import { formatCurrency, cn } from '../../lib/utils';
 import type { School, DetailedFeeComponent, FeeConcession } from '../../types/school';
 
-export const SchoolComparisonView: React.FC = () => {
+export const SchoolComparisonView: React.FC<{ initialSchools?: School[] }> = ({ initialSchools = [] }) => {
   const { compareList, addCompare, removeCompare, clearCompare, isInShortlist, toggleShortlist } =
     useSchoolStore();
-  const allSchools = getAllSchools();
+  const [allSchools, setAllSchools] = useState<School[]>(initialSchools);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => { if (!cancelled && data?.success && Array.isArray(data.schools)) setAllSchools(data.schools); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
 
   const [highlightDiff, setHighlightDiff] = useState(false);
   const [selectorQuery, setSelectorQuery] = useState('');
@@ -55,9 +64,9 @@ export const SchoolComparisonView: React.FC = () => {
   // Get full school objects from compareList
   const selectedSchools: School[] = useMemo(() => {
     return compareList
-      .map(slug => getPublicSchoolBySlug(slug))
+      .map(slug => allSchools.find(s => s.slug === slug))
       .filter((s): s is School => Boolean(s));
-  }, [compareList]);
+  }, [compareList, allSchools]);
 
   // URL query parameter synchronization
   useEffect(() => {

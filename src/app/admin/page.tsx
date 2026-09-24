@@ -299,19 +299,43 @@ export default function AdminPage() {
   const loadAdminData = async (force = false) => {
     setIsLoading(true);
     try {
-      const authRes = await fetch('/api/admin/auth/check', { cache: 'no-store' });
-      if (!authRes.ok) {
+      let authRes: Response | null = null;
+      let authData: any = null;
+      let lastAuthError: unknown = null;
+
+      // A transient cold-start/network hiccup should not require the admin
+      // to manually reload the page several times.
+      for (let attempt = 0; attempt < 2; attempt += 1) {
+        try {
+          authRes = await fetch('/api/admin/auth/check', { cache: 'no-store' });
+          authData = await authRes.json().catch(() => ({}));
+          if (authRes.ok) {
+            lastAuthError = null;
+            break;
+          }
+          lastAuthError = new Error('Admin authentication check failed.');
+        } catch (err) {
+          lastAuthError = err;
+        }
+
+        if (attempt === 0) {
+          await new Promise(resolve => setTimeout(resolve, 300));
+        }
+      }
+
+      if (!authRes?.ok || !authData?.authorized) {
+        if (lastAuthError) console.error('Admin authentication check failed:', lastAuthError);
         setIsAuthenticated(false);
         return;
       }
-      const authData = await authRes.json();
-      if (!authData.authorized) {
-        setIsAuthenticated(false);
-        return;
-      }
+
       setIsAuthenticated(true);
       setCurrentAdmin(authData.user);
-      await fetchTabData('overview', force);
+
+      // The shell should not wait for Mongo-backed overview analytics.
+      // The active admin section becomes usable immediately.
+      setIsLoading(false);
+      void fetchTabData('overview', true);
     } catch (err) {
       console.error('Error loading admin control center:', err);
     } finally {

@@ -2,10 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
 import { getAdminSchoolsListAsync, createAdminSchoolAsync } from '@/lib/schoolAdminService';
 import { getRawSchools } from '@/lib/schools';
-import {
-  getAllSchoolsAdminOverviewAsync,
-  getAllPromotions,
-} from '@/lib/authStore';
+import { getAllPromotions } from '@/lib/authStore';
 
 export async function GET(req: NextRequest) {
   const auth = await requireAdminAuth(req);
@@ -19,6 +16,7 @@ export async function GET(req: NextRequest) {
   const verificationFilter = searchParams.get('verification') || undefined;
   const areaFilter = searchParams.get('area') || undefined;
   const boardFilter = searchParams.get('board') || undefined;
+  const includeMetrics = searchParams.get('metrics') === 'true';
 
   const schools = await getAdminSchoolsListAsync({
     includeArchived: statusFilter !== 'active',
@@ -29,13 +27,28 @@ export async function GET(req: NextRequest) {
     board: boardFilter,
   });
 
-  const allPromotions = getAllPromotions();
-  const analyticsOverview = await getAllSchoolsAdminOverviewAsync();
-  const analyticsBySlug = new Map(analyticsOverview.map(item => [item.slug, item]));
+  const activePromotionsBySlug = new Map(
+    getAllPromotions()
+      .filter(p => p.status === 'active')
+      .map(p => [p.schoolSlug, p])
+  );
+
+  const analyticsBySlug = new Map<string, {
+    views?: number;
+    saves?: number;
+    reviewsCount?: number;
+    averageRating?: number;
+  }>();
+
+  if (includeMetrics) {
+    const { getAllSchoolsAdminOverviewAsync } = await import('@/lib/authStore');
+    const analyticsOverview = await getAllSchoolsAdminOverviewAsync();
+    for (const item of analyticsOverview) analyticsBySlug.set(item.slug, item);
+  }
 
   const schoolMetrics = schools.map(school => {
     const summary = analyticsBySlug.get(school.slug);
-    const activePromo = allPromotions.find(p => p.schoolSlug === school.slug && p.status === 'active');
+    const activePromo = activePromotionsBySlug.get(school.slug);
 
     return {
       ...school,
@@ -84,6 +97,7 @@ export async function GET(req: NextRequest) {
     schools: schoolMetrics,
     totalSchools: schoolMetrics.length,
     rawRecordsTotal: getRawSchools().length,
+    metricsIncluded: includeMetrics,
   }, {
     headers: { 'Cache-Control': 'no-store, max-age=0' },
   });

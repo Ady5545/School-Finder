@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import {
   Archive,
@@ -12,6 +12,7 @@ import {
   RefreshCw,
   Search,
   ShieldCheck,
+  Loader2,
   UploadCloud,
 } from 'lucide-react';
 import type { School } from '../../../data/schoolsData';
@@ -38,30 +39,115 @@ export function SchoolManagerTab() {
   const [editing, setEditing] = useState<SchoolRow | null>(null);
   const [creating, setCreating] = useState(false);
   const [refreshStamp, setRefreshStamp] = useState(() => Date.now());
+  const [metricsLoading, setMetricsLoading] = useState(false);
+  const requestSerial = useRef(0);
+  const metricsCache = useRef<Map<string, {
+    views: number;
+    saves: number;
+    reviewsCount: number;
+    averageRating: number;
+  }> | null>(null);
+
+  const mergeCachedMetrics = useCallback((items: SchoolRow[]) => {
+    const cache = metricsCache.current;
+    if (!cache) return items;
+    return items.map(school => {
+      const metrics = cache.get(school.slug);
+      return metrics ? { ...school, ...metrics } : school;
+    });
+  }, []);
+
+  const loadSchoolMetrics = useCallback(async () => {
+    if (metricsCache.current) {
+      setSchools(prev => mergeCachedMetrics(prev));
+      return;
+    }
+
+    setMetricsLoading(true);
+    let lastError: unknown = null;
+
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      try {
+        const res = await fetch('/api/admin/schools/metrics', { cache: 'no-store' });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || 'Could not load school analytics.');
+        }
+
+        const nextCache = new Map<string, {
+          views: number;
+          saves: number;
+          reviewsCount: number;
+          averageRating: number;
+        }>();
+
+        for (const item of Array.isArray(data.metrics) ? data.metrics : []) {
+          nextCache.set(item.slug, {
+            views: item.views ?? 0,
+            saves: item.saves ?? 0,
+            reviewsCount: item.reviewsCount ?? 0,
+            averageRating: item.averageRating ?? 0,
+          });
+        }
+
+        metricsCache.current = nextCache;
+        setSchools(prev => mergeCachedMetrics(prev));
+        lastError = null;
+        break;
+      } catch (err) {
+        lastError = err;
+        if (attempt === 0) await new Promise(resolve => setTimeout(resolve, 350));
+      }
+    }
+
+    if (lastError) console.error('School analytics load failed:', lastError);
+    setMetricsLoading(false);
+  }, [mergeCachedMetrics]);
 
   const loadSchools = useCallback(async (silent = false) => {
+    const requestId = ++requestSerial.current;
     if (!silent) setIsLoading(true);
     setError('');
-    try {
-      const params = new URLSearchParams();
-      params.set('_ts', String(Date.now()));
-      params.set('status', status);
-      if (query.trim()) params.set('q', query.trim());
-      if (verification !== 'all') params.set('verification', verification);
-      const res = await fetch('/api/admin/schools?' + params.toString(), {
-        cache: 'no-store',
-        headers: { 'Cache-Control': 'no-cache' },
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.message || 'Could not load the school registry.');
-      setSchools(Array.isArray(data.schools) ? data.schools : []);
-      setRefreshStamp(Date.now());
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not load the school registry.');
-    } finally {
-      setIsLoading(false);
+
+    const params = new URLSearchParams();
+    params.set('status', status);
+    if (query.trim()) params.set('q', query.trim());
+    if (verification !== 'all') params.set('verification', verification);
+
+    let lastError: unknown = null;
+
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      try {
+        const res = await fetch('/api/admin/schools?' + params.toString(), {
+          cache: 'no-store',
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (requestId !== requestSerial.current) return;
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || 'Could not load the school registry.');
+        }
+
+        const nextSchools = Array.isArray(data.schools) ? data.schools : [];
+        setSchools(mergeCachedMetrics(nextSchools));
+        setRefreshStamp(Date.now());
+        lastError = null;
+
+        // Never block the registry on analytics.
+        void loadSchoolMetrics();
+        break;
+      } catch (err) {
+        lastError = err;
+        if (attempt === 0) await new Promise(resolve => setTimeout(resolve, 300));
+      }
     }
-  }, [status, query, verification]);
+
+    if (requestId !== requestSerial.current) return;
+    if (lastError) {
+      setError(lastError instanceof Error ? lastError.message : 'Could not load the school registry.');
+    }
+    setIsLoading(false);
+  }, [status, query, verification, loadSchoolMetrics, mergeCachedMetrics]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => void loadSchools(), 180);
@@ -167,12 +253,31 @@ export function SchoolManagerTab() {
       <div className="text-[11px] text-slate-400 flex items-center gap-2">
         <UploadCloud className="w-3.5 h-3.5 text-amber-400" />
         <span>{filtered.length} records loaded. Changes are saved to the persistent CMS store rather than only this browser session.</span>
+        {metricsLoading && (
+          <span className="inline-flex items-center gap-1 text-slate-500">
+            <Loader2 className="w-3 h-3 animate-spin" />
+            Analytics syncing
+          </span>
+        )}
       </div>
 
       {isLoading && schools.length === 0 ? (
-        <div className="rounded-2xl border border-[#1e4878] bg-[#0f284a] p-12 text-center text-sm text-slate-400">
-          <RefreshCw className="w-6 h-6 mx-auto animate-spin text-amber-400 mb-3" />
-          Loading school registry…
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="rounded-2xl border border-[#1e4878] bg-[#0f284a] p-5 shadow-lg animate-pulse"
+            >
+              <div className="h-4 w-2/3 rounded bg-[#17385e]" />
+              <div className="h-3 w-5/6 rounded bg-[#112e50] mt-2" />
+              <div className="grid grid-cols-4 gap-2 mt-5">
+                {Array.from({ length: 4 }).map((__, metricIndex) => (
+                  <div key={metricIndex} className="h-12 rounded-xl bg-[#0a1e38]" />
+                ))}
+              </div>
+              <div className="h-8 w-28 rounded-xl bg-[#102947] mt-5 ml-auto" />
+            </div>
+          ))}
         </div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

@@ -52,7 +52,6 @@ export async function POST(req: NextRequest) {
         uploadedBy: auth.user.email,
         uploadedAt: new Date().toISOString(),
       },
-      contentType: file.type,
     });
 
     const buffer = Buffer.from(await file.arrayBuffer());

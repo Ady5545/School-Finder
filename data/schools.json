@@ -6619,239 +6619,102 @@
   {
     "id": "apeejay-international-school-greater-noida",
     "slug": "apeejay-international-school-greater-noida",
-    "name": "Apeejay International School",
-    "shortName": "Apeejay International",
+    "name": "Apeejay International School, Greater Noida",
+    "shortName": "Apeejay School Greater Noida",
     "alternateNames": [
       "Apeejay School Greater Noida",
-      "AIS Surajpur Corridor"
+      "Apeejay International School Greater Noida"
     ],
-    "tagline": "Soaring high is my nature",
-    "summary": "Apeejay International School provides world-class educational infrastructure on a sprawling 15-acre green campus, offering CBSE curricula with proven board ranks.",
+    "tagline": "CBSE co-educational school in Knowledge Park III, Greater Noida",
+    "summary": "Apeejay School, Greater Noida is a CBSE-affiliated co-educational school in Knowledge Park III offering education from Nursery to Class XII.",
     "board": [
       "CBSE"
     ],
     "boardNote": null,
-    "curriculum": "CBSE Curriculum",
+    "curriculum": "CBSE",
     "gradeRange": {
       "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
     },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "13:1",
-    "schoolType": "Co-Educational Day & Day-Boarding School",
+    "admissionAge": "3+",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "Plot No. 1, Institutional Area, Surajpur-Kasna Road, Greater Noida, UP 201308",
-      "sector": "Knowledge Park 1",
+      "address": "1, Surajpur–Kasna Road, Institutional Area, Knowledge Park III, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Knowledge Park III",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
-      "pincode": "201308",
-      "area": "Greater Noida",
+      "pincode": "201310",
+      "area": "Knowledge Park III",
       "coordinates": {
-        "lat": 28.4981,
-        "lng": 77.4995
+        "lat": null,
+        "lng": null,
+        "isVerified": false
       },
-      "mapSearchQuery": "Apeejay International School Greater Noida",
-      "mapEmbedUrl": null
+      "mapSearchQuery": "Apeejay School Greater Noida Knowledge Park III"
     },
     "fees": {
-      "cardFee": 160000,
-      "estimatedFirstYear": 195000,
+      "cardFee": null,
+      "estimatedFirstYear": null,
       "currency": "INR",
-      "rangeText": "₹1.50L - ₹1.75L / year",
-      "registrationFee": 1500,
-      "admissionFee": 35000,
-      "tuitionMonthly": "₹13,333",
-      "tuitionQuarterly": "₹40,000",
-      "tuitionAnnual": "₹1,60,000",
-      "transportMonthly": "₹3,300",
-      "transportAnnual": "₹39,600",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 1 Premium",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://apeejay.edu/intl",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,500"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹35,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹1,60,000"
-        }
-      ],
+      "rangeText": "₹1.58–₹1.72 lakh annual composite (2026–27; varies by class)",
+      "registrationFee": 1000,
+      "admissionFee": 27500,
+      "verificationStatus": "partially_verified",
+      "isVerified": false,
       "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "apeejay-international-school-greater-noida-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1500,
-          "formattedAmount": "₹1,500",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "apeejay-international-school-greater-noida-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 35000,
-          "formattedAmount": "₹35,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "apeejay-international-school-greater-noida-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 13333,
-          "formattedAmount": "₹13,333 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "apeejay-international-school-greater-noida-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 160000,
-          "formattedAmount": "₹1,60,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹13,333 × 12 = ₹1,60,000/year."
-        },
-        {
-          "id": "apeejay-international-school-greater-noida-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹3,300 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹40,000 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹1,60,000 / year",
-          "totalAnnualPayable": "₹1,60,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Apeejay International School Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://apeejay.edu/intl",
-        "summary": "Official fee structure for Apeejay International School covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ],
-      "annualDisplay": "₹1.50L - ₹1.75L / year"
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 school fee information carried forward for 2027–28",
+      "sourceUrl": "https://www.apeejay.edu/intl/blogs/apeejay-international-school-greater-noida-fee-structure/",
+      "annualDisplay": "₹1.58–₹1.72 lakh / year"
     },
     "facilities": [
       {
-        "name": "15-Acre Green Campus & Synthetic Athletic Track",
-        "category": "Sports",
-        "icon": "trophy"
+        "name": "Science Laboratories",
+        "category": "Academic"
       },
       {
-        "name": "Half-Olympic Size Swimming Pool",
-        "category": "Sports",
-        "icon": "trophy"
+        "name": "Multimedia Library",
+        "category": "Academic"
       },
       {
-        "name": "Robotics, IoT & AI Labs",
-        "category": "Technology",
-        "icon": "cpu"
+        "name": "Science Park",
+        "category": "Academic"
       },
       {
-        "name": "Fully Equipped Science Complex",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Dedicated Fleet for Greater Noida West",
-        "category": "Transport",
-        "icon": "bus"
+        "name": "Sports Facilities",
+        "category": "Sports"
       }
     ],
     "uniforms": {
       "boys": {
         "image": null,
-        "label": "Official Apeejay Uniform"
+        "label": "School Uniform"
       },
       "girls": {
         "image": null,
-        "label": "Official Apeejay Uniform"
+        "label": "School Uniform"
       }
     },
-    "achievements": [
-      "Consistently top ranked in National CBSE Board Examinations"
-    ],
+    "achievements": [],
     "admissions": {
-      "date": "Admissions Open 2027-28",
+      "date": null,
       "status": "Open",
-      "process": "Online registration, informal student interaction, and document verification.",
-      "session": "2027-28"
+      "process": "Online registration followed by level placement assessment/interview as applicable.",
+      "session": "2027-28",
+      "sourceUrl": "https://www.apeejay.edu/intl/admissions-overview/",
+      "verificationStatus": "official_page"
     },
     "contact": {
-      "phone": "+91 85275 70222",
-      "website": "https://apeejay.edu/intl",
-      "email": "skool.ms.gnvd@apj.edu"
+      "phone": "+91-8826-059-059",
+      "website": "https://www.apeejay.edu/intl/",
+      "email": "skool.ais.gnvd@apj.edu"
     },
     "rating": {
-      "score": 4.7,
+      "score": 0,
       "scale": 5,
       "reviewsCount": 0
     },
@@ -6862,51 +6725,46 @@
       "legacyPaths": {}
     },
     "verification": {
-      "isVerified": true,
-      "status": "verified_official",
+      "isVerified": false,
+      "status": "partially_verified",
       "lastVerified": "2026-09",
-      "sourceName": "Official Apeejay Education Portal & CBSE SARAS",
-      "sourceUrl": "https://apeejay.edu/intl",
-      "cbseAffiliationNumber": "2130385",
+      "sourceName": "Apeejay School Greater Noida official site",
+      "sourceUrl": "https://www.apeejay.edu/intl/",
+      "cbseAffiliationNumber": null,
+      "schoolCode": null,
       "verifiedFields": [
         "name",
         "address",
-        "website",
-        "affiliation"
-      ]
+        "board",
+        "grades",
+        "admissions"
+      ],
+      "notes": "Campus coordinates and full fee schedule remain pending CMS import."
     },
     "legacyIdentifiers": {
       "pageFile": "",
-      "pageTitle": "Apeejay International School Greater Noida",
-      "h1": "Apeejay International School",
-      "pageHeartKey": "heart_apeejay",
-      "cardHeartKey": "card_apeejay",
-      "cardRatingKey": "rating_apeejay",
+      "pageTitle": "Apeejay International School, Greater Noida",
+      "h1": "Apeejay International School, Greater Noida",
+      "pageHeartKey": "apeejay-international-school-greater-noida",
+      "cardHeartKey": "apeejay-international-school-greater-noida",
+      "cardRatingKey": "apeejay-international-school-greater-noida",
       "cardLink": "/schools/apeejay-international-school-greater-noida",
       "legacyUrls": []
     },
     "auditNotes": [
-      "Surajpur corridor campus serving Greater Noida West parent population.",
-      "Located in Knowledge Park 1, Greater Noida. Established nearby campus."
+      "September 2026 expansion batch: Existing archived campus record refreshed into the active canonical directory; no duplicate created."
     ],
     "classification": "nearby_surrounding",
-    "sports": [
-      "Swimming",
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Lawn Tennis",
-      "Badminton",
-      "Athletics",
-      "Table Tennis"
-    ],
-    "affiliationNumber": "2130385",
-    "geographicClassification": "geographic_outlier",
-    "recordType": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
     "canonicalSlug": "apeejay-international-school-greater-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Knowledge Park 1, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": null,
+    "establishedYear": 1967,
+    "sports": []
   },
   {
     "id": "vishwa-bharati-public-school-greater-noida",
@@ -15834,6 +15692,1421 @@
     "isArchived": false,
     "status": "active",
     "affiliationNumber": "2130099",
+    "sports": []
+  },
+  {
+    "id": "cambridge-school-greater-noida",
+    "slug": "cambridge-school-greater-noida",
+    "name": "Cambridge School, Greater Noida",
+    "shortName": "Cambridge School Greater Noida",
+    "alternateNames": [
+      "Cambridge School Greater Noida",
+      "Cambridge School Knowledge Park I"
+    ],
+    "tagline": "CBSE senior secondary co-educational school in Knowledge Park I",
+    "summary": "Cambridge School Greater Noida is a CBSE-affiliated senior secondary school in Knowledge Park I.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "1-B, Institutional Area, Knowledge Park I, Greater Noida, Uttar Pradesh 201306",
+      "sector": "Knowledge Park I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Knowledge Park I",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Cambridge School Greater Noida Knowledge Park I"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "2026–27 fee schedule available; grade-wise figures pending CMS normalization",
+      "verificationStatus": "pending_audit",
+      "isVerified": false,
+      "disclosed": true,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 schedule to be carried forward for 2027–28",
+      "sourceUrl": "https://gn.cambridgeschool.edu.in/admissions/fees-structure/"
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Check the school's official admissions page for registration and assessment details.",
+      "session": "2027-28",
+      "sourceUrl": "https://gn.cambridgeschool.edu.in/",
+      "verificationStatus": "official_page"
+    },
+    "contact": {
+      "phone": "+91-8745984305",
+      "website": "https://gn.cambridgeschool.edu.in/",
+      "email": "info.csgn@cambridgeschool.edu.in"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS + Cambridge School Greater Noida",
+      "sourceUrl": "https://gn.cambridgeschool.edu.in/",
+      "cbseAffiliationNumber": "2130697",
+      "schoolCode": "60314",
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "affiliation",
+        "grades"
+      ],
+      "notes": "Fee schedule remains to be normalized in CMS."
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Cambridge School, Greater Noida",
+      "h1": "Cambridge School, Greater Noida",
+      "pageHeartKey": "cambridge-school-greater-noida",
+      "cardHeartKey": "cambridge-school-greater-noida",
+      "cardRatingKey": "cambridge-school-greater-noida",
+      "cardLink": "/schools/cambridge-school-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: New Greater Noida campus record; kept separate from the existing Cambridge School Noida Sector 27 campus."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "cambridge-school-greater-noida",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2130697",
+    "establishedYear": 2000,
+    "sports": []
+  },
+  {
+    "id": "modern-school-greater-noida",
+    "slug": "modern-school-greater-noida",
+    "name": "Modern School, Greater Noida",
+    "shortName": "Modern School Greater Noida",
+    "alternateNames": [
+      "Modern School Greater Noida",
+      "Modern School Delta 1"
+    ],
+    "tagline": "CBSE senior secondary co-educational school in Delta I",
+    "summary": "Modern School Greater Noida is a CBSE-affiliated senior secondary school in Block A, Delta I.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. HS-8, Block A, Delta I, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Delta I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201310",
+      "area": "Delta I",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Modern School Greater Noida Delta I"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "2026–27 fee circular is published; figures pending CMS normalization",
+      "verificationStatus": "pending_audit",
+      "isVerified": false,
+      "disclosed": true,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 school fee circular carried forward for 2027–28",
+      "sourceUrl": "https://modernschoolgnoida.com/admission/"
+    },
+    "facilities": [
+      {
+        "name": "5-acre Campus",
+        "category": "Infrastructure"
+      },
+      {
+        "name": "Indoor & Outdoor Sports",
+        "category": "Sports"
+      },
+      {
+        "name": "Air-conditioned Building",
+        "category": "Infrastructure"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Confirm current class availability and admission process with the school.",
+      "session": "2027-28",
+      "sourceUrl": "https://modernschoolgnoida.com/admission/",
+      "verificationStatus": "official_page"
+    },
+    "contact": {
+      "phone": "0120-297-7900 / +91-959-977-7167",
+      "website": "https://modernschoolgnoida.com/",
+      "email": "modernschoolgnoida@gmail.com"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS + Modern School Greater Noida",
+      "sourceUrl": "https://modernschoolgnoida.com/admission/",
+      "cbseAffiliationNumber": "2133980",
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "affiliation",
+        "establishedYear"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Modern School, Greater Noida",
+      "h1": "Modern School, Greater Noida",
+      "pageHeartKey": "modern-school-greater-noida",
+      "cardHeartKey": "modern-school-greater-noida",
+      "cardRatingKey": "modern-school-greater-noida",
+      "cardLink": "/schools/modern-school-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "modern-school-greater-noida",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2133980",
+    "establishedYear": 2018,
+    "sports": []
+  },
+  {
+    "id": "sheoran-international-school",
+    "slug": "sheoran-international-school",
+    "name": "Sheoran International School",
+    "shortName": "Sheoran International School",
+    "alternateNames": [
+      "Sheoran International School Greater Noida",
+      "Sheoran International School Omega 1"
+    ],
+    "tagline": "CBSE senior secondary school in Omega I, Greater Noida",
+    "summary": "Sheoran International School is a CBSE senior secondary school in Ansal Golf Link-1, Sector Omega I, Greater Noida.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Pre-Nursery",
+      "to": "Class 12",
+      "raw": "Pre-Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "PS-001, Ansal Golf Link-1, Sector Omega-1, Greater Noida, Uttar Pradesh 201308",
+      "sector": "Omega I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201308",
+      "area": "Omega I",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Sheoran International School Omega 1 Greater Noida"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Fee details pending verified CMS import",
+      "verificationStatus": "pending_audit",
+      "isVerified": false,
+      "disclosed": false,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 fees to be carried forward when verified"
+    },
+    "facilities": [
+      {
+        "name": "Smart Classrooms",
+        "category": "Academic"
+      },
+      {
+        "name": "Laboratories",
+        "category": "Academic"
+      },
+      {
+        "name": "Sports Facilities",
+        "category": "Sports"
+      },
+      {
+        "name": "Library",
+        "category": "Academic"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Contact the school for current registration and assessment details.",
+      "session": "2027-28",
+      "sourceUrl": "https://sheoraninternationalschool.com/"
+    },
+    "contact": {
+      "phone": null,
+      "website": "https://sheoraninternationalschool.com/",
+      "email": null
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS + Sheoran International School",
+      "sourceUrl": "https://sheoraninternationalschool.com/",
+      "cbseAffiliationNumber": "2133549",
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "affiliation",
+        "establishedYear"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Sheoran International School",
+      "h1": "Sheoran International School",
+      "pageHeartKey": "sheoran-international-school",
+      "cardHeartKey": "sheoran-international-school",
+      "cardRatingKey": "sheoran-international-school",
+      "cardLink": "/schools/sheoran-international-school",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "sheoran-international-school",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2133549",
+    "establishedYear": 2018,
+    "sports": []
+  },
+  {
+    "id": "rps-international-school-omega-ii",
+    "slug": "rps-international-school-omega-ii",
+    "name": "RPS International School, Omega II",
+    "shortName": "RPS International School Omega II",
+    "alternateNames": [
+      "RPS International School Omega II Greater Noida",
+      "RPS International School, Omega-II",
+      "RIS Omega II"
+    ],
+    "tagline": "CBSE co-educational day school in Omega II, Greater Noida",
+    "summary": "RPS International School's Omega-II campus is located at NS-44, Pocket-7, Builders Area, Greater Noida.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Play Group",
+      "to": "Class 8",
+      "raw": "Play Group – Class 8"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "NS-44, Pocket-7, Omega-II, Builders Area, Greater Noida, Uttar Pradesh 201308",
+      "sector": "Omega II",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201308",
+      "area": "Omega II",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "RPS International School Omega II Greater Noida"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "2026–27 reference: ₹36,000–₹38,000/year depending on grade; reference only",
+      "tuitionMonthly": "₹2,000/month (reference)",
+      "tuitionAnnual": "₹36,000–₹38,000/year (reference)",
+      "verificationStatus": "unverified_third_party",
+      "isVerified": false,
+      "disclosed": true,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 third-party reference carried forward; replace with official fee sheet",
+      "sourceUrl": "https://admissionschool.com/schools/rps-international-school-omega-ii-greater-noida/fees"
+    },
+    "facilities": [],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "Application followed by student/parent interaction and document submission.",
+      "session": "2027-28",
+      "sourceUrl": "https://rpsinternationalschool.com/admission.html"
+    },
+    "contact": {
+      "phone": "+91-9015556666 / +91-8010101033",
+      "website": "https://rpsinternationalschool.com/",
+      "email": "info@rpsinternationalschool.com"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "RPS International School official site",
+      "sourceUrl": "https://rpsinternationalschool.com/",
+      "cbseAffiliationNumber": null,
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "grades",
+        "timings"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "RPS International School, Omega II",
+      "h1": "RPS International School, Omega II",
+      "pageHeartKey": "rps-international-school-omega-ii",
+      "cardHeartKey": "rps-international-school-omega-ii",
+      "cardRatingKey": "rps-international-school-omega-ii",
+      "cardLink": "/schools/rps-international-school-omega-ii",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "rps-international-school-omega-ii",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": null,
+    "establishedYear": null,
+    "sports": [],
+    "timings": {
+      "weekdays": "Playgroup–UKG: 9:15 AM–12:15 PM; Grade I–VIII: 8:15 AM–2:15 PM"
+    }
+  },
+  {
+    "id": "narayana-e-techno-school-greater-noida",
+    "slug": "narayana-e-techno-school-greater-noida",
+    "name": "Narayana e-Techno School, Greater Noida",
+    "shortName": "Narayana e-Techno School Greater Noida",
+    "alternateNames": [
+      "Narayana School Greater Noida",
+      "Narayana e-Techno School Omicron I",
+      "Narayana Greater Noida"
+    ],
+    "tagline": "CBSE school from Nursery to Class XII in Omicron I",
+    "summary": "Narayana e-Techno School Greater Noida is located at HS-38, Omicron I, near Supertech Czar, and offers Nursery to Class XII.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "HS-38, Omicron I, Landmark Near Supertech Czar, Greater Noida, Uttar Pradesh 201310",
+      "sector": "Omicron I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201310",
+      "area": "Omicron I",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Narayana e-Techno School Omicron I Greater Noida"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Fee details pending verified CMS import",
+      "verificationStatus": "pending_audit",
+      "isVerified": false,
+      "disclosed": false,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 fees to be carried forward when verified"
+    },
+    "facilities": [
+      {
+        "name": "Academic Classrooms",
+        "category": "Academic"
+      },
+      {
+        "name": "Sports Facilities",
+        "category": "Sports"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Contact Narayana Schools for current Greater Noida admissions and class availability.",
+      "session": "2027-28",
+      "sourceUrl": "https://www.narayanaschools.in/uttar-pradesh/greater-noida/contact"
+    },
+    "contact": {
+      "phone": "+91-8750975555",
+      "website": "https://www.narayanaschools.in/uttar-pradesh/greater-noida/",
+      "email": "greaternoida.etechno@narayanagroup.com"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "Narayana Schools official site",
+      "sourceUrl": "https://www.narayanaschools.in/uttar-pradesh/greater-noida/contact",
+      "cbseAffiliationNumber": null,
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "grades",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Narayana e-Techno School, Greater Noida",
+      "h1": "Narayana e-Techno School, Greater Noida",
+      "pageHeartKey": "narayana-e-techno-school-greater-noida",
+      "cardHeartKey": "narayana-e-techno-school-greater-noida",
+      "cardRatingKey": "narayana-e-techno-school-greater-noida",
+      "cardLink": "/schools/narayana-e-techno-school-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "narayana-e-techno-school-greater-noida",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": null,
+    "establishedYear": null,
+    "sports": []
+  },
+  {
+    "id": "millennium-international-school-greater-noida",
+    "slug": "millennium-international-school-greater-noida",
+    "name": "Millennium International School, Greater Noida",
+    "shortName": "Millennium International School",
+    "alternateNames": [
+      "Millennium International School Greater Noida",
+      "Millennium International School Omicron 1A"
+    ],
+    "tagline": "CBSE co-educational school in Omicron 1A, Greater Noida",
+    "summary": "Millennium International School is a co-educational school in HS-37, Omicron 1A, Greater Noida.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 10",
+      "raw": "Nursery – Class 10"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "HS-37, Omicron 1A, Greater Noida, Uttar Pradesh 201306",
+      "sector": "Omicron 1A",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201306",
+      "area": "Omicron 1A",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Millennium International School Omicron 1A Greater Noida"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "2026–27 reference range ₹81,996–₹1,17,996 tuition; reference only",
+      "tuitionMonthly": "₹6,833–₹9,833/month (reference)",
+      "tuitionAnnual": "₹81,996–₹1,17,996/year (reference)",
+      "verificationStatus": "unverified_third_party",
+      "isVerified": false,
+      "disclosed": true,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 third-party reference carried forward; replace with official fee sheet",
+      "sourceUrl": "https://topschools.in/schools/millennium-international-school-greater-noida"
+    },
+    "facilities": [
+      {
+        "name": "Sports Facilities",
+        "category": "Sports"
+      },
+      {
+        "name": "Academic Laboratories",
+        "category": "Academic"
+      },
+      {
+        "name": "Activity Facilities",
+        "category": "Arts"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Contact the school for current registration and assessment details.",
+      "session": "2027-28",
+      "sourceUrl": "https://millenniuminternationalschool.com/"
+    },
+    "contact": {
+      "phone": "+91-9773986877 / +91-9773986878",
+      "website": "https://millenniuminternationalschool.com/",
+      "email": "info@millenniumInternationalschool.com"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "Millennium International School official site",
+      "sourceUrl": "https://millenniuminternationalschool.com/contact-us/",
+      "cbseAffiliationNumber": null,
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "contact"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Millennium International School, Greater Noida",
+      "h1": "Millennium International School, Greater Noida",
+      "pageHeartKey": "millennium-international-school-greater-noida",
+      "cardHeartKey": "millennium-international-school-greater-noida",
+      "cardRatingKey": "millennium-international-school-greater-noida",
+      "cardLink": "/schools/millennium-international-school-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "millennium-international-school-greater-noida",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": null,
+    "establishedYear": null,
+    "sports": []
+  },
+  {
+    "id": "greater-noida-world-school",
+    "slug": "greater-noida-world-school",
+    "name": "Greater Noida World School",
+    "shortName": "GNWS",
+    "alternateNames": [
+      "GNWS",
+      "Greater Noida World School",
+      "GNWS Sigma I"
+    ],
+    "tagline": "CBSE senior secondary school in Sigma I, Greater Noida",
+    "summary": "Greater Noida World School is a CBSE-affiliated senior secondary school at HS-28 A, Sigma I, Greater Noida.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Pre-Nursery",
+      "to": "Class 12",
+      "raw": "Pre-Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot No. HS-28 A, Sigma I, Greater Noida, Uttar Pradesh 201308",
+      "sector": "Sigma I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201308",
+      "area": "Sigma I",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Greater Noida World School Sigma I"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹20,310–₹32,700 quarterly composite in 2026–27 (grade dependent)",
+      "registrationFee": 500,
+      "admissionFee": 30000,
+      "tuitionQuarterly": "₹20,310–₹32,700 / quarter",
+      "tuitionAnnual": "₹81,240–₹1,30,800 / year (calculated)",
+      "verificationStatus": "calculated_from_official",
+      "isVerified": false,
+      "disclosed": true,
+      "comparableAnnualAvailable": true,
+      "billingFrequency": "quarterly",
+      "academicSession": "2027-28",
+      "source": "2026–27 official fee schedule carried forward for 2027–28",
+      "lastVerifiedDate": "September 2026",
+      "sourceUrl": "https://www.gnws.edu.in/apply-now/",
+      "annualDisplay": "₹81,240–₹1,30,800 / year (calculated)"
+    },
+    "facilities": [
+      {
+        "name": "Sports Complex",
+        "category": "Sports"
+      },
+      {
+        "name": "Laboratories",
+        "category": "Academic"
+      },
+      {
+        "name": "Auditorium",
+        "category": "Infrastructure"
+      },
+      {
+        "name": "Library",
+        "category": "Academic"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Open",
+      "process": "School form and document submission; confirm current class availability.",
+      "session": "2027-28",
+      "sourceUrl": "https://www.gnws.edu.in/apply-now/"
+    },
+    "contact": {
+      "phone": "+91-8860606690",
+      "website": "https://www.gnws.edu.in/",
+      "email": "admissions@gnws.edu.in"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS + Greater Noida World School official site",
+      "sourceUrl": "https://www.gnws.edu.in/",
+      "cbseAffiliationNumber": "2132700",
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "affiliation",
+        "grades",
+        "fees",
+        "admissions"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Greater Noida World School",
+      "h1": "Greater Noida World School",
+      "pageHeartKey": "greater-noida-world-school",
+      "cardHeartKey": "greater-noida-world-school",
+      "cardRatingKey": "greater-noida-world-school",
+      "cardLink": "/schools/greater-noida-world-school",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "greater-noida-world-school",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2132700",
+    "establishedYear": 2013,
+    "sports": []
+  },
+  {
+    "id": "jp-international-school-greater-noida",
+    "slug": "jp-international-school-greater-noida",
+    "name": "JP International School, Greater Noida",
+    "shortName": "JP International School",
+    "alternateNames": [
+      "JP International School Greater Noida",
+      "JPIS",
+      "JPIS Omega I"
+    ],
+    "tagline": "CBSE co-educational school in Sector Omega I, Greater Noida",
+    "summary": "JP International School is a CBSE-affiliated co-educational school at Plot 3A, Sector Omega I, near Pari Chowk, Greater Noida.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot 3A, Sector Omega I, Near Pari Chowk, Greater Noida, Uttar Pradesh 201308",
+      "sector": "Omega I",
+      "city": "Greater Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201308",
+      "area": "Omega I",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "JP International School Sector Omega I Greater Noida"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Fee details pending verified CMS import",
+      "verificationStatus": "pending_audit",
+      "isVerified": false,
+      "disclosed": false,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 fees to be carried forward when verified"
+    },
+    "facilities": [
+      {
+        "name": "Auditorium",
+        "category": "Infrastructure"
+      },
+      {
+        "name": "Sports Facilities",
+        "category": "Sports"
+      },
+      {
+        "name": "Laboratories",
+        "category": "Academic"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Contact the school for current registration and assessment details.",
+      "session": "2027-28",
+      "sourceUrl": "https://www.jpinternational.co.in/"
+    },
+    "contact": {
+      "phone": "+91-7669933404 / +91-9910606860",
+      "website": "https://www.jpinternational.co.in/",
+      "email": "info@jpinternational.co.in"
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "JP International School official site",
+      "sourceUrl": "https://www.jpinternational.co.in/",
+      "cbseAffiliationNumber": null,
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "board",
+        "establishedYear"
+      ]
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "JP International School, Greater Noida",
+      "h1": "JP International School, Greater Noida",
+      "pageHeartKey": "jp-international-school-greater-noida",
+      "cardHeartKey": "jp-international-school-greater-noida",
+      "cardRatingKey": "jp-international-school-greater-noida",
+      "cardLink": "/schools/jp-international-school-greater-noida",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "jp-international-school-greater-noida",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": null,
+    "establishedYear": 2004,
+    "sports": []
+  },
+  {
+    "id": "gurukul-the-school-ghaziabad",
+    "slug": "gurukul-the-school-ghaziabad",
+    "name": "Gurukul The School",
+    "shortName": "Gurukul The School",
+    "alternateNames": [
+      "Gurukul The School",
+      "Gurukul School Ghaziabad"
+    ],
+    "tagline": "CBSE senior secondary school near NH-24/Hapur Bypass, Ghaziabad",
+    "summary": "Gurukul The School is a CBSE senior secondary school in Ghaziabad, located on the NH-24 Hapur Bypass corridor.",
+    "board": [
+      "CBSE"
+    ],
+    "boardNote": null,
+    "curriculum": "CBSE",
+    "gradeRange": {
+      "from": "Nursery",
+      "to": "Class 12",
+      "raw": "Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "27.5 KM NH-24, Hapur Bypass Road, Ghaziabad, Uttar Pradesh 201002",
+      "sector": "NH-24 / Hapur Bypass",
+      "city": "Ghaziabad",
+      "state": "Uttar Pradesh",
+      "pincode": "201002",
+      "area": "NH-24 / Hapur Bypass",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "Gurukul The School NH 24 Hapur Bypass Ghaziabad"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "Fee details pending verified CMS import",
+      "verificationStatus": "pending_audit",
+      "isVerified": false,
+      "disclosed": false,
+      "comparableAnnualAvailable": false,
+      "academicSession": "2027-28",
+      "source": "2026–27 fees to be carried forward when verified"
+    },
+    "facilities": [
+      {
+        "name": "Academic Facilities",
+        "category": "Academic"
+      },
+      {
+        "name": "Sports Facilities",
+        "category": "Sports"
+      },
+      {
+        "name": "Activity Spaces",
+        "category": "Arts"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Contact the school for current admission details.",
+      "session": "2027-28",
+      "sourceUrl": "http://www.gurukultheschool.com/"
+    },
+    "contact": {
+      "phone": null,
+      "website": "http://www.gurukultheschool.com/",
+      "email": null
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "CBSE SARAS",
+      "sourceUrl": "https://saras.cbse.gov.in/SARAS/AffiliatedList/AfflicationDetails/2130750",
+      "cbseAffiliationNumber": "2130750",
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "website",
+        "affiliation",
+        "establishedYear"
+      ],
+      "notes": "This is Gurukul The School, not SSS Gurukul School."
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "Gurukul The School",
+      "h1": "Gurukul The School",
+      "pageHeartKey": "gurukul-the-school-ghaziabad",
+      "cardHeartKey": "gurukul-the-school-ghaziabad",
+      "cardRatingKey": "gurukul-the-school-ghaziabad",
+      "cardLink": "/schools/gurukul-the-school-ghaziabad",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "gurukul-the-school-ghaziabad",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": "2130750",
+    "establishedYear": 2002,
+    "sports": []
+  },
+  {
+    "id": "the-shriram-millennium-school-noida-sector-135",
+    "slug": "the-shriram-millennium-school-noida-sector-135",
+    "name": "The Shriram Millennium School, Noida",
+    "shortName": "TSMS Noida",
+    "alternateNames": [
+      "The Shriram Millennium School Noida",
+      "TSMS Noida",
+      "The Shriram Millennium School Sector 135"
+    ],
+    "tagline": "CISCE co-educational school at Sector 135, Noida",
+    "summary": "The Shriram Millennium School, Noida is a CISCE school at Plot S-1 off the Noida–Greater Noida Expressway in Sector 135.",
+    "board": [
+      "CISCE"
+    ],
+    "boardNote": null,
+    "curriculum": "CISCE",
+    "gradeRange": {
+      "from": "Pre-Nursery",
+      "to": "Class 12",
+      "raw": "Pre-Nursery – Class 12"
+    },
+    "admissionAge": "Not publicly disclosed",
+    "studentTeacherRatio": "Not publicly disclosed",
+    "schoolType": "Co-Ed",
+    "dayOrBoarding": "Day School",
+    "location": {
+      "address": "Plot S-1, off Noida–Greater Noida Expressway, Sector 135, Noida, Uttar Pradesh 201304",
+      "sector": "Sector 135",
+      "city": "Noida",
+      "state": "Uttar Pradesh",
+      "pincode": "201304",
+      "area": "Sector 135",
+      "coordinates": {
+        "lat": null,
+        "lng": null,
+        "isVerified": false
+      },
+      "mapSearchQuery": "The Shriram Millennium School Sector 135 Noida"
+    },
+    "fees": {
+      "cardFee": null,
+      "estimatedFirstYear": null,
+      "currency": "INR",
+      "rangeText": "₹28,840–₹30,080 monthly composite in 2026–27; annual composite varies by grade",
+      "registrationFee": 1000,
+      "admissionFee": 125000,
+      "tuitionMonthly": "₹28,840–₹30,080/month",
+      "tuitionAnnual": "₹3,46,080–₹3,60,960/year (calculated)",
+      "transportMonthly": "₹5,050–₹7,300/month (optional)",
+      "verificationStatus": "calculated_from_official",
+      "isVerified": false,
+      "disclosed": true,
+      "comparableAnnualAvailable": true,
+      "billingFrequency": "monthly",
+      "academicSession": "2027-28",
+      "source": "2026–27 official CISCE fee structure carried forward for 2027–28",
+      "lastVerifiedDate": "September 2026",
+      "sourceUrl": "https://www.tsms.org.in/noida/wp-content/uploads/2026/04/Fee-Structure-TSMS-Noida-CISCE-26-27.pdf",
+      "annualDisplay": "₹3.46–₹3.61 lakh / year composite (calculated)"
+    },
+    "facilities": [
+      {
+        "name": "Academic Facilities",
+        "category": "Academic"
+      },
+      {
+        "name": "Sports Facilities",
+        "category": "Sports"
+      },
+      {
+        "name": "Arts & Performing Arts",
+        "category": "Arts"
+      }
+    ],
+    "uniforms": {
+      "boys": {
+        "image": null,
+        "label": "School Uniform"
+      },
+      "girls": {
+        "image": null,
+        "label": "School Uniform"
+      }
+    },
+    "achievements": [],
+    "admissions": {
+      "date": null,
+      "status": "Coming Soon",
+      "process": "Contact the school for current admissions and class availability.",
+      "session": "2027-28",
+      "sourceUrl": "https://www.tsms.org.in/noida/"
+    },
+    "contact": {
+      "phone": "+91-9999176666",
+      "website": "https://www.tsms.org.in/noida/",
+      "email": null
+    },
+    "rating": {
+      "score": 0,
+      "scale": 5,
+      "reviewsCount": 0
+    },
+    "assets": {
+      "featured": null,
+      "hero": null,
+      "gallery": [],
+      "legacyPaths": {}
+    },
+    "verification": {
+      "isVerified": false,
+      "status": "partially_verified",
+      "lastVerified": "2026-09",
+      "sourceName": "The Shriram Millennium School official fee document",
+      "sourceUrl": "https://www.tsms.org.in/noida/wp-content/uploads/2026/04/Fee-Structure-TSMS-Noida-CISCE-26-27.pdf",
+      "cbseAffiliationNumber": null,
+      "schoolCode": null,
+      "verifiedFields": [
+        "name",
+        "address",
+        "board",
+        "fees"
+      ],
+      "notes": "This is the Sector 135 Noida campus; coordinates and complete admissions details remain pending."
+    },
+    "legacyIdentifiers": {
+      "pageFile": "",
+      "pageTitle": "The Shriram Millennium School, Noida",
+      "h1": "The Shriram Millennium School, Noida",
+      "pageHeartKey": "the-shriram-millennium-school-noida-sector-135",
+      "cardHeartKey": "the-shriram-millennium-school-noida-sector-135",
+      "cardRatingKey": "the-shriram-millennium-school-noida-sector-135",
+      "cardLink": "/schools/the-shriram-millennium-school-noida-sector-135",
+      "legacyUrls": []
+    },
+    "auditNotes": [
+      "September 2026 expansion batch: Campus added or refreshed from source review."
+    ],
+    "classification": "nearby_surrounding",
+    "geographicClassification": "nearby_surrounding",
+    "recordType": "canonical",
+    "canonicalSlug": "the-shriram-millennium-school-noida-sector-135",
+    "isDuplicate": false,
+    "duplicateOf": null,
+    "isArchived": false,
+    "status": "active",
+    "affiliationNumber": null,
+    "establishedYear": null,
     "sports": []
   }
 ]

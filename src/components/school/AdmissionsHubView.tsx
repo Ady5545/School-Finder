@@ -22,7 +22,6 @@ import {
   Building,
   Sparkles,
 } from 'lucide-react';
-import type { School } from '../../types/school';
 import { AdmissionStatus } from './AdmissionStatus';
 import { SchoolImage } from './SchoolImage';
 import { AdmissionReminderModal } from './AdmissionReminderModal';

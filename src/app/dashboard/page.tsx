@@ -83,7 +83,7 @@ export default function DashboardPage() {
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const [profileError, setProfileError] = useState<string | null>(null);
 
-  const [allSchools, setAllSchools] = useState<import('../../data/schoolsData').School[]>([]);
+  const [allSchools, setAllSchools] = useState<import('../../types/school').School[]>([]);
 
   useEffect(() => {
     let cancelled = false;

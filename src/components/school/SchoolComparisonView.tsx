@@ -76,7 +76,7 @@ export const SchoolComparisonView: React.FC<{ initialSchools?: School[] }> = ({ 
       if (urlSchools && compareList.length === 0) {
         const slugs = urlSchools.split(',').map(s => s.trim()).filter(Boolean);
         slugs.slice(0, 4).forEach(slug => {
-          const s = getPublicSchoolBySlug(slug);
+          const s = allSchools.find(s => s.slug === slug);
           if (s) addCompare(s.slug, s.name);
         });
       }

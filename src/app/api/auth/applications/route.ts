@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const schoolSlug = cleanOptionalString(body.schoolSlug, 200) || '';
-    const school = getPublicSchoolBySlugAsync(schoolSlug);
+    const school = await getPublicSchoolBySlugAsync(schoolSlug);
     if (!school) return NextResponse.json({ success: false, message: 'School not found.' }, { status: 404 });
 
     const current = Array.isArray(auth.user.applicationTracker) ? auth.user.applicationTracker : [];

@@ -45,6 +45,7 @@ import {
   Download,
 } from 'lucide-react';
 import { BrandLogo } from '../../components/ui/BrandLogo';
+import { SchoolManagerTab } from '../../components/admin/SchoolManagerTab';
 
 type AdminTab =
   | 'overview'
@@ -630,9 +631,9 @@ export default function AdminPage() {
           </div>
 
           <button
-            onClick={() => {
-              loadAdminData(true);
-              if (activeTab !== 'overview') fetchTabData(activeTab, true);
+            onClick={async () => {
+              await loadAdminData(true);
+              if (activeTab !== 'overview') await fetchTabData(activeTab, true);
             }}
             title="Refresh the current admin section"
             className="p-2 rounded-xl bg-[#0d2646] border border-[#1d4b7c] text-slate-300 hover:text-white hover:bg-[#133763] transition-colors cursor-pointer"
@@ -698,7 +699,7 @@ export default function AdminPage() {
             { id: 'users', label: `User Directory (${usersList.length})`, icon: Users },
             { id: 'activity', label: 'Activity Feed', icon: Activity },
             { id: 'reviews', label: `Reviews Moderation (${reviewsList.length})`, icon: Star },
-            { id: 'schools', label: `School Analytics (${schoolsList.length})`, icon: Building },
+            { id: 'schools', label: `Directory CMS (${schoolsList.length})`, icon: Building },
             { id: 'wishlists', label: 'Shortlists', icon: Heart },
             { id: 'comparisons', label: 'Comparisons', icon: Scale },
             { id: 'searches', label: 'Searches & Keywords', icon: Search },
@@ -1332,73 +1333,10 @@ export default function AdminPage() {
           </div>
         )}
 
+        {/* =================================================================== */
+        {/* TAB 5: DIRECTORY CMS                                                */}
         {/* =================================================================== */}
-        {/* TAB 5: SCHOOL ANALYTICS                                             */}
-        {/* =================================================================== */}
-        {activeTab === 'schools' && (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {schoolsList.map(school => (
-                <div
-                  key={school.slug}
-                  className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg flex flex-col justify-between space-y-4 hover:border-amber-400/50 transition-all"
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-start justify-between gap-2">
-                      <h4 className="font-bold text-sm text-white font-serif">{school.name}</h4>
-                      {school.activePromotion && (
-                        <span className="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 font-bold text-[10px] uppercase shrink-0">
-                          PROMOTED
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs text-slate-400 flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-amber-400" />
-                      <span>{school.sector} • {school.board}</span>
-                    </p>
-                    <p className="text-[11px] text-slate-300 font-mono">
-                      Fee: {school.verifiedFee}
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2 p-3 bg-[#0a1e38] rounded-xl border border-white/5 text-center text-xs">
-                    <div>
-                      <p className="text-slate-400 text-[10px]">VIEWS</p>
-                      <p className="font-bold text-blue-300">{school.views}</p>
-                    </div>
-                    <div>
-                      <p className="text-slate-400 text-[10px]">SAVES</p>
-                      <p className="font-bold text-rose-300">{school.saves}</p>
-                    </div>
-                    <div>
-                      <p className="text-slate-400 text-[10px]">RATING</p>
-                      <p className="font-bold text-amber-300">★ {school.averageRating}</p>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 flex items-center justify-between gap-2 border-t border-white/5">
-                    <Link
-                      href={`/schools/${school.slug}`}
-                      target="_blank"
-                      className="text-xs text-slate-400 hover:text-white flex items-center gap-1"
-                    >
-                      <span>Public Profile</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </Link>
-
-                    <Link
-                      href={`/admin/schools/${school.slug}`}
-                      className="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-1 transition-colors"
-                    >
-                      <span>Deep Analytics</span>
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        {activeTab === 'schools' && <SchoolManagerTab />}
 
         {/* =================================================================== */}
         {/* TAB 6: WISHLISTS & SHORTLISTS                                       */}

@@ -213,6 +213,13 @@ export interface SchoolAdmissions {
   milestones?: AdmissionMilestone[];
 }
 
+export interface SchoolTimings {
+  weekdays?: string;
+  saturday?: string;
+  sunday?: string;
+  notes?: string;
+}
+
 export interface SchoolContact {
   phone: string | null;
   website: string | null;
@@ -300,6 +307,9 @@ export interface School {
   affiliationNumber?: string | null;
   establishedYear?: number | null;
   sports?: string[];
+  timings?: SchoolTimings;
+  transportNotes?: string;
+  editorialNotes?: string;
 }
 
 export const schools: School[] = schoolsJson as unknown as School[];

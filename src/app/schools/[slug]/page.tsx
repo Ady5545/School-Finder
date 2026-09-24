@@ -259,6 +259,28 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
             )}
           </div>
 
+          {school.timings && (school.timings.weekdays || school.timings.saturday || school.timings.sunday || school.timings.notes) && (
+            <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+              <div>
+                <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">School Timings</h2>
+                <p className="text-xs text-[var(--color-content-muted)] mt-1">Daily timings maintained by the Admission Pitara admin directory.</p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {[
+                  ['Monday–Friday', school.timings.weekdays],
+                  ['Saturday', school.timings.saturday],
+                  ['Sunday', school.timings.sunday],
+                ].filter(([, value]) => Boolean(value)).map(([label, value]) => (
+                  <div key={label} className="rounded-xl bg-[#faf8f5] border border-[var(--color-border)] p-3.5">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-content-muted)]">{label}</p>
+                    <p className="text-sm font-bold text-[var(--color-content)] mt-1">{value}</p>
+                  </div>
+                ))}
+              </div>
+              {school.timings.notes && <p className="text-xs text-[var(--color-content-muted)] leading-relaxed">{school.timings.notes}</p>}
+            </section>
+          )}
+
           {/* About Section */}
           <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-3.5">
             <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">About {school.name}</h2>

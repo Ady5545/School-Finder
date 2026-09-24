@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllSchoolsAsync, filterSchools } from '../../../lib/schools';
+import { getAllSchoolsAsync, filterSchoolsAsync } from '../../../lib/schools';
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,18 +13,20 @@ export async function GET(request: NextRequest) {
     const area = areaParam ? areaParam.split(',') : undefined;
 
     if (!q && !board && !area) {
-      const schools = getAllSchools({ includeAliases });
+      const schools = await getAllSchoolsAsync({ includeAliases });
       return NextResponse.json({
+        success: true,
         total: schools.length,
         schools,
-      });
+      }, { headers: { 'Cache-Control': 'no-store, max-age=0' } });
     }
 
-    const filtered = filterSchools({ searchQuery: q, board, area });
+    const filtered = await filterSchoolsAsync({ searchQuery: q, board, area });
     return NextResponse.json({
+      success: true,
       total: filtered.length,
       schools: filtered,
-    });
+    }, { headers: { 'Cache-Control': 'no-store, max-age=0' } });
   } catch (error) {
     console.error('API /api/schools error:', error);
     return NextResponse.json({ error: 'Failed to fetch schools' }, { status: 500 });

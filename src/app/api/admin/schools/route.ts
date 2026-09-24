@@ -38,6 +38,7 @@ export async function GET(req: NextRequest) {
     const activePromo = allPromotions.find(p => p.schoolSlug === school.slug && p.status === 'active');
 
     return {
+      ...school,
       id: school.id,
       slug: school.slug,
       name: school.name,
@@ -83,6 +84,8 @@ export async function GET(req: NextRequest) {
     schools: schoolMetrics,
     totalSchools: schoolMetrics.length,
     rawRecordsTotal: getRawSchools().length,
+  }, {
+    headers: { 'Cache-Control': 'no-store, max-age=0' },
   });
 }
 

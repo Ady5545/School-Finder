@@ -2,11 +2,20 @@
 
 import React, { useMemo, useState } from 'react';
 import { ArrowRight, Bell, CheckCircle2 } from 'lucide-react';
-import { getAllSchools } from '../../lib/schools';
+import type { School } from '../../types/school';
 import { cn } from '../../lib/utils';
 
-export const AdmissionInterestForm: React.FC = () => {
-  const schools = getAllSchools();
+export const AdmissionInterestForm: React.FC<{ initialSchools?: School[] }> = ({ initialSchools = [] }) => {
+  const [schools, setSchools] = React.useState<School[]>(initialSchools);
+
+  React.useEffect(() => {
+    let cancelled = false;
+    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => { if (!cancelled && data?.success && Array.isArray(data.schools)) setSchools(data.schools); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
   const [schoolSlug, setSchoolSlug] = useState('');
   const [mode, setMode] = useState<'register' | 'pre_register'>('pre_register');
   const [name, setName] = useState('');

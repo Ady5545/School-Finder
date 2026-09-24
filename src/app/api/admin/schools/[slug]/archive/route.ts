@@ -30,7 +30,7 @@ export async function POST(
       );
     }
 
-    const result = archiveAdminSchool(
+    const result = await archiveAdminSchoolAsync(
       slug,
       reason.trim(),
       { id: auth.user.id, email: auth.user.email, name: auth.user.name }

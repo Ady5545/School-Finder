@@ -5,7 +5,7 @@ import { SchoolRatingsSection } from '../../components/school/SchoolRatingsSecti
 import { ReviewsShowcase } from '../../components/school/ReviewsShowcase';
 import { SchoolReviewsDirectory } from '../../components/school/SchoolReviewsDirectory';
 import { buildPageMetadata } from '../../lib/seo';
-import { getAllSchoolsAsync } from '../../lib/schools';
+import { getAllSchoolsAsync } from '../../lib/schoolsServer';
 import { MessageSquare } from 'lucide-react';
 
 export const metadata = buildPageMetadata(

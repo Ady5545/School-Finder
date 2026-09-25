@@ -61,9 +61,9 @@ export function SchoolManagerTab() {
     });
   }, []);
 
-  const loadSchoolMetrics = useCallback(async () => {
+  const loadSchoolMetrics = useCallback(async (force = false) => {
     const now = Date.now();
-    if (metricsCache.current && now - metricsCacheAt.current < METRICS_CLIENT_TTL_MS) {
+    if (!force && metricsCache.current && now - metricsCacheAt.current < METRICS_CLIENT_TTL_MS) {
       setSchools(prev => mergeCachedMetrics(prev));
       return;
     }
@@ -80,7 +80,7 @@ export function SchoolManagerTab() {
 
       for (let attempt = 0; attempt < 2; attempt += 1) {
       try {
-        const res = await fetch('/api/admin/schools/metrics', { cache: 'no-store' });
+        const res = await fetch(`/api/admin/schools/metrics${force ? '?force=true' : ''}`, { cache: 'no-store' });
         const data = await res.json().catch(() => ({}));
         if (!res.ok || !data.success) {
           throw new Error(data.message || 'Could not load school analytics.');
@@ -127,7 +127,7 @@ export function SchoolManagerTab() {
     }
   }, [mergeCachedMetrics]);
 
-  const loadSchools = useCallback(async (silent = false) => {
+  const loadSchools = useCallback(async (silent = false, forceMetrics = false) => {
     const requestId = ++requestSerial.current;
     if (!silent) setIsLoading(true);
     setError('');
@@ -157,7 +157,7 @@ export function SchoolManagerTab() {
         lastError = null;
 
         // Never block the registry on analytics.
-        void loadSchoolMetrics();
+        void loadSchoolMetrics(forceMetrics);
         break;
       } catch (err) {
         lastError = err;
@@ -238,7 +238,7 @@ export function SchoolManagerTab() {
             </button>
             <button
               type="button"
-              onClick={() => void loadSchools()}
+              onClick={() => void loadSchools(false, true)}
               className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#0d2646] border border-[#1d4b7c] text-slate-200 text-xs font-bold hover:bg-[#133763]"
               title={'Fresh registry load ' + refreshStamp}
             >

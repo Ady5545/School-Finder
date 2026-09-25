@@ -10,20 +10,20 @@ import { getCanonicalSlug } from '../../../../../lib/schools';
 const recentViewsCache = new Map<string, number>();
 
 function isDuplicateView(key: string): boolean {
-  const now = Date.now();
   const lastTime = recentViewsCache.get(key);
-  if (lastTime && now - lastTime < 30 * 1000) {
-    return true;
-  }
+  return Boolean(lastTime && Date.now() - lastTime < 30 * 1000);
+}
+
+function markViewRecorded(key: string): void {
+  const now = Date.now();
   recentViewsCache.set(key, now);
 
-  // Periodic pruning if cache exceeds 2000 entries
+  // Periodic pruning if cache exceeds 2000 entries.
   if (recentViewsCache.size > 2000) {
     for (const [k, t] of recentViewsCache.entries()) {
       if (now - t > 60 * 1000) recentViewsCache.delete(k);
     }
   }
-  return false;
 }
 
 export async function POST(
@@ -69,7 +69,11 @@ export async function POST(
       targetId: canonicalSlug,
       userId,
       visitorId: userId ? undefined : visitorId,
+      failOnMongoError: true,
     });
+
+    // Only deduplicate after durable persistence succeeds; a failed write can retry immediately.
+    markViewRecorded(dedupKey);
 
     const response = NextResponse.json({ success: true, duplicate: false });
     if (!existingVisitorId) {

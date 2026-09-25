@@ -14,14 +14,15 @@ let metricsCache: { expiresAt: number; value: Array<{
 
 
 export async function GET(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'analytics:view');
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
   try {
     const now = Date.now();
-    if (metricsCache && metricsCache.expiresAt > now) {
+    const force = new URL(req.url).searchParams.get('force') === 'true';
+    if (!force && metricsCache && metricsCache.expiresAt > now) {
       return NextResponse.json({ success: true, metrics: metricsCache.value, cached: true });
     }
 

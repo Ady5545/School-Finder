@@ -8,6 +8,7 @@ import {
   getUserByIdAsync,
   getUserRatingForSchoolAsync,
   sanitizePublicRating,
+  isUserSuspendedOrBanned,
 } from '../../../../../lib/authStore';
 import { getPublicSchoolBySlug, getCanonicalSlug } from '../../../../../lib/schools';
 
@@ -102,6 +103,14 @@ export async function POST(
       );
     }
 
+    const access = isUserSuspendedOrBanned(user.id);
+    if (access.blocked) {
+      return NextResponse.json(
+        { success: false, message: 'This account cannot submit or edit reviews right now.' },
+        { status: 403 }
+      );
+    }
+
     if (!user.emailVerified) {
       return NextResponse.json(
         { success: false, message: 'Please verify your email address before submitting a review.' },
@@ -186,6 +195,14 @@ export async function DELETE(
     const session = verifySessionToken(token);
     if (!session || !session.sub) {
       return NextResponse.json({ success: false, message: 'Invalid session' }, { status: 401 });
+    }
+
+    const access = isUserSuspendedOrBanned(session.sub);
+    if (access.blocked) {
+      return NextResponse.json(
+        { success: false, message: 'This account cannot remove reviews right now.' },
+        { status: 403 }
+      );
     }
 
     const deleted = await deleteSchoolRatingAsync(canonicalSlug, session.sub);

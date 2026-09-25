@@ -4,7 +4,7 @@ import { getComparisonAnalyticsAsync } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
 export async function GET(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'analytics:view');
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

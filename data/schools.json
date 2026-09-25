@@ -44,8 +44,8 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20Public%20School%20Knowledge%20Park%20V!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": 132900,
-      "estimatedFirstYear": "₹1.36 lakh – ₹1.67 lakh depending on grade and recurring charges.",
+      "cardFee": 200100,
+      "estimatedFirstYear": null,
       "currency": "INR",
       "rangeText": "₹11,075 / month (₹33,225 / quarter · ₹1,32,900 calculated annual)",
       "academicSession": "2027–28",
@@ -324,7 +324,8 @@
         "₹500 late fine after the 20th of the month.",
         "If unpaid by the 25th, the student's name may be struck off and a re-admission fee applies."
       ],
-      "annualDisplay": "1,32,900"
+      "annualDisplay": "₹2,00,100 / year",
+      "estimatedFirstYearText": "₹1.36 lakh – ₹1.67 lakh depending on grade and recurring charges."
     },
     "facilities": [
       {
@@ -1725,7 +1726,7 @@
       "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.0000000!2d77.4500000!3d28.5800000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x000000!2sDelhi%20World%20Public%20School%20KP5!5e0!3m2!1sen!2sin!4v0000000000"
     },
     "fees": {
-      "cardFee": 91000,
+      "cardFee": 204464,
       "estimatedFirstYear": 133000,
       "currency": "INR",
       "rangeText": "Class 11 Science confirmed from parent portal: Tuition ₹13,997/month + Transport ₹3,750/month + Practical/Lab ₹500.",
@@ -3673,7 +3674,7 @@
     "fees": {
       "academicSession": "2027–28",
       "rangeText": "₹10,500 / month composite; total new-admission annual fee ₹1,72,200–₹1,84,200 by grade",
-      "cardFee": 172200,
+      "cardFee": 184000,
       "registrationFee": 1200,
       "admissionFee": 35000,
       "cautionDeposit": 10000,
@@ -4243,7 +4244,7 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 8855,
+      "cardFee": 395800,
       "currency": "INR",
       "rangeText": "Composite monthly: NUR-KG ₹8,855 | I–V ₹10,175 | VI–VIII ₹10,725 | IX–X ₹11,825 | XI–XII ₹12,925",
       "registrationFee": 1000,
@@ -4372,7 +4373,7 @@
           "cost": "₹12,925/month · ₹1,55,100/year calculated"
         }
       ],
-      "annualDisplay": "₹1,06,260 – ₹1,55,100"
+      "annualDisplay": "Up to ₹3,95,800"
     },
     "facilities": [
       {
@@ -5860,7 +5861,7 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 73000,
+      "cardFee": 140500,
       "currency": "INR",
       "rangeText": "Pre-Nursery–VIII ₹1,12,900/year | Class IX ₹1,28,500/year | Class X ₹1,16,500/year | Class XI ₹1,40,500/year | Class XII ₹1,16,500/year",
       "registrationFee": 1000,
@@ -9692,7 +9693,7 @@
     },
     "fees": {
       "isVerified": true,
-      "cardFee": 6500,
+      "cardFee": 120000,
       "currency": "INR",
       "rangeText": "Pre-Nursery–KG ₹6,500/month | I–III ₹7,000 | IV–V ₹7,500 | VI–VIII ₹8,000 | IX–XII ₹8,500",
       "registrationFee": "₹500 – ₹1,000",
@@ -9791,7 +9792,7 @@
           "cost": "Additional charges may apply for external board examinations, specialised excursions and events with management intimation"
         }
       ],
-      "annualDisplay": "₹78,000 – ₹96,000"
+      "annualDisplay": "₹1,20,000+"
     },
     "facilities": [
       {
@@ -12867,7 +12868,7 @@
     },
     "fees": {
       "rangeText": "₹9,768 – ₹10,328 / month composite",
-      "cardFee": 9768,
+      "cardFee": 120000,
       "tuitionMonthly": "₹9,768 – ₹10,328",
       "gradeWiseTiers": [
         {
@@ -14051,7 +14052,7 @@
       "rangeText": "₹3,46,100 – ₹4,46,700 / year (grade-dependent)",
       "cardFee": 346100,
       "tuitionAnnual": "₹3,46,100 – ₹4,46,700",
-      "estimatedFirstYear": "Add approximately ₹30,000–₹40,000 one-time registration/admission/security charges.",
+      "estimatedFirstYear": null,
       "gradeWiseTiers": [
         {
           "grades": "Early Years (Toddler, Pre-Nursery, Nursery, LKG, UKG)",
@@ -14074,7 +14075,8 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹3,46,100 – ₹4,46,700 / year (grade-dependent)"
+      "annualDisplay": "₹3,46,100 – ₹4,46,700 / year (grade-dependent)",
+      "estimatedFirstYearText": "Add approximately ₹30,000–₹40,000 one-time registration/admission/security charges."
     },
     "facilities": [],
     "uniforms": {
@@ -14618,7 +14620,7 @@
       "tuitionMonthly": "₹5,000 – ₹5,500",
       "tuitionAnnual": "₹60,000 – ₹66,000 (calculated)",
       "transportMonthly": "₹800 – ₹4,000 (Optional)",
-      "estimatedFirstYear": "₹70,500 – ₹87,900",
+      "estimatedFirstYear": null,
       "gradeWiseTiers": [
         {
           "grades": "All Grades",
@@ -14630,7 +14632,8 @@
       "verificationStatus": "user_supplied_latest",
       "lastVerifiedDate": "2026-09-19",
       "disclosed": true,
-      "annualDisplay": "₹60,000 – ₹66,000"
+      "annualDisplay": "₹60,000 – ₹66,000",
+      "estimatedFirstYearText": "₹70,500 – ₹87,900"
     },
     "facilities": [],
     "uniforms": {
@@ -16370,10 +16373,10 @@
     ],
     "classification": "nearby_surrounding",
     "geographicClassification": "nearby_surrounding",
-    "recordType": "canonical",
-    "canonicalSlug": "narayana-e-techno-school-greater-noida",
-    "isDuplicate": false,
-    "duplicateOf": null,
+    "recordType": "alias",
+    "canonicalSlug": "narayana-school-greater-noida",
+    "isDuplicate": true,
+    "duplicateOf": "narayana-school-greater-noida",
     "isArchived": false,
     "status": "active",
     "affiliationNumber": null,
@@ -16675,147 +16678,6 @@
     "status": "active",
     "affiliationNumber": "2132700",
     "establishedYear": 2013,
-    "sports": []
-  },
-  {
-    "id": "jp-international-school-greater-noida",
-    "slug": "jp-international-school-greater-noida",
-    "name": "JP International School, Greater Noida",
-    "shortName": "JP International School",
-    "alternateNames": [
-      "JP International School Greater Noida",
-      "JPIS",
-      "JPIS Omega I"
-    ],
-    "tagline": "CBSE co-educational school in Sector Omega I, Greater Noida",
-    "summary": "JP International School is a CBSE-affiliated co-educational school at Plot 3A, Sector Omega I, near Pari Chowk, Greater Noida.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Class 12",
-      "raw": "Nursery – Class 12"
-    },
-    "admissionAge": "Not publicly disclosed",
-    "studentTeacherRatio": "Not publicly disclosed",
-    "schoolType": "Co-Ed",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Plot 3A, Sector Omega I, Near Pari Chowk, Greater Noida, Uttar Pradesh 201308",
-      "sector": "Omega I",
-      "city": "Greater Noida",
-      "state": "Uttar Pradesh",
-      "pincode": "201308",
-      "area": "Omega I",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "JP International School Sector Omega I Greater Noida"
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Fee details pending verified CMS import",
-      "verificationStatus": "pending_audit",
-      "isVerified": false,
-      "disclosed": false,
-      "comparableAnnualAvailable": false,
-      "academicSession": "2027-28",
-      "source": "2026–27 fees to be carried forward when verified"
-    },
-    "facilities": [
-      {
-        "name": "Auditorium",
-        "category": "Infrastructure"
-      },
-      {
-        "name": "Sports Facilities",
-        "category": "Sports"
-      },
-      {
-        "name": "Laboratories",
-        "category": "Academic"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "School Uniform"
-      }
-    },
-    "achievements": [],
-    "admissions": {
-      "date": null,
-      "status": "Coming Soon",
-      "process": "Contact the school for current registration and assessment details.",
-      "session": "2027-28",
-      "sourceUrl": "https://www.jpinternational.co.in/"
-    },
-    "contact": {
-      "phone": "+91-7669933404 / +91-9910606860",
-      "website": "https://www.jpinternational.co.in/",
-      "email": "info@jpinternational.co.in"
-    },
-    "rating": {
-      "score": 0,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": false,
-      "status": "partially_verified",
-      "lastVerified": "2026-09",
-      "sourceName": "JP International School official site",
-      "sourceUrl": "https://www.jpinternational.co.in/",
-      "cbseAffiliationNumber": null,
-      "schoolCode": null,
-      "verifiedFields": [
-        "name",
-        "address",
-        "website",
-        "board",
-        "establishedYear"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "JP International School, Greater Noida",
-      "h1": "JP International School, Greater Noida",
-      "pageHeartKey": "jp-international-school-greater-noida",
-      "cardHeartKey": "jp-international-school-greater-noida",
-      "cardRatingKey": "jp-international-school-greater-noida",
-      "cardLink": "/schools/jp-international-school-greater-noida",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "September 2026 expansion batch: Campus added or refreshed from source review."
-    ],
-    "classification": "nearby_surrounding",
-    "geographicClassification": "nearby_surrounding",
-    "recordType": "canonical",
-    "canonicalSlug": "jp-international-school-greater-noida",
-    "isDuplicate": false,
-    "duplicateOf": null,
-    "isArchived": false,
-    "status": "active",
-    "affiliationNumber": null,
-    "establishedYear": 2004,
     "sports": []
   },
   {

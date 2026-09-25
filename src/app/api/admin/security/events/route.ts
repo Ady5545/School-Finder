@@ -3,7 +3,7 @@ import { requireAdminAuth } from '@/lib/adminAuth';
 import { getSecurityEvents, recordSecurityEvent } from '@/lib/authStore';
 
 export async function GET(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'system:health');
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'system:health');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

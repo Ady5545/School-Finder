@@ -188,6 +188,7 @@ export default function AdminPage() {
   const [currentAdmin, setCurrentAdmin] = useState<{ id: string; name: string; email: string; role: string } | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [actionMessage, setActionMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [tabError, setTabError] = useState<string | null>(null);
 
   // Tab Specific Data
   const [overviewData, setOverviewData] = useState<any>(null);
@@ -264,6 +265,7 @@ export default function AdminPage() {
     const requestId = (tabRequestSerial.current[tab] || 0) + 1;
     tabRequestSerial.current[tab] = requestId;
     setLoadingTab(tab);
+    setTabError(null);
     try {
       const requests: Partial<Record<AdminTab, string>> = {
         overview: `/api/admin/overview?range=${timeRange}`,
@@ -294,9 +296,12 @@ export default function AdminPage() {
       if (tab === 'promotions') setPromotionsList(data.campaigns);
       if (tab === 'audit') setAuditLogsList(data.logs);
       setLoadedTabs(prev => new Set(prev).add(tab));
+      setTabError(null);
     } catch (err) {
       if (requestId === tabRequestSerial.current[tab]) {
+        const message = err instanceof Error ? err.message : `Failed to load ${tab} data.`;
         console.error(`Failed to load admin ${tab} data:`, err);
+        setTabError(message);
       }
     } finally {
       if (requestId === tabRequestSerial.current[tab]) {
@@ -305,7 +310,7 @@ export default function AdminPage() {
     }
   };
 
-  const loadAdminData = async (force = false) => {
+  const loadAdminData = async () => {
     setIsLoading(true);
     try {
       let authRes: Response | null = null;
@@ -789,6 +794,21 @@ export default function AdminPage() {
             </div>
           </div>
         )}
+        {tabError && activeTab !== 'schools' && (
+          <div className="mb-5 flex items-center justify-between gap-4 rounded-2xl border border-rose-400/20 bg-rose-950/40 px-4 py-3 text-xs">
+            <div className="flex min-w-0 items-center gap-2.5 text-rose-200">
+              <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+              <span className="truncate">{tabError}</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => void fetchTabData(activeTab, true)}
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-rose-300/20 bg-white/5 px-3 py-1.5 font-bold text-rose-100 hover:bg-white/10"
+            >
+              <RefreshCw className="w-3 h-3" /> Retry
+            </button>
+          </div>
+        )}
         {/* =================================================================== */}
         {/* TAB 1: EXECUTIVE OVERVIEW                                           */}
         {/* =================================================================== */}
@@ -803,14 +823,14 @@ export default function AdminPage() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-white font-serif">
-                    {overviewData?.users.totalAccounts || usersList.length}
+                    {overviewData ? (overviewData.users.totalAccounts ?? 0) : '—'}
                   </span>
                   <span className="text-xs text-emerald-400 font-semibold">
-                    +{overviewData?.users.newAccountsInRange || 0} in range
+                    +{overviewData ? (overviewData.users.newAccountsInRange ?? 0) : '—'} in range
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  {overviewData?.users.verifiedAccounts || 0} email-verified parents
+                  {overviewData ? (overviewData.users.verifiedAccounts ?? 0) : '—'} email-verified parents
                 </p>
               </div>
 
@@ -821,14 +841,14 @@ export default function AdminPage() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-white font-serif">
-                    {overviewData?.schools.totalViewsCount || 0}
+                    {overviewData ? (overviewData.schools.totalViewsCount ?? 0) : '—'}
                   </span>
                   <span className="text-xs text-amber-400 font-semibold">
                     {timeRange === 'all' ? 'All-time views' : `in ${timeRange}`}
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  {overviewData?.schools.uniqueViewersInRange || 0} unique parents ({overviewData?.schools.allTimeViewsCount || overviewData?.schools.totalViewsCount || 0} all-time clicks)
+                  {overviewData ? (overviewData.schools.uniqueViewersInRange ?? 0) : '—'} unique visitors ({overviewData?.schools.allTimeViewsCount ?? overviewData?.schools.totalViewsCount ?? 0} total profile views)
                 </p>
               </div>
 
@@ -839,14 +859,14 @@ export default function AdminPage() {
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-white font-serif">
-                    {overviewData?.schools.totalSavesCount || 0}
+                    {overviewData ? (overviewData.schools.totalSavesCount ?? 0) : '—'}
                   </span>
                   <span className="text-xs text-rose-400 font-semibold">
                     {timeRange === 'all' ? 'All-time' : `in ${timeRange}`}
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  {overviewData?.schools.allTimeSavesCount || overviewData?.schools.totalSavesCount || 0} total saved admissions bookmarks
+                  {overviewData?.schools.allTimeSavesCount ?? overviewData?.schools.totalSavesCount ?? 0} total saved admissions bookmarks
                 </p>
               </div>
 

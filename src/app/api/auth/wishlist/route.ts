@@ -3,8 +3,8 @@ import {
   verifySessionToken,
   getUserByIdAsync,
   updateUserListsAsync,
-  recordActivityEvent,
-  recordSchoolSave,
+  recordActivityEventAsync,
+  isUserSuspendedOrBanned,
 } from '../../../../lib/authStore';
 import { getPublicSchoolBySlugAsync } from '../../../../lib/schoolsServer';
 import { getCanonicalSlug } from '../../../../lib/schools';
@@ -34,6 +34,10 @@ export async function GET(req: NextRequest) {
     const user = await getUserByIdAsync(session.sub);
     if (!user) {
       return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
+    }
+    const access = isUserSuspendedOrBanned(user.id);
+    if (access.blocked) {
+      return NextResponse.json({ success: false, message: 'This account cannot access the saved shortlist right now.' }, { status: 403 });
     }
 
     return NextResponse.json({
@@ -72,34 +76,68 @@ export async function POST(req: NextRequest) {
     if (!user) {
       return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
     }
-
-    const body = await req.json();
-    const { slug, action, list } = body;
-
-    let current = Array.isArray(user.wishlist) ? [...user.wishlist] : [];
-
-    if (action === 'clear') {
-      current = [];
-      await updateUserListsAsync(user.id, current);
-      return NextResponse.json({
-        success: true,
-        wishlist: [],
-      });
+    const access = isUserSuspendedOrBanned(user.id);
+    if (access.blocked) {
+      return NextResponse.json({ success: false, message: 'This account cannot modify the shortlist right now.' }, { status: 403 });
     }
 
-    if (action === 'sync' && Array.isArray(list)) {
-      // Validate all slugs and convert to canonical slugs
-      const validated = await Promise.all(
+    const body = await req.json().catch(() => null);
+    const action = body?.action;
+    const slug = body?.slug;
+    const list = body?.list;
+
+    if (!['add', 'remove', 'toggle', 'clear', 'sync'].includes(action)) {
+      return NextResponse.json({ success: false, message: 'Invalid shortlist action.' }, { status: 400 });
+    }
+
+    let current = Array.from(new Set(
+      (Array.isArray(user.wishlist) ? user.wishlist : [])
+        .map(item => getCanonicalSlug(String(item)))
+        .filter(Boolean)
+    ));
+
+    const recordDelta = async (schoolSlug: string, type: 'wishlist_add' | 'wishlist_remove') => {
+      await recordActivityEventAsync({
+        type,
+        userId: user.id,
+        schoolSlug,
+        targetType: 'school',
+        targetId: schoolSlug,
+      });
+    };
+
+    if (action === 'clear') {
+      await Promise.all(current.map(schoolSlug => recordDelta(schoolSlug, 'wishlist_remove')));
+      current = [];
+      await updateUserListsAsync(user.id, current);
+      return NextResponse.json({ success: true, wishlist: [] });
+    }
+
+    if (action === 'sync') {
+      if (!Array.isArray(list)) {
+        return NextResponse.json({ success: false, message: 'Shortlist sync requires a school list.' }, { status: 400 });
+      }
+
+      const requested = Array.from(new Set(
         list
-          .filter((s: string) => typeof s === 'string')
-          .map(async (s: string) => (await getPublicSchoolBySlugAsync(s)) ? s : null),
+          .filter((s): s is string => typeof s === 'string')
+          .map(s => s.trim())
+          .filter(Boolean)
+      )).slice(0, 100);
+
+      const validated = await Promise.all(
+        requested.map(async s => {
+          const school = await getPublicSchoolBySlugAsync(s);
+          return school ? getCanonicalSlug(school.slug) : null;
+        })
       );
-      const validList = validated
-        .filter((s): s is string => Boolean(s))
-        .map((s: string) => getCanonicalSlug(s));
-      const combined = Array.from(new Set([...current.map(s => getCanonicalSlug(s)), ...validList]));
-      await updateUserListsAsync(user.id, combined);
-      return NextResponse.json({ success: true, wishlist: combined });
+      const validList = Array.from(new Set(validated.filter((s): s is string => Boolean(s))));
+      const additions = validList.filter(s => !current.includes(s));
+
+      await Promise.all(additions.map(schoolSlug => recordDelta(schoolSlug, 'wishlist_add')));
+      current = Array.from(new Set([...current, ...validList]));
+      await updateUserListsAsync(user.id, current);
+      return NextResponse.json({ success: true, wishlist: current });
     }
 
     if (!slug || typeof slug !== 'string') {
@@ -107,29 +145,31 @@ export async function POST(req: NextRequest) {
     }
 
     const rawCleanSlug = slug.trim();
-    // Validate school existence
-    if (!(await getPublicSchoolBySlugAsync(rawCleanSlug))) {
+    const school = await getPublicSchoolBySlugAsync(rawCleanSlug);
+    if (!school) {
       return NextResponse.json({ success: false, message: 'School not found' }, { status: 404 });
     }
 
-    // Always resolve to canonical slug so aliases do not create duplicate identities
-    const cleanSlug = getCanonicalSlug(rawCleanSlug);
+    const cleanSlug = getCanonicalSlug(school.slug);
+    const exists = current.includes(cleanSlug);
 
     if (action === 'add') {
-      if (!current.includes(cleanSlug)) {
+      if (!exists) {
         current.push(cleanSlug);
-        recordActivityEvent({ type: 'wishlist_add', userId: user.id, schoolSlug: cleanSlug });
+        await recordDelta(cleanSlug, 'wishlist_add');
       }
     } else if (action === 'remove') {
-      current = current.filter(s => s !== cleanSlug && s !== rawCleanSlug);
-      recordActivityEvent({ type: 'wishlist_remove', userId: user.id, schoolSlug: cleanSlug });
+      if (exists) {
+        current = current.filter(s => s !== cleanSlug);
+        await recordDelta(cleanSlug, 'wishlist_remove');
+      }
     } else if (action === 'toggle') {
-      if (current.includes(cleanSlug) || current.includes(rawCleanSlug)) {
-        current = current.filter(s => s !== cleanSlug && s !== rawCleanSlug);
-        recordActivityEvent({ type: 'wishlist_remove', userId: user.id, schoolSlug: cleanSlug });
+      if (exists) {
+        current = current.filter(s => s !== cleanSlug);
+        await recordDelta(cleanSlug, 'wishlist_remove');
       } else {
         current.push(cleanSlug);
-        recordActivityEvent({ type: 'wishlist_add', userId: user.id, schoolSlug: cleanSlug });
+        await recordDelta(cleanSlug, 'wishlist_add');
       }
     }
 
@@ -139,6 +179,7 @@ export async function POST(req: NextRequest) {
       success: true,
       wishlist: current,
     });
+
   } catch (error) {
     console.error('Error updating wishlist:', error);
     return NextResponse.json({ success: false, message: 'Failed to update wishlist' }, { status: 500 });

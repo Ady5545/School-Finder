@@ -7,7 +7,7 @@ import * as XLSX from 'xlsx';
 
 export async function GET(req: NextRequest) {
   // 1. Strict Server-Side Admin Authorization
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'reports:export');
   if (!auth.authorized || !auth.user) {
     return (
       auth.errorResponse ||

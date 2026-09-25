@@ -61,7 +61,6 @@ interface SchoolRatingsSectionProps {
    *  duplicating 700+ lines of tested form/list logic. */
   apiEndpoint?: string;
   /** Skip the school page-view tracking beacon when this isn't a real school page. */
-  trackView?: boolean;
   showPublishedReviews?: boolean;
   openFormInitially?: boolean;
 }
@@ -70,7 +69,6 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
   schoolSlug,
   schoolName,
   apiEndpoint,
-  trackView = true,
   showPublishedReviews = true,
   openFormInitially = false,
 }) => {
@@ -138,15 +136,10 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
 
     loadRatings();
 
-    // Fire view tracking (school pages only - not applicable to platform reviews)
-    if (trackView) {
-      fetch(`/api/schools/${schoolSlug}/view`, { method: 'POST' }).catch(() => {});
-    }
-
     return () => {
       mounted = false;
     };
-  }, [schoolSlug, ratingsUrl, trackView]);
+  }, [schoolSlug, ratingsUrl]);
 
   const handleSubmitRating = async (e: React.FormEvent) => {
     e.preventDefault();

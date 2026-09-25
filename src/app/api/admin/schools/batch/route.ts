@@ -4,7 +4,7 @@ import { archiveAdminSchoolAsync, updateAdminSchoolAsync } from '@/lib/schoolAdm
 import { recordAdminAudit } from '@/lib/authStore';
 
 export async function POST(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'schools:write');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -24,6 +24,9 @@ export async function POST(req: NextRequest) {
     const results: { slug: string; success: boolean; message?: string }[] = [];
 
     if (action === 'archive') {
+      if (!hasAdminPermission(auth.user, 'schools:archive')) {
+        return NextResponse.json({ success: false, message: 'Archive permission required.' }, { status: 403 });
+      }
       if (!reason || reason.trim().length < 5) {
         return NextResponse.json({ success: false, message: 'Descriptive archive reason required' }, { status: 400 });
       }
@@ -32,7 +35,20 @@ export async function POST(req: NextRequest) {
         results.push({ slug, success: res.success, message: res.error });
       }
     } else if (action === 'verify_status') {
+      const sourceName = typeof data?.sourceName === 'string' ? data.sourceName.trim() : '';
+      const sourceUrl = typeof data?.sourceUrl === 'string' ? data.sourceUrl.trim() : '';
+      const verifiedFields = Array.isArray(data?.verifiedFields)
+        ? data.verifiedFields.filter((field: unknown): field is string => typeof field === 'string' && field.trim()).slice(0, 30)
+        : [];
       const statusToSet = data?.verificationStatus || 'verified_official';
+
+      if (!sourceName || !sourceUrl || verifiedFields.length === 0) {
+        return NextResponse.json(
+          { success: false, message: 'Real verification source name, source URL, and at least one verified field are required.' },
+          { status: 400 }
+        );
+      }
+
       for (const slug of slugs) {
         const res = await updateAdminSchoolAsync(
           slug,
@@ -41,8 +57,9 @@ export async function POST(req: NextRequest) {
               isVerified: true,
               status: statusToSet,
               lastVerified: new Date().toISOString().split('T')[0],
-              sourceName: 'Bulk Administrative Verification',
-              verifiedFields: ['name', 'location', 'fees', 'contact'],
+              sourceName,
+              sourceUrl,
+              verifiedFields,
             },
           },
           adminUser,
@@ -58,8 +75,10 @@ export async function POST(req: NextRequest) {
           {
             admissions: {
               status: admStatus,
-              academicYear: data?.academicYear || '2025-2026',
-              process: 'Online & Offline Application',
+              academicYear: data?.academicYear || '2027-28',
+              ...(typeof data?.process === 'string' && data.process.trim()
+                ? { process: data.process.trim() }
+                : {}),
               date: null,
             },
           },

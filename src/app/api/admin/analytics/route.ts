@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const auth = await requireAdminAuth(req);
+    const auth = await requireAdminAuth(req, 'reviews:moderate');
     if (!auth.authorized || !auth.user) {
       return auth.errorResponse || NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
     }

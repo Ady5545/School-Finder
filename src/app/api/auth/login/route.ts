@@ -5,7 +5,7 @@ import {
   createSessionToken,
   sanitizeUser,
   verifyOtpCodeAsync,
-  recordActivityEvent,
+  recordActivityEventAsync,
   isUserSuspendedOrBanned,
   updateUserProfileAsync,
   updateUserPasswordAsync,
@@ -147,7 +147,7 @@ export async function POST(req: NextRequest) {
       role: user.role,
     });
 
-    recordActivityEvent({
+    await recordActivityEventAsync({
       type: 'user_login',
       userId: user.id,
       locality: user.preferredSchoolLocality,

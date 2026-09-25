@@ -1940,40 +1940,46 @@ export async function recordActivityEventAsync(params: {
   searchQuery?: string;
   approximateTimeSpent?: string;
   details?: Record<string, unknown>;
+  failOnMongoError?: boolean;
 }): Promise<ActivityEvent> {
-  const evt = recordActivityEvent({ ...params, persistMongo: false });
+  const { failOnMongoError = false, ...eventParams } = params;
+  const evt = recordActivityEvent({ ...eventParams, persistMongo: false });
 
   if (isMongoConfigured()) {
     try {
       const col = await getActivityCollection(true);
       if (col) {
         await col.updateOne({ id: evt.id }, { $set: evt }, { upsert: true });
+      } else if (failOnMongoError) {
+        throw new Error('MongoDB activity collection is unavailable.');
       }
 
-      if (params.schoolSlug && params.type === 'school_view') {
+      if (eventParams.schoolSlug && eventParams.type === 'school_view') {
         const viewsCol = await getSchoolViewsCollection(true);
         if (viewsCol) {
           const incFields: Record<string, number> = { totalViews: 1, count: 1 };
-          if (params.userId) {
+          if (eventParams.userId) {
             incFields.authenticatedViews = 1;
           } else {
             incFields.anonymousViews = 1;
           }
           await viewsCol.updateOne(
-            { slug: params.schoolSlug },
+            { slug: eventParams.schoolSlug },
             {
               $inc: incFields,
               $set: { lastViewedAt: new Date().toISOString() },
             },
             { upsert: true }
           );
+        } else if (failOnMongoError) {
+          throw new Error('MongoDB school views collection is unavailable.');
         }
-      } else if (params.schoolSlug && (params.type === 'wishlist_add' || params.type === 'wishlist_remove')) {
+      } else if (eventParams.schoolSlug && (eventParams.type === 'wishlist_add' || eventParams.type === 'wishlist_remove')) {
         const savesCol = await getSchoolSavesCollection(true);
         if (savesCol) {
-          const inc = params.type === 'wishlist_add' ? 1 : -1;
+          const inc = eventParams.type === 'wishlist_add' ? 1 : -1;
           await savesCol.updateOne(
-            { slug: params.schoolSlug },
+            { slug: eventParams.schoolSlug },
             {
               $inc: { count: inc },
               $set: { lastSavedAt: new Date().toISOString() },
@@ -3078,26 +3084,25 @@ export async function getAdminSchoolAnalyticsAsync(slug: string) {
     }
   }
 
-  const uniqueViewersList = await Promise.all(
-    Array.from(viewers.entries()).map(async ([userId, data]) => {
-      const user = await getUserByIdAsync(userId);
-      return {
-        userId,
-        userName: user?.name || 'Parent User',
-        userEmail: user?.email || '',
-        viewCount: data.count,
-        firstViewed: data.first,
-        lastViewed: data.last,
-      };
-    })
-  );
+  const usersById = new Map(allUsers.map(user => [user.id, user]));
+  const uniqueViewersList = Array.from(viewers.entries()).map(([userId, data]) => {
+    const user = usersById.get(userId);
+    return {
+      userId,
+      userName: user?.name || 'Parent User',
+      userEmail: user?.email || '',
+      viewCount: data.count,
+      firstViewed: data.first,
+      lastViewed: data.last,
+    };
+  });
 
   const repeatViewersCount = uniqueViewersList.filter(v => v.viewCount > 1).length;
 
   return {
     slug,
     traffic: {
-      totalViews: eventViewCount || views,
+      totalViews: Math.max(eventViewCount, views),
       uniqueAuthenticatedViewers: uniqueViewersList.length,
       uniqueAnonymousViewers: anonymousViewerIds.size,
       uniqueViewers: uniqueViewersList.length + anonymousViewerIds.size,
@@ -3191,19 +3196,32 @@ export async function getAllSchoolsAdminOverviewAsync() {
   }
 
   const allPromos = getAllPromotions();
+  const activeRatings = await getAllRatingsAsync(false);
+  const ratingGroups = new Map<string, { totalScore: number; count: number }>();
+
+  for (const rating of activeRatings) {
+    const current = ratingGroups.get(rating.schoolSlug) || { totalScore: 0, count: 0 };
+    current.totalScore += rating.score;
+    current.count += 1;
+    ratingGroups.set(rating.schoolSlug, current);
+  }
+
   const allSlugs = new Set([...viewsMap.keys(), ...savesMap.keys()]);
 
   for (const slug of allSlugs) {
     const views = viewsMap.get(slug) || 0;
     const saves = savesMap.get(slug) || 0;
-    const stats = await getSchoolRatingStatsAsync(slug);
+    const ratingStats = ratingGroups.get(slug) || { totalScore: 0, count: 0 };
+    const averageRating = ratingStats.count
+      ? Math.round((ratingStats.totalScore / ratingStats.count) * 10) / 10
+      : 0;
     const activePromo = allPromos.find(p => p.schoolSlug === slug && p.status === 'active');
     summaryMap.set(slug, {
       slug,
       views,
       saves,
-      reviewsCount: stats.totalReviews,
-      averageRating: stats.averageScore,
+      reviewsCount: ratingStats.count,
+      averageRating,
       activePromotion: activePromo,
     });
   }
@@ -3408,7 +3426,9 @@ export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '
   const savesCountInRange = savesEventsInRange.length;
 
   const uniqueParentsViewing = new Set(
-    viewsEventsInRange.map(e => e.userId).filter(Boolean)
+    viewsEventsInRange
+      .map(e => e.userId || e.visitorId)
+      .filter(Boolean)
   ).size;
 
   const viewsMapInRange = new Map<string, number>();
@@ -4282,23 +4302,7 @@ const globalAnnouncementsStore = globalThis as unknown as {
   __ADMISSION_PITARA_ANNOUNCEMENTS__?: PlatformAnnouncement[];
 };
 if (!globalAnnouncementsStore.__ADMISSION_PITARA_ANNOUNCEMENTS__) {
-  globalAnnouncementsStore.__ADMISSION_PITARA_ANNOUNCEMENTS__ = [
-    {
-      id: 'ann-2025-admissions',
-      title: '2025-2026 Greater Noida West Nursery Admissions Open',
-      body: 'Verified admission dates and online registration links for top schools in Techzone 4, Sector 16B, and Knowledge Park are now active.',
-      ctaText: 'Explore Schools',
-      ctaLink: '/schools',
-      startDate: '2025-08-01',
-      endDate: '2025-12-31',
-      priority: 'high',
-      targetAudience: 'all',
-      status: 'published',
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      createdBy: 'admin@admissionpitara.com',
-    },
-  ];
+  globalAnnouncementsStore.__ADMISSION_PITARA_ANNOUNCEMENTS__ = [];
 }
 const announcements = globalAnnouncementsStore.__ADMISSION_PITARA_ANNOUNCEMENTS__;
 
@@ -4365,35 +4369,7 @@ const globalSubmissionsStore = globalThis as unknown as {
   __ADMISSION_PITARA_SUBMISSIONS__?: SchoolSubmission[];
 };
 if (!globalSubmissionsStore.__ADMISSION_PITARA_SUBMISSIONS__) {
-  globalSubmissionsStore.__ADMISSION_PITARA_SUBMISSIONS__ = [
-    {
-      id: 'sub-sample-1',
-      type: 'data_correction',
-      schoolName: 'Delhi World Public School (KP-3)',
-      schoolSlug: 'delhi-world-public-school-noida-extension',
-      submitterName: 'Rohan Sharma',
-      submitterEmail: 'rohan.sharma.parent@gmail.com',
-      submitterRole: 'parent',
-      title: 'Fee structure revision for 2025-2026 Nursery',
-      description: 'The school announced updated tuition fee of ₹1,40,000 for upcoming session at parent orientation.',
-      status: 'new',
-      createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-    },
-    {
-      id: 'sub-sample-2',
-      type: 'parent_enquiry',
-      submitterName: 'Priya Mehra',
-      submitterEmail: 'priya.mehra@gmail.com',
-      submitterRole: 'parent',
-      title: 'Transport route confirmation for Sector 16B',
-      description: 'Looking to know which schools provide direct AC bus pickup from Panchsheel Greens.',
-      status: 'in_review',
-      assignedAdmin: 'admin@admissionpitara.com',
-      createdAt: new Date(Date.now() - 3600000 * 48).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 12).toISOString(),
-    },
-  ];
+  globalSubmissionsStore.__ADMISSION_PITARA_SUBMISSIONS__ = [];
 }
 const submissions = globalSubmissionsStore.__ADMISSION_PITARA_SUBMISSIONS__;
 
@@ -4518,19 +4494,7 @@ const globalEmailHistory = globalThis as unknown as {
   __ADMISSION_PITARA_EMAIL_HISTORY__?: EmailCampaignRecord[];
 };
 if (!globalEmailHistory.__ADMISSION_PITARA_EMAIL_HISTORY__) {
-  globalEmailHistory.__ADMISSION_PITARA_EMAIL_HISTORY__ = [
-    {
-      id: 'email-camp-1',
-      subject: 'Admission Pitara: 2025-26 School Admissions Now Active',
-      bodySnippet: 'Dear Parent, School admissions for the upcoming academic session are now verified...',
-      recipientType: 'verified_parents',
-      recipientCount: 24,
-      recipientsPreview: ['parent1@gmail.com', 'parent2@gmail.com'],
-      sentBy: 'admin@admissionpitara.com',
-      sentAt: new Date(Date.now() - 3600000 * 72).toISOString(),
-      status: 'sent',
-    },
-  ];
+  globalEmailHistory.__ADMISSION_PITARA_EMAIL_HISTORY__ = [];
 }
 const emailCampaigns = globalEmailHistory.__ADMISSION_PITARA_EMAIL_HISTORY__;
 
@@ -4567,16 +4531,7 @@ const globalSecurityEvents = globalThis as unknown as {
   __ADMISSION_PITARA_SECURITY_EVENTS__?: SecurityEvent[];
 };
 if (!globalSecurityEvents.__ADMISSION_PITARA_SECURITY_EVENTS__) {
-  globalSecurityEvents.__ADMISSION_PITARA_SECURITY_EVENTS__ = [
-    {
-      id: 'sec-1',
-      type: 'failed_login',
-      identifier: 'unknown@external.net',
-      details: 'Multiple invalid OTP attempts from unrecognized client address.',
-      severity: 'low',
-      timestamp: new Date(Date.now() - 3600000 * 3).toISOString(),
-    },
-  ];
+  globalSecurityEvents.__ADMISSION_PITARA_SECURITY_EVENTS__ = [];
 }
 const securityEvents = globalSecurityEvents.__ADMISSION_PITARA_SECURITY_EVENTS__;
 
@@ -4611,26 +4566,7 @@ const globalAdminNotifications = globalThis as unknown as {
   __ADMISSION_PITARA_ADMIN_NOTIFS__?: AdminNotification[];
 };
 if (!globalAdminNotifications.__ADMISSION_PITARA_ADMIN_NOTIFS__) {
-  globalAdminNotifications.__ADMISSION_PITARA_ADMIN_NOTIFS__ = [
-    {
-      id: 'notif-1',
-      type: 'new_submission',
-      title: 'New Data Correction Request',
-      message: 'Parent submitted updated 2025 fee schedule for Delhi World Public School.',
-      link: '/admin?tab=submissions',
-      read: false,
-      createdAt: new Date().toISOString(),
-    },
-    {
-      id: 'notif-2',
-      type: 'data_alert',
-      title: 'Unverified Coordinates Notice',
-      message: '14 schools in directory currently have no verified GPS coordinates.',
-      link: '/admin?tab=location-audit',
-      read: false,
-      createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
-    },
-  ];
+  globalAdminNotifications.__ADMISSION_PITARA_ADMIN_NOTIFS__ = [];
 }
 const adminNotifs = globalAdminNotifications.__ADMISSION_PITARA_ADMIN_NOTIFS__;
 

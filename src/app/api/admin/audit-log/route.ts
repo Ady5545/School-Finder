@@ -3,7 +3,7 @@ import { requireAdminAuth } from '../../../../lib/adminAuth';
 import { getAdminAuditLogsAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'audit:view');
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

@@ -6,7 +6,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'schools:write');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

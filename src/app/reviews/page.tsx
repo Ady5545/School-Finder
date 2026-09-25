@@ -53,7 +53,6 @@ export default async function ReviewsPage() {
           schoolSlug="__platform__"
           schoolName="Admission Pitara"
           apiEndpoint="/api/platform-reviews"
-          trackView={false}
           showPublishedReviews={false}
           openFormInitially
         />

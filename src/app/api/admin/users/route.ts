@@ -3,7 +3,7 @@ import { requireAdminAuth } from '../../../../lib/adminAuth';
 import { getAllUsersSanitizedAsync, getActivityEventsAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'users:manage');
   if (!auth.authorized) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

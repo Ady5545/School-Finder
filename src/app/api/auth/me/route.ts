@@ -9,6 +9,7 @@ import {
   validateResidentialSociety,
   validateChildName,
   validateOptionalParentName,
+  isUserSuspendedOrBanned,
 } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
@@ -30,26 +31,17 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ authenticated: false, user: null }, { status: 401 });
     }
 
-    let user = await getUserByIdAsync(payload.sub);
-    if (!user && payload.sub && payload.email) {
-      // Reconstruct user from cryptographically verified session token for serverless resilience
-      user = {
-        id: payload.sub,
-        name: payload.name || 'Parent',
-        email: payload.email,
-        status: 'active',
-        preferredSchoolLocality: payload.preferredSchoolLocality || 'Greater Noida West',
-        emailVerified: true,
-        analyticsConsent: true,
-        role: payload.role || 'parent',
-        createdAt: new Date().toISOString(),
-        wishlist: [],
-        compareList: [],
-      };
-    }
-
+    const user = await getUserByIdAsync(payload.sub);
     if (!user) {
       return NextResponse.json({ authenticated: false, user: null }, { status: 401 });
+    }
+
+    const access = isUserSuspendedOrBanned(user.id);
+    if (access.blocked) {
+      return NextResponse.json(
+        { authenticated: false, user: null, message: 'This account is currently unavailable.' },
+        { status: 403 }
+      );
     }
 
     return NextResponse.json({
@@ -79,6 +71,15 @@ export async function PATCH(req: NextRequest) {
     const payload = verifySessionToken(token);
     if (!payload) {
       return NextResponse.json({ success: false, message: 'Invalid session' }, { status: 401 });
+    }
+
+    const currentUser = await getUserByIdAsync(payload.sub);
+    if (!currentUser) {
+      return NextResponse.json({ success: false, message: 'User not found' }, { status: 404 });
+    }
+    const access = isUserSuspendedOrBanned(currentUser.id);
+    if (access.blocked) {
+      return NextResponse.json({ success: false, message: 'This account cannot update its profile right now.' }, { status: 403 });
     }
 
     const body = await req.json();

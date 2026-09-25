@@ -186,9 +186,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       setUser(data.user);
-      if (data.token) {
-        setToken(data.token);
-      }
+      setToken(null);
       showToast('Parent account registered successfully! Email verified.', 'success');
       return { success: true, message: data.message };
     } catch (err: unknown) {
@@ -217,9 +215,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       setUser(data.user);
-      if (data.token) {
-        setToken(data.token);
-      }
+      setToken(null);
       showToast(`Welcome back, ${data.user.name}!`, 'success');
       return { success: true, message: data.message };
     } catch (err: unknown) {

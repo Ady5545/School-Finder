@@ -163,7 +163,6 @@ export async function POST(req: NextRequest) {
       success: true,
       message: 'Parent account created successfully.',
       user: safeUser,
-      token: sessionToken,
     });
 
     // Set secure HTTP-only cookie

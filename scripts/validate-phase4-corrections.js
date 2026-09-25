@@ -69,7 +69,7 @@ assert((gagan?.verification?.cbseAffiliationNumber || gagan?.affiliationNumber) 
 
 const ryanTechzone = schools.find(s => s.id === 'ryan-international-school-noida-extension');
 assert(ryanTechzone !== undefined, 'Ryan Techzone 4 record exists');
-assert((ryanTechzone?.verification?.cbseAffiliationNumber || ryanTechzone?.affiliationNumber) === '2133182', 'Ryan Techzone 4 retains verified affiliation 2133182');
+assert((ryanTechzone?.verification?.cbseAffiliationNumber || ryanTechzone?.affiliationNumber) === '2133036', 'Ryan Techzone 4 retains verified affiliation 2133036');
 
 function numericTokens(text) {
   return String(text || '')

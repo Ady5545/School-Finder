@@ -3,7 +3,8 @@ name: Repair Branch Build Check
 on:
   push:
     branches:
-      - fix/vercel-missing-modules-2026-09-19
+      - main
+      - admin-cms-persistent-2026-09-24
   pull_request:
     branches:
       - main

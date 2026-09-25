@@ -548,6 +548,8 @@ function initDb(): void {
   }
 
   // Promotions are intentionally not auto-seeded. The CMS is the source of truth.
+  promotions = promotions.filter(p => !LEGACY_AUTO_SEEDED_PROMOTION_IDS.has(p.id));
+  globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__ = promotions;
 
 
   saveStoreToDisk();
@@ -3754,6 +3756,13 @@ export async function getSearchAnalyticsAsync() {
 // ----------------------------------------------------------------------------
 // PAID SCHOOL PROMOTION SYSTEM (Transparent, Admin-Controlled, Organic-Preserving)
 // ----------------------------------------------------------------------------
+const LEGACY_AUTO_SEEDED_PROMOTION_IDS = new Set(['promo_dwps_inaugural_2026']);
+
+async function removeLegacyAutoSeededPromotions(col: Awaited<ReturnType<typeof getPromotionsCollection>>): Promise<void> {
+  if (!col || LEGACY_AUTO_SEEDED_PROMOTION_IDS.size === 0) return;
+  await col.deleteMany({ id: { $in: Array.from(LEGACY_AUTO_SEEDED_PROMOTION_IDS) } });
+}
+
 
 export async function getActivePromotionsAsync(placement?: string): Promise<SchoolPromotionCampaign[]> {
   initDb();
@@ -3761,6 +3770,8 @@ export async function getActivePromotionsAsync(placement?: string): Promise<Scho
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
+
+    await removeLegacyAutoSeededPromotions(col);
 
     const docs = await col.find({ status: 'active' }).sort({ priority: 1 }).toArray();
     const now = new Date().toISOString();
@@ -3798,6 +3809,8 @@ export async function getAllPromotionsAsync(): Promise<SchoolPromotionCampaign[]
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
 
+    await removeLegacyAutoSeededPromotions(col);
+
     const docs = await col.find({}).sort({ createdAt: -1 }).toArray();
     return docs.map(({ _id, ...doc }) => doc as SchoolPromotionCampaign);
   }
@@ -3816,6 +3829,8 @@ export async function getPromotionByIdAsync(id: string): Promise<SchoolPromotion
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
+
+    await removeLegacyAutoSeededPromotions(col);
 
     const doc = await col.findOne({ id });
     if (!doc) return null;
@@ -3917,6 +3932,8 @@ export async function recordPromotionImpressionAsync(id: string): Promise<boolea
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
 
+    await removeLegacyAutoSeededPromotions(col);
+
     const now = new Date().toISOString();
     const result = await col.findOneAndUpdate(
       { id, status: 'active' },
@@ -3948,6 +3965,8 @@ export async function recordPromotionClickAsync(id: string): Promise<boolean> {
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
+
+    await removeLegacyAutoSeededPromotions(col);
 
     const now = new Date().toISOString();
     const result = await col.findOneAndUpdate(
@@ -3992,6 +4011,7 @@ export async function createPromotionCampaignAsync(
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
+    await removeLegacyAutoSeededPromotions(col);
     await col.insertOne({ ...campaign });
   }
 
@@ -4024,6 +4044,8 @@ export async function updatePromotionCampaignAsync(
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
+
+    await removeLegacyAutoSeededPromotions(col);
 
     const now = new Date().toISOString();
     const result = await col.findOneAndUpdate(
@@ -4064,6 +4086,8 @@ export async function deletePromotionCampaignAsync(id: string, adminUserId?: str
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
+
+    await removeLegacyAutoSeededPromotions(col);
 
     const result = await col.deleteOne({ id });
     if (result.deletedCount === 0) return false;

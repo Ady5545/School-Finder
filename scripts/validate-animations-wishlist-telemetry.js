@@ -162,9 +162,9 @@ assert(fs.existsSync(trackerPath), 'SchoolViewTracker.tsx exists');
 const trackerContent = fs.readFileSync(trackerPath, 'utf8');
 
 assert(
-  trackerContent.includes('sessionStorage') &&
-  trackerContent.includes('ap_viewed_'),
-  'SchoolViewTracker deduplicates page visits within browser session'
+  !trackerContent.includes('sessionStorage') &&
+  trackerContent.includes('keepalive: true'),
+  'SchoolViewTracker sends genuine profile visits without browser-level 10-minute suppression'
 );
 
 const schoolDetailPath = path.join(__dirname, '..', 'src', 'app', 'schools', '[slug]', 'page.tsx');
@@ -178,8 +178,9 @@ const viewRoutePath = path.join(__dirname, '..', 'src', 'app', 'api', 'schools',
 const viewRouteContent = fs.readFileSync(viewRoutePath, 'utf8');
 assert(
   viewRouteContent.includes('isDuplicateView') &&
-  viewRouteContent.includes('recentViewsCache'),
-  'School view API route includes server-side sliding-window deduplication'
+  viewRouteContent.includes('recentViewsCache') &&
+  viewRouteContent.includes('failOnMongoError: true'),
+  'School view API route uses server-side rapid-repeat deduplication and fail-fast persistence'
 );
 
 const authStorePath = path.join(__dirname, '..', 'src', 'lib', 'authStore.ts');

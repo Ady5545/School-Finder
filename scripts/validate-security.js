@@ -41,7 +41,7 @@ assert(adminRoutes.length >= 10, `Found ${adminRoutes.length} admin API routes t
 let unauthenticatedAdminRoutes = 0;
 for (const routePath of adminRoutes) {
   const content = fs.readFileSync(routePath, 'utf8');
-  if (!content.includes('requireAdminAuth(req)')) {
+  if (!/requireAdminAuth\(req(?:\s*,\s*['"][^'"]+['"])?\)/.test(content)) {
     console.error(`Unprotected admin route found: ${path.relative(process.cwd(), routePath)}`);
     unauthenticatedAdminRoutes++;
   }

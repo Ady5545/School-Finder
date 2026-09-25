@@ -5,6 +5,7 @@ import { getAllParentUsersAsync, recordAdminAudit, recordEmailCampaign } from '@
 import nodemailer from 'nodemailer';
 
 const SIMPLE_EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+type EmailRecipientType = 'individual' | 'verified_parents' | 'all_parents';
 const EMAIL_BATCH_SIZE = 50;
 
 export async function POST(req: NextRequest) {
@@ -28,9 +29,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Subject and email body are required.' }, { status: 400 });
     }
 
-    const allowedRecipientTypes = new Set(['individual', 'verified_parents', 'all_parents']);
-    const selectedRecipientType = typeof recipientType === 'string' ? recipientType : 'individual';
-    if (!allowedRecipientTypes.has(selectedRecipientType)) {
+    const allowedRecipientTypes = new Set<EmailRecipientType>(['individual', 'verified_parents', 'all_parents']);
+    const selectedRecipientType: EmailRecipientType = typeof recipientType === 'string' && allowedRecipientTypes.has(recipientType as EmailRecipientType)
+      ? recipientType as EmailRecipientType
+      : 'individual';
+    if (typeof recipientType === 'string' && !allowedRecipientTypes.has(recipientType as EmailRecipientType)) {
       return NextResponse.json({ success: false, message: 'Invalid recipient type.' }, { status: 400 });
     }
 

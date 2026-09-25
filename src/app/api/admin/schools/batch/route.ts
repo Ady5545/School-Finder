@@ -79,11 +79,10 @@ export async function POST(req: NextRequest) {
               ...(typeof data?.process === 'string' && data.process.trim()
                 ? { process: data.process.trim() }
                 : {}),
-              date: null,
             },
           },
           adminUser,
-          reason || `Bulk admission status change to ${admStatus}`
+          typeof reason === 'string' && reason.trim() ? reason.trim() : `Bulk admission status change to ${admStatus}`
         );
         results.push({ slug, success: res.success, message: res.error });
       }

@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = await req.json().catch(() => null);
+    const body = (await req.json().catch(() => null)) as Record<string, unknown> | null;
     if (!body || typeof body !== 'object') {
       return NextResponse.json({ success: false, message: 'Invalid telemetry payload.' }, { status: 400 });
     }

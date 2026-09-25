@@ -684,7 +684,7 @@ export default function AdminPage() {
 
           <button
             onClick={async () => {
-              await loadAdminData(true);
+              await loadAdminData();
               if (activeTab !== 'overview') await fetchTabData(activeTab, true);
             }}
             title="Refresh the current admin section"
@@ -928,7 +928,7 @@ export default function AdminPage() {
                               {school?.name || item.slug}
                             </p>
                             <p className="text-[10px] text-slate-400">
-                              {school?.sector || school?.address || 'Location unavailable'}
+                              {school ? ('sector' in school ? school.sector : school.location?.sector || school.location?.area || school.location?.address) : 'Location unavailable'}
                             </p>
                           </div>
                         </div>
@@ -977,7 +977,7 @@ export default function AdminPage() {
                               {school?.name || item.slug}
                             </p>
                             <p className="text-[10px] text-slate-400">
-                              {school?.sector || 'Greater Noida West'}
+                              {school ? ('sector' in school ? school.sector : school.location?.sector || school.location?.area || 'Greater Noida West') : 'Greater Noida West'}
                             </p>
                           </div>
                         </div>

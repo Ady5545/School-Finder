@@ -48,6 +48,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
 }) => {
   const [viewMode, setViewMode] = useState<'osm' | 'radar'>('osm');
   const [copiedCoords, setCopiedCoords] = useState(false);
+  const [copyError, setCopyError] = useState(false);
   const [activePin, setActivePin] = useState<string | null>(school.id);
 
   const coordinates = school.location?.coordinates;
@@ -75,10 +76,18 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
     `${school.name}, ${school.location.address}`
   )}`;
 
-  const handleCopyCoords = () => {
-    navigator.clipboard.writeText(`${lat}, ${lng}`);
-    setCopiedCoords(true);
-    setTimeout(() => setCopiedCoords(false), 2000);
+  const handleCopyCoords = async () => {
+    setCopyError(false);
+    try {
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard API unavailable');
+      await navigator.clipboard.writeText(`${lat}, ${lng}`);
+      setCopiedCoords(true);
+      setTimeout(() => setCopiedCoords(false), 2000);
+    } catch {
+      setCopiedCoords(false);
+      setCopyError(true);
+      setTimeout(() => setCopyError(false), 2500);
+    }
   };
 
   // Compute nearby schools with distance
@@ -195,8 +204,14 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
                   type="button"
                   onClick={handleCopyCoords}
                   className="text-slate-600 hover:text-[var(--color-primary)] inline-flex items-center gap-1 font-medium cursor-pointer"
+                  aria-label="Copy verified campus coordinates"
                 >
-                  {copiedCoords ? (
+                  {copyError ? (
+                    <>
+                      <Info className="w-3 h-3 text-rose-500" />
+                      <span className="text-rose-700 font-bold">Copy unavailable</span>
+                    </>
+                  ) : copiedCoords ? (
                     <>
                       <Check className="w-3 h-3 text-emerald-600" />
                       <span className="text-emerald-700 font-bold">Copied!</span>

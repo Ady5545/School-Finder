@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import {
   Scale,
@@ -37,6 +37,7 @@ import { useSchoolStore } from '../../lib/schoolStore';
 import { getAllSchools, getCanonicalSchools } from '../../lib/schools';
 import { formatCurrency, cn } from '../../lib/utils';
 import type { School, DetailedFeeComponent, FeeConcession } from '../../types/school';
+import { trackClientCompare } from '../../lib/tracker';
 
 export const SchoolComparisonView: React.FC<{ initialSchools?: School[] }> = ({ initialSchools = [] }) => {
   const { compareList, addCompare, removeCompare, clearCompare, isInShortlist, toggleShortlist } =
@@ -67,6 +68,16 @@ export const SchoolComparisonView: React.FC<{ initialSchools?: School[] }> = ({ 
       .map(slug => allSchools.find(s => s.slug === slug))
       .filter((s): s is School => Boolean(s));
   }, [compareList, allSchools]);
+
+  const trackedCompareKeyRef = useRef('');
+  const compareTelemetryKey = selectedSchools.map(s => s.slug).join('|');
+
+  useEffect(() => {
+    if (selectedSchools.length < 2 || !compareTelemetryKey) return;
+    if (trackedCompareKeyRef.current === compareTelemetryKey) return;
+    trackedCompareKeyRef.current = compareTelemetryKey;
+    trackClientCompare(selectedSchools.map(s => s.slug));
+  }, [compareTelemetryKey, selectedSchools]);
 
   // URL query parameter synchronization
   useEffect(() => {

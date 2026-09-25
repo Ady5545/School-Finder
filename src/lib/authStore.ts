@@ -2088,7 +2088,7 @@ export function recordCompareEvent(params: {
     userId: params.userId,
     targetType: 'school',
     details: {
-      schools: params.schoolSlugs,
+      schoolSlugs: params.schoolSlugs,
     },
   });
 }
@@ -2102,7 +2102,7 @@ export async function recordCompareEventAsync(params: {
     userId: params.userId,
     targetType: 'school',
     details: {
-      schools: params.schoolSlugs,
+      schoolSlugs: params.schoolSlugs,
     },
   });
 }
@@ -2121,7 +2121,11 @@ export function getActivityEvents(
     events = events.filter(e => e.userId === filters.userId);
   }
   if (filters?.schoolSlug) {
-    events = events.filter(e => e.schoolSlug === filters.schoolSlug || (Array.isArray(e.details?.schools) && (e.details.schools as string[]).includes(filters.schoolSlug!)));
+    events = events.filter(e =>
+      e.schoolSlug === filters.schoolSlug ||
+      (Array.isArray(e.details?.schoolSlugs) && (e.details.schoolSlugs as string[]).includes(filters.schoolSlug!)) ||
+      (Array.isArray(e.details?.schools) && (e.details.schools as string[]).includes(filters.schoolSlug!))
+    );
   }
   if (filters?.since) {
     const sinceTime = new Date(filters.since).getTime();
@@ -2153,6 +2157,7 @@ export async function getActivityEventsAsync(
         if (filters?.schoolSlug) {
           query.$or = [
             { schoolSlug: filters.schoolSlug },
+            { 'details.schoolSlugs': filters.schoolSlug },
             { 'details.schools': filters.schoolSlug },
           ];
         }
@@ -2995,7 +3000,13 @@ export function getAdminSchoolAnalytics(slug: string) {
       }
     }
     if ((evt.type === 'compare_view' || evt.type === 'compare_add') && evt.userId) {
-      const slugs = Array.isArray(evt.details?.schoolSlugs) ? (evt.details.schoolSlugs as string[]) : evt.schoolSlug ? [evt.schoolSlug] : [];
+      const slugs = Array.isArray(evt.details?.schoolSlugs)
+        ? (evt.details.schoolSlugs as string[])
+        : Array.isArray(evt.details?.schools)
+        ? (evt.details.schools as string[])
+        : evt.schoolSlug
+        ? [evt.schoolSlug]
+        : [];
       if (slugs.includes(slug)) {
         comparers.add(evt.userId);
       }
@@ -3638,8 +3649,12 @@ export function getComparisonAnalytics() {
   const schoolCompareFrequency = new Map<string, number>();
 
   for (const evt of activityEvents) {
-    if ((evt.type === 'compare_view' || evt.type === 'compare_add') && evt.details?.schoolSlugs) {
-      const slugs = evt.details.schoolSlugs as string[];
+    if (evt.type === 'compare_view' || evt.type === 'compare_add') {
+      const slugs = Array.isArray(evt.details?.schoolSlugs)
+        ? evt.details.schoolSlugs as string[]
+        : Array.isArray(evt.details?.schools)
+        ? evt.details.schools as string[]
+        : [];
       if (Array.isArray(slugs) && slugs.length >= 2) {
         for (const s of slugs) {
           schoolCompareFrequency.set(s, (schoolCompareFrequency.get(s) || 0) + 1);
@@ -3672,11 +3687,15 @@ export async function getComparisonAnalyticsAsync() {
   const pairCounts = new Map<string, { pair: string[]; count: number }>();
   const schoolCompareFrequency = new Map<string, number>();
 
-  const events = await getActivityEventsAsync(5000);
+  const events = await getActivityEventsAsync(100000);
 
   for (const evt of events) {
-    if ((evt.type === 'compare_view' || evt.type === 'compare_add') && evt.details?.schoolSlugs) {
-      const slugs = evt.details.schoolSlugs as string[];
+    if (evt.type === 'compare_view' || evt.type === 'compare_add') {
+      const slugs = Array.isArray(evt.details?.schoolSlugs)
+        ? evt.details.schoolSlugs as string[]
+        : Array.isArray(evt.details?.schools)
+        ? evt.details.schools as string[]
+        : [];
       if (Array.isArray(slugs) && slugs.length >= 2) {
         for (const s of slugs) {
           schoolCompareFrequency.set(s, (schoolCompareFrequency.get(s) || 0) + 1);
@@ -3757,6 +3776,11 @@ export async function getSearchAnalyticsAsync() {
 // PAID SCHOOL PROMOTION SYSTEM (Transparent, Admin-Controlled, Organic-Preserving)
 // ----------------------------------------------------------------------------
 
+export async function getActivePromotionsAsync(placement?: string): Promise<SchoolPromotionCampaign[]> {
+  await ensureMongoSync();
+  return getActivePromotions(placement);
+}
+
 export function getActivePromotions(placement?: string): SchoolPromotionCampaign[] {
   initDb();
   const now = new Date().toISOString();
@@ -3772,9 +3796,19 @@ export function getAllPromotions(): SchoolPromotionCampaign[] {
   return [...promotions].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
+export async function getAllPromotionsAsync(): Promise<SchoolPromotionCampaign[]> {
+  await ensureMongoSync();
+  return getAllPromotions();
+}
+
 export function getPromotionById(id: string): SchoolPromotionCampaign | null {
   initDb();
   return promotions.find(p => p.id === id) || null;
+}
+
+export async function getPromotionByIdAsync(id: string): Promise<SchoolPromotionCampaign | null> {
+  await ensureMongoSync();
+  return getPromotionById(id);
 }
 
 export function createPromotionCampaign(
@@ -3875,6 +3909,93 @@ export function recordPromotionClick(id: string): void {
     promo.clicks = (promo.clicks || 0) + 1;
     saveStoreToDisk();
   }
+}
+
+
+export async function recordPromotionImpressionAsync(id: string): Promise<boolean> {
+  await ensureMongoSync();
+  const promo = promotions.find(p => p.id === id);
+  if (!promo) return false;
+
+  const now = new Date().toISOString();
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) return false;
+    const result = await col.updateOne(
+      { id },
+      { $inc: { impressions: 1 }, $set: { updatedAt: now } }
+    );
+    if (result.matchedCount === 0) return false;
+  }
+
+  promo.impressions = (promo.impressions || 0) + 1;
+  promo.updatedAt = now;
+  saveStoreToDisk();
+  return true;
+}
+
+export async function recordPromotionClickAsync(id: string): Promise<boolean> {
+  await ensureMongoSync();
+  const promo = promotions.find(p => p.id === id);
+  if (!promo) return false;
+
+  const now = new Date().toISOString();
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) return false;
+    const result = await col.updateOne(
+      { id },
+      { $inc: { clicks: 1 }, $set: { updatedAt: now } }
+    );
+    if (result.matchedCount === 0) return false;
+  }
+
+  promo.clicks = (promo.clicks || 0) + 1;
+  promo.updatedAt = now;
+  saveStoreToDisk();
+  return true;
+}
+
+export async function createPromotionCampaignAsync(
+  data: Omit<SchoolPromotionCampaign, 'id' | 'impressions' | 'clicks' | 'createdAt' | 'updatedAt'>,
+  adminUserId?: string
+): Promise<SchoolPromotionCampaign> {
+  await ensureMongoSync();
+  const campaign = createPromotionCampaign(data, adminUserId);
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) throw new Error('Promotion database is unavailable.');
+    await col.updateOne({ id: campaign.id }, { $set: campaign }, { upsert: true });
+  }
+  return campaign;
+}
+
+export async function updatePromotionCampaignAsync(
+  id: string,
+  updates: Partial<Omit<SchoolPromotionCampaign, 'id' | 'createdAt'>>,
+  adminUserId?: string
+): Promise<SchoolPromotionCampaign | null> {
+  await ensureMongoSync();
+  const campaign = updatePromotionCampaign(id, updates, adminUserId);
+  if (!campaign) return null;
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) throw new Error('Promotion database is unavailable.');
+    await col.updateOne({ id: campaign.id }, { $set: campaign }, { upsert: true });
+  }
+  return campaign;
+}
+
+export async function deletePromotionCampaignAsync(id: string, adminUserId?: string): Promise<boolean> {
+  await ensureMongoSync();
+  const deleted = deletePromotionCampaign(id, adminUserId);
+  if (!deleted) return false;
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) throw new Error('Promotion database is unavailable.');
+    await col.deleteOne({ id });
+  }
+  return true;
 }
 
 // ----------------------------------------------------------------------------
@@ -4076,6 +4197,11 @@ export function getPublicSchoolPopularity(slug?: string) {
   return result;
 }
 
+
+export async function getPublicSchoolPopularityAsync(slug?: string) {
+  await ensureMongoSync();
+  return getPublicSchoolPopularity(slug);
+}
 // ----------------------------------------------------------------------------
 // ADMISSION REMINDERS & NOTIFICATIONS PERSISTENCE
 // ----------------------------------------------------------------------------

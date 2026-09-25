@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getPublicSchoolPopularity } from '../../../../lib/authStore';
+import { getPublicSchoolPopularityAsync } from '../../../../lib/authStore';
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const slug = searchParams.get('slug') || undefined;
 
-    const popularity = getPublicSchoolPopularity(slug);
+    const popularity = await getPublicSchoolPopularityAsync(slug);
 
     return NextResponse.json({
       success: true,

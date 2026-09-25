@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth } from '../../../../lib/adminAuth';
 import {
-  getAllPromotions,
-  createPromotionCampaign,
-  updatePromotionCampaign,
-  deletePromotionCampaign,
+  getAllPromotionsAsync,
+  createPromotionCampaignAsync,
+  updatePromotionCampaignAsync,
+  deletePromotionCampaignAsync,
 } from '../../../../lib/authStore';
 import { getSchoolBySlug } from '../../../../lib/schools';
 
@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
 
-  const campaigns = getAllPromotions();
+  const campaigns = await getAllPromotionsAsync();
 
   const enriched = campaigns.map(c => {
     const school = getSchoolBySlug(c.schoolSlug);
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: false, message: 'Canonical school not found' }, { status: 404 });
   }
 
-  const campaign = createPromotionCampaign(
+  const campaign = await createPromotionCampaignAsync(
     {
       schoolSlug,
       campaignName: String(campaignName).trim(),
@@ -88,7 +88,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ success: false, message: 'Campaign ID required' }, { status: 400 });
   }
 
-  const updated = updatePromotionCampaign(id, updates, auth.user.id);
+  const updated = await updatePromotionCampaignAsync(id, updates, auth.user.id);
   if (!updated) {
     return NextResponse.json({ success: false, message: 'Campaign not found' }, { status: 404 });
   }
@@ -113,7 +113,7 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ success: false, message: 'Campaign ID required' }, { status: 400 });
   }
 
-  const deleted = deletePromotionCampaign(id, auth.user.id);
+  const deleted = await deletePromotionCampaignAsync(id, auth.user.id);
   if (!deleted) {
     return NextResponse.json({ success: false, message: 'Campaign not found' }, { status: 404 });
   }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdminAuth, hasAdminPermission } from '@/lib/adminAuth';
-import { archiveAdminSchoolAsync, updateAdminSchoolAsync } from '@/lib/schoolAdminService';
+import { archiveAdminSchoolAsync, updateAdminSchoolAsync, getAdminSchoolBySlugAsync } from '@/lib/schoolAdminService';
 import { recordAdminAudit } from '@/lib/authStore';
 
 export async function POST(req: NextRequest) {
@@ -21,17 +21,18 @@ export async function POST(req: NextRequest) {
     }
 
     const adminUser = { id: auth.user.id, email: auth.user.email, name: auth.user.name };
+    const archiveReason = typeof reason === 'string' && reason.trim().length >= 5 ? reason.trim() : '';
     const results: { slug: string; success: boolean; message?: string }[] = [];
 
     if (action === 'archive') {
       if (!hasAdminPermission(auth.user, 'schools:archive')) {
         return NextResponse.json({ success: false, message: 'Archive permission required.' }, { status: 403 });
       }
-      if (!reason || reason.trim().length < 5) {
+      if (!archiveReason) {
         return NextResponse.json({ success: false, message: 'Descriptive archive reason required' }, { status: 400 });
       }
       for (const slug of slugs) {
-        const res = await archiveAdminSchoolAsync(slug, reason, adminUser);
+        const res = await archiveAdminSchoolAsync(slug, archiveReason, adminUser);
         results.push({ slug, success: res.success, message: res.error });
       }
     } else if (action === 'verify_status') {
@@ -70,12 +71,18 @@ export async function POST(req: NextRequest) {
     } else if (action === 'update_admission_status') {
       const admStatus = data?.admissionStatus || 'Admissions Open';
       for (const slug of slugs) {
+        const current = await getAdminSchoolBySlugAsync(slug);
+        if (!current) {
+          results.push({ slug, success: false, message: 'School record not found.' });
+          continue;
+        }
         const res = await updateAdminSchoolAsync(
           slug,
           {
             admissions: {
-              status: admStatus,
-              academicYear: data?.academicYear || '2027-28',
+              ...current.admissions,
+              status: typeof admStatus === 'string' ? admStatus : 'Admissions Open',
+              academicYear: typeof data?.academicYear === 'string' ? data.academicYear : (current.admissions.academicYear || '2027-28'),
               ...(typeof data?.process === 'string' && data.process.trim()
                 ? { process: data.process.trim() }
                 : {}),

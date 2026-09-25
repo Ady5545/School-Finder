@@ -60,6 +60,13 @@ export default function PrivacyPage() {
           </p>
         </section>
 
+        <section className="space-y-2">
+          <h2 className="text-base font-bold text-[var(--color-content)]">4. Cookies, Local Storage & Analytics</h2>
+          <p>
+            Admission Pitara uses essential browser storage for features such as privacy preferences and parent-facing site functionality. Optional anonymous analytics is enabled only when you choose &quot;Allow analytics&quot; in the privacy notice. You can choose &quot;Essential only&quot; instead.
+          </p>
+        </section>
+
         <section className="space-y-2 pt-2 border-t border-[var(--color-border)]">
           <h2 className="text-base font-bold text-[var(--color-content)]">5. Privacy Contact</h2>
           <p>

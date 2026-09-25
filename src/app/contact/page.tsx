@@ -2,7 +2,15 @@
 
 export const dynamic = 'force-dynamic';
 
+export const metadata = buildPageMetadata(
+  'Contact Admission Pitara',
+  'Contact Admission Pitara for parent enquiries, school data corrections, verified fee updates and partnerships in Greater Noida.',
+  '/contact'
+);
+
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { buildPageMetadata } from '../../lib/seo';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
@@ -23,6 +31,7 @@ import {
 const PUBLIC_ENQUIRY_EMAIL = 'enquiry.admissionpitara@gmail.com';
 
 export default function ContactPage() {
+  const router = useRouter();
   const [copied, setCopied] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -63,7 +72,7 @@ export default function ContactPage() {
         setErrorMessage(data.message || 'We could not send your message. Please try again.');
         return;
       }
-      setSubmitted(true);
+      router.push('/thank-you');
     } catch {
       setErrorMessage('Network error while sending your message. Please try again.');
     } finally {

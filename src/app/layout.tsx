@@ -9,8 +9,8 @@ import { SchoolStoreProvider } from '../lib/schoolStore';
 import { ComparisonDock } from '../components/school/ComparisonDock';
 import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { CookieConsent } from '../components/privacy/CookieConsent';
+import { ConsentAwareAnalytics } from '../components/privacy/ConsentAwareAnalytics';
 import { generateOrganizationJsonLd, generateWebsiteJsonLd, BASE_URL, SITE_DESCRIPTION, SITE_SHORT_NAME } from '../lib/seo';
 
 export const metadata: Metadata = {
@@ -94,8 +94,8 @@ export default function RootLayout({
                 <Footer />
                 <ComparisonDock />
                 <ScrollRevealManager />
-                <Analytics />
-                <SpeedInsights />
+                <ConsentAwareAnalytics />
+                <CookieConsent />
               </SchoolStoreProvider>
             </AuthProvider>
           </ToastProvider>

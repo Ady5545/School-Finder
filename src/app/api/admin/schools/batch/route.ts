@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       const sourceName = typeof data?.sourceName === 'string' ? data.sourceName.trim() : '';
       const sourceUrl = typeof data?.sourceUrl === 'string' ? data.sourceUrl.trim() : '';
       const verifiedFields = Array.isArray(data?.verifiedFields)
-        ? data.verifiedFields.filter((field: unknown): field is string => typeof field === 'string' && field.trim()).slice(0, 30)
+        ? data.verifiedFields.filter((field: unknown): field is string => typeof field === 'string' && field.trim().length > 0).slice(0, 30)
         : [];
       const statusToSet = data?.verificationStatus || 'verified_official';
 

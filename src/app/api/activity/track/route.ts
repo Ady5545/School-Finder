@@ -3,7 +3,7 @@ import {
   verifySessionToken,
   recordSearchEventAsync,
   recordCompareEventAsync,
-  checkRateLimit,
+  checkRateLimitAsync,
   getClientIp,
 } from '../../../../lib/authStore';
 import { getPublicSchoolBySlugAsync } from '../../../../lib/schoolsServer';
@@ -15,7 +15,7 @@ const MAX_LOCALITY_LENGTH = 80;
 export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req);
-    if (!checkRateLimit(`public_activity_${ip}`, 120, 60 * 1000)) {
+    if (!(await checkRateLimitAsync(`public_activity_${ip}`, 120, 60 * 1000))) {
       return NextResponse.json(
         { success: false, message: 'Too many telemetry requests. Please slow down.' },
         { status: 429 }

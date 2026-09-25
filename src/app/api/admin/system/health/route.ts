@@ -3,6 +3,7 @@ import { requireAdminAuth } from '@/lib/adminAuth';
 import { getCanonicalSchools, getArchivedSchools } from '@data/schoolsData';
 import { getAllParentUsersAsync, getAllRatingsAsync, getAdminAuditLogs } from '@/lib/authStore';
 import { getEmailCredentials } from '@/lib/emailService';
+import { getMongoDb, isMongoConfigured } from '@/lib/mongodb';
 
 export async function GET(req: NextRequest) {
   const auth = await requireAdminAuth(req, 'system:health');
@@ -17,12 +18,30 @@ export async function GET(req: NextRequest) {
   const creds = getEmailCredentials();
   const auditLogs = getAdminAuditLogs(1);
 
+  let databaseStatus: 'healthy' | 'unconfigured' | 'unavailable' = 'unconfigured';
+  let databaseError: string | undefined;
+  if (isMongoConfigured()) {
+    try {
+      const db = await getMongoDb(true);
+      if (!db) {
+        databaseStatus = 'unavailable';
+        databaseError = 'MongoDB connection is unavailable.';
+      } else {
+        await db.command({ ping: 1 });
+        databaseStatus = 'healthy';
+      }
+    } catch (error) {
+      databaseStatus = 'unavailable';
+      databaseError = error instanceof Error ? error.message : 'MongoDB health probe failed.';
+    }
+  }
+
   const memoryUsage = process.memoryUsage ? process.memoryUsage() : null;
 
   return NextResponse.json({
     success: true,
     system: {
-      status: 'operational',
+      status: databaseStatus === 'unavailable' ? 'degraded' : 'operational',
       environment: process.env.NODE_ENV || 'development',
       nodeVersion: process.version,
       uptimeSeconds: Math.round(process.uptime()),
@@ -34,7 +53,8 @@ export async function GET(req: NextRequest) {
       } : null,
     },
     database: {
-      status: 'healthy',
+      status: databaseStatus,
+      ...(databaseError ? { error: databaseError } : {}),
       activeCanonicalSchools: activeSchools.length,
       archivedSchools: archivedSchools.length,
       registeredParentUsers: users.length,
@@ -49,8 +69,8 @@ export async function GET(req: NextRequest) {
         port: creds.smtpPort,
       },
       telemetry: {
-        status: 'active',
-        storage: 'isolated_persistent',
+        status: databaseStatus === 'healthy' ? 'active' : databaseStatus === 'unconfigured' ? 'memory_fallback' : 'degraded',
+        storage: databaseStatus === 'healthy' ? 'mongodb' : 'memory_fallback',
       },
       securityMiddleware: {
         status: 'enforced',

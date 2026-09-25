@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'sponsorships:manage');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PATCH(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'sponsorships:manage');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }
@@ -101,7 +101,7 @@ export async function PATCH(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-  const auth = await requireAdminAuth(req);
+  const auth = await requireAdminAuth(req, 'sponsorships:manage');
   if (!auth.authorized || !auth.user) {
     return auth.errorResponse || NextResponse.json({ success: false }, { status: 401 });
   }

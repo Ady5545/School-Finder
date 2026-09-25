@@ -10,7 +10,7 @@ import {
 
 export async function GET(req: NextRequest) {
   try {
-    const auth = await requireAdminAuth(req);
+    const auth = await requireAdminAuth(req, 'analytics:view');
     if (!auth.authorized || !auth.user) {
       return auth.errorResponse || NextResponse.json({ success: false, message: 'Unauthorized' }, { status: 401 });
     }

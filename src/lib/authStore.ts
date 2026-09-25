@@ -1990,6 +1990,7 @@ export async function recordActivityEventAsync(params: {
       }
     } catch (err) {
       console.error('[MONGO_RECORD_ACTIVITY_ASYNC_ERR]', err);
+      if (failOnMongoError) throw err;
     }
   }
 
@@ -2128,6 +2129,12 @@ export function getActivityEvents(
       events = events.filter(e => new Date(e.timestamp).getTime() >= sinceTime);
     }
   }
+  if (filters?.until) {
+    const untilTime = new Date(filters.until).getTime();
+    if (!isNaN(untilTime)) {
+      events = events.filter(e => new Date(e.timestamp).getTime() <= untilTime);
+    }
+  }
 
   return events.slice(0, limit);
 }
@@ -2240,7 +2247,7 @@ export function getUserActivityTimeline(userId: string) {
 }
 
 export async function getUserActivityTimelineAsync(userId: string) {
-  const userEvents = await getActivityEventsAsync(5000, { userId });
+  const userEvents = await getActivityEventsAsync(100000, { userId });
   const user = await getUserByIdAsync(userId);
 
   let schoolsViewedCount = 0;
@@ -2820,19 +2827,35 @@ export async function adminDeleteRatingAsync(
   reason = 'Violates platform review guidelines'
 ): Promise<boolean> {
   const now = new Date().toISOString();
+
   if (isMongoConfigured()) {
     try {
       const ratingsCol = await getRatingsCollection(true);
       if (ratingsCol) {
         const target = await ratingsCol.findOne({ id: ratingId });
-        if (!target) return false;
+        if (!target || target.status === 'deleted') return false;
 
         await ratingsCol.updateOne(
           { id: ratingId },
-          { $set: { status: 'deleted', deletedAt: now, deletedBy: adminUserId || 'admin', deletionReason: reason } }
+          {
+            $set: {
+              status: 'deleted',
+              deletedAt: now,
+              deletedBy: adminUserId || 'admin',
+              deletionReason: reason,
+            },
+          }
         );
 
-        adminDeleteRating(ratingId, adminUserId, reason);
+        const localTarget = ratings.find(r => r.id === ratingId);
+        if (localTarget) {
+          localTarget.status = 'deleted';
+          localTarget.deletedAt = now;
+          localTarget.deletedBy = adminUserId || 'admin';
+          localTarget.deletionReason = reason;
+          localTarget.updatedAt = now;
+          saveStoreToDisk();
+        }
 
         await recordActivityEventAsync({
           type: 'rating_deleted',
@@ -2895,19 +2918,31 @@ export function adminRestoreRating(ratingId: string, adminUserId?: string): bool
 
 export async function adminRestoreRatingAsync(ratingId: string, adminUserId?: string): Promise<boolean> {
   const now = new Date().toISOString();
+
   if (isMongoConfigured()) {
     try {
       const ratingsCol = await getRatingsCollection(true);
       if (ratingsCol) {
         const target = await ratingsCol.findOne({ id: ratingId });
-        if (!target) return false;
+        if (!target || target.status !== 'deleted') return false;
 
         await ratingsCol.updateOne(
           { id: ratingId },
-          { $set: { status: 'published', updatedAt: now }, $unset: { deletedAt: '', deletedBy: '', deletionReason: '' } }
+          {
+            $set: { status: 'published', updatedAt: now },
+            $unset: { deletedAt: '', deletedBy: '', deletionReason: '' },
+          }
         );
 
-        adminRestoreRating(ratingId, adminUserId);
+        const localTarget = ratings.find(r => r.id === ratingId);
+        if (localTarget) {
+          localTarget.status = 'published';
+          localTarget.deletedAt = undefined;
+          localTarget.deletedBy = undefined;
+          localTarget.deletionReason = undefined;
+          localTarget.updatedAt = now;
+          saveStoreToDisk();
+        }
 
         if (adminUserId) {
           const adminUser = await getUserByIdAsync(adminUserId);

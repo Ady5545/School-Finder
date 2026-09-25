@@ -4,7 +4,7 @@ import {
   recordActivityEventAsync,
   verifySessionToken,
 } from '../../../../../lib/authStore';
-import { getCanonicalSlug } from '../../../../../lib/schools';
+import { getPublicSchoolBySlugAsync } from '../../../../../lib/schoolsServer';
 
 // In-memory sliding window cache to deduplicate rapid view calls (within 30 seconds)
 const recentViewsCache = new Map<string, number>();
@@ -36,7 +36,11 @@ export async function POST(
       return NextResponse.json({ success: false }, { status: 400 });
     }
 
-    const canonicalSlug = getCanonicalSlug(slug);
+    const school = await getPublicSchoolBySlugAsync(slug);
+    if (!school) {
+      return NextResponse.json({ success: false, message: 'School not found.' }, { status: 404 });
+    }
+    const canonicalSlug = school.slug;
 
     // Optional user activity tracking
     const cookieToken = req.cookies.get('ap_session')?.value;

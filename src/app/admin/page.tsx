@@ -231,6 +231,10 @@ export default function AdminPage() {
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const [schoolReportSlug, setSchoolReportSlug] = useState('');
   const reportableSchools = getCanonicalSchools();
+  const schoolDirectoryIndex = useMemo(
+    () => new Map(reportableSchools.map(school => [school.slug, school])),
+    [reportableSchools]
+  );
 
   // Sign out handler
   const handleLogout = async () => {
@@ -909,7 +913,7 @@ export default function AdminPage() {
 
                 <div className="space-y-2.5">
                   {(overviewData?.schools.topShortlisted || []).map((item: any, idx: number) => {
-                    const school = schoolsList.find(s => s.slug === item.slug);
+                    const school = schoolsList.find(s => s.slug === item.slug) || schoolDirectoryIndex.get(item.slug);
                     return (
                       <div
                         key={item.slug}
@@ -955,10 +959,10 @@ export default function AdminPage() {
 
                 <div className="space-y-2.5">
                   {(overviewData?.schools.topViewed || []).filter((item: any) => {
-                    const school = schoolsList.find(s => s.slug === item.slug);
-                    return school ? !school.isArchived && !school.isDuplicate : false;
+                    const school = schoolsList.find(s => s.slug === item.slug) || schoolDirectoryIndex.get(item.slug);
+                    return Boolean(school);
                   }).map((item: any, idx: number) => {
-                    const school = schoolsList.find(s => s.slug === item.slug);
+                    const school = schoolsList.find(s => s.slug === item.slug) || schoolDirectoryIndex.get(item.slug);
                     return (
                       <div
                         key={item.slug}
@@ -2055,9 +2059,9 @@ export default function AdminPage() {
                   onChange={e => setPromoForm({ ...promoForm, schoolSlug: e.target.value })}
                   className="w-full px-3 py-2 rounded-xl bg-[#0a1e38] border border-[#1d4b7c] text-slate-200 outline-none"
                 >
-                  {schoolsList.map(s => (
+                  {reportableSchools.map(s => (
                     <option key={s.slug} value={s.slug}>
-                      {s.name} ({s.sector})
+                      {s.name} ({s.location?.sector || s.location?.area || 'Location'})
                     </option>
                   ))}
                 </select>

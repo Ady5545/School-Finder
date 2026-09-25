@@ -50,7 +50,7 @@ assert(ryanBeta && ryanTechzone && ryanBeta.slug !== ryanTechzone.slug, 'Ryan Be
 assert(ryanBeta && ryanBeta.assets.featured === null, 'Ryan Beta 1 does not display Techzone IV image and is set to Photo Pending');
 assert(ryanTechzone && ryanTechzone.assets.featured && ryanTechzone.assets.featured.includes('featured.webp'), 'Ryan Techzone 4 displays verified Techzone IV campus image');
 assert(ryanBeta && ryanBeta.affiliationNumber === '2130728', 'Ryan Beta 1 CBSE Affiliation is 2130728');
-assert(ryanTechzone && ryanTechzone.affiliationNumber === '2133182', 'Ryan Techzone 4 CBSE Affiliation is 2133182');
+assert(ryanTechzone && ryanTechzone.affiliationNumber === '2133036', 'Ryan Techzone 4 CBSE Affiliation is 2133036');
 
 // 6. SKS World School campus banner verification
 const sks = schools.find(s => s.slug === 'sks-world-school-greater-noida-west');

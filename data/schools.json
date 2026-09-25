@@ -11578,9 +11578,9 @@
   },
   {
     "id": "ryan-international-school-greater-noida-beta-i",
-    "slug": "ryan-international-school-greater-noida-beta-i",
-    "name": "Ryan International School, Greater Noida",
-    "shortName": "Ryan International School, Beta I",
+    "slug": "ryan-international-school-noida-extension",
+    "name": "Ryan International School, Noida Extension",
+    "shortName": "Ryan International School, Noida Extension",
     "alternateNames": [
       "Ryan International School Greater Noida West",
       "Ryan Techzone 4",
@@ -11603,12 +11603,12 @@
     "schoolType": "Co-Educational Day School",
     "dayOrBoarding": "Day School",
     "location": {
-      "address": "HS-6, Block E, Beta I, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh 201308",
-      "sector": "Beta I",
+      "address": "Plot No-4, Sector-Tech Zone-4, Noida Extension, Uttar Pradesh 201308",
+      "sector": "Techzone 4",
       "city": "Greater Noida",
       "state": "Uttar Pradesh",
       "pincode": "201308",
-      "area": "Beta I",
+      "area": "Noida Extension",
       "coordinates": {
         "lat": 28.479127234083677,
         "lng": 77.51109056753765,
@@ -11743,14 +11743,15 @@
       "status": "verified_official",
       "lastVerified": "2026-09",
       "sourceName": "Official Ryan Group Portal & CBSE SARAS",
-      "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/greater-noida/ryan-international-school-noida-extension",
-      "cbseAffiliationNumber": "2133182",
+      "sourceUrl": "https://www.ryangroup.org/ryaninternational/cbse/noida/ryan-international-school-noida-extension",
+      "cbseAffiliationNumber": "2133036",
       "verifiedFields": [
         "name",
         "address",
         "website",
         "affiliation",
-        "establishedYear"
+        "establishedYear",
+        "campus"
       ]
     },
     "legacyIdentifiers": {
@@ -11775,7 +11776,7 @@
       "Badminton",
       "Table Tennis"
     ],
-    "affiliationNumber": "2130728",
+    "affiliationNumber": "2133036",
     "establishedYear": 2016,
     "geographicClassification": "core_greater_noida_west",
     "recordType": "canonical",

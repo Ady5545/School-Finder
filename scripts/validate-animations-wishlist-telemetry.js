@@ -200,6 +200,38 @@ assert(
   'Admin dashboard Overview displays range metrics, unique parents, and all-time totals'
 );
 
+assert(
+  authStoreContent.includes('getActivePromotionsAsync') &&
+  authStoreContent.includes('getAllPromotionsAsync') &&
+  authStoreContent.includes('deletePromotionCampaignAsync') &&
+  authStoreContent.includes('recordPromotionImpressionAsync'),
+  'Promotion telemetry exposes persistent async CRUD and interaction methods'
+);
+
+const adminPromotionPath = path.join(__dirname, '..', 'src', 'app', 'api', 'admin', 'promotions', 'route.ts');
+const adminPromotionContent = fs.readFileSync(adminPromotionPath, 'utf8');
+assert(
+  adminPromotionContent.includes('getAllPromotionsAsync') &&
+  adminPromotionContent.includes('createPromotionCampaignAsync') &&
+  adminPromotionContent.includes('updatePromotionCampaignAsync') &&
+  adminPromotionContent.includes('deletePromotionCampaignAsync'),
+  'Admin promotion CRUD uses persistent async storage'
+);
+
+const publicPromotionPath = path.join(__dirname, '..', 'src', 'app', 'api', 'promotions', 'route.ts');
+const publicPromotionContent = fs.readFileSync(publicPromotionPath, 'utf8');
+assert(
+  publicPromotionContent.includes('getActivePromotionsAsync') &&
+  publicPromotionContent.includes('recordPromotionImpressionAsync') &&
+  publicPromotionContent.includes('recordPromotionClickAsync'),
+  'Public promotion delivery and telemetry use persistent async storage'
+);
+
+assert(
+  !authStoreContent.includes('promo_dwps_inaugural_2026'),
+  'Production promotion state has no auto-seeded DWPS campaign that can resurrect after deletion'
+);
+
 console.log(`\n================================================================`);
 console.log(`  RESULTS: ${passed}/${total} assertions passed successfully!`);
 console.log(`================================================================\n`);

@@ -547,29 +547,8 @@ function initDb(): void {
     }
   }
 
-  // Initial Promotion: Delhi World Public School (admin controllable, easily modified/expired)
-  if (promotions.length === 0) {
-    const initialCampaign: SchoolPromotionCampaign = {
-      id: 'promo_dwps_inaugural_2026',
-      schoolSlug: 'delhi-world-public-school-kp-5',
-      campaignName: 'DWPS Greater Noida West - Premier Admissions 2027-28',
-      placementType: 'homepage_hero',
-      title: 'Delhi World Public School, Knowledge Park 5',
-      description: 'Admissions open for Nursery to Grade XI. World-class 5-acre smart campus with audited transparent fee structure.',
-      badgeLabel: 'Sponsored',
-      ctaText: 'Explore Campus & Fee Structure',
-      ctaLink: '/schools/delhi-world-public-school-kp-5',
-      startDate: new Date().toISOString(),
-      endDate: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString(), // 6 months
-      status: 'active',
-      priority: 1,
-      impressions: 0,
-      clicks: 0,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    promotions.push(initialCampaign);
-  }
+  // Promotions are intentionally not auto-seeded. The CMS is the source of truth.
+
 
   saveStoreToDisk();
 }
@@ -3777,7 +3756,23 @@ export async function getSearchAnalyticsAsync() {
 // ----------------------------------------------------------------------------
 
 export async function getActivePromotionsAsync(placement?: string): Promise<SchoolPromotionCampaign[]> {
-  await ensureMongoSync();
+  initDb();
+
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) throw new Error('Promotion database is unavailable.');
+
+    const docs = await col.find({ status: 'active' }).sort({ priority: 1 }).toArray();
+    const now = new Date().toISOString();
+
+    return docs
+      .map(({ _id, ...doc }) => doc as SchoolPromotionCampaign)
+      .filter(p => {
+        const isTimeValid = (!p.startDate || p.startDate <= now) && (!p.endDate || p.endDate >= now);
+        return isTimeValid && (!placement || p.placementType === placement);
+      });
+  }
+
   return getActivePromotions(placement);
 }
 
@@ -3797,7 +3792,16 @@ export function getAllPromotions(): SchoolPromotionCampaign[] {
 }
 
 export async function getAllPromotionsAsync(): Promise<SchoolPromotionCampaign[]> {
-  await ensureMongoSync();
+  initDb();
+
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) throw new Error('Promotion database is unavailable.');
+
+    const docs = await col.find({}).sort({ createdAt: -1 }).toArray();
+    return docs.map(({ _id, ...doc }) => doc as SchoolPromotionCampaign);
+  }
+
   return getAllPromotions();
 }
 
@@ -3807,7 +3811,18 @@ export function getPromotionById(id: string): SchoolPromotionCampaign | null {
 }
 
 export async function getPromotionByIdAsync(id: string): Promise<SchoolPromotionCampaign | null> {
-  await ensureMongoSync();
+  initDb();
+
+  if (isMongoConfigured()) {
+    const col = await getPromotionsCollection(true);
+    if (!col) throw new Error('Promotion database is unavailable.');
+
+    const doc = await col.findOne({ id });
+    if (!doc) return null;
+    const { _id, ...campaign } = doc;
+    return campaign as SchoolPromotionCampaign;
+  }
+
   return getPromotionById(id);
 }
 
@@ -3895,63 +3910,66 @@ export function deletePromotionCampaign(id: string, adminUserId?: string): boole
   return false;
 }
 
-export function recordPromotionImpression(id: string): void {
-  const promo = promotions.find(p => p.id === id);
-  if (promo) {
-    promo.impressions = (promo.impressions || 0) + 1;
-    saveStoreToDisk();
-  }
-}
-
-export function recordPromotionClick(id: string): void {
-  const promo = promotions.find(p => p.id === id);
-  if (promo) {
-    promo.clicks = (promo.clicks || 0) + 1;
-    saveStoreToDisk();
-  }
-}
-
-
 export async function recordPromotionImpressionAsync(id: string): Promise<boolean> {
-  await ensureMongoSync();
-  const promo = promotions.find(p => p.id === id);
-  if (!promo) return false;
+  initDb();
 
-  const now = new Date().toISOString();
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
-    if (!col) return false;
-    const result = await col.updateOne(
-      { id },
-      { $inc: { impressions: 1 }, $set: { updatedAt: now } }
+    if (!col) throw new Error('Promotion database is unavailable.');
+
+    const now = new Date().toISOString();
+    const result = await col.findOneAndUpdate(
+      { id, status: 'active' },
+      { $inc: { impressions: 1 }, $set: { updatedAt: now } },
+      { returnDocument: 'after' }
     );
-    if (result.matchedCount === 0) return false;
+    if (!result) return false;
+
+    const localPromo = promotions.find(p => p.id === id);
+    if (localPromo) {
+      localPromo.impressions = typeof result.impressions === 'number' ? result.impressions : (localPromo.impressions || 0) + 1;
+      localPromo.updatedAt = now;
+      saveStoreToDisk();
+    }
+    return true;
   }
 
+  const promo = promotions.find(p => p.id === id);
+  if (!promo) return false;
   promo.impressions = (promo.impressions || 0) + 1;
-  promo.updatedAt = now;
+  promo.updatedAt = new Date().toISOString();
   saveStoreToDisk();
   return true;
 }
 
 export async function recordPromotionClickAsync(id: string): Promise<boolean> {
-  await ensureMongoSync();
-  const promo = promotions.find(p => p.id === id);
-  if (!promo) return false;
+  initDb();
 
-  const now = new Date().toISOString();
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
-    if (!col) return false;
-    const result = await col.updateOne(
-      { id },
-      { $inc: { clicks: 1 }, $set: { updatedAt: now } }
+    if (!col) throw new Error('Promotion database is unavailable.');
+
+    const now = new Date().toISOString();
+    const result = await col.findOneAndUpdate(
+      { id, status: 'active' },
+      { $inc: { clicks: 1 }, $set: { updatedAt: now } },
+      { returnDocument: 'after' }
     );
-    if (result.matchedCount === 0) return false;
+    if (!result) return false;
+
+    const localPromo = promotions.find(p => p.id === id);
+    if (localPromo) {
+      localPromo.clicks = typeof result.clicks === 'number' ? result.clicks : (localPromo.clicks || 0) + 1;
+      localPromo.updatedAt = now;
+      saveStoreToDisk();
+    }
+    return true;
   }
 
+  const promo = promotions.find(p => p.id === id);
+  if (!promo) return false;
   promo.clicks = (promo.clicks || 0) + 1;
-  promo.updatedAt = now;
+  promo.updatedAt = new Date().toISOString();
   saveStoreToDisk();
   return true;
 }
@@ -3960,13 +3978,39 @@ export async function createPromotionCampaignAsync(
   data: Omit<SchoolPromotionCampaign, 'id' | 'impressions' | 'clicks' | 'createdAt' | 'updatedAt'>,
   adminUserId?: string
 ): Promise<SchoolPromotionCampaign> {
-  await ensureMongoSync();
-  const campaign = createPromotionCampaign(data, adminUserId);
+  initDb();
+  const now = new Date().toISOString();
+  const campaign: SchoolPromotionCampaign = {
+    ...data,
+    id: `promo_${crypto.randomBytes(6).toString('hex')}`,
+    impressions: 0,
+    clicks: 0,
+    createdAt: now,
+    updatedAt: now,
+  };
+
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
-    await col.updateOne({ id: campaign.id }, { $set: campaign }, { upsert: true });
+    await col.insertOne({ ...campaign });
   }
+
+  promotions.push(campaign);
+  globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__ = promotions;
+  saveStoreToDisk();
+
+  if (adminUserId) {
+    await recordAdminAuditAsync(
+      adminUserId,
+      getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+      'create_promotion_campaign',
+      'promotion',
+      campaign.id,
+      { campaignName: campaign.campaignName, schoolSlug: campaign.schoolSlug },
+      'success'
+    );
+  }
+
   return campaign;
 }
 
@@ -3975,27 +4019,74 @@ export async function updatePromotionCampaignAsync(
   updates: Partial<Omit<SchoolPromotionCampaign, 'id' | 'createdAt'>>,
   adminUserId?: string
 ): Promise<SchoolPromotionCampaign | null> {
-  await ensureMongoSync();
-  const campaign = updatePromotionCampaign(id, updates, adminUserId);
-  if (!campaign) return null;
+  initDb();
+
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
-    await col.updateOne({ id: campaign.id }, { $set: campaign }, { upsert: true });
+
+    const now = new Date().toISOString();
+    const result = await col.findOneAndUpdate(
+      { id },
+      { $set: { ...updates, updatedAt: now } },
+      { returnDocument: 'after' }
+    );
+    if (!result) return null;
+
+    const { _id, ...campaign } = result;
+    const localIndex = promotions.findIndex(p => p.id === id);
+    if (localIndex >= 0) promotions[localIndex] = campaign as SchoolPromotionCampaign;
+    else promotions.push(campaign as SchoolPromotionCampaign);
+    saveStoreToDisk();
+
+    if (adminUserId) {
+      await recordAdminAuditAsync(
+        adminUserId,
+        getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+        'update_promotion_campaign',
+        'promotion',
+        id,
+        { updates },
+        'success'
+      );
+    }
+
+    return campaign as SchoolPromotionCampaign;
   }
+
+  const campaign = updatePromotionCampaign(id, updates, adminUserId);
   return campaign;
 }
 
 export async function deletePromotionCampaignAsync(id: string, adminUserId?: string): Promise<boolean> {
-  await ensureMongoSync();
-  const deleted = deletePromotionCampaign(id, adminUserId);
-  if (!deleted) return false;
+  initDb();
+
   if (isMongoConfigured()) {
     const col = await getPromotionsCollection(true);
     if (!col) throw new Error('Promotion database is unavailable.');
-    await col.deleteOne({ id });
+
+    const result = await col.deleteOne({ id });
+    if (result.deletedCount === 0) return false;
+
+    promotions = promotions.filter(p => p.id !== id);
+    globalAuthStore.__ADMISSION_PITARA_PROMOTIONS__ = promotions;
+    saveStoreToDisk();
+
+    if (adminUserId) {
+      await recordAdminAuditAsync(
+        adminUserId,
+        getUserById(adminUserId)?.email || 'admin@admissionpitara.com',
+        'delete_promotion_campaign',
+        'promotion',
+        id,
+        {},
+        'success'
+      );
+    }
+    return true;
   }
-  return true;
+
+  return deletePromotionCampaign(id, adminUserId);
 }
 
 // ----------------------------------------------------------------------------
@@ -4199,9 +4290,51 @@ export function getPublicSchoolPopularity(slug?: string) {
 
 
 export async function getPublicSchoolPopularityAsync(slug?: string) {
-  await ensureMongoSync();
+  if (isMongoConfigured()) {
+    const viewsCol = await getSchoolViewsCollection(true);
+    const savesCol = await getSchoolSavesCollection(true);
+    if (!viewsCol || !savesCol) throw new Error('Analytics database is unavailable.');
+
+    if (slug) {
+      const [viewDoc, saveDoc, ratingStats] = await Promise.all([
+        viewsCol.findOne({ slug }),
+        savesCol.findOne({ slug }),
+        getSchoolRatingStatsAsync(slug),
+      ]);
+      return {
+        slug,
+        views: typeof viewDoc?.totalViews === 'number' ? viewDoc.totalViews : (viewDoc?.count || 0),
+        saves: Math.max(0, saveDoc?.count || 0),
+        reviewsCount: ratingStats.totalReviews,
+        averageScore: ratingStats.averageScore,
+      };
+    }
+
+    const [viewDocs, saveDocs] = await Promise.all([
+      viewsCol.find({}).toArray(),
+      savesCol.find({}).toArray(),
+    ]);
+    const saveMap = new Map(saveDocs.map(doc => [doc.slug, Math.max(0, doc.count || 0)]));
+    const result: Record<string, { slug: string; views: number; saves: number; reviewsCount: number; averageScore: number }> = {};
+
+    for (const doc of viewDocs) {
+      const key = doc.slug;
+      const views = typeof doc.totalViews === 'number' ? doc.totalViews : (doc.count || 0);
+      const stats = await getSchoolRatingStatsAsync(key);
+      result[key] = {
+        slug: key,
+        views,
+        saves: saveMap.get(key) || 0,
+        reviewsCount: stats.totalReviews,
+        averageScore: stats.averageScore,
+      };
+    }
+    return result;
+  }
+
   return getPublicSchoolPopularity(slug);
 }
+
 // ----------------------------------------------------------------------------
 // ADMISSION REMINDERS & NOTIFICATIONS PERSISTENCE
 // ----------------------------------------------------------------------------

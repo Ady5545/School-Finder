@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
             },
           },
           adminUser,
-          reason || 'Bulk verification update'
+          typeof reason === 'string' && reason.trim() ? reason.trim() : 'Bulk verification update'
         );
         results.push({ slug, success: res.success, message: res.error });
       }

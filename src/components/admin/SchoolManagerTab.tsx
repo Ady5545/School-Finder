@@ -22,6 +22,7 @@ type SchoolRow = School & {
   completeness?: {
     score: number;
     level: string;
+    items?: { key: string; label: string; passed: boolean; description: string; severity: string }[];
   };
   views?: number;
   saves?: number;
@@ -327,6 +328,22 @@ export function SchoolManagerTab() {
                 <div className="rounded-xl bg-[#0a1e38] border border-white/5 p-2.5 text-center"><div className="text-[9px] text-slate-500 uppercase">Saves</div><div className="text-sm font-black text-rose-300 mt-1">{school.saves ?? 0}</div></div>
                 <div className="rounded-xl bg-[#0a1e38] border border-white/5 p-2.5 text-center"><div className="text-[9px] text-slate-500 uppercase">Rating</div><div className="text-sm font-black text-amber-300 mt-1">{school.averageRating ?? school.rating?.score ?? 0}</div></div>
               </div>
+
+              {school.completeness && school.completeness.items && school.completeness.items.some(item => !item.passed) && (
+                <div className="mt-3 rounded-xl border border-rose-500/15 bg-rose-500/5 px-3 py-2.5">
+                  <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-rose-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-400" />
+                    Incomplete fields
+                  </div>
+                  <div className="mt-1.5 flex flex-wrap gap-1.5">
+                    {school.completeness.items.filter(item => !item.passed).map(item => (
+                      <span key={item.key} title={item.description} className="rounded-md border border-rose-400/15 bg-rose-500/10 px-1.5 py-1 text-[10px] font-semibold text-rose-200">
+                        {item.label}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="flex items-center justify-between gap-2 mt-4 pt-4 border-t border-white/5">
                 <Link href={'/schools/' + school.slug} target="_blank" className="inline-flex items-center gap-1.5 text-[11px] text-slate-300 hover:text-white">

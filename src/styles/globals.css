@@ -49,6 +49,11 @@
   --color-info-text: #075985;
 
   --color-rating: #d97706;
+
+  /* Quiet brand signature — intentionally restrained red derived from the Pitara wordmark. */
+  --color-brand-red: #b94a4a;
+  --color-brand-red-soft: #f8eeee;
+  --color-brand-red-border: #edd4d4;
 }
 
 :root {
@@ -90,6 +95,10 @@
   --color-info-text: #075985;
 
   --color-rating: #d97706;
+
+  --color-brand-red: #b94a4a;
+  --color-brand-red-soft: #f8eeee;
+  --color-brand-red-border: #edd4d4;
 
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -604,7 +613,7 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
   bottom: -10rem;
   border-radius: 999px;
   pointer-events: none;
-  background: rgba(242,164,93,0.12);
+  background: rgba(185,74,74,0.055);
   filter: blur(58px);
   animation: glass-liquid-drift 16s ease-in-out infinite alternate-reverse;
 }

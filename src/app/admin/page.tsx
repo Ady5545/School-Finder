@@ -2037,8 +2037,8 @@ export default function AdminPage() {
       {/* 4. MODAL: CREATE NEW PROMOTION CAMPAIGN                               */}
       {/* --------------------------------------------------------------------- */}
       {showPromoModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
-          <div className="max-w-lg w-full bg-[#0f284a] border border-[#1e4878] rounded-2xl p-6 shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-3 sm:p-4 bg-slate-950/80 backdrop-blur-sm">
+          <div className="max-w-lg w-full max-h-[calc(100dvh-1.5rem)] overflow-y-auto bg-[#0f284a] border border-[#1e4878] rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <h3 className="text-base font-bold text-white font-serif">
                 Launch School Promotion Campaign

@@ -192,8 +192,8 @@ export function SubmissionsTab({ onEditSchool }: SubmissionsTabProps) {
 
       {/* Review Dialog */}
       {selectedSub && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xs">
-          <div className="w-full max-w-lg bg-[#0c1f38] border border-[#1e4875] rounded-2xl p-6 space-y-4 text-slate-200 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs">
+          <div className="w-full max-w-lg max-h-[calc(100dvh-1.5rem)] overflow-y-auto bg-[#0c1f38] border border-[#1e4875] rounded-2xl p-5 sm:p-6 space-y-4 text-slate-200 shadow-2xl">
             <h3 className="text-base font-bold text-white font-serif">
               Review Correction Proposal
             </h3>

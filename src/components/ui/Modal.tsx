@@ -50,7 +50,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-3 sm:p-4 bg-slate-900/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-150"
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
@@ -59,7 +59,7 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={cn(
-          'relative w-full rounded-3xl liquid-glass glass-shine glass-float p-6 shadow-xl border-white/80 transition-transform animate-in zoom-in-95 duration-150',
+          'relative w-full max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-3xl liquid-glass glass-shine glass-float p-5 sm:p-6 shadow-xl border-white/80 transition-transform animate-in zoom-in-95 duration-150',
           maxStyles[maxWidth],
           className
         )}

@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   AlertCircle,
+  ArrowLeft,
   Building,
   Calendar,
   CheckCircle2,
@@ -319,16 +320,32 @@ export function SchoolEditorModal({
       <div className={pageMode ? "mx-auto w-full max-w-[1500px] px-3 py-4 sm:px-5 sm:py-6 lg:px-8" : "w-full max-w-[1280px] h-[calc(100dvh-1.5rem)] max-h-[calc(100dvh-1.5rem)] overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col"}>
         <div className={pageMode ? "overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col min-h-[calc(100dvh-3rem)]" : ""}>
         <div className="px-5 py-4 border-b border-[#1b3d63] bg-[#08172b] flex items-center justify-between gap-3">
-          <div>
+          <div className="min-w-0">
+            {pageMode && (
+              <div className="flex items-center gap-2 text-[10px] font-bold text-slate-500 mb-1.5">
+                <span>Admin</span>
+                <span>/</span>
+                <span>Directory CMS</span>
+                <span>/</span>
+                <span className="text-amber-400">Edit school</span>
+              </div>
+            )}
             <p className="text-[10px] uppercase tracking-[0.16em] text-amber-400 font-black">Admission Pitara CMS</p>
-            <h2 className="text-lg font-black text-white font-serif">{isNew ? 'Add a school' : 'Edit school data'}</h2>
+            <h2 className="text-lg sm:text-xl font-black text-white font-serif truncate">{isNew ? 'Add a school' : pageMode ? String(draft.name || 'Edit school') : 'Edit school data'}</h2>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              Everything here is editable. The Full Data tab is the escape hatch for any field not represented by a visual control.
+              {pageMode ? 'Edit the complete school record. Changes are saved to the persistent CMS and recorded in the admin audit trail.' : 'Everything here is editable. The Full Data tab is the escape hatch for any field not represented by a visual control.'}
             </p>
           </div>
-          <button type="button" onClick={onClose} className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-white">
-            <X className="w-5 h-5" />
-          </button>
+          {pageMode ? (
+            <button type="button" onClick={onClose} className="shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Directory
+            </button>
+          ) : (
+            <button type="button" onClick={onClose} className="p-2 rounded-xl hover:bg-white/10 text-slate-400 hover:text-white">
+              <X className="w-5 h-5" />
+            </button>
+          )}
         </div>
 
         <div className="flex gap-1 overflow-x-auto px-4 py-2 border-b border-[#1b3d63] bg-[#091a30]">

@@ -209,6 +209,9 @@ export default function AdminPage() {
   const [activityTypeFilter, setActivityTypeFilter] = useState('all');
   const [reviewSearch, setReviewSearch] = useState('');
   const [reviewStarFilter, setReviewStarFilter] = useState('all');
+  const [auditActionFilter, setAuditActionFilter] = useState('all');
+  const [auditTargetFilter, setAuditTargetFilter] = useState('all');
+  const [auditResultFilter, setAuditResultFilter] = useState('all');
 
   // Promotion Form Modal State
   const [showPromoModal, setShowPromoModal] = useState(false);
@@ -281,7 +284,7 @@ export default function AdminPage() {
         comparisons: '/api/admin/comparisons',
         searches: '/api/admin/searches',
         promotions: '/api/admin/promotions',
-        audit: '/api/admin/audit-log?limit=100',
+        audit: `/api/admin/audit-log?limit=200${auditActionFilter !== 'all' ? '&action=' + encodeURIComponent(auditActionFilter) : ''}${auditTargetFilter !== 'all' ? '&targetType=' + encodeURIComponent(auditTargetFilter) : ''}`,
       };
       const url = requests[tab];
       if (!url) return;
@@ -369,6 +372,12 @@ export default function AdminPage() {
       void fetchTabData('overview', true);
     }
   }, [timeRange, isAuthenticated]);
+
+  useEffect(() => {
+    if (isAuthenticated && activeTab === 'audit') {
+      void fetchTabData('audit', true);
+    }
+  }, [auditActionFilter, auditTargetFilter, isAuthenticated]);
 
   useEffect(() => {
     if (isAuthenticated && activeTab !== 'overview') {
@@ -2000,40 +2009,76 @@ export default function AdminPage() {
         {/* TAB 11: ADMINISTRATIVE AUDIT LOG                                   */}
         {/* =================================================================== */}
         {activeTab === 'audit' && (
-          <div className="space-y-6">
-            <div className="p-4 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg flex items-center justify-between">
-              <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                <FileText className="w-4 h-4 text-amber-400" />
-                <span>Administrative Actions &amp; Security Audit Log</span>
-              </h3>
-              <span className="text-xs text-slate-400">
-                Immutable records of review deletions, user status changes &amp; campaigns
-              </span>
+          <div className="space-y-5">
+            <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-amber-400" />
+                    Administrative Audit
+                  </h3>
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    A private history of admin changes. Use filters to answer who changed what, when, and whether it succeeded.
+                  </p>
+                </div>
+                <button type="button" onClick={() => void fetchTabData('audit', true)} className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-[11px] font-bold text-slate-200 hover:bg-white/10">
+                  <RefreshCw className="w-3.5 h-3.5" />Refresh audit
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-4">
+                <select value={auditActionFilter} onChange={e => setAuditActionFilter(e.target.value)} className="rounded-xl bg-[#091b32] border border-[#1d4672] px-3 py-2.5 text-[11px] text-white">
+                  <option value="all">All actions</option>
+                  {Array.from(new Set(auditLogsList.map(l => l.action))).sort().map(action => <option key={action} value={action}>{action.replaceAll('_', ' ')}</option>)}
+                </select>
+                <select value={auditTargetFilter} onChange={e => setAuditTargetFilter(e.target.value)} className="rounded-xl bg-[#091b32] border border-[#1d4672] px-3 py-2.5 text-[11px] text-white">
+                  <option value="all">All targets</option>
+                  {Array.from(new Set(auditLogsList.map(l => l.targetType))).sort().map(target => <option key={target} value={target}>{target}</option>)}
+                </select>
+                <select value={auditResultFilter} onChange={e => setAuditResultFilter(e.target.value)} className="rounded-xl bg-[#091b32] border border-[#1d4672] px-3 py-2.5 text-[11px] text-white">
+                  <option value="all">All results</option>
+                  <option value="success">Successful</option>
+                  <option value="failed">Failed</option>
+                </select>
+              </div>
+              <div className="mt-3 text-[10px] text-slate-500">{auditLogsList.filter(l => auditResultFilter === 'all' || l.result === auditResultFilter).length} visible audit records</div>
             </div>
 
             <div className="space-y-2.5">
-              {auditLogsList.map(log => (
-                <div
-                  key={log.id}
-                  className="p-4 rounded-xl bg-[#0f284a] border border-[#1e4878] shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
-                >
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md font-mono text-[10px] font-bold uppercase bg-amber-400/10 text-amber-300 border border-amber-400/20">
-                        {log.action.replace('_', ' ')}
-                      </span>
-                      <span className="font-bold text-white">Target: {log.targetType} ({log.targetId})</span>
+              {auditLogsList.filter(log => auditResultFilter === 'all' || log.result === auditResultFilter).map(log => {
+                const details = log.details || {};
+                const detailText = Object.entries(details).map(([key, value]) => {
+                  const rendered = typeof value === 'string' ? value : JSON.stringify(value);
+                  return `${key.replaceAll('_', ' ')}: ${rendered}`;
+                }).join(' • ');
+                const actionLabel = log.action.replaceAll('_', ' ');
+                return (
+                  <details key={log.id} className="group rounded-xl bg-[#0f284a] border border-[#1e4878] shadow-sm">
+                    <summary className="list-none cursor-pointer p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className={`px-2 py-1 rounded-md font-mono text-[10px] font-bold uppercase ${log.result === 'success' ? 'bg-emerald-400/10 text-emerald-300 border border-emerald-400/20' : 'bg-rose-400/10 text-rose-300 border border-rose-400/20'}`}>
+                            {actionLabel}
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-400">{log.result === 'success' ? 'Succeeded' : 'Failed'}</span>
+                        </div>
+                        <p className="text-xs text-white font-semibold mt-1.5">
+                          {log.targetType} <span className="text-slate-400">→</span> {log.targetId}
+                        </p>
+                        <p className="text-[10px] text-slate-500 mt-1">Changed by {log.adminEmail} · {new Date(log.timestamp).toLocaleString()}</p>
+                      </div>
+                      <span className="text-[10px] text-slate-500 group-open:text-amber-300">View details</span>
+                    </summary>
+                    <div className="px-4 pb-4 border-t border-white/5 pt-3">
+                      {detailText ? <p className="text-[10px] leading-relaxed text-slate-300 break-words">{detailText}</p> : <p className="text-[10px] text-slate-500">No additional details were recorded for this action.</p>}
+                      <p className="mt-2 text-[9px] font-mono text-slate-600">Audit ID: {log.id}</p>
                     </div>
-                    <p className="text-[11px] text-slate-400 mt-1">
-                      Admin: <strong className="text-slate-200">{log.adminEmail}</strong>
-                    </p>
-                  </div>
-
-                  <span className="text-[11px] text-slate-400 shrink-0 font-mono">
-                    {new Date(log.timestamp).toLocaleString()}
-                  </span>
-                </div>
-              ))}
+                  </details>
+                );
+              })}
+              {auditLogsList.filter(log => auditResultFilter === 'all' || log.result === auditResultFilter).length === 0 && (
+                <div className="rounded-2xl border border-dashed border-[#2b5a88] bg-[#0f284a] p-10 text-center text-sm text-slate-400">No audit records match these filters.</div>
+              )}
             </div>
           </div>
         )}

@@ -504,7 +504,6 @@ export function SchoolEditorModal({
         </form>
           </div>
         </div>
-      </div>
     </div>
   );
 }

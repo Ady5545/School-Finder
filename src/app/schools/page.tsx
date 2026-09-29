@@ -48,16 +48,6 @@ interface SchoolsPageProps {
   }>;
 }
 
-function getExactSectorNumber(query: string): string | null {
-  const match = query.trim().match(/^sector\s*[-/]?\s*(\d+[a-z]?)$/i);
-  return match ? match[1].toLowerCase() : null;
-}
-
-function matchesExactSector(school: { location?: { sector?: string } }, sectorNumber: string): boolean {
-  const sector = String(school.location?.sector || '').trim().toLowerCase();
-  const match = sector.match(/^sector\s*[-/]?\s*(\d+[a-z]?)$/i);
-  return match?.[1]?.toLowerCase() === sectorNumber;
-}
 
 export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const params = await searchParams;

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {
   Archive,
   Building2,
+  RotateCcw,
   CheckCircle2,
   Edit3,
   ExternalLink,
@@ -198,6 +199,24 @@ export function SchoolManagerTab() {
     }
   };
 
+  const restoreSchool = async (school: SchoolRow) => {
+    const reason = window.prompt(`Why are you restoring ${school.name}?`, 'School record has been reviewed and should return to the active directory');
+    if (reason === null) return;
+    try {
+      const res = await fetch('/api/admin/schools/' + encodeURIComponent(school.slug) + '/restore', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-cache' },
+        cache: 'no-store',
+        body: JSON.stringify({ reason }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.message || 'Restore failed.');
+      await loadSchools();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Restore failed.');
+    }
+  };
+
   const handleSaved = (school: School) => {
     setEditing(null);
     setCreating(false);
@@ -351,7 +370,11 @@ export function SchoolManagerTab() {
                 </Link>
                 <div className="flex items-center gap-2">
                   <button type="button" onClick={() => setEditing(school)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-300 text-[11px] font-black hover:bg-amber-400/20"><Edit3 className="w-3.5 h-3.5" />Edit all data</button>
-                  {!school.isArchived && <button type="button" onClick={() => void archiveSchool(school)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px] font-black hover:bg-rose-500/20"><Archive className="w-3.5 h-3.5" />Archive</button>}
+                  {!school.isArchived ? (
+                    <button type="button" onClick={() => void archiveSchool(school)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px] font-black hover:bg-rose-500/20"><Archive className="w-3.5 h-3.5" />Archive</button>
+                  ) : (
+                    <button type="button" onClick={() => void restoreSchool(school)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-[11px] font-black hover:bg-emerald-500/20"><RotateCcw className="w-3.5 h-3.5" />Unarchive</button>
+                  )}
                 </div>
               </div>
             </article>

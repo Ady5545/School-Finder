@@ -8,11 +8,28 @@ import { buildPageMetadata, generateSchoolDirectoryJsonLd } from '../../lib/seo'
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export const metadata = buildPageMetadata(
-  'Schools in Greater Noida West & Noida Extension',
-  'Browse schools in Greater Noida, Greater Noida West and Noida Extension. Compare fees, boards, facilities, student-teacher ratios and current admission information.',
-  '/schools'
-);
+export async function generateMetadata({ searchParams }: SchoolsPageProps) {
+  const params = await searchParams;
+  const hasDirectoryFilters = Object.values(params).some(value => Boolean(value));
+  const base = buildPageMetadata(
+    'Schools in Greater Noida West & Noida Extension',
+    'Browse schools in Greater Noida, Greater Noida West and Noida Extension. Compare fees, boards, facilities, student-teacher ratios and current admission information.',
+    '/schools'
+  );
+
+  // Search/filter states are useful for visitors but should not become competing
+  // Google landing pages. Keep the clean /schools URL as the canonical indexable page.
+  if (hasDirectoryFilters) {
+    base.robots = {
+      index: false,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    };
+  }
+  return base;
+}
 
 interface SchoolsPageProps {
   searchParams: Promise<{

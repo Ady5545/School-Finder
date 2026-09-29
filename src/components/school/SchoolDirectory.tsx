@@ -317,6 +317,18 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     return match?.[1]?.toLowerCase() === sectorNumber;
   };
 
+  // Sector numbers are not geographic ordering. For "nearby sector" discovery,
+  // use a map anchor and real school coordinates, not sector-number arithmetic.
+  // These anchors are locality-centre points used only for search proximity; the
+  // map itself remains hidden during this fallback.
+  const SECTOR_SEARCH_ANCHORS: Record<string, { lat: number; lng: number }> = {
+    '11': { lat: 28.5985, lng: 77.4535 },
+  };
+
+  const getSectorSearchAnchor = (sectorNumber: string): { lat: number; lng: number } | null => {
+    return SECTOR_SEARCH_ANCHORS[sectorNumber] || null;
+  };
+
   // Helper to match search query across name, alternateNames, location, board, tagline, summary, sports.
   const matchesSearch = (school: School, query: string): boolean => {
     const q = query.toLowerCase().trim();
@@ -431,14 +443,37 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         if (exactMatches.length > 0) {
           result = exactMatches;
         } else {
-          const target = Number(exactSector.match(/\d+/)?.[0]);
-          const nearby = result
-            .map(school => ({ school, sector: getSchoolSectorNumber(school) }))
-            .filter(item => item.sector !== null && Number.isFinite(target))
-            .sort((a, b) => Math.abs((a.sector as number) - target) - Math.abs((b.sector as number) - target))
-            .slice(0, 8)
-            .map(item => item.school);
-          result = nearby;
+          const anchor = getSectorSearchAnchor(exactSector);
+
+          if (anchor) {
+            // Geographic proximity wins. This intentionally ignores sector-number
+            // distance because Greater Noida West's sector numbering is not a
+            // reliable representation of physical adjacency (e.g. 16C → 4 → 16B).
+            result = result
+              .map(school => {
+                const coords = school.location?.coordinates;
+                if (!isSafeStoredSchoolCoordinate(coords)) {
+                  return { school, distance: Number.POSITIVE_INFINITY };
+                }
+                return {
+                  school,
+                  distance: calculateDistance(
+                    anchor.lat,
+                    anchor.lng,
+                    coords.lat,
+                    coords.lng
+                  ),
+                };
+              })
+              .filter(item => Number.isFinite(item.distance))
+              .sort((a, b) => a.distance - b.distance)
+              .slice(0, 8)
+              .map(item => item.school);
+          } else {
+            // For sectors without a calibrated map anchor yet, do not pretend
+            // numeric sector distance is geographic distance.
+            result = [];
+          }
         }
       } else {
         result = result.filter(s => matchesSearch(s, searchQuery));

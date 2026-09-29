@@ -1924,6 +1924,26 @@ export async function recordActivityEventAsync(params: {
   failOnMongoError?: boolean;
 }): Promise<ActivityEvent> {
   const { failOnMongoError = false, ...eventParams } = params;
+
+  // Admin sessions are operational sessions, not parent/visitor analytics.
+  // Never let an admin's browsing, searches, comparisons, saves, or school
+  // views enter the activity stream or school counters.
+  if (eventParams.userId) {
+    const actingUser = await getUserByIdAsync(eventParams.userId);
+    if (actingUser?.role === 'admin') {
+      return {
+        id: `evt_admin_excluded_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`,
+        type: eventParams.type,
+        userId: eventParams.userId,
+        targetType: eventParams.targetType,
+        targetId: eventParams.targetId || eventParams.schoolSlug,
+        schoolSlug: eventParams.schoolSlug,
+        timestamp: new Date().toISOString(),
+        details: { ...(eventParams.details || {}), adminExcluded: true },
+      };
+    }
+  }
+
   const evt = recordActivityEvent({ ...eventParams, persistMongo: false });
 
   if (isMongoConfigured()) {
@@ -2029,6 +2049,7 @@ export function recordSearchEvent(params: {
   locality?: string;
   resultsCount?: number;
   userId?: string;
+  visitorId?: string;
 }): ActivityEvent {
   return recordActivityEvent({
     type: 'search_performed',
@@ -2053,6 +2074,7 @@ export async function recordSearchEventAsync(params: {
   return recordActivityEventAsync({
     type: 'search_performed',
     userId: params.userId,
+    visitorId: params.visitorId,
     targetType: 'search',
     searchQuery: params.query,
     locality: params.locality,
@@ -2085,6 +2107,7 @@ export async function recordCompareEventAsync(params: {
   return recordActivityEventAsync({
     type: 'compare_view',
     userId: params.userId,
+    visitorId: params.visitorId,
     targetType: 'school',
     details: {
       schoolSlugs: params.schoolSlugs,

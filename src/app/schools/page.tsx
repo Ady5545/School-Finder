@@ -5,6 +5,9 @@ import { MostViewedSchools } from '../../components/school/MostViewedSchools';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { buildPageMetadata, generateSchoolDirectoryJsonLd } from '../../lib/seo';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export const metadata = buildPageMetadata(
   'Schools in Greater Noida West & Noida Extension',
   'Browse schools in Greater Noida, Greater Noida West and Noida Extension. Compare fees, boards, facilities, student-teacher ratios and current admission information.',
@@ -33,7 +36,7 @@ function getExactSectorNumber(query: string): string | null {
   return match ? match[1].toLowerCase() : null;
 }
 
-function matchesExactSector(school: any, sectorNumber: string): boolean {
+function matchesExactSector(school: { location?: { sector?: string } }, sectorNumber: string): boolean {
   const sector = String(school.location?.sector || '').trim().toLowerCase();
   const match = sector.match(/^sector\s*[-/]?\s*(\d+[a-z]?)$/i);
   return match?.[1]?.toLowerCase() === sectorNumber;
@@ -68,14 +71,14 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const directoryJsonLd = generateSchoolDirectoryJsonLd(allSchools);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 w-full flex flex-col flex-1 overflow-x-clip">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(directoryJsonLd) }}
       />
       <Breadcrumbs items={[{ label: 'Schools', isCurrent: true }]} className="mb-4" />
 
-      <div className="pb-6">
+      <div className="pb-5 sm:pb-6">
         <h1 className="text-2xl sm:text-3xl font-extrabold text-[var(--color-content)] tracking-tight">
           Schools in Greater Noida West &amp; Noida Extension
         </h1>

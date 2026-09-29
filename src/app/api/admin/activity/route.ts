@@ -25,9 +25,14 @@ export async function GET(req: NextRequest) {
 
   // Enrich from one user lookup rather than querying Mongo once per event.
   const users = await getAllUsersSanitizedAsync();
+  const adminUserIds = new Set(users.filter(user => user.role === 'admin').map(user => user.id));
   const usersById = new Map(users.map(user => [user.id, user]));
 
-  const enrichedEvents = events.map(evt => {
+  // Defense in depth: older records may predate the recording guard.
+  // Admin actions belong in the audit log, not the parent activity feed.
+  const parentActivityEvents = events.filter(evt => !evt.userId || !adminUserIds.has(evt.userId));
+
+  const enrichedEvents = parentActivityEvents.map(evt => {
     const user = evt.userId ? usersById.get(evt.userId) : undefined;
     const school = evt.schoolSlug ? getSchoolBySlug(evt.schoolSlug) : undefined;
 

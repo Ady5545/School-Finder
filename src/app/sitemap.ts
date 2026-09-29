@@ -18,11 +18,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Keep the sitemap focused on canonical, useful, indexable pages.
   // Private/session pages and utility views are intentionally excluded.
-  const schoolRoutes: MetadataRoute.Sitemap = (await getCanonicalSchoolsAsync()).map(school => ({
-    url: `${SITE_URL}/schools/${school.slug}`,
-    changeFrequency: 'weekly',
-    priority: 0.8,
-  }));
+  const schoolRoutes: MetadataRoute.Sitemap = (await getCanonicalSchoolsAsync()).map(school => {
+    const verificationDates = [
+      school.verification?.lastVerified,
+      school.fees?.lastVerifiedDate,
+      school.admissions?.lastVerifiedDate,
+    ].filter(Boolean) as string[];
+    const parsedDates = verificationDates
+      .map(value => {
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? null : date;
+      })
+      .filter((date): date is Date => Boolean(date));
+
+    return {
+      url: `${SITE_URL}/schools/${school.slug}`,
+      lastModified: parsedDates.length ? new Date(Math.max(...parsedDates.map(d => d.getTime()))) : undefined,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    };
+  });
 
   return [...staticRoutes, ...schoolRoutes];
 }

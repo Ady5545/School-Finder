@@ -34,7 +34,6 @@ export async function GET() {
           name: school.name,
           area: school.location?.area || school.location?.sector || 'Greater Noida',
           sector: school.location?.sector || '',
-          image: school.images?.[0] || school.image || '',
           rating: school.rating?.score || 0,
           views: Number(row.totalViews || row.count || 0),
         };

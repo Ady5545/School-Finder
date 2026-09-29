@@ -632,15 +632,20 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         const coords = school.location?.coordinates;
         return isSafeStoredSchoolCoordinate(coords) && !matchesExactSector(school, targetSector);
       })
-      .map(school => ({
-        school,
-        distanceKm: calculateDistance(
-          sectorSearchCoords.lat,
-          sectorSearchCoords.lng,
-          school.location!.coordinates!.lat,
-          school.location!.coordinates!.lng
-        ),
-      }))
+      .map(school => {
+        const coords = school.location?.coordinates;
+        if (!coords || coords.lat === null || coords.lng === null) return null;
+        return {
+          school,
+          distanceKm: calculateDistance(
+            sectorSearchCoords.lat,
+            sectorSearchCoords.lng,
+            coords.lat,
+            coords.lng
+          ),
+        };
+      })
+      .filter((item): item is { school: typeof initialSchools[number]; distanceKm: number } => item !== null)
       .sort((a, b) => a.distanceKm - b.distanceKm)
       .slice(0, 6);
   }, [searchQuery, filteredSchools.length, sectorSearchCoords, initialSchools]);

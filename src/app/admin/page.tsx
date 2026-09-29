@@ -91,6 +91,7 @@ interface ActivityEventItem {
   id: string;
   type: string;
   userId?: string;
+  visitorId?: string;
   userName?: string;
   userEmail?: string;
   schoolSlug?: string;

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
 import { SchoolEditorModal } from '../../../../../components/admin/SchoolEditorModal';
-import type { School } from '../../../../../data/schoolsData';
+import type { School } from '@data/schoolsData';
 
 export default function AdminSchoolEditPage() {
   const params = useParams<{ slug: string }>();

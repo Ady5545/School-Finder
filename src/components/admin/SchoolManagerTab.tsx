@@ -38,7 +38,6 @@ export function SchoolManagerTab() {
   const [verification, setVerification] = useState<'all' | 'verified' | 'pending'>('all');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const [editing, setEditing] = useState<SchoolRow | null>(null);
   const [creating, setCreating] = useState(false);
   const [refreshStamp, setRefreshStamp] = useState(() => Date.now());
   const [metricsLoading, setMetricsLoading] = useState(false);
@@ -218,7 +217,6 @@ export function SchoolManagerTab() {
   };
 
   const handleSaved = (school: School) => {
-    setEditing(null);
     setCreating(false);
     setSchools(prev => {
       const idx = prev.findIndex(item => item.slug === school.slug);
@@ -369,7 +367,7 @@ export function SchoolManagerTab() {
                   Public profile <ExternalLink className="w-3.5 h-3.5" />
                 </Link>
                 <div className="flex items-center gap-2">
-                  <button type="button" onClick={() => setEditing(school)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-300 text-[11px] font-black hover:bg-amber-400/20"><Edit3 className="w-3.5 h-3.5" />Edit all data</button>
+                  <Link href={'/admin/schools/' + encodeURIComponent(school.slug) + '/edit'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-300 text-[11px] font-black hover:bg-amber-400/20"><Edit3 className="w-3.5 h-3.5" />Edit all data</Link>
                   {!school.isArchived ? (
                     <button type="button" onClick={() => void archiveSchool(school)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px] font-black hover:bg-rose-500/20"><Archive className="w-3.5 h-3.5" />Archive</button>
                   ) : (
@@ -387,11 +385,10 @@ export function SchoolManagerTab() {
       )}
 
       <SchoolEditorModal
-        isOpen={creating || Boolean(editing)}
-        onClose={() => { setCreating(false); setEditing(null); }}
+        isOpen={creating}
+        onClose={() => setCreating(false)}
         onSaved={handleSaved}
-        schoolToEdit={editing}
-        isNew={creating}
+        isNew
       />
     </section>
   );

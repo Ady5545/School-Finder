@@ -311,97 +311,6 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     return match?.[1]?.toLowerCase() === sectorNumber;
   };
 
-  // Sector numbers are not geographic ordering. When an exact sector has no
-  // schools, geocode the requested sector at runtime and rank our verified
-  // school coordinates by real geographic distance. Nothing is hardcoded to
-  // a particular sector, so the same behavior works for Sector 10, 11, 16B, etc.
-  const [sectorSearchCoords, setSectorSearchCoords] = useState<{ lat: number; lng: number } | null>(null);
-  const [sectorSearchLoading, setSectorSearchLoading] = useState(false);
-
-  useEffect(() => {
-    const sectorNumber = getExactSectorNumber(searchQuery);
-    if (sectorNumber === null || filteredSchools.length > 0) {
-      setSectorSearchCoords(null);
-      setSectorSearchLoading(false);
-      return;
-    }
-
-    const controller = new AbortController();
-    const timer = window.setTimeout(() => controller.abort(), 7000);
-
-    const geocodeSector = async () => {
-      setSectorSearchLoading(true);
-      try {
-        const queries = [
-          `Sector ${sectorNumber}, Greater Noida West, Uttar Pradesh, India`,
-          `Sector ${sectorNumber}, Greater Noida, Uttar Pradesh, India`,
-        ];
-
-        let coords: { lat: number; lng: number } | null = null;
-
-        for (const query of queries) {
-          const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=in&q=${encodeURIComponent(query)}`;
-          const response = await fetch(url, {
-            signal: controller.signal,
-            headers: { Accept: 'application/json' },
-          });
-          if (!response.ok) continue;
-
-          const results = await response.json();
-          const first = Array.isArray(results) ? results[0] : null;
-          const lat = Number(first?.lat);
-          const lng = Number(first?.lon);
-
-          if (Number.isFinite(lat) && Number.isFinite(lng)) {
-            coords = { lat, lng };
-            break;
-          }
-        }
-
-        if (!controller.signal.aborted) {
-          setSectorSearchCoords(coords);
-        }
-      } catch {
-        if (!controller.signal.aborted) {
-          setSectorSearchCoords(null);
-        }
-      } finally {
-        if (!controller.signal.aborted) {
-          setSectorSearchLoading(false);
-        }
-      }
-    };
-
-    void geocodeSector();
-
-    return () => {
-      window.clearTimeout(timer);
-      controller.abort();
-    };
-  }, [searchQuery, filteredSchools.length]);
-
-  const nearbySectorSuggestions = useMemo(() => {
-    const targetSector = getExactSectorNumber(searchQuery);
-    if (targetSector === null || filteredSchools.length > 0 || !sectorSearchCoords) return [];
-
-    return initialSchools
-      .filter(school => {
-        if (!isSafeStoredSchoolCoordinate(school.location?.coordinates)) return false;
-        return !matchesExactSector(school, targetSector);
-      })
-      .map(school => ({
-        school,
-        distanceKm: calculateDistance(
-          sectorSearchCoords.lat,
-          sectorSearchCoords.lng,
-          school.location!.coordinates!.lat,
-          school.location!.coordinates!.lng
-        ),
-      }))
-      .sort((a, b) => a.distanceKm - b.distanceKm)
-      .slice(0, 6);
-  }, [searchQuery, filteredSchools.length, sectorSearchCoords, initialSchools]);
-
   // Helper to match search query across name, alternateNames, location, board, tagline, summary, sports.
   const matchesSearch = (school: School, query: string): boolean => {
     const q = query.toLowerCase().trim();
@@ -516,37 +425,9 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         if (exactMatches.length > 0) {
           result = exactMatches;
         } else {
-          const anchor = getSectorSearchAnchor(exactSector);
-
-          if (anchor) {
-            // Geographic proximity wins. This intentionally ignores sector-number
-            // distance because Greater Noida West's sector numbering is not a
-            // reliable representation of physical adjacency (e.g. 16C → 4 → 16B).
-            result = result
-              .map(school => {
-                const coords = school.location?.coordinates;
-                if (!isSafeStoredSchoolCoordinate(coords)) {
-                  return { school, distance: Number.POSITIVE_INFINITY };
-                }
-                return {
-                  school,
-                  distance: calculateDistance(
-                    anchor.lat,
-                    anchor.lng,
-                    coords.lat,
-                    coords.lng
-                  ),
-                };
-              })
-              .filter(item => Number.isFinite(item.distance))
-              .sort((a, b) => a.distance - b.distance)
-              .slice(0, 8)
-              .map(item => item.school);
-          } else {
-            // For sectors without a calibrated map anchor yet, do not pretend
-            // numeric sector distance is geographic distance.
-            result = [];
-          }
+          // Nearby geographic suggestions are calculated separately after the
+          // exact-search result is known.
+          result = [];
         }
       } else {
         result = result.filter(s => matchesSearch(s, searchQuery));
@@ -690,6 +571,79 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     schoolDistances,
     sortBy,
   ]);
+
+  // Generic geographic fallback for every exact sector query.
+  // The requested sector is geocoded at runtime; verified school coordinates
+  // are then ranked by actual map distance. No sector is hardcoded here.
+  const [sectorSearchCoords, setSectorSearchCoords] = useState<{ lat: number; lng: number } | null>(null);
+  const [sectorSearchLoading, setSectorSearchLoading] = useState(false);
+
+  useEffect(() => {
+    const sectorNumber = getExactSectorNumber(searchQuery);
+    if (sectorNumber === null || filteredSchools.length > 0) {
+      setSectorSearchCoords(null);
+      setSectorSearchLoading(false);
+      return;
+    }
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 7000);
+    const geocodeSector = async () => {
+      setSectorSearchLoading(true);
+      try {
+        const queries = [
+          `Sector ${sectorNumber}, Greater Noida West, Uttar Pradesh, India`,
+          `Sector ${sectorNumber}, Greater Noida, Uttar Pradesh, India`,
+        ];
+        let coords: { lat: number; lng: number } | null = null;
+        for (const query of queries) {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=in&q=${encodeURIComponent(query)}`,
+            { signal: controller.signal, headers: { Accept: 'application/json' } }
+          );
+          if (!response.ok) continue;
+          const results = await response.json();
+          const first = Array.isArray(results) ? results[0] : null;
+          const lat = Number(first?.lat);
+          const lng = Number(first?.lon);
+          if (Number.isFinite(lat) && Number.isFinite(lng)) {
+            coords = { lat, lng };
+            break;
+          }
+        }
+        if (!controller.signal.aborted) setSectorSearchCoords(coords);
+      } catch {
+        if (!controller.signal.aborted) setSectorSearchCoords(null);
+      } finally {
+        if (!controller.signal.aborted) setSectorSearchLoading(false);
+      }
+    };
+    void geocodeSector();
+    return () => {
+      window.clearTimeout(timeoutId);
+      controller.abort();
+    };
+  }, [searchQuery, filteredSchools.length]);
+
+  const nearbySectorSuggestions = useMemo(() => {
+    const targetSector = getExactSectorNumber(searchQuery);
+    if (targetSector === null || filteredSchools.length > 0 || !sectorSearchCoords) return [];
+    return initialSchools
+      .filter(school => {
+        const coords = school.location?.coordinates;
+        return isSafeStoredSchoolCoordinate(coords) && !matchesExactSector(school, targetSector);
+      })
+      .map(school => ({
+        school,
+        distanceKm: calculateDistance(
+          sectorSearchCoords.lat,
+          sectorSearchCoords.lng,
+          school.location!.coordinates!.lat,
+          school.location!.coordinates!.lng
+        ),
+      }))
+      .sort((a, b) => a.distanceKm - b.distanceKm)
+      .slice(0, 6);
+  }, [searchQuery, filteredSchools.length, sectorSearchCoords, initialSchools]);
 
   const activeFiltersCount =
     (selectedBoard ? 1 : 0) +
@@ -1683,9 +1637,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             <div className="space-y-5">
               <div className="rounded-2xl border border-amber-200 bg-amber-50/70 p-4 sm:p-5">
                 <div className="text-sm font-black text-slate-900">No schools were found in {searchQuery}.</div>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1.5">
-                  These are the most nearby schools from our verified directory, based on map distance.
-                </p>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1.5">These are the most nearby schools from our verified directory, based on map distance.</p>
               </div>
               <div>
                 <h3 className="text-base font-black text-[var(--color-content)] mb-3">Most nearby schools</h3>
@@ -1697,9 +1649,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
                   ))}
                 </div>
               </div>
-              <button type="button" onClick={resetAllFilters} className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[var(--color-primary)] text-white text-xs font-black shadow-warm-xs hover:opacity-95">
-                Show all listed schools
-              </button>
+              <button type="button" onClick={resetAllFilters} className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-[var(--color-primary)] text-white text-xs font-black shadow-warm-xs hover:opacity-95">Show all listed schools</button>
             </div>
           ) : sectorSearchLoading ? (
             <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center">

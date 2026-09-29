@@ -1,6 +1,7 @@
 import React from 'react';
 import { getAllSchoolsAsync, getDistinctBoardsAsync, getDistinctAreasAsync } from '../../lib/schoolsServer';
 import { SchoolDirectory } from '../../components/school/SchoolDirectory';
+import { MostViewedSchools } from '../../components/school/MostViewedSchools';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
 import { buildPageMetadata, generateSchoolDirectoryJsonLd } from '../../lib/seo';
 
@@ -27,6 +28,17 @@ interface SchoolsPageProps {
   }>;
 }
 
+function getExactSectorNumber(query: string): string | null {
+  const match = query.trim().match(/^sector\s*[-/]?\s*(\d+[a-z]?)$/i);
+  return match ? match[1].toLowerCase() : null;
+}
+
+function matchesExactSector(school: any, sectorNumber: string): boolean {
+  const sector = String(school.location?.sector || '').trim().toLowerCase();
+  const match = sector.match(/^sector\s*[-/]?\s*(\d+[a-z]?)$/i);
+  return match?.[1]?.toLowerCase() === sectorNumber;
+}
+
 export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
   const params = await searchParams;
   const q = params.q || '';
@@ -48,6 +60,11 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
     getDistinctAreasAsync(),
   ]);
 
+  const exactSector = getExactSectorNumber(q);
+  const directorySchools = exactSector
+    ? allSchools.filter(school => matchesExactSector(school, exactSector))
+    : allSchools;
+
   const directoryJsonLd = generateSchoolDirectoryJsonLd(allSchools);
 
   return (
@@ -67,8 +84,17 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
         </p>
       </div>
 
+      <MostViewedSchools />
+
+      {exactSector && directorySchools.length === 0 && (
+        <div className="mb-5 rounded-xl border border-[var(--color-brand-red-border)] bg-[var(--color-brand-red-soft)] px-4 py-3 text-xs text-[var(--color-content)]">
+          <strong>No exact Sector {exactSector.replace(/^0+/, '')} profile is currently listed.</strong>{' '}
+          Try the school name, a nearby sector, or broaden the search to the locality.
+        </div>
+      )}
+
       <SchoolDirectory
-        initialSchools={allSchools}
+        initialSchools={directorySchools}
         distinctBoards={boards}
         distinctAreas={areas}
         initialQuery={q}

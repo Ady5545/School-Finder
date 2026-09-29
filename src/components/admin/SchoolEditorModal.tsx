@@ -313,7 +313,7 @@ export function SchoolEditorModal({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-slate-950/80 backdrop-blur-sm p-3 sm:p-5">
-      <div className="w-full max-w-[1280px] max-h-[calc(100dvh-1.5rem)] overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col">
+          <div className="w-full max-w-[1280px] h-[calc(100dvh-1.5rem)] max-h-[calc(100dvh-1.5rem)] overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col">
         <div className="px-5 py-4 border-b border-[#1b3d63] bg-[#08172b] flex items-center justify-between gap-3">
           <div>
             <p className="text-[10px] uppercase tracking-[0.16em] text-amber-400 font-black">Admission Pitara CMS</p>
@@ -502,6 +502,8 @@ export function SchoolEditorModal({
             <div className="flex gap-2 justify-end"><button type="button" onClick={onClose} className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-slate-300">Cancel</button><button type="submit" disabled={isSaving || uploadingKind !== null || !canSave} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black disabled:opacity-50"><Save className="w-4 h-4" />{isSaving ? 'Saving…' : isNew ? 'Create school' : 'Save changes'}</button></div>
           </div>
         </form>
+          </div>
+        </div>
       </div>
     </div>
   );

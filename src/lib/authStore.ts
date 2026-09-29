@@ -2087,6 +2087,7 @@ export async function recordSearchEventAsync(params: {
 export function recordCompareEvent(params: {
   schoolSlugs: string[];
   userId?: string;
+  visitorId?: string;
 }): ActivityEvent {
   return recordActivityEvent({
     type: 'compare_view',
@@ -3303,9 +3304,10 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
   const allUsersList = Array.from(new Set(Array.from(users.values()).map(u => u.id)))
     .map(id => getUserById(id))
     .filter((u): u is ParentUser => u !== null);
+  const parentUsersList = allUsersList.filter(u => u.role !== 'admin');
 
-  const totalAccounts = allUsersList.length;
-  const verifiedAccounts = allUsersList.filter(u => u.emailVerified).length;
+  const totalAccounts = parentUsersList.length;
+  const verifiedAccounts = parentUsersList.filter(u => u.emailVerified).length;
   const newAccountsInRange = parentUsersList.filter(
     u => timeThreshold === 0 || new Date(u.createdAt).getTime() >= timeThreshold
   ).length;
@@ -3450,11 +3452,11 @@ export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '
   const adminUserIds = new Set(allUsersList.filter(u => u.role === 'admin').map(u => u.id));
   const totalAccounts = parentUsersList.length;
   const verifiedAccounts = parentUsersList.filter(u => u.emailVerified).length;
-  const newAccountsInRange = allUsersList.filter(
+  const newAccountsInRange = parentUsersList.filter(
     u => timeThreshold === 0 || new Date(u.createdAt).getTime() >= timeThreshold
   ).length;
 
-  const activeUsersInRange = allUsersList.filter(u => {
+  const activeUsersInRange = parentUsersList.filter(u => {
     const actTime = u.lastActivityAt
       ? new Date(u.lastActivityAt).getTime()
       : u.lastLoginAt

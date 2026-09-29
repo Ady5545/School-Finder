@@ -502,8 +502,7 @@ export function SchoolEditorModal({
             <div className="flex gap-2 justify-end"><button type="button" onClick={onClose} className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-slate-300">Cancel</button><button type="submit" disabled={isSaving || uploadingKind !== null || !canSave} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black disabled:opacity-50"><Save className="w-4 h-4" />{isSaving ? 'Saving…' : isNew ? 'Create school' : 'Save changes'}</button></div>
           </div>
         </form>
-          </div>
-        </div>
+      </div>
     </div>
   );
 }

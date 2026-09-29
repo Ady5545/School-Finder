@@ -25,6 +25,8 @@ interface SchoolEditorModalProps {
   onSaved: (school: School) => void;
   schoolToEdit?: Partial<School> | null;
   isNew?: boolean;
+  /** Render as a dedicated admin page instead of a modal overlay. */
+  pageMode?: boolean;
 }
 
 const inputClass =
@@ -49,6 +51,7 @@ export function SchoolEditorModal({
   onSaved,
   schoolToEdit,
   isNew = false,
+  pageMode = false,
 }: SchoolEditorModalProps) {
   const [activeTab, setActiveTab] = useState<'basic' | 'location' | 'fees' | 'admissions' | 'timings' | 'media' | 'json'>('basic');
   const [draft, setDraft] = useState<Partial<School>>({});
@@ -312,8 +315,9 @@ export function SchoolEditorModal({
   const timings = draft.timings || {};
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-slate-950/80 backdrop-blur-sm p-3 sm:p-5">
-          <div className="w-full max-w-[1280px] h-[calc(100dvh-1.5rem)] max-h-[calc(100dvh-1.5rem)] overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col">
+    <div className={pageMode ? "min-h-screen bg-[#071322] text-slate-200" : "fixed inset-0 z-[70] flex items-center justify-center overflow-y-auto bg-slate-950/80 backdrop-blur-sm p-3 sm:p-5"}>
+      <div className={pageMode ? "mx-auto w-full max-w-[1500px] px-3 py-4 sm:px-5 sm:py-6 lg:px-8" : "w-full max-w-[1280px] h-[calc(100dvh-1.5rem)] max-h-[calc(100dvh-1.5rem)] overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col"}>
+        <div className={pageMode ? "overflow-hidden rounded-3xl border border-[#244f7d] bg-[#0c1f38] text-slate-200 shadow-2xl flex flex-col min-h-[calc(100dvh-3rem)]" : ""}>
         <div className="px-5 py-4 border-b border-[#1b3d63] bg-[#08172b] flex items-center justify-between gap-3">
           <div>
             <p className="text-[10px] uppercase tracking-[0.16em] text-amber-400 font-black">Admission Pitara CMS</p>
@@ -349,7 +353,7 @@ export function SchoolEditorModal({
           </div>
         )}
 
-        <form onSubmit={handleSave} className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-5 lg:p-6">
+        <form onSubmit={handleSave} className={pageMode ? "flex-1 min-h-0 p-4 sm:p-5 lg:p-7" : "flex-1 min-h-0 overflow-y-auto p-4 sm:p-5 lg:p-6"}>
           {activeTab === 'basic' && (
             <div className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
@@ -502,6 +506,7 @@ export function SchoolEditorModal({
             <div className="flex gap-2 justify-end"><button type="button" onClick={onClose} className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-slate-300">Cancel</button><button type="submit" disabled={isSaving || uploadingKind !== null || !canSave} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black disabled:opacity-50"><Save className="w-4 h-4" />{isSaving ? 'Saving…' : isNew ? 'Create school' : 'Save changes'}</button></div>
           </div>
         </form>
+        </div>
       </div>
     </div>
   );

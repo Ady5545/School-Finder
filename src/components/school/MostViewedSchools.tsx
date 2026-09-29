@@ -10,7 +10,6 @@ type MostViewedSchool = {
   area: string;
   sector: string;
   rating: number;
-  views: number;
 };
 
 export function MostViewedSchools() {
@@ -51,9 +50,6 @@ export function MostViewedSchools() {
           >
             <div className="flex items-start justify-between gap-2">
               <span className="text-[10px] font-black text-[var(--color-content-muted)]">#{index + 1}</span>
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[var(--color-content-muted)]">
-                <Eye className="w-3 h-3" /> {school.views.toLocaleString()}
-              </span>
             </div>
             <h3 className="mt-2 text-sm font-extrabold text-[var(--color-content)] leading-snug group-hover:text-[var(--color-brand-red)]">
               {school.name}

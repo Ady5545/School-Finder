@@ -3306,11 +3306,11 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
 
   const totalAccounts = allUsersList.length;
   const verifiedAccounts = allUsersList.filter(u => u.emailVerified).length;
-  const newAccountsInRange = allUsersList.filter(
+  const newAccountsInRange = parentUsersList.filter(
     u => timeThreshold === 0 || new Date(u.createdAt).getTime() >= timeThreshold
   ).length;
 
-  const activeUsersInRange = allUsersList.filter(u => {
+  const activeUsersInRange = parentUsersList.filter(u => {
     const actTime = u.lastActivityAt
       ? new Date(u.lastActivityAt).getTime()
       : u.lastLoginAt
@@ -3402,7 +3402,7 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
       verifiedAccounts,
       newAccountsInRange,
       activeUsersInRange,
-      disabledAccounts: allUsersList.filter(u => u.status === 'disabled').length,
+      disabledAccounts: parentUsersList.filter(u => u.status === 'disabled').length,
     },
     schools: {
       topViewed,
@@ -3445,8 +3445,11 @@ export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '
   }
 
   const allUsersList = await getAllUsersSanitizedAsync();
-  const totalAccounts = allUsersList.length;
-  const verifiedAccounts = allUsersList.filter(u => u.emailVerified).length;
+  // Admin identities are operational accounts, never parent analytics.
+  const parentUsersList = allUsersList.filter(u => u.role !== 'admin');
+  const adminUserIds = new Set(allUsersList.filter(u => u.role === 'admin').map(u => u.id));
+  const totalAccounts = parentUsersList.length;
+  const verifiedAccounts = parentUsersList.filter(u => u.emailVerified).length;
   const newAccountsInRange = allUsersList.filter(
     u => timeThreshold === 0 || new Date(u.createdAt).getTime() >= timeThreshold
   ).length;
@@ -3468,10 +3471,12 @@ export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '
   // Admin analytics must not silently truncate the selected time range after
   // 5,000 events. Production activity is persisted in MongoDB, so use a generous
   // ceiling for the admin analytics workload.
-  const filteredActivity = await getActivityEventsAsync(
+  const rawActivity = await getActivityEventsAsync(
     100000,
     timeThreshold ? { since: new Date(timeThreshold).toISOString() } : undefined
   );
+  // Defense in depth for activity records created before admin-session exclusion.
+  const filteredActivity = rawActivity.filter(e => !e.userId || !adminUserIds.has(e.userId));
 
   const viewsEventsInRange = filteredActivity.filter(e => e.type === 'school_view');
   const savesEventsInRange = filteredActivity.filter(e => e.type === 'wishlist_add');
@@ -4270,7 +4275,7 @@ export const getDashboardAnalytics = () => {
 
 export async function getDashboardAnalyticsAsync() {
   const overview = await getAdminOverviewMetricsAsync('30d');
-  const allUsers = await getAllUsersSanitizedAsync();
+  const allUsers = (await getAllUsersSanitizedAsync()).filter(user => user.role !== 'admin');
   let verifiedEmails = 0;
   const localityDistribution: Record<string, number> = {};
 

@@ -85,7 +85,8 @@ export async function POST(
         httpOnly: true,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
-        maxAge: 60 * 60 * 24 * 365,
+        // Session cookie: keep the visitor identity for this browser session,
+        // rather than permanently identifying the browser across future visits.
         path: '/',
       });
     }

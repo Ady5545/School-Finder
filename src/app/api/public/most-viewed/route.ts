@@ -35,7 +35,6 @@ export async function GET() {
           area: school.location?.area || school.location?.sector || 'Greater Noida',
           sector: school.location?.sector || '',
           rating: school.rating?.score || 0,
-          views: Number(row.totalViews || row.count || 0),
         };
       })
       .filter(Boolean);

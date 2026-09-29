@@ -300,10 +300,30 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     });
   };
 
-  // Helper to match search query across name, alternateNames, location, board, tagline, summary, sports
+  const getExactSectorNumber = (query: string): string | null => {
+    const match = query.trim().match(/^(?:sector|sec)\s*[-/]?\s*(\d+[a-z]?)$/i);
+    return match ? match[1].toLowerCase() : null;
+  };
+
+  const getSchoolSectorNumber = (school: School): number | null => {
+    const raw = String(school.location?.sector || '').trim();
+    const match = raw.match(/^(?:sector|sec)\s*[-/]?\s*(\d+)/i);
+    return match ? Number(match[1]) : null;
+  };
+
+  const matchesExactSector = (school: School, sectorNumber: string): boolean => {
+    const sector = String(school.location?.sector || '').trim().toLowerCase();
+    const match = sector.match(/^(?:sector|sec)\s*[-/]?\s*(\d+[a-z]?)$/i);
+    return match?.[1]?.toLowerCase() === sectorNumber;
+  };
+
+  // Helper to match search query across name, alternateNames, location, board, tagline, summary, sports.
   const matchesSearch = (school: School, query: string): boolean => {
     const q = query.toLowerCase().trim();
     if (!q) return true;
+
+    const exactSector = getExactSectorNumber(query);
+    if (exactSector) return matchesExactSector(school, exactSector);
 
     const boards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
     const altNames = Array.isArray(school.alternateNames) ? school.alternateNames : [];
@@ -401,9 +421,28 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
   const filteredSchools = useMemo(() => {
     let result = [...initialSchools];
 
-    // 1. Search Query Filter (name, altNames, location, board, tagline, summary, sports)
+    // 1. Search Query Filter. Exact sector queries never use substring matching
+    // (so Sector 11 cannot accidentally match Sector 119). If no exact sector
+    // is listed, show the closest numbered sectors rather than a dead-end.
     if (searchQuery.trim()) {
-      result = result.filter(s => matchesSearch(s, searchQuery));
+      const exactSector = getExactSectorNumber(searchQuery);
+      if (exactSector) {
+        const exactMatches = result.filter(s => matchesExactSector(s, exactSector));
+        if (exactMatches.length > 0) {
+          result = exactMatches;
+        } else {
+          const target = Number(exactSector.match(/\d+/)?.[0]);
+          const nearby = result
+            .map(school => ({ school, sector: getSchoolSectorNumber(school) }))
+            .filter(item => item.sector !== null && Number.isFinite(target))
+            .sort((a, b) => Math.abs((a.sector as number) - target) - Math.abs((b.sector as number) - target))
+            .slice(0, 8)
+            .map(item => item.school);
+          result = nearby;
+        }
+      } else {
+        result = result.filter(s => matchesSearch(s, searchQuery));
+      }
     }
 
     // 2. Board Filter

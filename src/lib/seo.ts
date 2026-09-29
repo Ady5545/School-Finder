@@ -135,6 +135,7 @@ export function generateSchoolJsonLd(school: School) {
     description: school.summary || school.tagline,
     url: canonicalUrl,
     ...(schoolImage ? { image: [schoolImage] } : {}),
+    mainEntityOfPage: canonicalUrl,
     address: {
       '@type': 'PostalAddress',
       ...(school.location.address ? { streetAddress: school.location.address } : {}),

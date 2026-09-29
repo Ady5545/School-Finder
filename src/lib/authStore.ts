@@ -2033,6 +2033,7 @@ export function recordSearchEvent(params: {
   return recordActivityEvent({
     type: 'search_performed',
     userId: params.userId,
+    visitorId: params.visitorId,
     targetType: 'search',
     searchQuery: params.query,
     locality: params.locality,
@@ -2047,6 +2048,7 @@ export async function recordSearchEventAsync(params: {
   locality?: string;
   resultsCount?: number;
   userId?: string;
+  visitorId?: string;
 }): Promise<ActivityEvent> {
   return recordActivityEventAsync({
     type: 'search_performed',
@@ -2067,6 +2069,7 @@ export function recordCompareEvent(params: {
   return recordActivityEvent({
     type: 'compare_view',
     userId: params.userId,
+    visitorId: params.visitorId,
     targetType: 'school',
     details: {
       schoolSlugs: params.schoolSlugs,
@@ -2077,6 +2080,7 @@ export function recordCompareEvent(params: {
 export async function recordCompareEventAsync(params: {
   schoolSlugs: string[];
   userId?: string;
+  visitorId?: string;
 }): Promise<ActivityEvent> {
   return recordActivityEventAsync({
     type: 'compare_view',

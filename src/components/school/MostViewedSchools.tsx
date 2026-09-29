@@ -41,8 +41,8 @@ export function MostViewedSchools() {
         <Eye className="w-5 h-5 text-[var(--color-brand-red)] shrink-0" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-        {schools.slice(0, 4).map((school, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        {schools.slice(0, 5).map((school, index) => (
           <Link
             key={school.slug}
             href={`/schools/${school.slug}`}

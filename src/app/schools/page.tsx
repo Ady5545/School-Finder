@@ -95,13 +95,6 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
 
       <MostViewedSchools />
 
-      {exactSector && directorySchools.length === 0 && (
-        <div className="mb-5 rounded-xl border border-[var(--color-brand-red-border)] bg-[var(--color-brand-red-soft)] px-4 py-3 text-xs text-[var(--color-content)]">
-          <strong>No exact Sector {exactSector.replace(/^0+/, '')} profile is currently listed.</strong>{' '}
-          Try the school name, a nearby sector, or broaden the search to the locality.
-        </div>
-      )}
-
       <SchoolDirectory
         initialSchools={directorySchools}
         distinctBoards={boards}

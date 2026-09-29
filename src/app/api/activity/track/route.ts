@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { randomUUID } from 'crypto';
 import {
   verifySessionToken,
   recordSearchEventAsync,
@@ -42,6 +43,11 @@ export async function POST(req: NextRequest) {
       if (session?.sub) userId = session.sub;
     }
 
+    // Anonymous visitors get one short-lived browser-session ID. It is deliberately
+    // a session cookie (no maxAge), so it normally disappears when the browser session closes.
+    const existingVisitorId = req.cookies.get('ap_visitor_id')?.value;
+    const visitorId = userId ? undefined : (existingVisitorId || randomUUID());
+
     if (type === 'search_performed') {
       const query = typeof body.query === 'string' ? body.query.trim().slice(0, MAX_QUERY_LENGTH) : '';
       if (query.length < 2) {
@@ -55,8 +61,17 @@ export async function POST(req: NextRequest) {
         ? Math.max(0, Math.min(10000, Math.floor(body.resultsCount)))
         : undefined;
 
-      await recordSearchEventAsync({ query, locality, resultsCount, userId });
-      return NextResponse.json({ success: true });
+      await recordSearchEventAsync({ query, locality, resultsCount, userId, visitorId });
+      const response = NextResponse.json({ success: true });
+      if (!userId && !existingVisitorId) {
+        response.cookies.set('ap_visitor_id', visitorId!, {
+          httpOnly: true,
+          sameSite: 'lax',
+          secure: process.env.NODE_ENV === 'production',
+          path: '/',
+        });
+      }
+      return response;
     }
 
     const rawSlugs = Array.isArray(body.schoolSlugs) ? body.schoolSlugs : [];
@@ -79,8 +94,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Comparison contains an unavailable school.' }, { status: 400 });
     }
 
-    await recordCompareEventAsync({ schoolSlugs: verifiedSlugs, userId });
-    return NextResponse.json({ success: true });
+    await recordCompareEventAsync({ schoolSlugs: verifiedSlugs, userId, visitorId });
+    const response = NextResponse.json({ success: true });
+    if (!userId && !existingVisitorId) {
+      response.cookies.set('ap_visitor_id', visitorId!, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        path: '/',
+      });
+    }
+    return response;
   } catch (error) {
     console.error('Error in activity tracking:', error);
     return NextResponse.json({ success: false, message: 'Telemetry could not be recorded.' }, { status: 500 });

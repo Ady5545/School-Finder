@@ -80,10 +80,9 @@ export default async function SchoolsPage({ searchParams }: SchoolsPageProps) {
     getDistinctAreasAsync(),
   ]);
 
-  const exactSector = getExactSectorNumber(q);
-  const directorySchools = exactSector
-    ? allSchools.filter(school => matchesExactSector(school, exactSector))
-    : allSchools;
+  // Keep the full registry available to the client so an exact-sector miss can
+  // gracefully fall back to nearby sectors instead of producing a dead-end.
+  const directorySchools = allSchools;
 
   const directoryJsonLd = generateSchoolDirectoryJsonLd(allSchools);
 

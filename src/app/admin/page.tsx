@@ -1266,7 +1266,14 @@ export default function AdminPage() {
                             {evt.userName || evt.userEmail || evt.userId}
                           </Link>
                         ) : (
-                          <span className="text-slate-400">Anonymous Visitor</span>
+                          <span className="text-slate-400">
+                            Anonymous Visitor
+                            {evt.visitorId && (
+                              <span className="ml-2 text-cyan-300 font-mono text-[10px]">
+                                #{evt.visitorId.replace(/-/g, '').slice(0, 8).toUpperCase()}
+                              </span>
+                            )}
+                          </span>
                         )}
                         {evt.schoolName && <span className="text-slate-300"> → {evt.schoolName}</span>}
                         {evt.searchQuery && (
@@ -1274,6 +1281,10 @@ export default function AdminPage() {
                         )}
                       </p>
                       <p className="text-[10px] text-slate-400 font-mono mt-0.5">
+                        {evt.visitorId && !evt.userId && (
+                          <>Visitor ID: {evt.visitorId}</> 
+                        )}
+                        {evt.visitorId && !evt.userId && <span className="mx-1">•</span>}
                         Event ID: {evt.id}
                       </p>
                     </div>

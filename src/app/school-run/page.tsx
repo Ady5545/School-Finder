@@ -7,7 +7,7 @@ export const metadata = { ...buildPageMetadata('School Run Planner for Shortlist
 export const dynamic='force-dynamic';
 
 export default function SchoolRunPage(){
-  return <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
+  return <div className="mobile-route-page mobile-route-page--school-run max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
     <Breadcrumbs items={[{label:'Shortlist',href:'/wishlist'},{label:'School Run',isCurrent:true}]} className="mb-4"/>
     <div className="pb-6 mb-2">
       <div className="inline-flex items-center rounded-full bg-[#eef6fb] text-[var(--color-primary)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em]">Parent planning</div>

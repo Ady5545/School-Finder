@@ -85,7 +85,7 @@ export const SchoolGallery: React.FC<SchoolGalleryProps> = ({ school, className 
     <section
       id="school-campus-gallery"
       className={cn(
-        'bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-5',
+        'bg-white p-4 sm:p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-5',
         className
       )}
       aria-label={`${school.name} Campus Gallery`}

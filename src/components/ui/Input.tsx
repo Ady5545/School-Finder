@@ -36,7 +36,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-invalid={Boolean(error)}
             aria-describedby={error ? errorId : helperText ? helperId : undefined}
             className={cn(
-              'w-full rounded-lg border border-[var(--color-border)] bg-white px-3.5 py-2 text-sm text-[var(--color-content)] transition-colors placeholder:text-[var(--color-content-subtle)] focus:border-[var(--color-primary)] focus:outline-none disabled:bg-[var(--color-surface-subtle)] disabled:text-[var(--color-content-subtle)] disabled:cursor-not-allowed',
+              'w-full min-h-11 rounded-lg border border-[var(--color-border)] bg-white px-3.5 py-2 text-sm touch-manipulation text-[var(--color-content)] transition-colors placeholder:text-[var(--color-content-subtle)] focus:border-[var(--color-primary)] focus:outline-none disabled:bg-[var(--color-surface-subtle)] disabled:text-[var(--color-content-subtle)] disabled:cursor-not-allowed',
               leftIcon && 'pl-10',
               rightIcon && 'pr-10',
               error && 'border-[var(--color-error)] focus:border-[var(--color-error)] focus:ring-1 focus:ring-[var(--color-error)]',

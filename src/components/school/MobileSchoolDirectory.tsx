@@ -121,7 +121,6 @@ export const MobileSchoolDirectory: React.FC<MobileSchoolDirectoryProps> = props
             const sector = String(school.location?.sector || '').trim().toLowerCase();
             return !new RegExp('^(?:sector|sec)\\s*[-\\/]?\\s*' + exactSector + '\\b', 'i').test(sector);
           })
-          })
           .map(school => {
             const coords = school.location.coordinates;
             return {

@@ -43,11 +43,11 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, className, show
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav aria-label="Breadcrumb" className={cn('flex items-center text-xs text-[var(--color-content-muted)]', className)}>
+      <nav aria-label="Breadcrumb" className={cn('flex items-start text-xs text-[var(--color-content-muted)] overflow-hidden', className)}>
         <ol
           itemScope
           itemType="https://schema.org/BreadcrumbList"
-          className="flex items-center flex-wrap gap-1.5 list-none p-0 m-0"
+          className="flex items-center flex-wrap gap-1 list-none min-w-0 p-0 m-0"
         >
           {showHome && (
             <li

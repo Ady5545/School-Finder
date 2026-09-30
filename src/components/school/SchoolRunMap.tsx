@@ -67,7 +67,7 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
       distanceKm={route?.distanceKm ?? null}
       durationMin={route?.durationMin ?? null}
     />
-    <div className="h-[300px] xs:h-[340px] sm:h-[520px] w-full">
+    <div className="h-[280px] xs:h-[320px] sm:h-[520px] w-full">
       <MapContainer center={[origin.lat, origin.lng]} zoom={13} scrollWheelZoom className="h-full w-full">
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <FitBounds origin={origin} schools={schools} />
@@ -87,7 +87,7 @@ export default function SchoolRunMap({ origin, schools, activeSlug, onSelect }: 
         ) : null}
       </MapContainer>
     </div>
-    <div className="flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 border-t border-[var(--color-border)] bg-[#faf8f5]">
+    <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3 border-t border-[var(--color-border)] bg-[#faf8f5]">
       <div className="inline-flex rounded-xl border border-[var(--color-border-strong)] bg-white p-0.5 text-xs font-bold">
         <button type="button" onClick={() => setMode('driving')} className={`px-3 py-1.5 rounded-[10px] transition-colors ${mode === 'driving' ? 'bg-[var(--color-primary)] text-white' : 'text-[var(--color-content-muted)]'}`}>🚗 Drive</button>
         <button type="button" disabled={!hasWalking} onClick={() => setMode('walking')} className={`px-3 py-1.5 rounded-[10px] transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${mode === 'walking' ? 'bg-[var(--color-accent)] text-white' : 'text-[var(--color-content-muted)]'}`}>🚶 Walk</button>

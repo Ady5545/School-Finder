@@ -11,6 +11,7 @@ export interface WishlistModalTarget {
   name: string;
   image?: string | null;
   area?: string;
+  action?: 'shortlist' | 'compare';
 }
 
 interface WishlistLoginModalProps {
@@ -40,6 +41,8 @@ export const WishlistLoginModal: React.FC<WishlistLoginModalProps> = ({
   if (!isOpen) return null;
 
   const redirectUrl = encodeURIComponent(pathname || '/schools');
+  const action = targetSchool?.action || 'shortlist';
+  const isCompare = action === 'compare';
 
   return (
     <div
@@ -66,11 +69,11 @@ export const WishlistLoginModal: React.FC<WishlistLoginModalProps> = ({
 
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-400/30 flex items-center justify-center shrink-0">
-              <Heart className="w-5 h-5 fill-rose-400 text-rose-400" />
+              {isCompare ? <Scale className="w-5 h-5 text-sky-300" /> : <Heart className="w-5 h-5 fill-rose-400 text-rose-400" />}
             </div>
             <div>
               <h3 id="wishlist-modal-title" className="text-base font-bold text-white tracking-tight">
-                Save to Your Shortlist
+                {isCompare ? 'Compare Schools' : 'Save to Your Shortlist'}
               </h3>
               <p className="text-xs text-amber-200/90 mt-0.5">
                 Private parent account required
@@ -85,7 +88,7 @@ export const WishlistLoginModal: React.FC<WishlistLoginModalProps> = ({
           {targetSchool && (
             <div className="p-3 bg-amber-50/70 border border-amber-200/80 rounded-xl flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-white border border-amber-200 flex items-center justify-center text-rose-600 font-bold text-xs shrink-0 shadow-2xs">
-                <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />
+                {isCompare ? <Scale className="w-4 h-4 text-sky-700" /> : <Heart className="w-4 h-4 fill-rose-500 text-rose-500" />}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-bold text-stone-900 truncate">
@@ -103,10 +106,10 @@ export const WishlistLoginModal: React.FC<WishlistLoginModalProps> = ({
           {/* Primary Instruction Message */}
           <div className="space-y-2">
             <p className="text-sm font-semibold text-stone-900 leading-snug">
-              Please log in to save schools to your shortlist.
+              {isCompare ? 'Please sign in to compare schools.' : 'Please sign in to save schools to your shortlist.'}
             </p>
             <p className="text-xs text-stone-600 leading-relaxed">
-              Shortlists are permanently stored in your verified parent account so you can track admission deadlines, fee structures, and compare notes across visits and devices.
+              {isCompare ? 'Your comparison list is kept with your Parent Account so your selected schools stay available while you review them across visits and devices.' : 'Shortlists are permanently stored in your verified parent account so you can track admission deadlines, fee structures, and compare notes across visits and devices.'}
             </p>
           </div>
 
@@ -126,11 +129,10 @@ export const WishlistLoginModal: React.FC<WishlistLoginModalProps> = ({
             </div>
           </div>
 
-          {/* Guest Comparison Tip */}
-          <div className="text-[11px] text-stone-500 bg-blue-50/60 border border-blue-100 p-2.5 rounded-lg flex items-start gap-2">
+          <div className="text-[11px] text-slate-500 bg-blue-50/60 border border-blue-100 p-2.5 rounded-lg flex items-start gap-2">
             <Scale className="w-4 h-4 text-blue-700 shrink-0 mt-0.5" />
             <span className="leading-normal">
-              <strong>Tip:</strong> You can use the temporary <strong>Compare</strong> tray right now without signing in.
+              <strong>Private by design:</strong> Your saved shortlist and comparison list are available only inside your Parent Account.
             </span>
           </div>
 

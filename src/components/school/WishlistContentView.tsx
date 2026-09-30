@@ -100,14 +100,14 @@ export const WishlistContentView: React.FC = () => {
   return (
     <div className="w-full flex flex-col space-y-6">
       {/* Shortlist Summary Workspace Card */}
-      <div className="bg-white rounded-2xl border border-[var(--color-border)] p-5 sm:p-6 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="bg-white rounded-2xl border border-[var(--color-border)] p-4 sm:p-6 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
         <div className="flex items-start sm:items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 border border-rose-100 shadow-2xs">
             <Heart className="w-6 h-6 fill-rose-500" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-lg font-black text-[var(--color-content)]">
+              <h2 className="text-base sm:text-lg font-black text-[var(--color-content)] break-words">
                 {savedSchools.length} {savedSchools.length === 1 ? 'School' : 'Schools'} in Family Shortlist
               </h2>
               <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-100">
@@ -133,7 +133,7 @@ export const WishlistContentView: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
           {savedSchools.length >= 1 && (
             <Link href="/school-run">
               <Button

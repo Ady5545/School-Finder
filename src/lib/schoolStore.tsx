@@ -296,6 +296,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
             }
           }
         });
+      }
     },
     [isAuthenticated, user?.id, queueShortlistMutation, reconcileAuthenticatedShortlist, showToast]
   );
@@ -475,5 +476,4 @@ export const useSchoolStore = () => {
   }
   return context;
 };
-
 

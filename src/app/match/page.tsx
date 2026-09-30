@@ -12,7 +12,7 @@ export const metadata = buildPageMetadata(
 
 export default function MatchPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
+    <div className="mobile-route-page mobile-route-page--match max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'School Match', isCurrent: true }]} className="mb-4" />
       <SchoolMatchView schools={getAllSchools()} />
     </div>

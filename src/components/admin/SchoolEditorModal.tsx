@@ -485,10 +485,7 @@ export function SchoolEditorModal({
                     value={fees.cardFee ?? ''}
                     onChange={e => {
                       const value = e.target.value ? Number(e.target.value) : null;
-                      updateFees({
-                        cardFee: value,
-                        feeDisplayOverride: value === null ? '' : '₹' + value.toLocaleString('en-IN'),
-                      });
+                      updateFees({ cardFee: value });
                     }}
                     className={inputClass}
                   />

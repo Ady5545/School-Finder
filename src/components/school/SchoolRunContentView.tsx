@@ -60,7 +60,7 @@ function NearbyShopsPanel({ slug }: { slug: string }) {
     {loading ? <div className="py-8 text-center text-xs text-[var(--color-content-muted)]">Finding real shops around this school…</div> : null}
     {error ? <div className="py-6 text-center text-xs text-[var(--color-content-muted)]">{error}</div> : null}
     {!loading && !error && shops && shops.length === 0 ? <div className="py-6 text-center text-xs text-[var(--color-content-muted)]">No mapped uniform, stationery or fancy-dress shops near this school yet on OpenStreetMap.</div> : null}
-    {!loading && !error && shops && shops.length > 0 ? <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
+    {!loading && !error && shops && shops.length > 0 ? <div className="grid grid-cols-1 gap-3 mt-4">
       {(['uniform', 'stationery', 'fancy_dress'] as const).map(cat => {
         const meta = CATEGORY_META[cat];
         const Icon = meta.icon;

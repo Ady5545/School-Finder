@@ -211,7 +211,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
     [showToast, isAuthenticated, user?.id, openAuthPrompt, queueShortlistMutation, reconcileAuthenticatedShortlist]
   );
 
-  const addToShortl  const addToShortlist = useCallback(
+  const addToShortlist = useCallback(
     (slug: string, schoolName?: string) => {
       const canonical = toPublicCanonicalSlug(slug);
       if (!canonical) return;
@@ -294,11 +294,6 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
             }
           }
         });
-      } else {
-        try {
-          localStorage.setItem(ANON_SHORTLIST_KEY, JSON.stringify(nextList));
-        } catch {}
-      }
     },
     [isAuthenticated, user?.id, queueShortlistMutation, reconcileAuthenticatedShortlist, showToast]
   );

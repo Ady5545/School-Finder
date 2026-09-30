@@ -19,6 +19,7 @@ import {
   Star,
   LocateFixed,
   Navigation,
+  ShieldCheck,
 } from 'lucide-react';
 import { SchoolCard } from './SchoolCard';
 import { SponsoredPlacementCard } from './SponsoredPlacementCard';
@@ -1161,6 +1162,33 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             <MapPin className={cn('w-4 h-4', showMap ? 'text-amber-600' : 'text-slate-500')} />
             <span className="hidden sm:inline">{showMap ? 'Hide map' : 'Open map'}</span>
           </button>
+        </div>
+
+        {/* Parent + School Trust Strip */}
+        <div className="mt-3 rounded-xl border border-amber-200/80 bg-gradient-to-r from-amber-50 via-white to-sky-50 px-3.5 py-3 sm:px-4 sm:py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-900">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Want your school listed?</span>
+            </div>
+            <p className="text-[10.5px] sm:text-[11px] text-slate-600 leading-relaxed mt-0.5">
+              Schools, administrators and parents can send official school details or corrections to our team for review.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-lg bg-white border border-amber-300 px-3 py-2 text-[10.5px] sm:text-[11px] font-extrabold text-amber-900 hover:bg-amber-100 transition-colors shadow-2xs"
+            >
+              Click here →
+            </Link>
+            <Link
+              href="/auth/register"
+              className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+            >
+              Free parent account
+            </Link>
+          </div>
         </div>
 
         {/* Active Filter Chips Ribbon (Desktop & Mobile) */}

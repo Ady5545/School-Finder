@@ -54,7 +54,7 @@ export default async function HomePage() {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION: EXACT REPLICATION FROM USER IMAGE 1                      */}
       {/* ========================================================================= */}
-      <section className="relative w-full page-glass-section bg-[#f4f7f8] border-b border-[var(--color-border)] pt-14 pb-16 sm:pt-20 sm:pb-24 overflow-hidden">
+      <section className="relative w-full page-glass-section bg-[#f4f7f8] border-b border-[var(--color-border)] pt-10 pb-12 sm:pt-20 sm:pb-24 overflow-hidden">
         {/* Quiet editorial accents — intentionally soft and non-technical. */}
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[760px] h-[360px] rounded-full bg-[#e7eef2] opacity-75 blur-3xl pointer-events-none" />
         <div className="absolute top-28 -left-28 w-64 h-64 rounded-full bg-[#fff3e8] opacity-55 blur-3xl pointer-events-none" />
@@ -63,7 +63,7 @@ export default async function HomePage() {
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="w-full flex flex-col items-center text-center">
             {/* Top Pill Badge matching Image 1 */}
-            <div className="inline-flex glass-interactive glass-shine items-center gap-2 px-4 py-1.5 rounded-full bg-white/55 backdrop-blur-xl text-slate-800 text-xs sm:text-[13px] font-medium mb-6 sm:mb-8 border border-[#e5dfd5] shadow-xs backdrop-blur-md mx-auto">
+            <div className="inline-flex max-w-full glass-interactive glass-shine items-center gap-2 px-4 py-1.5 rounded-full bg-white/55 backdrop-blur-xl text-slate-800 text-xs sm:text-[13px] font-medium mb-6 sm:mb-8 border border-[#e5dfd5] shadow-xs backdrop-blur-md mx-auto">
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#c2410c] shrink-0" />
               <span className="font-semibold text-slate-900">School discovery across Greater Noida West &amp; Noida Extension</span>
               <span className="text-slate-400 mx-0.5">•</span>
@@ -126,18 +126,18 @@ export default async function HomePage() {
             </div>
 
             {/* Primary & Secondary Actions */}
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-8 pt-6 border-t border-[var(--color-border-subtle)] w-full max-w-4xl mx-auto">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mt-7 sm:mt-8 pt-6 border-t border-[var(--color-border-subtle)] w-full max-w-4xl mx-auto">
               <div className="w-full text-center -mb-1">
                 <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
                   Start with what matters to your family
                 </span>
               </div>
-              <Link href="/schools">
+              <Link href="/schools" className="w-full sm:w-auto">
                 <Button variant="primary" size="lg" className="text-white font-bold shadow-[0_8px_24px_rgba(15,45,74,0.16)] hover:shadow-[0_12px_30px_rgba(15,45,74,0.20)] hover:-translate-y-0.5 transition-all" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   Explore all listed schools
                 </Button>
               </Link>
-              <Link href="/compare">
+              <Link href="/compare" className="w-full sm:w-auto">
                 <Button variant="outline" size="lg" className="bg-white hover:bg-slate-50 font-bold border-[var(--color-border-strong)] hover:border-amber-500 hover:text-amber-800" rightIcon={<Scale className="w-4 h-4" />}>
                   Compare Schools Side-by-Side
                 </Button>
@@ -202,7 +202,7 @@ export default async function HomePage() {
       {/* ========================================================================= */}
       {/* 3. METHODOLOGY: PARENT-CENTRIC METHODOLOGY                                 */}
       {/* ========================================================================= */}
-      <section className="w-full page-glass-section py-16 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)]">
+      <section className="w-full page-glass-section py-12 sm:py-24 bg-[#f8fafc] border-y border-[var(--color-border)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 flex flex-col items-center reveal-on-scroll">
             {/* Top Badge matching Image 3 */}
@@ -221,7 +221,7 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
             {/* 01 Discover */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="1">
+            <div className="p-5 sm:p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="1">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#eff6ff] text-[#1e40af] font-bold text-xs mb-5">
                   01
@@ -244,7 +244,7 @@ export default async function HomePage() {
             </div>
 
             {/* 02 Understand */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="2">
+            <div className="p-5 sm:p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="2">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff7ed] text-[#9a3412] font-bold text-xs mb-5">
                   02
@@ -267,7 +267,7 @@ export default async function HomePage() {
             </div>
 
             {/* 03 Compare */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="3">
+            <div className="p-5 sm:p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="3">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#ecfdf5] text-[#065f46] font-bold text-xs mb-5">
                   03
@@ -290,7 +290,7 @@ export default async function HomePage() {
             </div>
 
             {/* 04 Shortlist */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="4">
+            <div className="p-5 sm:p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="4">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff1f2] text-[#9f1239] font-bold text-xs mb-5">
                   04
@@ -313,7 +313,7 @@ export default async function HomePage() {
             </div>
 
             {/* 05 Apply */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="5">
+            <div className="p-5 sm:p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="5">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#f0f9ff] text-[#0369a1] font-bold text-xs mb-5">
                   05

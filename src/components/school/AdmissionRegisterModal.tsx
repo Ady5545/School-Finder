@@ -336,7 +336,6 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
           </div>
         )}
       </div>
-      </div>
     </Drawer>
   );
 };

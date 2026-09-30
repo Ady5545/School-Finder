@@ -63,6 +63,10 @@ export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string 
   const managedOverride = typeof fees.feeDisplayOverride === 'string' ? clean(fees.feeDisplayOverride) : '';
   if (managedOverride) return managedOverride;
 
+  if (typeof fees.cardFee === 'number' && Number.isFinite(fees.cardFee)) {
+    return `₹${fees.cardFee.toLocaleString('en-IN')}`;
+  }
+
   const candidates = [
     typeof fees.annualDisplay === 'string' ? fees.annualDisplay : '',
     typeof fees.tuitionAnnual === 'string' ? fees.tuitionAnnual : '',
@@ -96,10 +100,6 @@ export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string 
     if (annualToken && (hasAnnualMarker || /^₹?\s*[\d,]+(?:\+)?$/i.test(candidate))) {
       return `₹${formatIndianNumber(annualToken[1])}${annualToken[2] || ''}`;
     }
-  }
-
-  if (fees.billingFrequency === 'annual' && typeof fees.cardFee === 'number' && Number.isFinite(fees.cardFee)) {
-    return `₹${fees.cardFee.toLocaleString('en-IN')}`;
   }
 
   const legacyOverride = CARD_FEE_OVERRIDES[slug];

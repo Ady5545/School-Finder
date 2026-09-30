@@ -1,8 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { X, ShieldCheck, CheckCircle2, AlertCircle, Sparkles, Building, User, Mail, Phone, GraduationCap, MapPin } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { Drawer } from '../ui/Drawer';
 import { cn } from '../../lib/utils';
 import type { School } from '../../types/school';
 
@@ -117,23 +119,14 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">
-      <div
-        className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-100 relative overflow-hidden max-h-[90vh] flex flex-col animate-scale-in"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="admission-modal-title"
-      >
-        {/* Close Button */}
-        <button
-          type="button"
-          onClick={handleModalClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100 transition-colors cursor-pointer"
-          aria-label="Close dialog"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
+    <Drawer
+      isOpen={isOpen}
+      onClose={handleModalClose}
+      side="right"
+      title={isPreReg ? 'Pre-registration request' : 'Admission request'}
+      className="w-full sm:max-w-xl bg-white p-0 rounded-l-3xl"
+    >
+      <div className="px-5 pb-6 sm:px-6 sm:pb-7 space-y-4">
         {isSuccess ? (
           /* Confirmation State */
           <div className="py-6 text-center space-y-4 my-auto">
@@ -188,19 +181,27 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
             </div>
 
             {/* Scope / Transparency Banner */}
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/80 text-[11.5px] text-amber-900 space-y-1">
+            <div className="p-3.5 rounded-xl bg-amber-50/80 border border-amber-200/90 text-[11.5px] text-amber-950 space-y-1.5">
               <div className="flex items-center gap-1.5 font-bold text-amber-950">
                 <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
-                <span>Parent Advisory Notice</span>
+                <span>Admission enquiry handled by Admission Pitara</span>
               </div>
               <p className="leading-relaxed">
-                {isPreReg
-                  ? "Register your interest with Admission Pitara and we'll contact you when relevant 2027–28 admission information becomes available."
-                  : "Register your interest with Admission Pitara and we'll help you connect with the school and navigate the admission process."}
+                Send your request here and our team receives it at the Admission Pitara enquiry desk. We then follow up with the school directly on your behalf.
               </p>
-              <p className="text-[10.5px] text-amber-800/90 font-medium">
-                * Note: This is an Admission Pitara registration for updates and guidance, not the school&apos;s official admission application.
+              <p className="text-[10.5px] text-amber-900/85 font-semibold">
+                Your submitted details are used to communicate this admission request to the school and coordinate the follow-up.
               </p>
+            </div>
+
+            <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <p className="text-[11px] font-extrabold text-slate-800">Have a free Parent Account?</p>
+                <p className="text-[10px] text-slate-500">Sign in to keep admission requests and saved schools together.</p>
+              </div>
+              <Link href="/auth/login" className="shrink-0 text-[10.5px] font-extrabold text-[var(--color-primary)] hover:underline">
+                Sign in
+              </Link>
             </div>
 
             {errorMessage && (
@@ -342,13 +343,14 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
                     ? 'Submitting...'
                     : isPreReg
                       ? 'Submit Pre-Registration for 2027–28'
-                      : 'Register on Admission Pitara'}
+                      : 'Send Admission Request'}
                 </Button>
               </div>
             </form>
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </Drawer>
   );
 };

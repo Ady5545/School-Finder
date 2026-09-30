@@ -1670,3 +1670,294 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
     min-width: 0;
   }
 }
+
+
+/* ==========================================================================
+   MOBILE ROUTE SYSTEM — compare / admissions / wishlist / match / school run /
+   reviews / school profiles
+   ========================================================================== */
+@media (max-width: 767px) {
+  .mobile-route-page {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 12px 26px !important;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .mobile-route-page > nav {
+    margin: 0 0 10px !important;
+    font-size: 10px;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .mobile-route-page > nav ol,
+  .mobile-route-page > nav ul {
+    gap: 5px !important;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .mobile-route-page > nav ol::-webkit-scrollbar,
+  .mobile-route-page > nav ul::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-route-page > nav a,
+  .mobile-route-page > nav span {
+    font-size: 10px !important;
+  }
+
+  .mobile-route-page > div:not([class*="mobile-"]) {
+    min-width: 0;
+  }
+
+  .mobile-route-page h1 {
+    text-wrap: balance;
+    letter-spacing: -.035em;
+  }
+
+  .mobile-route-page > div > h1 {
+    font-size: 26px;
+    line-height: 1.04;
+  }
+
+  .mobile-route-page > div > p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .mobile-route-page .rounded-3xl,
+  .mobile-route-page .rounded-2xl {
+    border-radius: 18px;
+  }
+
+  .mobile-route-page .shadow-warm-xl,
+  .mobile-route-page .shadow-warm-lg {
+    box-shadow: 0 14px 34px -30px rgba(15,45,74,.46);
+  }
+
+  /* Comparison */
+  .mobile-route-page--compare {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .mobile-route-page--compare .max-w-2xl,
+  .mobile-route-page--compare .max-w-4xl,
+  .mobile-route-page--compare .max-w-xl {
+    max-width: 100%;
+  }
+
+  .mobile-route-page--compare .overflow-x-auto {
+    border-radius: 16px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-route-page--compare table {
+    min-width: 760px;
+  }
+
+  .mobile-route-page--compare input[type="search"] {
+    min-height: 52px;
+    border-radius: 15px;
+    font-size: 16px !important;
+  }
+
+  .mobile-route-page--compare .grid {
+    min-width: 0;
+  }
+
+  /* Admissions */
+  .mobile-route-page--admissions {
+    padding-top: 12px !important;
+  }
+
+  .mobile-route-page--admissions > div:first-of-type {
+    padding-bottom: 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .mobile-route-page--admissions > div:first-of-type h1 {
+    font-size: 27px;
+    line-height: 1.05;
+  }
+
+  .mobile-route-page--admissions > div:first-of-type p {
+    margin-top: 7px;
+  }
+
+  .mobile-route-page--admissions .grid {
+    min-width: 0;
+  }
+
+  /* Reviews */
+  .mobile-route-page--reviews {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .mobile-route-page--reviews > div:first-of-type {
+    padding-bottom: 16px !important;
+  }
+
+  .mobile-route-page--reviews > div:first-of-type h1 {
+    font-size: 28px;
+  }
+
+  /* Wishlist */
+  .mobile-route-page--wishlist {
+    padding-top: 13px !important;
+  }
+
+  .mobile-route-page--wishlist > div:first-of-type h1 {
+    font-size: 27px;
+  }
+
+  .mobile-route-page--wishlist .bg-white {
+    min-width: 0;
+  }
+
+  /* School Match */
+  .mobile-route-page--match {
+    padding-top: 12px !important;
+  }
+
+  .mobile-route-page--match .rounded-3xl {
+    padding: 15px !important;
+  }
+
+  .mobile-route-page--match .rounded-3xl h1 {
+    font-size: 24px;
+    line-height: 1.06;
+  }
+
+  .mobile-route-page--match input,
+  .mobile-route-page--match select {
+    min-height: 46px;
+    font-size: 16px !important;
+    border-radius: 13px;
+  }
+
+  .mobile-route-page--match article {
+    padding: 14px !important;
+  }
+
+  .mobile-route-page--match article > div > div:last-child {
+    width: 100%;
+  }
+
+  .mobile-route-page--match article a,
+  .mobile-route-page--match article button {
+    min-height: 42px;
+  }
+
+  /* School Run */
+  .mobile-route-page--school-run {
+    padding-top: 12px !important;
+  }
+
+  .mobile-route-page--school-run > div:first-of-type h1 {
+    font-size: 27px;
+  }
+
+  .mobile-route-page--school-run .bg-white {
+    min-width: 0;
+  }
+
+  .mobile-route-page--school-run .grid {
+    min-width: 0;
+  }
+
+  .mobile-route-page--school-run button,
+  .mobile-route-page--school-run a {
+    touch-action: manipulation;
+  }
+
+  /* School profile */
+  .mobile-route-page--profile {
+    padding: 10px 10px 92px !important;
+  }
+
+  .mobile-route-page--profile .mobile-profile-actions {
+    position: sticky;
+    bottom: 76px;
+    z-index: 28;
+    padding: 9px;
+    margin: 0 -2px;
+    border: 1px solid #e2ddd4;
+    border-radius: 17px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 12px 28px -22px rgba(15,45,74,.52);
+    backdrop-filter: blur(12px) saturate(125%);
+    -webkit-backdrop-filter: blur(12px) saturate(125%);
+  }
+
+  .mobile-route-page--profile .mobile-profile-actions > button:first-child {
+    min-height: 48px;
+    font-size: 12px;
+  }
+
+  .mobile-route-page--profile .mobile-profile-actions > button,
+  .mobile-route-page--profile .mobile-profile-actions > a {
+    min-height: 44px;
+  }
+
+  .mobile-route-page--profile .grid {
+    min-width: 0;
+  }
+
+  .mobile-route-page--profile section {
+    scroll-margin-top: 74px;
+  }
+
+  .mobile-route-page--profile .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mobile-route-page--profile .grid-cols-3,
+  .mobile-route-page--profile .grid-cols-4,
+  .mobile-route-page--profile .grid-cols-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mobile-route-page--profile .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* The compare tray must float above the bottom navigation on phones. */
+  .mobile-route-page ~ *,
+  body > * {
+    min-width: 0;
+  }
+
+  .mobile-route-page--profile + * {
+    min-width: 0;
+  }
+
+  /* Prevent the global compare dock from covering the thumb nav. */
+  aside[aria-label="Parent Shortlist Basket and Comparison Tray"] {
+    bottom: 76px !important;
+    width: calc(100% - 18px) !important;
+    max-height: 32vh !important;
+    border-radius: 18px !important;
+    padding: 10px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .mobile-route-page {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .mobile-route-page--profile .grid-cols-2,
+  .mobile-route-page--profile .grid-cols-3,
+  .mobile-route-page--profile .grid-cols-4,
+  .mobile-route-page--profile .grid-cols-5 {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1553,7 +1553,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </div>
 
           {/* Action Footer in Filter Drawer */}
-          <div className="pt-3 border-t border-[var(--color-border-subtle)] flex items-center gap-3 mt-1">
+          <div className="pt-3 border-t border-[var(--color-border-subtle)] flex flex-col-reverse sm:flex-row items-stretch sm:items-center gap-2.5 mt-1">
             <button
               type="button"
               onClick={resetAllFilters}

@@ -1310,7 +1310,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         title="Filter Schools"
         side="bottom"
       >
-        <div className="flex flex-col gap-4 pb-4">
+        <div className="flex flex-col gap-4 pb-6">
           {/* Curriculum / Board */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">

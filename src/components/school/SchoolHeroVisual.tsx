@@ -105,7 +105,7 @@ export const SchoolHeroVisual: React.FC<SchoolHeroVisualProps> = ({
               alt={`${school.name} Campus Exterior`}
               fill
               priority
-              quality={90}
+              quality={80}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 50vw"
               className="object-cover group-hover:scale-103 transition-transform duration-500 ease-out"
               onError={() => setHasError(true)}

@@ -177,7 +177,7 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
           variant="primary"
           size="sm"
           onClick={() => setIsRegisterModalOpen(true)}
-          className="flex-1.5 text-xs font-extrabold text-white py-2.5 min-h-[44px] justify-center px-2"
+          className="flex-[1.5] text-xs font-extrabold text-white py-2.5 min-h-[44px] justify-center px-2"
         >
           {isOpen ? 'Register' : 'Pre-register'}
         </Button>

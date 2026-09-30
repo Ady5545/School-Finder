@@ -87,7 +87,7 @@ export const MobileHomeExperience: React.FC<MobileHomeExperienceProps> = ({ scho
         <div className="mobile-home-hero__eyebrow"><span className="mobile-dot" /> Greater Noida West • School discovery</div>
         <h1>Find the right school.<br /><span>With clarity.</span></h1>
         <p>Fees, boards, facilities, reviews and admissions — brought together for parents.</p>
-        <div className="mobile-home-search"><HomeSearch initialSchools={schools} className="w-full" /></div>
+        <div className="mobile-home-search"><HomeSearch className="w-full" /></div>
 
         <div className="mobile-home-actions">
           <Link href="/schools" className="mobile-home-primary-action"><Compass className="w-4 h-4" /> Browse schools</Link>

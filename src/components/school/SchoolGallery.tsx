@@ -124,7 +124,7 @@ export const SchoolGallery: React.FC<SchoolGalleryProps> = ({ school, className 
 
       {/* Gallery Grid */}
       {hasPhotos ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-3.5">
           {galleryImages.map((img, index) => (
             <button
               key={img.src + index}

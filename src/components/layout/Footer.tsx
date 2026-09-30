@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
             </span>
             <ul className="space-y-2 text-xs text-slate-300 list-none p-0 m-0">
               <li>
-                <Link href="/schools" className="hover:text-[#f7a072] transition-colors">
+                <Link href="/schools" className="inline-flex min-h-10 items-center hover:text-[#f7a072] transition-colors">
                   All Schools
                 </Link>
               </li>
@@ -130,7 +130,7 @@ export const Footer: React.FC = () => {
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <p>© {new Date().getFullYear()} Admission Pitara. All rights reserved.</p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-white transition-colors">
+            <Link href="/privacy" className="inline-flex min-h-10 items-center hover:text-white transition-colors">
               Privacy
             </Link>
             <span>•</span>

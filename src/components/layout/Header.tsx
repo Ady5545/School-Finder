@@ -149,6 +149,7 @@ export const Header: React.FC = () => {
             </IconButton>
           </Link>
         </div>
+      </div>
     </header>
   );
 };

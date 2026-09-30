@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimitAsync, getClientIp, verifySessionToken, getUserByIdAsync, createSchoolSubmissionAsync, recordActivityEvent } from '@/lib/authStore';
-import { sendPublicEnquiryEmail } from '@/lib/emailService';
+import { sendPublicEnquiryEmail, sendAdmissionRequestToSchool } from '@/lib/emailService';
+import { getPublicSchoolBySlugAsync } from '@/lib/schoolsServer';
 
 export async function POST(req: NextRequest) {
   try {
@@ -46,9 +47,13 @@ export async function POST(req: NextRequest) {
 
     const cleanEmail = email.trim().toLowerCase();
     const cleanParentName = parentName.trim();
-    const cleanSchoolName = (schoolName || 'Target School').trim();
     const cleanSchoolSlug = (schoolSlug || '').trim();
     const isPreReg = formType === 'admission_preregistration';
+    const canonicalSchool = cleanSchoolSlug ? await getPublicSchoolBySlugAsync(cleanSchoolSlug) : undefined;
+    if (!canonicalSchool) {
+      return NextResponse.json({ success: false, message: 'The selected school could not be verified. Please reopen the school profile and try again.' }, { status: 400 });
+    }
+    const cleanSchoolName = canonicalSchool.name.trim();
     const cleanType = isPreReg ? 'admission_preregistration' : 'admission_registration';
 
     // Rate Limiting Protection (Max 5 submissions per 10 minutes per IP/Email)
@@ -131,9 +136,36 @@ export async function POST(req: NextRequest) {
 
     if (!emailDelivery.success) {
       return NextResponse.json(
-        { success: false, message: 'Your form was recorded, but we could not deliver the notification email. Please try again shortly.' },
+        { success: false, message: 'Your request was recorded, but Admission Pitara could not deliver the enquiry email. Please try again shortly.' },
         { status: 503 }
       );
+    }
+
+    const schoolEmail = String(canonicalSchool.contact?.email || '').trim().toLowerCase();
+    let schoolDelivery: { success: boolean; error?: string } = { success: true };
+    if (schoolEmail && schoolEmail.includes('@')) {
+      schoolDelivery = await sendAdmissionRequestToSchool({
+        to: schoolEmail,
+        parentName: cleanParentName,
+        parentEmail: cleanEmail,
+        parentPhone: cleanPhone,
+        childGrade,
+        residentialSociety: cleanResidentialSociety || undefined,
+        schoolName: cleanSchoolName,
+        academicSession,
+        requestType: cleanType,
+        submissionId: submission.id,
+      });
+
+      if (!schoolDelivery.success) {
+        return NextResponse.json(
+          {
+            success: false,
+            message: 'Your request reached Admission Pitara, but the school contact could not be reached by email right now. Our team can retry the school delivery from the enquiry desk.',
+          },
+          { status: 503 }
+        );
+      }
     }
 
     // Log Activity Event for Admin Dashboard Analytics
@@ -163,7 +195,10 @@ export async function POST(req: NextRequest) {
       message: isPreReg
         ? `Pre-registration for ${cleanSchoolName} successfully recorded.`
         : `Registration for ${cleanSchoolName} successfully recorded.`,
-      deliveryNote: 'Your admission request has been received by Admission Pitara. Our team will follow up with the school using the details you provided.',
+      deliveryNote: schoolEmail
+        ? 'Your admission request has been received by Admission Pitara and forwarded to the school contact listed in our verified directory record.'
+        : 'Your admission request has been received by Admission Pitara. Our team will follow up with the school from the enquiry desk.'
+,
     });
   } catch (error) {
     console.error('Error processing admission registration:', error);

@@ -7,6 +7,7 @@ import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { SchoolImage } from '../../../components/school/SchoolImage';
 import { SchoolBadge } from '../../../components/school/SchoolBadge';
 import { SchoolHeroVisual } from '../../../components/school/SchoolHeroVisual';
+import { MobileSchoolProfileHero } from '../../../components/school/MobileSchoolProfileHero';
 import { FeeDisplay } from '../../../components/school/FeeDisplay';
 import { ComprehensiveFeeBreakdown } from '../../../components/school/ComprehensiveFeeBreakdown';
 import { AdmissionStatus } from '../../../components/school/AdmissionStatus';
@@ -142,6 +143,10 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         className="mb-6"
       />
 
+      <div className="md:hidden">
+        <MobileSchoolProfileHero school={school} />
+      </div>
+
       {/* Duplicate Listing Notice */}
       {school.isDuplicate && school.duplicateOf && (
         <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between">
@@ -162,7 +167,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
       )}
 
       {/* Header Banner */}
-      <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-[var(--color-border)]">
+      <div className="mobile-profile-desktop-header flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-[var(--color-border)]">
         <div className="space-y-3 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             {schoolBoards.map(b => (
@@ -214,7 +219,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         {/* Left 2 Cols: Imagery, Overview, Facilities, Sports */}
         <div className="lg:col-span-2 space-y-8">
           {/* Featured / Hero Visual */}
-          <SchoolHeroVisual school={school} />
+          <div className="mobile-profile-desktop-hero"><SchoolHeroVisual school={school} /></div>
 
           {/* Quick Specifications Matrix */}
           <div

@@ -471,8 +471,8 @@ export default function DashboardPage() {
 
         {/* Profile Edit Modal / Drawer */}
         {isEditingProfile && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-xs animate-fadeIn">
-            <div className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-stone-200 max-h-[90vh] overflow-y-auto space-y-4">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-2 sm:p-4 bg-stone-900/60 backdrop-blur-xs animate-fadeIn">
+            <div className="bg-white rounded-t-3xl sm:rounded-2xl max-w-xl w-full p-4 sm:p-6 shadow-2xl border border-stone-200 max-h-[calc(100dvh-0.5rem)] sm:max-h-[90vh] overflow-y-auto space-y-4">
               <div className="flex items-center justify-between border-b border-stone-100 pb-3">
                 <div className="flex items-center gap-2">
                   <User className="w-5 h-5 text-amber-800" />
@@ -481,7 +481,7 @@ export default function DashboardPage() {
                 <button
                   type="button"
                   onClick={() => setIsEditingProfile(false)}
-                  className="text-stone-400 hover:text-stone-700 p-1 rounded-lg hover:bg-stone-100"
+                  className="min-w-10 min-h-10 flex items-center justify-center text-stone-400 hover:text-stone-700 p-1 rounded-lg hover:bg-stone-100"
                 >
                   <X className="w-5 h-5" />
                 </button>

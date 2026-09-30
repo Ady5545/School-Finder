@@ -1177,7 +1177,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </div>
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             <Link
-              href="/contact"
+              href="/contact?type=school-claim"
               className="inline-flex items-center justify-center rounded-lg bg-white border border-amber-300 px-3 py-2 text-[10.5px] sm:text-[11px] font-extrabold text-amber-900 hover:bg-amber-100 transition-colors shadow-2xs"
             >
               Click here →

@@ -334,6 +334,7 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           }
         }
       });
+    }
   }, [showToast, isAuthenticated, user?.id, queueShortlistMutation, reconcileAuthenticatedShortlist]);
 
   const isInCompare = useCallback(
@@ -476,4 +477,3 @@ export const useSchoolStore = () => {
   }
   return context;
 };
-

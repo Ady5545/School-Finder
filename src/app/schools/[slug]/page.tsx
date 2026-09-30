@@ -119,7 +119,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
     .slice(0, 3);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8 w-full flex flex-col flex-1">
+    <div className="mobile-route-page mobile-route-page--profile max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8 w-full flex flex-col flex-1">
       {/* Telemetry Tracking with Session Deduplication */}
       <SchoolViewTracker slug={school.slug} />
 

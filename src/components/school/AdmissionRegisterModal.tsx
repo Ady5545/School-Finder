@@ -217,7 +217,7 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
               </div>
 
               {/* Email & Phone Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 mb-1">
                     Email Address <span className="text-rose-500">*</span>

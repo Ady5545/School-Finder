@@ -202,7 +202,7 @@ export const HomeSearch: React.FC<{ className?: string; initialSchools?: School[
           }}
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
-          placeholder="Search schools, sector, board (e.g. DPS, Techzone 4)..."
+          placeholder="Search schools, sectors, boards or sports..."
           className="w-full py-2.5 text-xs sm:text-base text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 bg-transparent outline-none font-medium tracking-tight"
           aria-autocomplete="list"
           aria-expanded={isOpen}

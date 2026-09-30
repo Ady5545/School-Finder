@@ -37,7 +37,7 @@ export const AdmissionCalendarView: React.FC<{ schools: School[] }> = ({ schools
   const [selectedMonth, setSelectedMonth] = useState(months[0]?.[0] || '');
 
   return (
-    <section className="rounded-2xl border border-[var(--color-border)] bg-white shadow-warm-xs p-5 sm:p-6">
+    <section className="rounded-2xl border border-[var(--color-border)] bg-white shadow-warm-xs p-4 sm:p-6">
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.16em] text-sky-700"><CalendarDays className="w-3.5 h-3.5" /> 2027–28 admissions calendar</div>

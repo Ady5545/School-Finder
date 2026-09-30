@@ -1574,16 +1574,16 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
       {/* Main Results and Supporting Map Layout */}
       {/* Primary rule: Results are ALWAYS rendered first on mobile (order-1) so parents immediately see cards */}
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-5 sm:gap-6 min-w-0">
         {/* Results Column */}
         <div
           className={cn(
-            'flex flex-col order-1 transition-all duration-200',
+            'flex flex-col order-1 transition-all duration-200 min-w-0',
             showMap ? 'w-full lg:w-7/12 xl:w-2/3' : 'w-full'
           )}
         >
           {/* Results Status Header */}
-          <div className="flex flex-wrap items-center justify-between mb-4 gap-2">
+          <div className="flex flex-wrap items-center justify-between mb-4 gap-2 min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm font-extrabold text-[var(--color-content)]">
                 {filteredSchools.length} {filteredSchools.length === 1 ? 'School' : 'Schools'} Found
@@ -1694,8 +1694,8 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         
         {/* Supporting Map Column (order-2 so on mobile it sits comfortably below the initial results when toggled) */}
         {showMap && (
-          <div className="w-full lg:w-5/12 xl:w-1/3 order-2">
-            <div className="sticky top-20">
+          <div className="w-full lg:w-5/12 xl:w-1/3 order-2 min-w-0">
+            <div className="lg:sticky lg:top-20">
               <DirectoryInteractiveMap
                 schools={initialSchools}
                 selectedProximityArea={selectedProximityArea}

@@ -57,11 +57,11 @@ export const ComparisonDock: React.FC = () => {
   return (
     <aside
       aria-label="Parent Shortlist Basket and Comparison Tray"
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-3xl bg-slate-900/95 text-white rounded-2xl p-3 sm:p-4 shadow-2xl border border-slate-700/80 backdrop-blur-xl transition-all duration-300 animate-subtle-float"
+      className="fixed bottom-2 sm:bottom-5 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] sm:w-[94%] max-w-3xl max-h-[42vh] overflow-hidden bg-slate-900/95 text-white rounded-2xl p-3 sm:p-4 shadow-2xl border border-slate-700/80 backdrop-blur-xl transition-all duration-300 animate-subtle-float"
     >
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-3 min-h-0">
         {/* Left: Summary & Selected School Badges */}
-        <div className="flex items-center gap-3 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+        <div className="flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto min-w-0 overflow-x-auto pb-1 sm:pb-0 no-scrollbar">
           <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/30">
             <Scale className="w-4 h-4" />
           </div>
@@ -93,11 +93,11 @@ export const ComparisonDock: React.FC = () => {
         </div>
 
         {/* Right: Actions */}
-        <div className="flex items-center justify-end gap-2 w-full sm:w-auto shrink-0 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-800">
+        <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 w-full sm:w-auto shrink-0 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-800">
           <button
             type="button"
             onClick={handleSaveAllToShortlist}
-            className="text-xs text-slate-300 hover:text-rose-400 px-2.5 py-1.5 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer flex items-center gap-1.5 border border-slate-700/60"
+            className="text-xs text-slate-300 hover:text-rose-400 px-2.5 py-2 rounded-lg min-h-[40px] hover:bg-slate-800 transition-colors cursor-pointer flex items-center gap-1.5 border border-slate-700/60"
             title="Save all basket schools to permanent parent shortlist"
           >
             <Heart className="w-3.5 h-3.5 text-rose-400" />

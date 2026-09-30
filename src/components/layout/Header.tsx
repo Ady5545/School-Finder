@@ -45,7 +45,7 @@ export const Header: React.FC = () => {
     <header className="sticky top-0 z-40 w-full border-t border-t-[var(--color-brand-red-border)]/45 border-b border-white/70 bg-[#fcfbf9]/88 sm:bg-[#fcfbf9]/72 backdrop-blur-xl sm:backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 sm:h-[4.25rem] grid grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(175px,220px)_minmax(0,1fr)_auto] items-center gap-2 sm:gap-4">
         <div className="flex items-center min-w-0 shrink-0">
-          <Link href="/" className="group flex items-center min-w-0 max-w-[180px] sm:max-w-[220px] overflow-hidden rounded-2xl px-1 py-1 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">
+          <Link href="/" className="group flex items-center min-w-0 max-w-[190px] sm:max-w-[220px] overflow-hidden rounded-2xl px-1 py-1 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">
             <BrandLogo size="sm" subtext="GREATER NOIDA WEST" className="max-w-full" />
           </Link>
         </div>
@@ -77,7 +77,7 @@ export const Header: React.FC = () => {
 
 
         {/* Desktop Actions */}
-        <div className="hidden sm:flex items-center justify-self-end gap-2.5 shrink-0">
+        <div className="hidden lg:flex items-center justify-self-end gap-2.5 shrink-0">
           <Link href="/wishlist">
             <IconButton
               aria-label={`Shortlisted Schools (${shortlist.length})`}
@@ -137,7 +137,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Affordances */}
-        <div className="flex items-center justify-self-end gap-0.5 sm:hidden rounded-2xl border border-white/75 bg-white/65 px-0.5 py-0.5 backdrop-blur-lg shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
+        <div className="flex items-center justify-self-end gap-0.5 lg:hidden rounded-2xl border border-white/75 bg-white/65 px-0.5 py-0.5 backdrop-blur-lg shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
           {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
             <IconButton
@@ -183,7 +183,7 @@ export const Header: React.FC = () => {
         title="Admission Pitara"
         side="right"
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4 sm:gap-5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
           {isAuthenticated && user && (
             <div className="p-3.5 rounded-xl liquid-glass glass-interactive flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center shrink-0">

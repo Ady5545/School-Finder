@@ -1182,12 +1182,6 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             >
               Click here →
             </Link>
-            <Link
-              href="/auth/register"
-              className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white/80 px-3 py-2 text-[10.5px] sm:text-[11px] font-bold text-slate-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
-            >
-              Free parent account
-            </Link>
           </div>
         </div>
 

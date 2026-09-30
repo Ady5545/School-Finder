@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { buildPageMetadata } from '../../lib/seo';
 import { Breadcrumbs } from '../../components/ui/Breadcrumbs';
@@ -33,6 +33,16 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    const requestedType = new URLSearchParams(window.location.search).get('type');
+    if (requestedType === 'school-claim') {
+      setInquiryType('school-claim');
+      window.setTimeout(() => {
+        document.getElementById('contact-form-card')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 120);
+    }
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PUBLIC_ENQUIRY_EMAIL);

@@ -30,7 +30,6 @@ interface SchoolStoreContextType {
 
 const SchoolStoreContext = createContext<SchoolStoreContextType | undefined>(undefined);
 
-const ANON_SHORTLIST_KEY = 'admission_pitara_anon_shortlist_v1';
 const COMPARE_STORAGE_KEY = 'admission_pitara_compare_v1';
 const MAX_COMPARE_ITEMS = 4;
 
@@ -58,124 +57,42 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const shortlistRef = useRef<string[]>([]);
   const shortlistMutationQueueRef = useRef<Promise<void>>(Promise.resolve());
 
-  // Hydrate Compare and Anonymous Shortlist once on mount
+  // Compare and shortlist are account-only features. We deliberately do not
+  // hydrate or persist either list for anonymous visitors.
   useEffect(() => {
     try {
-      const savedCompare = localStorage.getItem(COMPARE_STORAGE_KEY);
-      if (savedCompare) {
-        const parsed = JSON.parse(savedCompare);
-        if (Array.isArray(parsed)) {
-          setCompareList(normalizePublicSlugs(parsed));
-        }
-      }
-
-      // If not authenticated on initial load, hydrate anonymous shortlist
-      const savedAnon = localStorage.getItem(ANON_SHORTLIST_KEY);
-      if (savedAnon) {
-        const parsed = JSON.parse(savedAnon);
-        if (Array.isArray(parsed)) {
-          const normalized = normalizePublicSlugs(parsed);
-          shortlistRef.current = normalized;
-          setShortlist(normalized);
-        }
-      }
+      localStorage.removeItem('admission_pitara_anon_shortlist_v1');
+      localStorage.removeItem(COMPARE_STORAGE_KEY);
     } catch {
       // Storage unavailable
     } finally {
+      setCompareList([]);
       setIsHydrated(true);
     }
   }, []);
 
-  // Sync Wishlist with Authenticated User Account
+  //  // Sync Wishlist with Authenticated User Account
   useEffect(() => {
     if (isAuthLoading) return;
 
     if (isAuthenticated && user?.id) {
       currentUserIdRef.current = user.id;
+      const userWishlist = Array.isArray(user.wishlist) ? normalizePublicSlugs(user.wishlist) : [];
+      shortlistRef.current = userWishlist;
+      setShortlist(userWishlist);
 
-      // Check if anonymous wishlist exists to merge on first login
-      let anonList: string[] = [];
       try {
-        const savedAnon = localStorage.getItem(ANON_SHORTLIST_KEY);
-        if (savedAnon) {
-          const parsed = JSON.parse(savedAnon);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            anonList = normalizePublicSlugs(parsed);
-          }
-        }
+        localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(userWishlist));
       } catch {}
-
-      if (anonList.length > 0) {
-        // Sync anonymous wishlist to authenticated account
-        fetch('/api/auth/wishlist', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'sync', list: anonList }),
-        })
-          .then(r => r.json())
-          .then(data => {
-            if (data?.success && Array.isArray(data.wishlist)) {
-              const merged = normalizePublicSlugs(data.wishlist as string[]);
-              shortlistRef.current = merged;
-              setShortlist(merged);
-              try {
-                localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(merged));
-                localStorage.removeItem(ANON_SHORTLIST_KEY);
-              } catch {}
-            }
-          })
-          .catch(() => {
-            // Preserve the anonymous list when sync fails. Removing it here would
-            // turn a temporary network failure into permanent shortlist data loss.
-            const existingUserList = Array.isArray(user.wishlist) ? normalizePublicSlugs(user.wishlist) : [];
-            const merged = normalizePublicSlugs([...existingUserList, ...anonList]);
-            shortlistRef.current = merged;
-            setShortlist(merged);
-            try {
-              localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(merged));
-            } catch {}
-          });
-      } else {
-        // User is authenticated: load THIS user's server-backed wishlist
-        const userWishlist = Array.isArray(user.wishlist) ? normalizePublicSlugs(user.wishlist) : [];
-        shortlistRef.current = userWishlist;
-        setShortlist(userWishlist);
-
-        try {
-          localStorage.setItem(`admission_pitara_user_wishlist_${user.id}`, JSON.stringify(userWishlist));
-        } catch {}
-      }
     } else {
-      // User is unauthenticated / logged out: restore local anonymous shortlist if present
       currentUserIdRef.current = null;
-      try {
-        const savedAnon = localStorage.getItem(ANON_SHORTLIST_KEY);
-        if (savedAnon) {
-          const parsed = JSON.parse(savedAnon);
-          if (Array.isArray(parsed)) {
-            const anonRestored = normalizePublicSlugs(parsed);
-            shortlistRef.current = anonRestored;
-            setShortlist(anonRestored);
-            return;
-          }
-        }
-      } catch {}
       shortlistRef.current = [];
       setShortlist([]);
+      try {
+        localStorage.removeItem('admission_pitara_anon_shortlist_v1');
+      } catch {}
     }
   }, [isAuthenticated, user?.id, user?.wishlist, isAuthLoading]);
-
-  // Sync Compare list to localStorage
-  useEffect(() => {
-    if (isHydrated) {
-      try {
-        localStorage.setItem(COMPARE_STORAGE_KEY, JSON.stringify(compareList));
-      } catch {
-        // Ignored
-      }
-    }
-  }, [compareList, isHydrated]);
-
   const setShortlistFromServer = useCallback((slugs: string[]) => {
     const canonical = normalizePublicSlugs(slugs);
     shortlistRef.current = canonical;
@@ -235,6 +152,15 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
       const canonical = toPublicCanonicalSlug(slug);
       if (!canonical) return;
 
+      if (!isAuthenticated || !user?.id) {
+        openAuthPrompt({
+          slug: canonical,
+          name: schoolName || 'this school',
+          action: 'shortlist',
+        });
+        return;
+      }
+
       const previous = shortlistRef.current;
       const exists = previous.includes(canonical);
       const nextList = exists
@@ -251,50 +177,49 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
         exists ? 'info' : 'success'
       );
 
-      if (isAuthenticated && user?.id) {
-        const action = exists ? 'remove' : 'add';
-        void queueShortlistMutation(async () => {
-          try {
-            const response = await fetch('/api/auth/wishlist', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ slug: canonical, action: action }),
-            });
-            const data = await response.json().catch(() => null);
-            if (!response.ok || !data?.success) {
-              throw new Error(data?.message || 'Wishlist mutation failed');
-            }
-            if (Array.isArray(data.wishlist)) {
-              const serverList = normalizePublicSlugs(data.wishlist as string[]);
-              shortlistRef.current = serverList;
-              setShortlist(serverList);
-              try {
-                localStorage.setItem(
-                  `admission_pitara_user_wishlist_${user.id}`,
-                  JSON.stringify(serverList)
-                );
-              } catch {}
-            }
-          } catch {
-            const recovered = await reconcileAuthenticatedShortlist(user.id);
-            if (!recovered) {
-              showToast('Could not sync your shortlist. Please check your connection and try again.', 'error');
-            }
-          }
-        });
-      } else {
+      const action = exists ? 'remove' : 'add';
+      void queueShortlistMutation(async () => {
         try {
-          localStorage.setItem(ANON_SHORTLIST_KEY, JSON.stringify(nextList));
-        } catch {}
-      }
+          const response = await fetch('/api/auth/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug: canonical, action }),
+          });
+          const data = await response.json().catch(() => null);
+          if (!response.ok || !data?.success) {
+            throw new Error(data?.message || 'Wishlist mutation failed');
+          }
+          if (Array.isArray(data.wishlist)) {
+            const serverList = normalizePublicSlugs(data.wishlist as string[]);
+            shortlistRef.current = serverList;
+            setShortlist(serverList);
+            try {
+              localStorage.setItem(
+                `admission_pitara_user_wishlist_${user.id}`,
+                JSON.stringify(serverList)
+              );
+            } catch {}
+          }
+        } catch {
+          const recovered = await reconcileAuthenticatedShortlist(user.id);
+          if (!recovered) {
+            showToast('Could not sync your shortlist. Please check your connection and try again.', 'error');
+          }
+        }
+      });
     },
-    [showToast, isAuthenticated, user?.id, queueShortlistMutation, reconcileAuthenticatedShortlist]
+    [showToast, isAuthenticated, user?.id, openAuthPrompt, queueShortlistMutation, reconcileAuthenticatedShortlist]
   );
 
-  const addToShortlist = useCallback(
+  const addToShortl  const addToShortlist = useCallback(
     (slug: string, schoolName?: string) => {
       const canonical = toPublicCanonicalSlug(slug);
       if (!canonical) return;
+
+      if (!isAuthenticated || !user?.id) {
+        openAuthPrompt({ slug: canonical, name: schoolName || 'this school', action: 'shortlist' });
+        return;
+      }
 
       const previous = shortlistRef.current;
       if (previous.includes(canonical)) return;
@@ -304,49 +229,33 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
       setShortlist(nextList);
       showToast(schoolName ? `${schoolName} saved to shortlist` : 'Saved to shortlist', 'success');
 
-      if (isAuthenticated && user?.id) {
-        void queueShortlistMutation(async () => {
-          try {
-            const response = await fetch('/api/auth/wishlist', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ slug: canonical, action: 'add' }),
-            });
-            const data = await response.json().catch(() => null);
-            if (!response.ok || !data?.success) {
-              throw new Error(data?.message || 'Wishlist mutation failed');
-            }
-            if (Array.isArray(data.wishlist)) {
-              const serverList = normalizePublicSlugs(data.wishlist as string[]);
-              shortlistRef.current = serverList;
-              setShortlist(serverList);
-              try {
-                localStorage.setItem(
-                  `admission_pitara_user_wishlist_${user.id}`,
-                  JSON.stringify(serverList)
-                );
-              } catch {}
-            }
-          } catch {
-            const recovered = await reconcileAuthenticatedShortlist(user.id);
-            if (!recovered) {
-              showToast('Could not sync your shortlist. Please check your connection and try again.', 'error');
-            }
-          }
-        });
-      } else {
+      void queueShortlistMutation(async () => {
         try {
-          localStorage.setItem(ANON_SHORTLIST_KEY, JSON.stringify(nextList));
-        } catch {}
-      }
+          const response = await fetch('/api/auth/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ slug: canonical, action: 'add' }),
+          });
+          const data = await response.json().catch(() => null);
+          if (!response.ok || !data?.success) throw new Error(data?.message || 'Wishlist mutation failed');
+          if (Array.isArray(data.wishlist)) {
+            const serverList = normalizePublicSlugs(data.wishlist as string[]);
+            shortlistRef.current = serverList;
+            setShortlist(serverList);
+          }
+        } catch {
+          const recovered = await reconcileAuthenticatedShortlist(user.id);
+          if (!recovered) showToast('Could not sync your shortlist. Please check your connection and try again.', 'error');
+        }
+      });
     },
-    [showToast, isAuthenticated, user?.id, queueShortlistMutation]
+    [showToast, isAuthenticated, user?.id, openAuthPrompt, queueShortlistMutation, reconcileAuthenticatedShortlist]
   );
 
   const removeFromShortlist = useCallback(
     (slug: string) => {
       const canonical = toPublicCanonicalSlug(slug);
-      if (!canonical) return;
+      if (!canonical || !isAuthenticated || !user?.id) return;
 
       const previous = shortlistRef.current;
       if (!previous.includes(canonical)) return;
@@ -427,11 +336,6 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
           }
         }
       });
-    } else {
-      try {
-        localStorage.removeItem(ANON_SHORTLIST_KEY);
-      } catch {}
-    }
   }, [showToast, isAuthenticated, user?.id, queueShortlistMutation, reconcileAuthenticatedShortlist]);
 
   const isInCompare = useCallback(
@@ -446,6 +350,12 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
     (slug: string, schoolName?: string) => {
       const canonical = toPublicCanonicalSlug(slug);
       if (!canonical) return;
+
+      if (!isAuthenticated || !user?.id) {
+        openAuthPrompt({ slug: canonical, name: schoolName || 'this school', action: 'compare' });
+        return;
+      }
+
       setCompareList(prev => {
         const exists = prev.includes(canonical);
         if (exists) {
@@ -468,8 +378,9 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
         return [...prev, canonical];
       });
     },
-    [showToast]
+    [showToast, isAuthenticated, user?.id, openAuthPrompt]
   );
+
 
   const removeFromCompare = useCallback((slug: string) => {
     const canonical = toPublicCanonicalSlug(slug);
@@ -485,6 +396,12 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const addCompare = useCallback((slug: string, schoolName?: string) => {
     const canonical = toPublicCanonicalSlug(slug);
     if (!canonical) return;
+
+    if (!isAuthenticated || !user?.id) {
+      openAuthPrompt({ slug: canonical, name: schoolName || 'this school', action: 'compare' });
+      return;
+    }
+
     setCompareList(prev => {
       if (prev.includes(canonical)) return prev;
       if (prev.length >= MAX_COMPARE_ITEMS) {
@@ -494,7 +411,8 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
       showToast(schoolName ? `${schoolName} added to comparison` : 'Added to comparison', 'success');
       return [...prev, canonical];
     });
-  }, [showToast]);
+  }, [showToast, isAuthenticated, user?.id, openAuthPrompt]);
+
 
   const addToCompare = addCompare;
   const removeCompare = removeFromCompare;

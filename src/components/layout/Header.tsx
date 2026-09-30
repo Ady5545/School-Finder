@@ -1,12 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Compass, Scale, Calendar, Menu, Search, User, Heart, ShieldCheck, LayoutDashboard, MessageSquare, SlidersHorizontal, ClipboardList } from 'lucide-react';
+import { Home, Compass, Scale, Calendar, Search, User, Heart, ShieldCheck, LayoutDashboard, MessageSquare, SlidersHorizontal, ClipboardList } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { IconButton } from '../ui/IconButton';
-import { Drawer } from '../ui/Drawer';
 import { BrandLogo } from '../ui/BrandLogo';
 import { NotificationCenter } from './NotificationCenter';
 import { useSchoolStore } from '../../lib/schoolStore';
@@ -15,7 +14,6 @@ import { cn } from '../../lib/utils';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { shortlist, compareList } = useSchoolStore();
   const { user, isAuthenticated } = useAuth();
 
@@ -136,171 +134,21 @@ export const Header: React.FC = () => {
           )}
         </div>
 
-        {/* Mobile Navigation Affordances */}
+        {/* Mobile actions — no hamburger; primary action is fixed at the bottom of the screen. */}
         <div className="flex items-center justify-self-end gap-0.5 lg:hidden rounded-2xl border border-white/75 bg-white/65 px-0.5 py-0.5 backdrop-blur-lg shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
           {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
-            <IconButton
-              aria-label="Search schools"
-              size="sm"
-              variant="ghost"
-              className="text-[var(--color-content)]"
-            >
-              <Search className="w-5 h-5" />
+            <IconButton aria-label="Search schools" size="sm" variant="ghost" className="text-[var(--color-content)]">
+              <Search className="w-4 h-4" />
             </IconButton>
           </Link>
           <Link href="/wishlist" aria-label={`Shortlist (${shortlist.length})`}>
-            <IconButton
-              aria-label={`Shortlist (${shortlist.length})`}
-              size="sm"
-              variant="ghost"
-              className="relative text-[var(--color-content)]"
-            >
-              <Heart className={cn('w-5 h-5', shortlist.length > 0 && 'text-rose-500 fill-rose-500')} />
-              {shortlist.length > 0 && (
-                <span className="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-rose-500 text-white rounded-full text-[8px] font-bold flex items-center justify-center">
-                  {shortlist.length}
-                </span>
-              )}
+            <IconButton aria-label={`Shortlist (${shortlist.length})`} size="sm" variant="ghost" className="relative text-[var(--color-content)]">
+              <Heart className={cn('w-4 h-4', shortlist.length > 0 && 'text-rose-500 fill-rose-500')} />
+              {shortlist.length > 0 && <span className="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-rose-500 text-white rounded-full text-[8px] font-bold flex items-center justify-center">{shortlist.length}</span>}
             </IconButton>
           </Link>
-          <IconButton
-            aria-label="Open mobile menu"
-            size="sm"
-            variant="outline"
-            className="border-white/80 bg-white/55 backdrop-blur-md"
-            onClick={() => setIsMobileMenuOpen(true)}
-          >
-            <Menu className="w-5 h-5" />
-          </IconButton>
         </div>
-      </div>
-
-      {/* Mobile Drawer */}
-      <Drawer
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-        title="Admission Pitara"
-        side="right"
-      >
-        <div className="flex flex-col gap-4 sm:gap-5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-          {isAuthenticated && user && (
-            <div className="p-3.5 rounded-xl liquid-glass glass-interactive flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center shrink-0">
-                {user.name.charAt(0).toUpperCase()}
-              </div>
-              <div className="overflow-hidden">
-                <div className="flex items-center gap-1">
-                  <span className="font-bold text-xs text-sky-950 truncate">{user.name}</span>
-                  {user.emailVerified && <ShieldCheck className="w-3 h-3 text-emerald-600 shrink-0" />}
-                </div>
-                <span className="text-[11px] text-sky-700 truncate block">{user.preferredSchoolLocality || 'Parent Account'}</span>
-              </div>
-            </div>
-          )}
-
-          <div className="flex flex-col gap-1">
-            <span className="text-xs font-bold text-[var(--color-content-muted)] uppercase tracking-wider px-2 mb-1">
-              Navigation
-            </span>
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={cn(
-                  'flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                  isActive(link.href)
-                    ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] font-semibold'
-                    : 'text-[var(--color-content)] hover:bg-[var(--color-surface-subtle)]'
-                )}
-              >
-                <div className="flex items-center gap-3">
-                  {link.icon || <Compass className="w-4 h-4 text-slate-400" />}
-                  <span>{link.label}</span>
-                </div>
-                {link.badge && (
-                  <span
-                    className={cn(
-                      'text-xs font-bold px-2 py-0.5 rounded-full',
-                      link.badgeColor || 'bg-[var(--color-primary)] text-white'
-                    )}
-                  >
-                    {link.badge}
-                  </span>
-                )}
-              </Link>
-            ))}
-
-            {isAuthenticated && (
-              <>
-                <Link
-                  href="/dashboard"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={cn(
-                    'flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                    isActive('/dashboard')
-                      ? 'text-[var(--color-primary)] bg-[var(--color-primary-light)] font-semibold'
-                      : 'text-[var(--color-content)] hover:bg-[var(--color-surface-subtle)]'
-                  )}
-                >
-                  <div className="flex items-center gap-3">
-                    <LayoutDashboard className="w-4 h-4 text-sky-600" />
-                    <span>Parent Dashboard</span>
-                  </div>
-                </Link>
-
-                {user?.role === 'admin' && (
-                  <Link
-                    href="/admin"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn(
-                      'flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                      isActive('/admin')
-                        ? 'text-amber-800 bg-amber-50 font-semibold'
-                        : 'text-amber-700 hover:bg-amber-50/70'
-                    )}
-                  >
-                    <div className="flex items-center gap-3">
-                      <ShieldCheck className="w-4 h-4 text-amber-600" />
-                      <span>Admin Telemetry</span>
-                    </div>
-                  </Link>
-                )}
-              </>
-            )}
-          </div>
-
-          <div className="pt-4 border-t border-[var(--color-border-subtle)] flex flex-col gap-2.5">
-            <Link href="/schools" onClick={() => setIsMobileMenuOpen(false)}>
-              <Button variant="primary" size="md" className="w-full">
-                Explore All Schools
-              </Button>
-            </Link>
-            {!isAuthenticated ? (
-              <div className="grid grid-cols-2 gap-2">
-                <Link href="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="outline" size="md" className="w-full text-xs">
-                    Sign In
-                  </Button>
-                </Link>
-                <Link href="/auth/register" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="secondary" size="md" className="w-full text-xs font-bold">
-                    Signup
-                  </Button>
-                </Link>
-              </div>
-            ) : null}
-          </div>
-
-          <div className="mt-auto pt-6 text-xs text-[var(--color-content-muted)] border-t border-[var(--color-border-subtle)]">
-            <p className="font-bold text-[var(--color-content)]">Admission Pitara — Greater Noida</p>
-            <p className="mt-1 leading-relaxed text-[11px]">
-              Find the right school in Greater Noida with parent-first intelligence, verified fee breakdowns, and unbiased comparisons.
-            </p>
-          </div>
-        </div>
-      </Drawer>
     </header>
   );
 };

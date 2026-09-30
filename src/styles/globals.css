@@ -856,3 +856,46 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
     padding-right: 0.75rem;
   }
 }
+
+
+/* ==========================================================================
+   Phone density layer — mobile only.
+   Desktop/tablet styles are intentionally untouched.
+   ========================================================================== */
+@media (max-width: 639px) {
+  html {
+    font-size: 15px;
+  }
+
+  body {
+    font-size: 0.9rem;
+  }
+
+  header > div:first-child {
+    height: 3.5rem;
+  }
+
+  #main-content {
+    padding-bottom: 0;
+  }
+
+  /* Compact common page rhythm without changing component structure. */
+  #main-content :where(.py-16) { padding-top: 2.75rem; padding-bottom: 2.75rem; }
+  #main-content :where(.py-20) { padding-top: 3rem; padding-bottom: 3rem; }
+  #main-content :where(.py-24) { padding-top: 3.25rem; padding-bottom: 3.25rem; }
+  #main-content :where(.px-6) { padding-left: 1rem; padding-right: 1rem; }
+
+  /* Keep headings compact but comfortably readable on small screens. */
+  #main-content :where(h1) { line-height: 1.12; }
+  #main-content :where(h2) { line-height: 1.18; }
+  #main-content :where(h3) { line-height: 1.22; }
+
+  /* Reduce excessive card density while preserving touchability. */
+  #main-content :where(.p-6) { padding: 1rem; }
+  #main-content :where(.p-5) { padding: 0.9rem; }
+
+  /* Fixed CTA owns the bottom safe area; never let content hide underneath it. */
+  footer {
+    padding-bottom: 4.75rem;
+  }
+}

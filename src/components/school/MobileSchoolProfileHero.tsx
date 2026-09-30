@@ -2,34 +2,16 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Heart, MapPin, Scale, ShieldCheck, Star } from 'lucide-react';
+import { MapPin, ShieldCheck, Star } from 'lucide-react';
 import { SchoolImage } from './SchoolImage';
 import { AdmissionStatus } from './AdmissionStatus';
 import { RatingDisplay } from '../ui/RatingDisplay';
 import { CardFeeDisplay } from './CardFeeDisplay';
-import { useSchoolStore } from '../../lib/schoolStore';
-import { useAuth } from '../../lib/authContext';
-import { cn } from '../../lib/utils';
+import { SchoolProfileActions } from './SchoolProfileActions';
 import type { School } from '../../types/school';
 
 export const MobileSchoolProfileHero: React.FC<{ school: School }> = ({ school }) => {
-  const store = useSchoolStore();
-  const { isAuthenticated } = useAuth();
-  const saved = store.isInShortlist(school.slug);
   const boards = Array.isArray(school.board) ? school.board : [school.board].filter(Boolean) as string[];
-
-  const toggleSave = () => {
-    if (!isAuthenticated) {
-      store.openAuthPrompt({
-        slug: school.slug,
-        name: school.name,
-        image: school.assets.featured,
-        area: school.location.area,
-      });
-      return;
-    }
-    store.toggleShortlist(school.slug, school.name);
-  };
 
   return (
     <section className="mobile-profile-hero">
@@ -58,14 +40,6 @@ export const MobileSchoolProfileHero: React.FC<{ school: School }> = ({ school }
             <h1>{school.name}</h1>
             {school.tagline && <p>{school.tagline}</p>}
           </div>
-          <button
-            type="button"
-            onClick={toggleSave}
-            className={cn('mobile-profile-save', saved && 'is-saved')}
-            aria-label={saved ? 'Remove from shortlist' : 'Add to shortlist'}
-          >
-            <Heart className={cn('w-4 h-4', saved && 'fill-current')} />
-          </button>
         </div>
 
         <div className="mobile-profile-status-row">
@@ -85,13 +59,8 @@ export const MobileSchoolProfileHero: React.FC<{ school: School }> = ({ school }
           </div>
         </div>
 
-        <div className="mobile-profile-actions-row">
-          <Link href="#fee-breakdown-section" className="mobile-profile-hero-action mobile-profile-hero-action--primary">
-            View fees <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-          <Link href="/compare" className="mobile-profile-hero-action mobile-profile-hero-action--secondary">
-            <Scale className="w-3.5 h-3.5" /> Compare
-          </Link>
+        <div className="mobile-profile-actions-inline">
+          <SchoolProfileActions school={school} />
         </div>
       </div>
     </section>

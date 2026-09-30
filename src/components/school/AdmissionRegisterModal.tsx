@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { ShieldCheck, CheckCircle2, AlertCircle, Sparkles, Building, User, Mail, Phone, GraduationCap, MapPin } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Drawer } from '../ui/Drawer';
-import { cn } from '../../lib/utils';
 import type { School } from '../../types/school';
 
 interface AdmissionRegisterModalProps {
@@ -163,14 +162,14 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
           </div>
         ) : (
           /* Registration Form */
-          <div className="overflow-y-auto pr-1 space-y-4">
+          <div className="space-y-4">
             <div>
               <div className="flex items-center gap-1.5 text-[11px] font-bold text-[var(--color-primary)] uppercase tracking-wider mb-1">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Admission Pitara Parent Guidance</span>
               </div>
               <h2 id="admission-modal-title" className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                {isPreReg ? 'Pre-register for 2027–28' : 'Register on Admission Pitara'}
+                {isPreReg ? 'Pre-register for 2027–28' : 'Send an Admission Request'}
               </h2>
               <p className="text-xs text-slate-500 mt-1">
                 Target Institution: <span className="font-bold text-slate-800">{school.name}</span>

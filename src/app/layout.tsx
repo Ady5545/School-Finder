@@ -2,6 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../styles/globals.css';
 import { Header } from '../components/layout/Header';
+import { MobileSiteChrome } from '../components/layout/MobileSiteChrome';
 import { Footer } from '../components/layout/Footer';
 import { ToastProvider } from '../components/ui/Toast';
 import { AuthProvider } from '../lib/authContext';
@@ -89,6 +90,7 @@ export default function RootLayout({
             <AuthProvider>
               <SchoolStoreProvider>
                 <Header />
+                <MobileSiteChrome />
                 <main className="flex-1 w-full flex flex-col" id="main-content">
                   {children}
                 </main>

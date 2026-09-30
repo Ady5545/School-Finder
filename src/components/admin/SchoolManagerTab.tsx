@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Edit3, ExternalLink, Plus, RefreshCw, Search, ShieldCheck, Archive, Database, Loader2 } from 'lucide-react';
-import type { School } from '../../data/schoolsData';
+import type { School } from '../../../data/schoolsData';
 import { SchoolEditorModal } from './SchoolEditorModal';
 
 interface SchoolRow {

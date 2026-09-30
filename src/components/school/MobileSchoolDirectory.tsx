@@ -12,7 +12,7 @@
             if (!isSafeStoredSchoolCoordinate(coords)) return null;
             return {
               school,
-              distanceKm: calculateDistance(target.lat, target.lng, coords.lat, coords.lng),
+              distanceKm: calculateDistance(target!.lat, target!.lng, coords.lat, coords.lng),
             };
           })
           .filter((item): item is NearbySuggestion => item !== null)

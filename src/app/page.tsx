@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { getAllSchoolsAsync } from '../lib/schoolsServer';
 import { HomeSearch } from '../components/school/HomeSearch';
+import { MobileHomeExperience } from '../components/school/MobileHomeExperience';
 import { HomeSchoolShowcase } from '../components/school/HomeSchoolShowcase';
 import { HomeRatingsDiscovery } from '../components/home/HomeRatingsDiscovery';
 import { WhyAdmissionPitara } from '../components/home/WhyAdmissionPitara';
@@ -50,7 +51,11 @@ export default async function HomePage() {
   const allSchools = await getAllSchoolsAsync();
 
   return (
-    <div className="w-full flex flex-col bg-[#fdfcf9] text-[var(--color-content)]">
+    <>
+      <div className="md:hidden">
+        <MobileHomeExperience schools={allSchools} />
+      </div>
+      <div className="hidden md:block w-full flex flex-col bg-[#fdfcf9] text-[var(--color-content)]">
       {/* ========================================================================= */}
       {/* 1. HERO SECTION: EXACT REPLICATION FROM USER IMAGE 1                      */}
       {/* ========================================================================= */}
@@ -393,6 +398,7 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { MapPin, ShieldCheck, Star } from 'lucide-react';
 import { SchoolImage } from './SchoolImage';
 import { AdmissionStatus } from './AdmissionStatus';

@@ -771,3 +771,88 @@ html.has-scroll-reveal .reveal-on-scroll.is-settled {
     min-height: 100dvh;
   }
 }
+
+
+/* Mobile-first finishing layer — keep the phone surface light, fast and overflow-safe. */
+@media (max-width: 639px) {
+  html {
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Reduce paint cost from the decorative glass system on phones. */
+  .liquid-glass,
+  .glass-surface,
+  .glass-surface-strong,
+  .glass-chip,
+  .glass-panel {
+    backdrop-filter: blur(8px) saturate(115%);
+    -webkit-backdrop-filter: blur(8px) saturate(115%);
+  }
+
+  .liquid-glass::after,
+  .glass-float,
+  .glass-breathe,
+  .glass-breathing-surface,
+  .page-glass-section::before,
+  .page-glass-section::after {
+    animation: none !important;
+  }
+
+  .liquid-glass-hover:hover,
+  .glass-surface:hover,
+  .glass-surface-strong:hover {
+    transform: none !important;
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Keep long content inside the viewport; intentional scrollers stay scrollable. */
+  #main-content :where(img, video, canvas, iframe) {
+    max-width: 100%;
+  }
+
+  #main-content :where(pre, code) {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  #main-content .overflow-x-auto {
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #main-content .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Data-heavy tables should scroll rather than squeeze into unreadable columns. */
+  #main-content :where(table) {
+    font-size: 0.75rem;
+  }
+
+  /* Better default rhythm on very narrow phones. */
+  #main-content :where(section) {
+    scroll-margin-top: 4.5rem;
+  }
+
+  /* Prevent decorative transforms from creating a second visual viewport. */
+  #main-content :where(.absolute) {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  /* Extra-small Android/iPhone widths: protect the smallest horizontal rhythm. */
+  #main-content .grid {
+    min-width: 0;
+  }
+
+  #main-content :where(input, select, textarea) {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}

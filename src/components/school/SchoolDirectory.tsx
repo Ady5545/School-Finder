@@ -22,6 +22,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { SchoolCard } from './SchoolCard';
+import { MobileSchoolDirectory } from './MobileSchoolDirectory';
 import { SponsoredPlacementCard } from './SponsoredPlacementCard';
 import { EmptyState } from '../ui/EmptyState';
 import { Button } from '../ui/Button';
@@ -696,7 +697,57 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
   }, [selectedProximityArea]);
 
   return (
-    <div className="w-full flex flex-col relative">
+    <>
+      <div className="md:hidden">
+        <MobileSchoolDirectory
+          initialSchools={initialSchools}
+          distinctBoards={distinctBoards}
+          distinctAreas={distinctAreas}
+          filteredSchools={filteredSchools}
+          nearbySectorSuggestions={nearbySectorSuggestions}
+          sectorSearchLoading={sectorSearchLoading}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          selectedBoard={selectedBoard}
+          setSelectedBoard={setSelectedBoard}
+          selectedArea={selectedArea}
+          setSelectedArea={setSelectedArea}
+          selectedSports={selectedSports}
+          toggleSport={toggleSport}
+          availableSports={availableSports}
+          selectedAdmissionStatus={selectedAdmissionStatus}
+          setSelectedAdmissionStatus={setSelectedAdmissionStatus}
+          selectedGrade={selectedGrade}
+          setSelectedGrade={setSelectedGrade}
+          siblingOnly={siblingOnly}
+          setSiblingOnly={setSiblingOnly}
+          selectedFeeTier={selectedFeeTier}
+          setSelectedFeeTier={setSelectedFeeTier}
+          selectedCurriculum={selectedCurriculum}
+          setSelectedCurriculum={setSelectedCurriculum}
+          availableCurricula={availableCurricula}
+          selectedTransport={selectedTransport}
+          setSelectedTransport={setSelectedTransport}
+          selectedTrust={selectedTrust}
+          setSelectedTrust={setSelectedTrust}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          activeFiltersCount={activeFiltersCount}
+          resetAllFilters={resetAllFilters}
+          showMap={showMap}
+          setShowMap={setShowMap}
+          selectedProximityArea={selectedProximityArea}
+          selectedRadiusKm={selectedRadiusKm}
+          proximityCoords={proximityCoords}
+          activeMapSchoolSlug={activeMapSchoolSlug}
+          handleProximityChange={handleProximityChange}
+          handleNearMe={handleNearMe}
+          isLocating={isLocating}
+          setActiveMapSchoolSlug={setActiveMapSchoolSlug}
+        />
+      </div>
+      <div className="hidden md:block">
+        <div className="w-full flex flex-col relative">
       {/* Search and Compact Filters Container */}
       <div className="bg-white rounded-2xl border border-[var(--color-border)] p-3.5 sm:p-4 shadow-warm-xs mb-6">
         {/* Row 1: Prominent Primary School Search Field */}
@@ -1712,6 +1763,8 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
       {/* Floating Action Button: Back to Top */}
       <BackToTop threshold={350} />
-    </div>
+        </div>
+      </div>
+    </>
   );
 };

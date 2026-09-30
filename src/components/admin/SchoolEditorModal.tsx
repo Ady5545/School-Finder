@@ -63,6 +63,7 @@ export function SchoolEditorModal({
   const [uploadingKind, setUploadingKind] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [coordinateText, setCoordinateText] = useState('');
 
   useEffect(() => {
     if (!isOpen) return;
@@ -119,6 +120,14 @@ export function SchoolEditorModal({
       };
     }
     setDraft(next);
+    const coords = next.location?.coordinates;
+    const lat = coords?.lat ?? coords?.latitude;
+    const lng = coords?.lng ?? coords?.longitude;
+    setCoordinateText(
+      lat !== null && lat !== undefined && lng !== null && lng !== undefined
+        ? String(lat) + ', ' + String(lng)
+        : ''
+    );
     setJsonText(JSON.stringify(next, null, 2));
     setJsonError(null);
     setErrorMessage(null);
@@ -149,6 +158,27 @@ export function SchoolEditorModal({
 
   const updateTimings = (patch: Partial<SchoolTimings>) =>
     update({ timings: { ...(draft.timings || {}), ...patch } });
+
+  const handleCoordinateChange = (value: string) => {
+    setCoordinateText(value);
+    const parts = value.split(',');
+    if (parts.length !== 2) return;
+
+    const latText = parts[0].trim();
+    const lngText = parts[1].trim();
+    const lat = latText ? Number(latText) : null;
+    const lng = lngText ? Number(lngText) : null;
+    if ((lat !== null && !Number.isFinite(lat)) || (lng !== null && !Number.isFinite(lng))) return;
+
+    updateLocation({
+      coordinates: {
+        ...(draft.location?.coordinates || { lat: null, lng: null }),
+        lat,
+        lng,
+        isVerified: lat !== null && lng !== null,
+      },
+    });
+  };
 
   const addMilestone = () => {
     const current = draft.admissions?.milestones || [];
@@ -420,11 +450,24 @@ export function SchoolEditorModal({
               </div>
               <div><label className={labelClass}>Full campus address *</label><textarea rows={3} value={String(location.address || '')} onChange={e => updateLocation({ address: e.target.value })} className={inputClass} /></div>
               <div><label className={labelClass}>State / region</label><input value={String(location.state || '')} onChange={e => updateLocation({ state: e.target.value })} className={inputClass} /></div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div><label className={labelClass}>Latitude</label><input type="number" step="any" value={location.coordinates?.lat ?? ''} onChange={e => updateLocation({ coordinates: { ...(location.coordinates || { lat: null, lng: null }), lat: e.target.value ? Number(e.target.value) : null, isVerified: true } })} className={inputClass + ' font-mono'} /></div>
-                <div><label className={labelClass}>Longitude</label><input type="number" step="any" value={location.coordinates?.lng ?? ''} onChange={e => updateLocation({ coordinates: { ...(location.coordinates || { lat: null, lng: null }), lng: e.target.value ? Number(e.target.value) : null, isVerified: true } })} className={inputClass + ' font-mono'} /></div>
+              <div>
+                <label className={labelClass}>Exact coordinates (Latitude, Longitude)</label>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={coordinateText}
+                  onChange={e => handleCoordinateChange(e.target.value)}
+                  placeholder="28.6085, 77.4395"
+                  className={inputClass + ' font-mono'}
+                  aria-describedby="coordinates-help"
+                />
+                <p id="coordinates-help" className="mt-1.5 text-[10px] text-slate-500">
+                  Enter both values in one box, separated by a comma. Example: 28.6085, 77.4395
+                </p>
               </div>
-              {location.coordinates?.lat && location.coordinates?.lng && <a className="inline-flex items-center gap-1.5 text-xs text-amber-300 hover:underline" href={'https://www.google.com/maps/search/?api=1&query=' + location.coordinates.lat + ',' + location.coordinates.lng} target="_blank" rel="noreferrer"><ExternalLink className="w-3.5 h-3.5" />Preview exact pin</a>}
+              {location.coordinates?.lat !== null && location.coordinates?.lat !== undefined && location.coordinates?.lng !== null && location.coordinates?.lng !== undefined && (
+                <a className="inline-flex items-center gap-1.5 text-xs text-amber-300 hover:underline" href={'https://www.google.com/maps/search/?api=1&query=' + location.coordinates.lat + ',' + location.coordinates.lng} target="_blank" rel="noreferrer"><ExternalLink className="w-3.5 h-3.5" />Preview exact pin</a>
+              )}
               <div><label className={labelClass}>Map search query</label><input value={String(location.mapSearchQuery || '')} onChange={e => updateLocation({ mapSearchQuery: e.target.value })} className={inputClass} /></div>
             </div>
           )}
@@ -435,8 +478,34 @@ export function SchoolEditorModal({
                 Use this section for the amount you want displayed on Admission Pitara. The year shown below is independently editable, so you can carry forward a prior fee schedule for the next admissions cycle.
               </div>
               <div className="grid md:grid-cols-2 gap-4">
-                <div><label className={labelClass}>Card / comparable annual fee (₹)</label><input type="number" value={fees.cardFee ?? ''} onChange={e => updateFees({ cardFee: e.target.value ? Number(e.target.value) : null })} className={inputClass} /></div>
-                <div><label className={labelClass}>Annual display / range text</label><input value={String(fees.annualDisplay || fees.rangeText || '')} onChange={e => updateFees({ annualDisplay: e.target.value, rangeText: e.target.value })} className={inputClass} /></div>
+                <div>
+                  <label className={labelClass}>Card / comparable annual fee (₹)</label>
+                  <input
+                    type="number"
+                    value={fees.cardFee ?? ''}
+                    onChange={e => {
+                      const value = e.target.value ? Number(e.target.value) : null;
+                      updateFees({
+                        cardFee: value,
+                        feeDisplayOverride: value === null ? '' : '₹' + value.toLocaleString('en-IN'),
+                      });
+                    }}
+                    className={inputClass}
+                  />
+                </div>
+                <div>
+                  <label className={labelClass}>Card display text</label>
+                  <input
+                    value={String(fees.feeDisplayOverride || '')}
+                    onChange={e => updateFees({ feeDisplayOverride: e.target.value })}
+                    className={inputClass}
+                    placeholder="e.g. ₹1,50,000 or Up to ₹3,95,800"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className={labelClass}>Annual display / range text</label>
+                  <input value={String(fees.annualDisplay || fees.rangeText || '')} onChange={e => updateFees({ annualDisplay: e.target.value, rangeText: e.target.value })} className={inputClass} />
+                </div>
               </div>
               <div className="grid md:grid-cols-3 gap-4">
                 <div><label className={labelClass}>Tuition annual</label><input value={String(fees.tuitionAnnual || '')} onChange={e => updateFees({ tuitionAnnual: e.target.value || null })} className={inputClass} /></div>

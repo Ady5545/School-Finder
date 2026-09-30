@@ -88,8 +88,10 @@ export const SchoolStoreProvider: React.FC<{ children: React.ReactNode }> = ({ c
       currentUserIdRef.current = null;
       shortlistRef.current = [];
       setShortlist([]);
+      setCompareList([]);
       try {
         localStorage.removeItem('admission_pitara_anon_shortlist_v1');
+        localStorage.removeItem(COMPARE_STORAGE_KEY);
       } catch {}
     }
   }, [isAuthenticated, user?.id, user?.wishlist, isAuthLoading]);

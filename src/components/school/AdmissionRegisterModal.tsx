@@ -141,8 +141,8 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
             <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-2 text-left">
               <p className="font-semibold text-slate-900">
                 {isPreReg
-                  ? `Thank you for pre-registering interest for ${school.name} (Academic Session 2027–28).`
-                  : `Your interest registration for ${school.name} has been successfully recorded.`}
+                  ? `Your pre-registration request for ${school.name} has reached Admission Pitara.`
+                  : `Your admission request for ${school.name} has reached Admission Pitara.`}
               </p>
               <p className="text-slate-600 leading-relaxed">
                 {isPreReg
@@ -173,7 +173,7 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
                 <span>Admission Pitara Parent Guidance</span>
               </div>
               <h2 id="admission-modal-title" className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-                {isPreReg ? 'Pre-register for 2027–28' : 'Register on Admission Pitara'}
+                {isPreReg ? 'Pre-register for 2027–28' : 'Send an Admission Request'}
               </h2>
               <p className="text-xs text-slate-500 mt-1">
                 Target Institution: <span className="font-bold text-slate-800">{school.name}</span>

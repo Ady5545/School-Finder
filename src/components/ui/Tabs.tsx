@@ -47,15 +47,15 @@ export const Tabs: React.FC<TabsProps> = ({
             id={`tab-${tab.id}`}
             onClick={() => onChange(tab.id)}
             className={cn(
-              'inline-flex items-center gap-2 whitespace-nowrap text-sm font-medium transition-all cursor-pointer select-none',
+              'inline-flex items-center gap-2 whitespace-nowrap shrink-0 min-h-11 text-[13px] sm:text-sm font-medium transition-all cursor-pointer select-none',
               variant === 'underline' && [
-                'py-3 px-4 border-b-2 -mb-[1px]',
+                'py-3 px-3 sm:px-4 border-b-2 -mb-[1px]',
                 isActive
                   ? 'border-[var(--color-primary)] text-[var(--color-primary)] font-semibold'
                   : 'border-transparent text-[var(--color-content-muted)] hover:text-[var(--color-content)] hover:border-[var(--color-border-strong)]',
               ],
               variant === 'pills' && [
-                'py-1.5 px-3.5 rounded-xl glass-interactive',
+                'py-2 px-3 sm:px-3.5 rounded-xl glass-interactive',
                 isActive
                   ? 'liquid-glass bg-white/72 text-[var(--color-primary)] font-semibold shadow-sm backdrop-blur-xl'
                   : 'text-[var(--color-content-muted)] hover:text-[var(--color-content)]',

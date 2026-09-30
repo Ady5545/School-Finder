@@ -127,7 +127,7 @@ export const NotificationCenter: React.FC = () => {
 
       {/* Popover Card */}
       {isOpen && (
-        <div className="absolute right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 mt-2.5 w-[330px] sm:w-[380px] bg-white rounded-2xl border border-[var(--color-border-strong)] shadow-warm-xl z-50 overflow-hidden text-left animate-in fade-in-50 zoom-in-95 duration-150 divide-y divide-[var(--color-border-subtle)]">
+        <div className="absolute right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 mt-2.5 w-[min(calc(100vw-1rem),330px)] sm:w-[380px] bg-white rounded-2xl border border-[var(--color-border-strong)] shadow-warm-xl z-50 overflow-hidden text-left animate-in fade-in-50 zoom-in-95 duration-150 divide-y divide-[var(--color-border-subtle)]">
           {/* Header */}
           <div className="p-4 bg-[var(--color-surface-muted)] flex items-center justify-between">
             <div className="flex items-center gap-2">

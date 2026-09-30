@@ -16,7 +16,7 @@ export const dynamic = 'force-dynamic';
 
 export default function ReviewsPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col flex-1">
+    <div className="mobile-route-page mobile-route-page--reviews max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'Reviews', isCurrent: true }]} className="mb-6" />
 
       <div className="space-y-3 pb-8 border-b border-[var(--color-border)]">

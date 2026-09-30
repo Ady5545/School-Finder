@@ -15,7 +15,7 @@ export const metadata = buildPageMetadata(
 
 export default function AdmissionsPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
+    <div className="mobile-route-page mobile-route-page--admissions max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'Admissions', isCurrent: true }]} className="mb-4" />
 
       <div className="pb-6 border-b border-[var(--color-border)] mb-8">

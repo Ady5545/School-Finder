@@ -19,7 +19,7 @@ export const dynamic = 'force-dynamic';
 
 export default function ComparePage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
+    <div className="mobile-route-page mobile-route-page--compare max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'Compare Schools', isCurrent: true }]} className="mb-4" />
 
       <div className="pb-6 mb-6">

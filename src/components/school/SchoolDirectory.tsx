@@ -1513,8 +1513,8 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
             {/* Radius options if Near Me is selected */}
             {selectedProximityArea && (
-              <div className="flex items-center gap-1.5 pt-1">
-                <span className="text-[11px] font-bold text-slate-500">Radius:</span>
+              <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                <span className="text-[11px] font-bold text-slate-500 shrink-0">Radius:</span>
                 {RADIUS_OPTIONS.map(opt => (
                   <button
                     key={opt.value}

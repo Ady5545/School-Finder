@@ -88,7 +88,7 @@ export const SchoolMatchView: React.FC<{ schools: School[] }> = ({ schools }) =>
 
   return (
     <div className="space-y-6">
-      <section className="rounded-3xl border border-[var(--color-border)] bg-white p-6 sm:p-8 shadow-warm-xs">
+      <section className="rounded-3xl border border-[var(--color-border)] bg-white p-4 sm:p-8 shadow-warm-xs">
         <span className="inline-flex items-center gap-2 rounded-full bg-sky-50 border border-sky-100 text-sky-800 text-[10px] font-black uppercase tracking-[0.16em] px-3 py-1">
           <SlidersHorizontal className="w-3.5 h-3.5" /> Transparent School Match
         </span>
@@ -131,9 +131,9 @@ export const SchoolMatchView: React.FC<{ schools: School[] }> = ({ schools }) =>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">{item.school.location.area || item.school.location.sector} · {(Array.isArray(item.school.board) ? item.school.board : [item.school.board]).filter(Boolean).join(', ')}</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 px-2.5 py-1 text-[10px] font-bold"><CheckCircle2 className="w-3 h-3" /> Matches {item.matchedCount}{selectedCount ? ' / ' + selectedCount : ''}</span>
-                <Link href={'/schools/' + item.school.slug}><Button variant="outline" size="sm">Open profile <ArrowRight className="w-3.5 h-3.5" /></Button></Link>
+                <Link href={'/schools/' + item.school.slug}><Button variant="outline" size="sm" className="w-full sm:w-auto justify-center">Open profile <ArrowRight className="w-3.5 h-3.5" /></Button></Link>
               </div>
             </div>
             {item.criteria.length > 0 && (

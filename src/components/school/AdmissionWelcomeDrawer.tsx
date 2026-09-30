@@ -364,3 +364,10 @@ export const AdmissionWelcomeDrawer: React.FC = () => {
 
           <div className="mt-5 flex items-start gap-2 text-[10px] leading-relaxed text-slate-400">
             <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-0.5 text-emerald-600" />
+            <span>Admission Pitara routes the request using the selected school’s verified contact details where available and keeps the request tied to that school.</span>
+          </div>
+        </div>
+      )}
+    </Drawer>
+  );
+};

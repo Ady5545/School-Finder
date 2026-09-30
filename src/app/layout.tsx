@@ -7,6 +7,7 @@ import { ToastProvider } from '../components/ui/Toast';
 import { AuthProvider } from '../lib/authContext';
 import { SchoolStoreProvider } from '../lib/schoolStore';
 import { ComparisonDock } from '../components/school/ComparisonDock';
+import { AdmissionWelcomeDrawer } from '../components/school/AdmissionWelcomeDrawer';
 import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
 import { CookieConsent } from '../components/privacy/CookieConsent';
@@ -93,6 +94,7 @@ export default function RootLayout({
                 </main>
                 <Footer />
                 <ComparisonDock />
+                <AdmissionWelcomeDrawer />
                 <ScrollRevealManager />
                 <ConsentAwareAnalytics />
                 <CookieConsent />

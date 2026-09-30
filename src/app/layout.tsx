@@ -8,6 +8,9 @@ import { AuthProvider } from '../lib/authContext';
 import { SchoolStoreProvider } from '../lib/schoolStore';
 import { ComparisonDock } from '../components/school/ComparisonDock';
 import { AdmissionWelcomeDrawer } from '../components/school/AdmissionWelcomeDrawer';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '../components/ui/Button';
 import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
 import { CookieConsent } from '../components/privacy/CookieConsent';
@@ -89,9 +92,21 @@ export default function RootLayout({
             <AuthProvider>
               <SchoolStoreProvider>
                 <Header />
-                <main className="flex-1 w-full flex flex-col" id="main-content">
+                <main className="flex-1 w-full flex flex-col pb-16 sm:pb-0" id="main-content">
                   {children}
                 </main>
+                <div className="fixed inset-x-0 bottom-0 z-50 px-3 pb-[max(0.65rem,env(safe-area-inset-bottom))] pt-2 bg-gradient-to-t from-[#fdfcf9] via-[#fdfcf9]/95 to-transparent sm:hidden">
+                  <Link href="/schools" className="block w-full">
+                    <Button
+                      variant="primary"
+                      size="md"
+                      className="w-full h-11 rounded-2xl text-sm font-bold shadow-[0_8px_24px_rgba(15,45,74,0.20)]"
+                      rightIcon={<ArrowRight className="w-4 h-4" />}
+                    >
+                      Explore schools
+                    </Button>
+                  </Link>
+                </div>
                 <Footer />
                 <ComparisonDock />
                 <AdmissionWelcomeDrawer />

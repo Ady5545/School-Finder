@@ -50,7 +50,7 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
   };
 
   return (
-    <div className="flex flex-col gap-2.5 w-full">
+    <div className="mobile-profile-actions flex flex-col gap-2.5 w-full">
       {/* Primary CTA: Admission Pitara Registration / Pre-Registration */}
       <Button
         type="button"

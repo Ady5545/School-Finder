@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-t border-t-[var(--color-brand-red-border)]/45 border-b border-white/70 bg-[#fcfbf9]/88 sm:bg-[#fcfbf9]/72 backdrop-blur-xl sm:backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
+    <header className="hidden lg:block sticky top-0 z-40 w-full border-t border-t-[var(--color-brand-red-border)]/45 border-b border-white/70 bg-[#fcfbf9]/88 sm:bg-[#fcfbf9]/72 backdrop-blur-xl sm:backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 sm:h-[4.25rem] grid grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(175px,220px)_minmax(0,1fr)_auto] items-center gap-2 sm:gap-4">
         <div className="flex items-center min-w-0 shrink-0">
           <Link href="/" className="group flex items-center min-w-0 max-w-[190px] sm:max-w-[220px] overflow-hidden rounded-2xl px-1 py-1 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">

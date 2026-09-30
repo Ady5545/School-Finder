@@ -59,12 +59,18 @@ export const AdmissionWelcomeDrawer: React.FC = () => {
 
     try {
       if (window.localStorage.getItem(FIRST_VISIT_KEY) === '1') return;
-      window.localStorage.setItem(FIRST_VISIT_KEY, '1');
     } catch {
       // Continue without persistence if storage is unavailable.
     }
 
-    const timer = window.setTimeout(() => setIsOpen(true), 900);
+    const timer = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem(FIRST_VISIT_KEY, '1');
+      } catch {
+        // Continue without persistence if storage is unavailable.
+      }
+      setIsOpen(true);
+    }, 900);
     return () => window.clearTimeout(timer);
   }, [pathname]);
 

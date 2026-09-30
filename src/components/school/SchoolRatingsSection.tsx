@@ -378,7 +378,7 @@ export const SchoolRatingsSection: React.FC<SchoolRatingsSectionProps> = ({
       {showForm && (
         <form
           onSubmit={handleSubmitRating}
-          className="bg-white rounded-2xl border border-sky-300 p-6 shadow-warm-sm mb-8 space-y-5 animate-fadeIn"
+          className="bg-white rounded-2xl border border-sky-300 p-4 sm:p-6 shadow-warm-sm mb-6 sm:mb-8 space-y-5 animate-fadeIn"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
             <div>

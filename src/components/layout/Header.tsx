@@ -43,7 +43,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/70 dark:border-white/10 bg-[#fcfbf9]/72 dark:bg-[#0b1420]/80 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
+    <header className="hidden lg:block sticky top-0 z-40 w-full border-b border-white/70 dark:border-white/10 bg-[#fcfbf9]/72 dark:bg-[#0b1420]/80 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-[4.65rem] grid grid-cols-[auto_1fr_auto] items-center gap-3 sm:gap-5">
         {/* Logo / Brand Mark */}
         <div className="flex items-center gap-5 min-w-0">

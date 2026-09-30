@@ -163,7 +163,7 @@ export async function POST(req: NextRequest) {
       message: isPreReg
         ? `Pre-registration for ${cleanSchoolName} successfully recorded.`
         : `Registration for ${cleanSchoolName} successfully recorded.`,
-      disclaimer: 'This registration is recorded on Admission Pitara. Official admission evaluation and enrollment are conducted directly by the school.',
+      deliveryNote: 'Your admission request has been received by Admission Pitara. Our team will follow up with the school using the details you provided.',
     });
   } catch (error) {
     console.error('Error processing admission registration:', error);

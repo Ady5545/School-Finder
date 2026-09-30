@@ -50,7 +50,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto p-3 sm:p-4 bg-slate-900/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center overflow-y-auto p-2 sm:p-4 bg-slate-900/50 backdrop-blur-xs transition-opacity animate-in fade-in duration-150"
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
@@ -59,7 +59,7 @@ export const Modal: React.FC<ModalProps> = ({
     >
       <div
         className={cn(
-          'relative w-full max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-3xl liquid-glass glass-shine glass-float p-5 sm:p-6 shadow-xl border-white/80 transition-transform animate-in zoom-in-95 duration-150',
+          'relative w-full max-h-[calc(100dvh-0.5rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-t-3xl sm:rounded-3xl liquid-glass glass-shine glass-float p-4 sm:p-6 shadow-xl border-white/80 transition-transform animate-in zoom-in-95 duration-150',
           maxStyles[maxWidth],
           className
         )}
@@ -82,7 +82,7 @@ export const Modal: React.FC<ModalProps> = ({
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="p-1 rounded-lg text-[var(--color-content-muted)] hover:text-[var(--color-content)] hover:bg-[var(--color-surface-subtle)] cursor-pointer"
+            className="min-w-10 min-h-10 flex items-center justify-center p-1 rounded-lg text-[var(--color-content-muted)] hover:text-[var(--color-content)] hover:bg-[var(--color-surface-subtle)] cursor-pointer"
           >
             <X className="w-5 h-5" aria-hidden="true" />
           </button>

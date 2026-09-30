@@ -607,3 +607,91 @@ export async function sendPublicEnquiryEmail({
     return { success: false, category: classified.category, error: classified.safeUserMessage };
   }
 }
+
+export interface SendAdmissionRequestToSchoolOptions {
+  to: string;
+  parentName: string;
+  parentEmail: string;
+  parentPhone: string;
+  childGrade: string;
+  residentialSociety?: string;
+  schoolName: string;
+  academicSession: string;
+  requestType: 'admission_registration' | 'admission_preregistration';
+  submissionId: string;
+}
+
+/**
+ * Sends an admission request from Admission Pitara to the school's recorded
+ * institutional contact address. The parent's email is set as reply-to.
+ */
+export async function sendAdmissionRequestToSchool({
+  to,
+  parentName,
+  parentEmail,
+  parentPhone,
+  childGrade,
+  residentialSociety,
+  schoolName,
+  academicSession,
+  requestType,
+  submissionId,
+}: SendAdmissionRequestToSchoolOptions): Promise<{ success: boolean; error?: string; category?: EmailErrorCode }> {
+  const creds = getEmailCredentials();
+
+  if (!creds.hasUser || !creds.hasPass) {
+    return {
+      success: false,
+      category: 'EMAIL_CONFIG_MISSING',
+      error: 'Email delivery is not configured on the server.',
+    };
+  }
+
+  const label = requestType === 'admission_preregistration' ? 'Pre-Registration' : 'Admission Registration';
+  const subject = 'Admission Pitara — ' + label + ' Request — ' + schoolName + ' — ' + academicSession;
+  const societyLine = residentialSociety ? 'Residential Society: ' + residentialSociety + '\n' : '';
+
+  const text = [
+    'Dear ' + schoolName + ' Admissions Team,',
+    '',
+    'A parent has submitted an admission request through Admission Pitara for the ' + academicSession + ' session.',
+    '',
+    'Parent / Guardian: ' + parentName,
+    'Email: ' + parentEmail,
+    'Phone: ' + parentPhone,
+    "Child's Target Grade: " + childGrade,
+    societyLine.trim(),
+    'Academic Session: ' + academicSession,
+    'Admission Pitara Submission ID: ' + submissionId,
+    '',
+    'This request is being forwarded by Admission Pitara for follow-up with the parent.',
+    '',
+    'Regards,',
+    'Admission Pitara',
+    'Greater Noida West & Noida Extension',
+  ].filter(Boolean).join('\n');
+
+  try {
+    const transporter = createTransporter(creds);
+    await transporter.sendMail({
+      from: creds.smtpFrom,
+      to,
+      replyTo: parentEmail,
+      subject,
+      text,
+    });
+    console.log('[EMAIL_SUCCESS] Admission request forwarded to school for ' + schoolName + '.');
+    return { success: true };
+  } catch (err: unknown) {
+    const classified = classifySmtpError(err);
+    logSmtpDiagnostics('sendAdmissionRequestToSchool', {
+      category: classified.category,
+      hasUser: creds.hasUser,
+      hasPass: creds.hasPass,
+      smtpHost: creds.smtpHost,
+      smtpPort: creds.smtpPort,
+      errorSnippet: classified.detail,
+    });
+    return { success: false, category: classified.category, error: classified.safeUserMessage };
+  }
+}

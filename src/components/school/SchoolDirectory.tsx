@@ -19,6 +19,7 @@ import {
   Star,
   LocateFixed,
   Navigation,
+  ShieldCheck,
 } from 'lucide-react';
 import { SchoolCard } from './SchoolCard';
 import { SponsoredPlacementCard } from './SponsoredPlacementCard';
@@ -1163,6 +1164,27 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </button>
         </div>
 
+        {/* Parent + School Trust Strip */}
+        <div className="mt-3 rounded-xl border border-amber-200/80 bg-gradient-to-r from-amber-50 via-white to-sky-50 px-3.5 py-3 sm:px-4 sm:py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-900">
+              <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Want your school listed?</span>
+            </div>
+            <p className="text-[10.5px] sm:text-[11px] text-slate-600 leading-relaxed mt-0.5">
+              Schools, administrators and parents can send official school details or corrections to our team for review.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <Link
+              href="/contact?type=school-claim"
+              className="inline-flex items-center justify-center rounded-lg bg-white border border-amber-300 px-3 py-2 text-[10.5px] sm:text-[11px] font-extrabold text-amber-900 hover:bg-amber-100 transition-colors shadow-2xs"
+            >
+              Click here →
+            </Link>
+          </div>
+        </div>
+
         {/* Active Filter Chips Ribbon (Desktop & Mobile) */}
         {activeFiltersCount > 0 && (
           <div className="flex items-center gap-1.5 mt-2.5 pt-2 border-t border-[var(--color-border-subtle)] overflow-x-auto no-scrollbar text-[11px]">
@@ -1288,7 +1310,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         title="Filter Schools"
         side="bottom"
       >
-        <div className="flex flex-col gap-4 pb-4">
+        <div className="flex flex-col gap-4 pb-6">
           {/* Curriculum / Board */}
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider block">
@@ -1491,8 +1513,8 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
             {/* Radius options if Near Me is selected */}
             {selectedProximityArea && (
-              <div className="flex items-center gap-1.5 pt-1">
-                <span className="text-[11px] font-bold text-slate-500">Radius:</span>
+              <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                <span className="text-[11px] font-bold text-slate-500 shrink-0">Radius:</span>
                 {RADIUS_OPTIONS.map(opt => (
                   <button
                     key={opt.value}
@@ -1531,7 +1553,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </div>
 
           {/* Action Footer in Filter Drawer */}
-          <div className="pt-3 border-t border-[var(--color-border-subtle)] flex items-center gap-3 mt-1">
+          <div className="pt-3 border-t border-[var(--color-border-subtle)] flex flex-col-reverse sm:flex-row items-stretch sm:items-center gap-2.5 mt-1">
             <button
               type="button"
               onClick={resetAllFilters}
@@ -1552,16 +1574,16 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
       {/* Main Results and Supporting Map Layout */}
       {/* Primary rule: Results are ALWAYS rendered first on mobile (order-1) so parents immediately see cards */}
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-5 sm:gap-6 min-w-0">
         {/* Results Column */}
         <div
           className={cn(
-            'flex flex-col order-1 transition-all duration-200',
+            'flex flex-col order-1 transition-all duration-200 min-w-0',
             showMap ? 'w-full lg:w-7/12 xl:w-2/3' : 'w-full'
           )}
         >
           {/* Results Status Header */}
-          <div className="flex flex-wrap items-center justify-between mb-4 gap-2">
+          <div className="flex flex-wrap items-center justify-between mb-4 gap-2 min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm font-extrabold text-[var(--color-content)]">
                 {filteredSchools.length} {filteredSchools.length === 1 ? 'School' : 'Schools'} Found
@@ -1672,8 +1694,8 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         
         {/* Supporting Map Column (order-2 so on mobile it sits comfortably below the initial results when toggled) */}
         {showMap && (
-          <div className="w-full lg:w-5/12 xl:w-1/3 order-2">
-            <div className="sticky top-20">
+          <div className="w-full lg:w-5/12 xl:w-1/3 order-2 min-w-0">
+            <div className="lg:sticky lg:top-20">
               <DirectoryInteractiveMap
                 schools={initialSchools}
                 selectedProximityArea={selectedProximityArea}

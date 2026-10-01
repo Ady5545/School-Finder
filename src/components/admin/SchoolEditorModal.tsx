@@ -58,7 +58,6 @@ export function SchoolEditorModal({
   const [draft, setDraft] = useState<Partial<School>>({});
   const [jsonText, setJsonText] = useState('');
   const [jsonError, setJsonError] = useState<string | null>(null);
-  const [auditReason, setAuditReason] = useState('Updated via Admission Pitara Admin CMS');
   const [isSaving, setIsSaving] = useState(false);
   const [uploadingKind, setUploadingKind] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -113,8 +112,8 @@ export function SchoolEditorModal({
       next.verification = {
         isVerified: false,
         status: 'pending_audit',
-        lastVerified: new Date().toISOString().slice(0, 10),
-        sourceName: 'Admission Pitara Admin CMS',
+        lastVerified: '',
+        sourceName: '',
         cbseAffiliationNumber: null,
         verifiedFields: [],
       };
@@ -321,8 +320,8 @@ export function SchoolEditorModal({
         cache: 'no-store',
         body: JSON.stringify(
           isNew
-            ? { schoolData: payload, reason: auditReason.trim() || 'Created via Admin CMS' }
-            : { updates: payload, reason: auditReason.trim() || 'Updated via Admin CMS' },
+            ? { schoolData: payload }
+            : { updates: payload },
         ),
       });
       const data = await res.json();
@@ -363,7 +362,7 @@ export function SchoolEditorModal({
             <p className="text-[10px] uppercase tracking-[0.16em] text-amber-400 font-black">Admission Pitara CMS</p>
             <h2 className="text-lg sm:text-xl font-black text-white font-serif truncate">{isNew ? 'Add a school' : pageMode ? String(draft.name || 'Edit school') : 'Edit school data'}</h2>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              {pageMode ? 'Edit the complete school record. Changes are saved to the persistent CMS and recorded in the admin audit trail.' : 'Everything here is editable. The Full Data tab is the escape hatch for any field not represented by a visual control.'}
+              {pageMode ? 'Edit the complete school record. Changes are saved to the persistent CMS and appear on the public school profile.' : 'Everything here is editable. The Full Data tab is the escape hatch for any field not represented by a visual control.'}
             </p>
           </div>
           {pageMode ? (
@@ -585,7 +584,7 @@ export function SchoolEditorModal({
           )}
 
           <div className="mt-6 pt-4 border-t border-[#1b3d63] grid md:grid-cols-[1fr_auto] gap-4 items-end">
-            <div><label className={labelClass}>Admin change note *</label><input value={auditReason} onChange={e=>setAuditReason(e.target.value)} className={inputClass} required /></div>
+            <div className="text-[10px] text-slate-500">Changes are saved to the live school record.</div>
             <div className="flex gap-2 justify-end"><button type="button" onClick={onClose} className="px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-xs font-bold text-slate-300">Cancel</button><button type="submit" disabled={isSaving || uploadingKind !== null || !canSave} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black disabled:opacity-50"><Save className="w-4 h-4" />{isSaving ? 'Saving…' : isNew ? 'Create school' : 'Save changes'}</button></div>
           </div>
         </form>

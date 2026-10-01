@@ -10,7 +10,7 @@ import {
   Plus,
   Save,
   Trash2,
-  Upload,
+  Upload as UploadIcon,
   X,
 } from 'lucide-react';
 import type { School } from '../../types/school';
@@ -619,7 +619,7 @@ function Upload({
 }) {
   return (
     <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-[#1d4672] bg-[#091b32] px-3 py-2 text-xs font-bold text-slate-200 hover:border-amber-400 hover:text-white">
-      <Upload className="w-3.5 h-3.5" />
+      <UploadIcon className="w-3.5 h-3.5" />
       {label}
       <input type="file" accept="image/*" className="hidden" onChange={(event) => { const file = event.target.files?.[0]; if (file) onUpload(file, kind); event.currentTarget.value = ''; }} />
     </label>

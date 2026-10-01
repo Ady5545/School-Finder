@@ -83,7 +83,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             src={school.assets.featured}
             alt={school.name}
             aspectRatio="video"
-            className="w-full h-48 sm:h-52 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+            className="w-full h-44 sm:h-52 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         </Link>
 
@@ -170,15 +170,15 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
         </div>
 
         {/* Card Footer: Fees & Detail Link */}
-        <div className="mt-4 -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-5 sm:p-6 bg-white/38 rounded-b-2xl border-t border-white/70 backdrop-blur-md flex items-center justify-between gap-3">
+        <div className="mt-4 -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-5 sm:p-6 bg-white/38 rounded-b-2xl border-t border-white/70 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <CardFeeDisplay slug={school.slug} fees={school.fees} />
 
-          <div className="flex items-center gap-1.5 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0 w-full sm:w-auto">
             <button
               type="button"
               onClick={handleCompare}
               className={cn(
-                'text-xs px-3 py-2 rounded-xl border font-semibold transition-all duration-200 cursor-pointer active:scale-95 shadow-warm-2xs min-h-[38px]',
+                'text-xs px-3 py-2 rounded-xl border font-semibold transition-all duration-200 cursor-pointer active:scale-95 shadow-warm-2xs min-h-[40px] flex-1 sm:flex-none justify-center',
                 isCompared
                   ? 'border-[var(--color-primary)] bg-[var(--color-primary-light)] text-[var(--color-primary)] font-bold'
                   : 'border-white/80 bg-white/55 backdrop-blur-md text-[var(--color-content)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] hover:bg-[var(--color-accent-light)] font-semibold'

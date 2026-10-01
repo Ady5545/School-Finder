@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
   AlertCircle,
+  ArrowLeft,
   Check,
   ExternalLink,
   Image as ImageIcon,
@@ -499,6 +500,7 @@ export function AdminSchoolVisualEditor({ school }: Props) {
             <h1 className="truncate text-base sm:text-lg font-black text-white">{school.name}</h1>
           </div>
           <div className="flex items-center gap-2 shrink-0">
+            <a href="/admin" className={secondaryButton}><ArrowLeft className="w-4 h-4" />Back to Admin</a>
             <a href={'/schools/' + school.slug} target="_blank" rel="noreferrer" className={secondaryButton}><ExternalLink className="w-4 h-4" />Public profile</a>
             <button type="button" onClick={save} disabled={!dirty || saving} className={dirty ? saveButton : secondaryButton}>
               <Save className="w-4 h-4" />{saving ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}

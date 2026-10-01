@@ -23,6 +23,7 @@ import { AdmissionChecklist } from '../../../components/school/AdmissionChecklis
 import { SchoolViewTracker } from '../../../components/school/SchoolViewTracker';
 import { Button } from '../../../components/ui/Button';
 import { cn } from '../../../lib/utils';
+import { SchoolAdminEditBridge } from '../../../components/admin/SchoolAdminEditBridge';
 import {
   MapPin,
   Globe,
@@ -49,6 +50,9 @@ import {
 interface SchoolDetailPageProps {
   params: Promise<{
     slug: string;
+  }>;
+  searchParams?: Promise<{
+    adminEdit?: string;
   }>;
 }
 
@@ -85,8 +89,10 @@ export async function generateMetadata({ params }: SchoolDetailPageProps) {
   return buildSchoolMetadata(school);
 }
 
-export default async function SchoolDetailPage({ params }: SchoolDetailPageProps) {
+export default async function SchoolDetailPage({ params, searchParams }: SchoolDetailPageProps) {
   const { slug } = await params;
+  const adminParams = searchParams ? await searchParams : {};
+  const adminEdit = adminParams.adminEdit === '1';
   const school = await getSchoolBySlugAsync(slug);
 
   if (!school || school.slug === 'mount-vinson-school') {
@@ -120,6 +126,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24 lg:pb-8 w-full flex flex-col flex-1">
+      {adminEdit && <SchoolAdminEditBridge />}
       {/* Telemetry Tracking with Session Deduplication */}
       <SchoolViewTracker slug={school.slug} />
 
@@ -171,12 +178,12 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
             <SchoolBadge type="schoolType" value={school.schoolType} />
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-[var(--color-content)] tracking-tight">
+          <h1 data-admin-field="name" data-admin-label="School name" className="text-2xl sm:text-4xl font-extrabold text-[var(--color-content)] tracking-tight">
             {school.name}
           </h1>
 
           {school.tagline && (
-            <p className="text-sm sm:text-base text-[var(--color-content-muted)] max-w-3xl leading-relaxed">
+            <p data-admin-field="tagline" data-admin-label="Tagline" className="text-sm sm:text-base text-[var(--color-content-muted)] max-w-3xl leading-relaxed">
               {school.tagline}
             </p>
           )}
@@ -184,7 +191,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--color-content-muted)] pt-1">
             <div className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-              <span className="min-w-0 break-words">{school.location.address || school.location.area}</span>
+              <span data-admin-field="location.address" data-admin-label="School address" className="min-w-0 break-words">{school.location.address || school.location.area}</span>
             </div>
             <RatingDisplay score={school.rating.score} reviewsCount={school.rating.reviewsCount} size="sm" />
           </div>
@@ -214,7 +221,9 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         {/* Left 2 Cols: Imagery, Overview, Facilities, Sports */}
         <div className="lg:col-span-2 space-y-8">
           {/* Featured / Hero Visual */}
-          <SchoolHeroVisual school={school} />
+          <div data-admin-section="gallery" data-admin-label="Campus imagery" className="rounded-2xl">
+            <SchoolHeroVisual school={school} />
+          </div>
 
           {/* Quick Specifications Matrix */}
           {[
@@ -242,8 +251,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
             </div>
           )}
 
-          {school.timings && (school.timings.weekdays || school.timings.saturday || school.timings.sunday || school.timings.notes) && (
-            <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+          {!school.publicHiddenSections?.includes('timings') && school.timings && (school.timings.weekdays || school.timings.saturday || school.timings.sunday || school.timings.notes) && (
+            <section data-admin-section="timings" data-admin-label="School Timings" className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
               <div>
                 <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">School Timings</h2>
                 <p className="text-xs text-[var(--color-content-muted)] mt-1">Daily timings maintained by the Admission Pitara admin directory.</p>
@@ -265,9 +274,9 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           )}
 
           {/* About Section */}
-          <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-3.5">
+          {!school.publicHiddenSections?.includes('about') && ( <section data-admin-section="about" data-admin-label="About" className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-3.5">
             <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">About {school.name}</h2>
-            <p className="text-sm text-[var(--color-content-muted)] leading-relaxed">{school.summary}</p>
+            <p data-admin-field="summary" data-admin-label="About / summary" className="text-sm text-[var(--color-content-muted)] leading-relaxed">{school.summary}</p>
             {school.achievements && school.achievements.length > 0 && (
               <div className="mt-5 pt-4.5 border-t border-[var(--color-border-subtle)]">
                 <h3 className="text-xs font-bold text-[var(--color-content)] uppercase tracking-wider mb-2.5">
@@ -275,7 +284,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
                 </h3>
                 <ul className="space-y-2 text-xs text-[var(--color-content-muted)] list-none p-0">
                   {school.achievements.map((ach, idx) => (
-                    <li key={idx} className="flex items-start gap-2.5">
+                    <li key={idx} data-admin-section={idx === 0 ? 'achievements' : undefined} data-admin-label="Recognitions & Highlights" className="flex items-start gap-2.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                       <span className="leading-relaxed">{ach}</span>
                     </li>
@@ -289,17 +298,16 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <SchoolAdmissionsSection school={school} />
 
           {/* Verified Fee Structure & Breakdown */}
-          <section id="fee-breakdown-section">
+          {!school.publicHiddenSections?.includes('fees') && <section data-admin-section="fees" data-admin-label="Fee Structure" id="fee-breakdown-section">
             <ComprehensiveFeeBreakdown fees={school.fees} schoolName={school.name} />
-          </section>
-          
-          <FeeIntelligence school={school} />
+          </section>}
+          {!school.publicHiddenSections?.includes('fees') && <FeeIntelligence school={school} />
 
           <AdmissionChecklist school={school} />
 
           {/* Campus Facilities */}
-          {school.facilities && school.facilities.length > 0 && (
-            <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+          {!school.publicHiddenSections?.includes('facilities') && school.facilities && school.facilities.length > 0 && (
+            <section data-admin-section="facilities" data-admin-label="Campus Facilities" className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
               <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">Campus Infrastructure & Facilities</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {school.facilities.map((fac, idx) => (
@@ -318,8 +326,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           )}
 
           {/* Sports & Athletics Section */}
-          {school.sports && school.sports.length > 0 && (
-            <section className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+          {!school.publicHiddenSections?.includes('sports') && school.sports && school.sports.length > 0 && (
+            <section data-admin-section="sports" data-admin-label="Sports & Athletics" className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
               <div>
                 <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">
                   Sports & Athletics
@@ -345,14 +353,14 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           )}
 
           {/* Real Campus Photo Gallery */}
-          <SchoolGallery school={school} />
+          {!school.publicHiddenSections?.includes('gallery') && <div data-admin-section="gallery" data-admin-label="Campus Gallery"><SchoolGallery school={school} /></div>}
         </div>
 
         {/* Right Col: Institutional Credentials, Fees & Contact */}
         <div className="space-y-6">
           {/* Institutional Credentials & Verification Card */}
-          {school.verification && (
-            <section
+          {!school.publicHiddenSections?.includes('credentials') && school.verification && (
+            <section data-admin-section="credentials" data-admin-label="Institutional Credentials"
               className={
                 school.verification.isVerified
                   ? 'bg-[#f0fdf4] p-5 rounded-2xl border border-[#bbf7d0] shadow-warm-xs space-y-3'
@@ -424,7 +432,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
           {/* Contact Details Card */}
           {(school.location?.address || school.location?.area || school.contact?.phone || school.contact?.email || school.contact?.website) && (
-          <section className="bg-white p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+          <section data-admin-section="contact" data-admin-label="School Contact & Address" className="bg-white p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
             <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">School Contact & Address</h2>
             <div className="space-y-3.5 text-xs">
               <div className="flex items-start gap-2.5 text-[var(--color-content-muted)]">
@@ -484,8 +492,8 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
       </div>
 
       {/* Campus Location & Interactive Map Visualizer */}
-      {school.location?.coordinates?.lat !== null && school.location?.coordinates?.lat !== undefined && school.location?.coordinates?.lng !== null && school.location?.coordinates?.lng !== undefined && (
-        <section className="mt-12">
+      {!school.publicHiddenSections?.includes('map') && school.location?.coordinates?.lat !== null && school.location?.coordinates?.lat !== undefined && school.location?.coordinates?.lng !== null && school.location?.coordinates?.lng !== undefined && (
+        <section data-admin-section="map" data-admin-label="Campus Map" className="mt-12">
           <CampusInteractiveMap school={school} nearbySchools={similarSchools} />
         </section>
       )}

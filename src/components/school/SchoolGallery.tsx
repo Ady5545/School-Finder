@@ -90,7 +90,7 @@ export const SchoolGallery: React.FC<SchoolGalleryProps> = ({ school, className 
       )}
       aria-label={`${school.name} Campus Gallery`}
     >
-      {/* Header with Source & Audit Info */}
+      {/* Header with Source Info */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--color-border-subtle)] pb-4">
         <div>
           <div className="flex items-center gap-2">

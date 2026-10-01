@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { Loader2, AlertCircle } from 'lucide-react';
-import { SchoolEditorModal } from '../../../components/admin/SchoolEditorModal';
+import { AdminSchoolVisualEditor } from '../../../components/admin/AdminSchoolVisualEditor';
 import type { School } from '@data/schoolsData';
 
 export default function AdminSchoolPage() {
@@ -70,13 +70,5 @@ export default function AdminSchoolPage() {
     );
   }
 
-  return (
-    <SchoolEditorModal
-      isOpen
-      pageMode
-      onClose={() => router.push('/admin')}
-      onSaved={() => {}}
-      schoolToEdit={school}
-    />
-  );
+  return <AdminSchoolVisualEditor school={school as School} />;
 }

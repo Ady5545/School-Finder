@@ -107,7 +107,7 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
             Academic Session
           </span>
           <p className="text-sm font-bold text-[#0f172a]">
-            {school.admissions?.session || '2027–28'}
+            {school.admissions?.session || school.admissions?.academicYear}
           </p>
         </div>
 

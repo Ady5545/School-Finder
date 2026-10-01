@@ -475,7 +475,7 @@ export const SchoolComparisonView: React.FC<{ initialSchools?: School[] }> = ({ 
         </div>
 
         {/* Mobile View Switcher Mode Tabs */}
-        <div className="flex items-center p-1 rounded-xl bg-slate-100 border border-slate-200 text-xs font-bold">
+        <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-100 border border-slate-200 text-xs font-bold overflow-x-auto no-scrollbar">
           <button
             type="button"
             onClick={() => setMobileCompMode('stacked')}

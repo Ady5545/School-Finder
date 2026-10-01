@@ -112,7 +112,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
       )}
     >
       {/* Header Bar */}
-      <div className="p-5 sm:p-6 border-b border-[var(--color-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[var(--color-surface-muted)]">
+      <div className="p-4 sm:p-6 border-b border-[var(--color-border)] flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[var(--color-surface-muted)]">
         <div>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -129,7 +129,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
         </div>
 
         {/* View Mode Controls & Directions */}
-        <div className="flex flex-wrap items-center gap-2 shrink-0">
+        <div className="flex flex-wrap items-center gap-2 shrink-0 w-full sm:w-auto">
           <div className="inline-flex rounded-xl p-1 bg-white border border-[var(--color-border)] shadow-2xs">
             <button
               type="button"
@@ -163,7 +163,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
             href={googleMapsDirectionsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors"
           >
             <Navigation className="w-3.5 h-3.5" />
             <span>Get Directions</span>
@@ -173,7 +173,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
       </div>
 
       {/* Map Viewport */}
-      <div className="relative w-full h-[360px] sm:h-[420px] bg-slate-100 overflow-hidden">
+      <div className="relative w-full h-[300px] sm:h-[420px] bg-slate-100 overflow-hidden">
         {viewMode === 'osm' ? (
           // Street Map View
           <div className="w-full h-full relative">
@@ -184,7 +184,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
               loading="lazy"
             />
             {/* Campus Info Overlay Floating Card */}
-            <div className="absolute top-3 left-3 max-w-[280px] bg-white/95 backdrop-blur-md p-3 rounded-xl border border-slate-200 shadow-warm-md text-xs pointer-events-auto">
+            <div className="absolute top-3 left-3 right-3 sm:right-auto max-w-[280px] bg-white/95 backdrop-blur-md p-3 rounded-xl border border-slate-200 shadow-warm-md text-xs pointer-events-auto">
               <div className="flex items-start gap-2">
                 <div className="w-6 h-6 rounded-md bg-amber-600 text-white flex items-center justify-center shrink-0 mt-0.5">
                   <MapPin className="w-3.5 h-3.5" />
@@ -333,7 +333,7 @@ export const CampusInteractiveMap: React.FC<CampusInteractiveMapProps> = ({
       </div>
 
       {/* Connectivity & Transit Details Grid */}
-      <div className="p-5 sm:p-6 bg-white grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs border-t border-[var(--color-border)]">
+      <div className="p-4 sm:p-6 bg-white grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs border-t border-[var(--color-border)]">
         <div className="p-3.5 rounded-xl bg-[#faf8f5] border border-[var(--color-border)] space-y-1">
           <div className="flex items-center gap-2 text-slate-900 font-bold">
             <Train className="w-4 h-4 text-[var(--color-primary)]" />

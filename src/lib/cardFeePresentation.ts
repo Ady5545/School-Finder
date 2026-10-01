@@ -58,8 +58,14 @@ function formatIndianNumber(value: string): string {
  * normalize the underlying detailed fee structure used by school profiles.
  */
 export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string {
-  const override = CARD_FEE_OVERRIDES[slug];
-  if (override) return override;
+  // CMS-managed card presentation is authoritative. Legacy hardcoded values
+  // remain only as a fallback for records that have no usable fee data yet.
+  const managedOverride = typeof fees.feeDisplayOverride === 'string' ? clean(fees.feeDisplayOverride) : '';
+  if (managedOverride) return managedOverride;
+
+  if (typeof fees.cardFee === 'number' && Number.isFinite(fees.cardFee)) {
+    return `₹${fees.cardFee.toLocaleString('en-IN')}`;
+  }
 
   const candidates = [
     typeof fees.annualDisplay === 'string' ? fees.annualDisplay : '',
@@ -96,9 +102,8 @@ export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string 
     }
   }
 
-  if (fees.billingFrequency === 'annual' && typeof fees.cardFee === 'number' && Number.isFinite(fees.cardFee)) {
-    return `₹${fees.cardFee.toLocaleString('en-IN')}`;
-  }
+  const legacyOverride = CARD_FEE_OVERRIDES[slug];
+  if (legacyOverride) return legacyOverride;
 
   return fees.disclosed === false ? 'Not publicly disclosed' : 'Fee details available';
 }

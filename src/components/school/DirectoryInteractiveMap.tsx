@@ -357,7 +357,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-lg border border-[var(--color-border)] bg-white text-slate-500 hover:text-slate-800 transition-colors"
+              className="min-w-10 min-h-10 flex items-center justify-center p-1.5 rounded-lg border border-[var(--color-border)] bg-white text-slate-500 hover:text-slate-800 transition-colors"
               aria-label="Close Map"
               title="Close Map"
             >
@@ -373,7 +373,7 @@ export const DirectoryInteractiveMap: React.FC<DirectoryInteractiveMapProps> = (
           <span>Sector:</span>
         </div>
 
-        <div className="relative flex-1 min-w-[160px] max-w-xs">
+        <div className="relative flex-1 min-w-0 w-full sm:w-auto sm:min-w-[160px] max-w-xs">
           <select
             value={selectedProximityArea}
             onChange={e => {

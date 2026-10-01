@@ -40,6 +40,28 @@ const CARD_FEE_OVERRIDES: Record<string, string> = {
   'clarwyn-international-school': '₹2,40,000',
 };
 
+const LOCKED_CARD_FEE_OVERRIDES_FROM_JM: Record<string, string> = {
+  'jm-international-school': '₹1,15,200',
+  'the-wisdom-tree-school': '₹1,10,000',
+  'bls-world-school': '₹1,56,000',
+  'salvation-tree-school': '₹2,40,000',
+  'ramagya-school-noida-extension': '₹2,13,700',
+  'shri-ram-global-school': '₹1,14,000',
+  'st-johns-senior-secondary-school-noida-ext': '₹1,00,368',
+  'cambridge-school-noida-sector-27': '₹1,17,000',
+  'indus-valley-school-noida-ext': '₹1,38,000',
+  'modern-public-school-noida-extension': '₹85,000',
+  'golden-valley-public-school-noida-ext': '₹45,000',
+  'the-manthan-school-greater-noida-west': '₹1,23,600',
+  'bgs-vijnatham-school': '₹1,40,400',
+  'sparsh-global-school-greater-noida-west': '₹1,28,000',
+  'genesis-global-school-sector-132-noida': '₹4,32,600',
+  'kaushalya-world-school-greater-noida': '₹75,000',
+  'lps-global-school-sector-51-noida': '₹1,60,800',
+  'mount-litera-zee-school-dadri-greater-noida': '₹1,05,000',
+  'clarwyn-international-school': '₹2,40,000',
+};
+
 function clean(value: string): string {
   return value
     .replace(/\s+/g, ' ')
@@ -58,6 +80,10 @@ function formatIndianNumber(value: string): string {
  * normalize the underlying detailed fee structure used by school profiles.
  */
 export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string {
+  // JM International onward is protected from corrupted/stale persisted fee fields.
+  const lockedOverride = LOCKED_CARD_FEE_OVERRIDES_FROM_JM[slug];
+  if (lockedOverride) return lockedOverride;
+
   // CMS-managed card presentation is authoritative. Legacy hardcoded values
   // remain only as a fallback for records that have no usable fee data yet.
   const managedOverride = typeof fees.feeDisplayOverride === 'string' ? clean(fees.feeDisplayOverride) : '';

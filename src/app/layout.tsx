@@ -9,7 +9,6 @@ import { SchoolStoreProvider } from '../lib/schoolStore';
 import { ComparisonDock } from '../components/school/ComparisonDock';
 import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
-import { CookieConsent } from '../components/privacy/CookieConsent';
 import { ConsentAwareAnalytics } from '../components/privacy/ConsentAwareAnalytics';
 import { generateOrganizationJsonLd, generateWebsiteJsonLd, BASE_URL, SITE_DESCRIPTION, SITE_SHORT_NAME } from '../lib/seo';
 
@@ -95,7 +94,6 @@ export default function RootLayout({
                 <ComparisonDock />
                 <ScrollRevealManager />
                 <ConsentAwareAnalytics />
-                <CookieConsent />
               </SchoolStoreProvider>
             </AuthProvider>
           </ToastProvider>

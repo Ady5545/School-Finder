@@ -292,16 +292,31 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                 </ul>
               </div>
             )}
-          </section>
+          </section> )}
+
+          {school.customSections && school.customSections.length > 0 && !school.publicHiddenSections?.includes('custom') && (
+            <section data-admin-section="custom" data-admin-label="Custom Information" className="space-y-4">
+              {school.customSections.map((item) => (
+                <div key={item.id} className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-3.5">
+                  <h2 className="text-lg sm:text-xl font-extrabold text-[var(--color-content)] tracking-tight">{item.title}</h2>
+                  <p className="text-sm text-[var(--color-content-muted)] leading-relaxed whitespace-pre-line">{item.content}</p>
+                </div>
+              ))}
+            </section>
+          )}
 
           {/* Admissions Timelines & Reminders Section */}
-          <SchoolAdmissionsSection school={school} />
+          {!school.publicHiddenSections?.includes('admissions') && (
+            <div data-admin-section="admissions" data-admin-label="Admissions">
+              <SchoolAdmissionsSection school={school} />
+            </div>
+          )}
 
-          {/* Verified Fee Structure & Breakdown */}
+          {/* Verified Fee Structure & Breakdown */
           {!school.publicHiddenSections?.includes('fees') && <section data-admin-section="fees" data-admin-label="Fee Structure" id="fee-breakdown-section">
             <ComprehensiveFeeBreakdown fees={school.fees} schoolName={school.name} />
           </section>}
-          {!school.publicHiddenSections?.includes('fees') && <FeeIntelligence school={school} />
+          {!school.publicHiddenSections?.includes('fees') && <FeeIntelligence school={school} />}
 
           <AdmissionChecklist school={school} />
 
@@ -420,7 +435,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
             </section>
           )}
 
-          <DataTrustPanel school={school} />
+          <div data-admin-section="credentials" data-admin-label="Data Trust"><DataTrustPanel school={school} /></div>
 
           {/* Detailed Fees Card */}
           <section>
@@ -443,7 +458,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                 <div className="flex items-center gap-2.5 text-[var(--color-content-muted)]">
                   <Phone className="w-4 h-4 text-[var(--color-primary)] shrink-0" />
                   <a href={`tel:${school.contact.phone}`} className="hover:text-[var(--color-primary)] font-semibold">
-                    {school.contact.phone}
+                    <span data-admin-field="contact.phone" data-admin-label="Phone">{school.contact.phone}</span>
                   </a>
                 </div>
               )}
@@ -451,7 +466,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                 <div className="flex items-center gap-2.5 text-[var(--color-content-muted)]">
                   <Mail className="w-4 h-4 text-[var(--color-primary)] shrink-0" />
                   <a href={`mailto:${school.contact.email}`} className="hover:text-[var(--color-primary)] font-semibold">
-                    {school.contact.email}
+                    <span data-admin-field="contact.email" data-admin-label="Email">{school.contact.email}</span>
                   </a>
                 </div>
               )}
@@ -464,7 +479,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                     rel="noopener noreferrer"
                     className="hover:text-[var(--color-primary)] font-semibold truncate"
                   >
-                    {school.contact.website.replace(/^https?:\/\//, '')}
+                    <span data-admin-field="contact.website" data-admin-label="Website">{school.contact.website.replace(/^https?:\/\//, '')}</span>
                   </a>
                 </div>
               )}

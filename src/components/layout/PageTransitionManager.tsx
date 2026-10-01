@@ -37,6 +37,7 @@ export function PageTransitionManager() {
 
       event.preventDefault();
       navigatingRef.current = true;
+      document.body.classList.add('is-page-transitioning');
 
       startTransition(() => {
         router.push(url.pathname + url.search + url.hash);
@@ -44,6 +45,7 @@ export function PageTransitionManager() {
 
       window.setTimeout(() => {
         navigatingRef.current = false;
+        document.body.classList.remove('is-page-transitioning');
       }, 1200);
     };
 

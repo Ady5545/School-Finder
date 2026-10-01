@@ -312,7 +312,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
             </div>
           )}
 
-          {/* Verified Fee Structure & Breakdown */
+          {/* Verified Fee Structure & Breakdown */}
           {!school.publicHiddenSections?.includes('fees') && <section data-admin-section="fees" data-admin-label="Fee Structure" id="fee-breakdown-section">
             <ComprehensiveFeeBreakdown fees={school.fees} schoolName={school.name} />
           </section>}

@@ -85,7 +85,7 @@ export const SchoolGallery: React.FC<SchoolGalleryProps> = ({ school, className 
     <section
       id="school-campus-gallery"
       className={cn(
-        'bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-5',
+        'bg-white p-4 sm:p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-5',
         className
       )}
       aria-label={`${school.name} Campus Gallery`}
@@ -124,7 +124,7 @@ export const SchoolGallery: React.FC<SchoolGalleryProps> = ({ school, className 
 
       {/* Gallery Grid */}
       {hasPhotos ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-3.5">
           {galleryImages.map((img, index) => (
             <button
               key={img.src + index}

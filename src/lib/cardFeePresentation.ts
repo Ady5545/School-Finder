@@ -75,6 +75,12 @@ function formatIndianNumber(value: string): string {
   return Number(numeric).toLocaleString('en-IN');
 }
 
+function formatLakhValue(value: string): string {
+  const numeric = Number.parseFloat(value);
+  if (!Number.isFinite(numeric)) return '';
+  return Math.round(numeric * 100000).toLocaleString('en-IN');
+}
+
 /**
  * Card-only annual fee presentation. It deliberately does not mutate or
  * normalize the underlying detailed fee structure used by school profiles.
@@ -111,6 +117,17 @@ export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string 
 
     if (hasMonthlyMarker || hasQuarterlyMarker) {
       continue;
+    }
+
+    // Support compact Indian lakh notation such as “₹1.58–₹1.72 lakh / year”.
+    const lakhRange = candidate.match(/₹?\s*([\d.]+)\s*[–-]\s*₹?\s*([\d.]+)\s*lakh/i);
+    if (lakhRange && (hasAnnualMarker || /calculated/i.test(candidate))) {
+      return `₹${formatLakhValue(lakhRange[2])}`;
+    }
+
+    const lakhSingle = candidate.match(/₹?\s*([\d.]+)\s*lakh/i);
+    if (lakhSingle && (hasAnnualMarker || /calculated/i.test(candidate))) {
+      return `₹${formatLakhValue(lakhSingle[1])}`;
     }
 
     const range = candidate.match(/₹?\s*([\d,]+)\s*[–-]\s*₹?\s*([\d,]+)/);

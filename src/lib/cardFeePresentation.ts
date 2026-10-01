@@ -37,6 +37,15 @@ const CARD_FEE_OVERRIDES: Record<string, string> = {
   'lps-global-school-sector-51-noida': '₹1,60,800',
 };
 
+const LOCKED_CARD_FEE_OVERRIDES_BEFORE_JM: Record<string, string> = {
+  'delhi-public-school-knowledge-park-5': '₹2,00,100',
+  'lotus-valley-international-school': '₹1,57,560',
+  'pacific-world-school-techzone-4': '₹1,30,800',
+  'the-shri-ram-universal-school': '₹1,58,400',
+  'delhi-world-public-school-kp-5': '₹2,04,464',
+  'sks-world-school-greater-noida-west': '₹91,200',
+};
+
 const LOCKED_CARD_FEE_OVERRIDES_FROM_JM: Record<string, string> = {
   'jm-international-school': '₹1,14,000 – ₹1,44,000',
   'the-wisdom-tree-school': '₹1,10,000',
@@ -80,7 +89,7 @@ function formatLakhValue(value: string): string {
  * normalize the underlying detailed fee structure used by school profiles.
  */
 export function getCardAnnualFeeDisplay(slug: string, fees: SchoolFees): string {
-  // JM International onward is protected from corrupted/stale persisted fee fields.
+  // Preserve every pre-JM card exactly as it was before the audit.\n  const preJmOverride = LOCKED_CARD_FEE_OVERRIDES_BEFORE_JM[slug];\n  if (preJmOverride) return preJmOverride;\n\n  // JM International onward is protected from corrupted/stale persisted fee fields.
   const lockedOverride = LOCKED_CARD_FEE_OVERRIDES_FROM_JM[slug];
   if (lockedOverride) return lockedOverride;
 

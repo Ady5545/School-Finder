@@ -35,7 +35,7 @@ const CARD_FEE_OVERRIDES: Record<string, string> = {
   'genesis-global-school-sector-132-noida': '₹5,50,800',
   'kaushalya-world-school-greater-noida': '₹90,000',
   'lps-global-school-sector-51-noida': '₹1,60,800',
-    };
+};
 
 const LOCKED_CARD_FEE_OVERRIDES_FROM_JM: Record<string, string> = {
   'jm-international-school': '₹1,14,000 – ₹1,44,000',

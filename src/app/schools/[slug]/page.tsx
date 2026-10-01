@@ -163,7 +163,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
 
       {/* Header Banner */}
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-6 pb-6 border-b border-[var(--color-border)]">
-        <div className="space-y-3 flex-1">
+        <div className="space-y-3 flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             {schoolBoards.map(b => (
               <SchoolBadge key={b} type="board" value={b} />
@@ -184,14 +184,14 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--color-content-muted)] pt-1">
             <div className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-              <span>{school.location.address || `${school.location.area}, Greater Noida West`}</span>
+              <span className="min-w-0 break-words">{school.location.address || `${school.location.area}, Greater Noida West`}</span>
             </div>
             <RatingDisplay score={school.rating.score} reviewsCount={school.rating.reviewsCount} size="sm" />
           </div>
         </div>
 
         {/* Admission Action Card */}
-        <div className="w-full lg:w-80 shrink-0 bg-white p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
+        <div className="w-full lg:w-80 shrink-0 bg-white p-4 sm:p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
           <div>
             <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider block mb-2">
               Admission Status
@@ -210,7 +210,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
       </div>
 
       {/* Main Grid: Visuals & Facts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-8 mt-6 sm:mt-8 min-w-0">
         {/* Left 2 Cols: Imagery, Overview, Facilities, Sports */}
         <div className="lg:col-span-2 space-y-8">
           {/* Featured / Hero Visual */}
@@ -219,7 +219,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           {/* Quick Specifications Matrix */}
           <div
             className={cn(
-              'grid gap-4 p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs',
+              'grid gap-3 sm:gap-4 p-4 sm:p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs',
               school.establishedYear
                 ? 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5'
                 : 'grid-cols-2 sm:grid-cols-4'

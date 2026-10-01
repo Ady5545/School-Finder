@@ -9,6 +9,7 @@ import { SchoolStoreProvider } from '../lib/schoolStore';
 import { ComparisonDock } from '../components/school/ComparisonDock';
 import { ScrollRevealManager } from '../components/layout/ScrollRevealManager';
 import { SmoothScrollProvider } from '../components/layout/SmoothScrollProvider';
+import { PageTransitionManager } from '../components/layout/PageTransitionManager';
 import { ConsentAwareAnalytics } from '../components/privacy/ConsentAwareAnalytics';
 import { generateOrganizationJsonLd, generateWebsiteJsonLd, BASE_URL, SITE_DESCRIPTION, SITE_SHORT_NAME } from '../lib/seo';
 
@@ -82,6 +83,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(generateWebsiteJsonLd()) }}
         />
+        <PageTransitionManager />
         <SmoothScrollProvider>
           <ToastProvider>
             <AuthProvider>

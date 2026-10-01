@@ -450,9 +450,35 @@ export function AdminSchoolVisualEditor({ school }: Props) {
 
     if (sectionLabels[selectedSection]) {
       const hidden = hiddenSections.includes(selectedSection);
+      const editableBySection: Record<string, FieldPath[]> = {
+        about: ['summary', 'boardNote'],
+        timings: ['timings.weekdays', 'timings.saturday', 'timings.sunday', 'timings.notes'],
+        admissions: ['admissions.status', 'admissions.academicYear', 'admissions.process', 'admissions.timelineDescription'],
+        fees: ['fees.annualDisplay', 'fees.feeDisplayOverride', 'fees.tuitionAnnual', 'fees.rangeText'],
+        credentials: ['board', 'boardNote', 'verification.sourceName', 'verification.notes'],
+        contact: ['location.address', 'location.area', 'location.sector', 'location.pincode', 'contact.phone', 'contact.email', 'contact.website'],
+      };
+      const editables = editableBySection[selectedSection] || [];
       return (
         <div className="space-y-4">
           <SectionTitle title={sectionLabels[selectedSection]} />
+          {editables.length > 0 && (
+            <div className="space-y-2">
+              <p className="text-[10px] font-black uppercase tracking-[0.08em] text-slate-400">Edit content</p>
+              <div className="grid grid-cols-1 gap-2">
+                {editables.map((field) => (
+                  <button
+                    key={field}
+                    type="button"
+                    onClick={() => { setSelectedField(field); setSelectedSection(null); }}
+                    className="rounded-xl border border-[#1d4672] bg-[#091b32] px-3 py-2.5 text-left text-[11px] font-bold text-slate-200 hover:border-amber-400 hover:text-white"
+                  >
+                    {fieldLabels[field]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <button type="button" onClick={() => toggleSection(selectedSection)} className={hidden ? warningButton : secondaryButton}>
             {hidden ? <><Check className="w-4 h-4" />Keep this section visible</> : <><X className="w-4 h-4" />Hide this section on public profile</>}
           </button>

@@ -438,12 +438,14 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
           <div data-admin-section="credentials" data-admin-label="Data Trust"><DataTrustPanel school={school} /></div>
 
           {/* Detailed Fees Card */}
-          <section>
-            <div className="mb-3">
-              <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
-            </div>
-            <FeeDisplay fees={school.fees} variant="detailed" />
-          </section>
+          {!school.publicHiddenSections?.includes('fees') && (
+            <section data-admin-section="fees" data-admin-label="Fee Structure">
+              <div className="mb-3">
+                <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">Fee Structure</h2>
+              </div>
+              <FeeDisplay fees={school.fees} variant="detailed" />
+            </section>
+          )}
 
           {/* Contact Details Card */}
           {(school.location?.address || school.location?.area || school.contact?.phone || school.contact?.email || school.contact?.website) && (
@@ -452,7 +454,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
             <div className="space-y-3.5 text-xs">
               <div className="flex items-start gap-2.5 text-[var(--color-content-muted)]">
                 <MapPin className="w-4 h-4 text-[var(--color-accent)] shrink-0 mt-0.5" />
-                <span className="leading-relaxed font-medium">{school.location.address || `${school.location.area}, Greater Noida West`}</span>
+                <span data-admin-field="location.address" data-admin-label="School address" className="leading-relaxed font-medium">{school.location.address || `${school.location.area}, Greater Noida West`}</span>
               </div>
               {school.contact.phone && (
                 <div className="flex items-center gap-2.5 text-[var(--color-content-muted)]">

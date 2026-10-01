@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkRateLimitAsync, getClientIp, verifySessionToken, getUserByIdAsync, createSchoolSubmissionAsync, recordActivityEvent } from '@/lib/authStore';
-import { sendPublicEnquiryEmail, sendAdmissionRequestToSchool } from '@/lib/emailService';
+import { sendPublicEnquiryEmail } from '@/lib/emailService';
 import { getPublicSchoolBySlugAsync } from '@/lib/schoolsServer';
 
 export async function POST(req: NextRequest) {
@@ -141,33 +141,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const schoolEmail = String(canonicalSchool.contact?.email || '').trim().toLowerCase();
-    let schoolDelivery: { success: boolean; error?: string } = { success: true };
-    if (schoolEmail && schoolEmail.includes('@')) {
-      schoolDelivery = await sendAdmissionRequestToSchool({
-        to: schoolEmail,
-        parentName: cleanParentName,
-        parentEmail: cleanEmail,
-        parentPhone: cleanPhone,
-        childGrade,
-        residentialSociety: cleanResidentialSociety || undefined,
-        schoolName: cleanSchoolName,
-        academicSession,
-        requestType: cleanType,
-        submissionId: submission.id,
-      });
-
-      if (!schoolDelivery.success) {
-        return NextResponse.json(
-          {
-            success: false,
-            message: 'Your request reached Admission Pitara, but the school contact could not be reached by email right now. Our team can retry the school delivery from the enquiry desk.',
-          },
-          { status: 503 }
-        );
-      }
-    }
-
     // Log Activity Event for Admin Dashboard Analytics
     try {
       recordActivityEvent({
@@ -195,10 +168,7 @@ export async function POST(req: NextRequest) {
       message: isPreReg
         ? `Pre-registration for ${cleanSchoolName} successfully recorded.`
         : `Registration for ${cleanSchoolName} successfully recorded.`,
-      deliveryNote: schoolEmail
-        ? 'Your admission request has been received by Admission Pitara and forwarded to the school contact listed in our verified directory record.'
-        : 'Your admission request has been received by Admission Pitara. Our team will follow up with the school from the enquiry desk.'
-,
+      deliveryNote: 'Your admission request has been received by Admission Pitara. Our team will follow up with the school from the enquiry desk.',
     });
   } catch (error) {
     console.error('Error processing admission registration:', error);

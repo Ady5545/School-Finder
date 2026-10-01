@@ -553,6 +553,31 @@ export function AdminSchoolVisualEditor({ school }: Props) {
               </div>
 
               <div className="rounded-2xl border border-[#254d75] bg-[#0b2039] p-3 space-y-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.08em] text-slate-400">Public section visibility</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {Object.entries(sectionLabels)
+                    .filter(([key]) => !['achievements', 'facilities', 'sports', 'gallery', 'custom'].includes(key))
+                    .map(([key, label]) => {
+                      const hidden = hiddenSections.includes(key);
+                      return (
+                        <button
+                          key={key}
+                          type="button"
+                          onClick={() => toggleSection(key)}
+                          className={
+                            hidden
+                              ? 'rounded-xl border border-rose-400/20 bg-rose-400/10 px-2.5 py-2 text-left text-[10px] font-bold text-rose-200'
+                              : 'rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-2 text-left text-[10px] font-bold text-emerald-200'
+                          }
+                        >
+                          {hidden ? 'Hidden · ' : 'Visible · '}{label}
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-[#254d75] bg-[#0b2039] p-3 space-y-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.08em] text-slate-400">Add / remove content</p>
                 <div className="flex flex-wrap gap-2">
                   <button type="button" onClick={() => setSelectedSection('achievements')} className={secondaryButton}><Plus className="w-3.5 h-3.5" />Highlights</button>

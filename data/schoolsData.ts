@@ -310,6 +310,10 @@ export interface School {
   timings?: SchoolTimings;
   transportNotes?: string;
   editorialNotes?: string;
+  /** Public profile sections hidden intentionally by the administrator. */
+  publicHiddenSections?: string[];
+  /** Small custom information blocks rendered on the public profile. */
+  customSections?: Array<{ id: string; title: string; content: string }>;
 }
 
 export const schools: School[] = schoolsJson as unknown as School[];

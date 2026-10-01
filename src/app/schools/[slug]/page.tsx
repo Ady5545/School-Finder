@@ -184,7 +184,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--color-content-muted)] pt-1">
             <div className="flex items-center gap-1.5">
               <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-              <span className="min-w-0 break-words">{school.location.address || `${school.location.area}, Greater Noida West`}</span>
+              <span className="min-w-0 break-words">{school.location.address || school.location.area}</span>
             </div>
             <RatingDisplay score={school.rating.score} reviewsCount={school.rating.reviewsCount} size="sm" />
           </div>
@@ -423,6 +423,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
           </section>
 
           {/* Contact Details Card */}
+          {(school.location?.address || school.location?.area || school.contact?.phone || school.contact?.email || school.contact?.website) && (
           <section className="bg-white p-5.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
             <h2 className="text-base font-extrabold text-[var(--color-content)] tracking-tight">School Contact & Address</h2>
             <div className="space-y-3.5 text-xs">
@@ -478,13 +479,16 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
               </div>
             </div>
           </section>
+          )}
         </div>
       </div>
 
       {/* Campus Location & Interactive Map Visualizer */}
-      <section className="mt-12">
-        <CampusInteractiveMap school={school} nearbySchools={similarSchools} />
-      </section>
+      {school.location?.coordinates?.lat !== null && school.location?.coordinates?.lat !== undefined && school.location?.coordinates?.lng !== null && school.location?.coordinates?.lng !== undefined && (
+        <section className="mt-12">
+          <CampusInteractiveMap school={school} nearbySchools={similarSchools} />
+        </section>
+      )
 
       {/* Verified Parent Community Ratings & Reviews */}
       <SchoolRatingsSection schoolSlug={school.slug} schoolName={school.name} />

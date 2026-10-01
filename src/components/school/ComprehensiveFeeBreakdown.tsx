@@ -983,17 +983,7 @@ export const ComprehensiveFeeBreakdown: React.FC<ComprehensiveFeeBreakdownProps>
         )}
       </div>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 4. FOOTER AUDIT METADATA                                              */}
-      {/* --------------------------------------------------------------------- */}
-      <div className="px-5 py-3.5 bg-[#faf8f5] border-t border-[var(--color-border-subtle)] flex flex-wrap items-center justify-between gap-3 text-[11px] text-[var(--color-content-muted)]">
-        <div>
-          Last Audited:{' '}
-          <strong className="font-semibold text-[var(--color-content)]">
-            {fees.lastVerifiedDate || 'September 2026'}
-          </strong>
-        </div>
-
+      <div className="px-5 py-3.5 bg-[#faf8f5] border-t border-[var(--color-border-subtle)] flex flex-wrap items-center justify-end gap-3 text-[11px] text-[var(--color-content-muted)]">
         {fees.sourceUrl && (
           <a
             href={fees.sourceUrl}

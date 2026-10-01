@@ -488,7 +488,7 @@ export default async function SchoolDetailPage({ params }: SchoolDetailPageProps
         <section className="mt-12">
           <CampusInteractiveMap school={school} nearbySchools={similarSchools} />
         </section>
-      )
+      )}
 
       {/* Verified Parent Community Ratings & Reviews */}
       <SchoolRatingsSection schoolSlug={school.slug} schoolName={school.name} />

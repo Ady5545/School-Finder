@@ -171,7 +171,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
               id="review-school-selector"
               value={selectedSchool?.slug || ''}
               onChange={event => setSelectedReviewSlug(event.target.value)}
-              className="mt-2 w-full neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="mt-2 w-full neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               {schools.map(school => (
                 <option key={school.slug} value={school.slug}>
@@ -214,7 +214,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
               value={searchQuery}
               onChange={event => setSearchQuery(event.target.value)}
               placeholder="Search school name or sector..."
-              className="w-full neo-field pl-9 pr-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full neo-field pl-9 pr-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             />
           </label>
 
@@ -223,7 +223,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             <select
               value={boardFilter}
               onChange={event => setBoardFilter(event.target.value)}
-              className="w-full md:w-44 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full md:w-44 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               <option value="">All boards</option>
               {boards.map(board => (
@@ -239,7 +239,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             <select
               value={areaFilter}
               onChange={event => setAreaFilter(event.target.value)}
-              className="w-full md:w-52 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full md:w-52 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               <option value="">All areas</option>
               {areas.map(area => (

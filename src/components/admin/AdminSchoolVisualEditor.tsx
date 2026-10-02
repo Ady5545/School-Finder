@@ -619,17 +619,6 @@ export function AdminSchoolVisualEditor({ school }: Props) {
               {selectedSection ? renderSection() : renderField()}
 
               <div className="rounded-2xl border border-[#254d75] bg-[#0b2039] p-3 space-y-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.08em] text-slate-400">Quick edit</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {quickFields.map((field) => (
-                    <button key={field} type="button" onClick={() => { setSelectedField(field); setSelectedSection(null); setMessage('Editing ' + fieldLabels[field] + '.'); }} className="rounded-xl border border-[#1d4672] bg-[#091b32] px-2.5 py-2 text-left text-[10px] font-bold text-slate-300 hover:border-amber-400 hover:text-white">
-                      {fieldLabels[field]}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-[#254d75] bg-[#0b2039] p-3 space-y-3">
                 <p className="text-[10px] font-black uppercase tracking-[0.08em] text-slate-400">Editing tips</p>
                 <p className="text-[11px] leading-relaxed text-slate-300">
                   Click any highlighted text in the page to edit it in place. Hover a section for

@@ -46,6 +46,7 @@ import {
 } from 'lucide-react';
 import { BrandLogo } from '../../components/ui/BrandLogo';
 import { SchoolManagerTab } from '../../components/admin/SchoolManagerTab';
+import { AdvisAdminCopilot } from '../../components/admin/AdvisAdminCopilot';
 
 type AdminTab =
   | 'overview'

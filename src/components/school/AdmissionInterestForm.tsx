@@ -88,18 +88,6 @@ export const AdmissionInterestForm: React.FC<{ initialSchools?: School[] }> = ({
       </div>
 
       <form onSubmit={submit} className="p-6 sm:p-8 space-y-5">
-        <div className="p-4 rounded-2xl border border-slate-200 bg-slate-50/80">
-          <div className="flex items-start gap-3">
-            <div className={cn('w-9 h-9 rounded-xl flex items-center justify-center shrink-0 font-black text-xs', mode === 'register' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900')}>
-              {mode === 'register' ? '✓' : '↗'}
-            </div>
-            <div>
-              <span className="font-black text-sm text-slate-900">We’ll choose the right admission action for you</span>
-              <span className="block text-xs text-slate-600 mt-1">Select the school first. Admission Pitara automatically shows {selected ? <strong>{modeLabel}</strong> : 'Register or Pre-register'} based on that school’s current admission status.</span>
-            </div>
-          </div>
-        </div>
-
         <div>
           <label className="text-xs font-bold text-slate-700 block mb-1.5">School</label>
           <select required value={schoolSlug} onChange={e => setSchoolSlug(e.target.value)} className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm bg-white">
@@ -115,6 +103,20 @@ export const AdmissionInterestForm: React.FC<{ initialSchools?: School[] }> = ({
             </div>
           )}
         </div>
+
+        <div className="p-4 rounded-2xl border border-slate-200 bg-slate-50/80">
+          <div className="flex items-start gap-3">
+            <div className={cn('w-9 h-9 rounded-xl flex items-center justify-center shrink-0 font-black text-xs', mode === 'register' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900')}>
+              {mode === 'register' ? '✓' : '↗'}
+            </div>
+            <div>
+              <span className="font-black text-sm text-slate-900">We’ll choose the right admission action for you</span>
+              <span className="block text-xs text-slate-600 mt-1">Select the school first. Admission Pitara automatically shows {selected ? <strong>{modeLabel}</strong> : 'Register or Pre-register'} based on that school’s current admission status.</span>
+            </div>
+          </div>
+        </div>
+
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <label className="text-xs font-bold text-slate-700">Parent name<input required value={name} onChange={e => setName(e.target.value)} className="mt-1.5 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm" placeholder="Your name" /></label>

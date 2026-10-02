@@ -260,16 +260,6 @@ export function SchoolAdminEditBridge({ enabled = true }: SchoolAdminEditBridgeP
       }
     };
 
-    const onInput = (event: Event) => {
-      const el = event.target as HTMLElement | null;
-      const field = fieldFor(el);
-      if (!el || !field || el.dataset.adminEditing !== '1') return;
-      post('admission-pitara-admin-field-change', {
-        field,
-        value: el.innerText.replace(/\u00a0/g, ' '),
-      });
-    };
-
     const onFocusOut = (event: FocusEvent) => {
       const el = event.target as HTMLElement | null;
       if (!el || el.dataset.adminEditing !== '1') return;
@@ -344,7 +334,6 @@ export function SchoolAdminEditBridge({ enabled = true }: SchoolAdminEditBridgeP
     document.addEventListener('mouseover', onPointerOver, true);
     document.addEventListener('mouseout', onPointerOut, true);
     document.addEventListener('click', onClick, true);
-    document.addEventListener('input', onInput, true);
     document.addEventListener('focusout', onFocusOut, true);
 
     return () => {
@@ -354,7 +343,6 @@ export function SchoolAdminEditBridge({ enabled = true }: SchoolAdminEditBridgeP
       document.removeEventListener('mouseover', onPointerOver, true);
       document.removeEventListener('mouseout', onPointerOut, true);
       document.removeEventListener('click', onClick, true);
-      document.removeEventListener('input', onInput, true);
       document.removeEventListener('focusout', onFocusOut, true);
       style.remove();
     };

@@ -83,6 +83,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
             src={school.assets.featured}
             alt={school.name}
             aspectRatio="video"
+            sizes="(max-width: 640px) calc(100vw - 32px), (max-width: 1024px) 44vw, 385px"
             className="w-full h-44 sm:h-52 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           />
         </Link>

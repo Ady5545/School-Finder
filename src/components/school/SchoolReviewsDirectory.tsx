@@ -28,7 +28,12 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
     let cancelled = false;
     fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store' })
       .then(r => r.json())
-      .then(data => { if (!cancelled && data?.success && Array.isArray(data.schools)) setSchools(data.schools); })
+      .then(data => {
+        if (!cancelled && data?.success && Array.isArray(data.schools)) {
+          setSchools(data.schools);
+          setSelectedReviewSlug(prev => prev || data.schools[0]?.slug || '');
+        }
+      })
       .catch(() => {});
     return () => { cancelled = true; };
   }, []);
@@ -38,6 +43,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
   const [searchQuery, setSearchQuery] = useState('');
   const [boardFilter, setBoardFilter] = useState('');
   const [areaFilter, setAreaFilter] = useState('');
+  const [reviewSort, setReviewSort] = useState<'featured' | 'rating' | 'reviews' | 'new'>('featured');
   const [data, setData] = useState<Record<string, { summary: Summary; ratings: Review[] }>>({});
   const [loading, setLoading] = useState<string | null>(null);
 
@@ -117,7 +123,23 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
     }
   };
 
-  const selectedSchool = schools.find(school => school.slug === selectedReviewSlug) || filteredSchools[0] || schools[0];
+  const sortedSchools = useMemo(() => {
+    const copy = [...filteredSchools];
+    if (reviewSort === 'rating') {
+      copy.sort((a, b) => (b.rating?.score || 0) - (a.rating?.score || 0) || (b.rating?.reviewsCount || 0) - (a.rating?.reviewsCount || 0));
+    } else if (reviewSort === 'reviews') {
+      copy.sort((a, b) => (b.rating?.reviewsCount || 0) - (a.rating?.reviewsCount || 0) || (b.rating?.score || 0) - (a.rating?.score || 0));
+    } else if (reviewSort === 'new') {
+      copy.sort((a, b) => {
+        const da = Date.parse(a.rating?.lastUpdated || '') || 0;
+        const db = Date.parse(b.rating?.lastUpdated || '') || 0;
+        return db - da;
+      });
+    }
+    return copy;
+  }, [filteredSchools, reviewSort]);
+
+  const selectedSchool = schools.find(school => school.slug === selectedReviewSlug) || sortedSchools[0] || schools[0];
   const writeReviewHref = selectedSchool ? '/schools/' + selectedSchool.slug + '#reviews' : '/schools';
 
   return (
@@ -231,9 +253,30 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
       </div>
 
       {/* School Review Cards */}
+      <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-500">Review explorer</div>
+            <p className="text-xs sm:text-sm font-extrabold text-slate-900 mt-1">Find a school → read real experiences → decide what to explore next.</p>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {(['featured', 'reviews', 'rating', 'new'] as const).map(sort => (
+              <button
+                key={sort}
+                type="button"
+                onClick={() => setReviewSort(sort)}
+                className={`px-2.5 py-1.5 rounded-lg border text-[10.5px] font-extrabold transition-colors ${reviewSort === sort ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]' : 'bg-white text-slate-700 border-slate-200 hover:border-[var(--color-primary)]'}`}
+              >
+                {sort === 'featured' ? 'Featured' : sort === 'reviews' ? 'Most reviewed' : sort === 'rating' ? 'Top rated' : 'Recently checked'}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="flex items-center justify-between gap-3 px-1">
         <div className="text-sm font-extrabold text-[var(--color-content)]">
-          {filteredSchools.length} {filteredSchools.length === 1 ? 'school' : 'schools'} to explore
+          {sortedSchools.length} {sortedSchools.length === 1 ? 'school' : 'schools'} to explore
         </div>
         <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500">
           <Filter className="w-3.5 h-3.5" />
@@ -248,7 +291,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredSchools.map(school => {
+          {sortedSchools.map(school => {
             const item = data[school.slug];
             const isOpen = openSlug === school.slug;
             const reviewCount = item?.summary.totalReviews ?? school.rating.reviewsCount ?? 0;

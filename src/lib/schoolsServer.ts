@@ -29,7 +29,7 @@ export async function getArchivedSchoolsAsync(): Promise<School[]> {
 
 export async function getAllSchoolSlugsAsync(): Promise<string[]> {
   const all = await getEffectiveSchoolsAsync();
-  return all.filter(s => s.slug !== 'mount-vinson-school').map(s => s.slug);
+  return all.map(s => s.slug);
 }
 
 export async function getSchoolBySlugAsync(slug: string): Promise<School | undefined> {

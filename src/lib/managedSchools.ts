@@ -93,11 +93,17 @@ export async function getEffectiveSchoolsAsync(): Promise<School[]> {
   const baseSchools = schools.filter(school => !PERMANENTLY_REMOVED_SCHOOL_SLUGS.has(school.slug));
   if (managed.length === 0) return baseSchools;
 
-  const managedBySlug = new Map(managed.map(s => [s.slug, s]));
+  // A school is hidden by the CMS only when the Admin panel explicitly
+  // archived it. Older/stale CMS archive flags no longer override the active
+  // base directory.
+  const effectiveManaged = managed.filter(
+    school => !school.isArchived || school.adminArchiveOverride === true
+  );
+  const managedBySlug = new Map(effectiveManaged.map(s => [s.slug, s]));
   const merged = baseSchools.map(base => managedBySlug.get(base.slug) || base);
-  const baseSlugs = new Set(schools.map(s => s.slug));
+  const baseSlugs = new Set(baseSchools.map(s => s.slug));
 
-  for (const managedSchool of managed) {
+  for (const managedSchool of effectiveManaged) {
     if (!baseSlugs.has(managedSchool.slug) && !PERMANENTLY_REMOVED_SCHOOL_SLUGS.has(managedSchool.slug)) {
       merged.push(managedSchool);
     }

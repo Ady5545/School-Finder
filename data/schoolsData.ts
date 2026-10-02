@@ -303,6 +303,8 @@ export interface School {
   duplicateOf?: string | null;
   isArchived?: boolean;
   archiveReason?: string;
+  /** True only when the school was explicitly archived from the Admin panel. */
+  adminArchiveOverride?: boolean;
   status?: 'active' | 'archived' | 'alias';
   affiliationNumber?: string | null;
   establishedYear?: number | null;

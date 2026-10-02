@@ -233,7 +233,8 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
             school.admissionAge ? { label: 'Age Entry', value: school.admissionAge, icon: <Calendar className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
             school.establishedYear ? { label: 'Established', value: String(school.establishedYear), icon: <Landmark className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
           ].filter(Boolean).length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 p-4 sm:p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs">
+            {!school.publicHiddenSections?.includes('quickSpecs') && (
+            <div data-admin-section="quickSpecs" data-admin-label="Quick Facts" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 p-4 sm:p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs">
               {[
                 school.gradeRange?.raw ? { label: 'Grades', value: school.gradeRange.raw, icon: <GraduationCap className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
                 school.studentTeacherRatio ? { label: 'Ratio', value: school.studentTeacherRatio, icon: <Users className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
@@ -245,10 +246,28 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                   <span className="text-[11px] font-bold text-[var(--color-content-muted)] uppercase tracking-wider flex items-center gap-1.5">
                     {item!.icon} {item!.label}
                   </span>
-                  <p className="text-sm font-bold text-[var(--color-content)]">{item!.value}</p>
+                  <p
+                    data-admin-field={
+                      item!.label === 'Grades'
+                        ? 'gradeRange.raw'
+                        : item!.label === 'Ratio'
+                          ? 'studentTeacherRatio'
+                          : item!.label === 'Type'
+                            ? 'dayOrBoarding'
+                            : item!.label === 'Age Entry'
+                              ? 'admissionAge'
+                              : 'establishedYear'
+                    }
+                    data-admin-label={item!.label}
+                    className="text-sm font-bold text-[var(--color-content)]"
+                  >
+                    {item!.value}
+                  </p>
                 </div>
               ))}
             </div>
+          )}
+
           )}
 
           {!school.publicHiddenSections?.includes('timings') && school.timings && (school.timings.weekdays || school.timings.saturday || school.timings.sunday || school.timings.notes) && (
@@ -400,7 +419,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-semibold text-slate-600">Affiliated Board:</span>
                   <span className="font-bold text-[var(--color-primary)] bg-white px-2 py-0.5 rounded border border-slate-200 text-[11px]">
-                    {schoolBoards.join(', ')}
+                    <span data-admin-field="board" data-admin-label="Board(s)">{schoolBoards.join(', ')}</span>
                   </span>
                 </div>
 
@@ -516,11 +535,15 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
       )}
 
       {/* Verified Parent Community Ratings & Reviews */}
-      <SchoolRatingsSection schoolSlug={school.slug} schoolName={school.name} />
+      {!school.publicHiddenSections?.includes('ratings') && (
+        <section data-admin-section="ratings" data-admin-label="Ratings & Reviews">
+          <SchoolRatingsSection schoolSlug={school.slug} schoolName={school.name} />
+        </section>
+      )}
 
       {/* Similar Schools in Locality */}
-      {similarSchools.length > 0 && (
-        <section className="mt-14 pt-10 border-t border-[var(--color-border)]">
+      {similarSchools.length > 0 && !school.publicHiddenSections?.includes('similarSchools') && (
+        <section data-admin-section="similarSchools" data-admin-label="Similar Schools" className="mt-14 pt-10 border-t border-[var(--color-border)]">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl font-bold text-[var(--color-content)]">

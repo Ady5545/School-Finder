@@ -23,7 +23,6 @@ import {
 } from 'lucide-react';
 import { SchoolCard } from './SchoolCard';
 import { SponsoredPlacementCard } from './SponsoredPlacementCard';
-import { EmptyState } from '../ui/EmptyState';
 import { Button } from '../ui/Button';
 import { Drawer } from '../ui/Drawer';
 import { BackToTop } from '../ui/BackToTop';

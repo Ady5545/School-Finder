@@ -577,7 +577,7 @@ export function AdminSchoolVisualEditor({ school }: Props) {
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <a href="/admin" className={secondaryButton}><ArrowLeft className="w-4 h-4" />Back to Admin</a>
-            <a href={'/admin/' + encodeURIComponent(school.slug) + '?mode=classic'} className={secondaryButton}><SlidersIcon />Classic CMS</a>
+            <a href={'/admin/' + encodeURIComponent(school.slug) + '/classic'} className={secondaryButton}><SlidersIcon />Classic CMS</a>
             <a href={'/schools/' + school.slug} target="_blank" rel="noreferrer" className={secondaryButton}><ExternalLink className="w-4 h-4" />Public profile</a>
             <button type="button" onClick={save} disabled={!dirty || saving} className={dirty ? saveButton : secondaryButton}>
               <Save className="w-4 h-4" />{saving ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}

@@ -1,14 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { AdminSchoolVisualEditor } from '../../../components/admin/AdminSchoolVisualEditor';
+import { SchoolEditorModal } from '../../../components/admin/SchoolEditorModal';
 import type { School } from '@data/schoolsData';
 
 export default function AdminSchoolPage() {
   const params = useParams<{ slug: string }>();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const classicMode = searchParams.get('mode') === 'classic';
   const [school, setSchool] = useState<Partial<School> | null>(null);
   const [error, setError] = useState('');
 
@@ -67,6 +70,18 @@ export default function AdminSchoolPage() {
           Loading school CMS…
         </div>
       </main>
+    );
+  }
+
+  if (classicMode) {
+    return (
+      <SchoolEditorModal
+        isOpen
+        pageMode
+        schoolToEdit={school as School}
+        onClose={() => router.push('/admin/' + encodeURIComponent(slug))}
+        onSaved={(nextSchool) => setSchool(nextSchool)}
+      />
     );
   }
 

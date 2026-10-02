@@ -143,7 +143,14 @@ export function AdminSchoolVisualEditor({ school }: Props) {
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
       if (event.origin !== window.location.origin) return;
-      if (event.data?.type !== 'admission-pitara-admin-select') return;
+
+      const type = event.data?.type;
+      if (
+        type !== 'admission-pitara-admin-select' &&
+        type !== 'admission-pitara-admin-field-change' &&
+        type !== 'admission-pitara-admin-section-action' &&
+        type !== 'admission-pitara-admin-add-content'
+      ) return;
 
       const field = event.data.field as FieldPath | null;
       const section = event.data.section as string | null;

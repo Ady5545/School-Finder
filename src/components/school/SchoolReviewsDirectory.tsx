@@ -319,18 +319,11 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
 
                       <div className="shrink-0 text-right">
                         {reviewCount > 0 ? (
-                          <>
-                            <div className="inline-flex items-center gap-1 text-sm font-black text-slate-900">
-                              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                              {Number(rating || 0).toFixed(1)}
-                            </div>
-                            <div className="text-[10px] text-slate-500 mt-0.5">
-                              {reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="text-[10px] font-bold text-slate-500">No reviews yet</div>
-                        )}
+                          <div className="inline-flex items-center gap-1 text-sm font-black text-slate-900">
+                            <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                            {Number(rating || 0).toFixed(1)}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
 

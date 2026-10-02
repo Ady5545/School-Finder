@@ -368,6 +368,8 @@ export default async function HomePage() {
 
       <DataTrustAdvantage />
 
+      <HomepageAdmissionPopup schools={allSchools} />
+
       {/* ========================================================================= */}
       {/* 6. FINAL COMPACT CTA                                                      */}
       {/* ========================================================================= */}

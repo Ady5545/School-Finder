@@ -1,13 +1,13 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { BrainCircuit, Send, Loader2, Sparkles, ShieldCheck, ChevronDown } from 'lucide-react';
 
 const starters = [
-  'Give me a health check of Admission Pitara right now.',
-  'Find suspicious or inconsistent admin data.',
-  'Which schools are getting attention but weak conversion signals?',
-  'Explain the biggest user-behaviour trend in the last 30 days.',
+  'Give me the complete Admission Pitara situation right now. Cover users, schools, admissions, reviews, shortlists, searches, comparisons, promotions, data quality, security, and anything unusual.',
+  'Audit Admission Pitara for suspicious data, broken relationships, stale records, duplicate signals, missing information, and operational inconsistencies.',
+  'Analyse the entire school-discovery and admission funnel. Tell me where parents are engaging, dropping off, shortlisting, comparing, reviewing, or failing to convert.',
+  'Tell me everything important happening in Admission Pitara that I should know as the administrator, ranked by urgency and backed by the live data.',
 ];
 
 export function AdvisAdminCopilot() {
@@ -15,7 +15,7 @@ export function AdvisAdminCopilot() {
   const [answer, setAnswer] = useState('');
   const [model, setModel] = useState('');
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(true);\n  const [booting, setBooting] = useState(true);
 
   async function ask(value = question) {
     const q = value.trim();
@@ -46,6 +46,17 @@ export function AdvisAdminCopilot() {
     void ask();
   }
 
+  useEffect(() => {
+    let active = true;
+    void (async () => {
+      await ask('Give me the complete Admission Pitara briefing right now. Tell me what is happening across the platform, what changed, what looks healthy, what looks abnormal, what deserves attention, and what I should investigate next. Cover schools, admissions, parents, reviews, shortlists, searches, comparisons, promotions, data integrity, security, and operational health.');
+      if (active) setBooting(false);
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <section className="mb-6 rounded-2xl border border-cyan-300/25 bg-[#041323]/90 shadow-[0_0_45px_rgba(45,210,255,.08)] overflow-hidden">
       <button
@@ -71,12 +82,12 @@ export function AdvisAdminCopilot() {
 
       {open && (
         <div className="px-4 sm:px-5 pb-5 space-y-4 border-t border-cyan-300/10">
-          <div className="pt-4 flex items-center gap-2 text-[10px] text-cyan-100/70">
+          <div className="pt-4 flex flex-wrap items-center gap-2 text-[10px] text-cyan-100/70">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Authenticated admin context • read-only intelligence • destructive changes require explicit confirmation</span>
+            <span>Authenticated admin context</span><span>•</span><span>Admission Pitara intelligence only</span><span>•</span><span>Live operational snapshot</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
+          <div className="rounded-2xl border border-cyan-300/15 bg-gradient-to-r from-cyan-300/[0.05] via-transparent to-blue-400/[0.04] p-4 sm:p-5">\n            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">\n              <div>\n                <div className="flex items-center gap-2 text-cyan-200 text-[10px] font-black uppercase tracking-[0.2em]"><span className="w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(85,231,255,.9)] animate-pulse" />Platform intelligence online</div>\n                <h3 className="mt-2 text-lg sm:text-xl font-black text-white">Your Admission Pitara command centre</h3>\n                <p className="mt-1 text-xs sm:text-sm text-slate-400 max-w-3xl leading-5">Ask about the platform itself. ADVIS reasons over the authenticated admin snapshot and connects the signals across the directory, admissions funnel, parents, reviews, shortlists, searches, comparisons, promotions, audits, and school data.</p>\n              </div>\n              <div className="shrink-0 rounded-xl border border-cyan-300/15 bg-[#020b16]/70 px-3 py-2 text-[10px] text-cyan-100/80">{booting || loading ? 'ANALYSING LIVE DATA…' : 'READY FOR COMMANDS'}</div>\n            </div>\n          </div>\n\n          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
             {starters.map(s => (
               <button
                 key={s}
@@ -95,7 +106,7 @@ export function AdvisAdminCopilot() {
             <input
               value={question}
               onChange={e => setQuestion(e.target.value)}
-              placeholder="Ask ADVIS anything about the admin system..."
+              placeholder="Ask ADVIS anything about Admission Pitara — schools, parents, admissions, data, funnel, security, or operations..."
               className="min-w-0 flex-1 rounded-xl border border-cyan-300/15 bg-[#020b16] px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none focus:border-cyan-300/45"
             />
             <button

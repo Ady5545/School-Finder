@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { Star, ShieldCheck, MessageSquare, ArrowRight, Sparkles, CheckCircle2, User, School as SchoolIcon } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { getSchoolBySlug } from '../../lib/schools';
 import { cn } from '../../lib/utils';
 
 interface RatingItem {

@@ -226,14 +226,13 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
           </div>
 
           {/* Quick Specifications Matrix */}
-          {[
+          {!school.publicHiddenSections?.includes('quickSpecs') && [
             school.gradeRange?.raw ? { label: 'Grades', value: school.gradeRange.raw, icon: <GraduationCap className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
             school.studentTeacherRatio ? { label: 'Ratio', value: school.studentTeacherRatio, icon: <Users className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
             school.dayOrBoarding ? { label: 'Type', value: school.dayOrBoarding, icon: <Building className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
             school.admissionAge ? { label: 'Age Entry', value: school.admissionAge, icon: <Calendar className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
             school.establishedYear ? { label: 'Established', value: String(school.establishedYear), icon: <Landmark className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
           ].filter(Boolean).length > 0 && (
-            {!school.publicHiddenSections?.includes('quickSpecs') && (
             <div data-admin-section="quickSpecs" data-admin-label="Quick Facts" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 p-4 sm:p-5.5 rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs">
               {[
                 school.gradeRange?.raw ? { label: 'Grades', value: school.gradeRange.raw, icon: <GraduationCap className="w-3.5 h-3.5 text-[var(--color-primary)]" /> } : null,
@@ -267,9 +266,6 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
               ))}
             </div>
           )}
-
-          )}
-
           {!school.publicHiddenSections?.includes('timings') && school.timings && (school.timings.weekdays || school.timings.saturday || school.timings.sunday || school.timings.notes) && (
             <section data-admin-section="timings" data-admin-label="School Timings" className="bg-white p-6.5 rounded-2xl border border-[var(--color-border)] shadow-warm-xs space-y-4">
               <div>

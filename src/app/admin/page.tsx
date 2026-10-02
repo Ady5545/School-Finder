@@ -661,7 +661,128 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-[#071322] text-slate-200">
+    <div className="jarvis-admin-theme w-full min-h-screen flex flex-col bg-[#071322] text-slate-200">
+      <style>{`
+        .jarvis-admin-theme {
+          --admin-cyan: #55e7ff;
+          --admin-cyan-bright: #8af4ff;
+          --admin-blue: #1688ff;
+          --admin-deep: #020914;
+          --admin-panel: #07182a;
+          --admin-panel-2: #0a2038;
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          background-color: var(--admin-deep) !important;
+          background-image:
+            radial-gradient(circle at 12% 0%, rgba(45, 210, 255, .13), transparent 30%),
+            radial-gradient(circle at 88% 18%, rgba(0, 118, 255, .10), transparent 28%),
+            linear-gradient(rgba(72, 215, 255, .035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(72, 215, 255, .035) 1px, transparent 1px) !important;
+          background-size: auto, auto, 32px 32px, 32px 32px !important;
+        }
+        .jarvis-admin-theme::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          z-index: -1;
+          pointer-events: none;
+          background:
+            linear-gradient(to bottom, transparent 0%, rgba(82, 231, 255, .025) 50%, transparent 100%);
+          background-size: 100% 8px;
+          opacity: .8;
+        }
+        .jarvis-admin-theme header {
+          background: linear-gradient(135deg, rgba(4, 20, 36, .97), rgba(5, 31, 54, .94)) !important;
+          border-color: rgba(85, 231, 255, .28) !important;
+          box-shadow: 0 1px 0 rgba(85, 231, 255, .12), 0 10px 35px rgba(0, 0, 0, .28);
+        }
+        .jarvis-admin-theme nav {
+          background: rgba(3, 16, 29, .96) !important;
+          border-color: rgba(85, 231, 255, .22) !important;
+          box-shadow: inset 0 -1px 0 rgba(85, 231, 255, .08);
+        }
+        .jarvis-admin-theme [class*="bg-[#0f284a]"],
+        .jarvis-admin-theme [class*="bg-[#0b2039]"] {
+          background: linear-gradient(145deg, rgba(8, 30, 50, .96), rgba(4, 20, 35, .94)) !important;
+          border-color: rgba(85, 231, 255, .20) !important;
+          box-shadow: 0 0 0 1px rgba(85, 231, 255, .025), 0 12px 35px rgba(0, 0, 0, .24), inset 0 1px 0 rgba(138, 244, 255, .035);
+        }
+        .jarvis-admin-theme [class*="bg-[#0a1e38]"],
+        .jarvis-admin-theme [class*="bg-[#0d2646]"],
+        .jarvis-admin-theme [class*="bg-[#0e2746"] {
+          background: rgba(3, 19, 34, .94) !important;
+          border-color: rgba(85, 231, 255, .18) !important;
+        }
+        .jarvis-admin-theme [class*="border-[#1e4878]"],
+        .jarvis-admin-theme [class*="border-[#1d4b7c]"],
+        .jarvis-admin-theme [class*="border-[#1b3d63]"],
+        .jarvis-admin-theme [class*="border-[#1b436e]"] {
+          border-color: rgba(85, 231, 255, .22) !important;
+        }
+        .jarvis-admin-theme [class*="text-amber-400"],
+        .jarvis-admin-theme [class*="text-amber-300"],
+        .jarvis-admin-theme [class*="text-amber-200"] {
+          color: var(--admin-cyan-bright) !important;
+        }
+        .jarvis-admin-theme [class*="fill-amber-400"] {
+          fill: var(--admin-cyan-bright) !important;
+        }
+        .jarvis-admin-theme [class*="bg-amber-400"],
+        .jarvis-admin-theme [class*="bg-amber-500"] {
+          background: linear-gradient(135deg, var(--admin-cyan-bright), var(--admin-cyan)) !important;
+          color: #02101b !important;
+          box-shadow: 0 0 22px rgba(85, 231, 255, .20), inset 0 1px 0 rgba(255,255,255,.38);
+        }
+        .jarvis-admin-theme [class*="hover:bg-amber-300"]:hover {
+          background: linear-gradient(135deg, #b5f9ff, var(--admin-cyan-bright)) !important;
+        }
+        .jarvis-admin-theme [class*="hover:bg-[#133763]"]:hover,
+        .jarvis-admin-theme [class*="hover:bg-[#14365f]"]:hover {
+          background: rgba(18, 92, 139, .48) !important;
+        }
+        .jarvis-admin-theme [class*="text-blue-400"],
+        .jarvis-admin-theme [class*="text-blue-300"] {
+          color: #61cfff !important;
+        }
+        .jarvis-admin-theme [class*="text-emerald-400"],
+        .jarvis-admin-theme [class*="text-emerald-300"] {
+          color: #62e8df !important;
+        }
+        .jarvis-admin-theme button,
+        .jarvis-admin-theme a {
+          transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+        }
+        .jarvis-admin-theme nav button:not([class*="bg-amber-400"]) {
+          box-shadow: inset 0 0 0 1px rgba(85, 231, 255, .035);
+        }
+        .jarvis-admin-theme nav button:not([class*="bg-amber-400"]):hover {
+          border-color: rgba(85, 231, 255, .38) !important;
+          box-shadow: 0 0 18px rgba(85, 231, 255, .08);
+        }
+        .jarvis-admin-theme input:focus,
+        .jarvis-admin-theme select:focus,
+        .jarvis-admin-theme textarea:focus {
+          border-color: rgba(85, 231, 255, .72) !important;
+          box-shadow: 0 0 0 3px rgba(85, 231, 255, .08), 0 0 18px rgba(85, 231, 255, .07);
+        }
+        .jarvis-admin-theme [class*="shadow-amber"] {
+          --tw-shadow-color: rgba(85, 231, 255, .22) !important;
+        }
+        .jarvis-admin-theme main h1,
+        .jarvis-admin-theme main h2,
+        .jarvis-admin-theme main h3,
+        .jarvis-admin-theme main h4 {
+          text-shadow: 0 0 18px rgba(85, 231, 255, .055);
+        }
+        .jarvis-admin-theme .font-mono {
+          color: #8cefff;
+        }
+        .jarvis-admin-theme ::selection {
+          background: rgba(85, 231, 255, .28);
+          color: #fff;
+        }
+      `}</style>
       {/* --------------------------------------------------------------------- */}
       {/* 1. TOP HEADER & ADMINISTRATIVE STATUS BAR                             */}
       {/* --------------------------------------------------------------------- */}

@@ -95,7 +95,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
   const adminEdit = adminParams.adminEdit === '1';
   const school = await getSchoolBySlugAsync(slug);
 
-  if (!school || school.slug === 'mount-vinson-school') {
+  if (!school) {
     notFound();
   }
 

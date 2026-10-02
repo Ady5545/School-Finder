@@ -11,6 +11,7 @@ export interface SchoolImageProps {
   className?: string;
   fill?: boolean;
   priority?: boolean;
+  sizes?: string;
 }
 
 const NEUTRAL_PLACEHOLDER = '/assets/images/placeholder-school.svg';
@@ -22,6 +23,7 @@ export const SchoolImage: React.FC<SchoolImageProps> = ({
   className,
   fill = true,
   priority = false,
+  sizes,
 }) => {
   const [hasError, setHasError] = useState(false);
 
@@ -55,7 +57,7 @@ export const SchoolImage: React.FC<SchoolImageProps> = ({
         priority={priority}
         loading={priority ? 'eager' : 'lazy'}
         decoding="async"
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        sizes={sizes || "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
         className={cn(
           'object-cover',
           !isPlaceholder && 'transition-transform duration-300 group-hover:scale-105'

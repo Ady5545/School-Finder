@@ -143,7 +143,7 @@ export function SchoolAdminEditBridge({ enabled = true }: SchoolAdminEditBridgeP
         }, 'danger');
       } else if (section) {
         addButton('Edit', 'Open section controls', () => eventSelection(el), 'primary');
-        addButton('Hide', 'Hide this section on the public profile', () => {
+        addButton('Remove', 'Remove this section from the public profile (data stays intact)', () => {
           el.style.display = 'none';
           post('admission-pitara-admin-section-action', {
             action: 'hide',

@@ -23,17 +23,6 @@ export const HomeSearch: React.FC<{ className?: string; initialSchools?: School[
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    let cancelled = false;
-    fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } })
-      .then(r => r.json())
-      .then(data => {
-        if (!cancelled && data?.success && Array.isArray(data.schools)) setSchools(data.schools);
-      })
-      .catch(() => {});
-    return () => { cancelled = true; };
-  }, []);
-
   // Close dropdown when clicked outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -204,8 +193,11 @@ export const HomeSearch: React.FC<{ className?: string; initialSchools?: School[
           onKeyDown={handleKeyDown}
           placeholder="Search schools, sectors, boards or sports..."
           className="w-full py-2.5 text-xs sm:text-base text-[var(--color-content)] placeholder:text-[var(--color-content-muted)]/70 bg-transparent outline-none font-medium tracking-tight"
+          role="combobox"
           aria-autocomplete="list"
           aria-expanded={isOpen}
+          aria-controls="home-search-suggestions"
+          aria-activedescendant={selectedIndex >= 0 ? `home-search-option-${selectedIndex}` : undefined}
         />
 
         {query && (
@@ -234,7 +226,10 @@ export const HomeSearch: React.FC<{ className?: string; initialSchools?: School[
 
       {/* Real-time Predictive Autocomplete Suggestions Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2.5 liquid-glass glass-shine rounded-2xl border border-white/90 shadow-warm-xl z-50 overflow-hidden text-left divide-y divide-[var(--color-border-subtle)] animate-in fade-in-50 duration-200">
+        <div
+          id="home-search-suggestions"
+          role="listbox"
+          className="absolute top-full left-0 right-0 mt-2.5 liquid-glass glass-shine rounded-2xl border border-white/90 shadow-warm-xl z-50 overflow-hidden text-left divide-y divide-[var(--color-border-subtle)] animate-in fade-in-50 duration-200">
           {/* Header Banner */}
           <div className="px-4 py-2.5 bg-white/35 backdrop-blur-md text-[11px] font-bold text-[var(--color-primary)] uppercase tracking-wider flex items-center justify-between border-b border-[var(--color-border)]">
             <div className="flex items-center gap-1.5">

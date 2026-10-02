@@ -69,10 +69,10 @@ export async function POST(req: NextRequest) {
       feeVerified: s.fees?.isVerified === true,
       feeSession: s.fees?.academicSession || s.fees?.academicYear || '',
       admissions: s.admissions?.status || '',
-      admissionsCycle: s.admissions?.cycle || '',
+      admissionsSession: s.admissions?.session || s.admissions?.academicYear || '',
       rating: s.rating?.score || 0,
       ratingCount: 0,
-      transport: s.transport ? true : false,
+      coordinateVerified: s.location?.coordinates?.isVerified === true,
       slugStatus: s.status || 'active',
     }));
 

@@ -275,7 +275,7 @@ export async function archiveAdminSchoolAsync(
 ) {
   return updateAdminSchoolAsync(
     slug,
-    { isArchived: true, status: 'archived', archiveReason: reason.trim() },
+    { isArchived: true, status: 'archived', archiveReason: reason.trim(), adminArchiveOverride: true },
     adminUser,
     `Archived: ${reason}`,
   );
@@ -288,7 +288,7 @@ export async function restoreAdminSchoolAsync(
 ) {
   return updateAdminSchoolAsync(
     slug,
-    { isArchived: false, status: 'active', archiveReason: undefined },
+    { isArchived: false, status: 'active', archiveReason: undefined, adminArchiveOverride: false },
     adminUser,
     `Restored: ${reason || 'Restored by administrator'}`,
   );

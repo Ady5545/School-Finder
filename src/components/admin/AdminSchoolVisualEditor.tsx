@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AlertCircle,
   ArrowLeft,
@@ -212,15 +212,6 @@ export function AdminSchoolVisualEditor({ school }: Props) {
   const gallery = Array.isArray(draft.assets?.gallery) ? draft.assets.gallery : [];
   const customSections = Array.isArray(draft.customSections) ? draft.customSections : [];
   const dirty = JSON.stringify(initial) !== JSON.stringify(draft);
-
-  const quickFields = useMemo(
-    () => [
-      'name', 'shortName', 'tagline', 'summary', 'board', 'curriculum',
-      'gradeRange.raw', 'studentTeacherRatio', 'admissionAge', 'establishedYear',
-      'location.address', 'location.sector',
-    ] as FieldPath[],
-    [],
-  );
 
   const editField = (field: FieldPath, value: unknown) => {
     setDraft((prev) => setPathValue(prev, field, value));
@@ -627,28 +618,14 @@ export function AdminSchoolVisualEditor({ school }: Props) {
               </div>
 
               <div className="rounded-2xl border border-[#254d75] bg-[#0b2039] p-3 space-y-3">
-                <p className="text-[10px] font-black uppercase tracking-[0.08em] text-slate-400">Public section visibility</p>
-                <div className="grid grid-cols-2 gap-2">
-                  {Object.entries(sectionLabels)
-                    .filter(([key]) => !['achievements', 'facilities', 'sports', 'gallery', 'custom'].includes(key))
-                    .map(([key, label]) => {
-                      const hidden = hiddenSections.includes(key);
-                      return (
-                        <button
-                          key={key}
-                          type="button"
-                          onClick={() => toggleSection(key)}
-                          className={
-                            hidden
-                              ? 'rounded-xl border border-rose-400/20 bg-rose-400/10 px-2.5 py-2 text-left text-[10px] font-bold text-rose-200'
-                              : 'rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-2 text-left text-[10px] font-bold text-emerald-200'
-                          }
-                        >
-                          {hidden ? 'Hidden · ' : 'Visible · '}{label}
-                        </button>
-                      );
-                    })}
-                </div>
+                <p className="text-[10px] font-black uppercase tracking-[0.08em] text-slate-400">Editing tips</p>
+                <p className="text-[11px] leading-relaxed text-slate-300">
+                  Click any highlighted text in the page to edit it in place. Hover a section for
+                  <span className="font-bold text-amber-200"> Edit</span>,
+                  <span className="font-bold text-rose-200"> Hide</span>, or
+                  <span className="font-bold text-slate-100"> Duplicate</span>.
+                  Use <span className="font-bold text-amber-200">＋ Add content</span> for a new block.
+                </p>
               </div>
 
               <div className="rounded-2xl border border-[#254d75] bg-[#0b2039] p-3 space-y-3">

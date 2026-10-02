@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       sector: s.location?.sector || '',
       area: s.location?.area || '',
       board: s.board || '',
-      fee: s.fees?.amount ?? s.fees?.tuition ?? s.fees?.range ?? s.fees?.description ?? '',
+      fee: s.fees?.annualDisplay ?? s.fees?.feeDisplayOverride ?? s.fees?.rangeText ?? s.fees?.tuitionAnnual ?? '',
       admissions: s.admissions?.status || '',
       rating: s.rating?.score || 0,
     }));

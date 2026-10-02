@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { useToast } from '../components/ui/Toast';
-import { getCanonicalSlug, getPublicSchoolBySlug } from './schools';
+import { canonicalizePublicSchoolSlug } from './publicSchoolSlug';
 import { useAuth } from './authContext';
 import { WishlistLoginModal, type WishlistModalTarget } from '../components/auth/WishlistLoginModal';
 
@@ -35,8 +35,7 @@ const COMPARE_STORAGE_KEY = 'admission_pitara_compare_v1';
 const MAX_COMPARE_ITEMS = 4;
 
 function toPublicCanonicalSlug(slug: string): string | null {
-  const school = getPublicSchoolBySlug(slug);
-  return school ? getCanonicalSlug(school.slug) : (slug && slug.trim() ? slug.trim() : null);
+  return canonicalizePublicSchoolSlug(slug);
 }
 
 function normalizePublicSlugs(slugs: string[]): string[] {

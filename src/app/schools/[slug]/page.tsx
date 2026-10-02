@@ -280,11 +280,27 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                 ].filter(([, value]) => Boolean(value)).map(([label, value]) => (
                   <div key={label} className="rounded-xl bg-[#faf8f5] border border-[var(--color-border)] p-3.5">
                     <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--color-content-muted)]">{label}</p>
-                    <p className="text-sm font-bold text-[var(--color-content)] mt-1">{value}</p>
+                    <p
+                      data-admin-field={
+                        label === 'Monday–Friday'
+                          ? 'timings.weekdays'
+                          : label === 'Saturday'
+                            ? 'timings.saturday'
+                            : 'timings.sunday'
+                      }
+                      data-admin-label={String(label)}
+                      className="text-sm font-bold text-[var(--color-content)] mt-1"
+                    >
+                      {value}
+                    </p>
                   </div>
                 ))}
               </div>
-              {school.timings.notes && <p className="text-xs text-[var(--color-content-muted)] leading-relaxed">{school.timings.notes}</p>}
+              {school.timings.notes && (
+                <p data-admin-field="timings.notes" data-admin-label="Timing notes" className="text-xs text-[var(--color-content-muted)] leading-relaxed">
+                  {school.timings.notes}
+                </p>
+              )}
             </section>
           )}
 
@@ -432,7 +448,7 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
               {school.boardNote && (
                 <div className="p-2.5 rounded-lg bg-white/80 border border-emerald-200/80 text-[11px] text-slate-700 leading-relaxed">
                   <span className="font-bold text-slate-900 block mb-0.5">Board Note:</span>
-                  {school.boardNote}
+                  <span data-admin-field="boardNote" data-admin-label="Board note">{school.boardNote}</span>
                 </div>
               )}
 
@@ -444,7 +460,14 @@ export default async function SchoolDetailPage({ params, searchParams }: SchoolD
                 }
               >
                 {school.verification.isVerified
-                  ? (school.verification.sourceName ? `Information, address, and affiliation sourced from ${school.verification.sourceName}.` : 'School information is presented from the available school record.')
+                  ? (school.verification.sourceName ? (
+                    <>
+                      Information, address, and affiliation sourced from{' '}
+                      <span data-admin-field="verification.sourceName" data-admin-label="Verification source">
+                        {school.verification.sourceName}
+                      </span>.
+                    </>
+                  ) : 'School information is presented from the available school record.')
                   : 'School information is currently pending direct institutional disclosure.'}
               </p>
             </section>

@@ -19,7 +19,7 @@ export const dynamic = 'force-dynamic';
 export default async function ReviewsPage() {
   const allSchools = await getAllSchoolsAsync();
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col flex-1">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col flex-1">
       <Breadcrumbs items={[{ label: 'Reviews', isCurrent: true }]} className="mb-6" />
 
       <div className="space-y-3 pb-8 border-b border-[var(--color-border)]">
@@ -37,16 +37,18 @@ export default async function ReviewsPage() {
 
       <ReviewsShowcase />
 
-      <section className="pt-10 mt-8 border-t border-[var(--color-border)]">
+      <SchoolReviewsDirectory initialSchools={allSchools} />
+
+      <section className="pt-10 mt-10 border-t border-[var(--color-border)]">
         <div className="mb-5">
           <div className="text-xs font-extrabold uppercase tracking-[0.14em] text-[var(--color-accent)]">
-            About Admission Pitara
+            Your voice matters
           </div>
           <h2 className="text-xl sm:text-2xl font-black text-[var(--color-content)] mt-1">
-            Share your review
+            Review the Admission Pitara experience
           </h2>
           <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1 max-w-2xl">
-            Tell us about your experience with Admission Pitara. Your review is submitted directly through the website.
+            Tell other parents what worked, what was confusing, and what would make school discovery easier. Your review goes through the same verified-account safeguards.
           </p>
         </div>
         <SchoolRatingsSection
@@ -56,9 +58,6 @@ export default async function ReviewsPage() {
           showPublishedReviews={false}
           openFormInitially
         />
-        <div className="mt-10 pt-8 border-t border-[var(--color-border)]">
-          <SchoolReviewsDirectory initialSchools={allSchools} />
-        </div>
       </section>
     </div>
   );

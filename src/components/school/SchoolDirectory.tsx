@@ -730,6 +730,27 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
           </div>
         </div>
 
+        {/* Guided discovery funnel */}
+        <div className="mt-3 rounded-2xl border border-[var(--color-border)] bg-gradient-to-r from-[var(--color-primary-light)] via-white to-amber-50/70 p-3 sm:p-4">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.14em] text-[var(--color-primary)]">
+                <Sparkles className="w-3.5 h-3.5" />
+                Find your shortlist
+              </div>
+              <p className="text-xs sm:text-sm font-extrabold text-[var(--color-content)] mt-1">Start broad, then narrow it down in a few clicks.</p>
+              <p className="text-[10.5px] sm:text-[11px] text-[var(--color-content-muted)] mt-0.5">Search → filter → compare → open the school profile.</p>
+            </div>
+            <div className="flex flex-wrap gap-1.5 shrink-0">
+              <button type="button" onClick={() => setSelectedAdmissionStatus('open')} className="px-2.5 py-1.5 rounded-lg bg-white border border-emerald-200 text-emerald-800 text-[10.5px] font-extrabold hover:bg-emerald-50 transition-colors">Admissions open</button>
+              <button type="button" onClick={() => setSelectedFeeTier('under-200k')} className="px-2.5 py-1.5 rounded-lg bg-white border border-amber-200 text-amber-900 text-[10.5px] font-extrabold hover:bg-amber-50 transition-colors">Under ₹2L</button>
+              <button type="button" onClick={() => setSortBy('rating')} className="px-2.5 py-1.5 rounded-lg bg-white border border-sky-200 text-sky-800 text-[10.5px] font-extrabold hover:bg-sky-50 transition-colors">Top rated</button>
+              <button type="button" onClick={handleNearMe} disabled={isLocating} className="px-2.5 py-1.5 rounded-lg bg-white border border-violet-200 text-violet-800 text-[10.5px] font-extrabold hover:bg-violet-50 transition-colors disabled:opacity-60">{isLocating ? 'Finding you…' : 'Near me'}</button>
+              <Link href="/match" className="px-2.5 py-1.5 rounded-lg bg-[var(--color-primary)] text-white text-[10.5px] font-extrabold hover:opacity-95 transition-opacity">Help me choose →</Link>
+            </div>
+          </div>
+        </div>
+
         {/* Row 2: Desktop Compact Filters Ribbon (>= md) */}
         <div className="hidden">
           {/* Left Controls: Board, Sector, Grade, Admissions, Fees, Sports, Sibling */}

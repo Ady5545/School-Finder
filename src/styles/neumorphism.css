@@ -45,3 +45,18 @@
   .neo-button { box-shadow: 5px 5px 12px rgba(15,45,74,.10), -5px -5px 12px rgba(255,255,255,.94); }
 }
 @media (prefers-reduced-motion:reduce) { .neo-surface,.neo-button { transition:none!important; } .neo-surface:hover { transform:none!important; } }
+
+.neo-header {
+  box-shadow: 0 10px 24px rgba(15,45,74,.09), 0 -5px 14px rgba(255,255,255,.88);
+}
+.neo-header > div { position: relative; }
+.neo-header::after {
+  content: "";
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15,45,74,.10), transparent);
+  pointer-events: none;
+}

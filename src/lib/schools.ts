@@ -22,7 +22,7 @@ export { getCanonicalSchools, getArchivedSchools, getCanonicalSchoolsCount, getC
  * Returns every school slug so static routes and legacy URLs continue resolving without 404s.
  */
 export function getAllSchoolSlugs(): string[] {
-  return schools.filter(s => s.slug !== 'mount-vinson-school').map(s => s.slug);
+  return schools.map(s => s.slug);
 }
 
 export function getSchoolBySlug(slug: string): School | undefined {

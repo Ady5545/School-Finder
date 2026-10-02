@@ -496,6 +496,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
         }
         const annual = s.fees.cardFee;
         if (selectedFeeTier === 'under-100k') return annual <= 100000;
+        if (selectedFeeTier === 'under-200k') return annual <= 200000;
         if (selectedFeeTier === '100k-150k') return annual > 100000 && annual <= 150000;
         if (selectedFeeTier === '150k-200k') return annual > 150000 && annual <= 200000;
         if (selectedFeeTier === 'above-200k') return annual > 200000;
@@ -905,6 +906,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               >
                 <option value="all">Any Fee</option>
                 <option value="under-100k">Under ₹1L</option>
+                <option value="under-200k">Under ₹2L</option>
                 <option value="100k-150k">₹1L – ₹1.5L</option>
                 <option value="150k-200k">₹1.5L – ₹2L</option>
                 <option value="above-200k">Above ₹2L</option>
@@ -1297,7 +1299,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
 
             {selectedFeeTier !== 'all' && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-900 font-bold border border-emerald-200 shrink-0">
-                Fee: {selectedFeeTier.replace('-', ' ')}
+                Fee: {selectedFeeTier === 'under-200k' ? 'under ₹2L' : selectedFeeTier.replace('-', ' ')}
                 <button type="button" onClick={() => setSelectedFeeTier('all')} className="p-0.5 hover:text-rose-600">
                   <X className="w-3 h-3" />
                 </button>
@@ -1567,6 +1569,7 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
             >
               <option value="all">Any Annual Fee Range</option>
               <option value="under-100k">Under ₹1,00,000 / year</option>
+              <option value="under-200k">Under ₹2,00,000 / year</option>
               <option value="100k-150k">₹1,00,000 – ₹1,50,000 / year</option>
               <option value="150k-200k">₹1,50,000 – ₹2,00,000 / year</option>
               <option value="above-200k">Above ₹2,00,000 / year</option>

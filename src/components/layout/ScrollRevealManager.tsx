@@ -23,7 +23,12 @@ export const ScrollRevealManager: React.FC = () => {
 
     const prefersReducedMotion =
       window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    const isTouchDevice =
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia?.('(pointer: coarse)').matches;
+
+    if (prefersReducedMotion || isTouchDevice || !('IntersectionObserver' in window)) {
       document.documentElement.classList.remove('has-scroll-reveal');
       return;
     }

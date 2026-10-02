@@ -131,8 +131,8 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
       copy.sort((a, b) => (b.rating?.reviewsCount || 0) - (a.rating?.reviewsCount || 0) || (b.rating?.score || 0) - (a.rating?.score || 0));
     } else if (reviewSort === 'new') {
       copy.sort((a, b) => {
-        const da = Date.parse(a.rating?.lastUpdated || '') || 0;
-        const db = Date.parse(b.rating?.lastUpdated || '') || 0;
+        const da = Date.parse(a.verification?.lastVerified || '') || 0;
+        const db = Date.parse(b.verification?.lastVerified || '') || 0;
         return db - da;
       });
     }

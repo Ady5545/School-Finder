@@ -158,6 +158,14 @@ export function AdminSchoolVisualEditor({ school }: Props) {
         return;
       }
 
+      if (event.data.type === 'admission-pitara-admin-add-content') {
+        addCustom();
+        setMessage('New custom content block added. Edit it in the panel, then Save changes.');
+        setSelectedSection('custom');
+        setError('');
+        return;
+      }
+
       if (event.data.type === 'admission-pitara-admin-section-action' && section) {
         const action = event.data.action as string;
         if (action === 'hide') {
@@ -480,7 +488,35 @@ export function AdminSchoolVisualEditor({ school }: Props) {
             <div key={item.id || index} className="rounded-2xl border border-[#254d75] bg-[#0b2039] p-3 space-y-2">
               <input value={item.title || ''} onChange={(e) => updateCustom(index, 'title', e.target.value)} className={inputClass} />
               <textarea value={item.content || ''} onChange={(e) => updateCustom(index, 'content', e.target.value)} rows={5} className={inputClass + ' resize-y'} />
-              <button type="button" onClick={() => removeCustom(index)} className="text-xs font-bold text-rose-300 inline-flex items-center gap-1"><Trash2 className="w-3.5 h-3.5" />Remove section</button>
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (index === 0) return;
+                    const next = clone(customSections);
+                    [next[index - 1], next[index]] = [next[index], next[index - 1]];
+                    setDraft((prev) => ({ ...prev, customSections: next }));
+                  }}
+                  disabled={index === 0}
+                  className={secondaryButton}
+                >
+                  ↑ Move up
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (index === customSections.length - 1) return;
+                    const next = clone(customSections);
+                    [next[index + 1], next[index]] = [next[index], next[index + 1]];
+                    setDraft((prev) => ({ ...prev, customSections: next }));
+                  }}
+                  disabled={index === customSections.length - 1}
+                  className={secondaryButton}
+                >
+                  ↓ Move down
+                </button>
+                <button type="button" onClick={() => removeCustom(index)} className="text-xs font-bold text-rose-300 inline-flex items-center gap-1"><Trash2 className="w-3.5 h-3.5" />Remove section</button>
+              </div>
             </div>
           ))}
           <button type="button" onClick={addCustom} className={secondaryButton}><Plus className="w-4 h-4" />Add custom section</button>

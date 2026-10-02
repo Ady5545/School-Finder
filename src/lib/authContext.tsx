@@ -86,6 +86,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const res = await fetch('/api/auth/me', {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
+        cache: 'no-store',
       });
       if (res.ok) {
         const data = await res.json();

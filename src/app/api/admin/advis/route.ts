@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
       sector: s.location?.sector || '',
       area: s.location?.area || '',
       board: s.board || '',
-      fee: s.fees?.annualFee || s.fees?.display || '',
+      fee: s.fees?.amount ?? s.fees?.tuition ?? s.fees?.range ?? s.fees?.description ?? '',
       admissions: s.admissions?.status || '',
       rating: s.rating?.score || 0,
     }));
@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
       emailVerified: u.emailVerified, residentialSociety: u.residentialSociety,
       preferredSchoolLocality: u.preferredSchoolLocality, createdAt: u.createdAt,
       lastLoginAt: u.lastLoginAt, lastActivityAt: u.lastActivityAt,
-      wishlist: u.wishlist, engagement: u.engagement,
+      wishlist: u.wishlist,
     }));
 
     const context = {

@@ -22,7 +22,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 300;
 
 export const metadata = {
   title: 'School Admissions in Greater Noida West | Admission Pitara',

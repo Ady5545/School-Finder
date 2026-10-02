@@ -78,6 +78,9 @@ const sectionLabels: Record<string, string> = {
   credentials: 'Institutional Credentials',
   contact: 'Contact & Address',
   map: 'Campus Map',
+  quickSpecs: 'Quick Facts',
+  ratings: 'Ratings & Reviews',
+  similarSchools: 'Similar Schools',
   custom: 'Custom Information',
 };
 

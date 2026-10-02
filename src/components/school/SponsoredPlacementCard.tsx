@@ -14,6 +14,12 @@ interface PromoData {
   badgeLabel: string;
   ctaText: string;
   ctaLink: string;
+  school?: {
+    name: string;
+    sector?: string;
+    area?: string;
+    board?: string[];
+  } | null;
 }
 
 export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: string }> = ({
@@ -43,7 +49,6 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
             }).catch(() => {});
           } else if (isMounted) {
             setPromo(null);
-            setSchool(null);
           }
         }
       } catch {

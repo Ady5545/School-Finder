@@ -127,9 +127,6 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
           </div>
           <div className="glass-chip px-2.5 py-0.5 rounded-md shadow-warm-2xs flex items-center gap-1.5">
             <RatingDisplay score={school.rating.score} size="sm" showCount={false} />
-            <span className="text-[9px] font-extrabold text-slate-700 whitespace-nowrap">
-              {school.rating.reviewsCount || 0} {school.rating.reviewsCount === 1 ? 'review' : 'reviews'}
-            </span>
           </div>
         </div>
       </div>

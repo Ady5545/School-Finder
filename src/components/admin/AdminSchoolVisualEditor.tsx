@@ -14,7 +14,6 @@ import {
   X,
 } from 'lucide-react';
 import type { School } from '../../types/school';
-import { SchoolEditorModal } from './SchoolEditorModal';
 
 type FieldPath =
   | 'name' | 'shortName' | 'tagline' | 'summary' | 'board' | 'boardNote'
@@ -137,7 +136,6 @@ export function AdminSchoolVisualEditor({ school }: Props) {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const [classicOpen, setClassicOpen] = useState(false);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
@@ -576,7 +574,7 @@ export function AdminSchoolVisualEditor({ school }: Props) {
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <a href="/admin" className={secondaryButton}><ArrowLeft className="w-4 h-4" />Back to Admin</a>
-            <button type="button" onClick={() => setClassicOpen(true)} className={secondaryButton}><SlidersIcon />Classic CMS</button>
+            <a href={'/admin/' + encodeURIComponent(school.slug) + '?mode=classic'} className={secondaryButton}><SlidersIcon />Classic CMS</a>
             <a href={'/schools/' + school.slug} target="_blank" rel="noreferrer" className={secondaryButton}><ExternalLink className="w-4 h-4" />Public profile</a>
             <button type="button" onClick={save} disabled={!dirty || saving} className={dirty ? saveButton : secondaryButton}>
               <Save className="w-4 h-4" />{saving ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}
@@ -672,20 +670,6 @@ export function AdminSchoolVisualEditor({ school }: Props) {
         </div>
       </div>
     </div>
-      <SchoolEditorModal
-        isOpen={classicOpen}
-        onClose={() => setClassicOpen(false)}
-        onSaved={(nextSchool) => {
-          const next = clone(nextSchool);
-          setInitial(next);
-          setDraft(next);
-          setPreviewKey((value) => value + 1);
-          setMessage('Classic CMS changes loaded into the visual editor.');
-          setClassicOpen(false);
-        }}
-        schoolToEdit={draft}
-        isNew={false}
-      />
   );
 }
 

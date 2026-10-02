@@ -56,6 +56,7 @@ export const Header: React.FC = () => {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 className={cn(
                   'px-2 xl:px-2.5 py-1.5 rounded-xl text-[10px] xl:text-[11px] font-semibold transition-all duration-200 flex items-center gap-1 relative whitespace-nowrap shrink-0 snap-start',
                   isActive(link.href)
@@ -139,7 +140,7 @@ export const Header: React.FC = () => {
         {/* Mobile Navigation Affordances */}
         <div className="flex items-center justify-self-end gap-0.5 sm:hidden rounded-2xl border border-white/75 bg-white/65 px-0.5 py-0.5 backdrop-blur-lg shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
           {isAuthenticated && user && <NotificationCenter />}
-          <Link href="/schools" aria-label="Search schools">
+          <Link href="/schools" aria-label="Search schools" prefetch={false} className="inline-flex min-w-[44px] min-h-[44px] items-center justify-center">
             <IconButton
               aria-label="Search schools"
               size="sm"
@@ -149,7 +150,7 @@ export const Header: React.FC = () => {
               <Search className="w-5 h-5" />
             </IconButton>
           </Link>
-          <Link href="/wishlist" aria-label={`Shortlist (${shortlist.length})`}>
+          <Link href="/wishlist" aria-label={`Shortlist (${shortlist.length})`} prefetch={false} className="inline-flex min-w-[44px] min-h-[44px] items-center justify-center">
             <IconButton
               aria-label={`Shortlist (${shortlist.length})`}
               size="sm"

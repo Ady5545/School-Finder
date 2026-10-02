@@ -188,7 +188,6 @@ export const SchoolProfileActions: React.FC<{ school: School }> = ({ school }) =
         isOpen={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
         school={school}
-        mode={isOpen ? 'register' : 'preregister'}
       />
     </div>
   );

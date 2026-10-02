@@ -230,10 +230,12 @@ export function AdminSchoolVisualEditor({ school }: Props) {
   };
 
   const toggleSection = (section: string) => {
-    const next = new Set(hiddenSections);
-    if (next.has(section)) next.delete(section);
-    else next.add(section);
-    setDraft((prev) => ({ ...prev, publicHiddenSections: Array.from(next) }));
+    setDraft((prev) => {
+      const next = new Set(strings(prev.publicHiddenSections));
+      if (next.has(section)) next.delete(section);
+      else next.add(section);
+      return { ...prev, publicHiddenSections: Array.from(next) };
+    });
     setSelectedSection(section);
   };
 

@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Star, ShieldCheck, MessageSquare, ArrowRight, Sparkles, CheckCircle2, User, School as SchoolIcon } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -26,33 +24,6 @@ interface RatingItem {
 }
 
 export const HomeRatingsDiscovery: React.FC = () => {
-  const [recentRatings, setRecentRatings] = useState<RatingItem[]>([]);
-  const [totalCount, setTotalCount] = useState<number>(0);
-  const [averageScore, setAverageScore] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let isMounted = true;
-    async function loadRecentRatings() {
-      try {
-        const res = await fetch('/api/schools/popularity');
-        if (res.ok) {
-          const data = await res.json();
-          // We can also fetch recent ratings from a lightweight endpoint or summary
-        }
-      } catch {
-        // Fallback gracefully
-      } finally {
-        if (isMounted) setIsLoading(false);
-      }
-    }
-
-    loadRecentRatings();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <section className="py-16 bg-[#f7f5f0] border-y border-stone-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

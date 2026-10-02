@@ -94,31 +94,31 @@ export default async function HomePage() {
             {/* Quick Explore Navigation */}
             <div className="flex flex-wrap items-center justify-center gap-2 mt-5 text-xs text-[var(--color-content-muted)] max-w-4xl mx-auto">
               <span className="font-bold text-[var(--color-content)] mr-1">Quick Explore:</span>
-              <Link
+              <Link prefetch={false}
                 href="/schools?board=CBSE"
                 className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 CBSE
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/schools?board=IB"
                 className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 IB &amp; Cambridge
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/schools?area=Sector%2016B"
                 className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
               >
                 Sector 16B
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/schools?area=Techzone%204"
                 className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 Techzone 4
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/schools?area=Knowledge%20Park%205"
                 className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
               >
@@ -133,12 +133,12 @@ export default async function HomePage() {
                   Start with what matters to your family
                 </span>
               </div>
-              <Link href="/schools">
+              <Link prefetch={false} href="/schools">
                 <Button variant="primary" size="lg" className="text-white font-bold shadow-[0_8px_24px_rgba(15,45,74,0.16)] hover:shadow-[0_12px_30px_rgba(15,45,74,0.20)] hover:-translate-y-0.5 transition-all" rightIcon={<ArrowRight className="w-4 h-4" />}>
                   Explore all listed schools
                 </Button>
               </Link>
-              <Link href="/compare">
+              <Link prefetch={false} href="/compare">
                 <Button variant="outline" size="lg" className="bg-white hover:bg-slate-50 font-bold border-[var(--color-border-strong)] hover:border-amber-500 hover:text-amber-800" rightIcon={<Scale className="w-4 h-4" />}>
                   Compare Schools Side-by-Side
                 </Button>
@@ -235,7 +235,7 @@ export default async function HomePage() {
                   Filter by sector, board (CBSE, ICSE, IB), grade span, and fee verification status.
                 </p>
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/schools"
                 className="mt-6 pt-4 text-xs font-bold text-slate-900 hover:text-blue-900 inline-flex items-center gap-1 group/link"
               >
@@ -258,7 +258,7 @@ export default async function HomePage() {
                   Inspect annual fee components, student-teacher ratios, labs, and sports infrastructure.
                 </p>
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/schools"
                 className="mt-6 pt-4 text-xs font-bold text-[#c2410c] hover:text-orange-900 inline-flex items-center gap-1 group/link"
               >
@@ -281,7 +281,7 @@ export default async function HomePage() {
                   Evaluate up to 4 schools side-by-side across 20+ parameters with difference highlighting.
                 </p>
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/compare"
                 className="mt-6 pt-4 text-xs font-bold text-emerald-700 hover:text-emerald-900 inline-flex items-center gap-1 group/link"
               >
@@ -304,7 +304,7 @@ export default async function HomePage() {
                   Save prospective choices to your family wishlist with local persistence across visits.
                 </p>
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/wishlist"
                 className="mt-6 pt-4 text-xs font-bold text-rose-600 hover:text-rose-800 inline-flex items-center gap-1 group/link"
               >
@@ -327,7 +327,7 @@ export default async function HomePage() {
                   Track active registration windows, age criteria, documentation, and official portals.
                 </p>
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/admissions"
                 className="mt-6 pt-4 text-xs font-bold text-sky-700 hover:text-sky-900 inline-flex items-center gap-1 group/link"
               >
@@ -381,12 +381,12 @@ export default async function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-            <Link href="/schools" className="w-full sm:w-auto">
+            <Link prefetch={false} href="/schools" className="w-full sm:w-auto">
               <Button variant="accent" size="lg" className="w-full sm:w-auto text-white font-bold shadow-warm-xs" rightIcon={<ArrowRight className="w-4 h-4" />}>
                 Explore schools
               </Button>
             </Link>
-            <Link href="/compare" className="w-full sm:w-auto">
+            <Link prefetch={false} href="/compare" className="w-full sm:w-auto">
               <Button variant="outline" size="lg" className="w-full sm:w-auto bg-white font-bold border border-[var(--color-border-strong)] hover:border-[var(--color-primary)]" rightIcon={<Scale className="w-4 h-4" />}>
                 Compare schools
               </Button>

@@ -108,7 +108,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
                 theme === 'light' ? 'text-[#0f172a]' : 'text-white'
               )}
             >
-              Admission <span className={theme === 'light' ? 'text-[#dc2626]' : 'text-[#ef4444]'}>Pitara</span>
+              Admission <span className={theme === 'light' ? 'text-[#dc2626]' : 'text-[#fca5a5]'}>Pitara</span>
             </span>
           </div>
           {subtext && (

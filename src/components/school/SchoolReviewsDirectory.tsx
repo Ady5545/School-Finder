@@ -126,9 +126,9 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
   const sortedSchools = useMemo(() => {
     const copy = [...filteredSchools];
     if (reviewSort === 'rating') {
-      copy.sort((a, b) => (b.rating?.score || 0) - (a.rating?.score || 0) || (b.rating?.reviewsCount || 0) - (a.rating?.reviewsCount || 0));
+      copy.sort((a, b) => (data[b.slug]?.summary.averageRating || 0) - (data[a.slug]?.summary.averageRating || 0) || (data[b.slug]?.summary.totalReviews || 0) - (data[a.slug]?.summary.totalReviews || 0));
     } else if (reviewSort === 'reviews') {
-      copy.sort((a, b) => (b.rating?.reviewsCount || 0) - (a.rating?.reviewsCount || 0) || (b.rating?.score || 0) - (a.rating?.score || 0));
+      copy.sort((a, b) => (data[b.slug]?.summary.totalReviews || 0) - (data[a.slug]?.summary.totalReviews || 0) || (data[b.slug]?.summary.averageRating || 0) - (data[a.slug]?.summary.averageRating || 0));
     } else if (reviewSort === 'new') {
       copy.sort((a, b) => {
         const da = Date.parse(a.verification?.lastVerified || '') || 0;
@@ -294,8 +294,10 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
           {sortedSchools.map(school => {
             const item = data[school.slug];
             const isOpen = openSlug === school.slug;
-            const reviewCount = item?.summary.totalReviews ?? school.rating.reviewsCount ?? 0;
-            const rating = item?.summary.averageRating ?? school.rating.score ?? 0;
+            // Only show real Admission Pitara reviews fetched from the ratings API.
+            // school.rating.reviewsCount can contain legacy/seeded rating metadata and is not the published-review count.
+            const reviewCount = item?.summary.totalReviews ?? 0;
+            const rating = item?.summary.averageRating ?? 0;
 
             return (
               <article key={school.slug} className="rounded-2xl neo-surface bg-white border border-[var(--color-border)] shadow-warm-xs overflow-hidden">

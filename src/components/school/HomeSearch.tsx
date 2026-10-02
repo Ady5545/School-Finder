@@ -253,6 +253,9 @@ export const HomeSearch: React.FC<{ className?: string; initialSchools?: School[
                   const isSelected = selectedIndex === idx;
                   return (
                     <div
+                      id={`home-search-option-${idx}`}
+                      role="option"
+                      aria-selected={isSelected}
                       key={`loc-${loc.name}`}
                       onClick={() => handleSelectLocation(loc.name)}
                       onMouseEnter={() => setSelectedIndex(idx)}
@@ -296,6 +299,9 @@ export const HomeSearch: React.FC<{ className?: string; initialSchools?: School[
                   const isSelected = selectedIndex === itemIndex;
                   return (
                     <div
+                      id={`home-search-option-${itemIndex}`}
+                      role="option"
+                      aria-selected={isSelected}
                       key={school.id}
                       onClick={() => handleSelectSchool(school.slug)}
                       onMouseEnter={() => setSelectedIndex(itemIndex)}

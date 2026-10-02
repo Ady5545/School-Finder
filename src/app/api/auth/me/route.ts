@@ -23,7 +23,10 @@ export async function GET(req: NextRequest) {
     }
 
     if (!token) {
-      return NextResponse.json({ authenticated: false, user: null }, { status: 401 });
+      return NextResponse.json(
+        { authenticated: false, user: null },
+        { status: 200, headers: { 'Cache-Control': 'no-store' } }
+      );
     }
 
     const payload = verifySessionToken(token);

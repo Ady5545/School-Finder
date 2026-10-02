@@ -14,6 +14,7 @@ import {
   X,
 } from 'lucide-react';
 import type { School } from '../../types/school';
+import { SchoolEditorModal } from './SchoolEditorModal';
 
 type FieldPath =
   | 'name' | 'shortName' | 'tagline' | 'summary' | 'board' | 'boardNote'
@@ -136,6 +137,7 @@ export function AdminSchoolVisualEditor({ school }: Props) {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [classicOpen, setClassicOpen] = useState(false);
 
   useEffect(() => {
     const onMessage = (event: MessageEvent) => {
@@ -144,6 +146,43 @@ export function AdminSchoolVisualEditor({ school }: Props) {
 
       const field = event.data.field as FieldPath | null;
       const section = event.data.section as string | null;
+
+      if (event.data.type === 'admission-pitara-admin-field-change' && field) {
+        let value: unknown = String(event.data.value ?? '');
+        if (field === 'establishedYear') value = String(value).trim() ? Number(value) : null;
+        if (field === 'board') value = String(value).split(',').map((item) => item.trim()).filter(Boolean);
+        editField(field, value);
+        setSelectedField(field);
+        setSelectedSection(null);
+        setMessage('Edited ' + fieldLabels[field] + '.');
+        return;
+      }
+
+      if (event.data.type === 'admission-pitara-admin-section-action' && section) {
+        const action = event.data.action as string;
+        if (action === 'hide') {
+          toggleSection(section);
+          setMessage('Section hidden. Save changes to publish it.');
+        } else if (action === 'duplicate') {
+          const title = String(event.data.label || sectionLabels[section] || 'School section');
+          const text = String(event.data.text || '').trim();
+          setDraft((prev) => ({
+            ...prev,
+            customSections: [
+              ...(Array.isArray(prev.customSections) ? prev.customSections : []),
+              {
+                id: 'custom_' + Date.now(),
+                title: 'Copy of ' + title.replace(/\s+/g, ' ').slice(0, 70),
+                content: text || 'Duplicated school content. Edit this block before saving.',
+              },
+            ],
+          }));
+          setSelectedSection('custom');
+          setMessage('Duplicated as an editable custom block.');
+        }
+        setError('');
+        return;
+      }
 
       if (field && Object.prototype.hasOwnProperty.call(fieldLabels, field)) {
         setSelectedField(field);
@@ -501,6 +540,7 @@ export function AdminSchoolVisualEditor({ school }: Props) {
           </div>
           <div className="flex items-center gap-2 shrink-0">
             <a href="/admin" className={secondaryButton}><ArrowLeft className="w-4 h-4" />Back to Admin</a>
+            <button type="button" onClick={() => setClassicOpen(true)} className={secondaryButton}><SlidersIcon />Classic CMS</button>
             <a href={'/schools/' + school.slug} target="_blank" rel="noreferrer" className={secondaryButton}><ExternalLink className="w-4 h-4" />Public profile</a>
             <button type="button" onClick={save} disabled={!dirty || saving} className={dirty ? saveButton : secondaryButton}>
               <Save className="w-4 h-4" />{saving ? 'Saving…' : dirty ? 'Save changes' : 'Saved'}
@@ -596,7 +636,25 @@ export function AdminSchoolVisualEditor({ school }: Props) {
         </div>
       </div>
     </div>
+      <SchoolEditorModal
+        isOpen={classicOpen}
+        onClose={() => setClassicOpen(false)}
+        onSaved={(nextSchool) => {
+          const next = clone(nextSchool);
+          setInitial(next);
+          setDraft(next);
+          setPreviewKey((value) => value + 1);
+          setMessage('Classic CMS changes loaded into the visual editor.');
+          setClassicOpen(false);
+        }}
+        schoolToEdit={draft}
+        isNew={false}
+      />
   );
+}
+
+function SlidersIcon() {
+  return <span aria-hidden="true" className="text-sm leading-none">⚙︎</span>;
 }
 
 function SectionTitle({ title }: { title: string }) {

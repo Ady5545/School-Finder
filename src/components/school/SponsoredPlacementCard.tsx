@@ -3,8 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Sparkles, ArrowRight, ShieldCheck, MapPin } from 'lucide-react';
-import { getPublicSchoolBySlug } from '../../lib/schools';
-import type { School } from '../../types/school';
 
 interface PromoData {
   id: string;
@@ -23,7 +21,6 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
   className = '',
 }) => {
   const [promo, setPromo] = useState<PromoData | null>(null);
-  const [school, setSchool] = useState<School | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -37,8 +34,6 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
           if (data.promotions && data.promotions.length > 0 && isMounted) {
             const first = data.promotions[0];
             setPromo(first);
-            const foundSchool = getPublicSchoolBySlug(first.schoolSlug);
-            if (foundSchool) setSchool(foundSchool);
 
             // Log impression
             fetch('/api/promotions', {
@@ -61,7 +56,7 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
     };
   }, [placement]);
 
-  if (!promo || !school) return null;
+  if (!promo || !promo.school) return null;
 
   const handleClick = () => {
     fetch('/api/promotions', {
@@ -88,10 +83,10 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
             </span>
             <span className="text-xs text-blue-200/80 flex items-center gap-1">
               <MapPin className="w-3 h-3 text-amber-300 shrink-0" />
-              <span>{school.location.sector || school.location.area}</span>
+              <span>{promo.school.sector || promo.school.area}</span>
             </span>
             <span className="text-xs text-blue-300/60 hidden sm:inline">•</span>
-            <span className="text-xs text-blue-200/80 hidden sm:inline">{school.board ? school.board.join(', ') : 'CBSE'}</span>
+            <span className="text-xs text-blue-200/80 hidden sm:inline">{promo.school.board?.length ? promo.school.board.join(', ') : 'CBSE'}</span>
           </div>
 
           <h3 className="text-lg sm:text-xl font-bold font-serif text-white tracking-tight">
@@ -105,7 +100,7 @@ export const SponsoredPlacementCard: React.FC<{ placement?: string; className?: 
 
         <div className="shrink-0 flex items-center gap-3 w-full md:w-auto pt-2 md:pt-0 border-t border-white/10 md:border-t-0">
           <Link
-            href={promo.ctaLink || `/schools/${school.slug}`}
+            href={promo.ctaLink || `/schools/${promo.schoolSlug}`}
             onClick={handleClick}
             className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-md hover:shadow-lg active:scale-98"
           >

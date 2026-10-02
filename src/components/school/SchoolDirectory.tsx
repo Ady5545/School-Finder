@@ -667,6 +667,52 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
     (selectedRadiusKm ? 1 : 0) +
     (searchQuery.trim() ? 1 : 0);
 
+  const recoveryActions = [
+    searchQuery.trim()
+      ? { label: 'Clear search', onClick: () => setSearchQuery('') }
+      : null,
+    selectedArea
+      ? { label: 'Clear area', onClick: () => setSelectedArea('') }
+      : null,
+    selectedBoard
+      ? { label: 'Clear board', onClick: () => setSelectedBoard('') }
+      : null,
+    selectedFeeTier !== 'all'
+      ? { label: 'Clear fee filter', onClick: () => setSelectedFeeTier('all') }
+      : null,
+    selectedAdmissionStatus !== 'all'
+      ? { label: 'Clear admissions filter', onClick: () => setSelectedAdmissionStatus('all') }
+      : null,
+    selectedGrade !== 'all'
+      ? { label: 'Clear grade filter', onClick: () => setSelectedGrade('all') }
+      : null,
+    selectedCurriculum
+      ? { label: 'Clear curriculum', onClick: () => setSelectedCurriculum('') }
+      : null,
+    selectedTransport !== 'all'
+      ? { label: 'Clear transport filter', onClick: () => setSelectedTransport('all') }
+      : null,
+    selectedTrust !== 'all'
+      ? { label: 'Clear trust filter', onClick: () => setSelectedTrust('all') }
+      : null,
+    selectedSports.length > 0
+      ? { label: 'Clear sports filter', onClick: () => setSelectedSports([]) }
+      : null,
+    siblingOnly
+      ? { label: 'Clear sibling filter', onClick: () => setSiblingOnly(false) }
+      : null,
+    selectedProximityArea || selectedRadiusKm !== null
+      ? {
+          label: 'Clear distance filter',
+          onClick: () => {
+            setSelectedProximityArea('');
+            setSelectedRadiusKm(null);
+            setProximityCoords(null);
+          },
+        }
+      : null,
+  ].filter(Boolean) as Array<{ label: string; onClick: () => void }>;
+
   const resetAllFilters = () => {
     setSearchQuery('');
     setSelectedBoard('');
@@ -1708,12 +1754,41 @@ export const SchoolDirectory: React.FC<SchoolDirectoryProps> = ({
               <p className="text-xs text-slate-500 mt-1">Checking the requested sector against our verified school locations.</p>
             </div>
           ) : (
-            <EmptyState
-              title="No exact schools found"
-              description="We couldn’t find an exact match for this search. Try a broader area, school name, or clear the search to explore all listed schools."
-              actionLabel="Show All Listed Schools"
-              onAction={resetAllFilters}
-            />          )}
+            <div className="rounded-2xl neo-surface border border-dashed border-[var(--color-border-strong)] bg-white p-6 sm:p-8 text-center">
+              <h3 className="font-black text-sm sm:text-base text-[var(--color-content)]">
+                No schools match all your current filters
+              </h3>
+              <p className="text-xs sm:text-sm text-[var(--color-content-muted)] mt-1.5 max-w-xl mx-auto leading-relaxed">
+                Nothing fits this exact combination yet. Broaden one part of your search and we’ll keep the rest of your choices intact.
+              </p>
+
+              {recoveryActions.length > 0 && (
+                <div className="mt-5 pt-4 border-t border-[var(--color-border-subtle)]">
+                  <div className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-500 mb-2.5">
+                    Quick recovery
+                  </div>
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {recoveryActions.slice(0, 5).map(action => (
+                      <button
+                        key={action.label}
+                        type="button"
+                        onClick={action.onClick}
+                        className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-[var(--color-border-strong)] bg-white text-[11px] font-extrabold text-slate-700 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
+                      >
+                        {action.label}
+                        <X className="w-3 h-3" aria-hidden="true" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                <Button variant="primary" size="sm" onClick={resetAllFilters}>
+                  Show all listed schools
+                </Button>
+              </div>
+            </div>          )}
         </div>
         
         {/* Supporting Map Column (order-2 so on mobile it sits comfortably below the initial results when toggled) */}

@@ -7,6 +7,7 @@ import {
   checkRateLimitAsync,
   getClientIp,
 } from '../../../lib/authStore';
+import { getEffectiveSchoolBySlugAsync } from '../../../lib/managedSchools';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -17,22 +18,34 @@ export async function GET(req: NextRequest) {
     const placement = searchParams.get('placement') || undefined;
 
     const campaigns = await getActivePromotionsAsync(placement);
+    const promotions = await Promise.all(campaigns.map(async c => {
+      const school = await getEffectiveSchoolBySlugAsync(c.schoolSlug);
+      return {
+        id: c.id,
+        schoolSlug: c.schoolSlug,
+        campaignName: c.campaignName,
+        placementType: c.placementType,
+        title: c.title,
+        description: c.description,
+        badgeLabel: c.badgeLabel || 'Sponsored',
+        ctaText: c.ctaText,
+        ctaLink: c.ctaLink,
+        priority: c.priority,
+        school: school
+          ? {
+              name: school.name,
+              sector: school.location?.sector || '',
+              area: school.location?.area || '',
+              board: Array.isArray(school.board) ? school.board : [],
+            }
+          : null,
+      };
+    }));
 
     return NextResponse.json(
       {
         success: true,
-        promotions: campaigns.map(c => ({
-          id: c.id,
-          schoolSlug: c.schoolSlug,
-          campaignName: c.campaignName,
-          placementType: c.placementType,
-          title: c.title,
-          description: c.description,
-          badgeLabel: c.badgeLabel || 'Sponsored',
-          ctaText: c.ctaText,
-          ctaLink: c.ctaLink,
-          priority: c.priority,
-        })),
+        promotions,
       },
       {
         headers: {

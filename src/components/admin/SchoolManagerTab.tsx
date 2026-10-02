@@ -368,7 +368,7 @@ export function SchoolManagerTab() {
                 </Link>
                 <div className="flex items-center gap-2">
                   <Link href={'/admin/' + encodeURIComponent(school.slug)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-400/10 border border-amber-400/20 text-amber-300 text-[11px] font-black hover:bg-amber-400/20"><Edit3 className="w-3.5 h-3.5" />Visual edit</Link>
-                  <Link href={'/admin/' + encodeURIComponent(school.slug) + '?mode=classic'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-[11px] font-black hover:bg-white/10">Classic CMS</Link>
+                  <Link href={'/admin/' + encodeURIComponent(school.slug) + '/classic'} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-[11px] font-black hover:bg-white/10">Classic CMS</Link>
                   {!school.isArchived ? (
                     <button type="button" onClick={() => void archiveSchool(school)} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-[11px] font-black hover:bg-rose-500/20"><Archive className="w-3.5 h-3.5" />Archive</button>
                   ) : (

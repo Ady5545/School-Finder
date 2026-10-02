@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { revalidatePath } from 'next/cache';
 import path from 'path';
 import { School, schools, getCanonicalSchools, getArchivedSchools } from '../../data/schoolsData';
 import { recordAdminAudit } from './authStore';
@@ -222,6 +223,8 @@ export async function updateAdminSchoolAsync(
       };
     }
     await persistManagedSchoolAsync(result.school, adminUser, reason);
+    revalidatePath('/', 'page');
+    revalidatePath('/schools', 'page');
   } catch (err) {
     return {
       success: false,

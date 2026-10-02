@@ -1,27 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Star, ShieldCheck, MessageSquare, ArrowRight, Sparkles, CheckCircle2, User, School as SchoolIcon } from 'lucide-react';
+import { Star, ShieldCheck, MessageSquare, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { cn } from '../../lib/utils';
-
-interface RatingItem {
-  id: string;
-  schoolSlug: string;
-  userName: string;
-  userChildGrade?: string;
-  score: number;
-  title?: string;
-  comment: string;
-  verifiedParent: boolean;
-  createdAt: string;
-  categories?: {
-    academics?: number;
-    infrastructure?: number;
-    faculty?: number;
-    safety?: number;
-  };
-}
-
 export const HomeRatingsDiscovery: React.FC = () => {
   return (
     <section className="py-16 bg-[#f7f5f0] border-y border-stone-200/80">

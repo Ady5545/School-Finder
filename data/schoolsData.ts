@@ -322,7 +322,7 @@ export const schools: School[] = schoolsJson as unknown as School[];
 export const legacyUrlMap: Record<string, string> = legacyUrlMapJson as Record<string, string>;
 
 /**
- * Returns raw all schools including aliases, duplicates, and archived records (total 70).
+ * Returns raw all schools including aliases and duplicate records (72 total after permanent removals).
  */
 export function getRawSchools(): School[] {
   return schools;

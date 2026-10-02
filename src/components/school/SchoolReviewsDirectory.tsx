@@ -145,7 +145,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
   return (
     <section className="mt-10 space-y-6">
       {/* Discovery Header */}
-      <div className="rounded-2xl border border-[var(--color-border)] bg-white p-5 sm:p-6 shadow-warm-xs">
+      <div className="rounded-2xl neo-surface border border-[var(--color-border)] bg-white p-5 sm:p-6 shadow-warm-xs">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] text-[11px] font-extrabold uppercase tracking-wider">
@@ -160,7 +160,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             </p>
           </div>
 
-          <div className="w-full lg:w-[360px] rounded-2xl bg-[#fbf9f5] border border-[var(--color-border)] p-4">
+          <div className="w-full lg:w-[360px] rounded-2xl neo-surface bg-[#fbf9f5] border border-[var(--color-border)] p-4">
             <div className="text-[11px] font-extrabold uppercase tracking-wider text-[var(--color-content-muted)]">
               Ready to share an experience?
             </div>
@@ -171,7 +171,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
               id="review-school-selector"
               value={selectedSchool?.slug || ''}
               onChange={event => setSelectedReviewSlug(event.target.value)}
-              className="mt-2 w-full px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="mt-2 w-full neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               {schools.map(school => (
                 <option key={school.slug} value={school.slug}>
@@ -214,7 +214,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
               value={searchQuery}
               onChange={event => setSearchQuery(event.target.value)}
               placeholder="Search school name or sector..."
-              className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full neo-field pl-9 pr-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             />
           </label>
 
@@ -223,7 +223,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             <select
               value={boardFilter}
               onChange={event => setBoardFilter(event.target.value)}
-              className="w-full md:w-44 px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full md:w-44 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               <option value="">All boards</option>
               {boards.map(board => (
@@ -239,7 +239,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             <select
               value={areaFilter}
               onChange={event => setAreaFilter(event.target.value)}
-              className="w-full md:w-52 px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full md:w-52 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold" text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               <option value="">All areas</option>
               {areas.map(area => (
@@ -253,7 +253,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
       </div>
 
       {/* School Review Cards */}
-      <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-3 sm:p-4">
+      <div className="rounded-2xl neo-surface border border-slate-200 bg-slate-50/70 p-3 sm:p-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <div className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-500">Review explorer</div>
@@ -285,7 +285,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
       </div>
 
       {filteredSchools.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[var(--color-border-strong)] bg-white p-8 text-center">
+        <div className="rounded-2xl neo-surface border border-dashed border-[var(--color-border-strong)] bg-white p-8 text-center">
           <h3 className="font-bold text-sm text-slate-900">No schools match these filters</h3>
           <p className="text-xs text-slate-500 mt-1.5">Clear a filter to browse the full review directory.</p>
         </div>
@@ -298,7 +298,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             const rating = item?.summary.averageRating ?? school.rating.score ?? 0;
 
             return (
-              <article key={school.slug} className="rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs overflow-hidden">
+              <article key={school.slug} className="rounded-2xl neo-surface bg-white border border-[var(--color-border)] shadow-warm-xs overflow-hidden">
                 <div className="flex gap-3 p-4 sm:p-5">
                   <Link href={'/schools/' + school.slug} className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-slate-100">
                     <SchoolImage src={school.assets.featured} alt={school.name} aspectRatio="square" className="w-full h-full object-cover" />
@@ -374,7 +374,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
                         {item?.ratings?.length ? (
                           <div className="space-y-3 pt-4">
                             {item.ratings.map(review => (
-                              <article key={review.id} className="rounded-xl bg-white border border-slate-200 p-4">
+                              <article key={review.id} className="rounded-xl neo-surface bg-white border border-slate-200 p-4">
                                 <div className="flex items-center justify-between gap-3">
                                   <div className="text-amber-500 text-xs">
                                     {'★'.repeat(Math.max(0, Math.min(5, review.score)))}

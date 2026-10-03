@@ -100,6 +100,11 @@ function sanitizeUser(user: any) {
 
 export const ADVIS_TOOL_DECLARATIONS = [
   {
+    name: 'get_runtime_environment',
+    description: 'Gets non-secret runtime identity for the current Admission Pitara deployment: Vercel environment, deployment URL, commit/ref and region when available. Never returns secrets.',
+    parameters: { type: 'object', properties: {}, required: [] },
+  },
+  {
     name: 'get_platform_overview',
     description: 'Gets the current Admission Pitara admin overview metrics. Use for questions about overall platform health, users, profile views, saves, reviews and recent engagement.',
     parameters: {
@@ -256,6 +261,16 @@ export const ADVIS_TOOL_DECLARATIONS = [
 
 export async function executeAdvisAdminTool(name: string, args: ToolArgs) {
   switch (name) {
+    case 'get_runtime_environment':
+      return {
+        environment: process.env.VERCEL_ENV || process.env.NODE_ENV || 'unknown',
+        deploymentUrl: process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : null,
+        commitSha: process.env.VERCEL_GIT_COMMIT_SHA || null,
+        branch: process.env.VERCEL_GIT_COMMIT_REF || null,
+        region: process.env.VERCEL_REGION || process.env.VERCEL_REGION_ID || null,
+        project: process.env.VERCEL_PROJECT_PRODUCTION_URL || null,
+      };
+
     case 'get_platform_overview':
       return await getAdminOverviewMetricsAsync((text(args.range) || '30d') as 'today' | '7d' | '30d' | '90d' | 'all');
 

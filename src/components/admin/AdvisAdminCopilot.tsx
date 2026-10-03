@@ -86,13 +86,13 @@ export function AdvisAdminCopilot() {
   const [history, setHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
   const [listening, setListening] = useState(false);
   const [voiceMode, setVoiceMode] = useState(false);
-  const [voiceOutput, setVoiceOutput] = useState(true);
+  const [voiceOutput, setVoiceOutput] = useState(false);
   const [interimTranscript, setInterimTranscript] = useState('');
   const [voiceError, setVoiceError] = useState('');
   const [toolTrace, setToolTrace] = useState<Array<{ name: string; status: 'ok' | 'error'; summary?: string }>>([]);
   const recognitionRef = useRef<any>(null);
   const voiceModeRef = useRef(false);
-  const voiceOutputRef = useRef(true);
+  const voiceOutputRef = useRef(false);
   const restartVoiceRef = useRef(false);
   const voiceDraftRef = useRef('');
   const voiceSubmitTimerRef = useRef<number | null>(null);
@@ -240,8 +240,14 @@ export function AdvisAdminCopilot() {
     const next = !voiceMode;
     voiceModeRef.current = next;
     setVoiceMode(next);
-    if (next) startListening();
-    else stopListening();
+    if (next) {
+      voiceOutputRef.current = true;
+      setVoiceOutput(true);
+      startListening();
+    } else {
+      stopListening();
+      stopSpeaking();
+    }
   }
 
   function toggleVoiceOutput() {
@@ -345,6 +351,43 @@ export function AdvisAdminCopilot() {
             </button>
           </div>
 
+          <div className="rounded-2xl border border-cyan-300/15 bg-gradient-to-r from-cyan-300/[0.06] via-transparent to-blue-400/[0.04] p-4">
+            <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className={"shrink-0 w-11 h-11 rounded-2xl border flex items-center justify-center " + (listening ? "border-cyan-200/60 bg-cyan-300/15 shadow-[0_0_24px_rgba(85,231,255,.18)]" : "border-cyan-300/20 bg-cyan-300/[0.05]")}>
+                  {listening ? <Mic className="w-5 h-5 text-cyan-100 animate-pulse" /> : <MicOff className="w-5 h-5 text-cyan-300/70" />}
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[11px] font-black uppercase tracking-[0.16em] text-cyan-100">{listening ? 'Listening to you…' : voiceMode ? 'Voice Mode ready' : 'Talk to ADVIS'}</span>
+                    {voiceMode && <span className="rounded-full border border-cyan-300/15 bg-cyan-300/[0.04] px-2 py-0.5 text-[8px] font-black tracking-[0.14em] text-cyan-200">CONTINUOUS</span>}
+                  </div>
+                  <p className="mt-1 text-[10px] leading-4 text-slate-500">Speak naturally about Admission Pitara. Finish your sentence and ADVIS sends the command automatically.</p>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <button type="button" onClick={toggleVoiceMode} disabled={!browserVoiceSupported() || loading} className={"inline-flex items-center gap-2 rounded-xl border px-3.5 py-2.5 text-[9px] font-black tracking-[0.14em] disabled:opacity-35 " + (voiceMode ? "border-cyan-200/50 bg-cyan-300/15 text-cyan-100 shadow-[0_0_18px_rgba(85,231,255,.12)]" : "border-cyan-300/20 bg-cyan-300/[0.05] text-cyan-100 hover:bg-cyan-300/[0.1]")}>
+                  {voiceMode ? <Phone className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
+                  {voiceMode ? 'VOICE MODE ON' : 'START VOICE MODE'}
+                </button>
+                <button type="button" onClick={() => listening ? stopListening() : startListening()} disabled={!browserVoiceSupported() || loading} className="inline-flex items-center gap-2 rounded-xl border border-cyan-300/15 bg-cyan-300/[0.04] px-3.5 py-2.5 text-[9px] font-black tracking-[0.14em] text-cyan-100 hover:bg-cyan-300/[0.09] disabled:opacity-35">
+                  {listening ? <MicOff className="w-3.5 h-3.5" /> : <Mic className="w-3.5 h-3.5" />}
+                  {listening ? 'STOP LISTENING' : 'TALK NOW'}
+                </button>
+                <button type="button" onClick={toggleVoiceOutput} className="inline-flex items-center gap-2 rounded-xl border border-cyan-300/15 bg-cyan-300/[0.04] px-3.5 py-2.5 text-[9px] font-black tracking-[0.14em] text-cyan-100 hover:bg-cyan-300/[0.09]">
+                  {voiceOutput ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+                  {voiceOutput ? 'VOICE REPLIES ON' : 'VOICE REPLIES OFF'}
+                </button>
+                <button type="button" onClick={stopSpeaking} className="inline-flex items-center gap-2 rounded-xl border border-rose-300/15 bg-rose-300/[0.04] px-3.5 py-2.5 text-[9px] font-black tracking-[0.14em] text-rose-100 hover:bg-rose-300/[0.09]">
+                  <VolumeX className="w-3.5 h-3.5" /> STOP ADVIS VOICE
+                </button>
+              </div>
+            </div>
+            <div className="mt-3 rounded-xl border border-white/5 bg-[#01070d] px-3.5 py-3 min-h-11 text-sm text-white">
+              {interimTranscript || question || (listening ? 'Listening for your Admission Pitara command…' : 'Press START VOICE MODE to have a live spoken conversation with ADVIS.')}
+            </div>
+            {voiceError && <p className="mt-2 text-[10px] text-rose-200">{voiceError}</p>}
+          </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
             <div className="rounded-2xl border border-cyan-300/10 bg-[#061a2a] p-3.5">
               <div className="flex items-center justify-between text-cyan-200">

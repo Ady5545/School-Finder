@@ -3635,6 +3635,9 @@ export function getWishlistAnalytics() {
   const schoolCounts = new Map<string, { count: number; users: { userId: string; email: string; name: string }[] }>();
 
   for (const user of users.values()) {
+    // Current shortlist analytics are authoritative only for active parent
+    // accounts. Admin and disabled accounts must never appear as parent saves.
+    if (user.role === 'admin' || user.status === 'disabled') continue;
     if (Array.isArray(user.wishlist)) {
       for (const slug of user.wishlist) {
         const cur = schoolCounts.get(slug) || { count: 0, users: [] };

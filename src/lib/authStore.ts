@@ -3641,8 +3641,11 @@ export function getWishlistAnalytics() {
 export async function getWishlistAnalyticsAsync() {
   const schoolCounts = new Map<string, { count: number; users: { userId: string; email: string; name: string }[] }>();
   const allUsers = await getAllUsersSanitizedAsync();
+  // Wishlist state is authoritative only for real parent accounts. Historical
+  // wishlist_add events are analytics telemetry and must not create a current shortlist.
+  const parentUsers = allUsers.filter(user => user.role !== 'admin' && user.status !== 'disabled');
 
-  for (const user of allUsers) {
+  for (const user of parentUsers) {
     if (Array.isArray(user.wishlist)) {
       for (const slug of user.wishlist) {
         const cur = schoolCounts.get(slug) || { count: 0, users: [] };

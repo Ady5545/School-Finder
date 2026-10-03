@@ -251,7 +251,7 @@ export async function POST(req: NextRequest) {
     const datasetSummary = {
       canonicalSchoolCount: schools.length,
       parentUserCount: parentUsers.length,
-      activeParentUserCount: usersActive.filter((u: any) => u?.role !== 'admin' && u?.status !== 'disabled').length,
+      activeParentUserCount: usersActive.length,
       verifiedParentEmailCount: usersVerified.length,
       usersWithWishlistCount: usersWithWishlist.length,
       activityEventCount: (activity as any[]).length,

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import {
   Activity,
   AlertTriangle,
@@ -9,7 +9,6 @@ import {
   Phone,
   Volume2,
   VolumeX,
-  Square,
   BarChart3,
   BrainCircuit,
   ChevronDown,
@@ -84,7 +83,13 @@ export function AdvisAdminCopilot() {
   const [open, setOpen] = useState(true);
   const [booting, setBooting] = useState(true);
   const [intelligence, setIntelligence] = useState<Intelligence | null>(null);
-  const [history, setHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);\n  const [toolTrace, setToolTrace] = useState<Array<{ name: string; status: 'ok' | 'error'; summary?: string }>>([]);
+  const [history, setHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);
+  const [listening, setListening] = useState(false);
+  const [voiceMode, setVoiceMode] = useState(false);
+  const [voiceOutput, setVoiceOutput] = useState(true);
+  const [interimTranscript, setInterimTranscript] = useState('');
+  const [voiceError, setVoiceError] = useState('');
+  const [toolTrace, setToolTrace] = useState<Array<{ name: string; status: 'ok' | 'error'; summary?: string }>>([]);
   const recognitionRef = useRef<any>(null);
   const voiceModeRef = useRef(false);
   const voiceOutputRef = useRef(true);
@@ -113,7 +118,10 @@ export function AdvisAdminCopilot() {
       setAnswer(data.answer || '');
       setModel(data.model || '');
       setIntelligence(data.intelligence || null);
-      setHistory(prev => [q, ...prev.filter(item => item !== q)].slice(0, 5));
+      setToolTrace(data.toolTrace || []);
+      if (voiceModeRef.current) restartVoiceRef.current = true;
+      speakAnswer(data.answer || '');
+      setHistory(prev => [...prev, { role: 'user', content: q }, { role: 'assistant', content: data.answer || '' }].slice(-8));
     } catch (error) {
       setAnswer(error instanceof Error ? error.message : 'ADVIS could not complete the analysis.');
     } finally {

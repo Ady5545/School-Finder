@@ -28,7 +28,12 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
     let cancelled = false;
     fetch('/api/schools?_ts=' + Date.now(), { cache: 'no-store' })
       .then(r => r.json())
-      .then(data => { if (!cancelled && data?.success && Array.isArray(data.schools)) setSchools(data.schools); })
+      .then(data => {
+        if (!cancelled && data?.success && Array.isArray(data.schools)) {
+          setSchools(data.schools);
+          setSelectedReviewSlug(prev => prev || data.schools[0]?.slug || '');
+        }
+      })
       .catch(() => {});
     return () => { cancelled = true; };
   }, []);
@@ -38,6 +43,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
   const [searchQuery, setSearchQuery] = useState('');
   const [boardFilter, setBoardFilter] = useState('');
   const [areaFilter, setAreaFilter] = useState('');
+  const [reviewSort, setReviewSort] = useState<'featured' | 'rating' | 'reviews' | 'new'>('featured');
   const [data, setData] = useState<Record<string, { summary: Summary; ratings: Review[] }>>({});
   const [loading, setLoading] = useState<string | null>(null);
 
@@ -117,13 +123,29 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
     }
   };
 
-  const selectedSchool = schools.find(school => school.slug === selectedReviewSlug) || filteredSchools[0] || schools[0];
+  const sortedSchools = useMemo(() => {
+    const copy = [...filteredSchools];
+    if (reviewSort === 'rating') {
+      copy.sort((a, b) => (data[b.slug]?.summary.averageRating || 0) - (data[a.slug]?.summary.averageRating || 0) || (data[b.slug]?.summary.totalReviews || 0) - (data[a.slug]?.summary.totalReviews || 0));
+    } else if (reviewSort === 'reviews') {
+      copy.sort((a, b) => (data[b.slug]?.summary.totalReviews || 0) - (data[a.slug]?.summary.totalReviews || 0) || (data[b.slug]?.summary.averageRating || 0) - (data[a.slug]?.summary.averageRating || 0));
+    } else if (reviewSort === 'new') {
+      copy.sort((a, b) => {
+        const da = Date.parse(a.verification?.lastVerified || '') || 0;
+        const db = Date.parse(b.verification?.lastVerified || '') || 0;
+        return db - da;
+      });
+    }
+    return copy;
+  }, [filteredSchools, reviewSort]);
+
+  const selectedSchool = schools.find(school => school.slug === selectedReviewSlug) || sortedSchools[0] || schools[0];
   const writeReviewHref = selectedSchool ? '/schools/' + selectedSchool.slug + '#reviews' : '/schools';
 
   return (
     <section className="mt-10 space-y-6">
       {/* Discovery Header */}
-      <div className="rounded-2xl border border-[var(--color-border)] bg-white p-5 sm:p-6 shadow-warm-xs">
+      <div className="rounded-2xl neo-surface border border-[var(--color-border)] bg-white p-5 sm:p-6 shadow-warm-xs">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary-light)] text-[var(--color-primary)] text-[11px] font-extrabold uppercase tracking-wider">
@@ -138,7 +160,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             </p>
           </div>
 
-          <div className="w-full lg:w-[360px] rounded-2xl bg-[#fbf9f5] border border-[var(--color-border)] p-4">
+          <div className="w-full lg:w-[360px] rounded-2xl neo-surface bg-[#fbf9f5] border border-[var(--color-border)] p-4">
             <div className="text-[11px] font-extrabold uppercase tracking-wider text-[var(--color-content-muted)]">
               Ready to share an experience?
             </div>
@@ -149,7 +171,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
               id="review-school-selector"
               value={selectedSchool?.slug || ''}
               onChange={event => setSelectedReviewSlug(event.target.value)}
-              className="mt-2 w-full px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="mt-2 w-full neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               {schools.map(school => (
                 <option key={school.slug} value={school.slug}>
@@ -192,7 +214,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
               value={searchQuery}
               onChange={event => setSearchQuery(event.target.value)}
               placeholder="Search school name or sector..."
-              className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full neo-field pl-9 pr-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             />
           </label>
 
@@ -201,7 +223,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             <select
               value={boardFilter}
               onChange={event => setBoardFilter(event.target.value)}
-              className="w-full md:w-44 px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full md:w-44 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               <option value="">All boards</option>
               {boards.map(board => (
@@ -217,7 +239,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
             <select
               value={areaFilter}
               onChange={event => setAreaFilter(event.target.value)}
-              className="w-full md:w-52 px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
+              className="w-full md:w-52 neo-field px-3 py-2.5 rounded-xl border border-[var(--color-border-strong)] bg-white text-xs font-semibold text-[var(--color-content)] outline-none focus:border-[var(--color-primary)]"
             >
               <option value="">All areas</option>
               {areas.map(area => (
@@ -231,9 +253,30 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
       </div>
 
       {/* School Review Cards */}
+      <div className="rounded-2xl neo-surface border border-slate-200 bg-slate-50/70 p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-500">Review explorer</div>
+            <p className="text-xs sm:text-sm font-extrabold text-slate-900 mt-1">Find a school → read real experiences → decide what to explore next.</p>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {(['featured', 'reviews', 'rating', 'new'] as const).map(sort => (
+              <button
+                key={sort}
+                type="button"
+                onClick={() => setReviewSort(sort)}
+                className={`px-2.5 py-1.5 rounded-lg border text-[10.5px] font-extrabold transition-colors ${reviewSort === sort ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]' : 'bg-white text-slate-700 border-slate-200 hover:border-[var(--color-primary)]'}`}
+              >
+                {sort === 'featured' ? 'Featured' : sort === 'reviews' ? 'Most reviewed' : sort === 'rating' ? 'Top rated' : 'Recently checked'}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="flex items-center justify-between gap-3 px-1">
         <div className="text-sm font-extrabold text-[var(--color-content)]">
-          {filteredSchools.length} {filteredSchools.length === 1 ? 'school' : 'schools'} to explore
+          {sortedSchools.length} {sortedSchools.length === 1 ? 'school' : 'schools'} to explore
         </div>
         <div className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500">
           <Filter className="w-3.5 h-3.5" />
@@ -242,20 +285,22 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
       </div>
 
       {filteredSchools.length === 0 ? (
-        <div className="rounded-2xl border border-dashed border-[var(--color-border-strong)] bg-white p-8 text-center">
+        <div className="rounded-2xl neo-surface border border-dashed border-[var(--color-border-strong)] bg-white p-8 text-center">
           <h3 className="font-bold text-sm text-slate-900">No schools match these filters</h3>
           <p className="text-xs text-slate-500 mt-1.5">Clear a filter to browse the full review directory.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredSchools.map(school => {
+          {sortedSchools.map(school => {
             const item = data[school.slug];
             const isOpen = openSlug === school.slug;
-            const reviewCount = item?.summary.totalReviews ?? school.rating.reviewsCount ?? 0;
-            const rating = item?.summary.averageRating ?? school.rating.score ?? 0;
+            // Only show real Admission Pitara reviews fetched from the ratings API.
+            // school.rating.reviewsCount can contain legacy/seeded rating metadata and is not the published-review count.
+            const reviewCount = item?.summary.totalReviews ?? 0;
+            const rating = item?.summary.averageRating ?? 0;
 
             return (
-              <article key={school.slug} className="rounded-2xl bg-white border border-[var(--color-border)] shadow-warm-xs overflow-hidden">
+              <article key={school.slug} className="rounded-2xl neo-surface bg-white border border-[var(--color-border)] shadow-warm-xs overflow-hidden">
                 <div className="flex gap-3 p-4 sm:p-5">
                   <Link href={'/schools/' + school.slug} className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-slate-100">
                     <SchoolImage src={school.assets.featured} alt={school.name} aspectRatio="square" className="w-full h-full object-cover" />
@@ -274,18 +319,11 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
 
                       <div className="shrink-0 text-right">
                         {reviewCount > 0 ? (
-                          <>
-                            <div className="inline-flex items-center gap-1 text-sm font-black text-slate-900">
-                              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                              {Number(rating || 0).toFixed(1)}
-                            </div>
-                            <div className="text-[10px] text-slate-500 mt-0.5">
-                              {reviewCount} {reviewCount === 1 ? 'review' : 'reviews'}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="text-[10px] font-bold text-slate-500">No reviews yet</div>
-                        )}
+                          <div className="inline-flex items-center gap-1 text-sm font-black text-slate-900">
+                            <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                            {Number(rating || 0).toFixed(1)}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
 
@@ -331,7 +369,7 @@ export const SchoolReviewsDirectory: React.FC<{ initialSchools?: School[] }> = (
                         {item?.ratings?.length ? (
                           <div className="space-y-3 pt-4">
                             {item.ratings.map(review => (
-                              <article key={review.id} className="rounded-xl bg-white border border-slate-200 p-4">
+                              <article key={review.id} className="rounded-xl neo-surface bg-white border border-slate-200 p-4">
                                 <div className="flex items-center justify-between gap-3">
                                   <div className="text-amber-500 text-xs">
                                     {'★'.repeat(Math.max(0, Math.min(5, review.score)))}

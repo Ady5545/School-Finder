@@ -2409,9 +2409,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "ryan-international-school-greater-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector Beta 1 campus (Core Greater Noida). Techzone 4 Greater Noida West campus is retained separately as active."
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "sks-world-school-greater-noida-west",
@@ -5267,9 +5266,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "shiv-nadar-school",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector 168, Noida Expressway (Noida Expressway, outside Greater Noida West catchment)."
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "shri-ram-global-school",
@@ -7054,9 +7052,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "vishwa-bharati-public-school-greater-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector 27, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "st-mary-convent-school-greater-noida",
@@ -7344,9 +7341,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "st-mary-convent-school-greater-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector Alpha 2, Greater Noida (Core Greater Noida, outside Greater Noida West catchment)."
+    "isArchived": false,
+    "status": "active"
   },
   {
     "id": "indus-valley-school-noida-ext",
@@ -8367,479 +8363,6 @@
     "cbseAffiliationNumber": null
   },
   {
-    "id": "green-valley-academy-noida-ext",
-    "slug": "green-valley-academy-noida-ext",
-    "name": "Green Valley Academy",
-    "shortName": "Green Valley Academy",
-    "alternateNames": [
-      "Green Valley Academy Noida Extension",
-      "Green Valley Academy Sector 12"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Green Valley Academy in Sector 12, Greater Noida West, provides quality schooling under the CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "Not publicly verified",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Sector 12, Greater Noida West, Uttar Pradesh 201306",
-      "sector": "Sector 12",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "Green Valley Academy Sector 12 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": null,
-      "estimatedFirstYear": null,
-      "currency": "INR",
-      "rangeText": "Not publicly disclosed",
-      "registrationFee": null,
-      "admissionFee": null,
-      "tuitionMonthly": null,
-      "tuitionQuarterly": null,
-      "tuitionAnnual": null,
-      "transportMonthly": null,
-      "transportAnnual": null,
-      "verificationStatus": "not_publicly_verified",
-      "comparableAnnualAvailable": false,
-      "feeCategory": "Prospectus / Institutional Disclosure Required",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://greenvalleyacademynoidaext.edu.in",
-      "table": [],
-      "isVerified": false,
-      "disclosed": false,
-      "components": [],
-      "gradeWiseTiers": [],
-      "concessions": [],
-      "disclaimer": "This institution has not published a public fee circular or schedule online. Parents are advised to contact the school admissions desk directly or request the official prospectus to obtain certified fee details.",
-      "footnotes": [
-        "Admission Pitara strictly avoids fabricating fee figures when no official public circular exists.",
-        "Please contact the school office directly for current academic session fee schedules."
-      ],
-      "annualDisplay": "Not publicly disclosed"
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Not publicly verified",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": null,
-      "email": "info@greenvalleyacademynoidaext.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": "/assets/schools/green-valley-academy-noida-ext/featured/featured.webp",
-      "hero": "/assets/schools/green-valley-academy-noida-ext/featured/featured.webp",
-      "gallery": [
-        "/assets/schools/green-valley-academy-noida-ext/gallery/gallery-1.webp",
-        "/assets/schools/green-valley-academy-noida-ext/gallery/gallery-2.webp"
-      ],
-      "legacyPaths": {},
-      "coverImage": "/assets/schools/green-valley-academy-noida-ext/featured/featured.webp",
-      "imageSource": "User-provided photo collection",
-      "imageVerifiedAt": "2026-09-19"
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Local School Directory (Pending Official Disclosure)",
-      "sourceUrl": null,
-      "verifiedFields": [
-        "name",
-        "location"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Green Valley Academy Greater Noida West",
-      "h1": "Green Valley Academy",
-      "pageHeartKey": "heart_green-valley-academy-noida-ext",
-      "cardHeartKey": "card_green-valley-academy-noida-ext",
-      "cardRatingKey": "rating_green-valley-academy-noida-ext",
-      "cardLink": "/schools/green-valley-academy-noida-ext",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 12 campus verified in Greater Noida West directory.",
-      "Synthetic attributes (non-existent domain, templated fees, unverified facilities) cleansed. Marked as not publicly verified pending official disclosure."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "geographicClassification": "core_greater_noida_west",
-    "establishedYear": null,
-    "recordType": "canonical",
-    "canonicalSlug": "green-valley-academy-noida-ext",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Removed from public directory per data correction."
-  },
-  {
-    "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
-    "slug": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
-    "name": "Shree Thakur Dwara Balika Vidyalaya",
-    "shortName": "Shree Thakur Dwara Balika Vidyalaya",
-    "alternateNames": [
-      "Shree Thakur Dwara Balika Vidyalaya Noida Extension",
-      "Shree Thakur Dwara Balika Vidyalaya Sector 12"
-    ],
-    "tagline": "Committed to academic rigor and well-rounded personality development",
-    "summary": "Shree Thakur Dwara Balika Vidyalaya in Sector 12, Greater Noida West, provides quality schooling under the UP Board / CBSE framework with modern classrooms, laboratories, and sports grounds.",
-    "board": [
-      "UP Board",
-      "CBSE"
-    ],
-    "boardNote": null,
-    "curriculum": "UP Board / CBSE Curriculum",
-    "gradeRange": {
-      "from": "Nursery",
-      "to": "Grade 12",
-      "raw": "Nursery to Grade 12"
-    },
-    "admissionAge": "3+ years for Nursery",
-    "studentTeacherRatio": "15:1",
-    "schoolType": "Co-Educational Day School",
-    "dayOrBoarding": "Day School",
-    "location": {
-      "address": "Hapur Road Tiraha, G.T. Road, Jassipura, Ghaziabad, Uttar Pradesh 201001",
-      "sector": "Ghaziabad (Jassipura)",
-      "city": "Greater Noida West",
-      "state": "Uttar Pradesh",
-      "pincode": "201306",
-      "area": "Greater Noida West",
-      "coordinates": {
-        "lat": null,
-        "lng": null,
-        "isVerified": false
-      },
-      "mapSearchQuery": "Shree Thakur Dwara Balika Vidyalaya Sector 12 Greater Noida West",
-      "mapEmbedUrl": null
-    },
-    "fees": {
-      "cardFee": 45000,
-      "estimatedFirstYear": 56250,
-      "currency": "INR",
-      "rangeText": "₹41k - ₹50k / year",
-      "registrationFee": 1000,
-      "admissionFee": 20000,
-      "tuitionMonthly": "₹3,750",
-      "tuitionQuarterly": "₹11,250",
-      "tuitionAnnual": "₹45,000",
-      "transportMonthly": "₹2,500",
-      "transportAnnual": "₹30,000",
-      "verificationStatus": "verified_from_source",
-      "comparableAnnualAvailable": true,
-      "feeCategory": "Tier 2 Value",
-      "academicSession": "2026-27",
-      "lastVerifiedDate": "2026-09-15",
-      "sourceUrl": "https://shreethakurdwarabalikavidyalayagrnoida.edu.in",
-      "table": [
-        {
-          "type": "Registration Fee",
-          "cost": "₹1,000"
-        },
-        {
-          "type": "Admission Fee",
-          "cost": "₹20,000"
-        },
-        {
-          "type": "Composite Annual Tuition",
-          "cost": "₹45,000"
-        }
-      ],
-      "disclosed": true,
-      "isVerified": true,
-      "components": [
-        {
-          "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida-reg",
-          "name": "Registration Fee",
-          "category": "one_time",
-          "amount": 1000,
-          "formattedAmount": "₹1,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time registration and application processing charge.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida-adm",
-          "name": "Admission Fee",
-          "category": "one_time",
-          "amount": 20000,
-          "formattedAmount": "₹20,000",
-          "frequency": "one_time",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "One-time non-refundable admission charge payable upon admission confirmation.",
-          "gradesApplicable": "All Entry Grades"
-        },
-        {
-          "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida-tuition-monthly",
-          "name": "Tuition Fee (Monthly)",
-          "category": "recurring",
-          "amount": 3750,
-          "formattedAmount": "₹3,750 / month",
-          "frequency": "monthly",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "Payable on a monthly/quarterly schedule.",
-          "gradesApplicable": "Nursery to Grade 12"
-        },
-        {
-          "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida-tuition-annual",
-          "name": "Annual Tuition (Calculated)",
-          "category": "recurring",
-          "amount": 45000,
-          "formattedAmount": "₹45,000 / year",
-          "frequency": "annual",
-          "mandatory": true,
-          "refundable": false,
-          "isOfficial": false,
-          "notes": "Derived annual composite equivalent.",
-          "gradesApplicable": "Nursery to Grade 12",
-          "isCalculated": true,
-          "calculationNotes": "Calculated from published monthly fee of ₹3,750 × 12 = ₹45,000/year."
-        },
-        {
-          "id": "shree-thakur-dwara-balika-vidyalaya-gr-noida-transport",
-          "name": "Transport Service (Optional)",
-          "category": "transport",
-          "amount": null,
-          "formattedAmount": "₹2,500 / month",
-          "frequency": "monthly",
-          "mandatory": false,
-          "refundable": false,
-          "isOfficial": true,
-          "notes": "GPS-enabled school bus transportation covering major sectors in Greater Noida West.",
-          "gradesApplicable": "Optional for all grades"
-        }
-      ],
-      "gradeWiseTiers": [
-        {
-          "gradeGroup": "Nursery to Grade 12",
-          "tuitionFee": "₹₹11,250 / quarter",
-          "tuitionFrequency": "annual",
-          "calculatedAnnualEquivalent": "₹45,000 / year",
-          "totalAnnualPayable": "₹45,000",
-          "isCalculated": true,
-          "notes": "Standard published fee tier."
-        }
-      ],
-      "concessions": [
-        {
-          "title": "Sibling Concession",
-          "category": "sibling",
-          "discountDescription": "Institutional sibling fee concession",
-          "eligibilityCriteria": "Available for younger siblings studying concurrently.",
-          "isOfficial": true
-        }
-      ],
-      "circular": {
-        "title": "Shree Thakur Dwara Balika Vidyalaya Official Fee Schedule",
-        "academicSession": "2026-27",
-        "circularType": "web_schedule",
-        "sourceUrl": "https://shreethakurdwarabalikavidyalayagrnoida.edu.in",
-        "summary": "Official fee structure for Shree Thakur Dwara Balika Vidyalaya covering composite tuition, one-time charges, and optional services.",
-        "keyTerms": [
-          "Payment due as per institutional quarterly/monthly cycles",
-          "Online payment gateway via school portal"
-        ],
-        "officialNotes": [
-          "Fee is subject to periodic institutional revision under state educational guidelines."
-        ]
-      },
-      "disclaimer": "Composite tuition fee is payable periodically as specified by the school. Actual annual payable may vary based on optional activities and transport routes selected.",
-      "footnotes": [
-        "One-time registration and admission fees are non-refundable.",
-        "Transport fee is optional and calculated on the basis of distance from pickup point."
-      ],
-      "annualDisplay": "₹41k - ₹50k / year"
-    },
-    "facilities": [
-      {
-        "name": "Smart Classrooms",
-        "category": "Academics",
-        "icon": "monitor"
-      },
-      {
-        "name": "Science Laboratories",
-        "category": "Academics",
-        "icon": "flask-conical"
-      },
-      {
-        "name": "Computer Lab",
-        "category": "Technology",
-        "icon": "cpu"
-      },
-      {
-        "name": "Library",
-        "category": "Library",
-        "icon": "book-open"
-      },
-      {
-        "name": "Playground & Sports Facilities",
-        "category": "Sports",
-        "icon": "trophy"
-      }
-    ],
-    "uniforms": {
-      "boys": {
-        "image": null,
-        "label": "Official School Uniform"
-      },
-      "girls": {
-        "image": null,
-        "label": "Official School Uniform"
-      }
-    },
-    "achievements": [
-      "Strong academic and athletic track record in regional competitions"
-    ],
-    "admissions": {
-      "date": "Admissions Open 2027-28",
-      "status": "Open",
-      "process": "Online inquiry or campus registration followed by interaction.",
-      "session": "2027-28"
-    },
-    "contact": {
-      "phone": "+91 98110 00000",
-      "website": "https://thakurdwaraschool.com/",
-      "email": "info@shreethakurdwarabalikavidyalayagrnoida.edu.in"
-    },
-    "rating": {
-      "score": 4.3,
-      "scale": 5,
-      "reviewsCount": 0
-    },
-    "assets": {
-      "featured": null,
-      "hero": null,
-      "gallery": [],
-      "legacyPaths": {}
-    },
-    "verification": {
-      "isVerified": true,
-      "status": "verified_official",
-      "lastVerified": "2026-09",
-      "sourceName": "Official Shree Thakur Dwara Balika Vidyalaya Portal",
-      "sourceUrl": "https://thakurdwaraschool.com/",
-      "cbseAffiliationNumber": "2133120",
-      "verifiedFields": [
-        "name",
-        "address",
-        "website",
-        "affiliation"
-      ]
-    },
-    "legacyIdentifiers": {
-      "pageFile": "",
-      "pageTitle": "Shree Thakur Dwara Balika Vidyalaya Greater Noida West",
-      "h1": "Shree Thakur Dwara Balika Vidyalaya",
-      "pageHeartKey": "heart_shree-thakur-dwara-balika-vidyalaya-gr-noida",
-      "cardHeartKey": "card_shree-thakur-dwara-balika-vidyalaya-gr-noida",
-      "cardRatingKey": "rating_shree-thakur-dwara-balika-vidyalaya-gr-noida",
-      "cardLink": "/schools/shree-thakur-dwara-balika-vidyalaya-gr-noida",
-      "legacyUrls": []
-    },
-    "auditNotes": [
-      "Sector 12 campus verified in Greater Noida West directory.",
-      "Geographic Outlier: All-girls school located in Jassipura, Ghaziabad. Flagged for review."
-    ],
-    "classification": "core_greater_noida_west",
-    "sports": [
-      "Cricket",
-      "Football",
-      "Basketball",
-      "Badminton",
-      "Table Tennis",
-      "Athletics"
-    ],
-    "affiliationNumber": "2133120",
-    "geographicClassification": "geographic_outlier",
-    "recordType": "geographic_outlier",
-    "canonicalSlug": "shree-thakur-dwara-balika-vidyalaya-gr-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Located in Jassipura, Ghaziabad; outside practical Greater Noida West / Noida Extension catchment."
-  },
-  {
     "id": "pragyan-public-school-jewar-extension",
     "slug": "pragyan-public-school-jewar-extension",
     "name": "Pragyan Public School",
@@ -9131,9 +8654,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "geographic_outlier",
     "canonicalSlug": "pragyan-public-school-jewar-extension",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Located in Jewar Extension (50+ km south), far outside Greater Noida West catchment.",
+    "isArchived": false,
+    "status": "active",
     "cbseAffiliationNumber": "2130537"
   },
   {
@@ -9300,9 +8822,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "step-by-step-school-noida-feeder",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector 132, Noida Expressway (Noida feeder, outside Greater Noida West catchment).",
+    "isArchived": false,
+    "status": "active",
     "cbseAffiliationNumber": "2130548"
   },
   {
@@ -9480,9 +9001,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "amity-international-school-gn-feeder",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector 44, Noida (Core Noida feeder, outside Greater Noida West catchment).",
+    "isArchived": false,
+    "status": "active",
     "cbseAffiliationNumber": "2130456"
   },
   {
@@ -9646,9 +9166,8 @@
     "geographicClassification": "geographic_outlier",
     "recordType": "nearby_surrounding",
     "canonicalSlug": "somerville-school-greater-noida",
-    "isArchived": true,
-    "status": "archived",
-    "archiveReason": "Sector Alpha 2, Greater Noida (Core Greater Noida, outside Greater Noida West catchment).",
+    "isArchived": false,
+    "status": "active",
     "cbseAffiliationNumber": "2130263"
   },
   {
@@ -15130,8 +14649,8 @@
     "geographicClassification": null,
     "recordType": "primary",
     "canonicalSlug": "mount-vinson-school",
-    "isArchived": true,
-    "status": "archived",
+    "isArchived": false,
+    "status": "active",
     "verification": {
       "isVerified": false,
       "status": "partially_verified",
@@ -15143,8 +14662,7 @@
         "name",
         "address"
       ]
-    },
-    "archiveReason": "Removed from public Admission Pitara discovery; retained only as historical repository data."
+    }
   },
   {
     "id": "dps-world-school-noida-extension-alias",

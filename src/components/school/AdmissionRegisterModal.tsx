@@ -41,6 +41,8 @@ export const AdmissionRegisterModal: React.FC<AdmissionRegisterModalProps> = ({
   const statusLower = rawStatus.toLowerCase();
   const isOpenStatus = statusLower.includes('open') || statusLower.includes('ongoing') || statusLower.includes('active');
 
+  // The school is the source of truth. A parent should never have to decide
+  // between registration and pre-registration themselves.
   const mode = propMode || (isOpenStatus ? 'register' : 'preregister');
   const isPreReg = mode === 'preregister';
 

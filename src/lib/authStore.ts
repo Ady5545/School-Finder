@@ -3284,15 +3284,34 @@ export async function getAllSchoolsAdminOverviewAsync() {
   return Array.from(summaryMap.values());
 }
 
+function getIndiaTodayStartTimestamp(): number {
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(now);
+  const values: Record<string, string> = {};
+  for (const part of parts) values[part.type] = part.value;
+  return Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    0,
+    0,
+    0,
+    0
+  ) - (5.5 * 60 * 60 * 1000);
+}
+
 export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d' | 'all' = '30d') {
   initDb();
   let timeThreshold = 0;
   const now = Date.now();
 
   if (timeRange === 'today') {
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
-    timeThreshold = startOfToday.getTime();
+    timeThreshold = getIndiaTodayStartTimestamp();
   } else if (timeRange === '7d') {
     timeThreshold = now - 7 * 24 * 60 * 60 * 1000;
   } else if (timeRange === '30d') {
@@ -3358,17 +3377,17 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
     .sort((a, b) => b.views - a.views)
     .slice(0, 8);
 
-  // Top shortlisted schools in selected time range
-  const savesMapInRange = new Map<string, number>();
-  for (const ev of savesEventsInRange) {
-    if (ev.schoolSlug) {
-      savesMapInRange.set(ev.schoolSlug, (savesMapInRange.get(ev.schoolSlug) || 0) + 1);
+  // Current shortlist state is authoritative for "Top Shortlisted Schools".
+  // Historical wishlist_add events remain useful activity telemetry but must not
+  // make a school appear currently shortlisted after the parent removes it or
+  // the parent account no longer exists.
+  const currentShortlistMap = new Map<string, number>();
+  for (const parent of parentUsersList) {
+    if (!Array.isArray(parent.wishlist)) continue;
+    for (const slug of parent.wishlist) {
+      currentShortlistMap.set(slug, (currentShortlistMap.get(slug) || 0) + 1);
     }
   }
-  const topShortlistedInRange = Array.from(savesMapInRange.entries())
-    .map(([slug, count]) => ({ slug, saves: count }))
-    .sort((a, b) => b.saves - a.saves)
-    .slice(0, 8);
 
   const topViewed = timeRange === 'all' || topViewedInRange.length === 0
     ? Array.from(schoolViews.entries())
@@ -3377,12 +3396,13 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
         .slice(0, 8)
     : topViewedInRange;
 
-  const topShortlisted = timeRange === 'all' || topShortlistedInRange.length === 0
-    ? Array.from(schoolSaves.entries())
-        .map(([slug, count]) => ({ slug, saves: count }))
-        .sort((a, b) => b.saves - a.saves)
-        .slice(0, 8)
-    : topShortlistedInRange;
+  const topShortlisted = Array.from(currentShortlistMap.entries())
+    .map(([slug, saves]) => ({ slug, saves }))
+    .sort((a, b) => b.saves - a.saves)
+    .slice(0, 8);
+
+  const activeShortlistsCount = Array.from(currentShortlistMap.values()).reduce((sum, count) => sum + count, 0);
+  const activeShortlistedSchoolsCount = currentShortlistMap.size;
 
   const allTimeViews = Array.from(schoolViews.values()).reduce((a, b) => a + b, 0);
   const allTimeSaves = Array.from(schoolSaves.values()).reduce((a, b) => a + b, 0);
@@ -3416,6 +3436,8 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
       allTimeSavesCount: allTimeSaves,
       viewsInRange: viewsCountInRange,
       savesInRange: savesCountInRange,
+      activeShortlistsCount,
+      activeShortlistedSchoolsCount,
       uniqueViewersInRange: uniqueParentsViewing,
     },
     reviews: {
@@ -3560,12 +3582,21 @@ export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '
         .slice(0, 8)
     : topViewedInRange;
 
-  const topShortlisted = timeRange === 'all' || topShortlistedInRange.length === 0
-    ? Array.from(allTimeSavesMap.entries())
-        .map(([slug, count]) => ({ slug, saves: count }))
-        .sort((a, b) => b.saves - a.saves)
-        .slice(0, 8)
-    : topShortlistedInRange;
+  const currentShortlistMap = new Map<string, number>();
+  for (const parent of parentUsersList) {
+    if (parent.status === 'disabled' || !Array.isArray(parent.wishlist)) continue;
+    for (const slug of parent.wishlist) {
+      currentShortlistMap.set(slug, (currentShortlistMap.get(slug) || 0) + 1);
+    }
+  }
+
+  const topShortlisted = Array.from(currentShortlistMap.entries())
+    .map(([slug, saves]) => ({ slug, saves }))
+    .sort((a, b) => b.saves - a.saves)
+    .slice(0, 8);
+
+  const activeShortlistsCount = Array.from(currentShortlistMap.values()).reduce((sum, count) => sum + count, 0);
+  const activeShortlistedSchoolsCount = currentShortlistMap.size;
 
   const ratingGroups = new Map<string, { totalScore: number; count: number }>();
   for (const r of activeRatings) {
@@ -3623,6 +3654,9 @@ export function getWishlistAnalytics() {
   const schoolCounts = new Map<string, { count: number; users: { userId: string; email: string; name: string }[] }>();
 
   for (const user of users.values()) {
+    // Current shortlist analytics are authoritative only for active parent
+    // accounts. Admin and disabled accounts must never appear as parent saves.
+    if (user.role === 'admin' || user.status === 'disabled') continue;
     if (Array.isArray(user.wishlist)) {
       for (const slug of user.wishlist) {
         const cur = schoolCounts.get(slug) || { count: 0, users: [] };
@@ -3641,8 +3675,11 @@ export function getWishlistAnalytics() {
 export async function getWishlistAnalyticsAsync() {
   const schoolCounts = new Map<string, { count: number; users: { userId: string; email: string; name: string }[] }>();
   const allUsers = await getAllUsersSanitizedAsync();
+  // Wishlist state is authoritative only for real parent accounts. Historical
+  // wishlist_add events are analytics telemetry and must not create a current shortlist.
+  const parentUsers = allUsers.filter(user => user.role !== 'admin' && user.status !== 'disabled');
 
-  for (const user of allUsers) {
+  for (const user of parentUsers) {
     if (Array.isArray(user.wishlist)) {
       for (const slug of user.wishlist) {
         const cur = schoolCounts.get(slug) || { count: 0, users: [] };

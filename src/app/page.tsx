@@ -87,7 +87,7 @@ export default async function HomePage() {
             </p>
 
             {/* Search Bar */}
-            <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto rounded-[22px] liquid-glass-hover">
+            <div className="mt-8 sm:mt-10 w-full max-w-4xl mx-auto rounded-[22px] neo-surface liquid-glass-hover">
               <HomeSearch className="w-full" initialSchools={allSchools} />
             </div>
 
@@ -96,31 +96,31 @@ export default async function HomePage() {
               <span className="font-bold text-[var(--color-content)] mr-1">Quick Explore:</span>
               <Link
                 href="/schools?board=CBSE"
-                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive neo-chip px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 CBSE
               </Link>
               <Link
                 href="/schools?board=IB"
-                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive neo-chip px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 IB &amp; Cambridge
               </Link>
               <Link
                 href="/schools?area=Sector%2016B"
-                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive neo-chip px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
               >
                 Sector 16B
               </Link>
               <Link
                 href="/schools?area=Techzone%204"
-                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive neo-chip px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-amber-400 hover:text-amber-800 hover:bg-amber-50/70 transition-all font-semibold shadow-warm-2xs"
               >
                 Techzone 4
               </Link>
               <Link
                 href="/schools?area=Knowledge%20Park%205"
-                className="glass-interactive px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
+                className="glass-interactive neo-chip px-3 py-1.5 rounded-xl bg-white/48 backdrop-blur-lg border border-white/80 hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary-light)] transition-all font-semibold shadow-warm-2xs"
               >
                 Knowledge Park 5
               </Link>
@@ -222,7 +222,7 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-5">
             {/* 01 Discover */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="1">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover neo-surface glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="1">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#eff6ff] text-[#1e40af] font-bold text-xs mb-5">
                   01
@@ -245,7 +245,7 @@ export default async function HomePage() {
             </div>
 
             {/* 02 Understand */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="2">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover neo-surface glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="2">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff7ed] text-[#9a3412] font-bold text-xs mb-5">
                   02
@@ -268,7 +268,7 @@ export default async function HomePage() {
             </div>
 
             {/* 03 Compare */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="3">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover neo-surface glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="3">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#ecfdf5] text-[#065f46] font-bold text-xs mb-5">
                   03
@@ -291,7 +291,7 @@ export default async function HomePage() {
             </div>
 
             {/* 04 Shortlist */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="4">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover neo-surface glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="4">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#fff1f2] text-[#9f1239] font-bold text-xs mb-5">
                   04
@@ -314,7 +314,7 @@ export default async function HomePage() {
             </div>
 
             {/* 05 Apply */}
-            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="5">
+            <div className="p-6 rounded-2xl liquid-glass liquid-glass-hover neo-surface glass-shine border border-white/80 shadow-warm-2xs flex flex-col justify-between h-full reveal-on-scroll" data-reveal-delay="5">
               <div>
                 <div className="inline-block px-2.5 py-1 rounded-lg bg-[#f0f9ff] text-[#0369a1] font-bold text-xs mb-5">
                   05
@@ -367,6 +367,8 @@ export default async function HomePage() {
       <WhyAdmissionPitara />
 
       <DataTrustAdvantage />
+
+      <HomepageAdmissionPopup schools={allSchools} />
 
       {/* ========================================================================= */}
       {/* 6. FINAL COMPACT CTA                                                      */}

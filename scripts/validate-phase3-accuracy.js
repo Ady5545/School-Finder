@@ -84,11 +84,9 @@ assert(gdGoenka && gdGoenka.board.includes('IGSC') && gdGoenka.boardNote.include
 
 // 9. Regional outliers flagged & Bulandshahr removal
 const pragyan = schools.find(s => s.slug === 'pragyan-public-school-jewar-extension');
-const thakurDwara = schools.find(s => s.slug === 'shree-thakur-dwara-balika-vidyalaya-gr-noida');
 const renaissance = schools.find(s => s.slug === 'renaissance-school-noida-ext');
 const gaurs = schools.find(s => s.slug === 'gaurs-international-school-gaur-city-2');
 assert(pragyan && pragyan.geographicClassification === 'geographic_outlier', 'Pragyan Jewar flagged as geographic outlier');
-assert(thakurDwara && thakurDwara.geographicClassification === 'geographic_outlier', 'Shree Thakur Dwara Ghaziabad flagged as geographic outlier');
 assert(!renaissance, 'Renaissance Bulandshahr geographic outlier cleanly removed from active dataset');
 assert(gaurs && gaurs.boardNote.includes('2132595') && gaurs.location.sector === 'Sector 16C', 'Gaurs International Gaur City-2 verified in Sector 16C with CBSE 2132595');
 

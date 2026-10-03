@@ -46,6 +46,7 @@ import {
 } from 'lucide-react';
 import { BrandLogo } from '../../components/ui/BrandLogo';
 import { SchoolManagerTab } from '../../components/admin/SchoolManagerTab';
+import { AdvisAdminCopilot } from '../../components/admin/AdvisAdminCopilot';
 
 type AdminTab =
   | 'overview'
@@ -661,7 +662,208 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-[#071322] text-slate-200">
+    <div className="jarvis-admin-theme w-full min-h-screen flex flex-col bg-[#071322] text-slate-200">
+      <style>{`
+        .jarvis-admin-theme {
+          --admin-cyan: #55e7ff;
+          --admin-cyan-bright: #8af4ff;
+          --admin-blue: #1688ff;
+          --admin-deep: #020914;
+          --admin-panel: #07182a;
+          --admin-panel-2: #0a2038;
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          background-color: var(--admin-deep) !important;
+          background-image:
+            radial-gradient(circle at 12% 0%, rgba(45, 210, 255, .13), transparent 30%),
+            radial-gradient(circle at 88% 18%, rgba(0, 118, 255, .10), transparent 28%),
+            linear-gradient(rgba(72, 215, 255, .035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(72, 215, 255, .035) 1px, transparent 1px) !important;
+          background-size: auto, auto, 32px 32px, 32px 32px !important;
+        }
+        .jarvis-admin-theme::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          z-index: -1;
+          pointer-events: none;
+          background:
+            linear-gradient(to bottom, transparent 0%, rgba(82, 231, 255, .025) 50%, transparent 100%);
+          background-size: 100% 8px;
+          opacity: .8;
+        }
+        .jarvis-admin-theme header {
+          background: linear-gradient(135deg, rgba(4, 20, 36, .97), rgba(5, 31, 54, .94)) !important;
+          border-color: rgba(85, 231, 255, .28) !important;
+          box-shadow: 0 1px 0 rgba(85, 231, 255, .12), 0 10px 35px rgba(0, 0, 0, .28);
+        }
+        .jarvis-admin-theme nav {
+          background: rgba(3, 16, 29, .96) !important;
+          border-color: rgba(85, 231, 255, .22) !important;
+          box-shadow: inset 0 -1px 0 rgba(85, 231, 255, .08);
+        }
+        .jarvis-admin-theme [class*="bg-[#0f284a]"],
+        .jarvis-admin-theme [class*="bg-[#0b2039]"] {
+          background: linear-gradient(145deg, rgba(8, 30, 50, .96), rgba(4, 20, 35, .94)) !important;
+          border-color: rgba(85, 231, 255, .20) !important;
+          box-shadow: 0 0 0 1px rgba(85, 231, 255, .025), 0 12px 35px rgba(0, 0, 0, .24), inset 0 1px 0 rgba(138, 244, 255, .035);
+        }
+        .jarvis-admin-theme [class*="bg-[#0a1e38]"],
+        .jarvis-admin-theme [class*="bg-[#0d2646]"],
+        .jarvis-admin-theme [class*="bg-[#0e2746]"] {
+          background: rgba(3, 19, 34, .94) !important;
+          border-color: rgba(85, 231, 255, .18) !important;
+        }
+        .jarvis-admin-theme [class*="border-[#1e4878]"],
+        .jarvis-admin-theme [class*="border-[#1d4b7c]"],
+        .jarvis-admin-theme [class*="border-[#1b3d63]"],
+        .jarvis-admin-theme [class*="border-[#1b436e]"] {
+          border-color: rgba(85, 231, 255, .22) !important;
+        }
+        .jarvis-admin-theme [class*="text-amber-400"],
+        .jarvis-admin-theme [class*="text-amber-300"],
+        .jarvis-admin-theme [class*="text-amber-200"] {
+          color: var(--admin-cyan-bright) !important;
+        }
+        .jarvis-admin-theme [class*="fill-amber-400"] {
+          fill: var(--admin-cyan-bright) !important;
+        }
+        .jarvis-admin-theme [class*="bg-amber-400"],
+        .jarvis-admin-theme [class*="bg-amber-500"] {
+          background: linear-gradient(135deg, var(--admin-cyan-bright), var(--admin-cyan)) !important;
+          color: #02101b !important;
+          box-shadow: 0 0 22px rgba(85, 231, 255, .20), inset 0 1px 0 rgba(255,255,255,.38);
+        }
+        .jarvis-admin-theme [class*="hover:bg-amber-300"]:hover {
+          background: linear-gradient(135deg, #b5f9ff, var(--admin-cyan-bright)) !important;
+        }
+        .jarvis-admin-theme [class*="hover:bg-[#133763]"]:hover,
+        .jarvis-admin-theme [class*="hover:bg-[#14365f]"]:hover {
+          background: rgba(18, 92, 139, .48) !important;
+        }
+        .jarvis-admin-theme [class*="text-blue-400"],
+        .jarvis-admin-theme [class*="text-blue-300"] {
+          color: #61cfff !important;
+        }
+        .jarvis-admin-theme [class*="text-emerald-400"],
+        .jarvis-admin-theme [class*="text-emerald-300"] {
+          color: #62e8df !important;
+        }
+        .jarvis-admin-theme button,
+        .jarvis-admin-theme a {
+          transition: color .18s ease, background-color .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+        }
+        .jarvis-admin-theme nav button:not([class*="bg-amber-400"]) {
+          box-shadow: inset 0 0 0 1px rgba(85, 231, 255, .035);
+        }
+        .jarvis-admin-theme nav button:not([class*="bg-amber-400"]):hover {
+          border-color: rgba(85, 231, 255, .38) !important;
+          box-shadow: 0 0 18px rgba(85, 231, 255, .08);
+        }
+        .jarvis-admin-theme input:focus,
+        .jarvis-admin-theme select:focus,
+        .jarvis-admin-theme textarea:focus {
+          border-color: rgba(85, 231, 255, .72) !important;
+          box-shadow: 0 0 0 3px rgba(85, 231, 255, .08), 0 0 18px rgba(85, 231, 255, .07);
+        }
+        .jarvis-admin-theme [class*="shadow-amber"] {
+          --tw-shadow-color: rgba(85, 231, 255, .22) !important;
+        }
+        .jarvis-admin-theme main h1,
+        .jarvis-admin-theme main h2,
+        .jarvis-admin-theme main h3,
+        .jarvis-admin-theme main h4 {
+          text-shadow: 0 0 18px rgba(85, 231, 255, .055);
+        }
+        .jarvis-admin-theme .font-mono {
+          color: #8cefff;
+        }
+        .jarvis-admin-theme main {
+          position: relative;
+          background:
+            radial-gradient(circle at 50% -20%, rgba(85, 231, 255, .055), transparent 42%),
+            transparent !important;
+        }
+        .jarvis-admin-theme main::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(85, 231, 255, .42), transparent);
+          pointer-events: none;
+        }
+        .jarvis-admin-theme main [class*="bg-[#0f284a]"],
+        .jarvis-admin-theme main [class*="bg-[#0a1e38]"],
+        .jarvis-admin-theme main [class*="bg-[#091b32]"],
+        .jarvis-admin-theme main [class*="bg-[#0b2039]"],
+        .jarvis-admin-theme main [class*="bg-[#071629]"],
+        .jarvis-admin-theme main [class*="bg-[#0a1f3a]"],
+        .jarvis-admin-theme main [class*="bg-[#0d2646]"] {
+          background: linear-gradient(145deg, rgba(7, 27, 47, .97), rgba(3, 16, 29, .96)) !important;
+          border-color: rgba(85, 231, 255, .17) !important;
+          box-shadow:
+            inset 0 1px 0 rgba(138, 244, 255, .035),
+            0 0 0 1px rgba(85, 231, 255, .018),
+            0 14px 34px rgba(0, 0, 0, .22) !important;
+        }
+        .jarvis-admin-theme main [class*="bg-[#0f284a]"]:hover,
+        .jarvis-admin-theme main [class*="bg-[#0a1e38]"]:hover {
+          border-color: rgba(85, 231, 255, .26) !important;
+        }
+        .jarvis-admin-theme main input,
+        .jarvis-admin-theme main select,
+        .jarvis-admin-theme main textarea {
+          background-color: rgba(2, 13, 24, .86) !important;
+          border-color: rgba(85, 231, 255, .14) !important;
+          color: #e8fbff !important;
+        }
+        .jarvis-admin-theme main input::placeholder,
+        .jarvis-admin-theme main textarea::placeholder {
+          color: rgba(148, 163, 184, .56) !important;
+        }
+        .jarvis-admin-theme main table thead {
+          background: rgba(4, 24, 42, .78) !important;
+          box-shadow: inset 0 -1px 0 rgba(85, 231, 255, .08);
+        }
+        .jarvis-admin-theme main table tbody tr {
+          border-color: rgba(85, 231, 255, .06) !important;
+        }
+        .jarvis-admin-theme main table tbody tr:hover {
+          background: rgba(85, 231, 255, .025) !important;
+        }
+        .jarvis-admin-theme main hr {
+          border-color: rgba(85, 231, 255, .08) !important;
+        }
+        .jarvis-admin-theme nav {
+          scrollbar-color: rgba(85, 231, 255, .35) transparent;
+          scrollbar-width: thin;
+        }
+        .jarvis-admin-theme nav::-webkit-scrollbar {
+          height: 4px;
+        }
+        .jarvis-admin-theme nav::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .jarvis-admin-theme nav::-webkit-scrollbar-thumb {
+          background: rgba(85, 231, 255, .24);
+          border-radius: 999px;
+        }
+        .jarvis-admin-theme button:focus-visible,
+        .jarvis-admin-theme a:focus-visible,
+        .jarvis-admin-theme input:focus-visible,
+        .jarvis-admin-theme select:focus-visible,
+        .jarvis-admin-theme textarea:focus-visible {
+          outline: 1px solid rgba(138, 244, 255, .78);
+          outline-offset: 2px;
+        }
+        .jarvis-admin-theme ::selection {
+          background: rgba(85, 231, 255, .28);
+          color: #fff;
+        }
+      `}</style>
       {/* --------------------------------------------------------------------- */}
       {/* 1. TOP HEADER & ADMINISTRATIVE STATUS BAR                             */}
       {/* --------------------------------------------------------------------- */}
@@ -794,6 +996,7 @@ export default function AdminPage() {
       {/* 3. MAIN DASHBOARD CONTENT AREA                                        */}
       {/* --------------------------------------------------------------------- */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <AdvisAdminCopilot />
         {loadingTab && (
           <div className="sticky top-[76px] z-30 mb-5 overflow-hidden rounded-2xl border border-amber-400/20 bg-[#0b2039]/95 backdrop-blur-md shadow-lg">
             <div className="h-0.5 w-full bg-amber-400/10">
@@ -868,19 +1071,19 @@ export default function AdminPage() {
 
               <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-2">
                 <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider">
-                  <span>Wishlist Saves</span>
+                  <span>Active Shortlists</span>
                   <Heart className="w-4 h-4 text-rose-400" />
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-white font-serif">
-                    {overviewData ? (overviewData.schools.totalSavesCount ?? 0) : '—'}
+                    {overviewData ? (overviewData.schools.activeShortlistedSchoolsCount ?? 0) : '—'}
                   </span>
                   <span className="text-xs text-rose-400 font-semibold">
-                    {timeRange === 'all' ? 'All-time' : `in ${timeRange}`}
+                    {overviewData?.schools.activeShortlistsCount === 1 ? 'school currently saved' : 'schools currently saved'}
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  {overviewData?.schools.allTimeSavesCount ?? overviewData?.schools.totalSavesCount ?? 0} total saved admissions bookmarks
+                  {overviewData?.schools.activeShortlistsCount ?? 0} active saved admissions bookmarks across current parent accounts
                 </p>
               </div>
 

@@ -42,7 +42,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-t border-t-[var(--color-brand-red-border)]/45 border-b border-white/70 bg-[#fcfbf9]/88 sm:bg-[#fcfbf9]/72 backdrop-blur-xl sm:backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
+    <header className="neo-header sticky top-0 z-40 w-full border-t border-t-[var(--color-brand-red-border)]/45 border-b border-white/70 bg-[#fcfbf9]/88 sm:bg-[#fcfbf9]/72 backdrop-blur-xl sm:backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_35px_-24px_rgba(15,45,74,0.28)] transition-all duration-300">
       <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-16 sm:h-[4.25rem] grid grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[minmax(175px,220px)_minmax(0,1fr)_auto] items-center gap-2 sm:gap-4">
         <div className="flex items-center min-w-0 shrink-0">
           <Link href="/" className="group flex items-center min-w-0 max-w-[180px] sm:max-w-[220px] overflow-hidden rounded-2xl px-1 py-1 transition-transform duration-300 hover:-translate-y-0.5" aria-label="Admission Pitara Home">
@@ -51,7 +51,7 @@ export const Header: React.FC = () => {
         </div>
 
         <nav className="hidden lg:flex min-w-0 w-full items-center justify-center" aria-label="Main Navigation">
-          <div className="flex min-w-0 max-w-full items-center justify-start gap-0.5 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="neo-surface flex min-w-0 max-w-full items-center justify-start gap-0.5 rounded-2xl border border-white/80 bg-white/45 p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_28px_-24px_rgba(15,45,74,0.35)] backdrop-blur-xl overflow-x-auto snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {navLinks.map(link => (
               <Link
                 key={link.href}
@@ -59,7 +59,7 @@ export const Header: React.FC = () => {
                 className={cn(
                   'px-2 xl:px-2.5 py-1.5 rounded-xl text-[10px] xl:text-[11px] font-semibold transition-all duration-200 flex items-center gap-1 relative whitespace-nowrap shrink-0 snap-start',
                   isActive(link.href)
-                    ? 'text-[var(--color-primary)] bg-white/88 border border-white border-b-[var(--color-brand-red-border)] shadow-sm font-bold'
+                    ? 'text-[var(--color-primary)] neo-inset border border-white border-b-[var(--color-brand-red-border)] shadow-sm font-bold'
                     : 'text-[var(--color-content-muted)] hover:text-[var(--color-primary)] hover:bg-white/65'
                 )}
               >
@@ -137,7 +137,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Affordances */}
-        <div className="flex items-center justify-self-end gap-0.5 sm:hidden rounded-2xl border border-white/75 bg-white/65 px-0.5 py-0.5 backdrop-blur-lg shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
+        <div className="neo-surface flex items-center justify-self-end gap-0.5 sm:hidden rounded-2xl border border-white/75 bg-white/65 px-0.5 py-0.5 backdrop-blur-lg shadow-[0_8px_26px_-24px_rgba(15,45,74,0.4)]">
           {isAuthenticated && user && <NotificationCenter />}
           <Link href="/schools" aria-label="Search schools">
             <IconButton
@@ -185,7 +185,7 @@ export const Header: React.FC = () => {
       >
         <div className="flex flex-col gap-5">
           {isAuthenticated && user && (
-            <div className="p-3.5 rounded-xl liquid-glass glass-interactive flex items-center gap-3">
+            <div className="p-3.5 rounded-xl liquid-glass glass-interactive neo-surface flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white font-bold flex items-center justify-center shrink-0">
                 {user.name.charAt(0).toUpperCase()}
               </div>

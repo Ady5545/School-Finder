@@ -59,6 +59,20 @@ export const HomepageAdmissionPopup: React.FC<{ schools: School[] }> = ({ school
     [schools, schoolSlug],
   );
 
+  const admissionAction = useMemo(() => {
+    const status = (selectedSchool?.admissions?.status || '').toLowerCase();
+    const isOpen =
+      status.includes('open') ||
+      status.includes('ongoing') ||
+      status.includes('active');
+
+    return {
+      isOpen,
+      label: isOpen ? 'Registration open' : 'Pre-registration',
+      button: isOpen ? 'Send registration request' : 'Pre-register now',
+    };
+  }, [selectedSchool]);
+
   const close = () => setVisible(false);
 
   const submit = async (event: React.FormEvent) => {
@@ -123,12 +137,12 @@ export const HomepageAdmissionPopup: React.FC<{ schools: School[] }> = ({ school
       aria-label="Admission registration"
       className="fixed inset-0 z-[90] flex items-center justify-center bg-slate-950/30 px-4 py-6 backdrop-blur-[3px]"
     >
-      <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+      <div className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-white/90 bg-[#f5f6f7] shadow-[18px_18px_42px_rgba(15,23,42,0.16),-14px_-14px_34px_rgba(255,255,255,0.95)]">
         <button
           type="button"
           onClick={close}
           aria-label="Close admission registration"
-          className="absolute right-3 top-3 z-10 rounded-full p-1.5 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700"
+          className="absolute right-4 top-4 z-10 rounded-full border border-white/90 bg-[#f5f6f7] p-2 text-slate-400 shadow-[4px_4px_10px_rgba(15,23,42,0.10),-3px_-3px_8px_rgba(255,255,255,0.95)] transition hover:text-slate-700 hover:shadow-[inset_3px_3px_7px_rgba(15,23,42,0.10),inset_-3px_-3px_7px_rgba(255,255,255,0.95)]"
         >
           <X className="h-4 w-4" />
         </button>
@@ -175,7 +189,7 @@ export const HomepageAdmissionPopup: React.FC<{ schools: School[] }> = ({ school
                 required
                 value={schoolSlug}
                 onChange={(event) => setSchoolSlug(event.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-[var(--color-primary)]"
+                className="w-full rounded-2xl border border-white/90 bg-[#f5f6f7] px-3 py-2.5 text-sm text-slate-900 outline-none shadow-[inset_4px_4px_9px_rgba(15,23,42,0.09),inset_-4px_-4px_9px_rgba(255,255,255,0.95)] focus:ring-2 focus:ring-[var(--color-primary)]/20"
               >
                 <option value="">Choose a school</option>
                 {schools.map((school) => (
@@ -218,7 +232,7 @@ export const HomepageAdmissionPopup: React.FC<{ schools: School[] }> = ({ school
                 required
                 value={childGrade}
                 onChange={(event) => setChildGrade(event.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-[var(--color-primary)]"
+                className="w-full rounded-2xl border border-white/90 bg-[#f5f6f7] px-3 py-2.5 text-sm text-slate-900 outline-none shadow-[inset_4px_4px_9px_rgba(15,23,42,0.09),inset_-4px_-4px_9px_rgba(255,255,255,0.95)] focus:ring-2 focus:ring-[var(--color-primary)]/20"
               >
                 <option value="">Child&apos;s target class</option>
                 {GRADE_OPTIONS.map((grade) => (
@@ -228,17 +242,29 @@ export const HomepageAdmissionPopup: React.FC<{ schools: School[] }> = ({ school
                 ))}
               </select>
 
+              {selectedSchool && (
+                <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/90 bg-[#f5f6f7] px-3.5 py-3 shadow-[6px_6px_13px_rgba(15,23,42,0.09),-6px_-6px_13px_rgba(255,255,255,0.95)]">
+                  <div>
+                    <p className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-400">Admission status</p>
+                    <p className="mt-0.5 text-xs font-bold text-slate-800">{selectedSchool.admissions?.status || 'Status being checked'}</p>
+                  </div>
+                  <span className={admissionAction.isOpen ? 'rounded-xl bg-emerald-50 px-2.5 py-1 text-[10px] font-black text-emerald-800 shadow-[inset_2px_2px_5px_rgba(15,23,42,0.06),inset_-2px_-2px_5px_rgba(255,255,255,0.95)]' : 'rounded-xl bg-amber-50 px-2.5 py-1 text-[10px] font-black text-amber-900 shadow-[inset_2px_2px_5px_rgba(15,23,42,0.06),inset_-2px_-2px_5px_rgba(255,255,255,0.95)]'}>
+                    {admissionAction.label}
+                  </span>
+                </div>
+              )}
+
               <button
                 type="submit"
-                disabled={submitting}
-                className="w-full rounded-xl bg-[var(--color-primary)] px-4 py-2.5 text-sm font-black text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+                disabled={submitting || !selectedSchool}
+                className="w-full rounded-2xl bg-[var(--color-primary)] px-4 py-3 text-sm font-black text-white shadow-[7px_7px_14px_rgba(15,23,42,0.16),-4px_-4px_10px_rgba(255,255,255,0.45)] transition hover:-translate-y-0.5 hover:shadow-[9px_9px_17px_rgba(15,23,42,0.18),-5px_-5px_11px_rgba(255,255,255,0.48)] active:translate-y-0 active:shadow-[inset_4px_4px_9px_rgba(0,0,0,0.18),inset_-3px_-3px_7px_rgba(255,255,255,0.20)] disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {submitting ? 'Sending…' : 'Register admission interest'}
+                {submitting ? 'Sending…' : selectedSchool ? admissionAction.button : 'Choose a school first'}
               </button>
             </form>
 
             <p className="mt-3 text-center text-[10px] leading-relaxed text-slate-400">
-              Your details are sent to Admission Pitara for admission follow-up.
+              Choose the school first. Admission Pitara automatically selects registration or pre-registration from its current admission status.
             </p>
           </div>
         )}

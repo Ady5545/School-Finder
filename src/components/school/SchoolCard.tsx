@@ -75,7 +75,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
   };
 
   return (
-    <Card hoverEffect reveal={false} className={cn('group flex flex-col overflow-hidden h-full glass-surface-strong border-white/75 hover:border-white rounded-2xl shadow-warm-xs hover:shadow-warm-lg hover:-translate-y-1.5 transition-all duration-300 ease-out tactile-card', className)}>
+    <Card hoverEffect reveal={false} className={cn('group flex flex-col overflow-hidden h-full glass-surface-strong neo-surface border-white/75 hover:border-white rounded-2xl shadow-warm-xs hover:shadow-warm-lg hover:-translate-y-1.5 transition-all duration-300 ease-out tactile-card', className)}>
       {/* Featured Image & Overlays */}
       <div className="relative overflow-hidden">
         <Link href={`/schools/${school.slug}`} tabIndex={-1} aria-hidden="true" className="block overflow-hidden">
@@ -125,7 +125,7 @@ export const SchoolCard: React.FC<SchoolCardProps> = ({
               </span>
             ))}
           </div>
-          <div className="glass-chip px-2.5 py-0.5 rounded-md shadow-warm-2xs">
+          <div className="glass-chip px-2.5 py-0.5 rounded-md shadow-warm-2xs flex items-center gap-1.5">
             <RatingDisplay score={school.rating.score} size="sm" showCount={false} />
           </div>
         </div>

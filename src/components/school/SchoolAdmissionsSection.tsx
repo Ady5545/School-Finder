@@ -258,7 +258,6 @@ export const SchoolAdmissionsSection: React.FC<SchoolAdmissionsSectionProps> = (
         isOpen={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
         school={school}
-        mode={isOpen ? 'register' : 'preregister'}
       />
     </section>
   );

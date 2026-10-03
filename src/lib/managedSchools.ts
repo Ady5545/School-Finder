@@ -5,6 +5,14 @@ import { getManagedSchoolsCollection, isMongoConfigured } from './mongodb';
 // Keep the CMS highly fresh. Admin writes also invalidate this cache immediately on the current instance.
 const CACHE_TTL_MS = 1_000;
 
+// These records are permanently removed from the public/admin school registry.
+// They are blocked here as well as from the base dataset so an old CMS record
+// cannot resurrect them during the managed-school merge.
+const PERMANENTLY_REMOVED_SCHOOL_SLUGS = new Set([
+  'green-valley-academy-noida-ext',
+  'shree-thakur-dwara-balika-vidyalaya-gr-noida',
+]);
+
 type ManagedCache = {
   schools: School[];
   expiresAt: number;
@@ -56,10 +64,12 @@ export async function getManagedSchoolRecordsAsync(): Promise<School[]> {
       if (!collection) return [];
 
       const docs = await collection.find({}).sort({ updatedAt: 1 }).toArray();
-      const normalized = docs.map(doc => {
-        const { _id, updatedAt, updatedBy, updateReason, ...school } = doc as any;
-        return school as School;
-      });
+      const normalized = docs
+        .map(doc => {
+          const { _id, updatedAt, updatedBy, updateReason, ...school } = doc as any;
+          return school as School;
+        })
+        .filter(school => !PERMANENTLY_REMOVED_SCHOOL_SLUGS.has(school.slug));
 
       cache.schools = normalized;
       cache.expiresAt = Date.now() + CACHE_TTL_MS;
@@ -80,14 +90,23 @@ export async function getManagedSchoolRecordsAsync(): Promise<School[]> {
 
 export async function getEffectiveSchoolsAsync(): Promise<School[]> {
   const managed = await getManagedSchoolRecordsAsync();
-  if (managed.length === 0) return schools;
+  const baseSchools = schools.filter(school => !PERMANENTLY_REMOVED_SCHOOL_SLUGS.has(school.slug));
+  if (managed.length === 0) return baseSchools;
 
-  const managedBySlug = new Map(managed.map(s => [s.slug, s]));
-  const merged = schools.map(base => managedBySlug.get(base.slug) || base);
-  const baseSlugs = new Set(schools.map(s => s.slug));
+  // A school is hidden by the CMS only when the Admin panel explicitly
+  // archived it. Older/stale CMS archive flags no longer override the active
+  // base directory.
+  const effectiveManaged = managed.filter(
+    school => !school.isArchived || school.adminArchiveOverride === true
+  );
+  const managedBySlug = new Map(effectiveManaged.map(s => [s.slug, s]));
+  const merged = baseSchools.map(base => managedBySlug.get(base.slug) || base);
+  const baseSlugs = new Set(baseSchools.map(s => s.slug));
 
-  for (const managedSchool of managed) {
-    if (!baseSlugs.has(managedSchool.slug)) merged.push(managedSchool);
+  for (const managedSchool of effectiveManaged) {
+    if (!baseSlugs.has(managedSchool.slug) && !PERMANENTLY_REMOVED_SCHOOL_SLUGS.has(managedSchool.slug)) {
+      merged.push(managedSchool);
+    }
   }
 
   return merged;
@@ -99,7 +118,7 @@ export async function getEffectiveCanonicalSchoolsAsync(): Promise<School[]> {
 }
 
 export async function getEffectiveSchoolBySlugAsync(slug: string): Promise<School | undefined> {
-  if (!slug) return undefined;
+  if (!slug || PERMANENTLY_REMOVED_SCHOOL_SLUGS.has(slug)) return undefined;
   const all = await getEffectiveSchoolsAsync();
   return all.find(s => s.slug === slug || s.id === slug);
 }

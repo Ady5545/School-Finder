@@ -420,12 +420,15 @@ Work as the Admission Pitara intelligence core. Investigate before concluding. Y
           const result = await executeAdvisAdminTool(name, args);
           const raw = JSON.stringify(result);
           const trimmed = raw.length > 30000 ? raw.slice(0, 30000) + '…[truncated]' : raw;
-          toolTrace.push({ name, status: 'ok', summary: `Tool returned ${Math.min(raw.length, 30000)} characters.` });
+          toolTrace.push({ name, status: 'ok', summary: `Tool returned ${raw.length} characters.` });
+          const responsePayload = raw.length > 30000
+            ? { truncated: true, preview: raw.slice(0, 29500) }
+            : result;
           functionResponses.push({
             functionResponse: {
               id: call.id,
               name,
-              response: { result: JSON.parse(trimmed) },
+              response: { result: responsePayload },
             },
           });
         } catch (error) {

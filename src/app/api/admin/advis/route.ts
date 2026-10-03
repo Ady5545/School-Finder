@@ -180,9 +180,10 @@ export async function POST(req: NextRequest) {
       ? publishedReviews.reduce((sum, r) => sum + Number(r?.score || 0), 0) / publishedReviews.length
       : 0;
 
-    const usersActive = (users as any[]).filter(u => u?.status === 'active');
-    const usersVerified = (users as any[]).filter(u => u?.emailVerified === true);
-    const usersWithWishlist = (users as any[]).filter(u => Array.isArray(u?.wishlist) && u.wishlist.length > 0);
+    const parentUsers = (users as any[]).filter(u => u?.role !== 'admin' && u?.status !== 'disabled');
+    const usersActive = parentUsers.filter(u => u?.status === 'active');
+    const usersVerified = parentUsers.filter(u => u?.emailVerified === true);
+    const usersWithWishlist = parentUsers.filter(u => Array.isArray(u?.wishlist) && u.wishlist.length > 0);
 
     const eventCounts = new Map<string, number>();
     for (const event of activity as any[]) {

@@ -65,50 +65,61 @@ function admissionState(status: unknown): string {
   return value;
 }
 
-function buildFallbackBriefing(intelligence: {
-  health: { status: string; issueCount: number; high: number; medium: number; low: number };
-  schools: { total: number; admissionsOpen: number; admissionsClosed: number; admissionsUnknown: number; missingFee: number; unverifiedFee: number; unverifiedCoordinates: number; topAttentionSchools: Array<{ name: string; events: number; saves: number; views: number }> };
-  users: { total: number; active: number; verifiedEmail: number; withWishlist: number };
-  reviews: { total: number; published: number; deleted: number; averagePublishedScore: number };
-  activity: { loadedEvents: number; topEventTypes: Array<{ type: string; count: number }> };
-  anomalies: Array<{ severity: 'high' | 'medium' | 'low'; issue: string; evidence: string }>;
-}) {
+function buildFallbackAnswer(question: string, intelligence: any, overview: any, todayOverview: any): string {
+  const q = question.toLowerCase();
+
+  const todayViews = todayOverview?.schools?.totalViewsCount ?? todayOverview?.schools?.viewsInRange ?? 0;
+  const todayUnique = todayOverview?.schools?.uniqueViewersInRange ?? 0;
+  const currentShortlistCount = Number(intelligence?.users?.withWishlist || 0);
+  const currentShortlistedSchools = Array.isArray(intelligence?.currentWishlist) ? intelligence.currentWishlist : [];
+
+  if (/how many .*views.*today|total views.*today|views.*today/.test(q)) {
+    return `ADVIS: Today there are ${todayViews} total school-profile views from ${todayUnique} unique visitors in the current Admin analytics window.`;
+  }
+
+  if (/wishlist|shortlist|saved schools|schools.*saved/.test(q)) {
+    if (currentShortlistCount === 0) {
+      return 'ADVIS: There are currently no active parent shortlists. No eligible parent account currently has a school in its wishlist. Historical wishlist events do not count as current shortlists.';
+    }
+    return `ADVIS: There are ${currentShortlistCount} active shortlisted schools across current parent accounts. Current shortlist state: ${currentShortlistedSchools.map((row: any) => `${row.slug} (${row.count})`).join(', ')}.`;
+  }
+
+  if (/how many (users|parents)|registered parents|parent accounts/.test(q)) {
+    return `ADVIS: Admission Pitara currently has ${intelligence.users.total} eligible parent accounts, with ${intelligence.users.active} active and ${intelligence.users.verifiedEmail} email-verified.`;
+  }
+
+  if (/review/.test(q)) {
+    return `ADVIS: The current review dataset contains ${intelligence.reviews.published} published reviews and ${intelligence.reviews.deleted} deleted records. The published average is ${intelligence.reviews.averagePublishedScore || 'not available'}.`;
+  }
+
+  if (/school/.test(q) && /how many|total|count/.test(q)) {
+    return `ADVIS: The current Admission Pitara directory contains ${intelligence.schools.total} canonical schools; ${intelligence.schools.admissionsOpen} are in a recognised open-admissions state.`;
+  }
+
   const lines = [
     'ADVIS PLATFORM BRIEFING',
     '',
     `System state: ${intelligence.health.status.toUpperCase()} • ${intelligence.health.issueCount} issue signals`,
-    `Schools: ${intelligence.schools.total} total • ${intelligence.schools.admissionsOpen} open admissions • ${intelligence.schools.admissionsClosed} closed • ${intelligence.schools.admissionsUnknown} unknown`,
-    `Fee coverage: ${intelligence.schools.missingFee} missing display value • ${intelligence.schools.unverifiedFee} not marked verified`,
-    `Location data: ${intelligence.schools.unverifiedCoordinates} schools without verified coordinates`,
-    `Parents: ${intelligence.users.total} total • ${intelligence.users.active} active • ${intelligence.users.verifiedEmail} email-verified • ${intelligence.users.withWishlist} with shortlist signals`,
-    `Reviews: ${intelligence.reviews.total} total • ${intelligence.reviews.published} published • ${intelligence.reviews.deleted} deleted • published average ${intelligence.reviews.averagePublishedScore || 'n/a'}`,
+    `Today: ${todayViews} school-profile views • ${todayUnique} unique visitors`,
+    `Schools: ${intelligence.schools.total} total • ${intelligence.schools.admissionsOpen} open admissions • ${intelligence.schools.admissionsUnknown} unknown`,
+    `Parents: ${intelligence.users.total} current parent accounts • ${intelligence.users.withWishlist} currently maintaining a shortlist`,
+    `Reviews: ${intelligence.reviews.published} published • ${intelligence.reviews.deleted} deleted`,
     `Activity: ${intelligence.activity.loadedEvents} recent events loaded`,
     '',
     'WHAT DESERVES ATTENTION',
   ];
+
   if (intelligence.anomalies.length) {
-    for (const item of intelligence.anomalies) {
-      lines.push(`[${item.severity.toUpperCase()}] ${item.issue} — ${item.evidence}`);
-    }
+    for (const item of intelligence.anomalies) lines.push(`[${item.severity.toUpperCase()}] ${item.issue} — ${item.evidence}`);
   } else {
     lines.push('No deterministic anomaly signals detected in the current snapshot.');
   }
 
-  if (intelligence.schools.topAttentionSchools.length) {
-    lines.push('', 'SCHOOLS RECEIVING THE MOST OBSERVED ACTIVITY');
-    for (const school of intelligence.schools.topAttentionSchools.slice(0, 8)) {
-      lines.push(`• ${school.name}: ${school.events} events, ${school.views} views, ${school.saves} save/shortlist signals`);
-    }
-  }
+  lines.push('', 'CURRENT SHORTLIST STATE');
+  if (!currentShortlistedSchools.length) lines.push('• No current parent shortlists.');
+  else currentShortlistedSchools.slice(0, 10).forEach((row: any) => lines.push(`• ${row.slug}: ${row.count}`));
 
-  if (intelligence.activity.topEventTypes.length) {
-    lines.push('', 'TOP ACTIVITY TYPES');
-    for (const item of intelligence.activity.topEventTypes.slice(0, 8)) {
-      lines.push(`• ${item.type}: ${item.count}`);
-    }
-  }
-
-  lines.push('', 'MODE: deterministic platform diagnostics. Configure the ADVIS model key to enable deeper natural-language reasoning.');
+  lines.push('', 'MODE: deterministic Admission Pitara diagnostics.');
   return lines.join('\n');
 }
 
@@ -125,8 +136,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Question is required.' }, { status: 400 });
     }
 
-    const [overview, users, activity, reviews, wishlists, comparisons, searches, audit] = await Promise.all([
+    const [overview, todayOverview, users, activity, reviews, wishlists, comparisons, searches, audit] = await Promise.all([
       getAdminOverviewMetricsAsync('30d'),
+      getAdminOverviewMetricsAsync('today'),
       getAllUsersSanitizedAsync(),
       getActivityEventsAsync(300),
       getAllRatingsAsync(),
@@ -224,10 +236,21 @@ export async function POST(req: NextRequest) {
       evidence: `${deletedReviews.length} deleted review records vs ${publishedReviews.length} published records in the loaded review set.`,
     });
 
+    const parentUsers = (users as any[]).filter(u => u?.role !== 'admin' && u?.status !== 'disabled');
+    const currentWishlistSchools = new Map<string, { count: number; users: string[] }>();
+    for (const user of parentUsers) {
+      for (const slug of Array.isArray(user.wishlist) ? user.wishlist : []) {
+        const row = currentWishlistSchools.get(slug) || { count: 0, users: [] };
+        row.count += 1;
+        row.users.push(user.id);
+        currentWishlistSchools.set(slug, row);
+      }
+    }
+
     const datasetSummary = {
       canonicalSchoolCount: schools.length,
-      parentUserCount: users.length,
-      activeParentUserCount: usersActive.length,
+      parentUserCount: parentUsers.length,
+      activeParentUserCount: usersActive.filter((u: any) => u?.role !== 'admin' && u?.status !== 'disabled').length,
       verifiedParentEmailCount: usersVerified.length,
       usersWithWishlistCount: usersWithWishlist.length,
       activityEventCount: (activity as any[]).length,
@@ -274,6 +297,12 @@ export async function POST(req: NextRequest) {
         topEventTypes,
       },
       anomalies: suspiciousPatterns,
+      currentWishlist: [...currentWishlistSchools.entries()].map(([slug, row]) => ({ slug, count: row.count, userCount: row.users.length })),
+      today: {
+        views: todayOverview.schools?.totalViewsCount ?? todayOverview.schools?.viewsInRange ?? 0,
+        uniqueViewers: todayOverview.schools?.uniqueViewersInRange ?? 0,
+        saves: todayOverview.schools?.savesInRange ?? 0,
+      },
       datasets: datasetSummary,
     };
 
@@ -296,6 +325,7 @@ export async function POST(req: NextRequest) {
       generatedAt: intelligence.generatedAt,
       authenticatedAdmin: { id: auth.user.id, email: auth.user.email },
       overview,
+      todayOverview,
       intelligence,
       schoolDirectory: schools.slice(0, 40),
       recentUsers: safeUsers,
@@ -326,7 +356,7 @@ ${history.length ? JSON.stringify(history) : 'None'}
 
 Work as the Admission Pitara intelligence core. Investigate before concluding. You may call multiple tools, including different tools for the same entity when cross-checking is useful. After tool results are returned, synthesize one clear answer for the administrator. If the requested operation would mutate data, explain the exact proposed action and use propose_admin_action; never execute mutations from the model.`;
 
-    const fallbackAnswer = buildFallbackBriefing(intelligence);
+    const fallbackAnswer = buildFallbackAnswer(question, intelligence, overview, todayOverview);
 
     if (!GEMINI_API_KEY) {
       return NextResponse.json({

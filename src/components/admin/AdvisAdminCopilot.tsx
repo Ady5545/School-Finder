@@ -94,6 +94,8 @@ export function AdvisAdminCopilot() {
   const voiceModeRef = useRef(false);
   const voiceOutputRef = useRef(true);
   const restartVoiceRef = useRef(false);
+  const voiceDraftRef = useRef('');
+  const voiceSubmitTimerRef = useRef<number | null>(null);
 
   async function ask(value = question) {
     const q = value.trim();
@@ -156,6 +158,10 @@ export function AdvisAdminCopilot() {
 
   function stopListening() {
     restartVoiceRef.current = false;
+    if (voiceSubmitTimerRef.current) {
+      window.clearTimeout(voiceSubmitTimerRef.current);
+      voiceSubmitTimerRef.current = null;
+    }
     recognitionRef.current?.stop?.();
     recognitionRef.current = null;
     setListening(false);
@@ -190,8 +196,20 @@ export function AdvisAdminCopilot() {
       }
       setInterimTranscript(interimText);
       if (finalText.trim()) {
+        const spoken = finalText.trim();
+        const combined = [voiceDraftRef.current, spoken].filter(Boolean).join(' ').trim();
+        voiceDraftRef.current = combined;
         setInterimTranscript('');
-        setQuestion(prev => (prev ? prev + ' ' : '') + finalText.trim());
+        setQuestion(combined);
+        if (voiceSubmitTimerRef.current) window.clearTimeout(voiceSubmitTimerRef.current);
+        voiceSubmitTimerRef.current = window.setTimeout(() => {
+          const command = voiceDraftRef.current.trim();
+          if (!command) return;
+          voiceDraftRef.current = '';
+          restartVoiceRef.current = false;
+          recognitionRef.current?.stop?.();
+          void ask(command);
+        }, 850);
       }
     };
     recognition.onerror = (event: any) => {
@@ -245,6 +263,7 @@ export function AdvisAdminCopilot() {
   useEffect(() => {
     return () => {
       restartVoiceRef.current = false;
+      if (voiceSubmitTimerRef.current) window.clearTimeout(voiceSubmitTimerRef.current);
       recognitionRef.current?.stop?.();
       stopSpeaking();
     };

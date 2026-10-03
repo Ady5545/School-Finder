@@ -991,19 +991,19 @@ export default function AdminPage() {
 
               <div className="p-5 rounded-2xl bg-[#0f284a] border border-[#1e4878] shadow-lg space-y-2">
                 <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider">
-                  <span>Wishlist Saves</span>
+                  <span>Active Shortlists</span>
                   <Heart className="w-4 h-4 text-rose-400" />
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-black text-white font-serif">
-                    {overviewData ? (overviewData.schools.totalSavesCount ?? 0) : '—'}
+                    {overviewData ? (overviewData.schools.activeShortlistedSchoolsCount ?? 0) : '—'}
                   </span>
                   <span className="text-xs text-rose-400 font-semibold">
-                    {timeRange === 'all' ? 'All-time' : `in ${timeRange}`}
+                    {overviewData?.schools.activeShortlistsCount === 1 ? 'school currently saved' : 'schools currently saved'}
                   </span>
                 </div>
                 <p className="text-[11px] text-slate-400">
-                  {overviewData?.schools.allTimeSavesCount ?? overviewData?.schools.totalSavesCount ?? 0} total saved admissions bookmarks
+                  {overviewData?.schools.activeShortlistsCount ?? 0} active saved admissions bookmarks across current parent accounts
                 </p>
               </div>
 

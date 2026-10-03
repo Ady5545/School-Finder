@@ -123,7 +123,11 @@ export function AdvisAdminCopilot() {
       setToolTrace(data.toolTrace || []);
       if (voiceModeRef.current) restartVoiceRef.current = true;
       speakAnswer(data.answer || '');
-      setHistory(prev => [...prev, { role: 'user', content: q }, { role: 'assistant', content: data.answer || '' }].slice(-8));
+      setHistory(prev => [
+        ...prev,
+        { role: 'user' as const, content: q },
+        { role: 'assistant' as const, content: String(data.answer || '') },
+      ].slice(-8));
     } catch (error) {
       setAnswer(error instanceof Error ? error.message : 'ADVIS could not complete the analysis.');
     } finally {
@@ -479,7 +483,7 @@ export function AdvisAdminCopilot() {
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {history.filter(item => item.role === 'user').map(item => (
                     <button
-                      key={item}
+                      key={item.content}
                       type="button"
                       disabled={loading}
                       onClick={() => void ask(item.content)}

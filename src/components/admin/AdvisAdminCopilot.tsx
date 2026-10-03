@@ -70,7 +70,7 @@ export function AdvisAdminCopilot() {
   const [open, setOpen] = useState(true);
   const [booting, setBooting] = useState(true);
   const [intelligence, setIntelligence] = useState<Intelligence | null>(null);
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);\n  const [toolTrace, setToolTrace] = useState<Array<{ name: string; status: 'ok' | 'error'; summary?: string }>>([]);
 
   async function ask(value = question) {
     const q = value.trim();
@@ -83,7 +83,7 @@ export function AdvisAdminCopilot() {
       const res = await fetch('/api/admin/advis', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: q }),
+        body: JSON.stringify({ question: q, history: history.slice(-6) }),
         cache: 'no-store',
       });
       const data = await res.json();
@@ -270,16 +270,16 @@ export function AdvisAdminCopilot() {
 
               {history.length > 0 && (
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                  {history.map(item => (
+                  {history.filter(item => item.role === 'user').map(item => (
                     <button
                       key={item}
                       type="button"
                       disabled={loading}
-                      onClick={() => void ask(item)}
-                      title={item}
+                      onClick={() => void ask(item.content)}
+                      title={item.content}
                       className="max-w-full truncate rounded-lg border border-white/5 bg-white/[0.02] px-2.5 py-1.5 text-[9px] text-slate-500 hover:text-cyan-100 hover:border-cyan-300/15 transition-colors"
                     >
-                      {item}
+                      {item.content}
                     </button>
                   ))}
                 </div>
@@ -290,7 +290,22 @@ export function AdvisAdminCopilot() {
                   <span className="text-[9px] font-black uppercase tracking-[0.18em] text-cyan-200">Latest intelligence report</span>
                   {loading && <span className="inline-flex items-center gap-1.5 text-[9px] text-cyan-200/70"><Loader2 className="w-3 h-3 animate-spin" /> SCANNING</span>}
                 </div>
-                {answer ? (
+                {toolTrace.length > 0 && (
+                <div className="mb-4 rounded-xl border border-cyan-300/10 bg-cyan-300/[0.02] p-3">
+                  <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.16em] text-cyan-200 mb-2">
+                    <BrainCircuit className="w-3 h-3" /> Live tools consulted
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {toolTrace.map((tool, index) => (
+                      <span key={tool.name + index} className={`rounded-lg border px-2 py-1 text-[9px] font-mono ${tool.status === 'ok' ? 'border-cyan-300/10 bg-cyan-300/[0.03] text-cyan-100/70' : 'border-rose-300/10 bg-rose-300/[0.03] text-rose-200'}`}>
+                        {tool.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {answer ? (
                   <div className="whitespace-pre-wrap text-xs sm:text-sm leading-6 text-slate-200">{answer}</div>
                 ) : (
                   <div className="h-28 flex items-center justify-center text-center text-[11px] text-slate-600">

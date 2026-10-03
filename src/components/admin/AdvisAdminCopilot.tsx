@@ -15,7 +15,8 @@ export function AdvisAdminCopilot() {
   const [answer, setAnswer] = useState('');
   const [model, setModel] = useState('');
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(true);\n  const [booting, setBooting] = useState(true);
+  const [open, setOpen] = useState(true);
+  const [booting, setBooting] = useState(true);
 
   async function ask(value = question) {
     const q = value.trim();

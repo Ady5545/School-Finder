@@ -1,13 +1,65 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
-import { BrainCircuit, Send, Loader2, Sparkles, ShieldCheck, ChevronDown } from 'lucide-react';
+import {
+  Activity,
+  AlertTriangle,
+  BarChart3,
+  BrainCircuit,
+  ChevronDown,
+  Database,
+  Gauge,
+  Loader2,
+  MessageSquare,
+  RefreshCw,
+  Search,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Users,
+} from 'lucide-react';
+
+type Intelligence = {
+  generatedAt: string;
+  health: { status: string; issueCount: number; high: number; medium: number; low: number };
+  schools: {
+    total: number;
+    admissionsOpen: number;
+    admissionsClosed: number;
+    admissionsUnknown: number;
+    missingFee: number;
+    unverifiedFee: number;
+    unverifiedCoordinates: number;
+    topAttentionSchools: Array<{ slug: string; name: string; views: number; saves: number; events: number }>;
+  };
+  users: { total: number; active: number; verifiedEmail: number; withWishlist: number };
+  reviews: { total: number; published: number; deleted: number; averagePublishedScore: number };
+  activity: { loadedEvents: number; topEventTypes: Array<{ type: string; count: number }> };
+  anomalies: Array<{ severity: 'high' | 'medium' | 'low'; issue: string; evidence: string }>;
+  datasets: Record<string, number>;
+};
 
 const starters = [
-  'Give me the complete Admission Pitara situation right now. Cover users, schools, admissions, reviews, shortlists, searches, comparisons, promotions, data quality, security, and anything unusual.',
-  'Audit Admission Pitara for suspicious data, broken relationships, stale records, duplicate signals, missing information, and operational inconsistencies.',
-  'Analyse the entire school-discovery and admission funnel. Tell me where parents are engaging, dropping off, shortlisting, comparing, reviewing, or failing to convert.',
-  'Tell me everything important happening in Admission Pitara that I should know as the administrator, ranked by urgency and backed by the live data.',
+  {
+    label: 'FULL SYSTEM SCAN',
+    icon: Gauge,
+    prompt: 'Give me the complete Admission Pitara situation right now. Cover platform health, schools, admissions, fees, parents, reviews, shortlists, searches, comparisons, promotions, data integrity, security, activity and anything unusual. Connect the signals and tell me what matters most.',
+  },
+  {
+    label: 'FUNNEL ANALYSIS',
+    icon: BarChart3,
+    prompt: 'Analyse the Admission Pitara discovery-to-admission funnel. Use the available activity, search, comparison, wishlist and school signals to identify where parents engage, shortlist, compare, review, or appear to drop off. Show evidence and missing signals.',
+  },
+  {
+    label: 'DATA INTEGRITY',
+    icon: Database,
+    prompt: 'Perform a deep Admission Pitara data-integrity audit. Find missing, stale, inconsistent, duplicate-looking, unverifiable or contradictory school, fee, admission, user, review and activity records. Tell me what to investigate first.',
+  },
+  {
+    label: 'USER INTELLIGENCE',
+    icon: Users,
+    prompt: 'Analyse parent/user behaviour across Admission Pitara. Tell me what users are doing, what schools they appear interested in, where engagement is strongest, where activity is weak, and what operational patterns or anomalies deserve attention.',
+  },
 ];
 
 export function AdvisAdminCopilot() {
@@ -17,6 +69,8 @@ export function AdvisAdminCopilot() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(true);
   const [booting, setBooting] = useState(true);
+  const [intelligence, setIntelligence] = useState<Intelligence | null>(null);
+  const [history, setHistory] = useState<string[]>([]);
 
   async function ask(value = question) {
     const q = value.trim();
@@ -24,6 +78,7 @@ export function AdvisAdminCopilot() {
     setQuestion(q);
     setLoading(true);
     setAnswer('');
+
     try {
       const res = await fetch('/api/admin/advis', {
         method: 'POST',
@@ -32,13 +87,20 @@ export function AdvisAdminCopilot() {
         cache: 'no-store',
       });
       const data = await res.json();
-      if (!res.ok || !data.success) throw new Error(data.message || 'ADVIS request failed.');
-      setAnswer(data.answer);
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || 'ADVIS request failed.');
+      }
+
+      setAnswer(data.answer || '');
       setModel(data.model || '');
+      setIntelligence(data.intelligence || null);
+      setHistory(prev => [q, ...prev.filter(item => item !== q)].slice(0, 5));
     } catch (error) {
       setAnswer(error instanceof Error ? error.message : 'ADVIS could not complete the analysis.');
     } finally {
       setLoading(false);
+      setBooting(false);
     }
   }
 
@@ -48,86 +110,253 @@ export function AdvisAdminCopilot() {
   }
 
   useEffect(() => {
-    let active = true;
-    void (async () => {
-      await ask('Give me the complete Admission Pitara briefing right now. Tell me what is happening across the platform, what changed, what looks healthy, what looks abnormal, what deserves attention, and what I should investigate next. Cover schools, admissions, parents, reviews, shortlists, searches, comparisons, promotions, data integrity, security, and operational health.');
-      if (active) setBooting(false);
-    })();
-    return () => {
-      active = false;
-    };
+    void ask(
+      'Give me the complete Admission Pitara briefing right now. Tell me what is happening across the platform, what looks healthy, what looks abnormal, what deserves attention, what changed signals are visible in the current snapshot, and what I should investigate next. Cover schools, admissions, parents, reviews, shortlists, searches, comparisons, promotions, data integrity, security, activity, and operational health.'
+    );
   }, []);
 
+  const statusLabel = intelligence?.health.status === 'stable'
+    ? 'SYSTEM STABLE'
+    : intelligence?.health.status === 'watch'
+      ? 'SYSTEM WATCH'
+      : intelligence?.health.status === 'attention'
+        ? 'ATTENTION REQUIRED'
+        : booting || loading
+          ? 'SCANNING'
+          : 'READY';
+
   return (
-    <section className="mb-6 rounded-2xl border border-cyan-300/25 bg-[#041323]/90 shadow-[0_0_45px_rgba(45,210,255,.08)] overflow-hidden">
+    <section className="mb-7 overflow-hidden rounded-3xl border border-cyan-300/25 bg-[#03111f]/95 shadow-[0_0_55px_rgba(45,210,255,.09)]">
       <button
         type="button"
         onClick={() => setOpen(v => !v)}
-        className="w-full px-4 sm:px-5 py-4 flex items-center justify-between text-left hover:bg-cyan-300/[0.03] transition-colors"
+        className="w-full px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-4 text-left border-b border-cyan-300/10 hover:bg-cyan-300/[0.03] transition-colors"
       >
-        <div className="flex items-center gap-3">
-          <div className="relative w-10 h-10 rounded-xl border border-cyan-300/30 bg-cyan-300/10 flex items-center justify-center">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="relative shrink-0 w-11 h-11 rounded-2xl border border-cyan-300/30 bg-cyan-300/[0.08] flex items-center justify-center">
             <BrainCircuit className="w-5 h-5 text-cyan-200" />
-            <span className="absolute inset-0 rounded-xl border border-cyan-300/10 animate-pulse" />
+            <span className="absolute inset-0 rounded-2xl border border-cyan-300/10 animate-pulse" />
           </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h2 className="text-sm sm:text-base font-bold text-white">ADVIS Intelligence Core</h2>
-              <span className="px-2 py-0.5 rounded-full border border-cyan-300/20 bg-cyan-300/5 text-[9px] font-bold uppercase tracking-[0.18em] text-cyan-200">Admin only</span>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="text-sm sm:text-base font-black text-white">ADVIS Intelligence Core</h2>
+              <span className="px-2 py-0.5 rounded-full border border-cyan-300/20 bg-cyan-300/5 text-[9px] font-black uppercase tracking-[0.18em] text-cyan-200">
+                Admin only
+              </span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">Live reasoning over Admission Pitara's operational data</p>
+            <p className="text-[11px] text-slate-400 mt-0.5 truncate">Admission Pitara platform intelligence, diagnostics &amp; operational command</p>
           </div>
         </div>
-        <ChevronDown className={`w-4 h-4 text-cyan-200 transition-transform ${open ? 'rotate-180' : ''}`} />
+        <div className="flex items-center gap-3 shrink-0">
+          <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-cyan-300/15 bg-cyan-300/[0.04] px-2.5 py-1 text-[9px] font-black tracking-[0.14em] text-cyan-100/80">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse" />
+            {statusLabel}
+          </span>
+          <ChevronDown className={`w-4 h-4 text-cyan-200 transition-transform ${open ? 'rotate-180' : ''}`} />
+        </div>
       </button>
 
       {open && (
-        <div className="px-4 sm:px-5 pb-5 space-y-4 border-t border-cyan-300/10">
-          <div className="pt-4 flex flex-wrap items-center gap-2 text-[10px] text-cyan-100/70">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Authenticated admin context</span><span>•</span><span>Admission Pitara intelligence only</span><span>•</span><span>Live operational snapshot</span>
+        <div className="p-4 sm:p-6 space-y-5">
+          <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-4">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-2 text-[10px] text-cyan-100/70">
+                <ShieldCheck className="w-3.5 h-3.5" />
+                <span>Authenticated admin context</span>
+                <span>•</span>
+                <span>Admission Pitara scope only</span>
+                <span>•</span>
+                <span>{intelligence ? new Date(intelligence.generatedAt).toLocaleTimeString() : 'Awaiting first scan'}</span>
+              </div>
+              <h3 className="mt-2 text-lg sm:text-2xl font-black tracking-tight text-white">Your platform, observed as one system.</h3>
+              <p className="mt-1 text-xs sm:text-sm leading-5 text-slate-400 max-w-4xl">
+                ADVIS connects the signals already available to Admin instead of treating schools, parents, admissions, reviews and activity as separate screens.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => void ask('Re-scan the entire Admission Pitara platform from the current live admin snapshot. Tell me what changed or is abnormal since the previous analysis, then give me the highest-priority investigations.')}
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-300/25 bg-cyan-300/[0.08] px-4 py-2.5 text-[10px] font-black tracking-[0.14em] text-cyan-100 hover:bg-cyan-300/[0.14] disabled:opacity-40 transition-colors"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+              RE-SCAN
+            </button>
           </div>
 
-          <div className="rounded-2xl border border-cyan-300/15 bg-gradient-to-r from-cyan-300/[0.05] via-transparent to-blue-400/[0.04] p-4 sm:p-5">\n            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">\n              <div>\n                <div className="flex items-center gap-2 text-cyan-200 text-[10px] font-black uppercase tracking-[0.2em]"><span className="w-2 h-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(85,231,255,.9)] animate-pulse" />Platform intelligence online</div>\n                <h3 className="mt-2 text-lg sm:text-xl font-black text-white">Your Admission Pitara command centre</h3>\n                <p className="mt-1 text-xs sm:text-sm text-slate-400 max-w-3xl leading-5">Ask about the platform itself. ADVIS reasons over the authenticated admin snapshot and connects the signals across the directory, admissions funnel, parents, reviews, shortlists, searches, comparisons, promotions, audits, and school data.</p>\n              </div>\n              <div className="shrink-0 rounded-xl border border-cyan-300/15 bg-[#020b16]/70 px-3 py-2 text-[10px] text-cyan-100/80">{booting || loading ? 'ANALYSING LIVE DATA…' : 'READY FOR COMMANDS'}</div>\n            </div>\n          </div>\n\n          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2">
-            {starters.map(s => (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+            <div className="rounded-2xl border border-cyan-300/10 bg-[#061a2a] p-3.5">
+              <div className="flex items-center justify-between text-cyan-200">
+                <span className="text-[9px] font-black uppercase tracking-[0.15em]">Platform health</span>
+                <Activity className="w-3.5 h-3.5" />
+              </div>
+              <div className="mt-2 text-base font-black text-white">{statusLabel}</div>
+              <p className="mt-1 text-[10px] text-slate-500">{intelligence?.health.issueCount ?? 0} detected issue signals</p>
+            </div>
+
+            <div className="rounded-2xl border border-cyan-300/10 bg-[#061a2a] p-3.5">
+              <div className="flex items-center justify-between text-cyan-200">
+                <span className="text-[9px] font-black uppercase tracking-[0.15em]">Schools</span>
+                <Database className="w-3.5 h-3.5" />
+              </div>
+              <div className="mt-2 text-xl font-black text-white">{intelligence?.schools.total ?? '—'}</div>
+              <p className="mt-1 text-[10px] text-slate-500">{intelligence?.schools.admissionsOpen ?? 0} recognised as open</p>
+            </div>
+
+            <div className="rounded-2xl border border-cyan-300/10 bg-[#061a2a] p-3.5">
+              <div className="flex items-center justify-between text-cyan-200">
+                <span className="text-[9px] font-black uppercase tracking-[0.15em]">Parents</span>
+                <Users className="w-3.5 h-3.5" />
+              </div>
+              <div className="mt-2 text-xl font-black text-white">{intelligence?.users.total ?? '—'}</div>
+              <p className="mt-1 text-[10px] text-slate-500">{intelligence?.users.withWishlist ?? 0} have active shortlist signals</p>
+            </div>
+
+            <div className="rounded-2xl border border-cyan-300/10 bg-[#061a2a] p-3.5">
+              <div className="flex items-center justify-between text-cyan-200">
+                <span className="text-[9px] font-black uppercase tracking-[0.15em]">Activity</span>
+                <BarChart3 className="w-3.5 h-3.5" />
+              </div>
+              <div className="mt-2 text-xl font-black text-white">{intelligence?.activity.loadedEvents ?? '—'}</div>
+              <p className="mt-1 text-[10px] text-slate-500">recent platform events loaded</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-2.5">
+            {starters.map(({ label, icon: Icon, prompt }) => (
               <button
-                key={s}
+                key={label}
                 type="button"
-                onClick={() => void ask(s)}
+                onClick={() => void ask(prompt)}
                 disabled={loading}
-                className="text-left p-3 rounded-xl border border-cyan-300/10 bg-[#071a2c] hover:border-cyan-300/30 hover:bg-[#09233a] text-[10px] leading-relaxed text-slate-300 transition-colors disabled:opacity-50"
+                className="group text-left rounded-2xl border border-cyan-300/10 bg-[#061625] p-3.5 hover:border-cyan-300/25 hover:bg-[#082039] disabled:opacity-45 transition-all"
               >
-                <Sparkles className="w-3.5 h-3.5 text-cyan-300 mb-1.5" />
-                {s}
+                <div className="flex items-center justify-between">
+                  <Icon className="w-4 h-4 text-cyan-300" />
+                  <Sparkles className="w-3 h-3 text-cyan-300/40 group-hover:text-cyan-200 transition-colors" />
+                </div>
+                <div className="mt-3 text-[10px] font-black tracking-[0.14em] text-white">{label}</div>
+                <p className="mt-1 text-[10px] leading-4 text-slate-500">Run a focused intelligence pass.</p>
               </button>
             ))}
           </div>
 
-          <form onSubmit={submit} className="flex gap-2">
-            <input
-              value={question}
-              onChange={e => setQuestion(e.target.value)}
-              placeholder="Ask ADVIS anything about Admission Pitara — schools, parents, admissions, data, funnel, security, or operations..."
-              className="min-w-0 flex-1 rounded-xl border border-cyan-300/15 bg-[#020b16] px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none focus:border-cyan-300/45"
-            />
-            <button
-              type="submit"
-              disabled={!question.trim() || loading}
-              className="shrink-0 rounded-xl border border-cyan-200/30 bg-cyan-300/10 px-4 text-cyan-100 hover:bg-cyan-300/20 disabled:opacity-40 transition-colors"
-            >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-            </button>
-          </form>
-
-          {answer && (
-            <div className="rounded-xl border border-cyan-300/15 bg-[#020b16] p-4">
+          <div className="grid grid-cols-1 xl:grid-cols-[1.1fr_.9fr] gap-4">
+            <div className="rounded-2xl border border-cyan-300/10 bg-[#020d18] p-4 sm:p-5">
               <div className="flex items-center justify-between gap-3 mb-3">
-                <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-cyan-200">Analysis</span>
-                {model && <span className="text-[9px] text-slate-500">{model}</span>}
+                <div className="flex items-center gap-2">
+                  <MessageSquare className="w-4 h-4 text-cyan-300" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-200">Command console</span>
+                </div>
+                {model && <span className="text-[9px] font-mono text-slate-600">{model}</span>}
               </div>
-              <div className="text-xs sm:text-sm leading-6 text-slate-200 whitespace-pre-wrap">{answer}</div>
+
+              <form onSubmit={submit} className="flex gap-2">
+                <input
+                  value={question}
+                  onChange={e => setQuestion(e.target.value)}
+                  placeholder="Ask ADVIS about Admission Pitara..."
+                  className="min-w-0 flex-1 rounded-xl border border-cyan-300/15 bg-[#010912] px-4 py-3 text-sm text-white placeholder:text-slate-600 outline-none focus:border-cyan-300/45"
+                />
+                <button
+                  type="submit"
+                  disabled={!question.trim() || loading}
+                  className="shrink-0 rounded-xl border border-cyan-200/25 bg-cyan-300/[0.08] px-4 text-cyan-100 hover:bg-cyan-300/[0.14] disabled:opacity-40 transition-colors"
+                >
+                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                </button>
+              </form>
+
+              {history.length > 0 && (
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {history.map(item => (
+                    <button
+                      key={item}
+                      type="button"
+                      disabled={loading}
+                      onClick={() => void ask(item)}
+                      title={item}
+                      className="max-w-full truncate rounded-lg border border-white/5 bg-white/[0.02] px-2.5 py-1.5 text-[9px] text-slate-500 hover:text-cyan-100 hover:border-cyan-300/15 transition-colors"
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-4 min-h-[180px] rounded-xl border border-cyan-300/10 bg-[#01070d] p-4">
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <span className="text-[9px] font-black uppercase tracking-[0.18em] text-cyan-200">Latest intelligence report</span>
+                  {loading && <span className="inline-flex items-center gap-1.5 text-[9px] text-cyan-200/70"><Loader2 className="w-3 h-3 animate-spin" /> SCANNING</span>}
+                </div>
+                {answer ? (
+                  <div className="whitespace-pre-wrap text-xs sm:text-sm leading-6 text-slate-200">{answer}</div>
+                ) : (
+                  <div className="h-28 flex items-center justify-center text-center text-[11px] text-slate-600">
+                    <div>{booting || loading ? 'ADVIS is connecting the live Admission Pitara signals…' : 'Run a command to generate an intelligence report.'}</div>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
+
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-cyan-300/10 bg-[#020d18] p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <AlertTriangle className="w-4 h-4 text-cyan-300" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-200">Detected signals</span>
+                </div>
+                {intelligence?.anomalies?.length ? (
+                  <div className="space-y-2">
+                    {intelligence.anomalies.map((item, index) => (
+                      <div key={item.issue + index} className="rounded-xl border border-white/5 bg-white/[0.02] p-3">
+                        <div className="flex items-center gap-2">
+                          <span className={`w-1.5 h-1.5 rounded-full ${item.severity === 'high' ? 'bg-rose-300' : item.severity === 'medium' ? 'bg-amber-300' : 'bg-cyan-300'}`} />
+                          <span className="text-[10px] font-bold text-white">{item.issue}</span>
+                        </div>
+                        <p className="mt-1.5 text-[9px] leading-4 text-slate-500">{item.evidence}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[10px] text-slate-600">No deterministic anomaly signals detected in the current snapshot.</p>
+                )}
+              </div>
+
+              <div className="rounded-2xl border border-cyan-300/10 bg-[#020d18] p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Search className="w-4 h-4 text-cyan-300" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-200">Schools receiving attention</span>
+                </div>
+                {intelligence?.schools.topAttentionSchools?.length ? (
+                  <div className="space-y-1.5">
+                    {intelligence.schools.topAttentionSchools.slice(0, 6).map(school => (
+                      <div key={school.slug} className="flex items-center justify-between gap-3 rounded-lg bg-white/[0.02] px-2.5 py-2">
+                        <span className="min-w-0 truncate text-[10px] text-slate-300">{school.name}</span>
+                        <span className="shrink-0 text-[9px] font-mono text-cyan-200">{school.events} ev</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[10px] text-slate-600">No school-level activity loaded yet.</p>
+                )}
+              </div>
+
+              <div className="rounded-2xl border border-cyan-300/10 bg-[#020d18] p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <Activity className="w-4 h-4 text-cyan-300" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.18em] text-cyan-200">Top activity signals</span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {(intelligence?.activity.topEventTypes || []).slice(0, 8).map(item => (
+                    <span key={item.type} className="rounded-lg border border-cyan-300/10 bg-cyan-300/[0.03] px-2.5 py-1.5 text-[9px] text-slate-400">
+                      {item.type.replaceAll('_', ' ')} <strong className="text-cyan-200">{item.count}</strong>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </section>

@@ -10,7 +10,8 @@ import {
   getSearchAnalyticsAsync,
   getAdminAuditLogsAsync,
 } from '@/lib/authStore';
-import { getCanonicalSchools } from '@/lib/schools';
+import { getCanonicalSchools, getSchoolBySlug } from '@/lib/schools';
+
 
 const MODEL = process.env.ADVIS_MODEL || 'gemini-3.8-flash';
 

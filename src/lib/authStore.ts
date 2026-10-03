@@ -3284,15 +3284,34 @@ export async function getAllSchoolsAdminOverviewAsync() {
   return Array.from(summaryMap.values());
 }
 
+function getIndiaTodayStartTimestamp(): number {
+  const now = new Date();
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(now);
+  const values: Record<string, string> = {};
+  for (const part of parts) values[part.type] = part.value;
+  return Date.UTC(
+    Number(values.year),
+    Number(values.month) - 1,
+    Number(values.day),
+    0,
+    0,
+    0,
+    0
+  ) - (5.5 * 60 * 60 * 1000);
+}
+
 export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d' | 'all' = '30d') {
   initDb();
   let timeThreshold = 0;
   const now = Date.now();
 
   if (timeRange === 'today') {
-    const startOfToday = new Date();
-    startOfToday.setHours(0, 0, 0, 0);
-    timeThreshold = startOfToday.getTime();
+    timeThreshold = getIndiaTodayStartTimestamp();
   } else if (timeRange === '7d') {
     timeThreshold = now - 7 * 24 * 60 * 60 * 1000;
   } else if (timeRange === '30d') {

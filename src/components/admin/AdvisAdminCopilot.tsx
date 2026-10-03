@@ -151,7 +151,11 @@ export function AdvisAdminCopilot() {
     utterance.pitch = 0.96;
     utterance.volume = 1;
     utterance.onend = () => {
-      if (voiceModeRef.current && restartVoiceRef.current && !loading) startListening();
+      if (voiceModeRef.current && restartVoiceRef.current) {
+        window.setTimeout(() => {
+          if (voiceModeRef.current && restartVoiceRef.current) startListening();
+        }, 250);
+      }
     };
     window.speechSynthesis.speak(utterance);
   }

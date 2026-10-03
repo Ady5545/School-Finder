@@ -711,7 +711,7 @@ export default function AdminPage() {
         }
         .jarvis-admin-theme [class*="bg-[#0a1e38]"],
         .jarvis-admin-theme [class*="bg-[#0d2646]"],
-        .jarvis-admin-theme [class*="bg-[#0e2746"] {
+        .jarvis-admin-theme [class*="bg-[#0e2746]"] {
           background: rgba(3, 19, 34, .94) !important;
           border-color: rgba(85, 231, 255, .18) !important;
         }
@@ -778,6 +778,86 @@ export default function AdminPage() {
         }
         .jarvis-admin-theme .font-mono {
           color: #8cefff;
+        }
+        .jarvis-admin-theme main {
+          position: relative;
+          background:
+            radial-gradient(circle at 50% -20%, rgba(85, 231, 255, .055), transparent 42%),
+            transparent !important;
+        }
+        .jarvis-admin-theme main::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(85, 231, 255, .42), transparent);
+          pointer-events: none;
+        }
+        .jarvis-admin-theme main [class*="bg-[#0f284a]"],
+        .jarvis-admin-theme main [class*="bg-[#0a1e38]"],
+        .jarvis-admin-theme main [class*="bg-[#091b32]"],
+        .jarvis-admin-theme main [class*="bg-[#0b2039]"],
+        .jarvis-admin-theme main [class*="bg-[#071629]"],
+        .jarvis-admin-theme main [class*="bg-[#0a1f3a]"],
+        .jarvis-admin-theme main [class*="bg-[#0d2646]"] {
+          background: linear-gradient(145deg, rgba(7, 27, 47, .97), rgba(3, 16, 29, .96)) !important;
+          border-color: rgba(85, 231, 255, .17) !important;
+          box-shadow:
+            inset 0 1px 0 rgba(138, 244, 255, .035),
+            0 0 0 1px rgba(85, 231, 255, .018),
+            0 14px 34px rgba(0, 0, 0, .22) !important;
+        }
+        .jarvis-admin-theme main [class*="bg-[#0f284a]"]:hover,
+        .jarvis-admin-theme main [class*="bg-[#0a1e38]"]:hover {
+          border-color: rgba(85, 231, 255, .26) !important;
+        }
+        .jarvis-admin-theme main input,
+        .jarvis-admin-theme main select,
+        .jarvis-admin-theme main textarea {
+          background-color: rgba(2, 13, 24, .86) !important;
+          border-color: rgba(85, 231, 255, .14) !important;
+          color: #e8fbff !important;
+        }
+        .jarvis-admin-theme main input::placeholder,
+        .jarvis-admin-theme main textarea::placeholder {
+          color: rgba(148, 163, 184, .56) !important;
+        }
+        .jarvis-admin-theme main table thead {
+          background: rgba(4, 24, 42, .78) !important;
+          box-shadow: inset 0 -1px 0 rgba(85, 231, 255, .08);
+        }
+        .jarvis-admin-theme main table tbody tr {
+          border-color: rgba(85, 231, 255, .06) !important;
+        }
+        .jarvis-admin-theme main table tbody tr:hover {
+          background: rgba(85, 231, 255, .025) !important;
+        }
+        .jarvis-admin-theme main hr {
+          border-color: rgba(85, 231, 255, .08) !important;
+        }
+        .jarvis-admin-theme nav {
+          scrollbar-color: rgba(85, 231, 255, .35) transparent;
+          scrollbar-width: thin;
+        }
+        .jarvis-admin-theme nav::-webkit-scrollbar {
+          height: 4px;
+        }
+        .jarvis-admin-theme nav::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .jarvis-admin-theme nav::-webkit-scrollbar-thumb {
+          background: rgba(85, 231, 255, .24);
+          border-radius: 999px;
+        }
+        .jarvis-admin-theme button:focus-visible,
+        .jarvis-admin-theme a:focus-visible,
+        .jarvis-admin-theme input:focus-visible,
+        .jarvis-admin-theme select:focus-visible,
+        .jarvis-admin-theme textarea:focus-visible {
+          outline: 1px solid rgba(138, 244, 255, .78);
+          outline-offset: 2px;
         }
         .jarvis-admin-theme ::selection {
           background: rgba(85, 231, 255, .28);

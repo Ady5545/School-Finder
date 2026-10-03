@@ -10,10 +10,12 @@ import {
   getSearchAnalyticsAsync,
   getAdminAuditLogsAsync,
 } from '@/lib/authStore';
-import { getCanonicalSchools, getSchoolBySlug } from '@/lib/schools';
+import { getCanonicalSchools } from '@/lib/schools';
+import { ADVIS_TOOL_DECLARATIONS, executeAdvisAdminTool } from '@/lib/advisAdminTools';
 
 
 const MODEL = process.env.ADVIS_MODEL || 'gemini-3.8-flash';
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.GOOGLE_API_KEY;
 
 const SYSTEM = `You are ADVIS, the private intelligence and operations core for Admission Pitara's authenticated administrator.
 
@@ -275,7 +277,7 @@ export async function POST(req: NextRequest) {
       datasets: datasetSummary,
     };
 
-    const safeUsers = (users as any[]).slice(0, 150).map(u => ({
+    const safeUsers = (users as any[]).slice(0, 50).map(u => ({
       id: u.id,
       name: u.name,
       email: u.email,
@@ -290,24 +292,43 @@ export async function POST(req: NextRequest) {
       wishlist: u.wishlist,
     }));
 
-    const context = {
+    const baseContext = {
       generatedAt: intelligence.generatedAt,
       authenticatedAdmin: { id: auth.user.id, email: auth.user.email },
       overview,
       intelligence,
-      schools,
-      users: safeUsers,
-      activity: (activity as any[]).slice(0, 300),
-      reviews: (reviews as any[]).slice(0, 150),
-      wishlists: (wishlists as any[]).slice(0, 150),
+      schoolDirectory: schools.slice(0, 40),
+      recentUsers: safeUsers,
+      recentActivity: (activity as any[]).slice(0, 60),
+      recentReviews: (reviews as any[]).slice(0, 40),
+      shortlistSummary: (wishlists as any[]).slice(0, 40),
       comparisons,
       searches,
-      audit: (audit as any[]).slice(0, 150),
+      recentAudit: (audit as any[]).slice(0, 50),
     };
+
+    const history = Array.isArray(body?.history)
+      ? body.history
+          .filter((item: any) => item && (item.role === 'user' || item.role === 'assistant') && typeof item.content === 'string')
+          .slice(-8)
+      : [];
+
+    const prompt = `ADMISSION PITARA ADMIN COMMAND:
+${question}
+
+You have a base live snapshot below. Do not assume it is exhaustive. Use your tools to fetch more specific or deeper information whenever the question requires it.
+
+BASE LIVE SNAPSHOT:
+${JSON.stringify(baseContext)}
+
+Previous conversation:
+${history.length ? JSON.stringify(history) : 'None'}
+
+Work as the Admission Pitara intelligence core. Investigate before concluding. You may call multiple tools, including different tools for the same entity when cross-checking is useful. After tool results are returned, synthesize one clear answer for the administrator. If the requested operation would mutate data, explain the exact proposed action and use propose_admin_action; never execute mutations from the model.`;
 
     const fallbackAnswer = buildFallbackBriefing(intelligence);
 
-    if (!process.env.GEMINI_API_KEY) {
+    if (!GEMINI_API_KEY) {
       return NextResponse.json({
         success: true,
         answer: fallbackAnswer,
@@ -315,50 +336,124 @@ export async function POST(req: NextRequest) {
         mode: 'deterministic',
         generatedAt: intelligence.generatedAt,
         intelligence,
-        notice: 'GEMINI_API_KEY is not configured; ADVIS is running in deterministic platform-diagnostics mode.',
+        toolTrace: [],
+        notice: 'No Gemini API key is configured; ADVIS is running in deterministic platform-diagnostics mode.',
       });
     }
 
-    const prompt = `ADMIN COMMAND:
-${question}
+    const contents: any[] = [];
+    for (const item of history) {
+      contents.push({
+        role: item.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: String(item.content).slice(0, 8000) }],
+      });
+    }
+    contents.push({ role: 'user', parts: [{ text: prompt }] });
 
-ADVIS DETERMINISTIC INTELLIGENCE:
-${JSON.stringify(intelligence)}
+    const toolTrace: Array<{ name: string; status: 'ok' | 'error'; summary?: string }> = [];
+    let finalText = '';
+    const maxToolRounds = 6;
 
-LIVE ADMIN DATA:
-${JSON.stringify(context)}
+    for (let round = 0; round < maxToolRounds; round += 1) {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': GEMINI_API_KEY,
+          },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: SYSTEM }] },
+            contents,
+            tools: [{ functionDeclarations: ADVIS_TOOL_DECLARATIONS }],
+            toolConfig: {
+              functionCallingConfig: { mode: 'AUTO' },
+            },
+            generationConfig: {
+              responseMimeType: 'text/plain',
+              temperature: 0.2,
+            },
+          }),
+          cache: 'no-store',
+        }
+      );
 
-Answer as the Admission Pitara intelligence core. Prefer concrete evidence over generic advice. When something needs investigation, state exactly what should be checked and why. For mutation requests, describe the exact action proposal but do not execute it.`;
-
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${encodeURIComponent(process.env.GEMINI_API_KEY)}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: SYSTEM }] },
-          contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          generationConfig: { responseMimeType: 'text/plain', temperature: 0.2 },
-        }),
-        cache: 'no-store',
+      const json = await response.json();
+      if (!response.ok) {
+        console.error('[ADVIS] Gemini error:', json?.error?.message || response.statusText);
+        return NextResponse.json({
+          success: true,
+          answer: fallbackAnswer,
+          model: 'deterministic-advis',
+          mode: 'deterministic-fallback',
+          generatedAt: intelligence.generatedAt,
+          intelligence,
+          toolTrace,
+          notice: 'The model layer was unavailable, so ADVIS returned its deterministic platform diagnostics.',
+        });
       }
-    );
 
-    const json = await response.json();
-    if (!response.ok) {
-      console.error('[ADVIS] Gemini error:', json?.error?.message || response.statusText);
-      return NextResponse.json({ success: false, message: 'ADVIS model request failed.' }, { status: 502 });
+      const candidate = json?.candidates?.[0];
+      const parts = Array.isArray(candidate?.content?.parts) ? candidate.content.parts : [];
+      const functionCalls = parts
+        .map((part: any) => part?.functionCall)
+        .filter((call: any) => call && typeof call.name === 'string');
+
+      if (!functionCalls.length) {
+        finalText = parts
+          .map((part: any) => typeof part?.text === 'string' ? part.text : '')
+          .join('')
+          .trim();
+        break;
+      }
+
+      if (candidate?.content) {
+        contents.push(candidate.content);
+      }
+
+      const functionResponses = [];
+      for (const call of functionCalls.slice(0, 4)) {
+        const name = String(call.name);
+        const args = call.args && typeof call.args === 'object' ? call.args : {};
+        try {
+          const result = await executeAdvisAdminTool(name, args);
+          const raw = JSON.stringify(result);
+          const trimmed = raw.length > 30000 ? raw.slice(0, 30000) + '…[truncated]' : raw;
+          toolTrace.push({ name, status: 'ok', summary: `Tool returned ${Math.min(raw.length, 30000)} characters.` });
+          functionResponses.push({
+            functionResponse: {
+              id: call.id,
+              name,
+              response: { result: JSON.parse(trimmed) },
+            },
+          });
+        } catch (error) {
+          const message = error instanceof Error ? error.message : 'Tool execution failed.';
+          toolTrace.push({ name, status: 'error', summary: message });
+          functionResponses.push({
+            functionResponse: {
+              id: call.id,
+              name,
+              response: { error: message },
+            },
+          });
+        }
+      }
+
+      contents.push({ role: 'user', parts: functionResponses });
     }
 
-    const answer = json?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text || '').join('').trim();
-    if (!answer) return NextResponse.json({ success: false, message: 'ADVIS returned no answer.' }, { status: 502 });
+    if (!finalText) finalText = fallbackAnswer;
 
     return NextResponse.json({
       success: true,
-      answer,
+      answer: finalText,
       model: MODEL,
+      mode: 'agentic',
       generatedAt: intelligence.generatedAt,
       intelligence,
+      toolTrace,
     });
   } catch (error) {
     console.error('[ADVIS] Admin copilot error:', error);

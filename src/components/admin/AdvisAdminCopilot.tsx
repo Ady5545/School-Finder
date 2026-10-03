@@ -4,6 +4,12 @@ import { FormEvent, useEffect, useState } from 'react';
 import {
   Activity,
   AlertTriangle,
+  Mic,
+  MicOff,
+  Phone,
+  Volume2,
+  VolumeX,
+  Square,
   BarChart3,
   BrainCircuit,
   ChevronDown,
@@ -39,6 +45,14 @@ type Intelligence = {
   datasets: Record<string, number>;
 };
 
+const getSpeechRecognitionCtor = () => {
+  if (typeof window === 'undefined') return null;
+  return (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition || null;
+};
+
+const browserVoiceSupported = () =>
+  typeof window !== 'undefined' &&
+  !!((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
 const starters = [
   {
     label: 'FULL SYSTEM SCAN',
@@ -71,6 +85,10 @@ export function AdvisAdminCopilot() {
   const [booting, setBooting] = useState(true);
   const [intelligence, setIntelligence] = useState<Intelligence | null>(null);
   const [history, setHistory] = useState<Array<{ role: 'user' | 'assistant'; content: string }>>([]);\n  const [toolTrace, setToolTrace] = useState<Array<{ name: string; status: 'ok' | 'error'; summary?: string }>>([]);
+  const recognitionRef = useRef<any>(null);
+  const voiceModeRef = useRef(false);
+  const voiceOutputRef = useRef(true);
+  const restartVoiceRef = useRef(false);
 
   async function ask(value = question) {
     const q = value.trim();
@@ -108,6 +126,121 @@ export function AdvisAdminCopilot() {
     e.preventDefault();
     void ask();
   }
+
+  function stopSpeaking() {
+    if (typeof window !== 'undefined') window.speechSynthesis?.cancel();
+  }
+
+  function speakAnswer(text: string) {
+    if (!voiceOutputRef.current || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+    const clean = text.replace(/[#*_]/g, '').replace(/\\n+/g, '. ').replace(/•/g, '. ');
+    stopSpeaking();
+    const utterance = new SpeechSynthesisUtterance(clean.slice(0, 7000));
+    utterance.lang = 'en-IN';
+    utterance.rate = 1.02;
+    utterance.pitch = 0.96;
+    utterance.volume = 1;
+    utterance.onend = () => {
+      if (voiceModeRef.current && restartVoiceRef.current && !loading) startListening();
+    };
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function stopListening() {
+    restartVoiceRef.current = false;
+    recognitionRef.current?.stop?.();
+    recognitionRef.current = null;
+    setListening(false);
+    setInterimTranscript('');
+  }
+
+  function startListening() {
+    const Recognition = getSpeechRecognitionCtor();
+    if (!Recognition) {
+      setVoiceError('Voice input is not available in this browser. Chrome is recommended.');
+      return;
+    }
+    stopListening();
+    const recognition = new Recognition();
+    recognitionRef.current = recognition;
+    recognition.continuous = voiceModeRef.current;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 1;
+    recognition.lang = 'en-IN';
+    recognition.onstart = () => {
+      restartVoiceRef.current = voiceModeRef.current;
+      setVoiceError('');
+      setListening(true);
+    };
+    recognition.onresult = (event: any) => {
+      let finalText = '';
+      let interimText = '';
+      for (let index = event.resultIndex; index < event.results.length; index += 1) {
+        const spoken = event.results[index]?.[0]?.transcript || '';
+        if (event.results[index].isFinal) finalText += spoken;
+        else interimText += spoken;
+      }
+      setInterimTranscript(interimText);
+      if (finalText.trim()) {
+        setInterimTranscript('');
+        setQuestion(prev => (prev ? prev + ' ' : '') + finalText.trim());
+      }
+    };
+    recognition.onerror = (event: any) => {
+      restartVoiceRef.current = false;
+      setListening(false);
+      setInterimTranscript('');
+      const code = event?.error || 'unknown';
+      setVoiceError(code === 'not-allowed' || code === 'service-not-allowed'
+        ? 'Microphone access was blocked. Allow microphone access for Admission Pitara Admin.'
+        : 'Voice input error: ' + code);
+    };
+    recognition.onend = () => {
+      setListening(false);
+      if (voiceModeRef.current && restartVoiceRef.current && !loading) {
+        window.setTimeout(() => {
+          if (voiceModeRef.current && !loading) startListening();
+        }, 300);
+      }
+    };
+    try {
+      recognition.start();
+    } catch {
+      setVoiceError('Could not start the microphone. Try again.');
+    }
+  }
+
+  function toggleVoiceMode() {
+    const next = !voiceMode;
+    voiceModeRef.current = next;
+    setVoiceMode(next);
+    if (next) startListening();
+    else stopListening();
+  }
+
+  function toggleVoiceOutput() {
+    const next = !voiceOutput;
+    voiceOutputRef.current = next;
+    setVoiceOutput(next);
+    if (!next) stopSpeaking();
+  }
+
+
+  useEffect(() => {
+    voiceModeRef.current = voiceMode;
+  }, [voiceMode]);
+
+  useEffect(() => {
+    voiceOutputRef.current = voiceOutput;
+  }, [voiceOutput]);
+
+  useEffect(() => {
+    return () => {
+      restartVoiceRef.current = false;
+      recognitionRef.current?.stop?.();
+      stopSpeaking();
+    };
+  }, []);
 
   useEffect(() => {
     void ask(

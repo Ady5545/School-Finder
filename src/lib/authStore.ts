@@ -3358,17 +3358,17 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
     .sort((a, b) => b.views - a.views)
     .slice(0, 8);
 
-  // Top shortlisted schools in selected time range
-  const savesMapInRange = new Map<string, number>();
-  for (const ev of savesEventsInRange) {
-    if (ev.schoolSlug) {
-      savesMapInRange.set(ev.schoolSlug, (savesMapInRange.get(ev.schoolSlug) || 0) + 1);
+  // Current shortlist state is authoritative for "Top Shortlisted Schools".
+  // Historical wishlist_add events remain useful activity telemetry but must not
+  // make a school appear currently shortlisted after the parent removes it or
+  // the parent account no longer exists.
+  const currentShortlistMap = new Map<string, number>();
+  for (const parent of parentUsersList) {
+    if (!Array.isArray(parent.wishlist)) continue;
+    for (const slug of parent.wishlist) {
+      currentShortlistMap.set(slug, (currentShortlistMap.get(slug) || 0) + 1);
     }
   }
-  const topShortlistedInRange = Array.from(savesMapInRange.entries())
-    .map(([slug, count]) => ({ slug, saves: count }))
-    .sort((a, b) => b.saves - a.saves)
-    .slice(0, 8);
 
   const topViewed = timeRange === 'all' || topViewedInRange.length === 0
     ? Array.from(schoolViews.entries())
@@ -3377,12 +3377,13 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
         .slice(0, 8)
     : topViewedInRange;
 
-  const topShortlisted = timeRange === 'all' || topShortlistedInRange.length === 0
-    ? Array.from(schoolSaves.entries())
-        .map(([slug, count]) => ({ slug, saves: count }))
-        .sort((a, b) => b.saves - a.saves)
-        .slice(0, 8)
-    : topShortlistedInRange;
+  const topShortlisted = Array.from(currentShortlistMap.entries())
+    .map(([slug, saves]) => ({ slug, saves }))
+    .sort((a, b) => b.saves - a.saves)
+    .slice(0, 8);
+
+  const activeShortlistsCount = Array.from(currentShortlistMap.values()).reduce((sum, count) => sum + count, 0);
+  const activeShortlistedSchoolsCount = currentShortlistMap.size;
 
   const allTimeViews = Array.from(schoolViews.values()).reduce((a, b) => a + b, 0);
   const allTimeSaves = Array.from(schoolSaves.values()).reduce((a, b) => a + b, 0);
@@ -3416,6 +3417,8 @@ export function getAdminOverviewMetrics(timeRange: 'today' | '7d' | '30d' | '90d
       allTimeSavesCount: allTimeSaves,
       viewsInRange: viewsCountInRange,
       savesInRange: savesCountInRange,
+      activeShortlistsCount,
+      activeShortlistedSchoolsCount,
       uniqueViewersInRange: uniqueParentsViewing,
     },
     reviews: {

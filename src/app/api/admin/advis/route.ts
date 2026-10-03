@@ -16,6 +16,8 @@ import { ADVIS_TOOL_DECLARATIONS, executeAdvisAdminTool } from '@/lib/advisAdmin
 
 const MODEL = process.env.ADVIS_MODEL || 'gemini-3.8-flash';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY || process.env.GOOGLE_API_KEY;
+const AI_GATEWAY_API_KEY = process.env.AI_GATEWAY_API_KEY || '';
+const GATEWAY_MODEL = process.env.ADVIS_GATEWAY_MODEL || 'openai/gpt-5.6-sol';
 
 const SYSTEM = `You are ADVIS, the private intelligence and operations core for Admission Pitara's authenticated administrator.
 
@@ -63,6 +65,108 @@ function admissionState(status: unknown): string {
   if (['open', 'ongoing', 'active'].includes(value)) return 'open';
   if (['closed', 'ended', 'inactive'].includes(value)) return 'closed';
   return value;
+}
+
+function gatewayToolDeclarations() {
+  return ADVIS_TOOL_DECLARATIONS.map((tool: any) => ({
+    type: 'function',
+    function: {
+      name: tool.name,
+      description: tool.description,
+      parameters: tool.parameters,
+    },
+  }));
+}
+
+async function runGatewayAgent(params: {
+  question: string;
+  history: Array<{ role: 'user' | 'assistant'; content: string }>;
+  prompt: string;
+  toolTrace: Array<{ name: string; status: 'ok' | 'error'; summary?: string }>;
+}): Promise<{ text: string; toolTrace: Array<{ name: string; status: 'ok' | 'error'; summary?: string }> }> {
+  const messages: any[] = [{ role: 'system', content: SYSTEM }];
+  for (const item of params.history) {
+    messages.push({ role: item.role, content: item.content.slice(0, 8000) });
+  }
+  messages.push({ role: 'user', content: params.prompt });
+
+  for (let round = 0; round < 6; round += 1) {
+    const response = await fetch('https://ai-gateway.vercel.sh/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + AI_GATEWAY_API_KEY,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: GATEWAY_MODEL,
+        messages,
+        tools: gatewayToolDeclarations(),
+        tool_choice: 'auto',
+        temperature: 0.2,
+      }),
+      cache: 'no-store',
+    });
+
+    const json = await response.json();
+    if (!response.ok) {
+      throw new Error(json?.error?.message || 'AI Gateway request failed.');
+    }
+
+    const message = json?.choices?.[0]?.message;
+    if (!message) throw new Error('AI Gateway returned no message.');
+
+    const toolCalls = Array.isArray(message.tool_calls) ? message.tool_calls : [];
+    if (!toolCalls.length) {
+      return {
+        text: typeof message.content === 'string' ? message.content.trim() : '',
+        toolTrace: params.toolTrace,
+      };
+    }
+
+    messages.push({
+      role: 'assistant',
+      content: message.content || null,
+      tool_calls: toolCalls,
+    });
+
+    for (const call of toolCalls.slice(0, 4)) {
+      const name = String(call?.function?.name || '');
+      let args: Record<string, unknown> = {};
+      try {
+        args = call?.function?.arguments ? JSON.parse(call.function.arguments) : {};
+      } catch {
+        args = {};
+      }
+
+      try {
+        const result = await executeAdvisAdminTool(name, args);
+        const raw = JSON.stringify(result);
+        params.toolTrace.push({
+          name,
+          status: 'ok',
+          summary: 'Tool returned ' + raw.length + ' characters.',
+        });
+        const content = raw.length > 30000
+          ? JSON.stringify({ truncated: true, preview: raw.slice(0, 29500) })
+          : raw;
+        messages.push({
+          role: 'tool',
+          tool_call_id: call.id,
+          content,
+        });
+      } catch (error) {
+        const messageText = error instanceof Error ? error.message : 'Tool execution failed.';
+        params.toolTrace.push({ name, status: 'error', summary: messageText });
+        messages.push({
+          role: 'tool',
+          tool_call_id: call.id,
+          content: JSON.stringify({ error: messageText }),
+        });
+      }
+    }
+  }
+
+  return { text: 'ADVIS reached the investigation step limit. Run the command again for another pass.', toolTrace: params.toolTrace };
 }
 
 function buildFallbackAnswer(question: string, intelligence: any, overview: any, todayOverview: any): string {
@@ -359,7 +463,25 @@ Work as the Admission Pitara intelligence core. Investigate before concluding. Y
 
     const fallbackAnswer = buildFallbackAnswer(question, intelligence, overview, todayOverview);
 
-    if (!GEMINI_API_KEY) {
+    if (!GEMINI_API_KEY && AI_GATEWAY_API_KEY) {
+      const toolTrace: Array<{ name: string; status: 'ok' | 'error'; summary?: string }> = [];
+      try {
+        const gatewayResult = await runGatewayAgent({ question, history, prompt, toolTrace });
+        return NextResponse.json({
+          success: true,
+          answer: gatewayResult.text || fallbackAnswer,
+          model: GATEWAY_MODEL,
+          mode: 'gateway-agentic',
+          generatedAt: intelligence.generatedAt,
+          intelligence,
+          toolTrace: gatewayResult.toolTrace,
+        });
+      } catch (error) {
+        console.error('[ADVIS] AI Gateway error:', error);
+      }
+    }
+
+    if (!GEMINI_API_KEY && !AI_GATEWAY_API_KEY) {
       return NextResponse.json({
         success: true,
         answer: fallbackAnswer,
@@ -368,7 +490,7 @@ Work as the Admission Pitara intelligence core. Investigate before concluding. Y
         generatedAt: intelligence.generatedAt,
         intelligence,
         toolTrace: [],
-        notice: 'No Gemini API key is configured; ADVIS is running in deterministic platform-diagnostics mode.',
+        notice: 'No ADVIS model credential is configured; ADVIS is running its built-in Admission Pitara diagnostics.',
       });
     }
 

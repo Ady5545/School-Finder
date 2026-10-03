@@ -3563,12 +3563,21 @@ export async function getAdminOverviewMetricsAsync(timeRange: 'today' | '7d' | '
         .slice(0, 8)
     : topViewedInRange;
 
-  const topShortlisted = timeRange === 'all' || topShortlistedInRange.length === 0
-    ? Array.from(allTimeSavesMap.entries())
-        .map(([slug, count]) => ({ slug, saves: count }))
-        .sort((a, b) => b.saves - a.saves)
-        .slice(0, 8)
-    : topShortlistedInRange;
+  const currentShortlistMap = new Map<string, number>();
+  for (const parent of parentUsersList) {
+    if (parent.status === 'disabled' || !Array.isArray(parent.wishlist)) continue;
+    for (const slug of parent.wishlist) {
+      currentShortlistMap.set(slug, (currentShortlistMap.get(slug) || 0) + 1);
+    }
+  }
+
+  const topShortlisted = Array.from(currentShortlistMap.entries())
+    .map(([slug, saves]) => ({ slug, saves }))
+    .sort((a, b) => b.saves - a.saves)
+    .slice(0, 8);
+
+  const activeShortlistsCount = Array.from(currentShortlistMap.values()).reduce((sum, count) => sum + count, 0);
+  const activeShortlistedSchoolsCount = currentShortlistMap.size;
 
   const ratingGroups = new Map<string, { totalScore: number; count: number }>();
   for (const r of activeRatings) {

@@ -62,6 +62,53 @@ function admissionState(status: unknown): string {
   return value;
 }
 
+function buildFallbackBriefing(intelligence: {
+  health: { status: string; issueCount: number; high: number; medium: number; low: number };
+  schools: { total: number; admissionsOpen: number; admissionsClosed: number; admissionsUnknown: number; missingFee: number; unverifiedFee: number; unverifiedCoordinates: number; topAttentionSchools: Array<{ name: string; events: number; saves: number; views: number }> };
+  users: { total: number; active: number; verifiedEmail: number; withWishlist: number };
+  reviews: { total: number; published: number; deleted: number; averagePublishedScore: number };
+  activity: { loadedEvents: number; topEventTypes: Array<{ type: string; count: number }> };
+  anomalies: Array<{ severity: 'high' | 'medium' | 'low'; issue: string; evidence: string }>;
+}) {
+  const lines = [
+    'ADVIS PLATFORM BRIEFING',
+    '',
+    `System state: ${intelligence.health.status.toUpperCase()} • ${intelligence.health.issueCount} issue signals`,
+    `Schools: ${intelligence.schools.total} total • ${intelligence.schools.admissionsOpen} open admissions • ${intelligence.schools.admissionsClosed} closed • ${intelligence.schools.admissionsUnknown} unknown`,
+    `Fee coverage: ${intelligence.schools.missingFee} missing display value • ${intelligence.schools.unverifiedFee} not marked verified`,
+    `Location data: ${intelligence.schools.unverifiedCoordinates} schools without verified coordinates`,
+    `Parents: ${intelligence.users.total} total • ${intelligence.users.active} active • ${intelligence.users.verifiedEmail} email-verified • ${intelligence.users.withWishlist} with shortlist signals`,
+    `Reviews: ${intelligence.reviews.total} total • ${intelligence.reviews.published} published • ${intelligence.reviews.deleted} deleted • published average ${intelligence.reviews.averagePublishedScore || 'n/a'}`,
+    `Activity: ${intelligence.activity.loadedEvents} recent events loaded`,
+    '',
+    'WHAT DESERVES ATTENTION',
+  ];
+  if (intelligence.anomalies.length) {
+    for (const item of intelligence.anomalies) {
+      lines.push(`[${item.severity.toUpperCase()}] ${item.issue} — ${item.evidence}`);
+    }
+  } else {
+    lines.push('No deterministic anomaly signals detected in the current snapshot.');
+  }
+
+  if (intelligence.schools.topAttentionSchools.length) {
+    lines.push('', 'SCHOOLS RECEIVING THE MOST OBSERVED ACTIVITY');
+    for (const school of intelligence.schools.topAttentionSchools.slice(0, 8)) {
+      lines.push(`• ${school.name}: ${school.events} events, ${school.views} views, ${school.saves} save/shortlist signals`);
+    }
+  }
+
+  if (intelligence.activity.topEventTypes.length) {
+    lines.push('', 'TOP ACTIVITY TYPES');
+    for (const item of intelligence.activity.topEventTypes.slice(0, 8)) {
+      lines.push(`• ${item.type}: ${item.count}`);
+    }
+  }
+
+  lines.push('', 'MODE: deterministic platform diagnostics. Configure the ADVIS model key to enable deeper natural-language reasoning.');
+  return lines.join('\n');
+}
+
 export async function POST(req: NextRequest) {
   const auth = await requireAdminAuth(req);
   if (!auth.authorized || !auth.user) {
@@ -73,10 +120,6 @@ export async function POST(req: NextRequest) {
     const question = typeof body?.question === 'string' ? body.question.trim() : '';
     if (!question) {
       return NextResponse.json({ success: false, message: 'Question is required.' }, { status: 400 });
-    }
-
-    if (!process.env.GEMINI_API_KEY) {
-      return NextResponse.json({ success: false, message: 'ADVIS is not configured: GEMINI_API_KEY is missing.' }, { status: 503 });
     }
 
     const [overview, users, activity, reviews, wishlists, comparisons, searches, audit] = await Promise.all([
@@ -260,6 +303,20 @@ export async function POST(req: NextRequest) {
       searches,
       audit: (audit as any[]).slice(0, 150),
     };
+
+    const fallbackAnswer = buildFallbackBriefing(intelligence);
+
+    if (!process.env.GEMINI_API_KEY) {
+      return NextResponse.json({
+        success: true,
+        answer: fallbackAnswer,
+        model: 'deterministic-advis',
+        mode: 'deterministic',
+        generatedAt: intelligence.generatedAt,
+        intelligence,
+        notice: 'GEMINI_API_KEY is not configured; ADVIS is running in deterministic platform-diagnostics mode.',
+      });
+    }
 
     const prompt = `ADMIN COMMAND:
 ${question}
